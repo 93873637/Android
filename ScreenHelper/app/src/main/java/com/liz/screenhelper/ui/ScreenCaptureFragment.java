@@ -19,7 +19,6 @@ package com.liz.screenhelper.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.Image;
@@ -27,26 +26,25 @@ import android.media.ImageReader;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
-import android.os.Environment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.liz.screenhelper.R;
+import com.liz.screenhelper.app.ThisApp;
 import com.liz.screenhelper.utils.LogUtils;
+import com.liz.screenhelper.utils.TimeUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.text.SimpleDateFormat;
 
 /**
  * Provides UI for the screen capture.
@@ -72,11 +70,14 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     private DisplayMetrics mDisplayMetrics = null;
     private static int mScreenDensity = 0;
 
+    private TextView mTextProgress;
+    private ScrollView mScrollProgress;
+
     private ImageReader.OnImageAvailableListener mOnImageAvailableListener
             = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            LogUtils.d("onImageAvailable");
+            showProgress("onImageAvailable");
             Image img = reader.acquireNextImage();
             ByteBuffer buffer = img.getPlanes()[0].getBuffer();
             byte[] data = new byte[buffer.remaining()];
@@ -96,7 +97,6 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         mWindowManager = (WindowManager)getActivity().getSystemService(Context.WINDOW_SERVICE);
         mWindowWidth = mWindowManager.getDefaultDisplay().getWidth();
         mWindowHeight = mWindowManager.getDefaultDisplay().getHeight();
-        mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, 0x1, 2); //ImageFormat.RGB_565
         mDisplayMetrics = new DisplayMetrics();
         mWindowManager.getDefaultDisplay().getMetrics(mDisplayMetrics);
         mScreenDensity = mDisplayMetrics.densityDpi;
@@ -119,7 +119,34 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        view.findViewById(R.id.start_capture_image).setOnClickListener(this);
+        view.findViewById(R.id.stop_capture_image).setOnClickListener(this);
         view.findViewById(R.id.save_capture_image).setOnClickListener(this);
+        view.findViewById(R.id.exit_app).setOnClickListener(this);
+
+        mTextProgress = view.findViewById(R.id.textProgress);
+        mTextProgress.setText("");
+        mScrollProgress = view.findViewById(R.id.scrollview);
+        mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
+    }
+
+    private void showProgress(final String msg) {
+        LogUtils.i(msg);
+        Activity activity = getActivity();
+        if (activity != null) {
+            activity.runOnUiThread(new Runnable() {
+                public void run() {
+                    String logMsg = TimeUtils.getLogTime() + " - " + msg;
+                    mTextProgress.append(logMsg + "\n");
+                    mScrollProgress.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mScrollProgress.smoothScrollTo(0, mTextProgress.getBottom());
+                        }
+                    });
+                }
+            });
+        }
     }
 
     @Override
@@ -140,18 +167,18 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         if (requestCode == REQUEST_MEDIA_PROJECTION) {
             if (resultCode != Activity.RESULT_OK) {
                 String tip = "ERROR: resultCode = "+resultCode+", NOT OK";
-                LogUtils.e(tip);
+                showProgress(tip);
                 Toast.makeText(getActivity(), tip, Toast.LENGTH_SHORT).show();
                 return;
             }
 
             Activity activity = getActivity();
             if (activity == null) {
-                LogUtils.e("ERROR: activity is null");
+                showProgress("ERROR: activity is null");
                 return;
             }
 
-            LogUtils.d("onActivityResult OK");
+            showProgress("onActivityResult OK");
             mResultCode = resultCode;
             mResultData = data;
             startScreenCapture();
@@ -161,33 +188,74 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.start_capture_image:
+                startScreenCapture();
+                break;
+            case R.id.stop_capture_image:
+                stopScreenCapture();
+                break;
             case R.id.save_capture_image:
                 captureOnce();
+                break;
+            case R.id.exit_app:
+                ThisApp.exitApp();
                 break;
         }
     }
 
     private void startScreenCapture() {
-        LogUtils.d("startScreenCapture");
-        mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, mResultData);
-        mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen-mirror",
-                mWindowWidth, mWindowHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                mImageReader.getSurface(),
-                null, null);
-        mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, null);
+        showProgress("startScreenCapture");
+
+        if (mMediaProjection == null) {
+            mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, mResultData);
+        }
+        else {
+            showProgress("ERROR: startScreenCapture: mMediaProjection already exists");
+        }
+
+        if (mImageReader == null) {
+            mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, 0x1, 2); //ImageFormat.RGB_565
+            mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, null);
+        }
+        else {
+            showProgress("ERROR: startScreenCapture: mImageReader already exists");
+        }
+
+        if (mVirtualDisplay == null) {
+            mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen-mirror",
+                    mWindowWidth, mWindowHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+                    mImageReader.getSurface(),
+                    null, null);
+        }
+        else {
+            showProgress("ERROR: startScreenCapture: mVirtualDisplay already exists");
+        }
     }
 
     private void stopScreenCapture() {
-        LogUtils.d("stopScreenCapture");
-        if (mImageReader != null) {
-            mImageReader.setOnImageAvailableListener(null, null);
-            mImageReader.close();
+        showProgress("stopScreenCapture");
+
+        if (mVirtualDisplay == null) {
+            showProgress("ERROR: stopScreenCapture: mVirtualDisplay null");
         }
-        if (mVirtualDisplay != null) {
+        else {
             mVirtualDisplay.release();
             mVirtualDisplay = null;
         }
+
+        if (mImageReader == null) {
+            showProgress("ERROR: stopScreenCapture: mImageReader null");
+        }
+        else {
+            mImageReader.setOnImageAvailableListener(null, null);
+            mImageReader.close();
+            mImageReader = null;
+        }
+
         if (mMediaProjection == null) {
+            showProgress("ERROR: stopScreenCapture: mMediaProjection null");
+        }
+        else {
             mMediaProjection.stop();
             mMediaProjection = null;
         }
@@ -202,94 +270,82 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         return "ddz_current.jpg";
     }
 
-    private static String getDynamicImageFileName() {
-        String strDateTime = new SimpleDateFormat("yyyy.MMdd.HHmmss").format(new java.util.Date());
-        long currentTimeMillis = System.currentTimeMillis();
-        long ms = currentTimeMillis % 1000;
-        if (ms < 10)
-            strDateTime += ".00" + ms;
-        else if (ms < 100)
-            strDateTime += ".0" + ms;
-        else
-            strDateTime += "." + ms;
-        return "DDZScreenShot_" + strDateTime + ".jpg";
-    }
-
-    private static void startScreenCapture2() {
-        LogUtils.d("startScreenCapture2: E...");
-
-        String imagePath = Environment.getExternalStorageDirectory().getPath() + "/Pictures/DDZScreenShots/";
-        File filePath = new File(imagePath);
-        if (!filePath.exists()) {
-            filePath.mkdirs();
-            LogUtils.i("create image path: " + filePath);
-        }
-
-        String imageFileName = imagePath + getStaticImageFileName();
-        LogUtils.d("startScreenCapture2: imageFileName = " + imageFileName);
-
-        Image image = mImageReader.acquireLatestImage();
-        if (image == null) {
-            LogUtils.e("ERROR: acquireLatestImage null");
-            return;
-        }
-
-        int width = image.getWidth();
-        int height = image.getHeight();
-        LogUtils.d("startScreenCapture2: image size = " + width + "x" + height);
-
-        final Image.Plane[] planes = image.getPlanes();
-        final ByteBuffer buffer = planes[0].getBuffer();
-        int pixelStride = planes[0].getPixelStride();
-        int rowStride = planes[0].getRowStride();
-        int rowPadding = rowStride - pixelStride * width;
-        Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
-        bitmap.copyPixelsFromBuffer(buffer);
-        bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
-        image.close();
-
-        if (bitmap == null) {
-            LogUtils.e("ERROR: bitmap null");
-            return;
-        }
-        else {
-            try {
-                File fileImage = new File(imageFileName);
-                if (!fileImage.exists()) {
-                    fileImage.createNewFile();
-                    LogUtils.i("create image file: " + imageFileName);
-                }
-                FileOutputStream out = new FileOutputStream(fileImage);
-                if (out == null) {
-                    LogUtils.e("ERROR: get FileOutputStream null");
-                    return;
-                }
-                else {
-                    LogUtils.i("bitmap compress...");
-                    //###@: bitmap.compress(Bitmap.CompressFormat.  PNG, 100, out);  //PNG: take a long time
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);  //using JPEG to fast save
-                    LogUtils.i("out flush...");
-                    out.flush();
-                    LogUtils.i("out close...");
-                    out.close();
-                    //Intent media = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                    //Uri contentUri = Uri.fromFile(fileImage);
-                    //media.setData(contentUri);
-                    //this.sendBroadcast(media);
-                    LogUtils.i("screen image saved to " + imageFileName);
-                }
-            } catch (FileNotFoundException e) {
-                LogUtils.e("ERROR: FileNotFoundException e=" + e.toString());
-                e.printStackTrace();
-            } catch (IOException e) {
-                LogUtils.e("ERROR: IOException e=" + e.toString());
-                e.printStackTrace();
-            } catch (Exception e) {
-                LogUtils.e("ERROR: Exception e=" + e.toString());
-                e.printStackTrace();
-            }
-        }
-
-        LogUtils.d("startScreenCapture2: X.");
-    }
+    //
+//    private static void startScreenCapture2() {
+//        showProgress("startScreenCapture2: E...");
+//
+//        String imagePath = Environment.getExternalStorageDirectory().getPath() + "/Pictures/DDZScreenShots/";
+//        File filePath = new File(imagePath);
+//        if (!filePath.exists()) {
+//            filePath.mkdirs();
+//            LogUtils.i("create image path: " + filePath);
+//        }
+//
+//        String imageFileName = imagePath + getStaticImageFileName();
+//        showProgress("startScreenCapture2: imageFileName = " + imageFileName);
+//
+//        Image image = mImageReader.acquireLatestImage();
+//        if (image == null) {
+//            showProgress("ERROR: acquireLatestImage null");
+//            return;
+//        }
+//
+//        int width = image.getWidth();
+//        int height = image.getHeight();
+//        showProgress("startScreenCapture2: image size = " + width + "x" + height);
+//
+//        final Image.Plane[] planes = image.getPlanes();
+//        final ByteBuffer buffer = planes[0].getBuffer();
+//        int pixelStride = planes[0].getPixelStride();
+//        int rowStride = planes[0].getRowStride();
+//        int rowPadding = rowStride - pixelStride * width;
+//        Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
+//        bitmap.copyPixelsFromBuffer(buffer);
+//        bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
+//        image.close();
+//
+//        if (bitmap == null) {
+//            showProgress("ERROR: bitmap null");
+//            return;
+//        }
+//        else {
+//            try {
+//                File fileImage = new File(imageFileName);
+//                if (!fileImage.exists()) {
+//                    fileImage.createNewFile();
+//                    LogUtils.i("create image file: " + imageFileName);
+//                }
+//                FileOutputStream out = new FileOutputStream(fileImage);
+//                if (out == null) {
+//                    showProgress("ERROR: get FileOutputStream null");
+//                    return;
+//                }
+//                else {
+//                    LogUtils.i("bitmap compress...");
+//                    //###@: bitmap.compress(Bitmap.CompressFormat.  PNG, 100, out);  //PNG: take a long time
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);  //using JPEG to fast save
+//                    LogUtils.i("out flush...");
+//                    out.flush();
+//                    LogUtils.i("out close...");
+//                    out.close();
+//                    //Intent media = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//                    //Uri contentUri = Uri.fromFile(fileImage);
+//                    //media.setData(contentUri);
+//                    //this.sendBroadcast(media);
+//                    LogUtils.i("screen image saved to " + imageFileName);
+//                }
+//            } catch (FileNotFoundException e) {
+//                showProgress("ERROR: FileNotFoundException e=" + e.toString());
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                showProgress("ERROR: IOException e=" + e.toString());
+//                e.printStackTrace();
+//            } catch (Exception e) {
+//                showProgress("ERROR: Exception e=" + e.toString());
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        showProgress("startScreenCapture2: X.");
+//    }
 }

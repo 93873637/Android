@@ -31,6 +31,12 @@ public class ThisApp extends Application {
         return mAppInst;
     }
 
+    public static void exitApp() {
+        int pid = android.os.Process.myPid();
+        LogUtils.d("exitApp, pid=" + pid);
+        android.os.Process.killProcess(pid);
+    }
+
     @Override
     public void onTerminate() {
         LogUtils.d("onTerminate");
