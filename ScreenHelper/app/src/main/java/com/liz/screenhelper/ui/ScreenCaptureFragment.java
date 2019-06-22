@@ -65,12 +65,25 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     private VirtualDisplay mVirtualDisplay;
     private MediaProjectionManager mMediaProjectionManager;
 
-    private static int windowWidth = 0;
-    private static int windowHeight = 0;
+    private static int mWindowWidth = 0;
+    private static int mWindowHeight = 0;
     private static ImageReader mImageReader = null;
     private WindowManager mWindowManager = null;
-    private DisplayMetrics metrics = null;
+    private DisplayMetrics mDisplayMetrics = null;
     private static int mScreenDensity = 0;
+
+    private ImageReader.OnImageAvailableListener mOnImageAvailableListener
+            = new ImageReader.OnImageAvailableListener() {
+        @Override
+        public void onImageAvailable(ImageReader reader) {
+            LogUtils.d("onImageAvailable");
+            Image img = reader.acquireNextImage();
+            ByteBuffer buffer = img.getPlanes()[0].getBuffer();
+            byte[] data = new byte[buffer.remaining()];
+            buffer.get(data);
+            img.close();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,12 +94,21 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         }
 
         mWindowManager = (WindowManager)getActivity().getSystemService(Context.WINDOW_SERVICE);
-        windowWidth = mWindowManager.getDefaultDisplay().getWidth();
-        windowHeight = mWindowManager.getDefaultDisplay().getHeight();
-        mImageReader = ImageReader.newInstance(windowWidth, windowHeight, 0x1, 2); //ImageFormat.RGB_565
-        metrics = new DisplayMetrics();
-        mWindowManager.getDefaultDisplay().getMetrics(metrics);
-        mScreenDensity = metrics.densityDpi;
+        mWindowWidth = mWindowManager.getDefaultDisplay().getWidth();
+        mWindowHeight = mWindowManager.getDefaultDisplay().getHeight();
+        mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, 0x1, 2); //ImageFormat.RGB_565
+        mDisplayMetrics = new DisplayMetrics();
+        mWindowManager.getDefaultDisplay().getMetrics(mDisplayMetrics);
+        mScreenDensity = mDisplayMetrics.densityDpi;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mResultData != null) {
+            outState.putInt(STATE_RESULT_CODE, mResultCode);
+            outState.putParcelable(STATE_RESULT_DATA, mResultData);
+        }
     }
 
     @Nullable
@@ -107,17 +129,32 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mScreenDensity = metrics.densityDpi;
-        mMediaProjectionManager = (MediaProjectionManager)
-                activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-        startScreenCapture();  //####@:
+        mMediaProjectionManager = (MediaProjectionManager)activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+        startActivityForResult(
+                mMediaProjectionManager.createScreenCaptureIntent(),
+                REQUEST_MEDIA_PROJECTION);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mResultData != null) {
-            outState.putInt(STATE_RESULT_CODE, mResultCode);
-            outState.putParcelable(STATE_RESULT_DATA, mResultData);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_MEDIA_PROJECTION) {
+            if (resultCode != Activity.RESULT_OK) {
+                String tip = "ERROR: resultCode = "+resultCode+", NOT OK";
+                LogUtils.e(tip);
+                Toast.makeText(getActivity(), tip, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Activity activity = getActivity();
+            if (activity == null) {
+                LogUtils.e("ERROR: activity is null");
+                return;
+            }
+
+            LogUtils.d("onActivityResult OK");
+            mResultCode = resultCode;
+            mResultData = data;
+            startScreenCapture();
         }
     }
 
@@ -130,85 +167,35 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_MEDIA_PROJECTION) {
-            if (resultCode != Activity.RESULT_OK) {
-                Toast.makeText(getActivity(), "R.string.user_cancelled", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            LogUtils.d("Starting screen capture");
-            mResultCode = resultCode;
-            mResultData = data;
-            setUpMediaProjection();
+    private void startScreenCapture() {
+        LogUtils.d("startScreenCapture");
+        mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, mResultData);
+        mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen-mirror",
+                mWindowWidth, mWindowHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+                mImageReader.getSurface(),
+                null, null);
+        mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, null);
+    }
+
+    private void stopScreenCapture() {
+        LogUtils.d("stopScreenCapture");
+        if (mImageReader != null) {
+            mImageReader.setOnImageAvailableListener(null, null);
+            mImageReader.close();
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        stopScreenCapture();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        tearDownMediaProjection();
-    }
-
-    private void tearDownMediaProjection() {
-        if (mMediaProjection != null) {
+        if (mVirtualDisplay != null) {
+            mVirtualDisplay.release();
+            mVirtualDisplay = null;
+        }
+        if (mMediaProjection == null) {
             mMediaProjection.stop();
             mMediaProjection = null;
         }
     }
 
-    private void startScreenCapture() {
-        if (mMediaProjection != null) {
-
-            //Capture Screen on Timer
-            /*
-            new Timer().schedule(new TimerTask() {
-                public void run () {
-                    ScreenCaptureFragment.this.getActivity().runOnUiThread(new Runnable() {
-                        public void run() {
-                            captureOnce();
-                        }
-                    });
-                }
-            }, 500, 500);
-            //*/
-
-        } else if (mResultCode != 0 && mResultData != null) {
-            setUpMediaProjection();
-        } else {
-            LogUtils.i("Requesting confirmation");
-            // This initiates a prompt dialog for the user to confirm screen projection.
-            startActivityForResult(
-                    mMediaProjectionManager.createScreenCaptureIntent(),
-                    REQUEST_MEDIA_PROJECTION);
-        }
-    }
-
-    private void setUpMediaProjection() {
-        mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, mResultData);
-    }
-
     public static void captureOnce() {
-        LogUtils.d("captureOnce: E...");
-        setUpVirtualDisplay2();
-        startScreenCapture2();
-    }
-
-    private static void setUpVirtualDisplay2() {
-        LogUtils.d("setUpVirtualDisplay2: E...");
-       mMediaProjection.createVirtualDisplay("screen-mirror",
-                windowWidth, windowHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                mImageReader.getSurface(), null, null);
+        LogUtils.d("captureOnce");
+        //TODO: ####@: implemnt here by static flag....
     }
 
     private static String getStaticImageFileName() {
@@ -304,13 +291,5 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         }
 
         LogUtils.d("startScreenCapture2: X.");
-    }
-
-    private void stopScreenCapture() {
-        if (mVirtualDisplay == null) {
-            return;
-        }
-        mVirtualDisplay.release();
-        mVirtualDisplay = null;
     }
 }
