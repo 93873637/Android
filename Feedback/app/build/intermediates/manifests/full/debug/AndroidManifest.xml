@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cloudminds.feedback"
+    android:sharedUserId="android.uid.system"
+    android:versionCode="1"
+    android:versionName="1.0.19.0212.1112" >
+
+    <uses-sdk
+        android:minSdkVersion="25"
+        android:targetSdkVersion="26" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+
+    <application
+        android:name="com.cloudminds.feedback.app.ThisApp"
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher_feedback"
+        android:label="@string/app_name"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher_feedback_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.cloudminds.feedback.activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cloudminds.feedback.activity.UploadActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.cloudminds.feedback.activity.ChooseModuleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.cloudminds.feedback.activity.LogConfigActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cloudminds.feedback.activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cloudminds.feedback.activity.UserFeedbackSettingsActivity"
+            android:label="@string/user_experience_title"
+            android:taskAffinity="com.cloudminds.feedback" >
+            <intent-filter android:priority="1" >
+                <action android:name="android.settings.FEEDBACK_SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cloudminds.feedback.activity.UserFeedbackDetailActivity"
+            android:label="@string/user_experience_title"
+            android:parentActivityName="com.cloudminds.feedback.activity.SettingActivity" >
+        </activity>
+        <activity android:name="com.cloudminds.feedback.activity.TaskDetailsActivity" />
+        <activity android:name="com.cloudminds.feedback.activity.TasksListActivity" />
+        <activity android:name="com.cloudminds.feedback.activity.HistorysListActivity" />
+
+        <service
+            android:name="com.cloudminds.feedback.net.UploadTasksService"
+            android:enabled="true" >
+        </service>
+        <service
+            android:name="com.cloudminds.feedback.net.UploadService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name="net.gotev.uploadservice.UploadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+
+        <receiver
+            android:name="com.cloudminds.feedback.app.FeedbackReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+
+        <activity
+            android:name="com.luck.picture.lib.PictureSelectorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
+            android:theme="@style/activity.Theme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.luck.picture.lib.PicturePreviewActivity"
+            android:theme="@style/activity.Theme" />
+        <activity
+            android:name="com.luck.picture.lib.PictureVideoPlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/activity.Theme" />
+        <activity
+            android:name="com.luck.picture.lib.PictureExternalPreviewActivity"
+            android:theme="@style/activity.Theme" /> <!-- <activity -->
+        <!-- android:name="com.yalantis.ucrop.UCropActivity" -->
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
+        <!-- <activity -->
+        <!-- android:name="com.yalantis.ucrop.PictureMultiCuttingActivity" -->
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
+        <activity
+            android:name="com.luck.picture.lib.PicturePlayAudioActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+    </application>
+
+</manifest>

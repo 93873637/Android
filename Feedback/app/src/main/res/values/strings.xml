@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">User Feedback</string>
+  <string name="more">More</string>
+  <string name="hint_description">Please describe your question</string>
+  <string name="user_name">User Name(Optional): </string>
+  <string name="hint_user_name">Please input your name</string>
+  <string name="contact_number">Tel Number (Optional): </string>
+  <string name="hint_telnum">Please enter your tel number</string>
+  <string name="email">Email(Optional): </string>
+  <string name="hint_email">Please input your Email</string>
+  <string name="address">Address(Optional): </string>
+  <string name="hint_address">Please input your address</string>
+  <string name="add_pictures">Please add pictures(Optional):</string>
+  <string name="choose_module">Select Module</string>
+  <string name="module">Please select module:</string>
+  <string name="hint_module">Please select the error module</string>
+  <string name="log_text">LOG</string>
+  <string name="log_zipping">Log Files is Compressing...</string>
+  <string name="submit">submit</string>
+  <string name="text_delete">Delete</string>
+  <string name="tip_network_unavailable">Network not available. Please check your network and try again.</string>
+  <string name="tip_submit_ok">Thanks for your feedback, we will check it asap.</string>
+  <string name="tip_submit_failed">Failed to submit feedback.</string>
+  <string name="tip_cannot_submit">Log has stopped. To upload logs, start running log in Online Feedback app firstly.</string>
+  <string name="upload_attachment">Upload Attachment</string>
+  <string name="already_upload">Uploading...</string>
+  <string name="upload_completed">Upload Completed.</string>
+  <string name="upload_failed">Upload Failed.</string>
+  <string name="action_about">About</string>
+  <string name="action_userinfo">User Info</string>
+  <string name="action_setting">Setting</string>
+  <string name="action_logconfig">Log</string>
+  <string name="action_taskslist">Task</string>
+  <string name="action_historys_list">History</string>
+  <string name="history_details">History Details</string>
+  <string name="offline_log_file">LOG FILE SIZE: </string>
+  <string name="no_offline_log_file">NO LOG FILE.</string>
+  <string name="select_different_picture">The picture is already selected. Please choose another.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+  <string name="dialog_cancel">Cancel</string>
+  <string name="dialog_save">Save</string>
+  <string name="dialog_prompt">PROMPT</string>
+  <string name="dialog_message_mobile">Current network is mobile data. Confirm to feedback without WIFI?</string>
+  <string name="dialog_message_no_network">Network not available. Save the message?</string>
+
+  <!--log config-->
+  <string name="help_message">Please select the log:</string>
+  <string name="power_log">POWER LOG</string>
+  <string name="app_log">APP LOG</string>
+  <string name="modem_log">MODEM LOG</string>
+  <string name="net_log">NET LOG</string>
+  <string name="kernel_log">KERNEL LOG</string>
+  <string name="other">Other logs:</string>
+  <string name="gps_log">GPS LOG</string>
+  <string name="wlan_log">WLAN LOG</string>
+  <string name="battery_log">BATTERY LOG</string>
+  <string name="charge_log">CHARGE LOG</string>
+  <string name="sensor_log">SENSOR LOG</string>
+  <string name="sysprof_log">SYSPROF LOG</string>
+  <string name="log_running">Log Running, Click to Stop</string>
+  <string name="log_stopped">Log Stopped, Click to Start</string>
+
+  <!--setting-->
+  <string name="feedback_on_wifi">Feedback only on WIFI</string>
+  <!--userinfo-->
+  <string name="userinfo_save_success">Saved successfully</string>
+  
+    <!--tasklist-->
+    <string name="using_mobiledata">Using Mobile Data</string>
+    <string name="no_task_selected">No Task Selected</string>
+    <string name="no_network">Network NOT Available</string>
+    <!--taskdetails-->
+    <string name="save_time">Save Time:</string>
+    <string name="feedback_content">Feedback Content:</string>
+    <string name="task_details">Task Details</string>
+    <string name="taskdetail_report_id">Report ID:</string>
+    <string name="taskdetail_email">Email:</string>
+    <string name="taskdetail_address">Address:</string>
+    <string name="taskdetail_module">Module:</string>
+    <string name="log_file_size">Log file size:</string>
+    <string name="log_file_path">Log file:</string>
+
+    <string name="settings_upgrade">Upgrade</string>
+    <string name="settings_upgrade_no">Current is latest version.</string>
+    <string name="settings_upgrade_yes">New version found, size:%.2fM,  upgrade?</string>
+
+  <!-- user feedback -->
+  <string name="user_experience_title">User Experience Improvement</string>
+  <string name="user_experience_content">We invite you to join our User experience improvement</string>
+  <string name="user_experience_description">General statistical data about how you use your phone may be collected in order to help us improve our products and services.</string>
+  <string name="user_experience_Join">Join </string>
+  <string name="user_experience_text">User experience improvement</string>
+  <string name="user_experience_details">[Documentation] \n\n
+
+Dear customer, thank you for choosing RED. Welcome to our emotion user interface. To enhance your user experience, we sincerely invite you to participate in the User Experience Improvement Program (hereinafter referred to as the “Program”). Please note that your participation in this Program is completely voluntary. If you choose to participate, please read the Privacy Statement carefully. By participating in this Program, you accept this Privacy Statement and agree to have the following data collected from your device for RED and RED-authorised third-party companies to analyse: \n
+
+1) Your device identification data (IMEI, ESN, MEID, and SN), configuration data, app statistics data, user behaviour data, and error log data. \n
+2) Your data will be anonymized before being sent to RED and RED-authorised third-party companies. RED and RED-authorised third-party companies will analyse all the data collected to improve RED products and services as well as the user experience. \n
+3) To participate in or leave this Program, simply enable/disable the collection and sending of your data in Settings. \n
+4) The data collected from your device will be stored in a secure cloud environment, which is only accessible when processing the data for the purpose of this Program. Data transfer shall comply with all the applicable laws and regulations regarding privacy and data protection. \n
+5) After RED and RED-authorised third-party companies finish statistics and analysis, all the data collected from your device for the purpose of this Program will be deleted. \n
+
+RED and RED-authorised third-party companies shall keep all the information collected from your device strictly confidential.</string>
+  <string name="system_application_section_name">System applications</string>
+  <string name="statusBar">StatusBar</string>
+  <string name="launcher">Launcher</string>
+  <string name="wallpaper">Wallpaper</string>
+  <string name="lookscreen">LookScreen</string>
+  <string name="please_select_user_type">Please select the type of user.</string>
+  <string name="dialog_careful_title">Careful</string>
+  <string name="dialog_hint_content">Test or debug phone to select.</string>
+  <string name="question_feedback_type">Please select feedback type</string>
+  <string name="report_question">Problem</string>
+  <string name="question_consult">Consultation</string>
+  <string name="suggestion_feedback">Suggestion</string>
+  <string name="problem_format">Problem description: \n\nRecurring step: \n1. \n2. \n\nOccurrence time:&#160;</string>
+  <string name="upload_log">Upload log</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Online feedback</string>
+  <string name="hint_description">Beschrijf uw situatie</string>
+  <string name="contact_number">Telefoonnummer (optioneel):</string>
+  <string name="hint_telnum">Voer uw telefoonnummer in</string>
+  <string name="submit">indienen</string>
+  <string name="tip_network_unavailable">Netwerk niet beschikbaar. Controleer uw netwerk en probeer het opnieuw.</string>
+  <string name="tip_submit_ok">Bedankt voor uw feedback. We bekijken uw feedback zo snel mogelijk.</string>
+  <string name="tip_submit_failed">Feedback indienen mislukt.</string>
+  <string name="upload_attachment">Bijlage uploaden</string>
+  <string name="already_upload">Uploaden...</string>
+  <string name="upload_completed">Uploaden voltooid.</string>
+  <string name="action_about">Over</string>
+  <string name="offline_log_file">GROOTTE LOGBESTAND: </string>
+  <string name="no_offline_log_file">GEEN LOGBESTAND.</string>
+  <string name="select_different_picture">De afbeelding is al geselecteerd. Kies een andere afbeelding.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Tilbakemelding på nett</string>
+  <string name="hint_description">Beskriv spørsmålet ditt</string>
+  <string name="contact_number">Telefonnummer (valgfritt):</string>
+  <string name="hint_telnum">Skriv inn telefonnummeret ditt</string>
+  <string name="submit">send inn</string>
+  <string name="tip_network_unavailable">Nettverk ikke tilgjengelig. Sjekk nettverket ditt og prøv igjen.</string>
+  <string name="tip_submit_ok">Takk for tilbakemeldingen, vi tar en titt på saken så raskt som mulig.</string>
+  <string name="tip_submit_failed">Kunne ikke sende tilbakemelding.</string>
+  <string name="upload_attachment">Last opp vedlegg</string>
+  <string name="already_upload">Laster opp …</string>
+  <string name="upload_completed">Opplasting ferdig.</string>
+  <string name="action_about">Om</string>
+  <string name="offline_log_file">STØRRELSE PÅ LOGGFIL: </string>
+  <string name="no_offline_log_file">INGEN LOGGFIL.</string>
+  <string name="select_different_picture">Bildet er allerede valgt. Velg et annet.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

@@ -1,0 +1,136 @@
+    {
+    "sections": [
+    {
+    "sectionName": "System",
+    "items": [
+    {
+    "itemName": "Crash And Reboot",
+    "itemImageKey": "CrashAndReboot"
+    },
+    {
+    "itemName": "Power And Heat",
+    "itemImageKey": "PowerAndHeat"
+    },
+    {
+    "itemName": "Charging Exception",
+    "itemImageKey": "ChargingException"
+    },
+    {
+    "itemName": "Slowing And Hanging",
+    "itemImageKey": "SlowingAndHanging"
+    },
+    {
+    "itemName": "FingerPrint",
+    "itemImageKey": "FingerPrint"
+    },
+    {
+    "itemName": "Bluetooth",
+    "itemImageKey": "Bluetooth"
+    },
+    {
+    "itemName": "PressButton",
+    "itemImageKey": "PressButton"
+    },
+    {
+    "itemName": "GPS",
+    "itemImageKey": "GPS"
+    },
+    {
+    "itemName": "Peripheral",
+    "itemImageKey": "Peripheral"
+    },
+    {
+    "itemName": "Audio",
+    "itemImageKey": "Audio"
+    },
+    {
+    "itemName": "4View",
+    "itemImageKey": "4View"
+    },
+    {
+    "itemName": "Hardware",
+    "itemImageKey": "Hardware"
+    }
+    ]
+    },
+    {
+    "sectionName": "Network and upgrade",
+    "items": [
+    {
+    "itemName": "Mobile Network",
+    "itemImageKey": "MobileNetwork"
+    },
+    {
+    "itemName": "WI-FI",
+    "itemImageKey": "WI-FI"
+    },
+    {
+    "itemName": "System Upgrade",
+    "itemImageKey": "SystemUpgrade"
+    }
+    ]
+    },
+    {
+    "sectionName": "System applications",
+    "items": [
+    {
+    "itemName": "Launcher",
+    "itemImageKey": "Launcher"
+    },
+    {
+    "itemName": "Red Player",
+    "itemImageKey": "RedPlayer"
+    },
+    {
+    "itemName": "LeiaLoft",
+    "itemImageKey": "LeiaLoft"
+    },
+    {
+    "itemName": "Hydrogen Network",
+    "itemImageKey": "HydrogenNetwork"
+    },
+    {
+    "itemName": "Camera",
+    "itemImageKey": "Camera"
+    },
+    {
+    "itemName": "StatusBar",
+    "itemImageKey": "StatusBar"
+    },
+    {
+    "itemName": "Wallpaper",
+    "itemImageKey": "Wallpaper"
+    },
+    {
+    "itemName": "Lookscreen",
+    "itemImageKey": "Lookscreen"
+    },
+    {
+    "itemName": "Settings",
+    "itemImageKey": "Settings"
+    },
+    {
+    "itemName": "Dialer",
+    "itemImageKey": "Dialer"
+    },
+    {
+    "itemName": "FileManager",
+    "itemImageKey": "FileManager"
+    }
+    ]
+    },
+    {
+    "sectionName": "More",
+    "items": [
+    {
+    "itemName": "Other applications",
+    "itemImageKey": "OtherApplications"
+    },
+    {
+    "itemName": "Other mistakes and opinions",
+    "itemImageKey": "OtherMistakesAndOpinions"
+    }
+    ]
+    }
+    ]
+    }

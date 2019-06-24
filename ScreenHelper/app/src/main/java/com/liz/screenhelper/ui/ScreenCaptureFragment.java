@@ -41,10 +41,10 @@ import androidx.fragment.app.Fragment;
 
 import com.liz.screenhelper.R;
 import com.liz.screenhelper.app.ThisApp;
+import com.liz.screenhelper.logic.ComDef;
+import com.liz.screenhelper.utils.ImageUtils;
 import com.liz.screenhelper.utils.LogUtils;
 import com.liz.screenhelper.utils.TimeUtils;
-
-import java.nio.ByteBuffer;
 
 /**
  * Provides UI for the screen capture.
@@ -59,29 +59,37 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     private int mResultCode;
     private Intent mResultData;
 
-    private static MediaProjection mMediaProjection;
+    private MediaProjection mMediaProjection;
     private VirtualDisplay mVirtualDisplay;
     private MediaProjectionManager mMediaProjectionManager;
-
-    private static int mWindowWidth = 0;
-    private static int mWindowHeight = 0;
     private static ImageReader mImageReader = null;
-    private WindowManager mWindowManager = null;
-    private DisplayMetrics mDisplayMetrics = null;
-    private static int mScreenDensity = 0;
+
+    private int mWindowWidth = 0;
+    private int mWindowHeight = 0;
+    private int mScreenDensity = 0;
 
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
+
+    private static boolean mCaptureOnce;
 
     private ImageReader.OnImageAvailableListener mOnImageAvailableListener
             = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            showProgress("onImageAvailable");
+            //showProgress("onImageAvailable");
             Image img = reader.acquireNextImage();
-            ByteBuffer buffer = img.getPlanes()[0].getBuffer();
-            byte[] data = new byte[buffer.remaining()];
-            buffer.get(data);
+            if (mCaptureOnce) {
+                String fileName = getDynamicImageFileName();
+                int ret = ImageUtils.saveImage(img, fileName);
+                if (ret < 0) {
+                    showProgress("save screen image to " + fileName + " failed with error " + ret);
+                }
+                else {
+                    showProgress("screen image saved to " + fileName);
+                }
+                mCaptureOnce = false;
+            }
             img.close();
         }
     };
@@ -94,12 +102,12 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
             mResultData = savedInstanceState.getParcelable(STATE_RESULT_DATA);
         }
 
-        mWindowManager = (WindowManager)getActivity().getSystemService(Context.WINDOW_SERVICE);
-        mWindowWidth = mWindowManager.getDefaultDisplay().getWidth();
-        mWindowHeight = mWindowManager.getDefaultDisplay().getHeight();
-        mDisplayMetrics = new DisplayMetrics();
-        mWindowManager.getDefaultDisplay().getMetrics(mDisplayMetrics);
-        mScreenDensity = mDisplayMetrics.densityDpi;
+        WindowManager windowManager = (WindowManager)getActivity().getSystemService(Context.WINDOW_SERVICE);
+        mWindowWidth = windowManager.getDefaultDisplay().getWidth();
+        mWindowHeight = windowManager.getDefaultDisplay().getHeight();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        mScreenDensity = displayMetrics.densityDpi;
     }
 
     @Override
@@ -121,7 +129,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     public void onViewCreated(View view, Bundle savedInstanceState) {
         view.findViewById(R.id.start_capture_image).setOnClickListener(this);
         view.findViewById(R.id.stop_capture_image).setOnClickListener(this);
-        view.findViewById(R.id.save_capture_image).setOnClickListener(this);
+        view.findViewById(R.id.capture_screen_once).setOnClickListener(this);
         view.findViewById(R.id.exit_app).setOnClickListener(this);
 
         mTextProgress = view.findViewById(R.id.textProgress);
@@ -194,7 +202,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
             case R.id.stop_capture_image:
                 stopScreenCapture();
                 break;
-            case R.id.save_capture_image:
+            case R.id.capture_screen_once:
                 captureOnce();
                 break;
             case R.id.exit_app:
@@ -263,14 +271,22 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
     public static void captureOnce() {
         LogUtils.d("captureOnce");
-        //TODO: ####@: implemnt here by static flag....
+        if (mImageReader == null) {
+            LogUtils.i("captureOnce: no image reader to capture");
+        }
+        else {
+            mCaptureOnce = true;
+        }
+    }
+
+    private static String getDynamicImageFileName() {
+        return ComDef.SCREEN_PICTURE_SAVE_DIR + "ScreenShot_" + TimeUtils.getFileTime() + ".jpg";
     }
 
     private static String getStaticImageFileName() {
         return "ddz_current.jpg";
     }
 
-    //
 //    private static void startScreenCapture2() {
 //        showProgress("startScreenCapture2: E...");
 //

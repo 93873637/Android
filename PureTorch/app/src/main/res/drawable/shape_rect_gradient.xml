@@ -1,0 +1,8 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size android:width="32dp" android:height="22dp"/>
+    <!-- gradient with rgb color -->
+    <!--<gradient android:startColor="#00f" android:centerColor="#0f0" android:endColor="#f00"></gradient>-->
+    <!-- gradient with gray -->
+    <gradient android:startColor="#222" android:centerColor="#ccc" android:endColor="#222"></gradient>
+</shape>

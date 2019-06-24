@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Online-Feedback</string>
+  <string name="hint_description">Beschreiben Sie Ihre Frage</string>
+  <string name="contact_number">Tel.-Nummer (optional):</string>
+  <string name="hint_telnum">Geben Sie bitte Ihre Telefonnummer ein</string>
+  <string name="submit">Senden</string>
+  <string name="tip_network_unavailable">Kein Netzwerk verfügbar. Prüfen Sie Ihr Netzwerk und versuchen Sie es erneut.</string>
+  <string name="tip_submit_ok">Vielen Dank für Ihr Feedback, wir werden dies baldmöglichst prüfen.</string>
+  <string name="tip_submit_failed">Senden des Feedbacks fehlgeschlagen.</string>
+  <string name="upload_attachment">Anhang hochladen</string>
+  <string name="already_upload">Wird hochgeladen...</string>
+  <string name="upload_completed">Hochladen abgeschlossen.</string>
+  <string name="action_about">Info</string>
+  <string name="offline_log_file">GRÖSSE DER PROTOKOLLDATEI: </string>
+  <string name="no_offline_log_file">KEINE PROTOKOLLDATEI.</string>
+  <string name="select_different_picture">Das Bild ist bereits ausgewählt. Wählen Sie ein anderes aus.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

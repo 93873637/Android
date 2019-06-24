@@ -1,0 +1,136 @@
+    {
+    "sections": [
+    {
+    "sectionName": "系统底层",
+    "items": [
+    {
+    "itemName": "死机与重启",
+    "itemImageKey": "CrashAndReboot"
+    },
+    {
+    "itemName": "耗电与发热",
+    "itemImageKey": "PowerAndHeat"
+    },
+    {
+    "itemName": "充电异常",
+    "itemImageKey": "ChargingException"
+    },
+    {
+    "itemName": "系统卡顿",
+    "itemImageKey": "SlowingAndHanging"
+    },
+    {
+    "itemName": "指纹",
+    "itemImageKey": "FingerPrint"
+    },
+    {
+    "itemName": "蓝牙",
+    "itemImageKey": "Bluetooth"
+    },
+    {
+    "itemName": "按键",
+    "itemImageKey": "PressButton"
+    },
+    {
+    "itemName": "GPS",
+    "itemImageKey": "GPS"
+    },
+    {
+    "itemName": "外设连接",
+    "itemImageKey": "Peripheral"
+    },
+    {
+    "itemName": "音频",
+    "itemImageKey": "Audio"
+    },
+    {
+    "itemName": "4View",
+    "itemImageKey": "4View"
+    },
+    {
+    "itemName": "硬件",
+    "itemImageKey": "Hardware"
+    }
+    ]
+    },
+    {
+    "sectionName": "网络与升级",
+    "items": [
+    {
+    "itemName": "移动网络",
+    "itemImageKey": "MobileNetwork"
+    },
+    {
+    "itemName": "WI-FI",
+    "itemImageKey": "WI-FI"
+    },
+    {
+    "itemName": "系统升级",
+    "itemImageKey": "SystemUpgrade"
+    }
+    ]
+    },
+    {
+    "sectionName": "系统应用",
+    "items": [
+    {
+    "itemName": "桌面",
+    "itemImageKey": "Launcher"
+    },
+    {
+    "itemName": "Red Player",
+    "itemImageKey": "RedPlayer"
+    },
+    {
+    "itemName": "LeiaLoft",
+    "itemImageKey": "LeiaLoft"
+    },
+    {
+    "itemName": "Hydrogen Network",
+    "itemImageKey": "HydrogenNetwork"
+    },
+    {
+    "itemName": "相机",
+    "itemImageKey": "Camera"
+    },
+    {
+    "itemName": "状态栏",
+    "itemImageKey": "StatusBar"
+    },
+    {
+    "itemName": "壁纸",
+    "itemImageKey": "Wallpaper"
+    },
+    {
+    "itemName": "锁屏",
+    "itemImageKey": "Lookscreen"
+    },
+    {
+    "itemName": "设置",
+    "itemImageKey": "Settings"
+    },
+    {
+    "itemName": "电话",
+    "itemImageKey": "Dialer"
+    },
+    {
+    "itemName": "文件管理器",
+    "itemImageKey": "FileManager"
+    }
+    ]
+    },
+    {
+    "sectionName": "更多",
+    "items": [
+    {
+    "itemName": "其他应用",
+    "itemImageKey": "OtherApplications"
+    },
+    {
+    "itemName": "其他错误和意见",
+    "itemImageKey": "OtherMistakesAndOpinions"
+    }
+    ]
+    }
+    ]
+    }

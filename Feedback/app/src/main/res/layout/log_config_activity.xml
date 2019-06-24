@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMainBackground"
+    android:orientation="vertical">
+
+    <include layout="@layout/main_activity_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/label_margin_left"
+                        android:gravity="center_vertical"
+                        android:text="@string/help_message"
+                        android:textSize="18sp"
+                        android:textStyle="italic|bold" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sign_switch_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/app_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/app_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/app_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/all_logs_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/modem_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/modem_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/modem_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/at_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/net_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/net_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/net_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/download_switch_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/kernel_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/kernel_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/kernel_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/dt_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/child_margin_top">
+
+                    <android.widget.TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:text="@string/other"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="18sp"
+                        android:textStyle="italic|bold" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/gps_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/gps_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/gps_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/gps_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/wlan_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/wlan_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/wlan_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/wlan_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/ssr_dump_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/child_margin_bottom"
+                    android:layout_marginLeft="@dimen/child_margin_left"
+                    android:layout_marginTop="@dimen/child_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/sysprof_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:text="@string/sysprof_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/sysprof_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/charge_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/charge_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/charge_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/charge_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/ssr_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin_bottom"
+                    android:layout_marginLeft="@dimen/label_margin_left"
+                    android:layout_marginTop="@dimen/label_margin_top"
+                    android:background="@color/colorMainBackground">
+
+                    <android.widget.TextView
+                        android:id="@+id/sensor_log_tx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:singleLine="true"
+                        android:text="@string/sensor_log"
+                        android:textColor="@color/colorMainText"
+                        android:textSize="@dimen/text_size" />
+
+                    <android.widget.Switch
+                        android:id="@+id/sensor_log_swi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/label_margin_right"
+                        android:theme="@style/SCBSwitch" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3px"
+                    android:layout_marginLeft="@dimen/divider_margin_left"
+                    android:background="@color/colorLineForMenu"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
+                    android:layout_margin="3dp"
+                    android:shadowColor="@color/bar_grey"
+                    android:text="@string/button_ok"
+                    android:textSize="@dimen/text_size" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

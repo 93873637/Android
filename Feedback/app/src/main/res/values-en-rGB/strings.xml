@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Online Feedback</string>
+  <string name="hint_description">Please describe your problem</string>
+  <string name="contact_number">Tel Number (Optional): </string>
+  <string name="hint_telnum">Please enter your telephone number</string>
+  <string name="submit">Submit</string>
+  <string name="tip_network_unavailable">Network not available. Please check your network and try again.</string>
+  <string name="tip_submit_ok">Thanks for your feedback, we will check it asap.</string>
+  <string name="tip_submit_failed">Failed to submit feedback.</string>
+  <string name="upload_attachment">Upload Attachment</string>
+  <string name="already_upload">Uploading...</string>
+  <string name="upload_completed">Upload completed.</string>
+  <string name="action_about">About</string>
+  <string name="offline_log_file">LOG FILE SIZE: </string>
+  <string name="no_offline_log_file">NO LOG FILE.</string>
+  <string name="select_different_picture">The picture is already selected. Please choose another.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

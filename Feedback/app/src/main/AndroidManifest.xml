@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cloudminds.feedback"
+    android:sharedUserId="android.uid.system"
+    android:versionCode="105"
+    android:versionName="1.0.5"
+    >
+
+    <uses-sdk
+        android:minSdkVersion="23"
+        android:targetSdkVersion="27" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+
+    <application
+        android:name=".app.ThisApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_feedback"
+        android:roundIcon="@mipmap/ic_launcher_feedback_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:resizeableActivity="true"
+        android:theme="@style/AppTheme" >
+
+        <activity android:name="com.cloudminds.feedback.activity.MainActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.cloudminds.feedback.activity.UploadActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            >
+        </activity>
+
+        <activity android:name="com.cloudminds.feedback.activity.ChooseModuleActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
+            >
+        </activity>
+        <activity
+            android:name="com.cloudminds.feedback.activity.LogConfigActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name="com.cloudminds.feedback.activity.SettingActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name="com.cloudminds.feedback.activity.UserFeedbackSettingsActivity"
+            android:label="@string/user_experience_title"
+            android:taskAffinity="com.cloudminds.feedback">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.FEEDBACK_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.cloudminds.feedback.activity.UserFeedbackDetailActivity"
+            android:label="@string/user_experience_title"
+            android:parentActivityName="com.cloudminds.feedback.activity.SettingActivity">
+        </activity>
+
+        <activity android:name=".activity.TaskDetailsActivity" />
+        <activity android:name=".activity.TasksListActivity" />
+        <activity android:name=".activity.HistorysListActivity" />
+        <service android:name="com.cloudminds.feedback.net.UploadTasksService"
+            android:enabled="true">
+        </service>
+        <service android:name="com.cloudminds.feedback.net.UploadService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name="net.gotev.uploadservice.UploadService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
+
+        <receiver
+            android:name=".app.FeedbackReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
+    </application>
+</manifest>

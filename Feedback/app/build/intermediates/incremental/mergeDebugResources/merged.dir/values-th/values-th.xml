@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"นำทางไปหน้าแรก"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"นำทางขึ้น"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"ตัวเลือกอื่น"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"เสร็จสิ้น"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"ดูทั้งหมด"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"เลือกแอป"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"ปิด"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"เปิด"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"ค้นหา…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"ล้างข้อความค้นหา"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"ข้อความค้นหา"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"ค้นหา"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"ส่งข้อความค้นหา"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"ค้นหาด้วยเสียง"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"แชร์กับ"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"แชร์ทาง <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"ยุบ"</string>
+    <string name="action_about">เกี่ยวกับ</string>
+    <string name="already_upload">กำลังอัปโหลด...</string>
+    <string name="app_name">ข้อคิดเห็นออนไลน์</string>
+    <string name="button_ok">ตกลง</string>
+    <string name="company_name">CloudMinds</string>
+    <string name="contact_number">หมายเลขโทรศัพท์ (ไม่จำเป็น):</string>
+    <string name="hint_description">โปรดอธิบายคำถามของคุณ</string>
+    <string name="hint_telnum">โปรดป้อนหมายเลขโทรศัพท์ของคุณ</string>
+    <string name="no_offline_log_file">ไม่มีไฟล์บันทึก</string>
+    <string name="offline_log_file">ขนาดไฟล์บันทึก: </string>
+    <string msgid="146198913615257606" name="search_menu_title">"ค้นหา"</string>
+    <string name="select_different_picture">เลือกรูปภาพนี้แล้ว โปรดเลือกรูปภาพอื่น</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="submit">ส่ง</string>
+    <string name="tip_network_unavailable">เครือข่ายไม่พร้อมใช้งาน โปรดตรวจสอบเครือข่ายลองคุณและลองใหม่อีกครั้ง</string>
+    <string name="tip_submit_failed">ไม่สามารถส่งข้อคิดเห็นได้</string>
+    <string name="tip_submit_ok">ขอขอบคุณสำหรับข้อคิดเห็นของคุณ เราจะตรวจสอบโดยเร็วที่สุด</string>
+    <string name="upload_attachment">อัปโหลดเอกสารแนบ</string>
+    <string name="upload_completed">การอัปโหลดเสร็จสิ้น</string>
+</resources>

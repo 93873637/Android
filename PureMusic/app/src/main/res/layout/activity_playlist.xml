@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_playlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:layout_marginBottom="0dp">
+
+        <!--title bar-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="start|center_vertical">
+
+            <ImageButton
+                android:id="@+id/go_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="2dp"
+                android:contentDescription="@string/app_name"
+                android:gravity="end|center_vertical"
+                android:background="@drawable/ic_return" />
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginStart="6dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="PlayList"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorToolbarText"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sort_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="SORT"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorToolbarText"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/clear_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="CLEAR"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorToolbarText"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:id="@+id/playlist_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="HOME"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorToolbarText"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_items"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/list_selector"
+            android:drawSelectorOnTop="true" />
+
+        <!--bottom toolbar for list-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/play_list_ctrl_padding"
+            android:paddingBottom="@dimen/play_list_ctrl_padding"
+            android:gravity="center_vertical"
+            android:background="@color/colorForToolbar"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/music_lists"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/play_list_ctrl_margin"
+                android:layout_marginEnd="@dimen/play_list_ctrl_margin"
+                android:background="@drawable/playlists"
+                android:contentDescription="@string/app_name"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <ImageButton
+                android:id="@+id/add_music_folder"
+                android:layout_width="@dimen/play_list_ctrl_width"
+                android:layout_height="@dimen/play_list_ctrl_height"
+                android:layout_marginStart="@dimen/play_list_ctrl_margin"
+                android:layout_marginEnd="@dimen/play_list_ctrl_margin"
+                android:background="@drawable/ic_add_folder"
+                android:contentDescription="@string/app_name"
+                />
+            <ImageButton
+                android:id="@+id/add_music_file"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_add_music"
+                android:contentDescription="@string/app_name"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

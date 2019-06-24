@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Feedback on-line</string>
+  <string name="hint_description">Descreva sua pergunta</string>
+  <string name="contact_number">Número de telefone (opcional):</string>
+  <string name="hint_telnum">Digite seu número de telefone</string>
+  <string name="submit">enviar</string>
+  <string name="tip_network_unavailable">Rede indisponível. Verifique a rede e tente novamente.</string>
+  <string name="tip_submit_ok">Agradecemos seu feedback, vamos verificar o mais rápido possível.</string>
+  <string name="tip_submit_failed">Falha ao enviar feedback.</string>
+  <string name="upload_attachment">Carregar anexo</string>
+  <string name="already_upload">Carregando...</string>
+  <string name="upload_completed">Carregamento concluído.</string>
+  <string name="action_about">Sobre</string>
+  <string name="offline_log_file">TAMANHO DO ARQUIVO DE LOG: </string>
+  <string name="no_offline_log_file">SEM ARQUIVO DE LOG.</string>
+  <string name="select_different_picture">A imagem já está selecionada. Escolha outra.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

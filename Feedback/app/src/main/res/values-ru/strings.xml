@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Обратная связь в режиме онлайн</string>
+  <string name="hint_description">Опишите свой вопрос</string>
+  <string name="contact_number">Номер телефона (необязательно):</string>
+  <string name="hint_telnum">Введите свой номер телефона</string>
+  <string name="submit">submit</string>
+  <string name="tip_network_unavailable">Сеть недоступна. Проверьте сеть и повторите попытку.</string>
+  <string name="tip_submit_ok">Благодарим Вас за отзыв, мы проверим его как можно быстрее.</string>
+  <string name="tip_submit_failed">Не удалось отправить отзыв.</string>
+  <string name="upload_attachment">Загрузить приложение</string>
+  <string name="already_upload">Загрузка...</string>
+  <string name="upload_completed">Загрузка завершена.</string>
+  <string name="action_about">Сведения</string>
+  <string name="offline_log_file">РАЗМЕР ЛОГ-ФАЙЛА: </string>
+  <string name="no_offline_log_file">ЛОГ-ФАЙЛ ОТСУТСТВУЕТ.</string>
+  <string name="select_different_picture">Это изображение уже выбрано. Выберите другое.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

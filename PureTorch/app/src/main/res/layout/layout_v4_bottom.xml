@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:id="@+id/layoutMiddle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:gravity="top"
+        android:orientation="horizontal"
+        android:padding="0dp">
+
+        <com.liz.puretorch.ui.VerticalSeekBar
+            android:id="@+id/seekbarRed"
+            style="@style/VerticalVolumeBar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:thumb="@drawable/shape_circle_red" />
+
+        <com.liz.puretorch.ui.VerticalSeekBar
+            android:id="@+id/seekbarGreen"
+            style="@style/VerticalVolumeBar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:thumb="@drawable/shape_circle_green" />
+
+        <com.liz.puretorch.ui.VerticalSeekBar
+            android:id="@+id/seekbarBlue"
+            style="@style/VerticalVolumeBar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:thumb="@drawable/shape_circle_blue" />
+
+        <com.liz.puretorch.ui.VerticalSeekBar
+            android:id="@+id/seekbarLight"
+            style="@style/VerticalVolumeBar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:thumb="@drawable/shape_circle_light" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="0dp"
+        android:background="#12cecece"
+        />
+
+</LinearLayout>

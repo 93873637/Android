@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Sat Feb 16 13:50:01 CST 2019
+0.baseType=DIRECTORY
+0.base=D\:\\WorkSpace\\android\\PureMusic\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.path=classes.dex
+0.set=DEX
+count=1

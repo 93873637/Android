@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"홈 탐색"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"위로 탐색"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"옵션 더보기"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"완료"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"전체 보기"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"앱 선택"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"사용 안함"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"사용"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"검색..."</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"검색어 삭제"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"검색어"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"검색"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"검색어 보내기"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"음성 검색"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"공유 대상"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g>와(과) 공유"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"접기"</string>
+    <string name="action_about">정보</string>
+    <string name="already_upload">업로드 중...</string>
+    <string name="app_name">온라인 피드백</string>
+    <string name="button_ok">확인</string>
+    <string name="company_name">CloudMinds</string>
+    <string name="contact_number">전화번호(선택 사항):</string>
+    <string name="hint_description">질문을 구체적으로 작성해주십시오.</string>
+    <string name="hint_telnum">전화번호를 입력하십시오.</string>
+    <string name="no_offline_log_file">로그 파일 없음</string>
+    <string name="offline_log_file">로그 파일 크기: </string>
+    <string msgid="146198913615257606" name="search_menu_title">"검색"</string>
+    <string name="select_different_picture">이미 선택한 사진입니다. 다른 사진을 선택하십시오.</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="submit">제출</string>
+    <string name="tip_network_unavailable">네트워크를 사용할 수 없습니다. 네트워크를 확인하고 다시 시도하십시오.</string>
+    <string name="tip_submit_failed">의견을 제출하지 못했습니다.</string>
+    <string name="tip_submit_ok">의견에 감사 드리며 최대한 빨리 확인하겠습니다.</string>
+    <string name="upload_attachment">첨부 파일 업로드</string>
+    <string name="upload_completed">업로드 완료</string>
+</resources>

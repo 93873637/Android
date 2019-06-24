@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Ir a la pantalla de inicio"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Desplazarse hacia arriba"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Más opciones"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Listo"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Ver todo"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Seleccionar una aplicación"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"DESACTIVADO"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ACTIVADO"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Buscar…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Borrar consulta"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Consulta"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Buscar"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Enviar consulta"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Búsqueda por voz"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Compartir con"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Compartir con <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Contraer"</string>
+    <string name="action_about">Acerca de</string>
+    <string name="already_upload">Subiendo...</string>
+    <string name="app_name">Comentario online</string>
+    <string name="button_ok">Aceptar</string>
+    <string name="company_name">CloudMinds</string>
+    <string name="contact_number">Número de teléfono (opcional):</string>
+    <string name="hint_description">Describa su pregunta</string>
+    <string name="hint_telnum">Introduzca su número de teléfono</string>
+    <string name="no_offline_log_file">NO HAY ARCHIVO DE REGISTRO.</string>
+    <string name="offline_log_file">TAMAÑO DEL ARCHIVO DE REGISTRO: </string>
+    <string msgid="146198913615257606" name="search_menu_title">"Buscar"</string>
+    <string name="select_different_picture">La imagen ya está seleccionada. Seleccione otra.</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"+999"</string>
+    <string name="submit">enviar</string>
+    <string name="tip_network_unavailable">Red no disponible. Compruebe la red e inténtelo de nuevo.</string>
+    <string name="tip_submit_failed">Error al enviar comentario.</string>
+    <string name="tip_submit_ok">Gracias por su comentario, lo revisaremos tan pronto como podamos.</string>
+    <string name="upload_attachment">Subir archivo adjunto</string>
+    <string name="upload_completed">Subida completada.</string>
+</resources>

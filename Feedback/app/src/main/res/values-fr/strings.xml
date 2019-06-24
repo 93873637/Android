@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Commentaires en ligne</string>
+  <string name="hint_description">Veuillez poser votre question</string>
+  <string name="contact_number">Numéro de téléphone (facultatif) :</string>
+  <string name="hint_telnum">Veuillez entrer votre numéro de téléphone</string>
+  <string name="submit">envoyer</string>
+  <string name="tip_network_unavailable">Réseau non disponible. Veuillez vérifier votre réseau et réessayer.</string>
+  <string name="tip_submit_ok">Merci pour vos commentaires, nous les vérifierons dès que possible.</string>
+  <string name="tip_submit_failed">N’a pas réussi à envoyer un commentaire.</string>
+  <string name="upload_attachment">Télécharger une pièce jointe</string>
+  <string name="already_upload">Téléchargement ...</string>
+  <string name="upload_completed">Téléchargement terminé.</string>
+  <string name="action_about">A propos de</string>
+  <string name="offline_log_file">TAILLE DU FICHIER JOURNAL : </string>
+  <string name="no_offline_log_file">AUCUN FICHIER JOURNAL.</string>
+  <string name="select_different_picture">L’image est déjà sélectionnée. Veuillez en choisir une autre.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

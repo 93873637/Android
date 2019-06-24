@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Onlinefeedback</string>
+  <string name="hint_description">Beskriv din fråga</string>
+  <string name="contact_number">Tel.number (valfritt):</string>
+  <string name="hint_telnum">Ange ditt tel.nummer</string>
+  <string name="submit">skicka</string>
+  <string name="tip_network_unavailable">Nätverket inte tillgängligt. Kontrollera nätverket och försök igen.</string>
+  <string name="tip_submit_ok">Tack för din feedback, vi kontrollerar den snarast.</string>
+  <string name="tip_submit_failed">Det gick inte att skicka feedback.</string>
+  <string name="upload_attachment">Ladda upp bilaga</string>
+  <string name="already_upload">Laddar upp...</string>
+  <string name="upload_completed">Uppladdningen är slutförd.</string>
+  <string name="action_about">Om</string>
+  <string name="offline_log_file">LOGGFILENS STORLEK: </string>
+  <string name="no_offline_log_file">INGEN LOGGFIL.</string>
+  <string name="select_different_picture">Bilden har redan markerats. Välj en annan bild</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

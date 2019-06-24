@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+      <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item> 
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="VerticalVolumeBar" parent="@android:style/Widget.Holo.SeekBar">
+        <item name="android:progressDrawable">@drawable/layer_voice_bar</item>
+        <item name="android:thumb">@drawable/voice_btn</item>
+    </style>
+
+</resources>

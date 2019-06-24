@@ -1,0 +1,60 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\WorkSpace\\CloudMinds\\proj\\OnlineAnalysis\\src\\Feedback\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rGB\\values-en-rGB.xml",
+            "map": [
+                {
+                    "source": "D:\\WorkSpace\\CloudMinds\\proj\\OnlineAnalysis\\src\\Feedback\\app\\src\\main\\res\\values-en-rGB\\strings.xml",
+                    "from": {
+                        "startLines": "13,11,2,18,17,4,3,5,15,14,16,6,7,9,8,10,12",
+                        "startColumns": "2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2",
+                        "startOffsets": "805,690,53,1125,1075,176,104,241,909,850,968,314,354,557,468,628,744",
+                        "endColumns": "44,53,50,38,49,64,71,72,58,58,106,39,113,70,88,61,60",
+                        "endOffsets": "847,741,101,1161,1122,238,173,311,965,906,1072,351,465,625,554,687,802"
+                    },
+                    "to": {
+                        "startLines": "19,20,21,22,23,24,25,26,27,28,30,32,33,34,35,36,37",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1825,1872,1928,1981,2022,2074,2141,2215,2290,2351,2494,2704,2746,2862,2935,3026,3090",
+                        "endColumns": "46,55,52,40,51,66,73,74,60,60,108,41,115,72,90,63,62",
+                        "endOffsets": "1867,1923,1976,2017,2069,2136,2210,2285,2346,2407,2598,2741,2857,2930,3021,3085,3148"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\111cdb354dc77ef70050fa2e5780cb56\\res\\values-en-rGB\\values-en-rGB.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "31",
+                        "startColumns": "4",
+                        "startOffsets": "2603",
+                        "endColumns": "100",
+                        "endOffsets": "2699"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\34042ea07ff5947a63962e8551f5a3b5\\res\\values-en-rGB\\values-en-rGB.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,309,417,501,601,716,793,869,951,1054,1158,1257,1362,1465,1569,1725,1825",
+                        "endColumns": "103,99,107,83,99,114,76,75,81,102,103,98,104,102,103,155,99,81",
+                        "endOffsets": "204,304,412,496,596,711,788,864,946,1049,1153,1252,1357,1460,1564,1720,1820,1902"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,209,309,417,501,601,716,793,869,951,1054,1158,1257,1362,1465,1569,1725,2412",
+                        "endColumns": "103,99,107,83,99,114,76,75,81,102,103,98,104,102,103,155,99,81",
+                        "endOffsets": "204,304,412,496,596,711,788,864,946,1049,1153,1252,1357,1460,1564,1720,1820,2489"
+                    }
+                }
+            ]
+        }
+    ]
+}

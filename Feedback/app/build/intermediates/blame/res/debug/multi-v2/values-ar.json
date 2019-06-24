@@ -1,0 +1,60 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\WorkSpace\\CloudMinds\\proj\\OnlineAnalysis\\src\\Feedback\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ar\\values-ar.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.2.aar\\111cdb354dc77ef70050fa2e5780cb56\\res\\values-ar\\values-ar.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "31",
+                        "startColumns": "4",
+                        "startOffsets": "2607",
+                        "endColumns": "100",
+                        "endOffsets": "2703"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\34042ea07ff5947a63962e8551f5a3b5\\res\\values-ar\\values-ar.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,222,326,435,517,618,732,811,890,969,1074,1175,1271,1379,1482,1585,1740,1837",
+                        "endColumns": "116,103,108,81,100,113,78,78,78,104,100,95,107,102,102,154,96,80",
+                        "endOffsets": "217,321,430,512,613,727,806,885,964,1069,1170,1266,1374,1477,1580,1735,1832,1913"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,29",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,222,326,435,517,618,732,811,890,969,1074,1175,1271,1379,1482,1585,1740,2427",
+                        "endColumns": "116,103,108,81,100,113,78,78,78,104,100,95,107,102,102,154,96,80",
+                        "endOffsets": "217,321,430,512,613,727,806,885,964,1069,1170,1266,1374,1477,1580,1735,1832,2503"
+                    }
+                },
+                {
+                    "source": "D:\\WorkSpace\\CloudMinds\\proj\\OnlineAnalysis\\src\\Feedback\\app\\src\\main\\res\\values-ar\\strings.xml",
+                    "from": {
+                        "startLines": "13,11,2,18,17,4,3,5,15,14,16,6,7,9,8,10,12",
+                        "startColumns": "2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2",
+                        "startOffsets": "787,675,53,1103,1053,181,111,244,893,834,956,305,344,552,458,618,732",
+                        "endColumns": "46,56,57,41,49,62,69,60,62,58,96,38,113,65,93,56,54",
+                        "endOffsets": "831,729,108,1142,1100,241,178,302,953,890,1050,341,455,615,549,672,784"
+                    },
+                    "to": {
+                        "startLines": "19,20,21,22,23,24,25,26,27,28,30,32,33,34,35,36,37",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1837,1886,1945,2005,2049,2101,2166,2238,2301,2366,2508,2708,2749,2865,2933,3029,3088",
+                        "endColumns": "48,58,59,43,51,64,71,62,64,60,98,40,115,67,95,58,56",
+                        "endOffsets": "1881,1940,2000,2044,2096,2161,2233,2296,2361,2422,2602,2744,2860,2928,3024,3083,3140"
+                    }
+                }
+            ]
+        }
+    ]
+}

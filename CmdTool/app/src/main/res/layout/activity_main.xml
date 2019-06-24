@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--custom toolbar-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="start|center_vertical">
+
+        <TextView
+            android:id="@+id/tool_bar_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimaryWhite"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="2dp"
+            android:contentDescription="@string/app_name"
+            android:gravity="end|center_vertical"
+            android:background="@mipmap/orange_arrow_down" />
+
+        <ImageButton
+            android:id="@+id/btnPrev"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="6dp"
+            android:contentDescription="@string/app_name"
+            android:gravity="end|center_vertical"
+            android:background="@mipmap/orange_arrow_up" />
+
+        <ImageButton
+            android:id="@+id/btnList"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="6dp"
+            android:focusable="false"
+            android:contentDescription="@string/app_name"
+            android:gravity="end|center_vertical"
+            android:background="@mipmap/checklist" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_Terminal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:focusable="true"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transcriptMode="normal"
+            android:fastScrollEnabled="true"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/textInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:background="@color/colorPrimaryWhite"
+                android:fadeScrollbars="false"
+                android:gravity="start|top"
+                android:scrollbars="vertical"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbarFadeDuration="2000"
+                android:textIsSelectable="true"
+                android:focusable="true"
+                android:textSize="12sp"
+                />
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#efefef"
+        >
+        <EditText
+            android:id="@+id/editCmd"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:background="#fefefe"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:textStyle="italic"
+            android:hint="Please input command"
+            android:imeOptions="actionSend"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:singleLine="true"
+            android:textSize="16sp"
+            />
+
+        <ImageButton
+            android:id="@+id/btnSend"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:contentDescription="@string/app_name"
+            android:gravity="end|center_vertical"
+            android:background="@mipmap/ic_send" />
+    </LinearLayout>
+</LinearLayout>

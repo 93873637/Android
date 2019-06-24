@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">オンラインフィードバック</string>
+  <string name="hint_description">質問を記述してください</string>
+  <string name="contact_number">電話番号（任意）：</string>
+  <string name="hint_telnum">電話番号を入力してください</string>
+  <string name="submit">送信</string>
+  <string name="tip_network_unavailable">ネットワークは利用できません。ネットワークを確認して、もう一度やり直してください。</string>
+  <string name="tip_submit_ok">フィードバックをしていただきありがとうございます。可能な限り早く確認します。</string>
+  <string name="tip_submit_failed">フィードバックの送信に失敗しました。</string>
+  <string name="upload_attachment">添付ファイルをアップロードする</string>
+  <string name="already_upload">アップロードしています...</string>
+  <string name="upload_completed">アップロードが完了しました。</string>
+  <string name="action_about">バージョン情報</string>
+  <string name="offline_log_file">ログファイルサイズ： </string>
+  <string name="no_offline_log_file">ログファイルがありません。</string>
+  <string name="select_different_picture">画像はすでに選択されています。別のものを選んでください。</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

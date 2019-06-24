@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">ऑनलाइन प्रतिक्रिया</string>
+  <string name="hint_description">कृपया अपने प्रश्न का विवरण दें</string>
+  <string name="contact_number">टेलीफ़ोन नंबर (वैकल्पिक):</string>
+  <string name="hint_telnum">कृपया अपना टेलीफ़ोन नंबर दर्ज करें</string>
+  <string name="submit">सबमिट करें</string>
+  <string name="tip_network_unavailable">नेटवर्क उपलब्ध नहीं है। कृपया अपना नेटवर्क जाँचें और पुनः प्रयास करें।</string>
+  <string name="tip_submit_ok">आपकी प्रतिक्रिया के लिए धन्यवाद, हम इसे जल्द ही जाँचेंगे।</string>
+  <string name="tip_submit_failed">प्रतिक्रिया सबमिट करने में विफल रहा।</string>
+  <string name="upload_attachment">अनुलग्नक अपलोड करें</string>
+  <string name="already_upload">अपलोड किया जा रहा है...</string>
+  <string name="upload_completed">अपलोड पूर्ण हुआ।</string>
+  <string name="action_about">इसके बारे में</string>
+  <string name="offline_log_file">लॉग फ़ाइल आकार: </string>
+  <string name="no_offline_log_file">कोई लॉग फ़ाइल नहीं</string>
+  <string name="select_different_picture">चित्र पहले से चुना गया है। कृपया दूसरा चुनें।</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">ठीक</string>
+</resources>

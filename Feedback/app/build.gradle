@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+ext.majorNumber = 1
+ext.minorNumber = 0
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.2'
+    defaultConfig {
+        applicationId "com.cloudminds.feedback"
+        minSdkVersion 25
+        targetSdkVersion 26
+        versionCode 1
+        versionName generateVersionName()
+        ndk {
+            moduleName "byron_version"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
+    }
+    defaultConfig {
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets.main {
+        jni.srcDirs = []
+    }
+    lintOptions {
+       abortOnError false
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/xml'] } }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.truizlop.sectionedrecyclerview:library:1.2.0'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
+    compile(name: 'picture_library-debug', ext: 'aar')
+    compile(name: 'glide-4.5.0', ext: 'aar')
+    compile(name: 'gifdecoder-4.5.0', ext: 'aar')
+    compile(name: 'rxandroid-2.0.1', ext: 'aar')
+}
+
+repositories {
+    google()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+buildscript {
+    repositories {
+        google()
+    }
+}
+
+//Major_Version_Number.Minor_Version_Number.Revision_Number.Build_Date.Build_Time
+def generateVersionName() {
+    String strDate = new Date().format("yy.MMdd")
+    String strTime = new Date().format("HHmm")
+    majorNumber + "." + minorNumber + ".$strDate.$strTime"
+}

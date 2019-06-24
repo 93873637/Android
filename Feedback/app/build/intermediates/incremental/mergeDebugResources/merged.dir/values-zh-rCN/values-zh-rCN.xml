@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"转到主屏幕"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"转到上一层级"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"更多选项"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"完成"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"查看全部"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"选择应用"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"关闭"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"开启"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"搜索…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"清除查询"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"搜索查询"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"搜索"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"提交查询"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"语音搜索"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"分享方式"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"使用<ns1:g id="APPLICATION_NAME">%s</ns1:g>分享"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"收起"</string>
+    <string name="action_about">关于</string>
+    <string name="already_upload">正在上传...</string>
+    <string name="app_name">在线反馈</string>
+    <string name="button_ok">确定</string>
+    <string name="company_name">CloudMinds</string>
+    <string name="contact_number">电话号码（可选）：</string>
+    <string name="dialog_careful_title">注意</string>
+    <string name="dialog_hint_content">测试或调试手机务必勾选！</string>
+    <string name="hint_description">请描述您的问题</string>
+    <string name="hint_telnum">请输入您的电话号码</string>
+    <string name="launcher">桌面</string>
+    <string name="lookscreen">锁屏</string>
+    <string name="no_offline_log_file">没有日志文件。</string>
+    <string name="offline_log_file">日志文件大小： </string>
+    <string name="please_select_user_type">请选择用户类型</string>
+    <string name="problem_format">问题描述: \n\n复现步骤: \n1. \n2. \n\n发生时间点: </string>
+    <string msgid="146198913615257606" name="search_menu_title">"搜索"</string>
+    <string name="select_different_picture">照片已被选中。请选择其他照片。</string>
+    <string name="statusBar">状态栏</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="submit">提交</string>
+    <string name="system_application_section_name">系统应用</string>
+    <string name="tip_network_unavailable">网络不可用。请检查您的网络，然后重试。</string>
+    <string name="tip_submit_failed">无法提交反馈。</string>
+    <string name="tip_submit_ok">谢谢您的反馈，我们会尽快查看。</string>
+    <string name="upload_attachment">上传附件</string>
+    <string name="upload_completed">上传完成。</string>
+    <string name="upload_failed">上传失败。</string>
+    <string name="upload_log">上传日志</string>
+    <string name="user_experience_Join">加入</string>
+    <string name="user_experience_content">诚邀您参加用户体验改进计划</string>
+    <string name="user_experience_description">我们将统计您的手机使用情况，用以改善和提升产品体验。</string>
+    <string name="user_experience_details">【说明文档】\n\n
+
+尊敬的客户，感谢您选择RED，欢迎访问情感化用户界面。为了提升用户体验，诚挚邀请您参与用户体验改进计划（以下简称“计划”）。请注意，您参与本计划是完全出于自愿。如果您选择参与，请认真阅读本“隐私声明”。参与本计划即表示您接受本“隐私声明”，并同意从您的设备收集以下数据，将用于RED及RED授权的第三方公司进行分析：\n
+
+（1）您的设备识别数据（ IMEI 、 ESN 、 MEID 和 SN ）、配置数据、应用程序统计数据、用户行为数据和错误日志数据。\n
+（2）您的数据将经过匿名处理后，再传输给RED及RED授权的第三方公司。RED及RED授权的第三方公司将对收集到的所有数据进行分析，以改进RED的产品和服务以及用户体验。\n
+（3）若要开始或停止参与本计划，只需在“设置”中启用/禁用对您的数据的收集和传输。\n
+（4）从您的设备中收集到的数据将存储在安全的云环境中，仅当处理数据以用于本计划时才能访问该环境。数据传输应遵守所有关于隐私和数据保护的适用法律和法规。\n
+（5）当RED及RED授权的第三方公司的统计分析完成后，为了本计划目的而从您的设备中收集的所有数据将全部删除。\n
+
+对于从您的设备收集的所有信息，RED及RED授权的第三方公司都将严格保密。</string>
+    <string name="user_experience_text">用户体验改进计划</string>
+    <string name="user_experience_title">用户体验改进计划</string>
+    <string name="wallpaper">壁纸</string>
+</resources>

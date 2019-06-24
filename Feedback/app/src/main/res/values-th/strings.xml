@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">ข้อคิดเห็นออนไลน์</string>
+  <string name="hint_description">โปรดอธิบายคำถามของคุณ</string>
+  <string name="contact_number">หมายเลขโทรศัพท์ (ไม่จำเป็น):</string>
+  <string name="hint_telnum">โปรดป้อนหมายเลขโทรศัพท์ของคุณ</string>
+  <string name="submit">ส่ง</string>
+  <string name="tip_network_unavailable">เครือข่ายไม่พร้อมใช้งาน โปรดตรวจสอบเครือข่ายลองคุณและลองใหม่อีกครั้ง</string>
+  <string name="tip_submit_ok">ขอขอบคุณสำหรับข้อคิดเห็นของคุณ เราจะตรวจสอบโดยเร็วที่สุด</string>
+  <string name="tip_submit_failed">ไม่สามารถส่งข้อคิดเห็นได้</string>
+  <string name="upload_attachment">อัปโหลดเอกสารแนบ</string>
+  <string name="already_upload">กำลังอัปโหลด...</string>
+  <string name="upload_completed">การอัปโหลดเสร็จสิ้น</string>
+  <string name="action_about">เกี่ยวกับ</string>
+  <string name="offline_log_file">ขนาดไฟล์บันทึก: </string>
+  <string name="no_offline_log_file">ไม่มีไฟล์บันทึก</string>
+  <string name="select_different_picture">เลือกรูปภาพนี้แล้ว โปรดเลือกรูปภาพอื่น</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">ตกลง</string>
+</resources>

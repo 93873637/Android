@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">線上意見回饋</string>
+  <string name="hint_description">請描述您的問題</string>
+  <string name="contact_number">電話號碼（選填）：</string>
+  <string name="hint_telnum">請輸入您的電話號碼</string>
+  <string name="submit">提交</string>
+  <string name="tip_network_unavailable">網路無法使用請檢查您的網路，之後再試一次。</string>
+  <string name="tip_submit_ok">感謝您的意見回饋，我們會盡快查看。</string>
+  <string name="tip_submit_failed">提交意見回饋失敗。</string>
+  <string name="upload_attachment">上傳附件</string>
+  <string name="already_upload">正在上傳...</string>
+  <string name="upload_completed">上傳已完成。</string>
+  <string name="action_about">關於</string>
+  <string name="offline_log_file">記錄檔案大小： </string>
+  <string name="no_offline_log_file">無記錄檔案。</string>
+  <string name="select_different_picture">圖片已選取。請選擇另一個。</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">確定</string>
+</resources>

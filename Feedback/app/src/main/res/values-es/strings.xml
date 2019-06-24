@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Comentario online</string>
+  <string name="hint_description">Describa su pregunta</string>
+  <string name="contact_number">Número de teléfono (opcional):</string>
+  <string name="hint_telnum">Introduzca su número de teléfono</string>
+  <string name="submit">enviar</string>
+  <string name="tip_network_unavailable">Red no disponible. Compruebe la red e inténtelo de nuevo.</string>
+  <string name="tip_submit_ok">Gracias por su comentario, lo revisaremos tan pronto como podamos.</string>
+  <string name="tip_submit_failed">Error al enviar comentario.</string>
+  <string name="upload_attachment">Subir archivo adjunto</string>
+  <string name="already_upload">Subiendo...</string>
+  <string name="upload_completed">Subida completada.</string>
+  <string name="action_about">Acerca de</string>
+  <string name="offline_log_file">TAMAÑO DEL ARCHIVO DE REGISTRO: </string>
+  <string name="no_offline_log_file">NO HAY ARCHIVO DE REGISTRO.</string>
+  <string name="select_different_picture">La imagen ya está seleccionada. Seleccione otra.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">Aceptar</string>
+</resources>

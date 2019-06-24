@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <string name="app_name">Onlinefeedback</string>
+  <string name="hint_description">Beskriv dit spørgsmål</string>
+  <string name="contact_number">Telefonnummer (valgfrit):</string>
+  <string name="hint_telnum">Indtast dit telefonnummer</string>
+  <string name="submit">send</string>
+  <string name="tip_network_unavailable">Netværk ikke tilgængeligt Tjek netværksindstillinger og prøv igen.</string>
+  <string name="tip_submit_ok">Tak for din feedback, vi vil tjekke det hurtigst muligt.</string>
+  <string name="tip_submit_failed">Det lykkedes ikke at afsende feedback.</string>
+  <string name="upload_attachment">Overfør vedhæftning</string>
+  <string name="already_upload">Overfører ...</string>
+  <string name="upload_completed">Overførsel afsluttet.</string>
+  <string name="action_about">Om</string>
+  <string name="offline_log_file">LOGFILSTØRRELSE: </string>
+  <string name="no_offline_log_file">INGEN LOGFIL.</string>
+  <string name="select_different_picture">Billedet er allerede valgt. Vælg et anden.</string>
+  <string name="company_name">CloudMinds</string>
+  <string name="button_ok">OK</string>
+</resources>

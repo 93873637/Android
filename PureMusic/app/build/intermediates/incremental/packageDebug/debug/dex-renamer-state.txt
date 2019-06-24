@@ -1,0 +1,4 @@
+#Sat Feb 16 13:50:00 CST 2019
+base.0=D\:\\WorkSpace\\android\\PureMusic\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

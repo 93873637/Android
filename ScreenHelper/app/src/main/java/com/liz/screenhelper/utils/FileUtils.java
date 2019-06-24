@@ -7,14 +7,24 @@ package com.liz.screenhelper.utils;
 
 public class FileUtils {
     /**
-     * 获取文件扩展名
-     * @return
+     * @return get file extension name from file absolute path
      */
-    public static String ext(String filename) {
-        int index = filename.lastIndexOf(".");
+    public static String getFileExtension(String fileAbsolute) {
+        int index = fileAbsolute.lastIndexOf(".");
         if (index == -1) {
-            return null;
+            return "";
         }
-        return filename.substring(index + 1);
+        return fileAbsolute.substring(index + 1);
+    }
+
+    /**
+     * @return get file path from file absolute path
+     */
+    public static String getFilePath(String fileAbsolute) {
+        int index = fileAbsolute.lastIndexOf("/");
+        if (index == -1) {
+            return "";
+        }
+        return fileAbsolute.substring(0, index);
     }
 }
