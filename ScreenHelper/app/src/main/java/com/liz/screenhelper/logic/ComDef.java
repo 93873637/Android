@@ -21,6 +21,6 @@ public class ComDef {
 
     public static final int DEFAULT_SCREEN_SERVER_PORT = 8888;
 
-    public static final String SCREEN_SERVER_STATE_STOPPED = "STOPPED";
-    public static final String SCREEN_SERVER_STATE_RUNNING = "RUNNING";
+    public static final String SCREEN_SERVER_STATE_STOPPED = "STOPPED.";
+    public static final String SCREEN_SERVER_STATE_RUNNING = "RUNNING...";
 }
