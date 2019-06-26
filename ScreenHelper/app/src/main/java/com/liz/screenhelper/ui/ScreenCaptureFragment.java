@@ -42,6 +42,7 @@ import androidx.fragment.app.Fragment;
 import com.liz.screenhelper.R;
 import com.liz.screenhelper.app.ThisApp;
 import com.liz.screenhelper.logic.ComDef;
+import com.liz.screenhelper.logic.ScreenServer;
 import com.liz.screenhelper.utils.ImageUtils;
 import com.liz.screenhelper.utils.LogUtils;
 import com.liz.screenhelper.utils.TimeUtils;
@@ -68,6 +69,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     private int mWindowHeight = 0;
     private int mScreenDensity = 0;
 
+    private TextView mTextServerInfo;
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
 
@@ -131,12 +133,20 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         view.findViewById(R.id.stop_capture_image).setOnClickListener(this);
         view.findViewById(R.id.capture_screen_once).setOnClickListener(this);
         view.findViewById(R.id.exit_app).setOnClickListener(this);
+        mTextServerInfo = view.findViewById(R.id.textServerInfo);
 
         mTextProgress = view.findViewById(R.id.textProgress);
         mTextProgress.setText("");
         mScrollProgress = view.findViewById(R.id.scrollview);
         mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+        updateUI();
     }
+
+    public void updateUI() {
+        mTextServerInfo.setText(ScreenServer.getServerInfo());
+    }
+
 
     private void showProgress(final String msg) {
         LogUtils.i(msg);

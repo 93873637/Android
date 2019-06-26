@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import com.liz.screenhelper.logic.ComDef;
+import com.liz.screenhelper.logic.ScreenServer;
 import com.liz.screenhelper.utils.LogUtils;
 
 /**
@@ -25,6 +26,7 @@ public class ThisApp extends Application {
         mAppVersion = "";
         mAppVersionShow = "";
         LogUtils.setTag(ComDef.APP_NAME);
+        ScreenServer.start();
     }
 
     public static Context getAppContext() {
