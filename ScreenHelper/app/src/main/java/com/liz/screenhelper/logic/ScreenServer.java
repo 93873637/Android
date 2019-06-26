@@ -14,16 +14,26 @@ public class ScreenServer {
     private static String mServerAddr = "";
     private static int mServerPort = 0;
     private static String mServerState = ComDef.SCREEN_SERVER_STATE_STOPPED;
+    private static int mConnectionNumber = 0;
 
     public static void start() {
         mServerAddr = NetUtils.getLocalIpAddress(ThisApp.getAppContext());
         mServerPort = ComDef.DEFAULT_SCREEN_SERVER_PORT;
         mServerState = ComDef.SCREEN_SERVER_STATE_STOPPED;
+        mConnectionNumber = 0;
         new ServerSocket_thread().start();
     }
 
     public static String getServerInfo() {
-        return mServerAddr + ":" + mServerPort + " " + mServerState;
+        String info = mServerAddr + ":" + mServerPort + "  " + mServerState;
+        if (mServerState.equals(ComDef.SCREEN_SERVER_STATE_RUNNING)) {
+            info += "  Connection: " + mConnectionNumber;
+        }
+        return info;
+    }
+
+    public static String getState() {
+        return mServerState;
     }
 
     static class ServerSocket_thread extends Thread {
@@ -36,8 +46,9 @@ public class ScreenServer {
                 while (true) {
                     LogUtils.d("ScreenServer: listen on " + ComDef.DEFAULT_SCREEN_SERVER_PORT);
                     Socket clientSocket = serverSocket.accept();
-                    LogUtils.d("ScreenServer: get connect, start client thread...");
                     new ClientSocket_thread(clientSocket).start();
+                    mConnectionNumber++;
+                    LogUtils.d("ScreenServer: Get a new connection, mConnectionNumber = " + mConnectionNumber);
                 }
             }
             catch (Exception e) {
@@ -50,15 +61,14 @@ public class ScreenServer {
 
     static class ClientSocket_thread extends Thread {
 
-        Socket mClientSocket = null;
-
+        Socket mClientSocket;
         ClientSocket_thread(Socket clientSocket) {
             mClientSocket = clientSocket;
         }
 
         @Override
         public void run() {
-            LogUtils.d("ScreenServer: ClientSocket_thread run...");
+            LogUtils.d("ScreenServer: ClientSocket_thread: run: Enter, mConnectionNumber = " + mConnectionNumber + "...");
             while (true) {
                 try {
                     InputStream inputstream = mClientSocket.getInputStream();
@@ -73,12 +83,11 @@ public class ScreenServer {
                     else if (ret == 0) {
                         LogUtils.d("ScreenServer: recv zero, peer closed?");
                         break;
-
                     }
                     else {
                         LogUtils.d("ScreenServer: recv, bytes = " + ret);
                         OutputStream outputStream = mClientSocket.getOutputStream();
-                        outputStream.write("aaaab".getBytes());
+                        outputStream.write("this is an echo test".getBytes());
                     }
                 }
                 catch (Exception e) {
@@ -87,6 +96,8 @@ public class ScreenServer {
                     break;
                 }
             }
+            mConnectionNumber--;
+            LogUtils.d("ScreenServer: ClientSocket_thread: run: Exit, mConnectionNumber = " + mConnectionNumber);
         }
     }  //ClientSocket_thread
 }

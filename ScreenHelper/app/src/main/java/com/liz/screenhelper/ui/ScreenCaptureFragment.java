@@ -19,6 +19,7 @@ package com.liz.screenhelper.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.Image;
@@ -47,6 +48,9 @@ import com.liz.screenhelper.utils.ImageUtils;
 import com.liz.screenhelper.utils.LogUtils;
 import com.liz.screenhelper.utils.TimeUtils;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Provides UI for the screen capture.
  */
@@ -74,6 +78,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     private ScrollView mScrollProgress;
 
     private static boolean mCaptureOnce;
+    private Timer mUpdateUITimer;
 
     private ImageReader.OnImageAvailableListener mOnImageAvailableListener
             = new ImageReader.OnImageAvailableListener() {
@@ -133,20 +138,46 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         view.findViewById(R.id.stop_capture_image).setOnClickListener(this);
         view.findViewById(R.id.capture_screen_once).setOnClickListener(this);
         view.findViewById(R.id.exit_app).setOnClickListener(this);
-        mTextServerInfo = view.findViewById(R.id.textServerInfo);
+        mTextServerInfo = view.findViewById(R.id.serverInfo);
 
         mTextProgress = view.findViewById(R.id.textProgress);
         mTextProgress.setText("");
         mScrollProgress = view.findViewById(R.id.scrollview);
         mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        updateUI();
+        startUITimer();
+    }
+
+    private void startUITimer() {
+        //detect and update NV21 files of /sdcard/camera
+        mUpdateUITimer = new Timer();
+        mUpdateUITimer.schedule(new TimerTask() {
+            public void run () {
+                ScreenCaptureFragment.this.getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        updateUI();
+                    }
+                });
+            }
+        }, 1000, 1000);
+    }
+
+    private void stopUITimer() {
+        if (mUpdateUITimer != null) {
+            mUpdateUITimer.cancel();
+            mUpdateUITimer = null;
+        }
     }
 
     public void updateUI() {
         mTextServerInfo.setText(ScreenServer.getServerInfo());
+        if (ScreenServer.getState().equals(ComDef.SCREEN_SERVER_STATE_RUNNING)) {
+            mTextServerInfo.setBackgroundColor(Color.GREEN);
+        }
+        else {
+            mTextServerInfo.setBackgroundColor(Color.LTGRAY);
+        }
     }
-
 
     private void showProgress(final String msg) {
         LogUtils.i(msg);
@@ -216,6 +247,8 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
                 captureOnce();
                 break;
             case R.id.exit_app:
+                stopUITimer();
+                stopScreenCapture();
                 ThisApp.exitApp();
                 break;
         }
