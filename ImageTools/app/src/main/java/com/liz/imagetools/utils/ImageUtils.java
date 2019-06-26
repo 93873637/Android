@@ -1,9 +1,12 @@
-package com.liz.imagetools;
+package com.liz.imagetools.utils;
 
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.util.Log;
+
+import com.liz.imagetools.image.BMP;
+import com.liz.imagetools.image.NV21;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,7 +31,7 @@ public class ImageUtils {
             // Read all bytes
             byte[] bytes = FileUtils.readFile(file); //Files.readAllBytes(file.toPath());
 
-            int[] data = com.liz.imagetools.NV21.yuv2rgb(bytes, width, height);
+            int[] data = NV21.yuv2rgb(bytes, width, height);
             BMP bmp = new BMP(width, height, pixelBits, data);
             bmp.saveBMP(fileName + ".bmp"); // The output BMP file
 
@@ -44,34 +47,30 @@ public class ImageUtils {
     }
 
     public static String NV21toJPG(File nv21File, int width, int height, String outPath, int quality) {
-        Log.d("ImageTools", "NV21toJPG: Enter...");
+        LogUtils.d("NV21toJPG: Enter...");
         if (!nv21File.exists()) {
-            Log.d("ImageTools", "NV21toJPG: nv21File not exist.");
+            LogUtils.d("NV21toJPG: nv21File not exist.");
             return "ERR_NO_NV21_FILE";
         }
 
         File outFolder = new File(outPath);
         if (!outFolder.exists()) {
-            Log.d("ImageTools", "NV21toJPG: outFolder \"" + outPath + "\" not exist.");
+            LogUtils.d("NV21toJPG: outFolder \"" + outPath + "\" not exist.");
             return "ERR_NO_OUT_FOLDER: " + outPath;
         }
 
         File jpgFile = new File(outPath + "/" + nv21File.getName() + ".jpg");
-        if (!jpgFile.exists()) {
-            try {
-                jpgFile.createNewFile();
-                FileOutputStream filecon = new FileOutputStream(jpgFile);
-
-                // 将NV21格式图片，以质量70压缩成Jpeg，并得到JPEG数据流
-                byte[] data = FileUtils.readFile(nv21File);
-                YuvImage yuvImage = new YuvImage(data, ImageFormat.NV21, width, height, null);
-                yuvImage.compressToJpeg(
-                        new Rect(0, 0, yuvImage.getWidth(), yuvImage.getHeight()),
-                        quality, filecon);
-            } catch (IOException e) {
-                Log.d("ImageTools", "NV21toJPG: Exception: " + e.toString());
-                return "ERR_EXCEPTION: " + e.toString();
-            }
+        try {
+            jpgFile.createNewFile();
+            FileOutputStream filecon = new FileOutputStream(jpgFile);
+            byte[] data = FileUtils.readFile(nv21File);
+            YuvImage yuvImage = new YuvImage(data, ImageFormat.NV21, width, height, null);
+            yuvImage.compressToJpeg(
+                    new Rect(0, 0, yuvImage.getWidth(), yuvImage.getHeight()),
+                    quality, filecon);
+        } catch (IOException e) {
+            LogUtils.d("NV21toJPG: Exception: " + e.toString());
+            return "ERR_EXCEPTION: " + e.toString();
         }
 
         return SUCCESS;

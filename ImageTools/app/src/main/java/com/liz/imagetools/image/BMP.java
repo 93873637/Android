@@ -1,4 +1,4 @@
-package com.liz.imagetools;
+package com.liz.imagetools.image;
 
 import android.graphics.BitmapFactory;
 

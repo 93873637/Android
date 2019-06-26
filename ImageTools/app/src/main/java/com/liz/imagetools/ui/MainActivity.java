@@ -1,20 +1,24 @@
-package com.liz.imagetools;
+package com.liz.imagetools.ui;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.liz.imagetools.R;
+import com.liz.imagetools.logic.ComDef;
 import com.liz.imagetools.utils.ComUtils;
+import com.liz.imagetools.utils.FileUtils;
+import com.liz.imagetools.utils.ImageUtils;
 import com.liz.imagetools.utils.LogUtils;
 
 import java.io.File;
@@ -27,29 +31,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public final static String TITLE = "ImageTools";
 
-    public final static String NV21_FILES_PATH = "/sdcard/camera"; ///data/misc/camera/";
-    public final static String JPG_FILES_PATH = "/sdcard/camera/jpg"; ///data/misc/camera/";
-
-    public final static String MANUAL_STRING = "[STEPS]:\n"
-            + "1. create dirs if not exist:\n"
-            + "    adb root\n"
-            + "    adb shell mkdir " + NV21_FILES_PATH + "\n"
-            + "    adb shell mkdir " + JPG_FILES_PATH + "\n"
-            + "2. copy nv21 files to sdcard:\n"
-            + "    adb shell cp /data/misc/camera/*.nv21 " + NV21_FILES_PATH + "\n"
-            + "3. click the button below to convert, the jpg files will be saved\n"
-            + "    to " + JPG_FILES_PATH + ".\n"
-            + "4. then you can pull out the jpg files to view on PC:\n"
-            + "    adb pull " + JPG_FILES_PATH + " ./"
+    public final static String MANUAL_STRING = ""
+            + "1. adb shell cp /data/misc/camera/*.nv21 " + ComDef.NV21_FILES_PATH + "\n"
+            + "2. click button of NV21->JPG\n"
+            + "3. adb pull " + ComDef.JPG_FILES_PATH + " ./"
             ;
 
-    private Button mBtnConvert;
-    private TextView mTextManual;
-    private TextView mTextStatic;
+    private TextView mTextNV21Files;
+    private TextView mTextJPGFiles;
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
     private List<File> mNV21Files = new ArrayList<>();
-    private Timer mFileDetectTimer;
+    private Timer mUpdateUITimer;
 
     // Storage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -64,41 +57,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         this.setTitle(TITLE + " " + ComUtils.getAppVersion(this));
 
-        mTextManual = (TextView) findViewById(R.id.textManual);
-        mTextManual.setText(MANUAL_STRING);
+        TextView textManual = findViewById(R.id.textManual);
+        textManual.setText(MANUAL_STRING);
 
-        mTextStatic = (TextView) findViewById(R.id.textStatic);
-        mTextStatic.setText("");
+        mTextNV21Files = findViewById(R.id.textNV21Files);
+        mTextNV21Files.setText("");
 
-        mTextProgress = (TextView) findViewById(R.id.textProgress);
+        mTextJPGFiles = findViewById(R.id.textJPGFiles);
+        mTextJPGFiles.setText("");
+
+        mTextProgress = findViewById(R.id.textProgress);
         mTextProgress.setText("");
         mScrollProgress = (ScrollView) findViewById(R.id.scrollview);
         mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        mBtnConvert = (Button) findViewById(R.id.btnConvert);
-        mBtnConvert.setOnClickListener(this);
-
-        startDetectTimer();
+        findViewById(R.id.btnConvertN21toJPG).setOnClickListener(this);
+        findViewById(R.id.clearNV21Files).setOnClickListener(this);
+        findViewById(R.id.clearJPGFiles).setOnClickListener(this);
+        startUITimer();
     }
 
-    private void startDetectTimer() {
+    private void startUITimer() {
         //detect and update NV21 files of /sdcard/camera
-        mFileDetectTimer = new Timer();
-        mFileDetectTimer.schedule(new TimerTask() {
+        mUpdateUITimer = new Timer();
+        mUpdateUITimer.schedule(new TimerTask() {
             public void run () {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
-                        updateStaticInfo();
+                        updateUI();
                     }
                 });
             }
         }, 1000, 1000);
     }
 
-    private void stopDetectTimer() {
-        if (mFileDetectTimer != null) {
-            mFileDetectTimer.cancel();
-            mFileDetectTimer = null;
+    private void stopUITimer() {
+        if (mUpdateUITimer != null) {
+            mUpdateUITimer.cancel();
+            mUpdateUITimer = null;
         }
     }
 
@@ -117,15 +113,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             );
         }
         else {
-            updateStaticInfo();
+            updateUI();
         }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnConvert:
-                onConvert();
+            case R.id.btnConvertN21toJPG:
+                onConvertNV21toJPG();
+                break;
+            case R.id.clearNV21Files:
+                onClearNV21Files();
+                break;
+            case R.id.clearJPGFiles:
+                onClearJPGFiles();
                 break;
             default:
                 //LogUtils.d("MainActivity.onClick: ignored click on " + v.getId());
@@ -133,42 +135,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    protected void updateStaticInfo() {
-        String info = "";
-        mNV21Files.clear();
-
-        File[] files = new File(NV21_FILES_PATH).listFiles();
-        if (files == null) {
-            LogUtils.d("files null, please check if path " + NV21_FILES_PATH + " exist?");
-            info = "No file found, please check if path \"" + NV21_FILES_PATH + "\" exist.";
+    protected void updateUI() {
+        String nv21Info = "NV21 Files: ";
+        if (FileUtils.listFiles(ComDef.NV21_FILES_PATH, ".nv21", mNV21Files)) {
+            nv21Info += mNV21Files.size();
         }
         else {
-            for (File file : files) {
-                if (file.isFile()) {
-                    String fileName = file.getName();
-                    int pos = file.getName().lastIndexOf(".nv21");
-                    int posSuffix = fileName.length() - 5;
-                    if (pos >= 0 && posSuffix >= 0 && pos == posSuffix) {
-                            mNV21Files.add(file);
-                    }
-                }
-                else {
-                    LogUtils.d("skip dir");
-                }
-            }
-
-            info = "NV21 Files in " + NV21_FILES_PATH + ": " + mNV21Files.size();
+            nv21Info += "-1";
         }
+        mTextNV21Files.setText(nv21Info);
 
-        mTextStatic.setText(info);
+        String jpgInfo = "JPG Files: " + FileUtils.getFileNumber(ComDef.JPG_FILES_PATH, ".jpg");
+        mTextJPGFiles.setText(jpgInfo);
+
+//        mNV21Files.clear();
+//
+//        File[] files = new File(ComDef.NV21_FILES_PATH).listFiles();
+//        if (files == null) {
+//            LogUtils.d("files null, please check if path " + ComDef.NV21_FILES_PATH + " exist?");
+//            nv21Info = "No file found, please check if path \"" + ComDef.NV21_FILES_PATH + "\" exist.";
+//        }
+//        else {
+//            for (File file : files) {
+//                if (file.isFile()) {
+//                    String fileName = file.getName();
+//                    int pos = file.getName().lastIndexOf(".nv21");
+//                    int posSuffix = fileName.length() - 5;
+//                    if (pos >= 0 && posSuffix >= 0 && pos == posSuffix) {
+//                            mNV21Files.add(file);
+//                    }
+//                }
+//                else {
+//                    LogUtils.d("skip dir");
+//                }
+//            }
+//
+//            nv21Info = "NV21 Files: " + mNV21Files.size();
+//        }
+
     }
 
-    protected void onConvert() {
-        stopDetectTimer();
-        updateStaticInfo();
+    protected void onConvertNV21toJPG() {
+        stopUITimer();
+        updateUI();
 
         if (mNV21Files.size() == 0) {
-            updateStaticInfo();
+            updateUI();
         }
 
         if (mNV21Files.size() > 0) {
@@ -177,15 +189,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     runConvert();
                     MainActivity.this.runOnUiThread(new Runnable() {
                         public void run() {
-                            startDetectTimer();
+                            startUITimer();
                         }
                     });
                 }
             }.start();
         }
         else {
-            showProgress("No nv21 files found in path \"" + NV21_FILES_PATH + "\"");
+            showProgress("No nv21 files found in path \"" + ComDef.NV21_FILES_PATH + "\"");
         }
+    }
+
+    protected void onClearNV21Files() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm")
+                .setMessage("Are you sure to clear all NV21 files?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        FileUtils.clearDirectory(ComDef.NV21_FILES_PATH);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+    protected void onClearJPGFiles() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirm")
+                .setMessage("Are you sure to clear all JPG files?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        FileUtils.clearDirectory(ComDef.JPG_FILES_PATH);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
     protected void showProgress(final String msg) {
@@ -283,10 +329,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             //Toast.makeText(this, "NV21toJPG: file=" + fileName +", " + width + "x" + height, Toast.LENGTH_LONG).show();
-            Log.d("ImageTools", "NV21toJPG: file=" + file.getAbsolutePath() + ", width=" + width + ", height=" + height);
-            showProgress("width=" + width + ", height=" + height);
-            String res = ImageUtils.NV21toJPG(file, width, height, JPG_FILES_PATH, 100);
+            Log.d("ImageTools", "NV21toJPG: file=" + file.getAbsolutePath() + ", size=" + width + "x" + height);
+            //showProgress("width=" + width + ", height=" + height);
+            String res = ImageUtils.NV21toJPG(file, width, height, ComDef.JPG_FILES_PATH, 100);
             showProgress(res);
+            showProgress("");
             return res.equals(ImageUtils.SUCCESS);
         }
         catch (Exception e) {
@@ -303,11 +350,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay!
-                    updateStaticInfo();
+                    updateUI();
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    mTextStatic.setText("no sdcard permission");
+                    mTextNV21Files.setText("no sdcard permission");
                 }
                 return;
             }

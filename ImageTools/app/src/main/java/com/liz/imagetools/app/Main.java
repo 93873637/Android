@@ -1,4 +1,4 @@
-package com.liz.imagetools;
+package com.liz.imagetools.app;
 
 import java.io.File;
 import java.io.IOException;
