@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btnConvertN21toJPG).setOnClickListener(this);
         findViewById(R.id.clearNV21Files).setOnClickListener(this);
         findViewById(R.id.clearJPGFiles).setOnClickListener(this);
+        findViewById(R.id.modifyImageSize).setOnClickListener(this);
 
         DataLogic.setDataProcessListener(new DataLogic.DataProcessListener() {
             @Override
@@ -155,6 +159,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.clearJPGFiles:
                 onClearJPGFiles();
                 break;
+            case R.id.modifyImageSize:
+                onModifyImageSize();
+                break;
             default:
                 LogUtils.d("MainActivity.onClick: ignored click on " + v.getId());
                 break;
@@ -175,9 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String jpgInfo = "JPG Files: " + FileUtils.getFileNumber(ComDef.JPG_FILES_PATH, ".jpg");
         mTextJPGFiles.setText(jpgInfo);
 
-        final int width = SysUtils.getSystemPropertyInt(this, ComDef.PROP_IMAGE_WIDTH, 0);
-        final int height = SysUtils.getSystemPropertyInt(this, ComDef.PROP_IMAGE_HEIGHT, 0);
-        String imageInfo = "Image Size: " + width + "x" + height;
+        String imageInfo = "Image Size: " + DataLogic.getImageWidth(this) + "x" + DataLogic.getImageHeight(this);
         mTextImageSize.setText(imageInfo);
     }
 
@@ -221,6 +226,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         dialog.dismiss();
                     }
                 }).show();
+    }
+
+    protected void onModifyImageSize() {
+
+        LayoutInflater factory = LayoutInflater.from(this);
+        final View textEntryView = factory.inflate(R.layout.edit_image_size, null);
+        final EditText editWdith = textEntryView.findViewById(R.id.editWdith);
+        final EditText editHeight = textEntryView.findViewById(R.id.editHeight);
+        editWdith.setText("" + DataLogic.getImageWidth(this));
+        editHeight.setText("" + DataLogic.getImageHeight(this));
+
+        AlertDialog.Builder ad1 = new AlertDialog.Builder(MainActivity.this);
+        ad1.setTitle("Modify Image Size");
+        ad1.setIcon(android.R.drawable.ic_dialog_info);
+        ad1.setView(textEntryView);
+        ad1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+                DataLogic.setImageWidth(MainActivity.this, Integer.parseInt(editWdith.getText().toString()));
+                DataLogic.setImageHeight(MainActivity.this, Integer.parseInt(editHeight.getText().toString()));
+            }
+        });
+        ad1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+            }
+        });
+
+        ad1.show();
     }
 
     protected void showProgress(final String msg) {

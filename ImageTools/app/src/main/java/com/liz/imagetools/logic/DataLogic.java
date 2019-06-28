@@ -63,6 +63,22 @@ public class DataLogic {
         });
     }
 
+    public static int getImageWidth(Context context) {
+        return SysUtils.getSystemPropertyInt(context, ComDef.PROP_IMAGE_WIDTH, 0);
+    }
+
+    public static void setImageWidth(Context context, int width) {
+        SysUtils.setSystemProperty(context, ComDef.PROP_IMAGE_WIDTH, "" + width);
+    }
+
+    public static int getImageHeight(Context context) {
+        return SysUtils.getSystemPropertyInt(context, ComDef.PROP_IMAGE_HEIGHT, 0);
+    }
+
+    public static void setImageHeight(Context context, int height) {
+        SysUtils.setSystemProperty(context, ComDef.PROP_IMAGE_HEIGHT, "" + height);
+    }
+
     private static void restartMainActivityForAction(Context context, String action) {
         LogUtils.d("restartMainActivityForAction： action=" + action);
         Activity mainActivity = ThisApp.getMainActivity();

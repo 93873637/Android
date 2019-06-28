@@ -1,5 +1,7 @@
 package com.liz.screenhelper.logic;
 
+import android.graphics.Bitmap;
+
 import com.liz.screenhelper.app.ThisApp;
 import com.liz.screenhelper.utils.LogUtils;
 import com.liz.screenhelper.utils.NetUtils;
@@ -34,6 +36,10 @@ public class ScreenServer {
 
     public static String getState() {
         return mServerState;
+    }
+
+    public static boolean needScreenImage() {
+        return (mServerState.equals(ComDef.SCREEN_SERVER_STATE_RUNNING) && mConnectionNumber > 0);
     }
 
     static class ServerSocket_thread extends Thread {
@@ -87,7 +93,10 @@ public class ScreenServer {
                     else {
                         LogUtils.d("ScreenServer: recv, bytes = " + ret);
                         OutputStream outputStream = mClientSocket.getOutputStream();
-                        outputStream.write("this is an echo test".getBytes());
+                        //outputStream.write("this is an echo test".getBytes());
+                        Bitmap bmp = DataLogic.deQueueScreenImage();
+                        bmp.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                        outputStream.flush();
                     }
                 }
                 catch (Exception e) {

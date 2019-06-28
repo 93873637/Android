@@ -1,12 +1,13 @@
 package com.liz.screenhelper.utils;
 
-import java.nio.ByteBuffer;
+import android.graphics.Bitmap;
+
 import java.util.LinkedList;
 
-public class BufferQueue extends LinkedList<ByteBuffer>{
+public class BitmapQueue extends LinkedList<Bitmap>{
 
 //    public static void main(String[] args) {
-//        System.out.println("BufferQueueTest: Enter...");
+//        System.out.println("BitmapQueue: Enter...");
 //        //####@:
 //        BufferQueue queue = new BufferQueue();
 //        queue.add()enQueue("a");

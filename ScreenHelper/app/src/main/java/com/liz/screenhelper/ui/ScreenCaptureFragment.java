@@ -43,6 +43,7 @@ import androidx.fragment.app.Fragment;
 import com.liz.screenhelper.R;
 import com.liz.screenhelper.app.ThisApp;
 import com.liz.screenhelper.logic.ComDef;
+import com.liz.screenhelper.logic.DataLogic;
 import com.liz.screenhelper.logic.ScreenServer;
 import com.liz.screenhelper.utils.ImageUtils;
 import com.liz.screenhelper.utils.LogUtils;
@@ -86,6 +87,9 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         public void onImageAvailable(ImageReader reader) {
             //showProgress("onImageAvailable");
             Image img = reader.acquireNextImage();
+            if (ScreenServer.needScreenImage()) {
+                DataLogic.enQueueScreenImage(img);
+            }
             if (mCaptureOnce) {
                 String fileName = getDynamicImageFileName();
                 int ret = ImageUtils.saveImage(img, fileName);

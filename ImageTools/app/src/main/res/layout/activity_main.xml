@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
             android:text="NV21 -> JPG"
             android:textSize="20sp" />
 
@@ -119,12 +119,12 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
-                android:id="@+id/setImageSize"
+                android:id="@+id/modifyImageSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="2dp"
-                android:text="Set"
+                android:text="Modify"
                 android:textColor="#0000FF"
                 android:textStyle="bold"
                 />

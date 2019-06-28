@@ -2,76 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0094c24-0261-48bf-9347-64b81d2cb152" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../ImageTools/.idea/dictionaries/cloud.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/app/ImageToolsReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/utils/StringUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/utils/SysUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/utils/TimeUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/BufferQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__android_arch_core_common_1_0_0_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__android_arch_lifecycle_common_1_0_3_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_0_3_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_appcompat_v7_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_cardview_v7_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_annotations_27_0_2_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_compat_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_core_ui_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_core_utils_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_fragment_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_media_compat_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_v13_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_v4_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/libraries/Gradle__com_android_support_support_vector_drawable_27_0_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/Application/Application.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/android-Camera2Basic-master.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/res/layout/edit_image_size.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/BitmapQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/StringQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ImageTools/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/app/ThisApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/app/ThisApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ImageTools/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/logic/ComDef.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/logic/DataLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/ui/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/utils/ComUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/utils/ComUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/java/com/liz/imagetools/utils/FileUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ImageTools/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/4.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/built.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/cache.properties.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_0_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_appcompat_v7_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_appcompat_v7_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_0_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_0_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_compat_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_compat_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_core_ui_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_core_ui_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_core_utils_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_core_utils_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_fragment_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_fragment_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_media_compat_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_media_compat_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_v4_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_v4_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_vector_drawable_26_1_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_support_vector_drawable_26_1_0_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_rules_1_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_rules_1_0_1_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_runner_1_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/libraries/Gradle__com_android_support_test_runner_1_0_1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/PureMusic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/PureMusic.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/DataLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../_bin/ImageTools_1.0.19.0404.1750.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ScreenServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ScreenServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/ui/ScreenCaptureFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/ui/ScreenCaptureFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/BufferQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/BufferQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../android-Camera2Basic-master/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -284,7 +230,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.3336887" />
