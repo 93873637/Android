@@ -1,12 +1,15 @@
 package com.liz.imagetools.app;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
 import com.liz.imagetools.logic.ComDef;
 import com.liz.imagetools.logic.DataLogic;
+import com.liz.imagetools.ui.MainActivity;
 import com.liz.imagetools.utils.LogUtils;
+import com.liz.imagetools.utils.SysUtils;
 
 /**
  * ThisApp.java
@@ -15,17 +18,17 @@ import com.liz.imagetools.utils.LogUtils;
 
 @SuppressWarnings("unused")
 public class ThisApp extends Application {
+
     private static ThisApp mAppInst;
-    public static String mAppVersion = "";
-    public static String mAppVersionShow = "";  //text show in log
+    private static Activity mMainActivity;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mAppInst = this;
-        mAppVersion = "";
-        mAppVersionShow = "";
+        mMainActivity = null;
         LogUtils.setTag(ComDef.APP_NAME);
+        LogUtils.d("ThisApp:onCreate: mAppVersion=" + SysUtils.getVersionName(this));
         DataLogic.init(getAppContext());
     }
 
@@ -37,6 +40,14 @@ public class ThisApp extends Application {
         int pid = android.os.Process.myPid();
         LogUtils.d("exitApp, pid=" + pid);
         android.os.Process.killProcess(pid);
+    }
+
+    public static void setMainActivity(Activity mainActivity) {
+        mMainActivity = mainActivity;
+    }
+
+    public static Activity getMainActivity() {
+        return mMainActivity;
     }
 
     @Override

@@ -10,19 +10,4 @@ import android.text.TextUtils;
  */
 
 public class ComUtils {
-
-    public static String getAppVersion(Context context) {
-        String ver = "";
-        try {
-            PackageManager manager = context.getPackageManager();
-            String packageName = context.getPackageName();
-            LogUtils.d("packageName=" + packageName);
-            PackageInfo info = manager.getPackageInfo(packageName,0);
-            ver = info.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            LogUtils.e("getPackageInfo exception: " + e.toString());
-            e.printStackTrace();
-        }
-        return ver;
-    }
 }

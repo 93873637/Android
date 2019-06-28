@@ -46,11 +46,16 @@ public class FileUtils {
     }
 
     public static boolean listFiles(String filePath, String extName, List<File> list) {
+        if (list == null) {
+            LogUtils.e("ERROR: can't work with null list");
+            return false;
+        }
+
         list.clear();
 
         File[] files = new File(filePath).listFiles();
         if (files == null) {
-            LogUtils.d("files null, please check if path " + filePath + " exist?");
+            LogUtils.e("ERROR: files null, please check if path " + filePath + " exist?");
             return false;
         }
 

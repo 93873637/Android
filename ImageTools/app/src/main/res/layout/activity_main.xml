@@ -23,7 +23,8 @@
             android:layout_marginBottom="6dp"
             android:gravity="left|top"
             android:text="textManual"
-            android:textStyle="italic|bold"
+            android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -49,11 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:layout_marginTop="6dp"
                 android:layout_marginRight="2dp"
                 android:gravity="left|top"
                 android:text="textNV21Files"
-                android:textStyle="italic|bold"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -63,11 +63,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="6dp"
                 android:layout_marginRight="2dp"
                 android:text="Clear"
                 android:textColor="#0000FF"
-                android:textStyle="italic|bold"
+                android:textStyle="bold"
                 />
         </LinearLayout>
 
@@ -81,11 +80,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:layout_marginTop="6dp"
                 android:layout_marginRight="2dp"
                 android:gravity="left|top"
                 android:text="textNV21Files"
-                android:textStyle="italic|bold"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -95,11 +93,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="6dp"
                 android:layout_marginRight="2dp"
                 android:text="Clear"
                 android:textColor="#0000FF"
-                android:textStyle="italic|bold"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textImageSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:gravity="left|top"
+                android:text="textImageSize"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/setImageSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="2dp"
+                android:text="Set"
+                android:textColor="#0000FF"
+                android:textStyle="bold"
                 />
         </LinearLayout>
 
