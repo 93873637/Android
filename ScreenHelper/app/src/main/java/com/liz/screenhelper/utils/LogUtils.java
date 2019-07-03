@@ -56,10 +56,10 @@ public class LogUtils {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
-	// Callback for Log Listener
+	// Callback Log By Listener
 
 	public interface LogListener {
-		void onLogMsg(String msg);
+		void onCBLog(String msg);
 	}
 
 	private static LogListener mLogListener;
@@ -68,13 +68,13 @@ public class LogUtils {
 		mLogListener = listener;
 	}
 
-	public static void logMsg(String msg) {
+	public static void cbLog(String msg) {
 		if (mLogListener != null) {
-			mLogListener.onLogMsg(msg);
+			mLogListener.onCBLog(msg);
 		}
 	}
 
-	// Callback for Log Listener
+	// Callback Log By Listener
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//this can only put codes in place to tacke effect

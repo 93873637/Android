@@ -4,14 +4,17 @@ import android.graphics.Bitmap;
 import android.media.Image;
 
 import com.liz.screenhelper.utils.BitmapQueue;
-import com.liz.screenhelper.utils.LogUtils;
 
 import java.nio.ByteBuffer;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class DataLogic {
 
     private static BitmapQueue mBmpQueue = new BitmapQueue();
+
+    public static int getQueueSize() {
+        return mBmpQueue.size();
+    }
 
     public static void enQueueScreenImage(Image image) {
         if (mBmpQueue.size() == ComDef.MAX_SCREEN_BUFFER_QUEUE_SIZE) {
@@ -30,12 +33,12 @@ public class DataLogic {
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
 
         mBmpQueue.add(bitmap);
-        LogUtils.d("DataLogic:enQueueScreenImage: size=" + mBmpQueue.size());
+        //LogUtils.cbLog("DataLogic:enQueueScreenImage: size=" + mBmpQueue.size());
     }
 
     public static Bitmap deQueueScreenImage() {
         Bitmap bmp = mBmpQueue.poll();
-        LogUtils.d("DataLogic:deQueueScreenImage: size=" + mBmpQueue.size());
+        //LogUtils.cbLog("DataLogic:deQueueScreenImage: size=" + mBmpQueue.size());
         return bmp;
     }
 }

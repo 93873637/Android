@@ -89,9 +89,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         public void onImageAvailable(ImageReader reader) {
             //showProgress("onImageAvailable");
             Image img = reader.acquireNextImage();
-            if (ScreenServer.needScreenImage()) {
-                DataLogic.enQueueScreenImage(img);
-            }
+            DataLogic.enQueueScreenImage(img);
             if (mCaptureOnce) {
                 String fileName = getDynamicImageFileName();
                 int ret = ImageUtils.saveImage(img, fileName);
@@ -151,11 +149,12 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         mTextProgress = view.findViewById(R.id.textProgress);
         mTextProgress.setText("");
         mScrollProgress = view.findViewById(R.id.scrollview);
+        mScrollProgress.setBackgroundColor(Color.LTGRAY);
         mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         LogUtils.setLogListener(new LogUtils.LogListener() {
             @Override
-            public void onLogMsg(String msg) {
+            public void onCBLog(String msg) {
                 ScreenCaptureFragment.this.showProgress(msg);
             }
         });
@@ -186,7 +185,8 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
     public void updateUI() {
         if (isCaptureOn()) {
-            mBtnSwitchCapture.setText("Stop Capture");
+            String btnInfo = "Stop Capture(" + DataLogic.getQueueSize() + ")";
+            mBtnSwitchCapture.setText(btnInfo);
             mBtnSwitchCapture.setBackgroundColor(Color.GREEN);
         }
         else {
@@ -352,7 +352,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
             mCaptureOnce = true;
         }
         else {
-            LogUtils.logMsg("captureOnce: no image reader to capture");
+            LogUtils.cbLog("captureOnce: no image reader to capture");
         }
     }
 

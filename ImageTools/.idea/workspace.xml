@@ -13,11 +13,7 @@
     <list default="true" id="570c8163-7272-44ac-b4fa-c9699c73d799" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ComDef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/DataLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ScreenServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ScreenServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/ui/ScreenCaptureFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/ui/ScreenCaptureFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/LogUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/LogUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/res/layout/fragment_screen_capture.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/res/layout/fragment_screen_capture.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,11 +43,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="85" column="21" selection-start-line="82" selection-end-line="89" />
+            <state relative-caret-position="343">
+              <caret line="90" column="36" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3101#3102#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/DataLogic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
+            <state relative-caret-position="276">
               <caret line="27" column="45" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -121,7 +116,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/SysUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
+            <state relative-caret-position="1610">
               <caret line="75" selection-start-line="75" selection-end-line="75" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -241,9 +236,9 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -348,7 +343,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20628998" />
@@ -589,10 +583,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/DataLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="27" column="45" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/SysUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1610">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -606,32 +620,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/SysUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/DataLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="27" column="45" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="85" column="21" selection-start-line="82" selection-end-line="89" />
+        <state relative-caret-position="343">
+          <caret line="90" column="36" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2910#3102#0" expanded="true" />
             <element signature="e#3101#3102#0" expanded="true" />
           </folding>
         </state>
