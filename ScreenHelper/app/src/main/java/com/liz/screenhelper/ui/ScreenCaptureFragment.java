@@ -33,6 +33,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     private int mScreenDensity = 0;
 
     private TextView mTextServerInfo;
+    private Button mBtnSwitchCapture;
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
 
@@ -138,16 +140,25 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        view.findViewById(R.id.start_capture_image).setOnClickListener(this);
-        view.findViewById(R.id.stop_capture_image).setOnClickListener(this);
+        view.findViewById(R.id.switch_capture_onoff).setOnClickListener(this);
         view.findViewById(R.id.capture_screen_once).setOnClickListener(this);
         view.findViewById(R.id.exit_app).setOnClickListener(this);
+
         mTextServerInfo = view.findViewById(R.id.serverInfo);
+        mBtnSwitchCapture = view.findViewById(R.id.switch_capture_onoff);
+        view.findViewById(R.id.capture_screen_once).setBackgroundColor(Color.LTGRAY);
 
         mTextProgress = view.findViewById(R.id.textProgress);
         mTextProgress.setText("");
         mScrollProgress = view.findViewById(R.id.scrollview);
         mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+        LogUtils.setLogListener(new LogUtils.LogListener() {
+            @Override
+            public void onLogMsg(String msg) {
+                ScreenCaptureFragment.this.showProgress(msg);
+            }
+        });
 
         startUITimer();
     }
@@ -174,6 +185,15 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     }
 
     public void updateUI() {
+        if (isCaptureOn()) {
+            mBtnSwitchCapture.setText("Stop Capture");
+            mBtnSwitchCapture.setBackgroundColor(Color.GREEN);
+        }
+        else {
+            mBtnSwitchCapture.setText("Start Capture");
+            mBtnSwitchCapture.setBackgroundColor(Color.LTGRAY);
+        }
+
         mTextServerInfo.setText(ScreenServer.getServerInfo());
         if (ScreenServer.getState().equals(ComDef.SCREEN_SERVER_STATE_RUNNING)) {
             mTextServerInfo.setBackgroundColor(Color.GREEN);
@@ -184,12 +204,12 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     }
 
     private void showProgress(final String msg) {
-        LogUtils.i(msg);
         Activity activity = getActivity();
         if (activity != null) {
             activity.runOnUiThread(new Runnable() {
                 public void run() {
                     String logMsg = TimeUtils.getLogTime() + " - " + msg;
+                    LogUtils.d(logMsg);
                     mTextProgress.append(logMsg + "\n");
                     mScrollProgress.post(new Runnable() {
                         @Override
@@ -241,18 +261,24 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.start_capture_image:
-                startScreenCapture();
-                break;
-            case R.id.stop_capture_image:
-                stopScreenCapture();
+            case R.id.switch_capture_onoff:
+                mBtnSwitchCapture.setEnabled(false);
+                if (isCaptureOn()) {
+                    mBtnSwitchCapture.setText("Switch Off...");
+                    stopScreenCapture();
+                }
+                else {
+                    mBtnSwitchCapture.setText("Switch On...");
+                    startScreenCapture();
+                }
+                mBtnSwitchCapture.setEnabled(true);
                 break;
             case R.id.capture_screen_once:
                 captureOnce();
                 break;
             case R.id.exit_app:
-                stopUITimer();
                 stopScreenCapture();
+                stopUITimer();
                 ThisApp.exitApp();
                 break;
         }
@@ -316,13 +342,17 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    public static boolean isCaptureOn() {
+        return mImageReader != null;
+    }
+
     public static void captureOnce() {
         LogUtils.d("captureOnce");
-        if (mImageReader == null) {
-            LogUtils.i("captureOnce: no image reader to capture");
+        if (isCaptureOn()) {
+            mCaptureOnce = true;
         }
         else {
-            mCaptureOnce = true;
+            LogUtils.logMsg("captureOnce: no image reader to capture");
         }
     }
 
@@ -333,82 +363,4 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     private static String getStaticImageFileName() {
         return "ddz_current.jpg";
     }
-
-//    private static void startScreenCapture2() {
-//        showProgress("startScreenCapture2: E...");
-//
-//        String imagePath = Environment.getExternalStorageDirectory().getPath() + "/Pictures/DDZScreenShots/";
-//        File filePath = new File(imagePath);
-//        if (!filePath.exists()) {
-//            filePath.mkdirs();
-//            LogUtils.i("create image path: " + filePath);
-//        }
-//
-//        String imageFileName = imagePath + getStaticImageFileName();
-//        showProgress("startScreenCapture2: imageFileName = " + imageFileName);
-//
-//        Image image = mImageReader.acquireLatestImage();
-//        if (image == null) {
-//            showProgress("ERROR: acquireLatestImage null");
-//            return;
-//        }
-//
-//        int width = image.getWidth();
-//        int height = image.getHeight();
-//        showProgress("startScreenCapture2: image size = " + width + "x" + height);
-//
-//        final Image.Plane[] planes = image.getPlanes();
-//        final ByteBuffer buffer = planes[0].getBuffer();
-//        int pixelStride = planes[0].getPixelStride();
-//        int rowStride = planes[0].getRowStride();
-//        int rowPadding = rowStride - pixelStride * width;
-//        Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
-//        bitmap.copyPixelsFromBuffer(buffer);
-//        bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
-//        image.close();
-//
-//        if (bitmap == null) {
-//            showProgress("ERROR: bitmap null");
-//            return;
-//        }
-//        else {
-//            try {
-//                File fileImage = new File(imageFileName);
-//                if (!fileImage.exists()) {
-//                    fileImage.createNewFile();
-//                    LogUtils.i("create image file: " + imageFileName);
-//                }
-//                FileOutputStream out = new FileOutputStream(fileImage);
-//                if (out == null) {
-//                    showProgress("ERROR: get FileOutputStream null");
-//                    return;
-//                }
-//                else {
-//                    LogUtils.i("bitmap compress...");
-//                    //###@: bitmap.compress(Bitmap.CompressFormat.  PNG, 100, out);  //PNG: take a long time
-//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);  //using JPEG to fast save
-//                    LogUtils.i("out flush...");
-//                    out.flush();
-//                    LogUtils.i("out close...");
-//                    out.close();
-//                    //Intent media = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//                    //Uri contentUri = Uri.fromFile(fileImage);
-//                    //media.setData(contentUri);
-//                    //this.sendBroadcast(media);
-//                    LogUtils.i("screen image saved to " + imageFileName);
-//                }
-//            } catch (FileNotFoundException e) {
-//                showProgress("ERROR: FileNotFoundException e=" + e.toString());
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                showProgress("ERROR: IOException e=" + e.toString());
-//                e.printStackTrace();
-//            } catch (Exception e) {
-//                showProgress("ERROR: Exception e=" + e.toString());
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        showProgress("startScreenCapture2: X.");
-//    }
 }

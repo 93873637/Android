@@ -23,4 +23,6 @@ public class ComDef {
 
     public static final String SCREEN_SERVER_STATE_STOPPED = "STOPPED";
     public static final String SCREEN_SERVER_STATE_RUNNING = "RUNNING";
+
+    public static final int MAX_SCREEN_BUFFER_QUEUE_SIZE = 5;
 }

@@ -55,10 +55,32 @@ public class LogUtils {
 		Log.v(mTag, obj.getClass().getName() + ":" + msg);
 	}
 
-//	//this can only put codes in place to tacke effect
-//	public static void d2(String msg) {
-//		String className = Thread.currentThread().getStackTrace()[1].getClassName();
-//		String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-//		Log.d(mTag, className + "." + methodName + ":" + msg);
-//	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	// Callback for Log Listener
+
+	public interface LogListener {
+		void onLogMsg(String msg);
+	}
+
+	private static LogListener mLogListener;
+
+	public static void setLogListener(LogListener listener) {
+		mLogListener = listener;
+	}
+
+	public static void logMsg(String msg) {
+		if (mLogListener != null) {
+			mLogListener.onLogMsg(msg);
+		}
+	}
+
+	// Callback for Log Listener
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//this can only put codes in place to tacke effect
+	public static void d2(String msg) {
+		String className = Thread.currentThread().getStackTrace()[1].getClassName();
+		String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
+		Log.d(mTag, className + "." + methodName + ":" + msg);
+	}
 }

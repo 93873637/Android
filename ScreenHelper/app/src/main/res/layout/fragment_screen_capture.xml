@@ -31,7 +31,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:background="#00FF00"
-        android:padding="12dp"
+        android:padding="16dp"
         android:text="0.0.0.0:2828 RUNNING..."
         android:textStyle="bold"
         android:textSize="16sp"
@@ -44,29 +44,20 @@
         android:orientation="horizontal"
         android:background="#FFFFFF"
         >
-        >
         <Button
-            android:id="@+id/start_capture_image"
+            android:id="@+id/switch_capture_onoff"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:layout_margin="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:padding="0dp"
             android:text="Start Capture"
             android:textStyle="bold"
-            android:textSize="14sp"
-            />
-        <Button
-            android:id="@+id/stop_capture_image"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_margin="0dp"
-            android:text="Stop Capture"
-            android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="13sp"
             />
         <Button
             android:id="@+id/capture_screen_once"
@@ -74,10 +65,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:layout_margin="0dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:text="Capture Once"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="13sp"
             />
     </LinearLayout>
 
@@ -112,6 +106,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="Exit App"
         android:textStyle="bold"
         android:textSize="16sp"

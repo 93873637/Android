@@ -8,11 +8,16 @@ import com.liz.screenhelper.utils.LogUtils;
 
 import java.nio.ByteBuffer;
 
+@SuppressWarnings("WeakerAccess")
 public class DataLogic {
 
     private static BitmapQueue mBmpQueue = new BitmapQueue();
 
     public static void enQueueScreenImage(Image image) {
+        if (mBmpQueue.size() == ComDef.MAX_SCREEN_BUFFER_QUEUE_SIZE) {
+            deQueueScreenImage();
+        }
+
         int width = image.getWidth();
         int height = image.getHeight();
         final Image.Plane[] planes = image.getPlanes();
@@ -23,6 +28,7 @@ public class DataLogic {
         Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
         bitmap.copyPixelsFromBuffer(buffer);
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
+
         mBmpQueue.add(bitmap);
         LogUtils.d("DataLogic:enQueueScreenImage: size=" + mBmpQueue.size());
     }
