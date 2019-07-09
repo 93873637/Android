@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+@SuppressWarnings("unused")
 public class ScreenServer {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +79,7 @@ public class ScreenServer {
             try {
                 ServerSocket serverSocket = new ServerSocket(ComDef.DEFAULT_SCREEN_SERVER_PORT);
                 while (true) {
-                    LogUtils.cbLog("ScreenServer: listen on " + ComDef.DEFAULT_SCREEN_SERVER_PORT);
+                    LogUtils.cbLog("ScreenServer: waiting for connect...");
                     Socket clientSocket = serverSocket.accept();
                     new ClientSocket_thread(clientSocket).start();
                     mConnectionNumber++;
@@ -103,8 +104,9 @@ public class ScreenServer {
         @Override
         public void run() {
             LogUtils.cbLog("ScreenServer: ClientSocket_thread: run: Enter, mConnectionNumber = " + mConnectionNumber + "...");
-            while (send_on_request() > 0) {
-            }
+
+            //cont_send_on_request();
+            cont_send();
 
             try {
                 mClientSocket.close();
@@ -118,42 +120,78 @@ public class ScreenServer {
             LogUtils.cbLog("ScreenServer: ClientSocket_thread: run: Exit, mConnectionNumber = " + mConnectionNumber);
         }
 
-        private int send_on_request() {
+        private int cont_send() {
+            OutputStream outputStream;
             try {
-                InputStream inputstream = mClientSocket.getInputStream();
-                final byte[] buf = new byte[4096];
-
-                LogUtils.cbLog("ScreenServer: waiting for read...");
-                int ret = inputstream.read(buf);
-                if (ret < 0) {
-                    LogUtils.cbLog("ScreenServer: read failed with ret = " + ret);
+                outputStream = mClientSocket.getOutputStream();
+                if (outputStream == null) {
+                    LogUtils.cbLog("ERROR: ScreenServer: cont_send: no output stream from client socket");
                     return -1;
-                } else if (ret == 0) {
-                    LogUtils.cbLog("ScreenServer: read zero, peer closed?");
-                    return 0;
-                } else {
-                    LogUtils.cbLog("ScreenServer: read ok, bytes = " + ret);
-                    OutputStream outputStream = mClientSocket.getOutputStream();
-                    if (outputStream == null) {
-                        LogUtils.cbLog("ERROR: ScreenServer: no output stream from client socket");
-                    } else {
-                        //outputStream.write("this is an echo test".getBytes());
-                        Bitmap bmp = DataLogic.deQueueScreenImage();
-                        if (bmp == null) {
-                            LogUtils.cbLog("ScreenServer: dequeue image null");
-                            outputStream.write(ComDef.SCREEN_IMAGE_EMPTY_FLAG.getBytes());
-                        } else {
-                            bmp.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                            outputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
-                        }
-                        outputStream.flush();
-                    }
-                    return ret;
                 }
             } catch (Exception e) {
-                LogUtils.cbLog("ERROR: client socket recv failed, ex=" + e.toString());
+                LogUtils.cbLog("ERROR: ScreenServer: get client output stream failed, ex=" + e.toString());
                 e.printStackTrace();
                 return -2;
+            }
+
+            while (true) {
+                Bitmap bmp = DataLogic.deQueueScreenImage();
+                if (bmp == null) {
+                    LogUtils.cbLog("ScreenServer: cont_send: dequeue image null");
+                    return -3;
+                }
+
+                try {
+                    bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, outputStream);
+                    outputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                    outputStream.flush();
+                } catch (Exception e) {
+                    LogUtils.cbLog("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
+                    e.printStackTrace();
+                    return -4;
+                }
+            }
+        }
+
+        private int cont_send_on_request() {
+            while(true) {
+                try {
+                    InputStream inputstream = mClientSocket.getInputStream();
+                    final byte[] buf = new byte[4096];
+
+                    LogUtils.cbLog("ScreenServer: waiting for read...");
+                    int ret = inputstream.read(buf);
+                    if (ret < 0) {
+                        LogUtils.cbLog("ScreenServer: read failed with ret = " + ret);
+                        return -1;
+                    } else if (ret == 0) {
+                        LogUtils.cbLog("ScreenServer: read zero, peer closed?");
+                        return 0;
+                    } else {
+                        LogUtils.cbLog("ScreenServer: read ok, bytes = " + ret);
+                        OutputStream outputStream = mClientSocket.getOutputStream();
+                        if (outputStream == null) {
+                            LogUtils.cbLog("ERROR: ScreenServer: no output stream from client socket");
+                            return -2;
+                        } else {
+                            //outputStream.write("this is an echo test".getBytes());
+                            Bitmap bmp = DataLogic.deQueueScreenImage();
+                            if (bmp == null) {
+                                LogUtils.cbLog("ScreenServer: dequeue image null");
+                                outputStream.write(ComDef.SCREEN_IMAGE_EMPTY_FLAG.getBytes());
+                            } else {
+                                bmp.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                                outputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                            }
+                            outputStream.flush();
+                            return ret;
+                        }
+                    }
+                } catch (Exception e) {
+                    LogUtils.cbLog("ERROR: client socket recv failed, ex=" + e.toString());
+                    e.printStackTrace();
+                    return -3;
+                }
             }
         }
     }  //ClientSocket_thread

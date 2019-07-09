@@ -209,7 +209,6 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
             activity.runOnUiThread(new Runnable() {
                 public void run() {
                     String logMsg = TimeUtils.getLogTime() + " - " + msg;
-                    LogUtils.d(logMsg);
                     mTextProgress.append(logMsg + "\n");
                     mScrollProgress.post(new Runnable() {
                         @Override

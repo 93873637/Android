@@ -28,4 +28,6 @@ public class ComDef {
     public static final int MAX_SCREEN_BUFFER_QUEUE_SIZE = 5;
     public static final String SCREEN_IMAGE_END_FLAG = "#####";
     public static final String SCREEN_IMAGE_EMPTY_FLAG = "@@@@@";
+
+    public static final int JPEG_QUALITY = 80;  //1~100
 }

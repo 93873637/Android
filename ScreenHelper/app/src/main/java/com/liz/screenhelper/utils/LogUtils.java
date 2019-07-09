@@ -69,6 +69,7 @@ public class LogUtils {
 	}
 
 	public static void cbLog(String msg) {
+        LogUtils.d(msg);
 		if (mLogListener != null) {
 			mLogListener.onCBLog(msg);
 		}
