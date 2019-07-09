@@ -7,6 +7,7 @@ import android.os.Environment;
  * Created by liz on 2018/3/8.
  */
 
+@SuppressWarnings("unused")
 public class ComDef {
 
     /**
@@ -26,4 +27,5 @@ public class ComDef {
 
     public static final int MAX_SCREEN_BUFFER_QUEUE_SIZE = 5;
     public static final String SCREEN_IMAGE_END_FLAG = "#####";
+    public static final String SCREEN_IMAGE_EMPTY_FLAG = "@@@@@";
 }
