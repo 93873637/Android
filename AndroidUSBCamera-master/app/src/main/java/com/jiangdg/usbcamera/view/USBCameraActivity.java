@@ -1,6 +1,7 @@
 package com.jiangdg.usbcamera.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
 import android.os.Looper;
@@ -22,11 +23,13 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jiangdg.usbcamera.R;
 import com.jiangdg.usbcamera.UVCCameraHelper;
 import com.jiangdg.usbcamera.utils.FileUtils;
+import com.jiangdg.usbcamera.utils.LogUtils;
 import com.serenegiant.usb.CameraDialog;
 import com.serenegiant.usb.Size;
 import com.serenegiant.usb.USBMonitor;
@@ -36,6 +39,8 @@ import com.serenegiant.usb.widget.CameraViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -146,9 +151,42 @@ USBCameraActivity extends AppCompatActivity implements CameraDialog.CameraDialog
         mCameraHelper.setOnPreviewFrameListener(new AbstractUVCCameraHandler.OnPreViewResultListener() {
             @Override
             public void onPreviewResult(byte[] nv21Yuv) {
-
+                LogUtils.d("####@: onPreviewResult: nv21Yuv, size=" + nv21Yuv.length);
             }
         });
+
+        startUITimer();
+    }
+
+    private Timer mUpdateUITimer;
+    private int frame_count = 0;
+
+    private void startUITimer() {
+        //detect and update NV21 files of /sdcard/camera
+        mUpdateUITimer = new Timer();
+        mUpdateUITimer.schedule(new TimerTask() {
+            public void run () {
+                USBCameraActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        updateUI();
+                    }
+                });
+            }
+        }, 1000, 1000);
+    }
+
+    private void stopUITimer() {
+        if (mUpdateUITimer != null) {
+            mUpdateUITimer.cancel();
+            mUpdateUITimer = null;
+        }
+    }
+
+    public void updateUI() {
+        String videoInfo = "resolution: 640x480, frame rate: " + frame_count;
+        frame_count = 0;
+        TextView tvInfo = (TextView)findViewById(R.id.text_video_info);
+        tvInfo.setText(videoInfo);
     }
 
     private void initView() {
@@ -252,6 +290,8 @@ USBCameraActivity extends AppCompatActivity implements CameraDialog.CameraDialog
                     mCameraHelper.startPusher(params, new AbstractUVCCameraHandler.OnEncodeResultListener() {
                         @Override
                         public void onEncodeResult(byte[] data, int offset, int length, long timestamp, int type) {
+                            LogUtils.d("###@: onEncodeResult, data=" + data.length);
+                            frame_count ++;
                             // type = 1,h264 video stream
                             if (type == 1) {
                                 FileUtils.putFileStream(data, offset, length);
