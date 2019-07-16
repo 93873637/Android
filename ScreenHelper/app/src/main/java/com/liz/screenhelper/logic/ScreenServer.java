@@ -97,6 +97,7 @@ public class ScreenServer {
     class ClientSocket_thread extends Thread {
 
         Socket mClientSocket;
+        OutputStream mOutputStream;
         ClientSocket_thread(Socket clientSocket) {
             mClientSocket = clientSocket;
         }
@@ -109,7 +110,12 @@ public class ScreenServer {
             cont_send();
 
             try {
-                mClientSocket.close();
+                if (mOutputStream != null) {
+                    mOutputStream.close();
+                }
+                if (mClientSocket != null) {
+                    mClientSocket.close();
+                }
             }
             catch (Exception ex) {
                 LogUtils.cbLog("ERROR: close client socket exception " + ex.toString());
@@ -121,10 +127,9 @@ public class ScreenServer {
         }
 
         private int cont_send() {
-            OutputStream outputStream;
             try {
-                outputStream = mClientSocket.getOutputStream();
-                if (outputStream == null) {
+                mOutputStream = mClientSocket.getOutputStream();
+                if (mOutputStream == null) {
                     LogUtils.cbLog("ERROR: ScreenServer: cont_send: no output stream from client socket");
                     return -1;
                 }
@@ -142,9 +147,9 @@ public class ScreenServer {
                 }
 
                 try {
-                    bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, outputStream);
-                    outputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
-                    outputStream.flush();
+                    bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, mOutputStream);
+                    mOutputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                    mOutputStream.flush();
                 } catch (Exception e) {
                     LogUtils.cbLog("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
                     e.printStackTrace();
@@ -169,21 +174,21 @@ public class ScreenServer {
                         return 0;
                     } else {
                         LogUtils.cbLog("ScreenServer: read ok, bytes = " + ret);
-                        OutputStream outputStream = mClientSocket.getOutputStream();
-                        if (outputStream == null) {
+                        OutputStream mOutputStream = mClientSocket.getOutputStream();
+                        if (mOutputStream == null) {
                             LogUtils.cbLog("ERROR: ScreenServer: no output stream from client socket");
                             return -2;
                         } else {
-                            //outputStream.write("this is an echo test".getBytes());
+                            //mOutputStream.write("this is an echo test".getBytes());
                             Bitmap bmp = DataLogic.deQueueScreenImage();
                             if (bmp == null) {
                                 LogUtils.cbLog("ScreenServer: dequeue image null");
-                                outputStream.write(ComDef.SCREEN_IMAGE_EMPTY_FLAG.getBytes());
+                                mOutputStream.write(ComDef.SCREEN_IMAGE_EMPTY_FLAG.getBytes());
                             } else {
-                                bmp.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-                                outputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                                bmp.compress(Bitmap.CompressFormat.JPEG, 80, mOutputStream);
+                                mOutputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
                             }
-                            outputStream.flush();
+                            mOutputStream.flush();
                             return ret;
                         }
                     }
