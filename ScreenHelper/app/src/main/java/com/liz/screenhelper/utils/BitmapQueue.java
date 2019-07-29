@@ -8,7 +8,7 @@ public class BitmapQueue extends LinkedList<Bitmap>{
 
 //    public static void main(String[] args) {
 //        System.out.println("BitmapQueue: Enter...");
-//        //####@:
+//        //##@:
 //        BufferQueue queue = new BufferQueue();
 //        queue.add()enQueue("a");
 //        queue.enQueue("b");

@@ -15,16 +15,19 @@ public class ComDef {
 
 
     public final static String MANUAL_STRING = ""
-            + "1. adb shell cp /data/misc/camera/*.nv21 " + ComDef.NV21_FILES_PATH + "\n"
-            + "     for Android P: \n"
-            + "     adb shell cp /data/vendor/camera/*.nv21 " + ComDef.NV21_FILES_PATH + "\n"
+            + "1. adb shell mkdir " + ComDef.WORKING_PATH + "\n"
+            + "     adb shell mkdir " + ComDef.NV21_FILES_PATH + "\n"
+            + "     adb shell mkdir " + ComDef.JPG_FILES_PATH + "\n"
+            + "     Android O: adb shell cp /data/misc/camera/*.nv21 " + ComDef.NV21_FILES_PATH + "\n"
+            + "     Android P: adb shell cp /data/vendor/camera/*.nv21 " + ComDef.NV21_FILES_PATH + "\n"
             + "2. click button \"NV21->JPG\"\n"
-            + "3. adb pull " + ComDef.JPG_FILES_PATH + " ./\n"
-            + "4. NOTE: widht/height got from properties, if not, please set: \n"
-            + "     adb shell setprop " + ComDef.PROP_IMAGE_WIDTH + " 4096\n"
-            + "     adb shell setprop " + ComDef.PROP_IMAGE_HEIGHT + " 3040"
+            + "3. adb pull " + ComDef.JPG_FILES_PATH
+            //+ "4. NOTE: widht/height got from properties, if not, please set: \n"
+            //+ "     adb shell setprop " + ComDef.PROP_IMAGE_WIDTH + " 4096\n"
+            //+ "     adb shell setprop " + ComDef.PROP_IMAGE_HEIGHT + " 3040"
             ;
 
+    public static final String WORKING_PATH = "/sdcard/camera/";
     public static final String NV21_FILES_PATH = "/sdcard/camera/nv21/";
     public static final String JPG_FILES_PATH = "/sdcard/camera/jpg/";
     public static final String NV21_FILE_EXTNAME = ".nv21";

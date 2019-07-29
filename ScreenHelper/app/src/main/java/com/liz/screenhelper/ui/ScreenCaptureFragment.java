@@ -185,7 +185,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
     public void updateUI() {
         if (isCaptureOn()) {
-            String btnInfo = "Stop Capture(" + DataLogic.getQueueSize() + ")";
+            String btnInfo = "Stop Capture(" + DataLogic.getQueueSize() + "/" + DataLogic.getImageSize() + ")";
             mBtnSwitchCapture.setText(btnInfo);
             mBtnSwitchCapture.setBackgroundColor(Color.GREEN);
         }
@@ -195,11 +195,14 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         }
 
         mTextServerInfo.setText(ScreenServer.getServerInfo());
-        if (ScreenServer.getState().equals(ComDef.SCREEN_SERVER_STATE_RUNNING)) {
+        if (ScreenServer.getState().equals(ComDef.SCREEN_SERVER_STATE_LISTENING)) {
             mTextServerInfo.setBackgroundColor(Color.GREEN);
         }
-        else {
+        else if (ScreenServer.getState().equals(ComDef.SCREEN_SERVER_STATE_RUNNING)) {
             mTextServerInfo.setBackgroundColor(Color.LTGRAY);
+        }
+        else {
+            mTextServerInfo.setBackgroundColor(Color.DKGRAY);
         }
     }
 

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 
 import com.liz.screenhelper.logic.ComDef;
 import com.liz.screenhelper.ui.ScreenCaptureFragment;
@@ -37,6 +39,11 @@ public class ScreenHelperReceiver extends BroadcastReceiver {
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(ALARM_ALERT);
         filter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
+        filter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
         context.registerReceiver(getReceiver(), filter);
     }
 
@@ -58,5 +65,28 @@ public class ScreenHelperReceiver extends BroadcastReceiver {
         } else {
             LogUtils.i("ScreenHelperReceiver.onReceive: unhandled action: " + intent.getAction());
         }
+//
+//        if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(intent.getAction())) {//这个监听wifi的打开与关闭，与wifi的连接无关
+//            Log.v("my2", "收到WIFI_STATE_CHANGED_ACTION");
+//            int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, -1111);
+//            switch (wifiState) {
+//                case WifiManager.WIFI_STATE_DISABLED:
+//                    Log.v("my2", "收到" + "WIFI_STATE_DISABLED");
+//                    ScreenServer.sst.interrupt();
+//                    break;
+//                case WifiManager.WIFI_STATE_DISABLING:
+//                    Log.v("my2", "收到" + "WIFI_STATE_DISABLING");
+//                    break;
+//                case WifiManager.WIFI_STATE_ENABLED:
+//                    Log.v("my2", "收到" + "WIFI_STATE_ENABLED");
+//                    break;
+//                case WifiManager.WIFI_STATE_ENABLING:
+//                    Log.v("my2", "收到" + "WIFI_STATE_ENABLING");
+//                    break;
+//                case WifiManager.WIFI_STATE_UNKNOWN:
+//                    Log.v("my2", "WIFI_STATE_UNKNOWN");
+//
+//            }
+//        }
     }
 }

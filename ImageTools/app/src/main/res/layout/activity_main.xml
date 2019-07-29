@@ -23,7 +23,7 @@
             android:layout_marginBottom="6dp"
             android:gravity="left|top"
             android:text="textManual"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -11,9 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="570c8163-7272-44ac-b4fa-c9699c73d799" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../CmdTool/.gradle/4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../CmdTool/.gradle/4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CmdTool/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ComDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/.idea/dictionaries/cloud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/.idea/dictionaries/cloud.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/app/ScreenHelperReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/app/ScreenHelperReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/app/ThisApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/app/ThisApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/DataLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ScreenServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/logic/ScreenServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/ui/ScreenCaptureFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/ui/ScreenCaptureFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/NetUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/java/com/liz/screenhelper/utils/NetUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ScreenHelper/app/src/main/res/layout/fragment_screen_capture.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ScreenHelper/app/src/main/res/layout/fragment_screen_capture.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/CmdTool_1.0.18.1220.1035.apk" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,33 +45,33 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2093">
-              <caret line="91" column="46" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="46" />
+            <state relative-caret-position="194">
+              <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="32" column="14" selection-start-line="31" selection-end-line="35" selection-end-column="19" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-manifest" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="90" column="36" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
+            <state relative-caret-position="2116">
+              <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_image_size.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -107,8 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+            <state relative-caret-position="312">
+              <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -148,7 +160,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>textStatic</find>
       <find>btnConvertN21toJPG</find>
       <find>textNV21Files</find>
       <find>clearNV21Files</find>
@@ -178,6 +189,7 @@
       <find>//showProgress</find>
       <find>showProgress</find>
       <find>setDataProcessListener</find>
+      <find>getExternalStorageState</find>
     </findStrings>
     <replaceStrings>
       <replace>LogUtils.d(</replace>
@@ -213,19 +225,19 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/SysUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/TimeUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/FileUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/edit_image_size.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/DataLogic.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="1932" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -237,13 +249,57 @@
     <panes>
       <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="imagetools" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="imagetools" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="192.168.1.4:2727" />
+    <property name="device.picker.selection" value="20555940" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -342,7 +398,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20628998" />
@@ -360,8 +417,8 @@
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.298441" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" weight="0.32962137" />
+      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.18708241" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32962137" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32962137" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -515,14 +572,6 @@
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="34" selection-end-column="35" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/app/ThisApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="753">
@@ -542,14 +591,6 @@
           <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2093">
-          <caret line="91" column="46" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="46" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_image_size.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -593,13 +634,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/SysUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1610">
@@ -622,15 +656,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="90" column="36" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
+        <state relative-caret-position="2116">
+          <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2910#3102#0" expanded="true" />
-            <element signature="e#3101#3102#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/logic/ComDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="32" column="14" selection-start-line="31" selection-end-line="35" selection-end-column="19" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
   </component>
 </project>

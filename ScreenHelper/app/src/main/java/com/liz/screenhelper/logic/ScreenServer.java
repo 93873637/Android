@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 @SuppressWarnings("unused")
 public class ScreenServer {
@@ -52,7 +53,6 @@ public class ScreenServer {
     private int mConnectionNumber = 0;
 
     private void _start() {
-        mServerAddr = NetUtils.getLocalIpAddress(ThisApp.getAppContext());
         mServerPort = ComDef.DEFAULT_SCREEN_SERVER_PORT;
         mServerState = ComDef.SCREEN_SERVER_STATE_STOPPED;
         mConnectionNumber = 0;
@@ -60,8 +60,9 @@ public class ScreenServer {
     }
 
     private String _getServerInfo() {
+        mServerAddr = NetUtils.getLocalIpAddress(ThisApp.getAppContext());
         String info = mServerAddr + ":" + mServerPort + "  " + mServerState;
-        if (mServerState.equals(ComDef.SCREEN_SERVER_STATE_RUNNING)) {
+        if (mServerState.equals(ComDef.SCREEN_SERVER_STATE_LISTENING)) {
             info += "  Connection: " + mConnectionNumber;
         }
         return info;
@@ -71,28 +72,89 @@ public class ScreenServer {
         return mServerState;
     }
 
+    private static boolean isNetworkAvailable() {
+        return NetUtils.isWifiConnected(ThisApp.getAppContext());
+    }
+
     class ServerSocket_thread extends Thread {
+
+        ServerSocket mServerSocket = null;
+
+        public boolean openServerSocket() {
+            if (mServerSocket == null) {
+                LogUtils.cbLog("ScreenServer: open server socket...");
+                try {
+                    mServerSocket = new ServerSocket(ComDef.DEFAULT_SCREEN_SERVER_PORT);
+                    mServerSocket.setSoTimeout(ComDef.SCREEN_SERVER_LOOP_INTERVAL);
+                } catch (Exception e) {
+                    LogUtils.cbLog("ERROR: ScreenServer: open server socket exception: " + e.toString());
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void closeServerSocket() {
+            if (mServerSocket != null) {
+                LogUtils.cbLog("ScreenServer: close server socket...");
+                try {
+                    mServerSocket.close();
+                    mServerSocket = null;
+                } catch (Exception e) {
+                    LogUtils.cbLog("ERROR: ScreenServer: close server socket exception: " + e.toString());
+                    e.printStackTrace();
+                }
+            }
+        }
+
         @Override
         public void run() {
             mServerState = ComDef.SCREEN_SERVER_STATE_RUNNING;
-            LogUtils.cbLog("ScreenServer: ServerSocket_thread run...");
-            try {
-                ServerSocket serverSocket = new ServerSocket(ComDef.DEFAULT_SCREEN_SERVER_PORT);
-                while (true) {
+            LogUtils.cbLog("ScreenServer: ServerSocket_thread run, E...");
+
+            while (true) {
+                if (isNetworkAvailable()) {
+                    if (!openServerSocket()) {
+                        LogUtils.cbLog("ERROR: ScreenServer: open server socket failed");
+                        break;
+                    }
+                } else {
+                    LogUtils.cbLog("WARNING: ScreenServer: network unavailable, close server socket, sleep " +
+                            ComDef.SCREEN_SERVER_LOOP_INTERVAL + "ms to retry...");
+                    closeServerSocket();
+                    mServerState = ComDef.SCREEN_SERVER_STATE_RUNNING;
+                    try {
+                        Thread.sleep(ComDef.SCREEN_SERVER_LOOP_INTERVAL);
+                        continue;
+                    } catch (Exception ex) {
+                        LogUtils.cbLog("ERROR: ScreenServer: thread sleep failed");
+                        ex.printStackTrace();
+                        break;
+                    }
+                }
+
+                mServerState = ComDef.SCREEN_SERVER_STATE_LISTENING;
+                try {
                     LogUtils.cbLog("ScreenServer: waiting for connect...");
-                    Socket clientSocket = serverSocket.accept();
+                    Socket clientSocket = mServerSocket.accept();
                     new ClientSocket_thread(clientSocket).start();
                     mConnectionNumber++;
                     LogUtils.cbLog("ScreenServer: Get a new connection from " + clientSocket.getInetAddress() + ":" + clientSocket.getPort() + ", mConnectionNumber = " + mConnectionNumber);
+                } catch (SocketTimeoutException e) {
+                    LogUtils.cbLog("ScreenServer: server socket timeout");
+                } catch (Exception e) {
+                    LogUtils.cbLog("ERROR: ScreenServer: server socket exception: " + e.toString());
+                    e.printStackTrace();
+                    break;
                 }
-            }
-            catch (Exception e) {
-                LogUtils.cbLog("ERROR: ScreenServer: server socket failed with exception: " + e.toString());
-                e.printStackTrace();
-            }
+            } //while (true)
+
+            closeServerSocket();
             mServerState = ComDef.SCREEN_SERVER_STATE_STOPPED;
-        }
-    }
+            LogUtils.cbLog("ScreenServer: ServerSocket_thread run, X.");
+        } //public void run()
+    } //class ServerSocket_thread
 
     class ClientSocket_thread extends Thread {
 
