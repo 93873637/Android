@@ -56,6 +56,7 @@ import java.util.TimerTask;
 /**
  * Provides UI for the screen capture.
  */
+@SuppressWarnings({"WeakerAccess, unused"})
 public class ScreenCaptureFragment extends Fragment implements View.OnClickListener {
 
     private static final String STATE_RESULT_CODE = "result_code";
@@ -185,7 +186,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
     public void updateUI() {
         if (isCaptureOn()) {
-            String btnInfo = "Stop Capture(" + DataLogic.getQueueSize() + "/" + DataLogic.getImageSize() + ")";
+            String btnInfo = "Stop Capture(" + DataLogic.getFrameRate() + "/" + DataLogic.getQueueSize() + "/" + DataLogic.getImageSize() + ")";
             mBtnSwitchCapture.setText(btnInfo);
             mBtnSwitchCapture.setBackgroundColor(Color.GREEN);
         }

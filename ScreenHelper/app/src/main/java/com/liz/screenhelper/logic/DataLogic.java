@@ -28,7 +28,7 @@ public class DataLogic {
         mDataTimer = new Timer();
         mDataTimer.schedule(new TimerTask() {
             public void run () {
-                LogUtils.i("***FrameRate: " + mFrameCount);
+                //LogUtils.i("***FrameRate: " + mFrameCount);
                 mFrameCount = 0;
             }
         }, 1000, 1000);
@@ -41,9 +41,14 @@ public class DataLogic {
         }
     }
 
+    public static int getFrameRate() {
+        return mFrameCount;
+    }
+
     public static int getQueueSize() {
         return mBmpQueue.size();
     }
+
     public static String getImageSize() {
         return mImageWidth + "x" + mImageHeight;
     }

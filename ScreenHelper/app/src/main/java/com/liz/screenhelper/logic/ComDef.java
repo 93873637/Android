@@ -21,6 +21,7 @@ public class ComDef {
     public static final String SCREEN_PICTURE_SAVE_DIR = Environment.getExternalStorageDirectory().getPath() + "/Pictures/ScreenShots/";
 
     public static final int DEFAULT_SCREEN_SERVER_PORT = 8888;
+    public static final int DEFAULT_SCREEN_CLIENT_PORT = 8086;
 
     public static final String SCREEN_SERVER_STATE_STOPPED = "STOPPED";
     public static final String SCREEN_SERVER_STATE_RUNNING = "RUNNING";
