@@ -17,18 +17,23 @@ public class DataLogic {
     private static int mImageWidth = 0;
     private static int mImageHeight = 0;
 
-    private static Timer mDataTimer;
+    private static Timer mScreenChangeTimer;
+
     private static int mFrameCount = 0;
+    private static int mFrameRate = 0;
+    private static Timer mDataTimer;
 
     public static void init() {
         startDataTimer();
+        //startScreenChangeTimer();
     }
 
     private static void startDataTimer() {
         mDataTimer = new Timer();
         mDataTimer.schedule(new TimerTask() {
             public void run () {
-                //LogUtils.i("***FrameRate: " + mFrameCount);
+                mFrameRate = mFrameCount;
+                LogUtils.cbLog("***FrameRate: " + mFrameRate);
                 mFrameCount = 0;
             }
         }, 1000, 1000);
@@ -41,8 +46,24 @@ public class DataLogic {
         }
     }
 
+    private static void startScreenChangeTimer() {
+        mScreenChangeTimer = new Timer();
+        mScreenChangeTimer.schedule(new TimerTask() {
+            public void run () {
+                LogUtils.cbLog("I'm Screen Changer!!!");
+            }
+        }, 1000, 10);
+    }
+
+    private static void stopScreenChangeTimer() {
+        if (mScreenChangeTimer != null) {
+            mScreenChangeTimer.cancel();
+            mScreenChangeTimer = null;
+        }
+    }
+
     public static int getFrameRate() {
-        return mFrameCount;
+        return mFrameRate;
     }
 
     public static int getQueueSize() {
@@ -63,12 +84,13 @@ public class DataLogic {
         int height = image.getHeight();
         final Image.Plane[] planes = image.getPlanes();
         final ByteBuffer buffer = planes[0].getBuffer();
-        int pixelStride = planes[0].getPixelStride();
-        int rowStride = planes[0].getRowStride();
-        int rowPadding = rowStride - pixelStride * width;
-        Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
-        bitmap.copyPixelsFromBuffer(buffer);
-        return Bitmap.createBitmap(bitmap, 0, 0, width, height);
+        return null;
+//        int pixelStride = planes[0].getPixelStride();
+//        int rowStride = planes[0].getRowStride();
+//        int rowPadding = rowStride - pixelStride * width;
+//        Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
+//        bitmap.copyPixelsFromBuffer(buffer);
+//        return Bitmap.createBitmap(bitmap, 0, 0, width, height);
     }
 
     public static void enQueueScreenImage(Image image) {
@@ -78,13 +100,13 @@ public class DataLogic {
             }
 
             Bitmap bmpScreen = convertImageToBitmap(image);
-            int width = bmpScreen.getWidth();
-            int height = bmpScreen.getHeight();
-            mImageWidth = width / 4;
-            mImageHeight = height / 4;
-            Bitmap bmpQueue = Bitmap.createScaledBitmap(bmpScreen, mImageWidth, mImageHeight, true);
-            mBmpQueue.add(bmpQueue);
-            mBmpQueue.notifyAll();
+//            int width = bmpScreen.getWidth();
+//            int height = bmpScreen.getHeight();
+//            mImageWidth = width / 4;
+//            mImageHeight = height / 4;
+//            Bitmap bmpQueue = Bitmap.createScaledBitmap(bmpScreen, mImageWidth, mImageHeight, true);
+//            mBmpQueue.add(bmpQueue);
+//            mBmpQueue.notifyAll();
 
             mFrameCount ++;
             //LogUtils.cbLog("DataLogic:enQueueScreenImage: size=" + mBmpQueue.size());
