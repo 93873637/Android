@@ -33,7 +33,7 @@ public class DataLogic {
         mDataTimer.schedule(new TimerTask() {
             public void run () {
                 mFrameRate = mFrameCount;
-                LogUtils.cbLog("***FrameRate: " + mFrameRate);
+                LogUtils.d("***FrameRate: " + mFrameRate);
                 mFrameCount = 0;
             }
         }, 1000, 1000);
@@ -50,7 +50,7 @@ public class DataLogic {
         mScreenChangeTimer = new Timer();
         mScreenChangeTimer.schedule(new TimerTask() {
             public void run () {
-                LogUtils.cbLog("I'm Screen Changer!!!");
+                LogUtils.d("I'm Screen Changer!!!");
             }
         }, 1000, 10);
     }
@@ -79,18 +79,51 @@ public class DataLogic {
 //        byte[] bytes = new byte[buffer.capacity()];
 //        buffer.get(bytes);
 //        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-
         int width = image.getWidth();
         int height = image.getHeight();
         final Image.Plane[] planes = image.getPlanes();
         final ByteBuffer buffer = planes[0].getBuffer();
+        int pixelStride = planes[0].getPixelStride();
+        int rowStride = planes[0].getRowStride();
+        int rowPadding = rowStride - pixelStride * width;
+        Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height/2, Bitmap.Config.ARGB_8888);
+        bitmap.copyPixelsFromBuffer(buffer);
         return null;
-//        int pixelStride = planes[0].getPixelStride();
-//        int rowStride = planes[0].getRowStride();
-//        int rowPadding = rowStride - pixelStride * width;
-//        Bitmap bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888);
-//        bitmap.copyPixelsFromBuffer(buffer);
-//        return Bitmap.createBitmap(bitmap, 0, 0, width, height);
+
+
+        https://ask.csdn.net/questions/259327
+        https://blog.csdn.net/itheima6/article/details/7516631
+
+        以下代码拿到的结果图尺寸与原图保持一致
+
+        ByteBuffer mOutBuffer = ByteBuffer.allocate(width*2 * height*2 * 4);
+        mOutBuffer.rewind();
+        mBitmap.copyPixelsToBuffer(mOutBuffer);
+        upscale.upScale(mOutBuffer.array(), mBitmap.getWidth(), mBitmap.getHeight());
+        mOutBuffer.rewind();
+        mBitmap.copyPixelsFromBuffer(mOutBuffer);
+
+        public void upScale(byte[] bgradata,int width, int height)
+        {
+            float zoomFactor = 2.0f;
+            int format_in = CVImageFormat.CV_PIX_FMT_BGRA8888;
+            int w_in = width;
+            int h_in = height;
+            int s_in = w_in * 4;
+            int format_out = format_in;
+            int w_out = w_in * (int)zoomFactor;
+            int h_out = h_in * (int)zoomFactor;
+            int s_out = w_out * 4;
+            int rst = CvImageApiBridge.IMAGESDK_INSTANCE.cv_imagesdk_upscale(
+                    bgradata,format_in, w_in, h_in, s_in,
+                    bgradata, format_out, w_out, h_out, s_out,
+                    zoomFactor,2.0f,1,true);
+            if (rst != ResultCode.CV_OK.getResultCode()) {
+                throw new RuntimeException("Calling cv_imagesdk_upscale method failed! ResultCode=" + rst);
+            }
+        }
+
+        //return Bitmap.createBitmap(bitmap, 0, 0, width, height);
     }
 
     public static void enQueueScreenImage(Image image) {
@@ -109,7 +142,7 @@ public class DataLogic {
 //            mBmpQueue.notifyAll();
 
             mFrameCount ++;
-            //LogUtils.cbLog("DataLogic:enQueueScreenImage: size=" + mBmpQueue.size());
+            //LogUtils.d("DataLogic:enQueueScreenImage: size=" + mBmpQueue.size());
         }
     }
 
@@ -120,10 +153,10 @@ public class DataLogic {
                     mBmpQueue.wait();
                 }
 
-                //LogUtils.cbLog("DataLogic:deQueueScreenImage: size=" + mBmpQueue.size());
+                //LogUtils.d("DataLogic:deQueueScreenImage: size=" + mBmpQueue.size());
                 return mBmpQueue.poll();
             } catch (Exception e) {
-                LogUtils.cbLog("ERROR: DataLogic: dequeue screen image failed, ex=" + e.toString());
+                LogUtils.d("ERROR: DataLogic: dequeue screen image failed, ex=" + e.toString());
                 e.printStackTrace();
                 return null;
             }

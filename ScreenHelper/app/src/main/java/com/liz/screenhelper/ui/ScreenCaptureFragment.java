@@ -155,7 +155,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
         LogUtils.setLogListener(new LogUtils.LogListener() {
             @Override
-            public void onCBLog(String msg) {
+            public void onCBLog(String msg, int level) {
                 ScreenCaptureFragment.this.showProgress(msg);
             }
         });
@@ -355,7 +355,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
             mCaptureOnce = true;
         }
         else {
-            LogUtils.cbLog("captureOnce: no image reader to capture");
+            LogUtils.d("captureOnce: no image reader to capture");
         }
     }
 

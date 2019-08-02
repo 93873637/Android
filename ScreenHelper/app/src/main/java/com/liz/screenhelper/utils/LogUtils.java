@@ -48,7 +48,7 @@ public class LogUtils {
 		if (mLevel <= LOG_LEVEL_D) {
 			Log.d(mTag, msg);
 			if (mLogListener != null) {
-				mLogListener.onCBLog(msg);
+				mLogListener.onCBLog(msg, LOG_LEVEL_D);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class LogUtils {
 		if (mLevel <= LOG_LEVEL_I) {
 			Log.i(mTag, msg);
 			if (mLogListener != null) {
-				mLogListener.onCBLog(msg);
+				mLogListener.onCBLog(msg, LOG_LEVEL_I);
 			}
 		}
 	}
@@ -66,7 +66,7 @@ public class LogUtils {
 		if (mLevel <= LOG_LEVEL_W) {
 			Log.w(mTag, msg);
 			if (mLogListener != null) {
-				mLogListener.onCBLog(msg);
+				mLogListener.onCBLog(msg, LOG_LEVEL_W);
 			}
 		}
 	}
@@ -75,7 +75,7 @@ public class LogUtils {
 		//since e is top level, not need to judge, direct show
 		Log.e(mTag, msg);
 		if (mLogListener != null) {
-			mLogListener.onCBLog(msg);
+			mLogListener.onCBLog(msg, LOG_LEVEL_E);
 		}
 	}
 
@@ -115,20 +115,13 @@ public class LogUtils {
 	// Callback Log By Listener
 
 	public interface LogListener {
-		void onCBLog(String msg);
+		void onCBLog(String msg, int level);
 	}
 
 	private static LogListener mLogListener;
 
 	public static void setLogListener(LogListener listener) {
 		mLogListener = listener;
-	}
-
-	public static void cbLog(String msg) {
-        LogUtils.d(msg);
-		if (mLogListener != null) {
-			mLogListener.onCBLog(msg);
-		}
 	}
 
 	// Callback Log By Listener
