@@ -5,7 +5,7 @@ import android.util.Log;
 @SuppressWarnings("unused")
 public class LogUtils {
 
-	private static final String DEF_TAG = "MusicService";
+	private static final String DEF_TAG = "PureMusic";
 	private static String mTag = DEF_TAG;
 
 	public static void setTag(String tag) {

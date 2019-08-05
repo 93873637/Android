@@ -33,7 +33,8 @@ public class PlayNotifier {
     public static final int NOTIFY_KEY_PLAY_NEXT = 3;
     public static final int NOTIFY_KEY_PLAY_STOP = 4;
     public static final int NOTIFY_KEY_PLAY_MODE = 5;
-    private static final int NOTIFY_KEY_PLAY_LIST = 6;
+    public static final int NOTIFY_KEY_PLAY_LIST = 6;
+    public static final int NOTIFY_KEY_CLOSE_APP = 7;
 
     private static final int NOTIFY_UPDATE_TIMER_DELAY = 200;
     private static final int NOTIFY_UPDATE_TIMER_PERIOD = 1000;
@@ -49,8 +50,10 @@ public class PlayNotifier {
         }, NOTIFY_UPDATE_TIMER_DELAY, NOTIFY_UPDATE_TIMER_PERIOD);
     }
 
-    public static void onDestory() {
+    public static void onDestory(final Context context) {
         mNotifyUpdateTimer.cancel();
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.cancel(NOTICE_ID_TYPE_0);
     }
 
     private static void addNotification(Context context) {
@@ -70,50 +73,13 @@ public class PlayNotifier {
         remoteViews.setInt(R.id.BtnPlayOrPause, "setBackgroundResource", DataLogic.isPlaying()?R.drawable.pause:R.drawable.play);
         remoteViews.setInt(R.id.BtnPlayMode, "setBackgroundResource", MainActivity.getPlayModeResId());
 
-//        {
-//            //direct send intent to activity
-//            Intent intent = new Intent(context, MusicService.class);
-//            intent.putExtra(PURE_MUSIC_NOTIFY_KEY, 7777);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            int requestCode = (int) SystemClock.uptimeMillis();
-//            PendingIntent pendingIntent = PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//            remoteViews.setOnClickPendingIntent(R.id.BtnPlayOrPause, pendingIntent);
-//        }
-
-//        {
-//            Intent intent = new Intent(ACTION_PURE_MUSIC_NOTIFY);
-//            intent.setPackage(context.getPackageName());
-//            intent.putExtra(PURE_MUSIC_NOTIFY_KEY, NOTIFY_KEY_PLAY_OR_PAUSE);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            int requestCode = (int) SystemClock.uptimeMillis();
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//            remoteViews.setOnClickPendingIntent(R.id.BtnPlayOrPause, pendingIntent);
-//        }
-//        {
-//            Intent intent = new Intent(ACTION_PURE_MUSIC_NOTIFY);
-//            intent.setPackage(context.getPackageName());
-//            intent.putExtra(PURE_MUSIC_NOTIFY_KEY, NOTIFY_KEY_PLAY_PREV);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            int requestCode = (int) SystemClock.uptimeMillis();
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//            remoteViews.setOnClickPendingIntent(R.id.notify_play_prev, pendingIntent);
-//        }
-//        {
-//            Intent intent = new Intent(ACTION_PURE_MUSIC_NOTIFY);
-//            intent.setPackage(context.getPackageName());
-//            intent.putExtra(PURE_MUSIC_NOTIFY_KEY, NOTIFY_KEY_PLAY_NEXT);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            int requestCode = (int) SystemClock.uptimeMillis();
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//            remoteViews.setOnClickPendingIntent(R.id.notify_play_next, pendingIntent);
-//        }
-
         remoteViews.setOnClickPendingIntent(R.id.BtnPlayOrPause, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_OR_PAUSE));
         remoteViews.setOnClickPendingIntent(R.id.notify_play_prev, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_PREV));
         remoteViews.setOnClickPendingIntent(R.id.notify_play_next, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_NEXT));
         remoteViews.setOnClickPendingIntent(R.id.BtnStop, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_STOP));
         remoteViews.setOnClickPendingIntent(R.id.BtnPlayMode, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_MODE));
-        remoteViews.setOnClickPendingIntent(R.id.BtnPlayList, getPendingIntentForActivity(context, NOTIFY_KEY_PLAY_LIST));
+        remoteViews.setOnClickPendingIntent(R.id.notify_play_list, getPendingIntentForActivity(context, NOTIFY_KEY_PLAY_LIST));
+        remoteViews.setOnClickPendingIntent(R.id.notify_close_app, getPendingIntentForBroadcast(context, NOTIFY_KEY_CLOSE_APP));
 
         builder.setSmallIcon(R.drawable.abc_ic_menu_share_mtrl_alpha);
         Notification notification = builder.build();

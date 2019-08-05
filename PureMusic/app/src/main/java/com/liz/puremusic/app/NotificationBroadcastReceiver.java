@@ -39,6 +39,9 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
                 case PlayNotifier.NOTIFY_KEY_PLAY_MODE:
                     DataLogic.switchPlayMode();
                     break;
+                case PlayNotifier.NOTIFY_KEY_CLOSE_APP:
+                    ThisApp.onExitApp();
+                    break;
                 default:
                     LogUtils.w("WARNING: NotificationBroadcastReceiver.onReceive: unsupported notify key " + notifyId);
                     break;

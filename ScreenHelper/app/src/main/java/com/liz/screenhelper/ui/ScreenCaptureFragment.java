@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
 import android.media.Image;
@@ -102,7 +103,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
                 }
                 mCaptureOnce = false;
             }
-            img.close();
+            img.close();  //NOTE: you must close the image to get next
         }
     };
 
@@ -298,7 +299,11 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         }
 
         if (mImageReader == null) {
-            mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, 0x1, 2); //ImageFormat.RGB_565
+            //
+            //NOTE: only PixelFormat.RGBA_8888(1) is supported for my A2H
+            //java.lang.UnsupportedOperationException: The producer output buffer format 0x1 doesn't match the ImageReader's configured buffer format 0x3.
+            //
+            mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 2); //ImageFormat.RGB_565
             mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, null);
         }
         else {

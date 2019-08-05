@@ -100,11 +100,20 @@ public class ThisApp extends Application {
         return mAppInst;
     }
 
+    public static void onExitApp() {
+        LogUtils.d("onExitApp");
+        PureMusicReceiver.release(getAppContext());
+        PlayNotifier.onDestory(getAppContext());
+        int pid = android.os.Process.myPid();
+        LogUtils.d("onExitApp: pid=" + pid);
+        android.os.Process.killProcess(pid);
+    }
+
     @Override
     public void onTerminate() {
         LogUtils.d("onTerminate");
         PureMusicReceiver.release(this);
-        PlayNotifier.onDestory();
+        PlayNotifier.onDestory(this);
         super.onTerminate();
     }
 

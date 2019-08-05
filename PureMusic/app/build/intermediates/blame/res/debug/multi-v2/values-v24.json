@@ -1,42 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\WorkSpace\\android\\PureMusic\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3f1a21927953d9be612dc89621e2fb08\\res\\values-v24\\values-v24.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,212,347,416,480,549",
-                        "endColumns": "156,134,68,63,68,69",
-                        "endOffsets": "207,342,411,475,544,614"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\73ec7f9336194427a303be9aee39b869\\res\\values-v24\\values-v24.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,121,182,248",
-                        "endColumns": "65,60,65,66",
-                        "endOffsets": "116,177,243,310"
-                    },
-                    "to": {
-                        "startLines": "8,9,10,11",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "619,685,746,812",
-                        "endColumns": "65,60,65,66",
-                        "endOffsets": "680,741,807,874"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "D:\\WorkSpace\\Android\\PureMusic\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\cc233209a683659d3846b54eb75a2458\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\c7d6a119dd35c09f81d60b4a64a80f43\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -53,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\217ec1618e65cf6ac4d38cb732caddc8\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\11b69f1b6e9450606cc2e6225894f717\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

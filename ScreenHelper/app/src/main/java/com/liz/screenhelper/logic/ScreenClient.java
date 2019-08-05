@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 
 @SuppressWarnings({"WeakerAccess, unused"})
 public class ScreenClient {
@@ -42,6 +43,53 @@ public class ScreenClient {
 
         private DatagramSocket mUDPSocket;
 
+        private boolean sendBmp() {
+            Bitmap bmp = DataLogic.deQueueScreenBmp();
+            if (bmp == null) {
+                LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
+                return false;
+            }
+
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, baos);
+                baos.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                baos.flush();
+                byte[] data = baos.toByteArray();
+                DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
+                mUDPSocket.send(dataPacket);
+            } catch (Exception e) {
+                LogUtils.d("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+
+        private boolean sendScreenBuffer() {
+            ByteBuffer byteBuffer = DataLogic.deQueueScreenBuffer();
+            if (byteBuffer == null) {
+                LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
+                return false;
+            }
+
+            try {
+                byteBuffer.flip();
+                int len = byteBuffer.limit() - byteBuffer.position();
+                byte[] data = new byte[len];
+                byteBuffer.get(data);
+                DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
+                mUDPSocket.send(dataPacket);
+            } catch (Exception e) {
+                LogUtils.d("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+
         @Override
         public void run() {
             LogUtils.d("ScreenClient: UDPClientSocket_thread: run: Enter...");
@@ -53,27 +101,8 @@ public class ScreenClient {
                 return;
             }
 
-            while (true) {
-                Bitmap bmp = DataLogic.deQueueScreenImage();
-                if (bmp == null) {
-                    LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
-                    break;
-                }
-
-                try {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, baos);
-                    baos.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
-                    baos.flush();
-                    byte[] data = baos.toByteArray();
-                    DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
-                    mUDPSocket.send(dataPacket);
-                } catch (Exception e) {
-                    LogUtils.d("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
-                    e.printStackTrace();
-                    break;
-                }
-            }
+            //while (sendBmp());
+            while (sendScreenBuffer());
 
             try {
                 if (mUDPSocket != null) {
@@ -134,7 +163,7 @@ public class ScreenClient {
             }
 
             while (true) {
-                Bitmap bmp = DataLogic.deQueueScreenImage();
+                Bitmap bmp = DataLogic.deQueueScreenBmp();
                 if (bmp == null) {
                     LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
                     return -3;
