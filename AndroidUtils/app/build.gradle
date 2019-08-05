@@ -1,0 +1,67 @@
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+    defaultConfig {
+        //applicationId "com.liz.androidutils"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // for build jar
+
+    //
+    //Usage:
+    //1. On Android Studio's Terminal window, input 'gradlew buildJar'
+    //D:\WorkSpace\Android\AndroidUtils>gradlew buildJar
+    //2. Then you can get AndroidUtils.jar on D:/WorkSpace/Android/_bin
+    //
+
+    def jarFileName = "AndroidUtils"
+    def jarOutputDir = "build/outputs"
+    def jarTargetFile = jarOutputDir + "/" + jarFileName + ".jar"
+    def jarZipFile = file('build/intermediates/packaged-classes/debug/classes.jar')
+    def jarReleaseDir = 'D:/WorkSpace/Android/_bin'
+
+    task clearJar(type:Delete){
+        delete jarTargetFile
+    }
+
+    task makeJar(type:Jar){
+        from zipTree(jarZipFile)
+        from fileTree(dir:'src/main',includes:['assets/**'])
+        baseName = jarFileName
+        destinationDir = file(jarOutputDir)
+    }
+
+    task buildJar(type:Copy){
+        from(jarTargetFile)
+        into(jarReleaseDir)
+    }
+
+    buildJar.dependsOn(clearJar, build, makeJar)
+
+    // for build jar
+    ////////////////////////////////////////////////////////////////////////////////
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

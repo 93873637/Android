@@ -1,4 +1,4 @@
-package com.liz.screenhelper.utils;
+package com.liz.androidutils;
 
 import android.util.Log;
 
@@ -34,6 +34,22 @@ public class LogUtils {
 	public static int getLevel() {
 		return mLevel;
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	// Callback Log By Listener
+
+	public interface LogListener {
+		void onCBLog(String msg, int level);
+	}
+
+	private static LogListener mLogListener;
+
+	public static void setLogListener(LogListener listener) {
+		mLogListener = listener;
+	}
+
+	// Callback Log By Listener
+	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public static void v(String msg) {
 		if (mLevel == LOG_LEVEL_V) {
@@ -111,23 +127,7 @@ public class LogUtils {
 		Log.e(mTag, obj.getClass().getName() + ":" + msg);
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	// Callback Log By Listener
-
-	public interface LogListener {
-		void onCBLog(String msg, int level);
-	}
-
-	private static LogListener mLogListener;
-
-	public static void setLogListener(LogListener listener) {
-		mLogListener = listener;
-	}
-
-	// Callback Log By Listener
-	////////////////////////////////////////////////////////////////////////////////////////////////
-
-	//this can only put codes in place to tacke effect
+	//this can only put codes in place to take effect
 	public static void d2(String msg) {
 		String className = Thread.currentThread().getStackTrace()[1].getClassName();
 		String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();

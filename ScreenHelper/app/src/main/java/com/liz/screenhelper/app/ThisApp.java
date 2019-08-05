@@ -3,11 +3,11 @@ package com.liz.screenhelper.app;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
+import com.liz.androidutils.LogUtils;
 
 import com.liz.screenhelper.logic.ComDef;
 import com.liz.screenhelper.logic.DataLogic;
 import com.liz.screenhelper.logic.ScreenServer;
-import com.liz.screenhelper.utils.LogUtils;
 
 /**
  * ThisApp.java
@@ -26,6 +26,7 @@ public class ThisApp extends Application {
         mAppInst = this;
         mAppVersion = "";
         mAppVersionShow = "";
+
         LogUtils.setTag(ComDef.APP_NAME);
         DataLogic.init();
         ScreenHelperReceiver.init(getAppContext());

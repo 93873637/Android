@@ -2,7 +2,7 @@ package com.liz.screenhelper.logic;
 
 import android.graphics.Bitmap;
 
-import com.liz.screenhelper.utils.LogUtils;
+import com.liz.androidutils.LogUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;

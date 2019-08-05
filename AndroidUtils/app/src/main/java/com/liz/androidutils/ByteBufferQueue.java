@@ -1,4 +1,4 @@
-package com.liz.screenhelper.utils;
+package com.liz.androidutils;
 
 import java.nio.ByteBuffer;
 import java.util.LinkedList;

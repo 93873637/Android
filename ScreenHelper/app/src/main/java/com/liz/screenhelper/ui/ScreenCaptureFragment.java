@@ -42,14 +42,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.liz.androidutils.ImageUtils;
+import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.TimeUtils;
 import com.liz.screenhelper.R;
 import com.liz.screenhelper.app.ThisApp;
 import com.liz.screenhelper.logic.ComDef;
 import com.liz.screenhelper.logic.DataLogic;
 import com.liz.screenhelper.logic.ScreenServer;
-import com.liz.screenhelper.utils.ImageUtils;
-import com.liz.screenhelper.utils.LogUtils;
-import com.liz.screenhelper.utils.TimeUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;

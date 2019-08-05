@@ -3,9 +3,9 @@ package com.liz.screenhelper.logic;
 import android.graphics.Bitmap;
 import android.media.Image;
 
-import com.liz.screenhelper.utils.BitmapQueue;
-import com.liz.screenhelper.utils.ByteBufferQueue;
-import com.liz.screenhelper.utils.LogUtils;
+import com.liz.androidutils.BitmapQueue;
+import com.liz.androidutils.ByteBufferQueue;
+import com.liz.androidutils.LogUtils;
 
 import java.nio.ByteBuffer;
 import java.util.Timer;

@@ -1,8 +1,8 @@
 package com.liz.screenhelper.logic;
 
+import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.NetUtils;
 import com.liz.screenhelper.app.ThisApp;
-import com.liz.screenhelper.utils.LogUtils;
-import com.liz.screenhelper.utils.NetUtils;
 
 import java.net.ServerSocket;
 import java.net.Socket;

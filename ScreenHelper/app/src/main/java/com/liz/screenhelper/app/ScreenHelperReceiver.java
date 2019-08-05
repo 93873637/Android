@@ -9,9 +9,9 @@ import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.screenhelper.logic.ComDef;
 import com.liz.screenhelper.ui.ScreenCaptureFragment;
-import com.liz.screenhelper.utils.LogUtils;
 
 import static android.provider.Settings.System.ALARM_ALERT;
 
