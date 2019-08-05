@@ -75,10 +75,29 @@ public class ScreenClient {
             }
 
             try {
-                byteBuffer.flip();
-                int len = byteBuffer.limit() - byteBuffer.position();
-                byte[] data = new byte[len];
-                byteBuffer.get(data);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                baos.write(byteBuffer.array());  //###@: java.lang.UnsupportedOperationException????!!!
+                baos.flush();
+                byte[] data = baos.toByteArray();
+
+                //####@: //不能让方法一直循环  需要判断一个界限大小
+//                if(myByteArrayOutputStream.size()>2323323){
+//                    File file=new File("d://2.pcm")
+//                    if(!file.exists()){
+//                        file.createNewFile();
+//                    }
+//                    FileOutputStream fe=new FileOutputStream(file,true);
+//                    fe.wirte(myByteArrayOutputStream.toByteArray());
+//                    fe.flush();
+//                    fe.close();
+//                }
+
+
+//                byteBuffer.flip();
+//                int len = byteBuffer.limit() - byteBuffer.position();
+//                byte[] data = new byte[len];
+//                byteBuffer.get(data);
+
                 DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
                 mUDPSocket.send(dataPacket);
             } catch (Exception e) {

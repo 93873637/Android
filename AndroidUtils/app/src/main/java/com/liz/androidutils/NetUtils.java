@@ -34,17 +34,16 @@ public class NetUtils {
     }
 
     public static boolean isWifiConnected(Context context) {
-//        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//        if (connManager == null) {
-//            LogUtils.e("ERROR: isWifiConnected: get WIFI_SERVICE failed.");
-//            return false;
-//        }
-//        NetworkInfo wifiInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-//        if (wifiInfo == null) {
-//            LogUtils.e("ERROR: isWifiConnected: get wifi info failed.");
-//            return false;
-//        }
-//        return wifiInfo.isConnected();
-        return false;
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connManager == null) {
+            LogUtils.e("ERROR: isWifiConnected: get WIFI_SERVICE failed.");
+            return false;
+        }
+        NetworkInfo wifiInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiInfo == null) {
+            LogUtils.e("ERROR: isWifiConnected: get wifi info failed.");
+            return false;
+        }
+        return wifiInfo.isConnected();
     }
 }

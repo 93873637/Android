@@ -135,7 +135,7 @@ public class ScreenServer {
                     LogUtils.d("WARNING: ScreenServer: network unavailable, close server socket, sleep " +
                             ComDef.SCREEN_SERVER_LOOP_INTERVAL + "ms to retry...");
                     closeServerSocket();
-                    mServerState = ComDef.SCREEN_SERVER_STATE_RUNNING;
+                    mServerState = ComDef.SCREEN_SERVER_STATE_STOPPED;
                     try {
                         Thread.sleep(ComDef.SCREEN_SERVER_LOOP_INTERVAL);
                         continue;
