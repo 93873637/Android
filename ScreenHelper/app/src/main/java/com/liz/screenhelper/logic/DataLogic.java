@@ -5,9 +5,11 @@ import android.media.Image;
 
 import com.liz.androidutils.BitmapQueue;
 import com.liz.androidutils.ByteBufferQueue;
+import com.liz.androidutils.ComUtils;
 import com.liz.androidutils.LogUtils;
 
 import java.nio.ByteBuffer;
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +18,9 @@ public class DataLogic {
 
     private static final BitmapQueue mBmpQueue = new BitmapQueue();
     private static final ByteBufferQueue mByteBufferQueue = new ByteBufferQueue();
+    private static final LinkedList<byte[]> mDataQueue = new LinkedList<>();
+    //####@: using ScreenImage
+    //####@: LinkedList<ScreenImage> mScreenImageQueue
 
     private static int mImageWidth = 0;
     private static int mImageHeight = 0;
@@ -121,7 +126,8 @@ public class DataLogic {
     }
 
     public static void enQueueScreenImage(Image image) {
-        enQueueScreenBuffer(image);
+        //enQueueScreenBuffer(image);
+        enQueueScreenData(image);
     }
 
     public static ByteBuffer deQueueScreenImage() {
@@ -166,17 +172,53 @@ public class DataLogic {
         }
     }
 
+    public static void enQueueScreenData(Image image) {
+        synchronized (mDataQueue) {
+            if (mDataQueue.size() == ComDef.MAX_SCREEN_BUFFER_QUEUE_SIZE) {
+                mDataQueue.poll();
+            }
+            mImageWidth = image.getWidth();
+            mImageHeight = image.getHeight();
+            final Image.Plane[] planes = image.getPlanes();
+            final ByteBuffer buffer = planes[0].getBuffer();
+
+            //####@:
+            byte[] data = ComUtils.ByteBuffer2Bytes(buffer);
+
+            mDataQueue.add(data);
+            mDataQueue.notifyAll();
+            mFrameCount++;
+        }
+    }
+
+    public static byte[] deQueueScreenData() {
+        synchronized (mDataQueue) {
+            try {
+                if (mDataQueue.size() == 0) {
+                    mDataQueue.wait();
+                }
+                return mDataQueue.poll();
+            } catch (Exception e) {
+                LogUtils.d("ERROR: DataLogic: dequeue screen image failed, ex=" + e.toString());
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
     public static void enQueueScreenBuffer(Image image) {
         synchronized (mByteBufferQueue) {
             if (mByteBufferQueue.size() == ComDef.MAX_SCREEN_BUFFER_QUEUE_SIZE) {
                 mByteBufferQueue.poll();
             }
-
             mImageWidth = image.getWidth();
             mImageHeight = image.getHeight();
-
             final Image.Plane[] planes = image.getPlanes();
             final ByteBuffer buffer = planes[0].getBuffer();
+
+            //####@:
+            byte[] data = ComUtils.ByteBuffer2Bytes(buffer);
+
             mByteBufferQueue.add(buffer);
             mByteBufferQueue.notifyAll();
             mFrameCount++;
@@ -189,8 +231,6 @@ public class DataLogic {
                 if (mByteBufferQueue.size() == 0) {
                     mByteBufferQueue.wait();
                 }
-
-                //LogUtils.d("DataLogic:deQueueScreenImage: size=" + mBmpQueue.size());
                 return mByteBufferQueue.poll();
             } catch (Exception e) {
                 LogUtils.d("ERROR: DataLogic: dequeue screen image failed, ex=" + e.toString());

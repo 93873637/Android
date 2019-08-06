@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Socket;
-import java.nio.ByteBuffer;
 
 @SuppressWarnings({"WeakerAccess, unused"})
 public class ScreenClient {
@@ -67,18 +66,31 @@ public class ScreenClient {
             return true;
         }
 
-        private boolean sendScreenBuffer() {
-            ByteBuffer byteBuffer = DataLogic.deQueueScreenBuffer();
-            if (byteBuffer == null) {
-                LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
-                return false;
+        public byte[] byteSub(byte[] data, int start, int length) {
+            byte[] bt = new byte[length];
+
+            if(start + length > data.length) {
+                bt = new byte[data.length-start];
             }
 
+            for(int i = 0; i < length &&(i + start) < data.length; i++) {
+                bt[i] = data[i + start];
+            }
+            return bt;
+        }
+
+        private boolean sendScreenBuffer() {
+//            ByteBuffer byteBuffer = DataLogic.deQueueScreenBuffer();
+//            if (byteBuffer == null) {
+//                LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
+//                return false;
+//            }
+
             try {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                baos.write(byteBuffer.array());  //###@: java.lang.UnsupportedOperationException????!!!
-                baos.flush();
-                byte[] data = baos.toByteArray();
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                baos.write(byteBuffer.array());  //###@: java.lang.UnsupportedOperationException????!!!
+//                baos.flush();
+//                byte[] data = baos.toByteArray();
 
                 //####@: //不能让方法一直循环  需要判断一个界限大小
 //                if(myByteArrayOutputStream.size()>2323323){
@@ -98,8 +110,19 @@ public class ScreenClient {
 //                byte[] data = new byte[len];
 //                byteBuffer.get(data);
 
-                DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
-                mUDPSocket.send(dataPacket);
+                byte[] data = DataLogic.deQueueScreenData();
+                //DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
+                //mUDPSocket.send(dataPacket);
+                int pos = 0;
+                int seg = 60000;
+                while(pos < data.length) {
+                    int size = seg;
+                    if (pos + size > data.length)
+                        size = data.length - pos;
+                    byte[] bytes = byteSub(data, pos, size);
+                    DatagramPacket dataPacket = new DatagramPacket(bytes, seg, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
+                    mUDPSocket.send(dataPacket);
+                }
             } catch (Exception e) {
                 LogUtils.d("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
                 e.printStackTrace();

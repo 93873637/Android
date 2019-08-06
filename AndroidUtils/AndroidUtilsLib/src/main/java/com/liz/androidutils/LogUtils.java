@@ -2,6 +2,8 @@ package com.liz.androidutils;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 @SuppressWarnings("unused, WeakerAccess")
 public class LogUtils {
 
@@ -132,5 +134,11 @@ public class LogUtils {
 		String className = Thread.currentThread().getStackTrace()[1].getClassName();
 		String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
 		Log.d(mTag, className + "." + methodName + ":" + msg);
+	}
+
+	public static void printBytes(@NonNull  byte[] bytes) {
+		for (int i=0; i<bytes.length; i++) {
+			System.out.print(bytes[i] + " ");
+		}
 	}
 }

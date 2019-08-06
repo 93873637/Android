@@ -53,7 +53,7 @@ public class ScreenServer {
         mServerPort = ComDef.DEFAULT_SCREEN_SERVER_PORT;
         mServerState = ComDef.SCREEN_SERVER_STATE_STOPPED;
         mClientList = new HashMap<>();
-        new ServerSocket_thread().start();
+        //####@: new ServerSocket_thread().start();
     }
 
     private String _getServerInfo() {
