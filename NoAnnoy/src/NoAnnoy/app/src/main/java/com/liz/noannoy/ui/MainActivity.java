@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void openWebNode(String nodeUrl) {
         final WebView webView = new WebView(this);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new NoAnnoyWebViewClient());
+        setContentView(webView);
+        webView.loadUrl(nodeUrl);
 
         final String jsInputTelNum = String.format("javascript:document.getElementById('input-mobile').value='%s';", DataLogic.getTelNum());
         webView.postDelayed(new Runnable() {
@@ -97,92 +100,84 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LogUtils.d("webView: exec js: " + jsInputTelNum);
                 webView.evaluateJavascript(jsInputTelNum,null);
             }
-        },1000);
+        },2000);
 
-        //webView.loadUrl("http://gzlt.dwsoft.com.cn:18080/ivr/");
-        //webView.loadUrl("http://www.baidu.com");  //can't access?
-        //webView.loadUrl("https://blog.csdn.net/wl521124/article/details/81145970");
-        webView.loadUrl(nodeUrl);
-
-        webView.setWebViewClient(new WebViewClientDemo());
-        setContentView(webView);
-
-        webView.setWebViewClient(new WebViewClient() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.d("####@: webView", "url=" + url);
-                if (url != null && TextUtils.equals(url.toString(), "scheme://host/deduct")) {
-                    // TODO: 2018/7/21
-                    return true;
-                }
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-        });
-
-        //not effect for click?
-        webView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                WebView.HitTestResult result = ((WebView) view).getHitTestResult();
-                Log.d("####@: webView", result.getType() + "");
-
-            }
-        });
-
-        //ok for long click
-        webView.setOnLongClickListener(new View.OnLongClickListener() {
-            public boolean onLongClick(View v) {
-                WebView.HitTestResult result = ((WebView) v).getHitTestResult();
-                if (null == result)
-                    return false;
-                int type = result.getType();
-                switch (type) {
-                    case WebView.HitTestResult.EDIT_TEXT_TYPE: // 选中的文字类型
-                        break;
-                    case WebView.HitTestResult.PHONE_TYPE: // 处理拨号
-                        break;
-                    case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
-                        break;
-                    case WebView.HitTestResult.GEO_TYPE: // 　地图类型
-                        break;
-                    case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
-                        break;
-                    case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE: // 带有链接的图片类型
-                    case WebView.HitTestResult.IMAGE_TYPE: // 处理长按图片的菜单项 }
-                        return true;
-                    case WebView.HitTestResult.UNKNOWN_TYPE: //未知
-                        break;
-                }
-                return false;
-            }
-        });
-    }
-
-    public class WebViewClientDemo extends WebViewClient {
-        // 在WebView中而不是默认浏览器中显示页面
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
-
-        @Override
-        public void onLoadResource(WebView view, String url) {
-            super.onLoadResource(view, url);
-        }
-
-        @Override
-        public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-//            if (url.contains("plus_logo.png")) {
-//                try {
-//                    return new WebResourceResponse("image/png", "utf-8", mContext.getAssets().open("logo.png"));
-//                } catch (Exception e) {
-//                    e.printStackTrace();
+//        webView.setWebViewClient(new WebViewClient() {
+//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                Log.d("####@: webView", "url=" + url);
+//                if (url != null && TextUtils.equals(url.toString(), "scheme://host/deduct")) {
+//                    // TODO: 2018/7/21
+//                    return true;
 //                }
+//                return super.shouldOverrideUrlLoading(view, url);
 //            }
-            return super.shouldInterceptRequest(view, url);
-        }
+//        });
+//
+//        //not effect for click?
+//        webView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                WebView.HitTestResult result = ((WebView) view).getHitTestResult();
+//                Log.d("####@: webView", result.getType() + "");
+//
+//            }
+//        });
+//
+//        //ok for long click
+//        webView.setOnLongClickListener(new View.OnLongClickListener() {
+//            public boolean onLongClick(View v) {
+//                WebView.HitTestResult result = ((WebView) v).getHitTestResult();
+//                if (null == result)
+//                    return false;
+//                int type = result.getType();
+//                switch (type) {
+//                    case WebView.HitTestResult.EDIT_TEXT_TYPE: // 选中的文字类型
+//                        break;
+//                    case WebView.HitTestResult.PHONE_TYPE: // 处理拨号
+//                        break;
+//                    case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
+//                        break;
+//                    case WebView.HitTestResult.GEO_TYPE: // 　地图类型
+//                        break;
+//                    case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
+//                        break;
+//                    case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE: // 带有链接的图片类型
+//                    case WebView.HitTestResult.IMAGE_TYPE: // 处理长按图片的菜单项 }
+//                        return true;
+//                    case WebView.HitTestResult.UNKNOWN_TYPE: //未知
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+//    }
+//
+//    public class WebViewClientDemo extends WebViewClient {
+//        // 在WebView中而不是默认浏览器中显示页面
+//        @Override
+//        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//            view.loadUrl(url);
+//            return true;
+//        }
+//
+//        @Override
+//        public void onLoadResource(WebView view, String url) {
+//            super.onLoadResource(view, url);
+//        }
+//
+//        @Override
+//        public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+////            if (url.contains("plus_logo.png")) {
+////                try {
+////                    return new WebResourceResponse("image/png", "utf-8", mContext.getAssets().open("logo.png"));
+////                } catch (Exception e) {
+////                    e.printStackTrace();
+////                }
+////            }
+//            return super.shouldInterceptRequest(view, url);
+//        }
     }
 }
