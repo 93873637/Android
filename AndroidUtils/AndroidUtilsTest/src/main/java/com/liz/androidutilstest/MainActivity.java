@@ -42,10 +42,24 @@ public class MainActivity extends AppCompatActivity {
         test();
     }
 
+    public void ddeleteFile(String fileName) {
+        File f = new File(fileName);
+        if (f.exists()) {
+            System.out.println("image file " + fileName + " already exist, delete it");
+            f.delete();
+        }
+    }
 
     public void test() {
         String dataFileName = "/sdcard/data.txt";
+
         String imageFileName = dataFileName + ".jpg";
+        String imageFileName2 = dataFileName + "2.jpg";
+        String imageFileName3 = dataFileName + "3.jpg";
+
+        ddeleteFile(imageFileName);
+        ddeleteFile(imageFileName2);
+        ddeleteFile(imageFileName3);
 
         ByteBuffer bb = ComUtils.readByteBufferFromFile(dataFileName);
         if (bb == null) {
@@ -80,35 +94,57 @@ public class MainActivity extends AppCompatActivity {
 
         int rowStride = totalWidth * pixelStride;  //5888
 
+        ImageUtils.saveByteBuffer2JPGFile(bb, imageFileName, imageWidth, imageHeight, pixelPadding);
 
-//        File f = new File(imageFileName);
-//        if (f.exists()) {
-//            System.out.println("image file " + imageFileName + " already exist, delete it");
-//            f.delete();
-//        }
-        //ImageUtils.saveByteBuffer2JPGFile(bb, imageFileName, imageWidth, imageHeight, pixelPadding);
 
         int scale = 4;
-        int newHeight = totalHeight / scale;
-        ByteBuffer bbNew = ByteBuffer.allocate(rowStride * newHeight);
+        int imageHeight2 = totalHeight / scale;
+        ByteBuffer bb2 = ByteBuffer.allocate(rowStride * imageHeight2);
         bb.flip();
-        bbNew.flip();
-        LogUtils.d("###@: newHeight=" + newHeight);
-        LogUtils.d("###@: bbNew.capacity()=" + bbNew.capacity());
-        LogUtils.d("###@: bbNew.position()=" + bbNew.position());
-        LogUtils.d("###@: bbNew.limit()=" + bbNew.limit());
-        LogUtils.d("###@: bb.capacity()=" + bb.capacity());
-        LogUtils.d("###@: bb.position()=" + bb.position());
-        LogUtils.d("###@: bb.limit()=" + bb.limit());
+        bb2.flip();
+        LogUtils.d("###@: imageHeight2=" + imageHeight2);
+        LogUtils.d("###@: bb.position/limit/capacity=" + bb.position() + "/" + bb.limit() + "/" + bb.capacity()
+                + ": bb2.position/limit/capacity=" + bb2.position() + "/" + bb2.limit() + "/" + bb2.capacity());
 
-        for (int i = 0; i < newHeight; i ++) {
-            bb.position(i * scale * rowStride);
+        for (int i = 0; i < imageHeight2; i ++) {
             bb.limit((i * scale + 1) * rowStride);
-            bbNew.position(i * rowStride);
-            bbNew.limit((i + 1) * rowStride);
-            LogUtils.d("###@: i=" + i + ": bb.position/limit/capacity=" + bb.position() + "/" + bb.limit() + "/" + bb.capacity()
-                    + ": bbNew.position/limit/capacity=" + bbNew.position() + "/" + bbNew.limit() + "/" + bbNew.capacity());
-            bbNew.put(bb.slice());
+            bb.position(i * scale * rowStride);
+            bb2.limit((i + 1) * rowStride);
+            bb2.position(i * rowStride);
+            //LogUtils.d("###@: i=" + i + ": bb.position/limit/capacity=" + bb.position() + "/" + bb.limit() + "/" + bb.capacity()
+            //        + ": bb2.position/limit/capacity=" + bb2.position() + "/" + bb2.limit() + "/" + bb2.capacity());
+            bb2.put(bb.slice());
         }
+
+        ImageUtils.saveByteBuffer2JPGFile(bb2, imageFileName2, imageWidth, imageHeight2, pixelPadding);
+
+        int imageWidth2 = imageWidth / scale;
+        int imageBytes = imageWidth2 * imageHeight2 * (pixelStride);
+        LogUtils.d("###@: imageWidth2=" + imageWidth2);
+        LogUtils.d("###@: imageHeight2=" + imageHeight2);
+        LogUtils.d("###@: imageBytes=" + imageBytes);
+
+        byte[] imageArr = new byte[imageBytes];
+        int offset = 0;
+        int offset2;
+        for (int i = 0; i < imageHeight2; i ++) {
+            offset = i * rowStride;
+            bb2.limit(offset + rowStride);
+            bb2.position(offset);
+            byte[] arr = ComUtils.byteBuf2Arr(bb2.slice());
+            LogUtils.d("###@: arr=" + arr.length);
+            offset2 = i * imageWidth2 * pixelStride;
+            LogUtils.d("###@: offset2=" + offset2);
+            for (int j = 0; j < imageWidth2; j++) {
+                imageArr[offset2+j*4] = arr[j*4*4];
+                imageArr[offset2+j*4+1] = arr[j*4+1];
+                imageArr[offset2+j*4+2] = arr[j*4+2];
+                imageArr[offset2+j*4+3] = arr[j*4+3];
+            }
+        }
+
+        ByteBuffer bb3 = ComUtils.byteArr2Buf(imageArr);
+        LogUtils.d("###@: bb3.position/limit/capacity=" + bb3.position() + "/" + bb3.limit() + "/" + bb3.capacity());
+        ImageUtils.saveByteBuffer2JPGFile(bb3, imageFileName3, imageWidth2, imageHeight2, 0);
     }
 }

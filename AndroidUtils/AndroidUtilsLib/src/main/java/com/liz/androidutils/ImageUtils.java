@@ -41,7 +41,8 @@ public class ImageUtils {
     //
     public static int saveByteBuffer2JPGFile(@NonNull ByteBuffer byteBuffer, String fileAbsolute, int width, int height, int padding) {
         Bitmap bitmap = Bitmap.createBitmap(width + padding, height, Bitmap.Config.ARGB_8888);
-        byteBuffer.flip();
+        //byteBuffer.flip();
+        byteBuffer.rewind();
         bitmap.copyPixelsFromBuffer(byteBuffer);
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
         if (bitmap == null) {
