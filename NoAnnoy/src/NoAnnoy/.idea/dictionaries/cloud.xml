@@ -2,6 +2,8 @@
   <dictionary name="cloud">
     <words>
       <w>fsrserver</w>
+      <w>noannoy</w>
+      <w>sharedpreference</w>
     </words>
   </dictionary>
 </component>

@@ -183,7 +183,7 @@ public class DataLogic {
             final ByteBuffer buffer = planes[0].getBuffer();
 
             //####@:
-            byte[] data = ComUtils.ByteBuffer2Bytes(buffer);
+            byte[] data = ComUtils.byteBuf2Arr(buffer);
 
             mDataQueue.add(data);
             mDataQueue.notifyAll();
@@ -217,7 +217,7 @@ public class DataLogic {
             final ByteBuffer buffer = planes[0].getBuffer();
 
             //####@:
-            byte[] data = ComUtils.ByteBuffer2Bytes(buffer);
+            byte[] data = ComUtils.byteBuf2Arr(buffer);
 
             mByteBufferQueue.add(buffer);
             mByteBufferQueue.notifyAll();

@@ -1,21 +1,12 @@
 package com.liz.noannoy.ui;
 
 import android.graphics.Bitmap;
-import android.os.Build;
-import android.text.TextUtils;
-import android.util.Log;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.annotation.RequiresApi;
-
 import com.liz.androidutils.LogUtils;
 
-
-//webView.loadUrl("http://gzlt.dwsoft.com.cn:18080/ivr/");
-//webView.loadUrl("http://www.baidu.com");  //can't access?
-//webView.loadUrl("https://blog.csdn.net/wl521124/article/details/81145970");
 
 public class NoAnnoyWebViewClient extends WebViewClient {
 

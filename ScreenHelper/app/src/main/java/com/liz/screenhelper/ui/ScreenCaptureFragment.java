@@ -204,7 +204,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
             mTextServerInfo.setBackgroundColor(Color.LTGRAY);
         }
         else {
-            mTextServerInfo.setBackgroundColor(Color.DKGRAY);
+            mTextServerInfo.setBackgroundColor(Color.rgb(0xaa, 0xaa, 0xaa));
         }
     }
 
