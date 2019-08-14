@@ -1,12 +1,10 @@
-package com.liz.noannoy.app;
+package com.liz.androidutilstest.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
 
 import com.liz.androidutils.LogUtils;
-import com.liz.androidutils.SysUtils;
-import com.liz.noannoy.logic.ComDef;
-import com.liz.noannoy.logic.DataLogic;
 
 /**
  * ThisApp.java
@@ -17,25 +15,23 @@ import com.liz.noannoy.logic.DataLogic;
 public class ThisApp extends Application {
     private static ThisApp mAppInst;
     public static String mAppVersion = "";
+    public static String mAppVersionShow = "";  //text show in log
 
     @Override
     public void onCreate() {
         super.onCreate();
         mAppInst = this;
-        mAppVersion = SysUtils.getAppVersion(this);
-        LogUtils.setTag(ComDef.APP_NAME);
-        DataLogic.init();
-        LogUtils.d("ThisApp: onCreate, version=" + mAppVersion);
+        mAppVersion = "";
+        mAppVersionShow = "";
+        LogUtils.setTag("AndroidUtilsTest");
     }
 
     public static Context getAppContext() {
         return mAppInst;
     }
 
-    public static void exitApp() {
-        int pid = android.os.Process.myPid();
-        LogUtils.d("exitApp, pid=" + pid);
-        android.os.Process.killProcess(pid);
+    public static void onExitApp() {
+        LogUtils.d("onExitApp");
     }
 
     @Override
@@ -54,5 +50,11 @@ public class ThisApp extends Application {
     public void onTrimMemory(int level) {
         LogUtils.d("onTrimMemory");
         super.onTrimMemory(level);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        LogUtils.d("onConfigurationChanged");
+        super.onConfigurationChanged(newConfig);
     }
 }

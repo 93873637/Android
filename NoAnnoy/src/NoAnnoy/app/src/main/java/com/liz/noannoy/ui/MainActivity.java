@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
@@ -17,6 +22,8 @@ import android.widget.Toast;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.noannoy.R;
+import com.liz.noannoy.app.ThisApp;
+import com.liz.noannoy.logic.ComDef;
 import com.liz.noannoy.logic.DataAPI;
 import com.liz.noannoy.logic.DataLogic;
 import com.liz.noannoy.logic.Settings;
@@ -46,6 +53,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.btnNext) {
             onNextStep();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(this).inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                Toast.makeText(this, "###@: TODO: show settings...", 1).show();
+                break;
+            case R.id.menu_about:
+                LogUtils.d("show about dlg...");
+                new AlertDialog.Builder(MainActivity.this)
+                        .setMessage(getResources().getString(R.string.app_name) + "  " + ThisApp.mAppVersion)
+                        .setIcon(R.drawable.ic_launcher_background)
+                        .setTitle(ComDef.APP_NAME)
+                        .show();
+                break;
+        }
+        return true;
     }
 
     public void onNextStep() {
