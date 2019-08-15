@@ -13,7 +13,12 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.FileUtils;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,8 +52,52 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_image();
+        //test_image();
         //test_SysUtils();
+        test_saveByteBufferToFile();
+    }
+
+    public static void test_saveByteBufferToFile() {
+        //String filePath = "D:\\temp\\aa.bin";
+        String filePath = "/storage/emulated/0/Pictures/ScreenShots/ScreenShot_190815.152758.287.bin";
+        CharBuffer charBuffer=CharBuffer.allocate(1024);
+        charBuffer.put("123456789012345678901234567890");
+        charBuffer.flip();
+        Charset charset=Charset.defaultCharset();
+        ByteBuffer byteBuffer=charset.encode(charBuffer);
+        boolean ret = saveByteBufferToFile(byteBuffer, filePath);
+        System.out.println("test_saveByteBufferToFile: file="+ filePath + ", size=" + byteBuffer.capacity() + ", ret=" + ret);
+    }
+
+    public static boolean saveByteBufferToFile(ByteBuffer byteBuffer, String fileAbsolute) {
+        try {
+//            FileChannel fc = new FileOutputStream(fileAbsolute).getChannel();
+//            fc.write(bb.array());
+//            fc.close();
+//            File file = new File(fileAbsolute);
+
+//            if (!file.exists()) {
+//                file.createNewFile();
+//            }
+//            FileOutputStream fos = new FileOutputStream(file, true);
+//            fos.write(bb.array());
+//            fos.flush();
+//            fos.close();
+
+            FileOutputStream outputStream=new FileOutputStream(new File(fileAbsolute));
+            FileChannel fileChannel=outputStream.getChannel();
+            //cont write all data
+            while(byteBuffer.hasRemaining()){
+                fileChannel.write(byteBuffer);
+            }
+            fileChannel.close();
+            outputStream.close();
+        } catch (Exception e) {
+            System.out.println("ERROR: save ByteBuffer to file exception: " + e.toString());
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public void test_SysUtils() {

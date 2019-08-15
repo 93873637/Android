@@ -28,7 +28,7 @@ public class ComDef {
     public static final String SCREEN_SERVER_STATE_LISTENING = "LISTENING";
     public static final int SCREEN_SERVER_LOOP_INTERVAL = 2000;  // unit by ms
 
-    public static final int MAX_SCREEN_BUFFER_QUEUE_SIZE = 5;
+    public static final int MAX_SCREEN_IMAGE_QUEUE_SIZE = 5;
     public static final String SCREEN_IMAGE_END_FLAG = "#####";
     public static final String SCREEN_IMAGE_EMPTY_FLAG = "@@@@@";
 

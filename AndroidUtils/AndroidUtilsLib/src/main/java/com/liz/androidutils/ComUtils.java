@@ -1,14 +1,28 @@
 package com.liz.androidutils;
 
+import androidx.annotation.NonNull;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("unused, WeakerAccess")
 public class ComUtils {
+
+    public static byte[] copySubArr(@NonNull byte[] srcArr, int start, int length) {
+        int arrLen = length;
+        if (start + length > srcArr.length) {
+            arrLen = srcArr.length - start;
+        }
+        byte[] subArr = new byte[arrLen];
+        System.arraycopy(srcArr, start, subArr, 0, arrLen);
+        return subArr;
+    }
 
     public static ByteBuffer byteArr2Buf(byte[] arr) {
         return ByteBuffer.wrap(arr);
@@ -21,11 +35,29 @@ public class ComUtils {
         return arr;
     }
 
-    public static boolean saveByteBufferToFile(ByteBuffer bb, String fileAbsolute) {
+    public static boolean saveByteBufferToFile(ByteBuffer byteBuffer, String fileAbsolute) {
         try {
-            FileChannel fc = new FileOutputStream(fileAbsolute).getChannel();
-            fc.write(bb);
-            fc.close();
+//            FileChannel fc = new FileOutputStream(fileAbsolute).getChannel();
+//            fc.write(bb.array());
+//            fc.close();
+//            File file = new File(fileAbsolute);
+
+//            if (!file.exists()) {
+//                file.createNewFile();
+//            }
+//            FileOutputStream fos = new FileOutputStream(file, true);
+//            fos.write(bb.array());
+//            fos.flush();
+//            fos.close();
+
+            FileOutputStream outputStream=new FileOutputStream(new File(fileAbsolute));
+            FileChannel fileChannel=outputStream.getChannel();
+            //cont write all data
+            while(byteBuffer.hasRemaining()){
+                fileChannel.write(byteBuffer);
+            }
+            fileChannel.close();
+            outputStream.close();
         } catch (Exception e) {
             System.out.println("ERROR: save ByteBuffer to file exception: " + e.toString());
             e.printStackTrace();
@@ -80,11 +112,21 @@ public class ComUtils {
     // Test Functions
 
     public static void main(String[] args) {
+        test_saveByteBufferToFile();
+    }
 
+    public static void test_saveByteBufferToFile() {
+        CharBuffer charBuffer=CharBuffer.allocate(1024);
+        charBuffer.put("123456789012345678901234567890");
+        charBuffer.flip();
+        Charset charset=Charset.defaultCharset();
+        ByteBuffer byteBuffer=charset.encode(charBuffer);
+        boolean ret = saveByteBufferToFile(byteBuffer, "D:\\temp\\aa.bin");
+        System.out.println("test_saveByteBufferToFile: size = " + byteBuffer.capacity() + ", ret = " + ret);
     }
 
     //NOTE: this function can only run on android
-    public void test_save() {
+    public static void test_save() {
         //String dataFileName = "D:/Temp/data.txt";
         String dataFileName = "/sdcard/data.txt";
         String imageFileName = dataFileName + ".jpg";

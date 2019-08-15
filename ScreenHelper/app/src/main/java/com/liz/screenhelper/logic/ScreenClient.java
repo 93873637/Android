@@ -38,17 +38,49 @@ public class ScreenClient {
     public void send_data(byte[] data) {
     }
 
+    //
+    //TCPClientSocket_thread
+    //
     class UDPClientSocket_thread extends Thread {
 
         private DatagramSocket mUDPSocket;
 
+        private boolean sendScreenData() {
+            try {
+                byte[] data = DataLogic.dequeueScreenData();
+                if (data == null) {
+                    LogUtils.e("Dequeue screen data failed.");
+                    return false;
+                }
+                int pos = 0;
+                int seg = 60000;
+                int size;
+                byte[] dataSend;
+                DatagramPacket dataPacket;
+                while(pos < data.length) {
+                    size = seg;
+                    if (pos + size > data.length)
+                        size = data.length - pos;
+                    dataSend = new byte[size];
+                    System.arraycopy(data, pos, dataSend, 0, size);
+                    dataPacket = new DatagramPacket(dataSend, seg, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
+                    mUDPSocket.send(dataPacket);
+                    pos += size;
+                }
+            } catch (Exception ex) {
+                LogUtils.e("ScreenClient： send screen data exception, ex=" + ex.toString());
+                ex.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+
         private boolean sendBmp() {
-            Bitmap bmp = DataLogic.deQueueScreenBmp();
+            Bitmap bmp = DataLogic.dequeueScreenBmp();
             if (bmp == null) {
                 LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
                 return false;
             }
-
             try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, baos);
@@ -62,37 +94,23 @@ public class ScreenClient {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
 
-        public byte[] byteSub(byte[] data, int start, int length) {
-            byte[] bt = new byte[length];
-
-            if(start + length > data.length) {
-                bt = new byte[data.length-start];
-            }
-
-            for(int i = 0; i < length &&(i + start) < data.length; i++) {
-                bt[i] = data[i + start];
-            }
-            return bt;
-        }
-
         private boolean sendScreenBuffer() {
-//            ByteBuffer byteBuffer = DataLogic.deQueueScreenBuffer();
+//                        ByteBuffer byteBuffer = DataLogic.deQueueScreenBuffer();
 //            if (byteBuffer == null) {
 //                LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
 //                return false;
 //            }
-
-            try {
+//
+//            try {
 //                ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //                baos.write(byteBuffer.array());  //###@: java.lang.UnsupportedOperationException????!!!
 //                baos.flush();
 //                byte[] data = baos.toByteArray();
-
-                //####@: //不能让方法一直循环  需要判断一个界限大小
+//
+//                ####@: //不能让方法一直循环  需要判断一个界限大小
 //                if(myByteArrayOutputStream.size()>2323323){
 //                    File file=new File("d://2.pcm")
 //                    if(!file.exists()){
@@ -103,33 +121,13 @@ public class ScreenClient {
 //                    fe.flush();
 //                    fe.close();
 //                }
-
-
+//
+//
 //                byteBuffer.flip();
 //                int len = byteBuffer.limit() - byteBuffer.position();
 //                byte[] data = new byte[len];
 //                byteBuffer.get(data);
-
-                byte[] data = DataLogic.deQueueScreenData();
-                //DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
-                //mUDPSocket.send(dataPacket);
-                int pos = 0;
-                int seg = 60000;
-                while(pos < data.length) {
-                    int size = seg;
-                    if (pos + size > data.length)
-                        size = data.length - pos;
-                    byte[] bytes = byteSub(data, pos, size);
-                    DatagramPacket dataPacket = new DatagramPacket(bytes, seg, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
-                    mUDPSocket.send(dataPacket);
-                }
-            } catch (Exception e) {
-                LogUtils.d("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
-                e.printStackTrace();
                 return false;
-            }
-
-            return true;
         }
 
         @Override
@@ -144,7 +142,7 @@ public class ScreenClient {
             }
 
             //while (sendBmp());
-            while (sendScreenBuffer());
+            while (sendScreenData());
 
             try {
                 if (mUDPSocket != null) {
@@ -160,6 +158,9 @@ public class ScreenClient {
         }
     }  //UDPClientSocket_thread
 
+    //
+    //TCPClientSocket_thread
+    //
     class TCPClientSocket_thread extends Thread {
 
         Socket mClientSocket;
@@ -205,7 +206,7 @@ public class ScreenClient {
             }
 
             while (true) {
-                Bitmap bmp = DataLogic.deQueueScreenBmp();
+                Bitmap bmp = DataLogic.dequeueScreenBmp();
                 if (bmp == null) {
                     LogUtils.d("ScreenServer: cont_send_by_tcp: dequeue image null");
                     return -3;
@@ -246,7 +247,7 @@ public class ScreenClient {
                             return -2;
                         } else {
                             //mOutputStream.write("this is an echo test".getBytes());
-                            Bitmap bmp = DataLogic.deQueueScreenImage();
+                            Bitmap bmp = DataLogic.dequeueScreenImage();
                             if (bmp == null) {
                                 LogUtils.d("ScreenServer: dequeue image null");
                                 mOutputStream.write(ComDef.SCREEN_IMAGE_EMPTY_FLAG.getBytes());

@@ -91,21 +91,36 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         public void onImageAvailable(ImageReader reader) {
             //showProgress("onImageAvailable");
             Image img = reader.acquireNextImage();
-            DataLogic.enQueueScreenImage(img);
+            DataLogic.enqueueScreenImage(img);
             if (mCaptureOnce) {
-                String fileName = getDynamicImageFileName();
-                int ret = ImageUtils.saveImage(img, fileName);
-                if (ret < 0) {
-                    showProgress("save screen image to " + fileName + " failed with error " + ret);
-                }
-                else {
-                    showProgress("screen image saved to " + fileName);
-                }
+                onCaptureOnce(img);
                 mCaptureOnce = false;
             }
             img.close();  //NOTE: you must close the image to get next
         }
     };
+
+    private void onCaptureOnce(Image img) {
+        String fileTime = TimeUtils.getFileTime();
+
+        //save image to jpg file
+        String jpgFileName = genJPGFileName(fileTime);
+        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
+        if (ret < 0) {
+            showProgress("save screen image to " + jpgFileName + " failed with error " + ret);
+        } else {
+            showProgress("screen image saved to " + jpgFileName);
+        }
+
+        //save image data to file
+        String dataFileName = genScreenDataFileName(fileTime);
+        ret = ImageUtils.saveImageData2File(img, dataFileName);
+        if (ret < 0) {
+            showProgress("save screen image data to " + dataFileName + " failed with error " + ret);
+        } else {
+            showProgress("screen image data saved to " + dataFileName);
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -364,11 +379,19 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private static String getDynamicImageFileName() {
+    private static String genDynamicJPGFileName() {
         return ComDef.SCREEN_PICTURE_SAVE_DIR + "ScreenShot_" + TimeUtils.getFileTime() + ".jpg";
     }
 
     private static String getStaticImageFileName() {
         return "ddz_current.jpg";
+    }
+
+    private static String genJPGFileName(String fileTime) {
+        return ComDef.SCREEN_PICTURE_SAVE_DIR + "ScreenShot_" + fileTime + ".jpg";
+    }
+
+    private static String genScreenDataFileName(String fileTime) {
+        return ComDef.SCREEN_PICTURE_SAVE_DIR + "ScreenShot_" + fileTime + ".bin";
     }
 }
