@@ -10,8 +10,54 @@ import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 
 
-@SuppressWarnings("unused")
+@SuppressWarnings("unused, WeakerAccess")
 public class ImageUtils {
+
+    public static Bitmap byteBuffer2Bitmap(@NonNull ByteBuffer byteBuffer, int width, int height, int padding) {
+        Bitmap bitmap = Bitmap.createBitmap(width+ padding, height, Bitmap.Config.ARGB_8888);
+        byteBuffer.rewind();
+        bitmap.copyPixelsFromBuffer(byteBuffer);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height);
+    }
+
+    public static Bitmap byteBuffer2Bitmap(@NonNull ByteBuffer byteBuffer, int width, int height,
+                                           int padding, @NonNull Bitmap.Config config) {
+        Bitmap bitmap = Bitmap.createBitmap(width+ padding, height, config);
+        byteBuffer.rewind();
+        bitmap.copyPixelsFromBuffer(byteBuffer);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height);
+    }
+
+    public static Bitmap byteBuffer2Bitmap(@NonNull ByteBuffer byteBuffer, int width, int height,
+                                           int padding, @NonNull Bitmap.Config config, double scale) {
+        Bitmap bitmap = Bitmap.createBitmap(width+ padding, height, config);
+        byteBuffer.rewind();
+        bitmap.copyPixelsFromBuffer(byteBuffer);
+        Bitmap bmp2 = Bitmap.createBitmap(bitmap, 0, 0, width, height);
+        return Bitmap.createScaledBitmap(bmp2, (int)(width*scale), (int)(height*scale), true);
+    }
+
+    /**
+     * For A2H, general parameters' values are:
+     * image Size: 1440 x 2392
+     * bmp Size: 1472 x 2392
+     * pixelStride = 4
+     * rowStride = 5888 (64*23)
+     * rowPadding = 128
+     * pixelPadding = 32
+     * buffer capacity = 14084096 = 5888*2392 = (1440 + 32) * 4 * 2392
+    */
+    public static Bitmap image2Bitmap(Image image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        final Image.Plane[] planes = image.getPlanes();
+        final ByteBuffer byteBuffer = planes[0].getBuffer();
+        int pixelStride = planes[0].getPixelStride();
+        int rowStride = planes[0].getRowStride();
+        int rowPadding = rowStride - pixelStride * width;
+        int pixelPadding = rowPadding / pixelStride;
+        return byteBuffer2Bitmap(byteBuffer, width, height, pixelPadding, Bitmap.Config.ARGB_8888, 1);
+    }
 
     public static int saveBitmap2JPGFile(@NonNull Bitmap bitmap, String fileAbsolute) {
         try {
@@ -39,18 +85,14 @@ public class ImageUtils {
     //
     //NOTE: this function can only run on android
     //
-    public static int saveByteBuffer2JPGFile(@NonNull ByteBuffer byteBuffer, String fileAbsolute, int width, int height, int padding) {
-        Bitmap bitmap = Bitmap.createBitmap(width + padding, height, Bitmap.Config.ARGB_8888);
-        //byteBuffer.flip();
-        byteBuffer.rewind();
-        bitmap.copyPixelsFromBuffer(byteBuffer);
-        bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height);
+    public static int saveByteBuffer2JPGFile(@NonNull ByteBuffer byteBuffer, @NonNull String fileAbsolute, int width, int height, int padding) {
+        Bitmap bitmap = byteBuffer2Bitmap(byteBuffer, width, height, padding, Bitmap.Config.ARGB_8888, 1.0);
         if (bitmap == null) {
-            System.out.println("ERROR: saveImage2JPGFile: bitmap null");
+            System.out.println("ERROR: saveByteBuffer2JPGFile: convert byte buffer to bitmap null");
             return -1;
         }
         if (saveBitmap2JPGFile(bitmap, fileAbsolute) < 0) {
-            System.out.println("ERROR: saveImage2JPGFile: save bitmap failed.");
+            System.out.println("ERROR: saveByteBuffer2JPGFile: save bitmap failed.");
             return -2;
         }
         return 0;
@@ -70,8 +112,6 @@ public class ImageUtils {
 
         int width = image.getWidth();
         int height = image.getHeight();
-        System.out.println("saveImage2JPGFile: image size = " + width + "x" + height);
-
         final Image.Plane[] planes = image.getPlanes();
         final ByteBuffer buffer = planes[0].getBuffer();
         int pixelStride = planes[0].getPixelStride();
@@ -111,47 +151,5 @@ public class ImageUtils {
         }
 
         return 0;
-    }
-
-    public static Bitmap Image2Bitmap(Image image) {
-//        ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-//        byte[] bytes = new byte[buffer.capacity()];
-//        buffer.get(bytes);
-//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-        int width = image.getWidth();
-        int height = image.getHeight();
-        //System.out.println("image Size: " + width + "x" + height);
-        //System.out.println("image Format: " + image.getFormat());
-
-        final Image.Plane[] planes = image.getPlanes();
-        final ByteBuffer buffer = planes[0].getBuffer();
-        //System.out.println("buffer position=" + buffer.position());
-        //System.out.println("buffer limit=" + buffer.limit());
-        //System.out.println("buffer capacity=" + buffer.capacity());
-
-        int pixelStride = planes[0].getPixelStride();
-        int rowStride = planes[0].getRowStride();
-        //System.out.println("pixelStride=" + pixelStride);
-        //System.out.println("rowStride=" + rowStride);
-
-        int rowPadding = rowStride - pixelStride * width;
-        //System.out.println("rowPadding=" + rowPadding);
-
-        ////////////////////////////////////////////////////////////////////
-        //image Size: 1440 x 2392
-        //bmp Size: 1472 x 2392
-        //pixelStride = 4
-        //rowStride = 5888 (64*23)
-        //rowPadding = 128
-        //buffer capacity = 14084096 = 5888*2392 = (1440 + 32) * 4 * 2392
-        ////////////////////////////////////////////////////////////////////
-
-        int bmpWidth = width + rowPadding / pixelStride;
-        //System.out.println("bmp Size: " + bmpWidth + "x" + height);
-
-        Bitmap bitmap = Bitmap.createBitmap(bmpWidth, height, Bitmap.Config.ARGB_8888);
-        bitmap.copyPixelsFromBuffer(buffer);
-        return Bitmap.createBitmap(bitmap, 0, 0, width, height);
-        //return Bitmap.createScaledBitmap(bmpScreen, width/4, height/4, true);
     }
 }

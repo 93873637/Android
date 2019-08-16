@@ -1,10 +1,12 @@
 package com.liz.androidutilstest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import com.liz.androidutils.ComUtils;
@@ -20,6 +22,7 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
+@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
 
     // Storage Permissions
@@ -54,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
     public void test() {
         //test_image();
         //test_SysUtils();
-        test_saveByteBufferToFile();
+        //test_saveByteBufferToFile();
+        //test_image_scale_by_buffer();
+        test_image_scale_by_bitmap();
     }
 
     public static void test_saveByteBufferToFile() {
@@ -104,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
         LogUtils.d("test_SysUtils: appVersion = " + SysUtils.getAppVersion(MainActivity.this));
     }
 
-    public void test_image1() {
-        String dataFileName = "/sdcard/data.txt";
+    public void test_image() {
+        String dataFileName = "/sdcard/Pictures/Screenshots/ScreenShot_190815.154153.357.bin";
         String imageFileName = dataFileName + ".jpg";
 
         ByteBuffer bb = ComUtils.readByteBufferFromFile(dataFileName);
@@ -118,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //RGBA_8888
-
         ////////////////////////////////////////////////////////////////////
         //image Size: 1440 x 2392
         //total Size: 1472 x 2392
@@ -145,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
         ImageUtils.saveByteBuffer2JPGFile(bb, imageFileName, imageWidth, imageHeight, pixelPadding);
     }
 
-    public void test_image() {
-        String dataFileName = "/sdcard/data.txt";
+    public void test_image_scale_by_buffer() {
+        String dataFileName = "/sdcard/images/ScreenShot_190815.154153.357.bin";
 
         String imageFileName = dataFileName + ".jpg";
         String imageFileName2 = dataFileName + "2.jpg";
@@ -176,30 +180,25 @@ public class MainActivity extends AppCompatActivity {
         //buffer capacity = 14084096 = 5888*2392 = (1440 + 32) * 4 * 2392
         ////////////////////////////////////////////////////////////////////
 
+        LogUtils.d("***test_image_scale_by_buffer: begin...");
         int imageWidth = 1440;
         int imageHeight = 2392;
-
         int pixelStride = 4;
         int rowPadding = 128;
-
         int pixelPadding = rowPadding / pixelStride;  //32
-
         int totalWidth = imageWidth + pixelPadding;  //1472
         int totalHeight = imageHeight;
-
         int rowStride = totalWidth * pixelStride;  //5888
-
-        ImageUtils.saveByteBuffer2JPGFile(byteBuffer, imageFileName, imageWidth, imageHeight, pixelPadding);
-
+        //ImageUtils.saveByteBuffer2JPGFile(byteBuffer, imageFileName, imageWidth, imageHeight, pixelPadding);
 
         int scale = 4;
         int imageHeight2 = totalHeight / scale;
         ByteBuffer byteBuffer2 = ByteBuffer.allocate(rowStride * imageHeight2);
         byteBuffer.flip();
         byteBuffer2.flip();
-        LogUtils.d("###@: imageHeight2=" + imageHeight2);
-        LogUtils.d("###@: bb.position/limit/capacity=" + byteBuffer.position() + "/" + byteBuffer.limit() + "/" + byteBuffer.capacity()
-                + ": byteBuffer2.position/limit/capacity=" + byteBuffer2.position() + "/" + byteBuffer2.limit() + "/" + byteBuffer2.capacity());
+//        LogUtils.d("###@: imageHeight2=" + imageHeight2);
+//        LogUtils.d("###@: bb.position/limit/capacity=" + byteBuffer.position() + "/" + byteBuffer.limit() + "/" + byteBuffer.capacity()
+//                + ": byteBuffer2.position/limit/capacity=" + byteBuffer2.position() + "/" + byteBuffer2.limit() + "/" + byteBuffer2.capacity());
 
         for (int i = 0; i < imageHeight2; i ++) {
             byteBuffer.limit((i * scale + 1) * rowStride);
@@ -211,13 +210,13 @@ public class MainActivity extends AppCompatActivity {
             byteBuffer2.put(byteBuffer.slice());
         }
 
-        ImageUtils.saveByteBuffer2JPGFile(byteBuffer2, imageFileName2, imageWidth, imageHeight2, pixelPadding);
+        //ImageUtils.saveByteBuffer2JPGFile(byteBuffer2, imageFileName2, imageWidth, imageHeight2, pixelPadding);
 
         int imageWidth2 = imageWidth / scale;
         int imageBytes = imageWidth2 * imageHeight2 * (pixelStride);
-        LogUtils.d("###@: imageWidth2=" + imageWidth2);
-        LogUtils.d("###@: imageHeight2=" + imageHeight2);
-        LogUtils.d("###@: imageBytes=" + imageBytes);
+//        LogUtils.d("###@: imageWidth2=" + imageWidth2);
+//        LogUtils.d("###@: imageHeight2=" + imageHeight2);
+//        LogUtils.d("###@: imageBytes=" + imageBytes);
 
         byte[] imageArr = new byte[imageBytes];
         int offset;
@@ -227,9 +226,9 @@ public class MainActivity extends AppCompatActivity {
             byteBuffer2.limit(offset + rowStride);
             byteBuffer2.position(offset);
             byte[] arr = ComUtils.byteBuf2Arr(byteBuffer2.slice());
-            LogUtils.d("###@: arr=" + arr.length);
+            //LogUtils.d("###@: arr=" + arr.length);
             offset2 = i * imageWidth2 * pixelStride;
-            LogUtils.d("###@: offset2=" + offset2);
+            //LogUtils.d("###@: offset2=" + offset2);
             for (int j = 0; j < imageWidth2; j++) {
                 int imgOff = offset2 + j * 4;
                 int arrOff = j*4*4;
@@ -239,9 +238,67 @@ public class MainActivity extends AppCompatActivity {
                 imageArr[imgOff+3] = arr[arrOff+3];
             }
         }
+        LogUtils.d("***test_image_scale_by_buffer: end.");
 
         ByteBuffer byteBuffer3 = ComUtils.byteArr2Buf(imageArr);
         LogUtils.d("###@: byteBuffer3.position/limit/capacity=" + byteBuffer3.position() + "/" + byteBuffer3.limit() + "/" + byteBuffer3.capacity());
         ImageUtils.saveByteBuffer2JPGFile(byteBuffer3, imageFileName3, imageWidth2, imageHeight2, 0);
+    }
+
+    public byte[] byteBuffer2Array(@NonNull ByteBuffer byteBuffer, int width, int height, int padding, int pixelStride, int scale) {
+        int rowStride = (width + padding) * pixelStride;
+        int scaleHeight = height / scale;
+        int scareWidth = width / scale;
+        byte[] imageArr = new byte[scareWidth * scaleHeight * pixelStride];
+        for (int i=0; i<scaleHeight; i++) {
+            byteBuffer.limit((i * scale + 1) * rowStride);
+            byteBuffer.position(i * scale * rowStride);
+            byte[] rowArr = ComUtils.byteBuf2Arr(byteBuffer.slice());
+            int offset = i * scareWidth * pixelStride;
+            for (int j = 0; j < scareWidth; j++) {
+                int imgOff = offset + j * pixelStride;
+                int rowStart = j * scale * pixelStride;
+                System.arraycopy(rowArr, rowStart, imageArr, imgOff, pixelStride);
+            }
+        }
+        return imageArr;
+    }
+
+    public void test_image_scale_by_bitmap() {
+        String dataFileName = "/sdcard/images/ScreenShot_190815.154153.357.bin";
+        String imageFileName = dataFileName + ".bmp.jpg";
+        String imageFileName2 = dataFileName + ".arr.jpg";
+
+        FileUtils.removeFile(imageFileName);
+
+        ByteBuffer byteBuffer = ComUtils.readByteBufferFromFile(dataFileName);
+        if (byteBuffer == null) {
+            System.out.println("read failed");
+            return;
+        }
+        System.out.println("read ok, buffer size = " + byteBuffer.capacity());
+
+        //set the params
+        int imageWidth = 1440;
+        int imageHeight = 2392;
+        int pixelStride = 4;
+        int rowPadding = 128;
+        int pixelPadding = rowPadding / pixelStride;  //32
+
+        LogUtils.d("***test_image_scale_by_bitmap: begin....");
+        long begin = System.currentTimeMillis();
+        Bitmap bmp = ImageUtils.byteBuffer2Bitmap(byteBuffer,imageWidth, imageHeight, pixelPadding, Bitmap.Config.ARGB_8888, 0.25);
+        long diff = System.currentTimeMillis() - begin;
+        LogUtils.d("***test_image_scale_by_bitmap: end, time used(ms): " + diff);
+        ImageUtils.saveBitmap2JPGFile(bmp, imageFileName);
+
+        byte[] imageArr = byteBuffer2Array(byteBuffer, imageWidth, imageHeight, pixelPadding, pixelStride, 4);
+        LogUtils.d("***test_image_scale_by_bitmap: end, time  by arr begin");
+        long begin2 = System.currentTimeMillis();
+        ByteBuffer byteBuffer3 = ComUtils.byteArr2Buf(imageArr);
+        long diff2 = System.currentTimeMillis() - begin2;
+        LogUtils.d("***test_image_scale_by_bitmap: end, time  by arr(ms): " + diff2);
+        LogUtils.d("###@: byteBuffer3.position/limit/capacity=" + byteBuffer3.position() + "/" + byteBuffer3.limit() + "/" + byteBuffer3.capacity());
+        ImageUtils.saveByteBuffer2JPGFile(byteBuffer3, imageFileName2, imageWidth/4, imageHeight/4, 0);
     }
 }
