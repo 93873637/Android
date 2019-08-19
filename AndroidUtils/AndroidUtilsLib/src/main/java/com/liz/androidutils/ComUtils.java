@@ -1,7 +1,10 @@
 package com.liz.androidutils;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,7 +17,51 @@ import java.nio.charset.Charset;
 @SuppressWarnings("unused, WeakerAccess")
 public class ComUtils {
 
-    public static byte[] copySubArr(@NonNull byte[] srcArr, int start, int length) {
+    public static boolean saveByteArrayToFile(@NonNull byte[] bytes, String fileAbsolute) {
+
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        File file;
+        try {
+            String filePath = FileUtils.getFilePath(fileAbsolute);
+            File dir = new File(filePath);
+            if (!dir.exists() && dir.isDirectory()) {
+                System.out.println("saveByteArrayToFile: mk dir " + filePath + "...");
+                if (!dir.mkdirs()) {
+                    System.out.println("ERROR: saveByteArrayToFile mk dir " + filePath + " failed");
+                    return false;
+                }
+            }
+            file = new File(fileAbsolute);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(bytes);
+            return true;
+        } catch (Exception e) {
+            System.out.println("ERROR: saveByteArrayToFile exception: " + e.toString());
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    System.out.println("ERROR: saveByteArrayToFile close bos exception: " + e.toString());
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    System.out.println("ERROR: saveByteArrayToFile close fos exception: " + e.toString());
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static byte[] genSubArr(@NonNull byte[] srcArr, int start, int length) {
         int arrLen = length;
         if (start + length > srcArr.length) {
             arrLen = srcArr.length - start;
@@ -37,23 +84,10 @@ public class ComUtils {
 
     public static boolean saveByteBufferToFile(ByteBuffer byteBuffer, String fileAbsolute) {
         try {
-//            FileChannel fc = new FileOutputStream(fileAbsolute).getChannel();
-//            fc.write(bb.array());
-//            fc.close();
-//            File file = new File(fileAbsolute);
-
-//            if (!file.exists()) {
-//                file.createNewFile();
-//            }
-//            FileOutputStream fos = new FileOutputStream(file, true);
-//            fos.write(bb.array());
-//            fos.flush();
-//            fos.close();
-
-            FileOutputStream outputStream=new FileOutputStream(new File(fileAbsolute));
-            FileChannel fileChannel=outputStream.getChannel();
+            FileOutputStream outputStream = new FileOutputStream(new File(fileAbsolute));
+            FileChannel fileChannel = outputStream.getChannel();
             //cont write all data
-            while(byteBuffer.hasRemaining()){
+            while (byteBuffer.hasRemaining()) {
                 fileChannel.write(byteBuffer);
             }
             fileChannel.close();
@@ -112,7 +146,32 @@ public class ComUtils {
     // Test Functions
 
     public static void main(String[] args) {
-        test_saveByteBufferToFile();
+        //test_saveByteBufferToFile();
+        //test_saveByteArrayToFile();
+        test_try_catch_finally();
+    }
+
+    public static void test_try_catch_finally() {
+        int a = 9;
+        try {
+            System.out.println("test_try_catch_finally: try: enter...");
+            int c = a^2;
+            if (c%2 == 0) {
+                System.out.println("test_try_catch_finally: try: 2");
+                return;
+            }
+            int b = a*2;
+            System.out.println("test_try_catch_finally: try: 3");
+            int d[] = new int[c];
+            d[100] = 9;
+        }
+        catch (Exception e) {
+            System.out.println("test_try_catch_finally: catch: e=" + e.toString());
+        }
+        finally {
+            System.out.println("test_try_catch_finally: finally.");
+        }
+        System.out.println("test_try_catch_finally: E.");
     }
 
     public static void test_saveByteBufferToFile() {
@@ -123,6 +182,12 @@ public class ComUtils {
         ByteBuffer byteBuffer=charset.encode(charBuffer);
         boolean ret = saveByteBufferToFile(byteBuffer, "D:\\temp\\aa.bin");
         System.out.println("test_saveByteBufferToFile: size = " + byteBuffer.capacity() + ", ret = " + ret);
+    }
+
+    public static void test_saveByteArrayToFile() {
+        byte[] bytes = new byte[]{1,2,3,4,5,6,7,8,9,0};
+        boolean ret = saveByteArrayToFile(bytes, "D:\\temp\\saveByteArrayToFile.bin");
+        System.out.println("test_saveByteBufferToFile: size = " + bytes.length + ", ret = " + ret);
     }
 
     //NOTE: this function can only run on android
@@ -160,7 +225,7 @@ public class ComUtils {
         int pixelPadding = rowPadding / pixelStride;  //32
 
         int totalWidth = imageWidth + pixelPadding;  //1472
-        int totalHeight = imageHeight;
+        //int totalHeight = imageHeight;
 
         int rowStride = totalWidth * pixelStride;  //5888
 

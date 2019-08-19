@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import com.liz.androidutils.ComUtils;
@@ -14,6 +15,7 @@ import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.FileUtils;
+import com.liz.androidutils.TimeChecker;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -245,31 +247,15 @@ public class MainActivity extends AppCompatActivity {
         ImageUtils.saveByteBuffer2JPGFile(byteBuffer3, imageFileName3, imageWidth2, imageHeight2, 0);
     }
 
-    public byte[] byteBuffer2Array(@NonNull ByteBuffer byteBuffer, int width, int height, int padding, int pixelStride, int scale) {
-        int rowStride = (width + padding) * pixelStride;
-        int scaleHeight = height / scale;
-        int scareWidth = width / scale;
-        byte[] imageArr = new byte[scareWidth * scaleHeight * pixelStride];
-        for (int i=0; i<scaleHeight; i++) {
-            byteBuffer.limit((i * scale + 1) * rowStride);
-            byteBuffer.position(i * scale * rowStride);
-            byte[] rowArr = ComUtils.byteBuf2Arr(byteBuffer.slice());
-            int offset = i * scareWidth * pixelStride;
-            for (int j = 0; j < scareWidth; j++) {
-                int imgOff = offset + j * pixelStride;
-                int rowStart = j * scale * pixelStride;
-                System.arraycopy(rowArr, rowStart, imageArr, imgOff, pixelStride);
-            }
-        }
-        return imageArr;
-    }
-
     public void test_image_scale_by_bitmap() {
         String dataFileName = "/sdcard/images/ScreenShot_190815.154153.357.bin";
         String imageFileName = dataFileName + ".bmp.jpg";
         String imageFileName2 = dataFileName + ".arr.jpg";
+        String imageArrFileName = dataFileName + ".arr.bin";
 
         FileUtils.removeFile(imageFileName);
+        FileUtils.removeFile(imageFileName2);
+        FileUtils.removeFile(imageArrFileName);
 
         ByteBuffer byteBuffer = ComUtils.readByteBufferFromFile(dataFileName);
         if (byteBuffer == null) {
@@ -285,20 +271,17 @@ public class MainActivity extends AppCompatActivity {
         int rowPadding = 128;
         int pixelPadding = rowPadding / pixelStride;  //32
 
-        LogUtils.d("***test_image_scale_by_bitmap: begin....");
-        long begin = System.currentTimeMillis();
+        TimeChecker tc = new TimeChecker("ByteBuffer2JPG by Bitmap");
         Bitmap bmp = ImageUtils.byteBuffer2Bitmap(byteBuffer,imageWidth, imageHeight, pixelPadding, Bitmap.Config.ARGB_8888, 0.25);
-        long diff = System.currentTimeMillis() - begin;
-        LogUtils.d("***test_image_scale_by_bitmap: end, time used(ms): " + diff);
-        ImageUtils.saveBitmap2JPGFile(bmp, imageFileName);
+        tc.checkPoint("byteBuffer2Bitmap");
+        ImageUtils.saveBitmap2JPGFile(bmp, imageFileName, 100);
+        tc.checkPoint("saveBitmap2JPGFile");
 
-        byte[] imageArr = byteBuffer2Array(byteBuffer, imageWidth, imageHeight, pixelPadding, pixelStride, 4);
-        LogUtils.d("***test_image_scale_by_bitmap: end, time  by arr begin");
-        long begin2 = System.currentTimeMillis();
-        ByteBuffer byteBuffer3 = ComUtils.byteArr2Buf(imageArr);
-        long diff2 = System.currentTimeMillis() - begin2;
-        LogUtils.d("***test_image_scale_by_bitmap: end, time  by arr(ms): " + diff2);
-        LogUtils.d("###@: byteBuffer3.position/limit/capacity=" + byteBuffer3.position() + "/" + byteBuffer3.limit() + "/" + byteBuffer3.capacity());
-        ImageUtils.saveByteBuffer2JPGFile(byteBuffer3, imageFileName2, imageWidth/4, imageHeight/4, 0);
+        {
+            TimeChecker tc2 = new TimeChecker("ByteBuffer2JPG by scale");
+            byte[] jpgArr = ImageUtils.byteBuffer2JPGArray(byteBuffer, imageWidth, imageHeight, pixelPadding, pixelStride, 4, 100);
+            tc2.checkPoint("byteBuffer2Array bitmap2Bytes, size = " + jpgArr.length);
+            ImageUtils.saveJPGArray2File(jpgArr, imageFileName2, 100);
+        }
     }
 }

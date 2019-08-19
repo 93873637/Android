@@ -24,7 +24,7 @@ public class FileUtils {
      * @return get file path from file absolute path
      */
     public static String getFilePath(String fileAbsolute) {
-        int index = fileAbsolute.lastIndexOf("/");
+        int index = fileAbsolute.lastIndexOf(File.separator);
         if (index == -1) {
             return "";
         }

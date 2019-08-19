@@ -85,13 +85,13 @@ public class DataLogic{
         }
     }
 
-    public static void enQueueScreenBmp(Image image) {
+    public static void enqueueScreenBmp(Image image) {
         synchronized (mBmpQueue) {
             if (mBmpQueue.size() == ComDef.MAX_SCREEN_IMAGE_QUEUE_SIZE) {
                 mBmpQueue.poll();
             }
 
-            Bitmap bmp = ImageUtils.Image2Bitmap(image);
+            Bitmap bmp = ImageUtils.image2Bitmap(image);
             if (bmp == null) {
                 LogUtils.e("ERROR: convert image to bitmap failed.");
             }
