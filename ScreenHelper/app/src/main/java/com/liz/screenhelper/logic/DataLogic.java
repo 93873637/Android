@@ -62,8 +62,14 @@ public class DataLogic{
             mImageWidth = image.getWidth();
             mImageHeight = image.getHeight();
             final Image.Plane[] planes = image.getPlanes();
-            final ByteBuffer buffer = planes[0].getBuffer();
-            byte[] data = ComUtils.byteBuf2Arr(buffer);
+            final ByteBuffer byteBuffer = planes[0].getBuffer();
+            int rowStride = planes[0].getRowStride();
+            int pixelStride = planes[0].getPixelStride();
+            int rowPadding = rowStride - pixelStride * mImageWidth;
+            int pixelPadding = rowPadding / pixelStride;
+            byte[] data = ImageUtils.byteBuffer2JPGArray(byteBuffer, mImageWidth, mImageHeight,
+                    pixelPadding, pixelStride, 4, 100);
+            //LogUtils.d("enqueueScreenData: size = " + NumUtils.formatShow(data.length));
             mDataQueue.add(data);
             mDataQueue.notifyAll();
             mFrameCount++;

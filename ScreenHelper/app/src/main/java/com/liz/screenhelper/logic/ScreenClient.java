@@ -46,33 +46,40 @@ public class ScreenClient {
         private DatagramSocket mUDPSocket;
 
         private boolean sendScreenData() {
+            byte[] data = DataLogic.dequeueScreenData();
+            if (data == null) {
+                LogUtils.e("ScreenClient: Dequeue screen data failed.");
+                return false;
+            }
+
             try {
-                byte[] data = DataLogic.dequeueScreenData();
-                if (data == null) {
-                    LogUtils.e("Dequeue screen data failed.");
-                    return false;
-                }
+                ScreenDataHeader header = new ScreenDataHeader(data.length);
+                DatagramPacket dataPacket = new DatagramPacket(header.bytes, ScreenDataHeader.HEADER_LEN,
+                        mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
+                mUDPSocket.send(dataPacket);
+
                 int pos = 0;
-                int seg = 60000;
+                int seg = ComDef.SCREEN_DATAGRAM_PACKET_SIZE;
                 int size;
                 byte[] dataSend;
-                DatagramPacket dataPacket;
                 while(pos < data.length) {
                     size = seg;
                     if (pos + size > data.length)
                         size = data.length - pos;
-                    dataSend = new byte[size];
+                    dataSend = new byte[seg]; //####@: size];
                     System.arraycopy(data, pos, dataSend, 0, size);
-                    dataPacket = new DatagramPacket(dataSend, seg, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
+                    dataPacket = new DatagramPacket(dataSend, dataSend.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
                     mUDPSocket.send(dataPacket);
                     pos += size;
                 }
+
+                LogUtils.d("ScreenClient: send screen data, seq=" + ScreenDataHeader.seq + ", size=" + data.length);
+                return true;
             } catch (Exception ex) {
-                LogUtils.e("ScreenClient： send screen data exception, ex=" + ex.toString());
+                LogUtils.e("ScreenClient： send screen data exception: " + ex.toString());
                 ex.printStackTrace();
                 return false;
             }
-            return true;
         }
 
         private boolean sendBmp() {
@@ -84,7 +91,7 @@ public class ScreenClient {
             try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, baos);
-                baos.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                baos.write(ComDef.SCREEN_IMAGE_HEADER_FLAG.getBytes());
                 baos.flush();
                 byte[] data = baos.toByteArray();
                 DatagramPacket dataPacket = new DatagramPacket(data, data.length, mClientSocket.getInetAddress(), ComDef.DEFAULT_SCREEN_CLIENT_PORT);
@@ -214,7 +221,7 @@ public class ScreenClient {
 
                 try {
                     bmp.compress(Bitmap.CompressFormat.JPEG, ComDef.JPEG_QUALITY, mOutputStream);
-                    mOutputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                    mOutputStream.write(ComDef.SCREEN_IMAGE_HEADER_FLAG.getBytes());
                     mOutputStream.flush();
                 } catch (Exception e) {
                     LogUtils.d("ERROR: ScreenServer： client socket recv failed, ex=" + e.toString());
@@ -253,7 +260,7 @@ public class ScreenClient {
                                 mOutputStream.write(ComDef.SCREEN_IMAGE_EMPTY_FLAG.getBytes());
                             } else {
                                 bmp.compress(Bitmap.CompressFormat.JPEG, 80, mOutputStream);
-                                mOutputStream.write(ComDef.SCREEN_IMAGE_END_FLAG.getBytes());
+                                mOutputStream.write(ComDef.SCREEN_IMAGE_HEADER_FLAG.getBytes());
                             }
                             mOutputStream.flush();
                             return ret;

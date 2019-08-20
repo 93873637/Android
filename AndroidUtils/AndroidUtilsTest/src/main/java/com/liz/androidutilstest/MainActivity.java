@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         //test_SysUtils();
         //test_saveByteBufferToFile();
         //test_image_scale_by_buffer();
-        test_image_scale_by_bitmap();
+        //test_image_scale_by_bitmap();
+        LogUtils.d("###@: time=" + System.currentTimeMillis());
     }
 
     public static void test_saveByteBufferToFile() {

@@ -2,6 +2,7 @@ package com.liz.androidutils;
 
 import java.text.SimpleDateFormat;
 
+@SuppressWarnings("unused")
 public class TimeUtils {
 
     /**
@@ -34,5 +35,21 @@ public class TimeUtils {
         else
             strFileTime += "." + ms;
         return strFileTime;
+    }
+
+    /**
+     * @return String of file name format as 191103.173655.626
+     */
+    public static String genTimeID() {
+        return "" + System.currentTimeMillis();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Test Functions
+
+    public static void main(String[] args) {
+        for (int i=0; i<12; i++) {
+            System.out.println(genTimeID());
+        }
     }
 }
