@@ -3,7 +3,7 @@ package com.liz.whatsai.logic;
 import android.text.TextUtils;
 import android.util.Xml;
 
-import com.liz.whatsai.utils.LogUtils;
+import com.liz.androidutils.LogUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.liz.whatsai.app.ThisApp;
-import com.liz.whatsai.ui.AlarmActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,10 +53,11 @@ public class DataLogic extends Storage {
         String strDateTime = format.format(new Date(System.currentTimeMillis()));
         Node node = mAlarmMap.get(strDateTime);
         if (node != null) {
-            Intent activityIntent = new Intent(context, AlarmActivity.class);
-            activityIntent.putExtra(ComDef.ALARM_TAG, node.getRemindTime());
-            activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(activityIntent);
+            //###@:
+//            Intent activityIntent = new Intent(context, AlarmActivity.class);
+//            activityIntent.putExtra(ComDef.ALARM_TAG, node.getRemindTime());
+//            activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            context.startActivity(activityIntent);
         }
     }
 

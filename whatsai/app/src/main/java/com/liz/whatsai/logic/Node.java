@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.liz.whatsai.utils.LogUtils;
+import com.liz.androidutils.LogUtils;
 
 import java.util.List;
 

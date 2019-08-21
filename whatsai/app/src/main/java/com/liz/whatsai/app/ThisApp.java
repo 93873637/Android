@@ -3,6 +3,9 @@ package com.liz.whatsai.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.SysUtils;
+import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 
 /**
@@ -21,6 +24,8 @@ public class ThisApp extends Application {
     public void onCreate() {
         super.onCreate();
         mAppInst = this;
+        mAppVersion = SysUtils.getAppVersion(this);
+        LogUtils.setTag(ComDef.APP_NAME);
         DataLogic.init();
 
         /* for test only

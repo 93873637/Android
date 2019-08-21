@@ -1,60 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.liz.whatsai.ui.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
-        android:id="@+id/ll_whatsai"
+    <include
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:focusable="true"
-        android:layout_marginBottom="0dp">
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
-        <!--title bar-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/colorPrimaryDark"
-            android:gravity="start|center_vertical">
-
-            <ImageButton
-                android:id="@+id/left_img_btn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:contentDescription="@string/app_name"
-                android:gravity="end|center_vertical"
-                android:background="@drawable/ic_menu" />
-
-            <TextView
-                android:id="@+id/tool_bar_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="6dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/app_name"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/colorToolbarText"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- list -->
-        <ListView
-            android:id="@+id/lv_items"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawSelectorOnTop="true"
-            android:background="@drawable/list_selector"
-            />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

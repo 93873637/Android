@@ -9,7 +9,7 @@ import android.os.Environment;
 
 public class ComDef {
 
-    static final String APP_NAME = "whatsai";
+    public static final String APP_NAME = "whatsai";
 
     private static final String WHATSAI_DATA_FILE_NAME = "whatsai.xml";
     static final String WHATSAI_DATA_PATH = Environment.getExternalStorageDirectory().getPath() + "/whatsai";

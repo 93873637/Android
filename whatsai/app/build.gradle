@@ -5,18 +5,19 @@ ext.minorNumber = 0
 
 android {
     compileSdkVersion 29
+    buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.liz.whatsai"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName generateVersionName()
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     android.applicationVariants.all { variant ->
@@ -24,37 +25,17 @@ android {
             outputFileName = "whatsai_${variant.versionName}.apk"
         }
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/ic_menu'] } }
-
-    packagingOptions {
-        pickFirst 'META-INF/*' // picks the JavaMail license file
-    }
-}
-
-repositories {
-    jcenter()
-    maven {
-        url "https://maven.java.net/content/groups/public/"
-    }
-}
-
-dependencies {
-    // use whatever the current version is...
-    implementation 'com.sun.mail:android-mail:1.6.0'
-    implementation 'com.sun.mail:android-activation:1.6.0'
-    configurations {    all*.exclude group: 'javax.activation', module: 'activation'}
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-
     implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     implementation files('D:/WorkSpace/Android/_bin/AndroidUtils.jar')
 }
 
