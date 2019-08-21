@@ -1,7 +1,8 @@
 package com.liz.whatsai.logic;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.liz.whatsai.utils.LogUtils;
 

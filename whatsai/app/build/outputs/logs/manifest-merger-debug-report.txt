@@ -1,186 +1,190 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\04e208e801dd6d98dd202dc8021ce406\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\2739b3aacef1784361f8cd73a6c4a5e1\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\6f8aaa4f940a2fba77f7674ac2505823\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\729b57c59cec83d8aa28804b00af8d48\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\73ec7f9336194427a303be9aee39b869\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\a9e8ddac664268ffe1f4ded77e0ab8c9\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\4defa4f85afbae9d545ed88b2a573f13\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4f11042b4cb08ade7c489d31baf16940\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\32a06c1c5f5f44f332c616f4d32a7b16\AndroidManifest.xml:17:1-31:12
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:17:1-30:12
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\5ee17167787417d9b82cdaf7ff1b300e\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0a01b2eda5794b348025835af9a9e508\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\692f21019bd57200aebc815788a7a61b\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\952e95b8be8cf9b126683abf07b852fc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\225635c855b8aead9bc09ce5579e26b7\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\c461aea38e0f77a2d4c53a200521a847\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\777cd5e4f81946e1cd85615e35bfeaf4\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\821fb4affa662252ba7a363742385d16\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0caddd4b8dc8356a700fb70523508e25\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\95f9822ed6bbb52b61d856bce2adc2c4\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\4a32016d188631daa5c7eb9307235120\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\f1f278273669d450bf1d83e1454093a0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\488488f4b3e2fc374ac6d47abde6564e\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\12235310763e2a727e35607108fbe125\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\20d5d6f8b71b296b71c00c09c5fd2185\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\05ba7c8e9c0c6e1f88a7c282cd47e031\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\03add9de6048e9840a299c56f8a31291\AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\46c406db60c2bea54af4387adc87a7ba\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\9bf8daf816a2d564d87a8c906610d121\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\d52a2234cd42863a0781a948657c8a89\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\66024f2b6f8c7b38ff63dfb4ed8487b3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\86097c7c687f0ba396ea0795d26afa95\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\fd810dc89f9c4de2b24e9759df9f9ad3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\19f97cd2f828cd8400c6b0c9f1b7e712\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\d464e2242ee683b8b04c9b7cfb149895\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\3a7e18fd18acce68ee29d2fdd29d2a7d\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\ebd9995a7a0fee715fcc4eb5e7255064\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
 	package
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:3:5-30
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:3:5-30
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:1-37:12
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:5:5-81
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:5:5-81
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:5:22-78
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:5:22-78
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:6:5-80
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:6:5-80
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:6:22-77
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:6:22-77
 uses-permission#android.permission.INTERNET
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:7:5-66
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:7:5-66
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:7:22-64
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:7:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:8:5-78
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:8:5-78
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:8:22-76
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:8:22-76
 application
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:10:5-35:19
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\04e208e801dd6d98dd202dc8021ce406\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\04e208e801dd6d98dd202dc8021ce406\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\2739b3aacef1784361f8cd73a6c4a5e1\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\2739b3aacef1784361f8cd73a6c4a5e1\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\6f8aaa4f940a2fba77f7674ac2505823\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\6f8aaa4f940a2fba77f7674ac2505823\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\729b57c59cec83d8aa28804b00af8d48\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\729b57c59cec83d8aa28804b00af8d48\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\73ec7f9336194427a303be9aee39b869\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\73ec7f9336194427a303be9aee39b869\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\a9e8ddac664268ffe1f4ded77e0ab8c9\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\a9e8ddac664268ffe1f4ded77e0ab8c9\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\4defa4f85afbae9d545ed88b2a573f13\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\4defa4f85afbae9d545ed88b2a573f13\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4f11042b4cb08ade7c489d31baf16940\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4f11042b4cb08ade7c489d31baf16940\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\32a06c1c5f5f44f332c616f4d32a7b16\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\32a06c1c5f5f44f332c616f4d32a7b16\AndroidManifest.xml:25:5-29:19
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:24:5-28:19
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:24:5-28:19
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:10:5-35:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0a01b2eda5794b348025835af9a9e508\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0a01b2eda5794b348025835af9a9e508\AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\05ba7c8e9c0c6e1f88a7c282cd47e031\AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\05ba7c8e9c0c6e1f88a7c282cd47e031\AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\03add9de6048e9840a299c56f8a31291\AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\03add9de6048e9840a299c56f8a31291\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\05ba7c8e9c0c6e1f88a7c282cd47e031\AndroidManifest.xml:22:18-86
 	android:supportsRtl
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:16:9-35
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:14:9-41
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:14:9-41
 	android:roundIcon
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:15:9-52
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:15:9-52
 	android:icon
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:13:9-47
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:13:9-47
 	android:allowBackup
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:12:9-35
 	android:theme
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:17:9-41
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:17:9-41
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:11:9-36
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:11:9-36
 activity#com.liz.whatsai.ui.MainActivity
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:18:9-26:20
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:18:9-26:20
 	android:screenOrientation
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:20:13-49
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:20:13-49
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:19:13-44
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:21:13-25:29
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:19:13-44
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:21:13-25:29
 action#android.intent.action.MAIN
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:22:17-69
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:22:17-69
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:22:25-66
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:22:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:24:17-77
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:24:27-74
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:24:27-74
 activity#com.liz.whatsai.ui.NodeActivity
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:27:9-53
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:27:9-53
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:27:19-50
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:27:19-50
 receiver#com.liz.whatsai.app.WhatsaiReceiver
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:29:9-32:48
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:29:9-32:48
 	android:enabled
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:31:13-35
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:31:13-35
 	android:exported
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:32:13-36
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:32:13-36
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:30:13-48
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:30:13-48
 activity#com.liz.whatsai.ui.AlarmActivity
-ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:34:9-63
+ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:34:9-63
 	android:name
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml:34:19-51
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml:34:19-51
 uses-sdk
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\04e208e801dd6d98dd202dc8021ce406\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\04e208e801dd6d98dd202dc8021ce406\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\2739b3aacef1784361f8cd73a6c4a5e1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\2739b3aacef1784361f8cd73a6c4a5e1\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\6f8aaa4f940a2fba77f7674ac2505823\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\6f8aaa4f940a2fba77f7674ac2505823\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\729b57c59cec83d8aa28804b00af8d48\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\729b57c59cec83d8aa28804b00af8d48\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\73ec7f9336194427a303be9aee39b869\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\73ec7f9336194427a303be9aee39b869\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\a9e8ddac664268ffe1f4ded77e0ab8c9\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\a9e8ddac664268ffe1f4ded77e0ab8c9\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\4defa4f85afbae9d545ed88b2a573f13\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\4defa4f85afbae9d545ed88b2a573f13\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4f11042b4cb08ade7c489d31baf16940\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4f11042b4cb08ade7c489d31baf16940\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\32a06c1c5f5f44f332c616f4d32a7b16\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\32a06c1c5f5f44f332c616f4d32a7b16\AndroidManifest.xml:21:5-23:58
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:20:5-22:41
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:20:5-22:41
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:23:9-75
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\5ee17167787417d9b82cdaf7ff1b300e\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\5ee17167787417d9b82cdaf7ff1b300e\AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0a01b2eda5794b348025835af9a9e508\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0a01b2eda5794b348025835af9a9e508\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\692f21019bd57200aebc815788a7a61b\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\692f21019bd57200aebc815788a7a61b\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\952e95b8be8cf9b126683abf07b852fc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\952e95b8be8cf9b126683abf07b852fc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\225635c855b8aead9bc09ce5579e26b7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\225635c855b8aead9bc09ce5579e26b7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\c461aea38e0f77a2d4c53a200521a847\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\c461aea38e0f77a2d4c53a200521a847\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\777cd5e4f81946e1cd85615e35bfeaf4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\777cd5e4f81946e1cd85615e35bfeaf4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\821fb4affa662252ba7a363742385d16\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\821fb4affa662252ba7a363742385d16\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0caddd4b8dc8356a700fb70523508e25\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\0caddd4b8dc8356a700fb70523508e25\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\95f9822ed6bbb52b61d856bce2adc2c4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\95f9822ed6bbb52b61d856bce2adc2c4\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\4a32016d188631daa5c7eb9307235120\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\4a32016d188631daa5c7eb9307235120\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\f1f278273669d450bf1d83e1454093a0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\f1f278273669d450bf1d83e1454093a0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\488488f4b3e2fc374ac6d47abde6564e\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\488488f4b3e2fc374ac6d47abde6564e\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\12235310763e2a727e35607108fbe125\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\12235310763e2a727e35607108fbe125\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\20d5d6f8b71b296b71c00c09c5fd2185\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\20d5d6f8b71b296b71c00c09c5fd2185\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\05ba7c8e9c0c6e1f88a7c282cd47e031\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\05ba7c8e9c0c6e1f88a7c282cd47e031\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\03add9de6048e9840a299c56f8a31291\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\03add9de6048e9840a299c56f8a31291\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\46c406db60c2bea54af4387adc87a7ba\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\46c406db60c2bea54af4387adc87a7ba\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\9bf8daf816a2d564d87a8c906610d121\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\9bf8daf816a2d564d87a8c906610d121\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\d52a2234cd42863a0781a948657c8a89\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\d52a2234cd42863a0781a948657c8a89\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\66024f2b6f8c7b38ff63dfb4ed8487b3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\66024f2b6f8c7b38ff63dfb4ed8487b3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\86097c7c687f0ba396ea0795d26afa95\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\86097c7c687f0ba396ea0795d26afa95\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\fd810dc89f9c4de2b24e9759df9f9ad3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\fd810dc89f9c4de2b24e9759df9f9ad3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\19f97cd2f828cd8400c6b0c9f1b7e712\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\19f97cd2f828cd8400c6b0c9f1b7e712\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\d464e2242ee683b8b04c9b7cfb149895\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\d464e2242ee683b8b04c9b7cfb149895\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\3a7e18fd18acce68ee29d2fdd29d2a7d\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\3a7e18fd18acce68ee29d2fdd29d2a7d\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\ebd9995a7a0fee715fcc4eb5e7255064\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\cloud\.gradle\caches\transforms-2\files-2.1\ebd9995a7a0fee715fcc4eb5e7255064\AndroidManifest.xml:20:5-44
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-		ADDED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-		INJECTED from D:\WorkSpace\android\whatsai\app\src\main\AndroidManifest.xml
-meta-data#android.support.VERSION
-ADDED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\2739b3aacef1784361f8cd73a6c4a5e1\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\2739b3aacef1784361f8cd73a6c4a5e1\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\6f8aaa4f940a2fba77f7674ac2505823\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\6f8aaa4f940a2fba77f7674ac2505823\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\729b57c59cec83d8aa28804b00af8d48\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\729b57c59cec83d8aa28804b00af8d48\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\73ec7f9336194427a303be9aee39b869\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\73ec7f9336194427a303be9aee39b869\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\a9e8ddac664268ffe1f4ded77e0ab8c9\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\a9e8ddac664268ffe1f4ded77e0ab8c9\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\4defa4f85afbae9d545ed88b2a573f13\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\4defa4f85afbae9d545ed88b2a573f13\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4f11042b4cb08ade7c489d31baf16940\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4f11042b4cb08ade7c489d31baf16940\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\32a06c1c5f5f44f332c616f4d32a7b16\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\32a06c1c5f5f44f332c616f4d32a7b16\AndroidManifest.xml:26:9-28:38
-	android:value
-		ADDED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:28:13-35
-	android:name
-		ADDED from [com.android.support:appcompat-v7:26.1.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\3f1a21927953d9be612dc89621e2fb08\AndroidManifest.xml:27:13-51
-meta-data#android.arch.lifecycle.VERSION
-ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:25:9-27:47
-	android:value
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:27:13-44
-	android:name
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\admin\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\c8a0f0e337249a6eabea403054b5c02f\AndroidManifest.xml:26:13-58
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+		ADDED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\whatsai\app\src\main\AndroidManifest.xml
