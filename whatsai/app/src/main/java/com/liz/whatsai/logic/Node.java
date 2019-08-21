@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.liz.androidutils.LogUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,30 +14,34 @@ import java.util.List;
  * Created by admin on 2018/8/30.
  */
 
-@SuppressWarnings("unused")
+@SuppressWarnings("unused, WeakerAccess")
 public abstract class Node implements Comparable<Node> {
-    private Node parent = null;
-    private String name = "";
-    public String detail = "";
 
-    private String remindString;
-    int remindType;
-    private RemindTime remindTime;
+    private Node parent;
+    private String name;
+    public String detail;
+    private String remind_string;
+    int remind_type;
+    private RemindTime remind_time;
+    private List<Node> list;
 
     Node() {
-        this.name = "";
-        this.detail = "";
-        remindString = "";
-        remindType = ComDef.REMIND_TYPE_INVALID;
-        remindTime = new RemindTime();
+        init();
     }
 
     Node(String name) {
+        init();
         this.name = name;
-        this.detail = "";
-        remindString = "";
-        remindType = ComDef.REMIND_TYPE_INVALID;
-        remindTime = new RemindTime();
+    }
+
+    private void init() {
+        parent = null;
+        name = "";
+        detail = "";
+        remind_string = "";
+        remind_type = ComDef.REMIND_TYPE_INVALID;
+        remind_time = new RemindTime();
+        list = new ArrayList<>();
     }
 
     public void setParent(Node node) {
@@ -81,28 +86,28 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public String getRemindString() {
-        return remindString;
+        return remind_string;
     }
 
-    public void setRemindString(String remindString) {
-        if (TextUtils.equals(remindString, this.remindString)) {
+    public void setRemindString(String mRemindString) {
+        if (TextUtils.equals(mRemindString, this.remind_string)) {
             LogUtils.v("remind not change");
             return;
         }
 
-        if (TextUtils.isEmpty(remindString)) {
-            this.remindString = "";
-            this.remindTime = null;
+        if (TextUtils.isEmpty(mRemindString)) {
+            this.remind_string = "";
+            this.remind_time = null;
             return;
         }
 
-        this.remindString = remindString;
-        parseRemind(remindString);
+        this.remind_string = mRemindString;
+        parseRemind(mRemindString);
     }
 
     String getRemindTime() {
         if (isRemindValid()) {
-            return remindTime.timeFormatString();
+            return remind_time.timeFormatString();
         }
         else {
             return "";
@@ -124,7 +129,7 @@ public abstract class Node implements Comparable<Node> {
         }
 
         //sort by remind time: this.isRemindValid && node.isRemindValid
-        int comp = this.remindTime.compareTo(node.remindTime);
+        int comp = this.remind_time.compareTo(node.remind_time);
         return (comp == 0) ? compareName(node.name) : comp;
     }
 
@@ -145,7 +150,7 @@ public abstract class Node implements Comparable<Node> {
         String[] timeStrings = words[0].split(":");
         if (timeStrings.length < 1) {
             LogUtils.e("Remind:parseRemind: unknown remind type.");
-            remindType = ComDef.REMIND_TYPE_INVALID;
+            remind_type = ComDef.REMIND_TYPE_INVALID;
             return;
         }
 
@@ -155,34 +160,34 @@ public abstract class Node implements Comparable<Node> {
                 LogUtils.e("Remind:parseRemind: invalid hh=" + hh);
                 return;
             }
-            remindTime.hour = hh;
+            remind_time.hour = hh;
 
             int mm = Integer.parseInt(timeStrings[1]);
             if (mm < 0 || mm > 59) {
                 LogUtils.e("Remind:parseRemind: invalid mm=" + mm);
                 return;
             }
-            remindTime.minute = mm;
+            remind_time.minute = mm;
 
             if (timeStrings.length > 2) {
                 int ss = Integer.parseInt(timeStrings[2]);
                 if (ss >= 0 && ss <= 59) {
-                    remindTime.second = ss;
+                    remind_time.second = ss;
                 }
             }
         }
         catch(NumberFormatException ex){
             LogUtils.e("Remind:parseRemind: NumberFormatException.");
-            remindType = ComDef.REMIND_TYPE_INVALID;
+            remind_type = ComDef.REMIND_TYPE_INVALID;
             return;
         }
 
-        LogUtils.d("Remind:parseRemind: get remind time at " + remindTime.hour + ":" + remindTime.minute + ":" + remindTime.second);
-        remindType = ComDef.REMIND_TYPE_DAILY_TIME;
+        LogUtils.d("Remind:parseRemind: get remind time at " + remind_time.hour + ":" + remind_time.minute + ":" + remind_time.second);
+        remind_type = ComDef.REMIND_TYPE_DAILY_TIME;
     }
 
     public boolean isRemindValid() {
-        return (remindType != ComDef.REMIND_TYPE_INVALID);
+        return (remind_type != ComDef.REMIND_TYPE_INVALID);
     }
 
     public boolean isRoot() {
@@ -198,25 +203,29 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public List<Node> getList() {
-        return null;
+        return list;
     }
 
-    public int getType() {
-        //TODO: Override this method
-        return ComDef.NODE_TYPE_UNKNOWN;
-    }
+    public abstract int getType();
 
     public void add(Node node) {
-        //TODO: Override this method
+        list.add(node);
+        node.setParent(this);
     }
 
     public void remove(int pos) {
-        //TODO: Override this method
+        if (pos >= 0 && pos < list.size()) {
+            list.remove(pos);
+        }
     }
 
     public Node get(int pos) {
-        //TODO: Override this method
-        return null;
+        if (pos >= 0 && pos < list.size()) {
+            return list.get(pos);
+        }
+        else {
+            return null;
+        }
     }
 
     public String getPath() {

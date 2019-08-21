@@ -86,7 +86,7 @@ public class DataLogic extends Storage {
         return mActiveNode.get(pos);
     }
 
-    public static List<Node> getList() {
+    public static List<Node> getDataList() {
         return mActiveNode.getList();
     }
 

@@ -22,7 +22,9 @@ import java.util.TimerTask;
  * Created by liz on 2019/2/15.
  */
 
+@SuppressWarnings("unused")
 public class Storage {
+
     private static Node mRootNode = null;
     private static boolean mListDirty = false;
 
@@ -33,7 +35,8 @@ public class Storage {
     static void init() {
         mRootNode = new WhatsaiDir();
         mRootNode.setName(ComDef.APP_NAME);
-        load();
+        //##@: loadTestData();
+        loadData();
         startSavingTimer();
     }
 
@@ -65,8 +68,7 @@ public class Storage {
             "TEXT",
     };
 
-    private static void load() {
-        //##@: loadTestData();
+    private static void loadData() {
         try {
             File f = new File(ComDef.WHATSAI_DATA_FILE);
             if (!f.exists()) {
@@ -77,7 +79,23 @@ public class Storage {
                 loadFromXML(input, (WhatsaiDir)mRootNode);
             }
         } catch (Exception e) {
-            LogUtils.e("load from xml exception: " + e.toString());
+            LogUtils.e("loadData from xml exception: " + e.toString());
+        }
+    }
+
+    private static void loadTestData() {
+        {Task task = new Task(); task.setName("TaskName0"); task.setDone(true); mRootNode.add(task);}
+        {Task task = new Task(); task.setName("TaskName1"); task.setDone(false); mRootNode.add(task);}
+        {
+            WhatsaiDir tg = new WhatsaiDir();
+            tg.setName("taskgroup0");
+            for (int i = 0; i < 30; i++) {
+                Task task = new Task();
+                task.setName("SubTask" + i);
+                task.setDone(i % 2 == 0);
+                tg.add(task);
+            }
+            mRootNode.add(tg);
         }
     }
 

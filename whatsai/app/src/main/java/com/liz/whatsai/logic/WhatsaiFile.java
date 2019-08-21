@@ -15,4 +15,7 @@ public class WhatsaiFile extends Node {
         super(name);
     }
 
+    public int getType() {
+        return ComDef.NODE_TYPE_FILE;
+    }
 }
