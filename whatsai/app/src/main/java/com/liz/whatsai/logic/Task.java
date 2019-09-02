@@ -8,12 +8,12 @@ package com.liz.whatsai.logic;
 public class Task extends WhatsaiFile {
     private boolean done = false;
 
-    Task() {
+    public Task() {
         super();
         done = false;
     }
 
-    Task(String name) {
+    public Task(String name) {
         super(name);
         done = false;
     }

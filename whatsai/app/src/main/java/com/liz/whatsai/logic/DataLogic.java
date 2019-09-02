@@ -1,9 +1,9 @@
 package com.liz.whatsai.logic;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.liz.whatsai.app.ThisApp;
+import com.liz.whatsai.storage.WhatsaiStorage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,13 +19,13 @@ import java.util.TimerTask;
  */
 
 @SuppressWarnings("unused")
-public class DataLogic extends Storage {
+public class DataLogic extends WhatsaiStorage {
     private static Node mActiveNode = null;
 
     private static Map<String, Node> mAlarmMap = new HashMap<String, Node>();
 
     public static void init() {
-        Storage.init();
+        WhatsaiStorage.init();
         mActiveNode = getRootNode();
         startAlarmTimer();
     }

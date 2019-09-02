@@ -9,10 +9,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 
 import com.liz.androidutils.ComUtils;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.MailSender;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeChecker;
@@ -50,7 +52,23 @@ public class MainActivity extends AppCompatActivity {
             );
         }
 
-        test();
+        //test();
+
+        findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //MailSender.test_send_mail_content();
+                        //MailSender.test_send_mail_content_subject();
+                        MailSender.test_send_mail_content_subject_attach();
+                    }
+                }).start();
+
+            }
+        });
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         //test_saveByteBufferToFile();
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
-        LogUtils.d("###@: time=" + System.currentTimeMillis());
+        //LogUtils.d("###@: time=" + System.currentTimeMillis());
     }
 
     public static void test_saveByteBufferToFile() {

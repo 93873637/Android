@@ -10,11 +10,11 @@ import android.graphics.Bitmap;
 @SuppressWarnings("unused")
 public class WhatsaiDir extends Node {
 
-    WhatsaiDir() {
+    public WhatsaiDir() {
         super();
     }
 
-    WhatsaiDir(String name) {
+    public WhatsaiDir(String name) {
         super(name);
     }
 

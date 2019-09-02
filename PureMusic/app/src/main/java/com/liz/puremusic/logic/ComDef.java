@@ -16,7 +16,8 @@ public class ComDef {
      */
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public static final String APP_NAME = "PureMusic";
-    public static final String PURE_MUSIC_DEFAULT_PATH = Environment.getExternalStorageDirectory().getPath() + "/0.sd/Music";
+    //public static final String PURE_MUSIC_DEFAULT_PATH = Environment.getExternalStorageDirectory().getPath() + "/0.sd/Music";
+    public static final String PURE_MUSIC_DEFAULT_PATH = "/storage/0CCD-50F4/0.sd/Music";
     public static final String DEFAULT_MUSIC_FILE = PURE_MUSIC_DEFAULT_PATH + "/music.mp3";
 
     public static final int PLAYUI_REFRESH_TIMER = 1000;  //unit by milli-seconds

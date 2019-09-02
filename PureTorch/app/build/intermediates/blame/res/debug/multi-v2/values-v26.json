@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\WorkSpace\\android\\PureTorch\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
+            "outputFile": "D:\\WorkSpace\\Android\\PureTorch\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0ccfc0a0dab052116cebbc851cc3dc4c\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\2e363c69b00932375ee229fd0b31186b\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\3f1a21927953d9be612dc89621e2fb08\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\11b69f1b6e9450606cc2e6225894f717\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

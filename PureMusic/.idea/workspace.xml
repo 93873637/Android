@@ -11,7 +11,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ff66a70-9db3-4e71-816a-4738758ae468" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/MailUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/test/Pack01.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/androidTest/java/com/liz/androidutils/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/test/java/com/liz/androidutils/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/androidTest/debug/com/liz/puremusic/test/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/androidTest/debug/com/liz/puremusic/test/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/logic/ComDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureTorch/PureTorch.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/PureTorch.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureTorch/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/_install.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/_install.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/generated/source/buildConfig/debug/com/liz/whatsai/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/generated/source/buildConfig/debug/com/liz/whatsai/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/outputs/apk/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_bitcomet1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/content_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/content_main.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,39 +73,38 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="26" selection-start-line="21" selection-end-line="26" />
+            <state relative-caret-position="366">
+              <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/provider_paths.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/app/ThisApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="93" column="58" selection-start-line="93" selection-start-column="58" selection-end-line="93" selection-end-column="58" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/logic/ComDef.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_notification.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1518">
-              <caret line="66" column="30" selection-start-line="66" selection-start-column="30" selection-end-line="66" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/logic/DataLogic.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2300">
-              <caret line="135" column="33" selection-start-line="135" selection-start-column="23" selection-end-line="135" selection-end-column="33" />
+            <state relative-caret-position="287">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -157,6 +195,7 @@
       <find>checkAutoLoad</find>
       <find>onAddMusic</find>
       <find>generateVersionName</find>
+      <find>0.sd</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -170,6 +209,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/app/NotificationBroadcastReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/ui/PlayNotifier.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_notification.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/logic/ComDef.java" />
       </list>
     </option>
   </component>
@@ -187,39 +227,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
-            <path>
-              <item name="PureMusic" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="PureMusic" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
-            </path>
-            <path>
-              <item name="PureMusic" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="PureMusic" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="puremusic" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PureMusic" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="puremusic" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
             <path>
               <item name="PureMusic" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
@@ -228,6 +239,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -333,7 +346,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20202559" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.20202559" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -346,8 +359,8 @@
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.24053451" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Build" order="5" visible="true" weight="0.24053451" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32962137" />
       <window_info anchor="bottom" id="Run" order="8" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.087973274" />
@@ -448,13 +461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/logic/ComDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="19" column="61" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/app/MediaButtonReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -477,13 +483,6 @@
             <element signature="e#1014#1015#0" expanded="true" />
             <element signature="e#1071#1072#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/app/ThisApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="102" column="32" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -584,12 +583,33 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        <state relative-caret-position="366">
+          <caret line="18" column="17" selection-start-line="18" selection-start-column="17" selection-end-line="18" selection-end-column="17" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/provider_paths.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/app/ThisApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="93" column="58" selection-start-line="93" selection-start-column="58" selection-end-line="93" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puremusic/logic/ComDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

@@ -172,6 +172,10 @@
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\5ee17167787417d9b82cdaf7ff1b300e\\res\\drawable-xhdpi-v4\\abc_list_focused_holo.9.png"
     },
     {
+        "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\menu_main_menu.xml.flat",
+        "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\menu\\main_menu.xml"
+    },
+    {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\layout_node_list_item.xml.flat",
         "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\layout\\node_list_item.xml"
     },
@@ -670,10 +674,6 @@
     {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v21_abc_list_divider_material.xml.flat",
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\5ee17167787417d9b82cdaf7ff1b300e\\res\\drawable-v21\\abc_list_divider_material.xml"
-    },
-    {
-        "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\menu_main.xml.flat",
-        "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\menu\\main.xml"
     },
     {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_screen_simple.xml.flat",
@@ -1260,10 +1260,6 @@
         "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\layout\\nav_header_main.xml"
     },
     {
-        "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable_icon_bitcomet1.png.flat",
-        "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\drawable\\icon_bitcomet1.png"
-    },
-    {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\5ee17167787417d9b82cdaf7ff1b300e\\res\\drawable-xxhdpi-v4\\abc_ic_star_half_black_16dp.png"
     },
@@ -1682,6 +1678,10 @@
     {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_design_ic_visibility.png.flat",
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\cf05be8aac065e4ea306f82393da5458\\res\\drawable-mdpi-v4\\design_ic_visibility.png"
+    },
+    {
+        "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_list_bg_gradient.xml.flat",
+        "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\drawable-v24\\list_bg_gradient.xml"
     },
     {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\animator_mtrl_btn_unelevated_state_list_anim.xml.flat",

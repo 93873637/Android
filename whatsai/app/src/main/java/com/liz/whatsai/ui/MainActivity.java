@@ -23,13 +23,13 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.liz.androidutils.LogUtils;
-import com.liz.androidutils.SysUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.app.NodeListAdapter;
 import com.liz.whatsai.app.ThisApp;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
+import com.liz.whatsai.storage.WhatsaiStorage;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
         AdapterView.OnItemClickListener, View.OnCreateContextMenuListener {
 
-    // For Storage Permissions
+    // For WhatsaiStorage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity
             //super.onBackPressed();
             if (DataLogic.isRootActive()) {
                 super.onBackPressed(); //exit activity
-                DataLogic.save();
+                DataLogic.local_save();
             }
             else {
                 //not exit, go to upper node
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -316,6 +316,10 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        else if (id == R.id.action_cloud_backup) {
+            WhatsaiStorage.cloud_save();
             return true;
         }
 

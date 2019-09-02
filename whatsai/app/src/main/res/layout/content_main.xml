@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="0dp"
-        android:background="#AABBFF"
+        android:background="@drawable/list_bg_gradient"
         android:focusable="true"
         android:orientation="vertical">
 

@@ -609,6 +609,7 @@ color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
 color colorAccent
+color colorDeepBlue
 color colorDescBackground
 color colorForMenuItem
 color colorGrayLineForAddPic
@@ -1050,7 +1051,7 @@ drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable ic_return
 drawable icon_bitcomet
-drawable icon_bitcomet1
+drawable list_bg_gradient
 drawable list_selector
 drawable mtrl_snackbar_background
 drawable mtrl_tabs_default_indicator
@@ -1084,6 +1085,7 @@ id action_bar_root
 id action_bar_spinner
 id action_bar_subtitle
 id action_bar_title
+id action_cloud_backup
 id action_container
 id action_context_bar
 id action_divider
@@ -1398,7 +1400,7 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu activity_main_drawer
-menu main
+menu main_menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 string abc_action_bar_home_description
@@ -1440,6 +1442,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_cloud_backup
 string action_settings
 string app_name
 string appbar_scrolling_view_behavior
