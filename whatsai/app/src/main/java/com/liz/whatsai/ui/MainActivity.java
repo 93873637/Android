@@ -369,8 +369,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void updateView() {
-        //####@: mToolbarTitle.setText(DataLogic.getPath());
+        MainActivity.this.setTitle(DataLogic.getPath());
         NodeListAdapter.onUpdateList();
     }
-
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.DataLogic;
@@ -33,25 +34,26 @@ public class NodeActivity extends Activity implements View.OnClickListener {
             mNode = DataLogic.get((int) nodeId);
         }
 
+        //can't show null node
+        if (mNode == null) {
+            Toast.makeText(this, "ERROR: NULL Node", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+
         mtvToolbar = findViewById(R.id.toolbar_title);
-        mtvToolbar.setText(DataLogic.getPath());
+        mtvToolbar.setText(DataLogic.getPath() + "/" + mNode.getName());
 
         mEditName = findViewById(R.id.editNodeName);
         mCheckDone = findViewById(R.id.cbDone);
-        if (mNode != null) {
-            mEditName.setText(mNode.getName());
-            mCheckDone.setChecked(mNode.isDone());
-        }
+        mEditName.setText(mNode.getName());
+        mCheckDone.setChecked(mNode.isDone());
 
         mEditRemind = findViewById(R.id.editRemind);
-        if (mNode != null) {
-            mEditRemind.setText(mNode.getRemindString());
-        }
+        mEditRemind.setText(mNode.getRemindString());
 
         mEditDetail = findViewById(R.id.editDetail);
-        if (mNode != null) {
-            mEditDetail.setText(mNode.detail);
-        }
+        mEditDetail.setText(mNode.detail);
 
         findViewById(R.id.toolbar_menu).setOnClickListener(this);
     }

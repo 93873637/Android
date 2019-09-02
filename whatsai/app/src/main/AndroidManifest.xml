@@ -15,6 +15,7 @@
         android:roundIcon="@drawable/icon_bitcomet"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
@@ -26,6 +27,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.NodeActivity" />
+
+        <receiver
+            android:name=".app.WhatsaiReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity android:name=".ui.AlarmActivity"></activity>
+
     </application>
 
 </manifest>
