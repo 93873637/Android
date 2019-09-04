@@ -1,15 +1,18 @@
 package com.liz.puretorch.ui;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -30,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static String[] PERMISSIONS_CAMERA = {
             Manifest.permission.CAMERA,
     };
+
+//    PowerManager mPowerManager = null;
+//    PowerManager.WakeLock mWakeLock = null;
 
     private LinearLayout mLayoutMain;
     private SeekBar mSeekbarLight;
@@ -65,7 +71,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
+
+//        mPowerManager = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+//        mWakeLock = mPowerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, this.getClass().getName());
 
         mLayoutMain = findViewById(R.id.layoutMain);
         mTorchInfo = findViewById(R.id.torchInfo);
@@ -213,6 +223,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        mLayoutMain.setBackgroundColor(Color.rgb(all, all, all));
 //        LogUtils.d("updateSeekBarAll: all=" + all);
 //    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //mWakeLock.acquire();
+    }
+
+    protected void onPause() {
+        super.onPause();
+        //mWakeLock.release();
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event){

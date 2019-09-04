@@ -1,22 +1,23 @@
 package com.liz.whatsai.storage;
 
-import android.text.TextUtils;
-import android.util.Xml;
-
-import com.liz.androidutils.LogUtils;
-import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.Node;
-import com.liz.whatsai.logic.Reminder;
-import com.liz.whatsai.logic.Task;
+import com.alibaba.fastjson.JSON;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.liz.whatsai.logic.WhatsaiDir;
 
-import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlSerializer;
-
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 /**
  * WhatsaiStorage:
@@ -25,6 +26,179 @@ import java.io.OutputStream;
 
 @SuppressWarnings("unused")
 class StorageJSON {
+
+    public static void saveToJSON(OutputStream out, WhatsaiDir rootNode) throws Exception {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(rootNode);
+        System.out.println(jsonString);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Test Functions
+
+    public static class User {
+        public User() {
+
+        }
+        public User(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+        public String name;
+        public int age;
+
+        @SerializedName("email_address")
+        public String emailAddress;
+
+        public List<User> children = new ArrayList<>();
+
+        //因业务需要增加，但并不需要序列化
+        public User parent;
+    }
+
+    public static void main(String[] args) {
+        test_Gson();
+//        WhatsaiDir node = new WhatsaiDir("aaa");
+//        WhatsaiDir subNode = new WhatsaiDir("bbb");
+//        node.add(subNode);
+
+        /* this can only run on android system, or you will get exception Stub!
+        try {
+            JSONObject object = new JSONObject();
+            //string
+            object.put("string", "this is my string");
+            //int
+            object.put("int", 2);
+            //boolean
+            object.put("boolean", true);
+            //array
+            List<Integer> integers = Arrays.asList(1, 2, 3);
+            object.put("list", integers);
+            //null
+            object.put("null", null);
+            System.out.println(object);
+        }
+        catch (Exception e) {
+            System.out.println("JSONObject Exception: e=" + e.toString());
+        }
+        //*/
+
+        /*
+        {
+            Gson gson = new Gson();
+            String jsonString = gson.toJson(node);
+            System.out.println("gson=" + jsonString);
+        }
+        //*/
+
+        /*
+        {
+            String jsonString = JSON.toJSONString(node.getRemindString());
+            System.out.println("fastJson=" + jsonString);
+        }
+        //*/
+    }
+
+    public static class UserTypeAdapter extends TypeAdapter<User> {
+
+        @Override
+        public void write(JsonWriter out, User value) throws IOException {
+            out.beginObject();
+            write_obj(out, value);
+            out.endObject();
+        }
+
+        public void write_obj(JsonWriter out, User value) throws IOException {
+            out.name("name").value(value.name);
+            out.name("age").value(value.age);
+            out.name("email").value(value.emailAddress);
+            for (int i=0; i<value.children.size(); i++) {
+                write_obj(out, value.children.get(i));
+            }
+        }
+
+        @Override
+        public User read(JsonReader in) throws IOException {
+            User user = new User();
+            in.beginObject();
+            while (in.hasNext()) {
+                switch (in.nextName()) {
+                    case "name":
+                        user.name = in.nextString();
+                        break;
+                    case "age":
+                        user.age = in.nextInt();
+                        break;
+                    case "email":
+                    case "email_address":
+                    case "emailAddress":
+                        user.emailAddress = in.nextString();
+                        break;
+                }
+            }
+            in.endObject();
+            return user;
+        }
+    }
+
+    public static void test_Gson() {
+//        Gson gson = new Gson();
+//        int i = gson.fromJson("100", int.class);              //100
+//        double d = gson.fromJson("\"99.99\"", double.class);  //99.99
+//        boolean b = gson.fromJson("true", boolean.class);     // true
+//        String str = gson.fromJson("String", String.class);   // String
+
+        {
+            Gson gson = new Gson();
+            User user = new User("怪盗kidou", 24);
+            user.emailAddress = "aaaaaa";
+            String jsonString = gson.toJson(user); // {"name":"怪盗kidou","age":24}
+            System.out.println("jsonObject=" + jsonString);
+        }
+        {
+            Gson gson = new Gson();
+            String jsonString = "{\"name\":\"怪盗kidou\",\"age\":24,\"emailAddress\":\"ikidou@example.com\"}";//{"name":"怪盗kidou","age":24,"emailAddress":"ikidou@example.com"};  //"{\"name\":\"怪盗kidou\",\"age\":24}";
+            User user = gson.fromJson(jsonString, User.class);
+            System.out.println("jsonObject.emailAddress=" + user.emailAddress);
+        }
+        {
+            try {
+                JsonWriter writer = new JsonWriter(new OutputStreamWriter(System.out));
+                writer.beginObject() // throws IOException
+                        .name("name").value("怪盗kidou")
+                        .name("age").value(24)
+                        .name("email").nullValue() //演示null
+                        .endObject(); // throws IOException
+                writer.flush(); // throws IOException
+                System.out.println("");
+            }
+            catch(Exception e){
+
+            }
+        }
+        {
+            User user = new User("怪盗kidou", 44);
+            user.emailAddress = "ikidou@example.com";
+            User user2 = new User("user2", 20);
+            user.children.add(user2);
+            user2.parent = user;
+
+            Gson gson = new GsonBuilder()
+                    //为User注册TypeAdapter
+                    .registerTypeAdapter(User.class, new UserTypeAdapter())
+                    .create();
+            System.out.println("gson TypeAdapter=" + gson.toJson(user));
+        }
+//        User user = new User("怪盗kidou", 24);
+//        user.emailAddress = "ikidou@example.com";
+//        Gson gson = new GsonBuilder()
+//                //为User注册TypeAdapter
+//                .registerTypeAdapter(User.class, new UserTypeAdapter())
+//                .create();
+//        System.out.println(gson.toJson(user));
+    }
+
+
 //
 //    public static RespQueryMdn parseResponseQueryMdn(String resStr) {
 //        RespQueryMdn resp = new RespQueryMdn();

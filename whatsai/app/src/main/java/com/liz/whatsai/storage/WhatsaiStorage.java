@@ -35,7 +35,6 @@ public class WhatsaiStorage {
 
     private static Node mRootNode = null;
     private static boolean mListDirty = false;
-    private static long mLastCloudSaveTime = 0;
 
     public static void init() {
         mRootNode = new WhatsaiDir();
@@ -103,7 +102,8 @@ public class WhatsaiStorage {
                 }
             }
             OutputStream output = new FileOutputStream(f);
-            StorageXML.saveToXML(output, (WhatsaiDir) mRootNode);
+            //###@: StorageXML.saveToXML(output, (WhatsaiDir) mRootNode);
+            StorageJSON.saveToJSON(output, (WhatsaiDir) mRootNode);
             output.flush();
             output.close();
 
@@ -117,7 +117,6 @@ public class WhatsaiStorage {
     public static void cloud_save() {
         if (ZipUtils.zip(ComDef.MAIL_ATTACH_FILE_PATH, ComDef.WHATSAI_DATA_FILE)) {
             WhatsaiMail.start();
-            mLastCloudSaveTime = System.currentTimeMillis();
         }
         else {
             LogUtils.e("WhatsaiStorage: cloud_save: zip data file failed");
@@ -128,7 +127,7 @@ public class WhatsaiStorage {
         long currentTime = System.currentTimeMillis();
 
         //check if time up to cloud save period
-        long diff = currentTime - mLastCloudSaveTime;
+        long diff = currentTime - mRootNode.getSyncTime();
         if (diff < ComDef.CLOUD_SAVE_PERIOD) {
             LogUtils.d("WhatsaiStorage: current diff " + diff + " not up to cloud save period " + ComDef.CLOUD_SAVE_PERIOD);
             return;
@@ -145,8 +144,11 @@ public class WhatsaiStorage {
         //###@:
 
         //finally, save to cloud by mail
-        mLastCloudSaveTime = currentTime;
         WhatsaiMail.start();
+    }
+
+    public static void updateSyncTime() {
+        mRootNode.setSyncTime(System.currentTimeMillis());
     }
 
     private static void loadTestData() {

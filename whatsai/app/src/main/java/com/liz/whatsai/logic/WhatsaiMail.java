@@ -2,6 +2,7 @@ package com.liz.whatsai.logic;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.MailSender;
+import com.liz.whatsai.storage.WhatsaiStorage;
 
 @SuppressWarnings("unused, WeakerAccess")
 public class WhatsaiMail {
@@ -29,6 +30,7 @@ public class WhatsaiMail {
         }
         if (mMailSender.send()) {
             LogUtils.d("WhatsaiMail: send mail ok");
+            WhatsaiStorage.updateSyncTime();
         }
         else {
             LogUtils.e("WhatsaiMail: send mail failed");

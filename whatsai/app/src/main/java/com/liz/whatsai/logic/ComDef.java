@@ -20,6 +20,8 @@ public class ComDef {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // WhatsaiStorage Definitions
 
+    public static final String TAG_SYNC_TIME = "sync_time";
+
     public static final String XML_TAG_DIR = "dir";
     public static final String XML_TAG_FILE = "file";
 

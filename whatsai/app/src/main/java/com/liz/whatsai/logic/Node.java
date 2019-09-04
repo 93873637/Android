@@ -21,9 +21,10 @@ public abstract class Node implements Comparable<Node> {
     private String name;
     public String detail;
     private String remind_string;
-    int remind_type;
+    public int remind_type;
     private RemindTime remind_time;
     private List<Node> list;
+    private long sync_time;  //time for sync to cloud
 
     Node() {
         init();
@@ -42,6 +43,7 @@ public abstract class Node implements Comparable<Node> {
         remind_type = ComDef.REMIND_TYPE_INVALID;
         remind_time = new RemindTime();
         list = new ArrayList<>();
+        sync_time = 0;
     }
 
     public void setParent(Node node) {
@@ -50,6 +52,14 @@ public abstract class Node implements Comparable<Node> {
 
     public Node getParent() {
         return parent;
+    }
+
+    public long getSyncTime() {
+        return sync_time;
+    }
+
+    public void setSyncTime(long syncTime) {
+        sync_time = syncTime;
     }
 
     public void incTaskNumber(int num) {
@@ -105,7 +115,7 @@ public abstract class Node implements Comparable<Node> {
         parseRemind(mRemindString);
     }
 
-    String getRemindTime() {
+    public String getRemindTime() {
         if (isRemindValid()) {
             return remind_time.timeFormatString();
         }
