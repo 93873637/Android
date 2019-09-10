@@ -29,6 +29,7 @@ import com.liz.whatsai.app.ThisApp;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
+import com.liz.whatsai.logic.WhatsaiMail;
 import com.liz.whatsai.storage.WhatsaiStorage;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -319,7 +320,7 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_cloud_backup) {
-            WhatsaiStorage.cloud_save();
+            WhatsaiStorage.cloud_save(this);
             return true;
         }
 

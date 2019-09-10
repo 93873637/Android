@@ -19,7 +19,7 @@
             android:gravity="center_vertical|left"
             android:paddingLeft="10dp"
             android:textSize="16sp"
-            android:text="Add Task(s):"
+            android:text="Add File/Path:"
             android:textColor="#000000"
             android:textStyle="bold"
             />
@@ -33,22 +33,23 @@
             android:layout_marginBottom="5dp"
             android:background="@color/colorTelBackground"
             android:cursorVisible="true"
-            android:hint="please input name"
+            android:hint="Input Name Here"
             android:focusable="true"
             android:textSize="16sp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:singleLine="true"
+            android:textStyle="italic"
             />
 
         <CheckBox
-            android:id="@+id/cbTaskgroup"
+            android:id="@+id/cbDirectory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_marginBottom="5dp"
             android:paddingLeft="2dp"
-            android:text="Task Group"
+            android:text="Directory"
             android:textColor="#000000"
             android:textSize="16sp"
             android:checked="false"/>

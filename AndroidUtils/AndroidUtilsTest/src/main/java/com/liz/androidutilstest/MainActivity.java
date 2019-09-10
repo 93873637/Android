@@ -60,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        //MailSender.test_send_mail_content();
+                        //MailSender.test_send_mail_simple();
+                        //MailSender.test_send_mail_multiple();
+                        MailSender.test_send_mail_multiple_cc();
                         //MailSender.test_send_mail_content_subject();
-                        MailSender.test_send_mail_content_subject_attach();
+                        //MailSender.test_send_mail_content_subject_attach();
                     }
                 }).start();
 

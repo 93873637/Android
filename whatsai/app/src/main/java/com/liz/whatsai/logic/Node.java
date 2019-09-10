@@ -17,11 +17,11 @@ import java.util.List;
 @SuppressWarnings("unused, WeakerAccess")
 public abstract class Node implements Comparable<Node> {
 
-    private Node parent;
     private String name;
-    public String detail;
+    private String detail;
+    private Node parent;
     private String remind_string;
-    public int remind_type;
+    private int remind_type;
     private RemindTime remind_time;
     private List<Node> list;
     private long sync_time;  //time for sync to cloud
@@ -44,6 +44,39 @@ public abstract class Node implements Comparable<Node> {
         remind_time = new RemindTime();
         list = new ArrayList<>();
         sync_time = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNameEx() {
+        if (isRemindValid()) {
+            return name + "(" + this.getRemindString() + ")";
+        }
+        return name;
+    }
+
+    public void setName(String name) {
+        if (TextUtils.isEmpty(name)) {
+            this.name = "";
+        }
+        else {
+            this.name = name;
+        }
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        if (TextUtils.isEmpty(detail)) {
+            this.detail = "";
+        }
+        else {
+            this.detail = detail;
+        }
     }
 
     public void setParent(Node node) {
@@ -75,24 +108,8 @@ public abstract class Node implements Comparable<Node> {
         return 0;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (TextUtils.isEmpty(name)) {
-            this.name = "";
-        }
-        else {
-            this.name = name;
-        }
-    }
-
-    public String getNameEx() {
-        if (isRemindValid()) {
-            return name + "(" + this.getRemindString() + ")";
-        }
-        return name;
+    public int getRemindType() {
+        return this.remind_type;
     }
 
     public String getRemindString() {
@@ -214,6 +231,24 @@ public abstract class Node implements Comparable<Node> {
 
     public List<Node> getList() {
         return list;
+    }
+
+    public int getChildNumber() {
+        if (list == null) {
+            return 0;
+        }
+        else {
+            return list.size();
+        }
+    }
+
+    public Node getChild(int i) {
+        if (i >= 0 && i < list.size()) {
+            return list.get(i);
+        }
+        else {
+            return null;
+        }
     }
 
     public abstract int getType();

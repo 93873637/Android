@@ -3,6 +3,7 @@ package com.liz.whatsai.logic;
 import android.content.Context;
 
 import com.liz.whatsai.app.ThisApp;
+import com.liz.whatsai.storage.StorageJSON;
 import com.liz.whatsai.storage.WhatsaiStorage;
 
 import java.text.SimpleDateFormat;

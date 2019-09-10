@@ -1,5 +1,8 @@
 package com.liz.whatsai.logic;
 
+import android.app.Activity;
+import android.widget.Toast;
+
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.MailSender;
 import com.liz.whatsai.storage.WhatsaiStorage;
@@ -9,31 +12,49 @@ public class WhatsaiMail {
 
     private static MailSender mMailSender = null;
 
-    public static void start() {
+    public static void start(final Activity activity) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                send();
+                send(activity);
             }
         }).start();
     }
 
-    public static void send() {
+    private static void send(final Activity activity) {
         if (mMailSender == null) {
             mMailSender = new MailSender();
             mMailSender.fromAddress = ComDef.MAIL_FROM_ADDRESS;
             mMailSender.fromAccount = ComDef.MAIL_FROM_ACCOUNT;
             mMailSender.fromPassword = ComDef.MAIL_FROM_PASSWORD;
             mMailSender.toAddress = ComDef.MAIL_TO_ADDRESS;
+            mMailSender.ccAddress = ComDef.MAIL_CC_ADDRESS;
             mMailSender.smtpHost = ComDef.MAIL_SMTP_HOST;
             mMailSender.addAttachFile(ComDef.MAIL_ATTACH_FILE_PATH);
         }
+
+        String msg;
         if (mMailSender.send()) {
-            LogUtils.d("WhatsaiMail: send mail ok");
-            WhatsaiStorage.updateSyncTime();
+            msg = "WhatsaiMail: mail sent successfully";
+            LogUtils.d(msg);
         }
         else {
-            LogUtils.e("WhatsaiMail: send mail failed");
+            msg = "WhatsaiMail: send failed, error = " + mMailSender.errMsg;
+            LogUtils.e(msg);
+        }
+
+        //show toast message
+        final String msgToast = msg;
+        if (activity != null) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(activity, msgToast, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else {
+            LogUtils.d("WhatsaiMail: no context to toast");
         }
     }
 }

@@ -1,26 +1,18 @@
 package com.liz.whatsai.storage;
 
-import android.text.TextUtils;
-import android.util.Xml;
+import android.app.Activity;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.ZipUtils;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
-import com.liz.whatsai.logic.Reminder;
 import com.liz.whatsai.logic.Task;
 import com.liz.whatsai.logic.WhatsaiDir;
 import com.liz.whatsai.logic.WhatsaiMail;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlSerializer;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -39,8 +31,16 @@ public class WhatsaiStorage {
     public static void init() {
         mRootNode = new WhatsaiDir();
         mRootNode.setName(ComDef.APP_NAME);
-        //##@: loadTestData();
-        loadData();
+
+        /*
+        //##@: for test only
+        //StorageJSON.test();
+        mRootNode = loadTestData();
+        local_save();
+        //*/
+
+        //StorageXML.loadData((WhatsaiDir)mRootNode);
+        StorageJSON.loadData((WhatsaiDir)mRootNode);
         startSavingTimer();
     }
 
@@ -59,33 +59,18 @@ public class WhatsaiStorage {
     private static void startSavingTimer() {
         new Timer().schedule(new TimerTask() {
             public void run () {
-                DataLogic.local_save();
-                DataLogic.cloud_save_period();
+                if (isDirty()) {
+                    local_save();
+                }
+                else {
+                    LogUtils.v("WhatsaiStorage: list data not change for local save.");
+                }
+                cloud_save_period();
             }
-        }, ComDef.TASK_LIST_SAVING_DELAY, ComDef.TASK_LIST_SAVING_TIMER);
-    }
-
-    private static void loadData() {
-        try {
-            File f = new File(ComDef.WHATSAI_DATA_FILE);
-            if (!f.exists()) {
-                LogUtils.i("WhatsaiStorage: whatsai data file \"" + ComDef.WHATSAI_DATA_FILE + "\" not exists");
-            }
-            else {
-                InputStream input = new FileInputStream(f);
-                StorageXML.loadFromXML(input, (WhatsaiDir)mRootNode);
-            }
-        } catch (Exception e) {
-            LogUtils.e("WhatsaiStorage: loadData from xml exception: " + e.toString());
-        }
+        }, ComDef.WHATSAI_SAVING_DELAY, ComDef.WHATSAI_SAVING_TIMER);
     }
 
     public static void local_save() {
-        if (!isDirty()) {
-            LogUtils.v("WhatsaiStorage: list data not change for local_save.");
-            return;
-        }
-
         try {
             File path = new File(ComDef.WHATSAI_DATA_PATH);
             if (!path.exists()) {
@@ -102,7 +87,7 @@ public class WhatsaiStorage {
                 }
             }
             OutputStream output = new FileOutputStream(f);
-            //###@: StorageXML.saveToXML(output, (WhatsaiDir) mRootNode);
+            //##@: StorageXML.saveToXML(output, (WhatsaiDir) mRootNode);
             StorageJSON.saveToJSON(output, (WhatsaiDir) mRootNode);
             output.flush();
             output.close();
@@ -114,16 +99,16 @@ public class WhatsaiStorage {
         }
     }
 
-    public static void cloud_save() {
+    public static void cloud_save(Activity activity) {
         if (ZipUtils.zip(ComDef.MAIL_ATTACH_FILE_PATH, ComDef.WHATSAI_DATA_FILE)) {
-            WhatsaiMail.start();
+            WhatsaiMail.start(activity);
         }
         else {
             LogUtils.e("WhatsaiStorage: cloud_save: zip data file failed");
         }
     }
 
-    protected static void cloud_save_period() {
+    private static void cloud_save_period() {
         long currentTime = System.currentTimeMillis();
 
         //check if time up to cloud save period
@@ -132,9 +117,12 @@ public class WhatsaiStorage {
             LogUtils.d("WhatsaiStorage: current diff " + diff + " not up to cloud save period " + ComDef.CLOUD_SAVE_PERIOD);
             return;
         }
+        else {
+            mRootNode.setSyncTime(currentTime);
+        }
 
         //TODO: improve it as first compress current data file to a temporary zip file
-        //####@:
+        //###@:
         if (!ZipUtils.zip(ComDef.MAIL_ATTACH_FILE_PATH, ComDef.WHATSAI_DATA_FILE)) {
             LogUtils.e("WhatsaiStorage: cloud_save_period: zip data file failed");
             return;
@@ -144,82 +132,57 @@ public class WhatsaiStorage {
         //###@:
 
         //finally, save to cloud by mail
-        WhatsaiMail.start();
+        WhatsaiMail.start(null);
     }
 
-    public static void updateSyncTime() {
-        mRootNode.setSyncTime(System.currentTimeMillis());
-    }
+    ///* for test
+    protected static Node loadTestData() {
+        WhatsaiDir rootNode = new WhatsaiDir();
+        rootNode.setName("whatsai");
 
-    private static void loadTestData() {
-        {
-            Task task = new Task();
-            task.setName("TaskName0");
-            task.setDone(true);
-            mRootNode.add(task);
-        }
-        {
-            Task task = new Task();
-            task.setName("TaskName1");
-            task.setDone(false);
-            mRootNode.add(task);
-        }
+        {Task task = new Task(); task.setName("TaskName0"); task.setDone(true); rootNode.add(task);}
+        {Task task = new Task(); task.setName("TaskName1"); task.setDone(false); rootNode.add(task);}
+
         {
             WhatsaiDir tg = new WhatsaiDir();
-            tg.setName("taskgroup0");
-            for (int i = 0; i < 30; i++) {
+            tg.setName("TaskGroup1");
+            rootNode.add(tg);
+            for (int i = 0; i < 2; i++) {
                 Task task = new Task();
-                task.setName("SubTask" + i);
-                task.setDone(i % 2 == 0);
+                task.setName("SubTask1" + i);
+                task.setDone(i % 2 != 0);
                 tg.add(task);
             }
-            mRootNode.add(tg);
-        }
-    }
-
-     /* for test
-    protected static void loadTestData() {
-        {Task task = new Task(); task.name = "TaskName"; task.setDone(true); mRootNode.add(task);}
-        {Task task = new Task(); task.name = "TaskName"; task.setDone(false); mRootNode.add(task);}
-
-        {
-            WhatsaiDir tg = new WhatsaiDir();
-            tg.name = ComDef.XML_TAG_DIR;
-            mRootNode.add(tg);
-            for (int i = 0; i < 19; i++) {
-                Task task = new Task();
-                task.name = "SubTask" + i;
-                task.setDone(i % 2 != 0);
-                tg.list.add(task);
-            }
             {
-                WhatsaiDir tg22 = new WhatsaiDir();
-                tg22.name = "taskgroup22";
-                tg.add(tg22);
-                for (int i = 0; i < 5; i++) {
+                WhatsaiDir tg11 = new WhatsaiDir();
+                tg11.setName("taskgroup11");
+                tg.add(tg11);
+                for (int i = 0; i < 3; i++) {
                     Task task = new Task();
-                    task.name = "SubTask" + i;
+                    task.setName("SubTask11" + i);
                     task.setDone(i % 2 != 0);
-                    tg22.list.add(task);
+                    tg11.add(task);
                 }
             }
         }
 
-        {Task task = new Task(); task.name = "TaskName"; task.setDone(false); mRootNode.add(task);}
-        {Task task = new Task(); task.name = "TaskName"; task.setDone(true); mRootNode.add(task);}
-        {Task task = new Task(); task.name = "TaskName"; task.setDone(true); mRootNode.add(task);}
+        {Task task = new Task(); task.setName("TaskName2"); task.setDone(false); rootNode.add(task);}
+        {Task task = new Task(); task.setName("TaskName3"); task.setDone(true); rootNode.add(task);}
+        {Task task = new Task(); task.setName("TaskName4"); task.setDone(true); rootNode.add(task);}
 
         {
             WhatsaiDir tg = new WhatsaiDir();
-            tg.name = "taskgroup2";
-            mRootNode.add(tg);
-            for (int i = 0; i < 9; i++) {
+            tg.setName("TaskGroup2");
+            rootNode.add(tg);
+            for (int i = 0; i < 29; i++) {
                 Task task = new Task();
-                task.name = "SubTask" + i;
+                task.setName("SubTask2" + i);
                 task.setDone(i % 2 == 0);
-                tg.list.add(task);
+                tg.add(task);
             }
         }
+
+        return rootNode;
     }
     //*/
 }

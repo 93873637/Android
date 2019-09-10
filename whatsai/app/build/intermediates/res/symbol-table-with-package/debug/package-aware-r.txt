@@ -1117,8 +1117,8 @@ id btnCancel
 id btnOK
 id buttonPanel
 id cancel_action
+id cbDirectory
 id cbDone
-id cbTaskgroup
 id center
 id center_horizontal
 id center_vertical

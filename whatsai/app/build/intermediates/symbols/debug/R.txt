@@ -1116,8 +1116,8 @@ int id btnCancel 0x7f08002a
 int id btnOK 0x7f08002b
 int id buttonPanel 0x7f08002c
 int id cancel_action 0x7f08002d
-int id cbDone 0x7f08002e
-int id cbTaskgroup 0x7f08002f
+int id cbDirectory 0x7f08002e
+int id cbDone 0x7f08002f
 int id center 0x7f080030
 int id center_horizontal 0x7f080031
 int id center_vertical 0x7f080032

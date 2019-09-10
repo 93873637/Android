@@ -50,7 +50,7 @@ class AddNodeDlg extends Dialog {
         }
 
         final EditText editName = addDlgWindow.findViewById(R.id.editNodeName);
-        final CheckBox cbTaskgroup = addDlgWindow.findViewById(R.id.cbTaskgroup);
+        final CheckBox cbTaskgroup = addDlgWindow.findViewById(R.id.cbDirectory);
 
         Button btnOK = addDlgWindow.findViewById(R.id.btnOK);
         btnOK.setOnClickListener(new View.OnClickListener() {

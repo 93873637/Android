@@ -45,13 +45,24 @@ public class MailSender {
     public String mailContent = "";
     private ArrayList<String> attachFiles = new ArrayList<>();
 
+    public String errMsg = "";
+
     public void addAttachFile(String fileAbsolute) {
         attachFiles.add(fileAbsolute);
     }
 
+    private void logMsg(String msg) {
+        LogUtils.e("MailSender: " + msg);
+    }
+
+    private void setErrMsg(String msg) {
+        errMsg = "MailSender: " + msg;
+        LogUtils.e(errMsg);
+    }
+
     public boolean send() {
         if (!checkParams()) {
-            LogUtils.e("MailSender: send failed with invalid param.");
+            logMsg("send failed with invalid param.");
             return false;
         }
         try {
@@ -66,30 +77,30 @@ public class MailSender {
             return true;
         }
         catch (Exception e) {
-            LogUtils.e("MailSender: send exception: " + e.toString());
+            setErrMsg("send exception: " + e.toString());
             return false;
         }
     }
 
     public boolean checkParams() {
         if (TextUtils.isEmpty(fromAddress)) {
-            LogUtils.e("MailSender: checkParams: no fromAddress.");
+            setErrMsg("checkParams: no fromAddress.");
             return false;
         }
         if (TextUtils.isEmpty(fromAccount)) {
-            LogUtils.e("MailSender: checkParams: no fromAccount.");
+            setErrMsg("checkParams: no fromAccount.");
             return false;
         }
         if (TextUtils.isEmpty(fromPassword)) {
-            LogUtils.e("MailSender: checkParams: no fromPassword.");
+            setErrMsg("checkParams: no fromPassword.");
             return false;
         }
-        if (TextUtils.isEmpty(toAddress)) {
-            LogUtils.e("MailSender: checkParams: no toAddress.");
+        if (TextUtils.isEmpty(toAddress) && TextUtils.isEmpty(ccAddress) && TextUtils.isEmpty(bccAddress)) {
+            setErrMsg("checkParams: no address to send.");
             return false;
         }
         if (TextUtils.isEmpty(smtpHost)) {
-            LogUtils.e("MailSender: checkParams: no smtpHost.");
+            setErrMsg("checkParams: no smtpHost.");
             return false;
         }
         return true;
@@ -106,13 +117,28 @@ public class MailSender {
     public MimeMessage getMimeMessage(Session session) throws Exception{
         MimeMessage msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(fromAddress));
-        msg.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toAddress));
+
+        if (!TextUtils.isEmpty(toAddress)) {
+            @SuppressWarnings("static-access")
+            InternetAddress[] internetAddressTo = new InternetAddress().parse(toAddress);
+            msg.setRecipients(MimeMessage.RecipientType.TO, internetAddressTo);
+            //msg.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toAddress));
+        }
+
         if (!TextUtils.isEmpty(ccAddress)) {
-            msg.setRecipient(MimeMessage.RecipientType.CC, new InternetAddress(ccAddress));
+            @SuppressWarnings("static-access")
+            InternetAddress[] internetAddressCC = new InternetAddress().parse(ccAddress);
+            msg.setRecipients(MimeMessage.RecipientType.CC, internetAddressCC);
+            //msg.setRecipient(MimeMessage.RecipientType.CC, new InternetAddress(ccAddress));
         }
+
         if (!TextUtils.isEmpty(bccAddress)) {
-            msg.setRecipient(MimeMessage.RecipientType.BCC, new InternetAddress(bccAddress));
+            @SuppressWarnings("static-access")
+            InternetAddress[] internetAddressBCC = new InternetAddress().parse(bccAddress);
+            msg.setRecipients(MimeMessage.RecipientType.BCC, internetAddressBCC);
+            //msg.setRecipient(MimeMessage.RecipientType.BCC, new InternetAddress(bccAddress));
         }
+
         if (!TextUtils.isEmpty(mailSubject)) {
             msg.setSubject(mailSubject, DEFAULT_MAIL_SUBJECT_CHARSET);
         }
@@ -181,21 +207,78 @@ public class MailSender {
     // java main and test functions
 
     public static void main(String[] args) {
-        test_send_mail_content();
+        //following functions can only run on Android, or you will get Stub error!
+//        test_send_mail_content();
 //        ms.sendMail("this is a mail 带附件！", "/storage/0CCD-50F4/0.sd/whatsai/whatsai.zip");
 //        ms.sendMail("this is 邮件 带附件和图片！", "/storage/0CCD-50F4/0.sd/whatsai/whatsai.zip", "/storage/0CCD-50F4/0.sd/whatsai/test.jpg");
-       //
     }
 
-    public static void test_send_mail_content() {
+    public static void test_send_mail_simple() {
+        MailSender ms = new MailSender();
+        ms.fromAddress = "nehzil@sina.com";
+        ms.fromAccount = "nehzil@sina.com";
+        ms.fromPassword = "cfd5f95327cea45a";
+        ms.toAddress = "93873637@qq.com";
+        ms.smtpHost = "smtp.sina.com.cn";
+        ms.mailContent = "this is 简单的纯文本邮件！";
+        if (ms.send()) {
+            System.out.println("test_send_mail_simple: success!");
+        }
+        else {
+            System.out.println("ERROR: test_send_mail_simple: send failed!");
+        }
+    }
+
+    public static void test_send_mail_multiple() {
+        MailSender ms = new MailSender();
+        ms.fromAddress = "nehzil@sina.com";
+        ms.fromAccount = "nehzil@sina.com";
+        ms.fromPassword = "cfd5f95327cea45a";
+        ms.toAddress = "tom.li@cloudminds.com,wx.tom.li@qq.com,13910115737@139.com";
+        //ms.ccAddress = "wx.tom.li@qq.com;13910115737@139.com;";
+        //ms.bccAddress = "wx.tom.li@qq.com;13910115737@139.com;tom.li@cloudminds.com;";
+        ms.smtpHost = "smtp.sina.com.cn";
+        ms.mailContent = "this is test_send_mail_multiple！";
+        if (ms.send()) {
+            System.out.println("test_send_mail_multiple: success!");
+        }
+        else {
+            System.out.println("ERROR: test_send_mail_multiple: send failed!");
+        }
+    }
+
+    public static void test_send_mail_multiple_cc() {
+        MailSender ms = new MailSender();
+        ms.fromAddress = "nehzil@sina.com";
+        ms.fromAccount = "nehzil@sina.com";
+        ms.fromPassword = "cfd5f95327cea45a";
+        ms.toAddress = "93873637@qq.com";
+        ms.ccAddress = "wx.tom.li@qq.com,tom.li@cloudminds.com,13910115737@139.com";
+        ms.smtpHost = "smtp.sina.com.cn";
+        ms.mailContent = "this is test_send_mail_multiple_cc！";
+        if (ms.send()) {
+            System.out.println("test_send_mail_multiple_cc: success!");
+        }
+        else {
+            System.out.println("ERROR: test_send_mail_multiple_cc: send failed!");
+        }
+    }
+
+    public static void test_send_mail_multiple_bcc() {
         MailSender ms = new MailSender();
         ms.fromAddress = "nehzil@sina.com";
         ms.fromAccount = "nehzil@sina.com";
         ms.fromPassword = "cfd5f95327cea45a";
         ms.toAddress = "tom.li@cloudminds.com";
+        ms.bccAddress = "wx.tom.li@qq.com,13910115737@139.com,lizhen70@gmail.com";
         ms.smtpHost = "smtp.sina.com.cn";
-        ms.mailContent = "this is 简单的纯文本邮件！";
-        ms.send();
+        ms.mailContent = "this is test_send_mail_multiple_bcc！";
+        if (ms.send()) {
+            System.out.println("test_send_mail_multiple_bcc: success!");
+        }
+        else {
+            System.out.println("ERROR: test_send_mail_multiple_bcc: send failed!");
+        }
     }
 
     public static void test_send_mail_content_subject() {
@@ -206,8 +289,13 @@ public class MailSender {
         ms.toAddress = "tom.li@cloudminds.com";
         ms.smtpHost = "smtp.sina.com.cn";
         ms.mailSubject = "this is 邮件主题";
-        ms.mailContent = "this is 简单的纯文本邮件！";
-        ms.send();
+        ms.mailContent = "this is 简单的纯文本邮件 with subject！";
+        if (ms.send()) {
+            System.out.println("test_send_mail_content_subject: success!");
+        }
+        else {
+            System.out.println("ERROR: test_send_mail_content_subject: send failed!");
+        }
     }
 
     public static void test_send_mail_content_subject_attach() {
@@ -218,8 +306,13 @@ public class MailSender {
         ms.toAddress = "tom.li@cloudminds.com";
         ms.smtpHost = "smtp.sina.com.cn";
         ms.mailSubject = "this is my 邮件主题";
-        ms.mailContent = "this is 简单的纯文本邮件！";
+        ms.mailContent = "this is test_send_mail_content_subject_attach！";
         ms.addAttachFile( "/storage/0CCD-50F4/0.sd/whatsai/whatsai.zip");
-        ms.send();
+        if (ms.send()) {
+            System.out.println("test_send_mail_content_subject_attach: success!");
+        }
+        else {
+            System.out.println("ERROR: test_send_mail_content_subject_attach: send failed!");
+        }
     }
 }

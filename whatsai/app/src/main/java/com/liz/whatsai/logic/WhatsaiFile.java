@@ -7,11 +7,11 @@ package com.liz.whatsai.logic;
 
 public class WhatsaiFile extends Node {
 
-    WhatsaiFile() {
+    public WhatsaiFile() {
         super();
     }
 
-    WhatsaiFile(String name) {
+    public WhatsaiFile(String name) {
         super(name);
     }
 

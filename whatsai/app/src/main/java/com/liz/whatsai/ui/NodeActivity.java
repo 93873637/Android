@@ -53,7 +53,7 @@ public class NodeActivity extends Activity implements View.OnClickListener {
         mEditRemind.setText(mNode.getRemindString());
 
         mEditDetail = findViewById(R.id.editDetail);
-        mEditDetail.setText(mNode.detail);
+        mEditDetail.setText(mNode.getDetail());
 
         findViewById(R.id.toolbar_menu).setOnClickListener(this);
     }
@@ -71,7 +71,7 @@ public class NodeActivity extends Activity implements View.OnClickListener {
     public void onBackPressed() {
         if (mNode != null) {
             mNode.setName(mEditName.getText().toString());
-            mNode.detail = mEditDetail.getText().toString();
+            mNode.setDetail(mEditDetail.getText().toString());
             mNode.setDone(mCheckDone.isChecked());
             mNode.setRemindString(mEditRemind.getText().toString());
             Reminder.checkRemind(mNode);

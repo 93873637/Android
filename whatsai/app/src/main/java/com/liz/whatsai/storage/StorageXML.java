@@ -5,7 +5,6 @@ import android.util.Xml;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
 import com.liz.whatsai.logic.Reminder;
 import com.liz.whatsai.logic.Task;
@@ -16,12 +15,9 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * WhatsaiStorage:
@@ -42,6 +38,21 @@ class StorageXML {
             "END_TAG",
             "TEXT",
     };
+
+    public static void loadData(WhatsaiDir rootNode) {
+        try {
+            File f = new File(ComDef.WHATSAI_DATA_FILE);
+            if (!f.exists()) {
+                LogUtils.i("WhatsaiStorage: whatsai data file \"" + ComDef.WHATSAI_DATA_FILE + "\" not exists");
+            }
+            else {
+                InputStream input = new FileInputStream(f);
+                loadFromXML(input, rootNode);
+            }
+        } catch (Exception e) {
+            LogUtils.e("WhatsaiStorage: loadData from xml exception: " + e.toString());
+        }
+    }
 
     static void loadFromXML(InputStream xmlStream, WhatsaiDir rootNode) throws Exception {
         XmlPullParser pullParser = Xml.newPullParser();
@@ -66,7 +77,7 @@ class StorageXML {
                     if (ComDef.XML_TAG_DIR.equals(tagName)) {
                         //ENTER into a new taskgroup
                         newNode = new WhatsaiDir();
-                        attrValue = pullParser.getAttributeValue(null, ComDef.XML_ATTR_NAME);
+                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_NAME);
                         newNode.setName(attrValue);
                         LogUtils.v("loadFromXML: enter taskgroup, name=" + attrValue);
                         curDir.add(newNode);
@@ -74,11 +85,11 @@ class StorageXML {
                     } else if (ComDef.XML_TAG_FILE.equals(tagName)) {
                         //ENTER into a new task
                         newNode = new Task();
-                        attrValue = pullParser.getAttributeValue(null, ComDef.XML_ATTR_NAME);
+                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_NAME);
                         newNode.setName(attrValue);
                         LogUtils.v("loadFromXML: enter task, name=" + attrValue);
-                        attrValue = pullParser.getAttributeValue(null, ComDef.XML_ATTR_DETAIL);
-                        newNode.detail = attrValue;
+                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_DETAIL);
+                        newNode.setDetail(attrValue);
                         //LogUtils.v("loadFromXML: enter task, detail=" + attrValue);
                         attrValue = pullParser.getAttributeValue(null, ComDef.XML_ATTR_DONE);
                         newNode.setDone(TextUtils.equals(attrValue, ComDef.XML_BOOL_TRUE));
@@ -132,7 +143,7 @@ class StorageXML {
         if (node.isDir()) {
             newLine(s, indent);
             s.startTag(null, ComDef.XML_TAG_DIR);
-            s.attribute(null, ComDef.XML_ATTR_NAME, node.getName()); endLine(s, ENTER);
+            s.attribute(null, ComDef.TAG_NAME, node.getName()); endLine(s, ENTER);
             for (Node subNode : node.getList()) {
                 writeNode(s, subNode, indent+ INDENT_INCREMENT);
             }
@@ -141,8 +152,8 @@ class StorageXML {
         else {
             newLine(s, indent);
             s.startTag(null, ComDef.XML_TAG_FILE);
-            s.attribute(null, ComDef.XML_ATTR_NAME, node.getName()==null?"":node.getName());
-            s.attribute(null, ComDef.XML_ATTR_DETAIL, node.detail==null?"":node.detail);
+            s.attribute(null, ComDef.TAG_NAME, node.getName());
+            s.attribute(null, ComDef.TAG_DETAIL, node.getDetail());
             if (node.isDone()) {
                 s.attribute(null, ComDef.XML_ATTR_DONE, ComDef.XML_BOOL_TRUE);
             }
