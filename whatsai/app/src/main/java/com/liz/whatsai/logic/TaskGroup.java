@@ -13,13 +13,13 @@ public class TaskGroup extends WhatsaiDir {
     private ArrayList<Node> list = null;
     private int task_number = 0;
 
-    TaskGroup() {
+    public TaskGroup() {
         super();
         list = new ArrayList<>();
         task_number = 0;
     }
 
-    TaskGroup(String name) {
+    public TaskGroup(String name) {
         super(name);
         list = new ArrayList<>();
         task_number = 0;
@@ -44,7 +44,7 @@ public class TaskGroup extends WhatsaiDir {
 
     @Override
     public int getType() {
-        return ComDef.NODE_TYPE_DIR;
+        return ComDef.NODE_TYPE_TASKGROUP;
     }
 
     @Override

@@ -53,19 +53,31 @@ public class ComDef {
     // WhatsaiStorage Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Node Type Definitions
+
     public static final int NODE_TYPE_UNKNOWN = -1;
+
     public static final int NODE_TYPE_FILE = 0;
     public static final int NODE_TYPE_DIR = 1;
+
+    public static final int NODE_TYPE_TASK = 2;
+    public static final int NODE_TYPE_TEXT = 4;
+
+    public static final int NODE_TYPE_TASKGROUP = 3;
+
+    // Node Type Definitions
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     public static final int LIST_MENU_ID_ADD = 0;
     public static final int LIST_MENU_ID_UPDATE = 1;
     public static final int LIST_MENU_ID_DEL = 2;
     public static final int LIST_MENU_ID_INFO = 3;
 
-    public static final String LIST_MENU_NAME_ADD = "添加";
-    public static final String LIST_MENU_NAME_UPDATE = "修改";
-    public static final String LIST_MENU_NAME_DEL = "删除";
-    public static final String LIST_MENU_NAME_INFO = "详情";
+    public static final String LIST_MENU_NAME_ADD = "ADD";
+    public static final String LIST_MENU_NAME_UPDATE = "MODIFY";
+    public static final String LIST_MENU_NAME_DEL = "DELETE";
+    public static final String LIST_MENU_NAME_INFO = "DETAIL";
 
     public static final String WHATSAI_ACTION_DAILY_ALARM = "com.liz.reminder.daily";
     public static final String WHATSAI_ACTION_ELAPSED_ALARM = "com.liz.reminder.elapsed";

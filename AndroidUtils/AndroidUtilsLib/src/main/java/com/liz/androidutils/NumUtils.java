@@ -66,8 +66,9 @@ public class NumUtils {
     // Test Functions
 
     public static void main(String[] args) {
-        printBytes(int2Bytes(65536));
-
+        System.out.println("a = 0x" + Integer.toHexString(0x10000001));
+        System.out.println("a = 0x" + Integer.toHexString(0x8001));
+        //printBytes(int2Bytes(65536));
 //        test_formatShow(456);
 //        test_formatShow(1456);
 //        test_formatShow(13456);

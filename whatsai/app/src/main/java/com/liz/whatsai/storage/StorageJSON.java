@@ -92,7 +92,7 @@ public class StorageJSON {
                 for (int i = 0; i < jsonList.size(); i++) {
                     com.alibaba.fastjson.JSONObject jsonObj = (com.alibaba.fastjson.JSONObject) jsonList.get(i);
                     int type = (int) jsonObj.get(ComDef.TAG_TYPE);
-                    Node subNode = (type == ComDef.NODE_TYPE_DIR) ? new WhatsaiDir() : new WhatsaiFile();
+                    Node subNode = Node.createNode(type);
                     jsonObj2Node(jsonObj, subNode);
                     node.add(subNode);
                 }

@@ -60,8 +60,7 @@ public abstract class Node implements Comparable<Node> {
     public void setName(String name) {
         if (TextUtils.isEmpty(name)) {
             this.name = "";
-        }
-        else {
+        } else {
             this.name = name;
         }
     }
@@ -73,8 +72,7 @@ public abstract class Node implements Comparable<Node> {
     public void setDetail(String detail) {
         if (TextUtils.isEmpty(detail)) {
             this.detail = "";
-        }
-        else {
+        } else {
             this.detail = detail;
         }
     }
@@ -135,8 +133,7 @@ public abstract class Node implements Comparable<Node> {
     public String getRemindTime() {
         if (isRemindValid()) {
             return remind_time.timeFormatString();
-        }
-        else {
+        } else {
             return "";
         }
     }
@@ -202,8 +199,7 @@ public abstract class Node implements Comparable<Node> {
                     remind_time.second = ss;
                 }
             }
-        }
-        catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             LogUtils.e("Remind:parseRemind: NumberFormatException.");
             remind_type = ComDef.REMIND_TYPE_INVALID;
             return;
@@ -222,11 +218,26 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public boolean isTask() {
-        return this.getType() == ComDef.NODE_TYPE_FILE;
+        return this.getType() == ComDef.NODE_TYPE_TASK;
     }
 
     public boolean isDir() {
-        return this.getType() == ComDef.NODE_TYPE_DIR;
+        return (this.getType() & 0x1) == ComDef.NODE_TYPE_DIR;
+    }
+
+    public static Node createNode(int type) {
+        switch (type) {
+            case ComDef.NODE_TYPE_TASK:
+                return new Task();
+            case ComDef.NODE_TYPE_TEXT:
+                return new WhatsaiText();
+            case ComDef.NODE_TYPE_DIR:
+                return new WhatsaiDir();
+            case ComDef.NODE_TYPE_TASKGROUP:
+                return new TaskGroup();
+            default:
+                return new WhatsaiFile();
+        }
     }
 
     public List<Node> getList() {
@@ -236,8 +247,7 @@ public abstract class Node implements Comparable<Node> {
     public int getChildNumber() {
         if (list == null) {
             return 0;
-        }
-        else {
+        } else {
             return list.size();
         }
     }
@@ -245,8 +255,7 @@ public abstract class Node implements Comparable<Node> {
     public Node getChild(int i) {
         if (i >= 0 && i < list.size()) {
             return list.get(i);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -267,8 +276,7 @@ public abstract class Node implements Comparable<Node> {
     public Node get(int pos) {
         if (pos >= 0 && pos < list.size()) {
             return list.get(pos);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -276,7 +284,7 @@ public abstract class Node implements Comparable<Node> {
     public String getPath() {
         Node node = this;
         StringBuilder path = new StringBuilder(node.getName());
-        while(node.parent != null) {
+        while (node.parent != null) {
             path.insert(0, node.parent.name + "/");
             node = node.parent;
         }

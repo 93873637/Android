@@ -29,7 +29,7 @@ public class Task extends WhatsaiFile {
 
     @Override
     public int getType() {
-        return ComDef.NODE_TYPE_FILE;
+        return ComDef.NODE_TYPE_TASK;
     }
 
     @Override

@@ -5,6 +5,7 @@ package com.liz.whatsai.logic;
  * Created by liz on 2019/2/15.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class WhatsaiFile extends Node {
 
     public WhatsaiFile() {

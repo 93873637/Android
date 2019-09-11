@@ -165,10 +165,10 @@ public class MainActivity extends AppCompatActivity
         et.setText(node.getName());
         new AlertDialog
                 .Builder(this)
-                .setTitle("修改任务：")
+                .setTitle("Modify File/Path: ")
                 .setIcon(android.R.drawable.sym_def_app_icon)
                 .setView(et)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (!TextUtils.equals(et.getText().toString(), node.getName())) {
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
                             DataLogic.setDirty(true);
                         }
                     }
-                }).setNegativeButton("取消", null).show();
+                }).setNegativeButton("Cancel", null).show();
     }
 
     protected void onDelNode(long id) {
@@ -187,17 +187,17 @@ public class MainActivity extends AppCompatActivity
         tv.setText(node.getName());
         new AlertDialog
                 .Builder(this)
-                .setTitle("删除任务：")
+                .setTitle("Delete File/Path: ")
                 .setIcon(android.R.drawable.sym_def_app_icon)
                 .setView(tv)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //Toast.makeText(getApplicationContext(), et.getText().toString(), Toast.LENGTH_LONG).show();
                         DataLogic.delTask(pos);
                         NodeListAdapter.onDataChanged();
                     }
-                }).setNegativeButton("取消", null).show();
+                }).setNegativeButton("Cancel", null).show();
     }
 
     @Override
