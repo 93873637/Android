@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.liz.whatsai.logic.WhatsaiFile;
 
 import org.json.JSONObject;
 
@@ -63,7 +62,7 @@ public class StorageJSON {
         try {
             jsonStr += buildJsonStr(node);
 
-            if (node.isDir()) {
+            if (node.isDir() && node.getChildNumber() > 0) {
                 String listStr = "[";
                 int listSize = node.getChildNumber();
                 for (int i=0; i<listSize; i++) {
@@ -107,8 +106,11 @@ public class StorageJSON {
         String jsonStr = "";
         jsonStr += "\"" + ComDef.TAG_TYPE + "\": " + node.getType();
         jsonStr += ", " + "\"" + ComDef.TAG_NAME + "\": \"" + node.getName() + "\"";
-        if (!TextUtils.isEmpty(node.getDetail())) {
-            jsonStr += ", " + "\"" + ComDef.TAG_DETAIL + "\": \"" + node.getDetail() + "\"";
+        if (!TextUtils.isEmpty(node.getSummary())) {
+            jsonStr += ", " + "\"" + ComDef.TAG_SUMMARY + "\": \"" + node.getSummary() + "\"";
+        }
+        if (!TextUtils.isEmpty(node.getContent())) {
+            jsonStr += ", " + "\"" + ComDef.TAG_CONTENT + "\": \"" + node.getContent() + "\"";
         }
         if (node.getSyncTime() != 0) {
             jsonStr += ", " + "\"" + ComDef.TAG_SYNC_TIME + "\": " + node.getSyncTime();
@@ -127,9 +129,15 @@ public class StorageJSON {
                 }
             }
             {
-                Object obj = jobj.get(ComDef.TAG_DETAIL);
+                Object obj = jobj.get(ComDef.TAG_SUMMARY);
                 if (obj != null) {
-                    node.setDetail((String) obj);
+                    node.setSummary((String) obj);
+                }
+            }
+            {
+                Object obj = jobj.get(ComDef.TAG_CONTENT);
+                if (obj != null) {
+                    node.setContent((String) obj);
                 }
             }
             {
@@ -453,7 +461,7 @@ public class StorageJSON {
 //                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_NAME);
 //                        newNode.setName(attrValue);
 //                        LogUtils.v("loadFromXML: enter task, name=" + attrValue);
-//                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_DETAIL);
+//                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_SUMMARY);
 //                        newNode.detail = attrValue;
 //                        //LogUtils.v("loadFromXML: enter task, detail=" + attrValue);
 //                        attrValue = pullParser.getAttributeValue(null, ComDef.XML_ATTR_DONE);
@@ -518,7 +526,7 @@ public class StorageJSON {
 //            newLine(s, indent);
 //            s.startTag(null, ComDef.XML_TAG_FILE);
 //            s.attribute(null, ComDef.TAG_NAME, node.getName()==null?"":node.getName());
-//            s.attribute(null, ComDef.TAG_DETAIL, node.detail==null?"":node.detail);
+//            s.attribute(null, ComDef.TAG_SUMMARY, node.detail==null?"":node.detail);
 //            if (node.isDone()) {
 //                s.attribute(null, ComDef.XML_ATTR_DONE, ComDef.XML_BOOL_TRUE);
 //            }

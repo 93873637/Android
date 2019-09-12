@@ -18,7 +18,8 @@ import java.util.List;
 public abstract class Node implements Comparable<Node> {
 
     private String name;
-    private String detail;
+    private String summary;
+    private String content;
     private Node parent;
     private String remind_string;
     private int remind_type;
@@ -38,7 +39,7 @@ public abstract class Node implements Comparable<Node> {
     private void init() {
         parent = null;
         name = "";
-        detail = "";
+        summary = "";
         remind_string = "";
         remind_type = ComDef.REMIND_TYPE_INVALID;
         remind_time = new RemindTime();
@@ -65,15 +66,27 @@ public abstract class Node implements Comparable<Node> {
         }
     }
 
-    public String getDetail() {
-        return detail;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setDetail(String detail) {
-        if (TextUtils.isEmpty(detail)) {
-            this.detail = "";
+    public void setSummary(String summary) {
+        if (TextUtils.isEmpty(summary)) {
+            this.summary = "";
         } else {
-            this.detail = detail;
+            this.summary = summary;
+        }
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        if (TextUtils.isEmpty(content)) {
+            this.content = "";
+        } else {
+            this.content = content;
         }
     }
 

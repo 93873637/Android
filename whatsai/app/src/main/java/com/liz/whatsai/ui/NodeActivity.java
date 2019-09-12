@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.liz.whatsai.R;
+import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
 import com.liz.whatsai.logic.Reminder;
@@ -19,7 +21,7 @@ public class NodeActivity extends Activity implements View.OnClickListener {
 
     private TextView mtvToolbar;
     private EditText mEditName;
-    private EditText mEditDetail;
+    private EditText mEditSummary;
     private EditText mEditRemind;
     private CheckBox mCheckDone;
 
@@ -41,7 +43,7 @@ public class NodeActivity extends Activity implements View.OnClickListener {
             return;
         }
 
-        mtvToolbar = findViewById(R.id.toolbar_title);
+        mtvToolbar = findViewById(R.id.titlebar_title);
         mtvToolbar.setText(DataLogic.getPath() + "/" + mNode.getName());
 
         mEditName = findViewById(R.id.editNodeName);
@@ -49,19 +51,41 @@ public class NodeActivity extends Activity implements View.OnClickListener {
         mEditName.setText(mNode.getName());
         mCheckDone.setChecked(mNode.isDone());
 
+        setCheckedType();
+
         mEditRemind = findViewById(R.id.editRemind);
         mEditRemind.setText(mNode.getRemindString());
 
-        mEditDetail = findViewById(R.id.editDetail);
-        mEditDetail.setText(mNode.getDetail());
+        mEditSummary = findViewById(R.id.editSummary);
+        mEditSummary.setText(mNode.getSummary());
 
-        findViewById(R.id.toolbar_menu).setOnClickListener(this);
+        findViewById(R.id.titlebar_menu).setOnClickListener(this);
+    }
+
+    public void setCheckedType() {
+        switch (mNode.getType()) {
+            case ComDef.NODE_TYPE_DIR:
+                ((RadioButton)findViewById(R.id.rb_directory)).setChecked(true);
+                break;
+            case ComDef.NODE_TYPE_TASKGROUP:
+                ((RadioButton)findViewById(R.id.rb_taskgroup)).setChecked(true);
+                break;
+            case ComDef.NODE_TYPE_TASK:
+                ((RadioButton)findViewById(R.id.rb_task)).setChecked(true);
+                break;
+            case ComDef.NODE_TYPE_TEXT:
+                ((RadioButton)findViewById(R.id.rb_text)).setChecked(true);
+                break;
+            default:
+                ((RadioButton)findViewById(R.id.rb_file)).setChecked(true);
+                break;
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.toolbar_menu:
+            case R.id.titlebar_menu:
                 this.onBackPressed();
                 break;
         }
@@ -71,7 +95,7 @@ public class NodeActivity extends Activity implements View.OnClickListener {
     public void onBackPressed() {
         if (mNode != null) {
             mNode.setName(mEditName.getText().toString());
-            mNode.setDetail(mEditDetail.getText().toString());
+            mNode.setSummary(mEditSummary.getText().toString());
             mNode.setDone(mCheckDone.isChecked());
             mNode.setRemindString(mEditRemind.getText().toString());
             Reminder.checkRemind(mNode);

@@ -88,8 +88,8 @@ class StorageXML {
                         attrValue = pullParser.getAttributeValue(null, ComDef.TAG_NAME);
                         newNode.setName(attrValue);
                         LogUtils.v("loadFromXML: enter task, name=" + attrValue);
-                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_DETAIL);
-                        newNode.setDetail(attrValue);
+                        attrValue = pullParser.getAttributeValue(null, ComDef.TAG_SUMMARY);
+                        newNode.setSummary(attrValue);
                         //LogUtils.v("loadFromXML: enter task, detail=" + attrValue);
                         attrValue = pullParser.getAttributeValue(null, ComDef.XML_ATTR_DONE);
                         newNode.setDone(TextUtils.equals(attrValue, ComDef.XML_BOOL_TRUE));
@@ -153,7 +153,7 @@ class StorageXML {
             newLine(s, indent);
             s.startTag(null, ComDef.XML_TAG_FILE);
             s.attribute(null, ComDef.TAG_NAME, node.getName());
-            s.attribute(null, ComDef.TAG_DETAIL, node.getDetail());
+            s.attribute(null, ComDef.TAG_SUMMARY, node.getSummary());
             if (node.isDone()) {
                 s.attribute(null, ComDef.XML_ATTR_DONE, ComDef.XML_BOOL_TRUE);
             }

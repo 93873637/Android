@@ -3,7 +3,6 @@ package com.liz.whatsai.logic;
 import android.content.Context;
 
 import com.liz.whatsai.app.ThisApp;
-import com.liz.whatsai.storage.StorageJSON;
 import com.liz.whatsai.storage.WhatsaiStorage;
 
 import java.text.SimpleDateFormat;
@@ -62,13 +61,51 @@ public class DataLogic extends WhatsaiStorage {
         }
     }
 
-    public static void addTask(String name) {
+    public static void createNode(String name, int type) {
+        switch (type) {
+            case ComDef.NODE_TYPE_DIR:
+                DataLogic.createDir(name);
+                break;
+            case ComDef.NODE_TYPE_TASK:
+                DataLogic.createTask(name);
+                break;
+            case ComDef.NODE_TYPE_TASKGROUP:
+                DataLogic.createTaskGroup(name);
+                break;
+            case ComDef.NODE_TYPE_TEXT:
+                DataLogic.createText(name);
+                break;
+            default:
+                DataLogic.createFile(name);
+                break;
+        }
+    }
+
+    private static void createFile(String name) {
+        Node node = new WhatsaiFile(name);
+        mActiveNode.add(node);
+        setDirty(true);
+    }
+
+    private static void createDir(String name) {
+        Node node = new WhatsaiDir(name);
+        mActiveNode.add(node);
+        setDirty(true);
+    }
+
+    private static void createText(String name) {
+        Node node = new WhatsaiText(name);
+        mActiveNode.add(node);
+        setDirty(true);
+    }
+
+    private static void createTask(String name) {
         Node node = new Task(name);
         mActiveNode.add(node);
         setDirty(true);
     }
 
-    public static void addTaskGroup(String name) {
+    private static void createTaskGroup(String name) {
         Node node = new TaskGroup(name);
         mActiveNode.add(node);
         setDirty(true);

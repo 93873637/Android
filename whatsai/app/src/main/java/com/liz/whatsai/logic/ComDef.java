@@ -1,6 +1,6 @@
 package com.liz.whatsai.logic;
 
-import android.os.Environment;
+import java.util.ArrayList;
 
 /**
  * Common Definitions
@@ -24,17 +24,25 @@ public class ComDef {
     public static final String TAG_TYPE = "TYPE";
     public static final String TAG_NAME = "NAME";
     public static final String TAG_LIST = "LIST";
-    public static final String TAG_DETAIL = "DETAIL";
+    public static final String TAG_SUMMARY = "SUMMARY";
+    public static final String TAG_CONTENT = "CONTENT";
     public static final String TAG_SYNC_TIME = "SYNC_TIME";
 
     public static final String XML_TAG_DIR = "dir";
     public static final String XML_TAG_FILE = "file";
-
     public static final String XML_ATTR_DONE = "DONE";
-
     public static final String XML_ATTR_REMIND = "remind";
-
     public static final String XML_BOOL_TRUE = "true";
+
+    public static final int WHATSAI_SAVING_DELAY = 3 * 1000;  //unit by milliseconds
+    public static final int WHATSAI_SAVING_TIMER = 10 * 1000;  //unit by milliseconds
+    public static final long CLOUD_SAVE_PERIOD = 24 * 3600 * 1000;  //one day, unit by millisecond
+
+    // WhatsaiStorage Definitions
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // WhatsaiMail Definitions
 
     public static final String MAIL_FROM_ADDRESS = "nehzil@sina.com";
     public static final String MAIL_FROM_ACCOUNT = "nehzil@sina.com";
@@ -45,12 +53,7 @@ public class ComDef {
     public static final String MAIL_ATTACH_FILE_NAME = "whatsai.zip";
     public static final String MAIL_ATTACH_FILE_PATH = WHATSAI_DATA_PATH  + "/" + MAIL_ATTACH_FILE_NAME;
 
-    public static final int WHATSAI_SAVING_DELAY = 3*1000;  //unit by milliseconds
-    public static final int WHATSAI_SAVING_TIMER = 5*1000;  //unit by milliseconds
-
-    public static final long CLOUD_SAVE_PERIOD = 24 * 3600 * 1000;  //one day, unit by millisecond
-
-    // WhatsaiStorage Definitions
+    // WhatsaiMail Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,15 +72,44 @@ public class ComDef {
     // Node Type Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static final int LIST_MENU_ID_ADD = 0;
-    public static final int LIST_MENU_ID_UPDATE = 1;
-    public static final int LIST_MENU_ID_DEL = 2;
-    public static final int LIST_MENU_ID_INFO = 3;
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // List Menu Definitions
 
-    public static final String LIST_MENU_NAME_ADD = "ADD";
-    public static final String LIST_MENU_NAME_UPDATE = "MODIFY";
-    public static final String LIST_MENU_NAME_DEL = "DELETE";
-    public static final String LIST_MENU_NAME_INFO = "DETAIL";
+    private static int ListMenuEnumID = 0;
+
+    public enum ListMenu {
+        OPEN("OPEN"),
+        ADD("ADD"),
+        MODIFY("MODIFY"),
+        DEL("DELETE"),
+        PROP("PROPERTIES");
+
+        public int id;
+        public String name;
+        ListMenu(String name) {
+            this.name = name;
+            this.id = (ListMenuEnumID++);
+        }
+    }
+
+//    public static enum LIST_MENU {
+//        LIST_MENU_ID_OPEN,
+//        LIST_MENU_ID_ADD,
+//
+//    }
+//    public static final int LIST_MENU_ID_OPEN = 0;
+//    public static final int LIST_MENU_ID_ADD = 1;
+//    public static final int LIST_MENU_ID_MODIFY = 2;
+//    public static final int LIST_MENU_ID_DELETE = 3;
+//    public static final int LIST_MENU_ID_PROPERTIES = 4;
+//
+//    public static final String LIST_MENU_NAME_ADD = "ADD";
+//    public static final String LIST_MENU_NAME_MODIFY = "MODIFY";
+//    public static final String LIST_MENU_NAME_DELETE = "DELETE";
+//    public static final String LIST_MENU_NAME_PROPERTIES = "PROPERTIES";
+
+    // List Menu Definitions
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     public static final String WHATSAI_ACTION_DAILY_ALARM = "com.liz.reminder.daily";
     public static final String WHATSAI_ACTION_ELAPSED_ALARM = "com.liz.reminder.elapsed";

@@ -29,7 +29,6 @@ import com.liz.whatsai.app.ThisApp;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
-import com.liz.whatsai.logic.WhatsaiMail;
 import com.liz.whatsai.storage.WhatsaiStorage;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -65,7 +64,8 @@ public class MainActivity extends AppCompatActivity
     private int mListItemLastClickPos;
     private Timer mListItemLastClickTimer;
 
-    private final static int REQUEST_NODE_INFO = 2;
+    private final static int REQUEST_NODE_PROPERTIES = 2;
+    private final static int REQUEST_NODE_TEXT_EDIT = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,10 +98,13 @@ public class MainActivity extends AppCompatActivity
         listView.setOnItemClickListener(this);
         listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                menu.add(0, ComDef.LIST_MENU_ID_ADD, 0, ComDef.LIST_MENU_NAME_ADD);
-                menu.add(0, ComDef.LIST_MENU_ID_UPDATE, 0, ComDef.LIST_MENU_NAME_UPDATE);
-                menu.add(0, ComDef.LIST_MENU_ID_DEL, 0, ComDef.LIST_MENU_NAME_DEL);
-                menu.add(0, ComDef.LIST_MENU_ID_INFO, 0, ComDef.LIST_MENU_NAME_INFO);
+//                menu.add(0, ComDef.LIST_MENU_ID_ADD, 0, ComDef.LIST_MENU_NAME_ADD);
+//                menu.add(0, ComDef.LIST_MENU_ID_MODIFY, 0, ComDef.LIST_MENU_NAME_MODIFY);
+//                menu.add(0, ComDef.LIST_MENU_ID_DELETE, 0, ComDef.LIST_MENU_NAME_DELETE);
+//                menu.add(0, ComDef.LIST_MENU_ID_PROPERTIES, 0, ComDef.LIST_MENU_NAME_PROPERTIES);
+                for (ComDef.ListMenu c : ComDef.ListMenu.values()) {
+                    menu.add(0, c.id, 0, c.name);
+                }
             }
         });
 
@@ -140,21 +143,40 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()) {
-            case ComDef.LIST_MENU_ID_ADD:
-                AddNodeDlg.onAddNode(this);
-                return true;
-            case ComDef.LIST_MENU_ID_UPDATE:
-                onModifyNode(info.id);
-                return true;
-            case ComDef.LIST_MENU_ID_DEL:
-                onDelNode(info.id);
-                return true;
-            case ComDef.LIST_MENU_ID_INFO:
-                onNodeInfo(info.id);
-                return true;
-            default:
-                return super.onContextItemSelected(item);
+//        switch (item.getItemId()) {
+//            case ComDef.ListMenu.OPEN.id:
+//                AddNodeDlg.onAddNode(this);
+//                return true;
+//            case ComDef.LIST_MENU_ID_MODIFY:
+//                onModifyNode(info.id);
+//                return true;
+//            case ComDef.LIST_MENU_ID_DELETE:
+//                onDelNode(info.id);
+//                return true;
+//            case ComDef.LIST_MENU_ID_PROPERTIES:
+//                openNodeProperties(info.id);
+//                return true;
+//            default:
+//                return super.onContextItemSelected(item);
+//        }
+        int itemId = item.getItemId();
+        if (itemId == ComDef.ListMenu.OPEN.id) {
+            openNode(info.id);
+            return true;
+        } else if (itemId == ComDef.ListMenu.ADD.id) {
+            AddNodeDlg.onAddNode(this);
+            return true;
+        } else if (itemId == ComDef.ListMenu.MODIFY.id) {
+            onModifyNode(info.id);
+            return true;
+        } else if (itemId == ComDef.ListMenu.DEL.id) {
+            onDelNode(info.id);
+            return true;
+        } else if (itemId == ComDef.ListMenu.PROP.id) {
+            openNodeProperties(info.id);
+            return true;
+        } else {
+            return super.onContextItemSelected(item);
         }
     }
 
@@ -198,6 +220,33 @@ public class MainActivity extends AppCompatActivity
                         NodeListAdapter.onDataChanged();
                     }
                 }).setNegativeButton("Cancel", null).show();
+    }
+
+    protected void openNode(long id) {
+        final Node node = DataLogic.get((int)id);
+        if (node == null) {
+            LogUtils.e("openNode: invalid node id " + id);
+        }
+        else {
+            if (node.getType() == ComDef.NODE_TYPE_TEXT) {
+                openTextNode(id);
+            }
+            else {
+                openNodeProperties(id);
+            }
+        }
+    }
+
+    protected void openNodeProperties(long id) {
+        Intent intent = new Intent(MainActivity.this, NodeActivity.class);
+        intent.putExtra("NodeId", id);
+        startActivityForResult(intent, REQUEST_NODE_PROPERTIES);
+    }
+
+    protected void openTextNode(long id) {
+        Intent intent = new Intent(MainActivity.this, TextActivity.class);
+        intent.putExtra("NodeId", id);
+        startActivityForResult(intent, REQUEST_NODE_TEXT_EDIT);
     }
 
     @Override
@@ -272,14 +321,8 @@ public class MainActivity extends AppCompatActivity
             updateView();
         }
         else {
-            onNodeInfo(position);
+            openNode(position);
         }
-    }
-
-    protected void onNodeInfo(long id) {
-        Intent intent = new Intent(MainActivity.this, NodeActivity.class);
-        intent.putExtra("NodeId", id);
-        startActivityForResult(intent, REQUEST_NODE_INFO);
     }
 
     @Override

@@ -22,7 +22,7 @@
             android:gravity="start|center_vertical">
 
             <ImageButton
-                android:id="@+id/toolbar_menu"
+                android:id="@+id/titlebar_menu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:paddingTop="8dp"
@@ -32,7 +32,7 @@
                 android:background="@drawable/ic_return" />
 
             <TextView
-                android:id="@+id/toolbar_title"
+                android:id="@+id/titlebar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,11 +93,49 @@
                 android:checked="false"/>
         </LinearLayout>
 
+        <RadioGroup
+            android:id="@+id/rg_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:orientation="vertical" >
+            <RadioButton
+                android:id="@+id/rb_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="File"
+                />
+            <RadioButton
+                android:id="@+id/rb_directory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Directory"
+                />
+            <RadioButton
+                android:id="@+id/rb_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task"
+                />
+            <RadioButton
+                android:id="@+id/rb_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                />
+            <RadioButton
+                android:id="@+id/rb_taskgroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task Group"
+                />
+        </RadioGroup>
+
         <!--remind-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
             android:orientation="horizontal"
             android:gravity="start|center_vertical">
 
@@ -136,28 +174,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:gravity="start|center_vertical">
+            android:layout_weight="1"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:gravity="left">
 
             <TextView
-                android:id="@+id/textDetail"
-                android:layout_width="70dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center|top"
+                android:id="@+id/textSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
                 android:layout_marginStart="6dp"
-                android:layout_marginTop="10dp"
-                android:text="Detail: "
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="4dp"
+                android:text="Summary: "
                 android:textSize="18sp"
                 android:textStyle="bold"
                 />
 
             <EditText
-                android:id="@+id/editDetail"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:id="@+id/editSummary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="top|left"
+                android:gravity="left"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:cursorVisible="true"

@@ -65,9 +65,21 @@ public class LJson {
         char last;
         char current = '\0';
         int indent = 0;
+        boolean in_quotes = false;
+        char pre_char = '\0';
         for (int i = 0; i < srcStr.length(); i++) {
             last = current;
             current = srcStr.charAt(i);
+            if (i > 0) {
+                pre_char = srcStr.charAt(i-1);
+            }
+            if (current == '"' && pre_char != '\\') {
+                in_quotes = !in_quotes;
+            }
+            if (in_quotes) {
+                sb.append(current);
+                continue;
+            }
             switch (current) {
                 case '{':
                 case '[':
@@ -107,22 +119,29 @@ public class LJson {
     // Test Functions
 
     public static void main(String[] args) {
-        String jstr = "    {\n" +
-                "      \"TYPE\":1,\n" +
-                "      \"NAME\":\"what \\\"sai\\\" \",\n" +
-                "      \"LIST\":[\n" +
-                "        {\n" +
-                "          \"TYPE\":0,\n" +
-                "          \"NAME\":\"Task NAME \t 0\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "          \"TYPE\":0,\n" +
-                "          \"NAME\":\"Task NAME \t 1\"\n" +
-                "        }\n" +
-                "      ]\n" +
-                "    }";
-        String compatStr = compactJson(jstr);
-        System.out.println(compatStr);
+        String jstr = "{\"TYPE\": 1, \"N[AM]E\": \"wh[atsa]i\", \"LIST\": [{\"T{YP}E\": 0, \"NAME\": \"Task NAME0\"},{\"TYPE\": 0, \"NAME\": \"Task NAME1\"}]};";
+        String formatStr = formatJson(jstr);
+        System.out.println(formatStr);
+
+//        String s = readJsonFile("D:/Temp/whatsai.dat");
+//        System.out.println(s)
+
+//        String jstr = "    {\n" +
+//                "      \"TYPE\":1,\n" +
+//                "      \"NAME\":\"what \\\"sai\\\" \",\n" +
+//                "      \"LIST\":[\n" +
+//                "        {\n" +
+//                "          \"TYPE\":0,\n" +
+//                "          \"NAME\":\"Task NAME \t 0\"\n" +
+//                "        },\n" +
+//                "        {\n" +
+//                "          \"TYPE\":0,\n" +
+//                "          \"NAME\":\"Task NAME \t 1\"\n" +
+//                "        }\n" +
+//                "      ]\n" +
+//                "    }";
+//        String compatStr = compactJson(jstr);
+//        System.out.println(compatStr);
 
 //        String jstr = "";{TYPE: 1, NAME: "whatsai", LIST: [{TYPE: 0, NAME: "TaskName0"},{TYPE: 0, NAME: "TaskName1"}]}
 //        String s = readJsonFile("D:/Temp/whatsai.dat");

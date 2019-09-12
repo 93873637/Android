@@ -29,13 +29,13 @@
         </activity>
 
         <activity android:name=".ui.NodeActivity" />
+        <activity android:name=".ui.TextActivity" />
+        <activity android:name=".ui.AlarmActivity"/>
 
         <receiver
             android:name=".app.WhatsaiReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
-
-        <activity android:name=".ui.AlarmActivity"></activity>
+            android:exported="true"/>
 
     </application>
 

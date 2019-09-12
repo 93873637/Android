@@ -25,6 +25,9 @@ android {
             outputFileName = "whatsai_${variant.versionName}.apk"
         }
     }
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+    }
 }
 
 dependencies {
