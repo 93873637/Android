@@ -1,7 +1,5 @@
 package com.liz.whatsai.logic;
 
-import java.util.ArrayList;
-
 /**
  * Common Definitions
  * Created by liz on 2018/3/8.
@@ -17,6 +15,8 @@ public class ComDef {
     //public static final String WHATSAI_DATA_PATH = "/storage/0CCD-50F4/0.sd/whatsai";  //for security, external storage can't write for android app!
     public static final String WHATSAI_DATA_PATH = "/sdcard/0.sd/whatsai";
     public static final String WHATSAI_DATA_FILE = WHATSAI_DATA_PATH  + "/" + WHATSAI_DATA_FILE_NAME;
+    public static final String WHATSAI_DATA_FILE_TEMP = WHATSAI_DATA_FILE + ".tmp";
+    public static final String WHATSAI_DATA_FILE_SYNC = WHATSAI_DATA_FILE + ".syn";
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // WhatsaiStorage Definitions
@@ -38,6 +38,9 @@ public class ComDef {
     public static final int WHATSAI_SAVING_TIMER = 10 * 1000;  //unit by milliseconds
     public static final long CLOUD_SAVE_PERIOD = 24 * 3600 * 1000;  //one day, unit by millisecond
 
+    public static final String CLOUD_FILE_NAME = "whatsai.zip";
+    public static final String CLOUD_FILE_PATH = WHATSAI_DATA_PATH  + "/" + CLOUD_FILE_NAME;
+
     // WhatsaiStorage Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,8 +53,6 @@ public class ComDef {
     public static final String MAIL_TO_ADDRESS = "93873637@qq.com";
     public static final String MAIL_CC_ADDRESS = "wx.tom.li@qq.com,13910115737@139.com,tom.li@cloudminds.com";
     public static final String MAIL_SMTP_HOST = "smtp.sina.com.cn";
-    public static final String MAIL_ATTACH_FILE_NAME = "whatsai.zip";
-    public static final String MAIL_ATTACH_FILE_PATH = WHATSAI_DATA_PATH  + "/" + MAIL_ATTACH_FILE_NAME;
 
     // WhatsaiMail Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////

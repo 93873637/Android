@@ -42,8 +42,10 @@ dependencies {
     implementation files('D:/WorkSpace/Android/_bin/AndroidUtils.jar')
     implementation 'com.sun.mail:android-mail:1.5.5'
     implementation 'com.sun.mail:android-activation:1.5.5'
+    implementation 'org.apache.httpcomponents:httpclient:4.2.1'
     implementation files('libs/gson-2.8.0.jar')
     implementation files('libs/fastjson-1.2.9.jar')
+    implementation files('libs/commons-io-1.4.jar')
 }
 
 //Major_Version_Number.Minor_Version_Number.Revision_Number.Build_Date.Build_Time

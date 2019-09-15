@@ -2,10 +2,10 @@ package com.liz.whatsai.storage;
 
 import android.app.Activity;
 
+import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.ZipUtils;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
 import com.liz.whatsai.logic.Task;
 import com.liz.whatsai.logic.WhatsaiDir;
@@ -31,6 +31,14 @@ public class WhatsaiStorage {
     public static void init() {
         mRootNode = new WhatsaiDir();
         mRootNode.setName(ComDef.APP_NAME);
+
+        File path = new File(ComDef.WHATSAI_DATA_PATH);
+        if (!path.exists()) {
+            LogUtils.e("WhatsaiStorage: whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" not exists, create....");
+            if (!path.mkdirs()) {
+                LogUtils.e("WhatsaiStorage: create whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" failed.");
+            }
+        }
 
         /*
         //##@: for test only
@@ -59,80 +67,102 @@ public class WhatsaiStorage {
     private static void startSavingTimer() {
         new Timer().schedule(new TimerTask() {
             public void run () {
-                if (isDirty()) {
-                    local_save();
-                }
-                else {
-                    LogUtils.v("WhatsaiStorage: list data not change for local save.");
-                }
+                local_save_period();
                 cloud_save_period();
             }
         }, ComDef.WHATSAI_SAVING_DELAY, ComDef.WHATSAI_SAVING_TIMER);
     }
 
-    public static void local_save() {
+    private static void local_save_period() {
+        if (isDirty()) {
+            local_save();
+        }
+        else {
+            LogUtils.v("WhatsaiStorage: list data not change for local save.");
+        }
+    }
+
+    private static void cloud_save_period() {
+        if (cloud_save_required()) {
+            cloud_save(null);
+        } else {
+            LogUtils.d("WhatsaiStorage: not need cloud save.");
+        }
+    }
+
+    private static boolean cloud_save_required() {
+        LogUtils.d("WhatsaiStorage: cloud_save_required: sync_time = " +  mRootNode.getSyncTime());
+
+        // check if time up to cloud save period
+        long diff = System.currentTimeMillis() - mRootNode.getSyncTime();
+        if (diff < ComDef.CLOUD_SAVE_PERIOD) {
+            LogUtils.d("WhatsaiStorage: cloud_save_required: current diff " + diff
+                    + " not up to cloud save period " + ComDef.CLOUD_SAVE_PERIOD + ", check failed");
+            return false;
+        }
+
+        // anyway, update local save file
+        saveToFile((WhatsaiDir)mRootNode, ComDef.WHATSAI_DATA_FILE_TEMP);
+
+        // check if data file changed
         try {
-            File path = new File(ComDef.WHATSAI_DATA_PATH);
-            if (!path.exists()) {
-                if (!path.mkdirs()) {
-                    LogUtils.e("WhatsaiStorage: make dir of whatsai path \"" + ComDef.WHATSAI_DATA_PATH + "\" failed.");
-                    return;
-                }
+            if (FileUtils.sameFile(ComDef.WHATSAI_DATA_FILE_SYNC, ComDef.WHATSAI_DATA_FILE_TEMP)) {
+                LogUtils.i("WhatsaiStorage: cloud_save_required: data file not changed, check failed");
+                return false;
             }
-            File f = new File(ComDef.WHATSAI_DATA_FILE);
+        } catch (Exception e) {
+            LogUtils.e("WhatsaiStorage: cloud_save_required: compare same file exception: " + e.toString());
+            // think as not same
+        }
+
+        // finally, cloud save required
+        LogUtils.d("WhatsaiStorage: cloud_save_required: check pass");
+        return true;
+    }
+
+    public static void local_save() {
+        saveToFile((WhatsaiDir)mRootNode, ComDef.WHATSAI_DATA_FILE);
+    }
+
+    private static void saveToFile(WhatsaiDir dir, String fileAbsolute) {
+        try {
+            File f = new File(fileAbsolute);
             if (!f.exists()) {
                 if (!f.createNewFile()) {
-                    LogUtils.e("WhatsaiStorage: create whatsai file \"" + ComDef.WHATSAI_DATA_FILE + "\" failed.");
+                    LogUtils.e("WhatsaiStorage: create whatsai file \"" + fileAbsolute + "\" failed.");
                     return;
                 }
             }
             OutputStream output = new FileOutputStream(f);
             //##@: StorageXML.saveToXML(output, (WhatsaiDir) mRootNode);
-            StorageJSON.saveToJSON(output, (WhatsaiDir) mRootNode);
+            StorageJSON.saveToJSON(output, dir);
             output.flush();
             output.close();
-
-            LogUtils.d("WhatsaiStorage: save to local file \"" + ComDef.WHATSAI_DATA_PATH + "\" succeed.");
+            LogUtils.d("WhatsaiStorage: save to local file \"" + fileAbsolute + "\" succeed.");
             setDirty(false);
         } catch (Exception e) {
-            LogUtils.e("WhatsaiStorage: save to local file \"" + ComDef.WHATSAI_DATA_PATH + "\" exception: " + e.toString());
+            LogUtils.e("WhatsaiStorage: save to local file \"" + fileAbsolute + "\" exception: " + e.toString());
         }
     }
 
     public static void cloud_save(Activity activity) {
-        if (ZipUtils.zip(ComDef.MAIL_ATTACH_FILE_PATH, ComDef.WHATSAI_DATA_FILE)) {
-            WhatsaiMail.start(activity);
-        }
-        else {
-            LogUtils.e("WhatsaiStorage: cloud_save: zip data file failed");
-        }
-    }
+        LogUtils.d("WhatsaiStorage: cloud save: E...");
 
-    private static void cloud_save_period() {
-        long currentTime = System.currentTimeMillis();
+        //update sync time of root node
+        mRootNode.setSyncTime(System.currentTimeMillis());
 
-        //check if time up to cloud save period
-        long diff = currentTime - mRootNode.getSyncTime();
-        if (diff < ComDef.CLOUD_SAVE_PERIOD) {
-            LogUtils.d("WhatsaiStorage: current diff " + diff + " not up to cloud save period " + ComDef.CLOUD_SAVE_PERIOD);
-            return;
-        }
-        else {
-            mRootNode.setSyncTime(currentTime);
-        }
+        //update local save file
+        saveToFile((WhatsaiDir)mRootNode, ComDef.WHATSAI_DATA_FILE_SYNC);
 
-        //TODO: improve it as first compress current data file to a temporary zip file
-        //###@:
-        if (!ZipUtils.zip(ComDef.MAIL_ATTACH_FILE_PATH, ComDef.WHATSAI_DATA_FILE)) {
-            LogUtils.e("WhatsaiStorage: cloud_save_period: zip data file failed");
+        //zip local file to cloud file
+        if (!ZipUtils.zip(ComDef.CLOUD_FILE_PATH, ComDef.WHATSAI_DATA_FILE_SYNC)) {
+            LogUtils.e("WhatsaiStorage: cloud_save: zip cloud file failed");
             return;
         }
 
-        //check if zip file changed
-        //###@:
-
-        //finally, save to cloud by mail
-        WhatsaiMail.start(null);
+        //finally, save file to cloud
+        LogUtils.i("WhatsaiStorage: cloud_save: sync_time = " + mRootNode.getSyncTime());
+        WhatsaiMail.start(activity);
     }
 
     ///* for test

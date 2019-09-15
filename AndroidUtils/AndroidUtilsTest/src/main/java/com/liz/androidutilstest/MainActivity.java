@@ -10,11 +10,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.liz.androidutils.ComUtils;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.MailSender;
+import com.liz.androidutils.SysTools;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeChecker;
@@ -52,22 +54,10 @@ public class MainActivity extends AppCompatActivity {
             );
         }
 
-        //test();
-
         findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //MailSender.test_send_mail_simple();
-                        //MailSender.test_send_mail_multiple();
-                        MailSender.test_send_mail_multiple_cc();
-                        //MailSender.test_send_mail_content_subject();
-                        //MailSender.test_send_mail_content_subject_attach();
-                    }
-                }).start();
-
+                test();
             }
         });
 
@@ -77,12 +67,35 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
+        test_SysTools();
         //test_image();
         //test_SysUtils();
         //test_saveByteBufferToFile();
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_SysTools() {
+        if (SysTools.checkRootExecutable()) {
+            Toast.makeText(this, "ROOTED!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this, "NOT ROOT!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void test_mail() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //MailSender.test_send_mail_simple();
+                //MailSender.test_send_mail_multiple();
+                //MailSender.test_send_mail_multiple_cc();
+                //MailSender.test_send_mail_content_subject();
+                //MailSender.test_send_mail_content_subject_attach();
+            }
+        }).start();
     }
 
     public static void test_saveByteBufferToFile() {

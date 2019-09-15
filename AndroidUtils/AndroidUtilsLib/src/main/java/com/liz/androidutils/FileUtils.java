@@ -7,9 +7,12 @@ import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  * FileUtils:
@@ -43,13 +46,30 @@ public class FileUtils {
     public static void removeFile(String fileName) {
         File f = new File(fileName);
         if (f.exists()) {
-            //System.out.println("image file " + fileName + " already exist, delete it");
             if (!f.delete()) {
                 System.out.println("Delete file " + fileName + " failed.");
             }
         }
     }
 
+    public static void mv(String filePathFrom, String filePathTo) {
+        //delete old file
+        File fileTo = new File(filePathTo);
+        if (fileTo.exists()) {
+            if (!fileTo.delete()) {
+                System.out.println("Delete to file " + filePathTo + " failed.");
+                return;
+            }
+        }
+
+        //rename file
+        File fileFrom = new File(filePathFrom);
+        if (fileFrom.exists()) {
+            if (!fileFrom.renameTo(fileTo)) {
+                System.out.println("Rename file to " + filePathTo + " failed.");
+            }
+        }
+    }
 
     /**
      * Format As:
@@ -100,7 +120,7 @@ public class FileUtils {
     public static long getFileSize(File file) throws Exception {
         long size = 0;
         if (file != null && file.exists()) {
-            FileInputStream fis = null;
+            FileInputStream fis;
             fis = new FileInputStream(file);
             size = fis.available();
         }
@@ -135,5 +155,39 @@ public class FileUtils {
         }
 
         return sizeString;
+    }
+
+    public static boolean sameFile(String filePath1, String filePath2) throws IOException {
+        FileInputStream fis1 = new FileInputStream(filePath1);
+        long size1 = fis1.available();
+        String md51 = DigestUtils.md5Hex(IOUtils.toByteArray(fis1));
+        IOUtils.closeQuietly(fis1);
+
+        FileInputStream fis2 = new FileInputStream(filePath2);
+        long size2 = fis2.available();
+        String md52 = DigestUtils.md5Hex(IOUtils.toByteArray(fis2));
+        IOUtils.closeQuietly(fis2);
+        return (size1 == size2) && md51.equals(md52);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Test Functions
+
+    public static void main(String[] args) throws IOException {
+        // TODO Auto-generated method stub
+        //String path1="D:\\Temp\\whatsai.zip";
+        //String path2="D:\\Temp\\whatsai_tmp.zip";
+        String path1="D:\\Temp\\whatsai\\whatsai.dat";
+        String path2="D:\\Temp\\whatsai_tmp\\whatsai.dat";
+        if (sameFile(path1, path2)) {
+            System.out.println("same file");
+        }
+        else {
+            System.out.println("different file");
+        }
+
+//        String path1="D:\\Temp\\test2.jpg";
+//        String path2="D:\\Temp\\test3.jpg";
+        //mv(path2, path1);
     }
 }

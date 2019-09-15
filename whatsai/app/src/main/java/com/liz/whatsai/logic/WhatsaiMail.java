@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.MailSender;
-import com.liz.whatsai.storage.WhatsaiStorage;
 
 @SuppressWarnings("unused, WeakerAccess")
 public class WhatsaiMail {
@@ -30,7 +29,7 @@ public class WhatsaiMail {
             mMailSender.toAddress = ComDef.MAIL_TO_ADDRESS;
             mMailSender.ccAddress = ComDef.MAIL_CC_ADDRESS;
             mMailSender.smtpHost = ComDef.MAIL_SMTP_HOST;
-            mMailSender.addAttachFile(ComDef.MAIL_ATTACH_FILE_PATH);
+            mMailSender.addAttachFile(ComDef.CLOUD_FILE_PATH);
         }
 
         String msg;
