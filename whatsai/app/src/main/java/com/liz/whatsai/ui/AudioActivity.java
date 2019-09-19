@@ -53,6 +53,6 @@ public class AudioActivity extends Activity implements View.OnClickListener {
 
     protected void onSwitchAudio() {
         WhatsaiAudio.switchAudio();
-        mBtnSwitchAudio.setBackgroundResource(WhatsaiAudio.isOpen() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
+        mBtnSwitchAudio.setBackgroundResource(WhatsaiAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
     }
 }

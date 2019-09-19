@@ -27,6 +27,7 @@ public class DataLogic extends WhatsaiStorage {
     public static void init() {
         WhatsaiStorage.init();
         mActiveNode = getRootNode();
+        WhatsaiAudio.init();
         startAlarmTimer();
     }
 
