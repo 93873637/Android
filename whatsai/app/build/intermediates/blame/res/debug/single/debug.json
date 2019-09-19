@@ -432,6 +432,10 @@
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\5ee17167787417d9b82cdaf7ff1b300e\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
+        "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_audio.xml.flat",
+        "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\layout\\activity_audio.xml"
+    },
+    {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\05ba7c8e9c0c6e1f88a7c282cd47e031\\res\\drawable-xhdpi-v4\\notification_bg_normal.9.png"
     },
@@ -808,6 +812,10 @@
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\5ee17167787417d9b82cdaf7ff1b300e\\res\\drawable-hdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
+        "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_bg_circle_red.xml.flat",
+        "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\drawable-v24\\bg_circle_red.xml"
+    },
+    {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\5ee17167787417d9b82cdaf7ff1b300e\\res\\drawable-mdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
     },
@@ -826,6 +834,10 @@
     {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_scrubber_track_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\cloud\\.gradle\\caches\\transforms-2\\files-2.1\\5ee17167787417d9b82cdaf7ff1b300e\\res\\drawable-hdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_bg_circle_green.xml.flat",
+        "source": "D:\\WorkSpace\\Android\\whatsai\\app\\src\\main\\res\\drawable-v24\\bg_circle_green.xml"
     },
     {
         "merged": "D:\\WorkSpace\\Android\\whatsai\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",

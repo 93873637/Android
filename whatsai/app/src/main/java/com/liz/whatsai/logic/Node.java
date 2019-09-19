@@ -20,11 +20,17 @@ public abstract class Node implements Comparable<Node> {
     private String name;
     private String summary;
     private String content;
-    private Node parent;
+
+    //if set, need password to open
+    private String password;
+
     private String remind_string;
     private int remind_type;
     private RemindTime remind_time;
+
+    private Node parent;
     private List<Node> list;
+
     private long sync_time;  //time for sync to cloud
 
     Node() {
@@ -78,6 +84,10 @@ public abstract class Node implements Comparable<Node> {
         }
     }
 
+    public boolean hasSummary() {
+        return !TextUtils.isEmpty(summary);
+    }
+
     public String getContent() {
         return content;
     }
@@ -88,6 +98,10 @@ public abstract class Node implements Comparable<Node> {
         } else {
             this.content = content;
         }
+    }
+
+    public boolean hasContent() {
+        return !TextUtils.isEmpty(content);
     }
 
     public void setParent(Node node) {
@@ -104,6 +118,27 @@ public abstract class Node implements Comparable<Node> {
 
     public void setSyncTime(long syncTime) {
         sync_time = syncTime;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean hasPassword() {
+        return !TextUtils.isEmpty(password);
+    }
+
+    public boolean samePassword(String password) {
+        if (TextUtils.isEmpty(this.password)) {
+            return TextUtils.isEmpty(password);
+        }
+        else {
+            return TextUtils.equals(this.password, password);
+        }
     }
 
     public void incTaskNumber(int num) {

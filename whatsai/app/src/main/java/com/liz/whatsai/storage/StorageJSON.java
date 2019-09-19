@@ -106,11 +106,14 @@ public class StorageJSON {
         String jsonStr = "";
         jsonStr += "\"" + ComDef.TAG_TYPE + "\": " + node.getType();
         jsonStr += ", " + "\"" + ComDef.TAG_NAME + "\": \"" + node.getName() + "\"";
-        if (!TextUtils.isEmpty(node.getSummary())) {
+        if (node.hasSummary()) {
             jsonStr += ", " + "\"" + ComDef.TAG_SUMMARY + "\": \"" + node.getSummary() + "\"";
         }
-        if (!TextUtils.isEmpty(node.getContent())) {
+        if (node.hasContent()) {
             jsonStr += ", " + "\"" + ComDef.TAG_CONTENT + "\": \"" + node.getContent() + "\"";
+        }
+        if (node.hasPassword()) {
+            jsonStr += ", " + "\"" + ComDef.TAG_PASSWORD + "\": \"" + node.getPassword() + "\"";
         }
         if (node.getSyncTime() != 0) {
             jsonStr += ", " + "\"" + ComDef.TAG_SYNC_TIME + "\": " + node.getSyncTime();
@@ -138,6 +141,12 @@ public class StorageJSON {
                 Object obj = jobj.get(ComDef.TAG_CONTENT);
                 if (obj != null) {
                     node.setContent((String) obj);
+                }
+            }
+            {
+                Object obj = jobj.get(ComDef.TAG_PASSWORD);
+                if (obj != null) {
+                    node.setPassword((String) obj);
                 }
             }
             {

@@ -1025,6 +1025,8 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_circle_green
+drawable bg_circle_red
 drawable bg_edittext
 drawable bg_edittext_focused
 drawable bg_edittext_normal
@@ -1120,9 +1122,11 @@ id blocking
 id bottom
 id btnCancel
 id btnOK
+id btn_switch_audio
 id buttonPanel
 id cancel_action
 id cbDone
+id cbPassword
 id center
 id center_horizontal
 id center_vertical
@@ -1286,6 +1290,7 @@ id text
 id text2
 id textAppInfo
 id textNodeName
+id textNodePassword
 id textRemind
 id textSpacerNoButtons
 id textSpacerNoTitle
@@ -1372,6 +1377,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_alarm
+layout activity_audio
 layout activity_main
 layout activity_node
 layout activity_text
@@ -1459,7 +1465,7 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string action_cloud_backup
-string action_settings
+string action_listening
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior

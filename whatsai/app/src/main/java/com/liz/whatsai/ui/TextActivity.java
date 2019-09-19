@@ -25,6 +25,8 @@ public class TextActivity extends Activity implements View.OnClickListener {
 
     private Node mNode = null;
     private EditText mEditContent;
+    private boolean mBtnSaveActive;
+    private boolean mBtnCloudSaveActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class TextActivity extends Activity implements View.OnClickListener {
     }
 
     private void setToolbarSave(boolean active) {
+        mBtnSaveActive = active;
         ImageButton toolbarSave = findViewById(R.id.toolbar_save);
         ColorMatrix cm = new ColorMatrix();
         cm.setSaturation(active ? 1 : 0); //0; gray, 1: color
@@ -68,6 +71,7 @@ public class TextActivity extends Activity implements View.OnClickListener {
     }
 
     private void setToolbarCloudSave(boolean active) {
+        mBtnCloudSaveActive = active;
         ImageButton toolbarCloudSave = findViewById(R.id.toolbar_cloud_save);
         ColorMatrix cm = new ColorMatrix();
         cm.setSaturation(active ? 1 : 0); //0; gray, 1: color
@@ -106,12 +110,16 @@ public class TextActivity extends Activity implements View.OnClickListener {
                 onBackPressed();
                 break;
             case R.id.toolbar_save:
-                localSave();
-                setToolbarSave(false);
+                if (mBtnSaveActive) {
+                    localSave();
+                    setToolbarSave(false);
+                }
                 break;
             case R.id.toolbar_cloud_save:
-                cloudSave();
-                setToolbarCloudSave(false);
+                if (mBtnCloudSaveActive) {
+                    cloudSave();
+                    setToolbarCloudSave(false);
+                }
                 break;
             case R.id.toolbar_datetime:
                 insertDateTime();
@@ -142,6 +150,6 @@ public class TextActivity extends Activity implements View.OnClickListener {
         int index = mEditContent.getSelectionStart();
         Editable editable = mEditContent.getText();
         String strDateTime = new SimpleDateFormat("[yy/MM/dd HH:mm]").format(new java.util.Date());
-        editable.insert(index, strDateTime);
+        editable.insert(index, strDateTime+"\n");
     }
 }

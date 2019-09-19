@@ -26,6 +26,7 @@ public class ComDef {
     public static final String TAG_LIST = "LIST";
     public static final String TAG_SUMMARY = "SUMMARY";
     public static final String TAG_CONTENT = "CONTENT";
+    public static final String TAG_PASSWORD = "PASSWORD";
     public static final String TAG_SYNC_TIME = "SYNC_TIME";
 
     public static final String XML_TAG_DIR = "dir";

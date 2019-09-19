@@ -2,14 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.liz.whatsai">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".app.ThisApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/icon_bitcomet"
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon_bitcomet"
@@ -23,20 +25,24 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.WhatsaiActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <activity android:name=".ui.NodeActivity" />
+        <activity android:name=".ui.AudioActivity" />
         <activity android:name=".ui.TextActivity" />
         <activity android:name=".ui.AlarmActivity"/>
 
         <receiver
             android:name=".app.WhatsaiReceiver"
-            android:enabled="true"
-            android:exported="true"/>
-
+            android:enabled="true"/>
     </application>
-
 </manifest>

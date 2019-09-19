@@ -90,6 +90,11 @@ public class WhatsaiStorage {
         }
     }
 
+    //
+    //Two Conditions:
+    //1. time up to sync
+    //2. data file changed
+    //
     private static boolean cloud_save_required() {
         LogUtils.d("WhatsaiStorage: cloud_save_required: sync_time = " +  mRootNode.getSyncTime());
 

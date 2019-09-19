@@ -131,6 +131,53 @@
                 />
         </RadioGroup>
 
+        <!--node password-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="start|center_vertical">
+
+            <TextView
+                android:id="@+id/textNodePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center|center_vertical"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="10dp"
+                android:text="Password: "
+                android:textSize="18sp"
+                android:textStyle="bold"
+                />
+            <CheckBox
+                android:id="@+id/cbPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:text=""
+                android:checked="false"/>
+            <!--
+            <EditText
+                android:id="@+id/editNodePassword"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:cursorVisible="true"
+                android:focusable="true"
+                android:textSize="16sp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:singleLine="true"
+                android:background="@drawable/bg_edittext"
+                android:hint="please input password"
+                android:inputType="textPassword"
+                android:textStyle="italic"
+                />-->
+        </LinearLayout>
+
         <!--remind-->
         <LinearLayout
             android:layout_width="match_parent"

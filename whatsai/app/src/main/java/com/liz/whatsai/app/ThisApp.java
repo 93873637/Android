@@ -26,7 +26,6 @@ public class ThisApp extends Application {
         mAppInst = this;
         mAppVersion = SysUtils.getAppVersion(this);
         LogUtils.setTag(ComDef.APP_NAME);
-        DataLogic.init();
 
         /* for test only
         //WhatsaiMail.sendMail("tom.li@cloudminds.com", "ddaasfess111", "fease111");
@@ -37,5 +36,9 @@ public class ThisApp extends Application {
 
     public static Context getAppContext() {
         return mAppInst;
+    }
+
+    public static void init() {
+        DataLogic.init();
     }
 }

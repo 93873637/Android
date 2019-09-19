@@ -1,7 +1,12 @@
 package com.liz.whatsai.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -10,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.liz.whatsai.R;
+import com.liz.whatsai.app.NodeListAdapter;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
@@ -24,6 +30,7 @@ public class NodeActivity extends Activity implements View.OnClickListener {
     private EditText mEditSummary;
     private EditText mEditRemind;
     private CheckBox mCheckDone;
+    private CheckBox mCheckPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,10 @@ public class NodeActivity extends Activity implements View.OnClickListener {
         mEditSummary.setText(mNode.getSummary());
 
         findViewById(R.id.titlebar_menu).setOnClickListener(this);
+
+        mCheckPassword = findViewById(R.id.cbPassword);
+        mCheckPassword.setChecked(mNode.hasPassword());
+        mCheckPassword.setOnClickListener(this);
     }
 
     public void setCheckedType() {
@@ -84,11 +95,70 @@ public class NodeActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.titlebar_menu:
-                this.onBackPressed();
+                onBackPressed();
+                break;
+            case R.id.cbPassword:
+                onCheckPassword();
+                break;
+            default:
                 break;
         }
+    }
+
+    public void onCheckPassword() {
+        final Node node = mNode;
+        final EditText et = new EditText(this);
+        et.setTransformationMethod(new PasswordTransformationMethod());
+        String title = "Password of \"" + node.getName() + "\"";
+        et.setText(node.getPassword());
+        new AlertDialog
+                .Builder(this)
+                .setTitle(title)
+                .setIcon(android.R.drawable.sym_def_app_icon)
+                .setView(et)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String newPassword = et.getText().toString();
+                        if (!node.hasPassword()) {
+                            node.setPassword(newPassword);
+                            mCheckPassword.setChecked(mNode.hasPassword());
+                        }
+                        else {
+                            if (!node.samePassword(newPassword)) {
+                                onChangePassword(newPassword);
+                            }
+                        }
+                    }
+                }).setNegativeButton("Cancel", null).show();
+        mCheckPassword.setChecked(mNode.hasPassword());
+    }
+
+    public void onChangePassword(final String newPassword) {
+        final Node node = mNode;
+        final EditText et = new EditText(this);
+        et.setTransformationMethod(new PasswordTransformationMethod());
+        String title = "Change Password of \"" + node.getName() + "\", Please input old password: ";
+        new AlertDialog
+                .Builder(this)
+                .setTitle(title)
+                .setIcon(android.R.drawable.sym_def_app_icon)
+                .setView(et)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String inputPassword = et.getText().toString();
+                        if (node.samePassword(inputPassword)) {
+                            node.setPassword(newPassword);
+                            mCheckPassword.setChecked(mNode.hasPassword());
+                        }
+                        else {
+                            Toast.makeText(NodeActivity.this, "Old Password Incorrect", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }).setNegativeButton("Cancel", null).show();
     }
 
     @Override

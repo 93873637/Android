@@ -25,11 +25,12 @@ import com.liz.whatsai.logic.DataLogic;
  * Created by admin on 2018/9/28.
  */
 
+@SuppressWarnings("WeakerAccess")
 class AddNodeDlg extends Dialog {
 
     RadioGroup mRgType;
 
-    static void onAddNode(Context context) {
+    public static void onAddNode(Context context) {
         new AddNodeDlg(context).openDlg();
     }
 
