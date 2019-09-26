@@ -85,36 +85,36 @@ public class DataLogic extends WhatsaiStorage {
     private static void createFile(String name) {
         Node node = new WhatsaiFile(name);
         mActiveNode.add(node);
-        setDirty(true);
+        setDirty();
     }
 
     private static void createDir(String name) {
         Node node = new WhatsaiDir(name);
         mActiveNode.add(node);
-        setDirty(true);
+        setDirty();
     }
 
     private static void createText(String name) {
         Node node = new WhatsaiText(name);
         mActiveNode.add(node);
-        setDirty(true);
+        setDirty();
     }
 
     private static void createTask(String name) {
         Node node = new Task(name);
         mActiveNode.add(node);
-        setDirty(true);
+        setDirty();
     }
 
     private static void createTaskGroup(String name) {
         Node node = new TaskGroup(name);
         mActiveNode.add(node);
-        setDirty(true);
+        setDirty();
     }
 
     public static void delTask(int pos) {
         mActiveNode.remove(pos);
-        setDirty(true);
+        setDirty();
     }
 
     public static void setActiveNode(Node node) {

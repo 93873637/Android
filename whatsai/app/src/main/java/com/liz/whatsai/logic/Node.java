@@ -53,6 +53,10 @@ public abstract class Node implements Comparable<Node> {
         sync_time = 0;
     }
 
+    protected void setDirty() {
+        DataLogic.setDirty();
+    }
+
     public String getName() {
         return name;
     }
@@ -65,11 +69,16 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public void setName(String name) {
+        if (TextUtils.equals(name, this.name)) {
+            LogUtils.d("Node: setName: not change");
+            return;
+        }
         if (TextUtils.isEmpty(name)) {
             this.name = "";
         } else {
             this.name = name;
         }
+        setDirty();
     }
 
     public String getSummary() {
@@ -77,11 +86,16 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public void setSummary(String summary) {
+        if (TextUtils.equals(summary, this.summary)) {
+            LogUtils.d("Node: setSummary: not change");
+            return;
+        }
         if (TextUtils.isEmpty(summary)) {
             this.summary = "";
         } else {
             this.summary = summary;
         }
+        setDirty();
     }
 
     public boolean hasSummary() {
@@ -93,11 +107,16 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public void setContent(String content) {
+        if (TextUtils.equals(content, this.content)) {
+            LogUtils.d("Node: setContent: not change");
+            return;
+        }
         if (TextUtils.isEmpty(content)) {
             this.content = "";
         } else {
             this.content = content;
         }
+        setDirty();
     }
 
     public boolean hasContent() {
@@ -105,7 +124,12 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public void setParent(Node node) {
+        if (this.parent == node) {
+            LogUtils.d("Node: setParent: not change");
+            return;
+        }
         this.parent = node;
+        setDirty();
     }
 
     public Node getParent() {
@@ -116,8 +140,13 @@ public abstract class Node implements Comparable<Node> {
         return sync_time;
     }
 
-    public void setSyncTime(long syncTime) {
-        sync_time = syncTime;
+    public void setSyncTime(long sync_time) {
+        if (this.sync_time == sync_time) {
+            LogUtils.d("Node: setSyncTime: not change");
+            return;
+        }
+        this.sync_time = sync_time;
+        setDirty();
     }
 
     public String getPassword() {
@@ -125,7 +154,12 @@ public abstract class Node implements Comparable<Node> {
     }
 
     public void setPassword(String password) {
+        if (TextUtils.equals(this.password, password)) {
+            LogUtils.d("Node: setPassword: not change");
+            return;
+        }
         this.password = password;
+        setDirty();
     }
 
     public boolean hasPassword() {
@@ -162,20 +196,22 @@ public abstract class Node implements Comparable<Node> {
         return remind_string;
     }
 
-    public void setRemindString(String mRemindString) {
-        if (TextUtils.equals(mRemindString, this.remind_string)) {
+    public void setRemindString(String remind_string) {
+        if (TextUtils.equals(remind_string, this.remind_string)) {
             LogUtils.v("remind not change");
             return;
         }
 
-        if (TextUtils.isEmpty(mRemindString)) {
+        if (TextUtils.isEmpty(remind_string)) {
             this.remind_string = "";
             this.remind_time = null;
-            return;
+        }
+        else {
+            this.remind_string = remind_string;
+            parseRemind(remind_string);
         }
 
-        this.remind_string = mRemindString;
-        parseRemind(mRemindString);
+        setDirty();
     }
 
     public String getRemindTime() {

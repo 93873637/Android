@@ -91,7 +91,7 @@
             android:thumb="@drawable/shape_circle_light" />
 
         <com.liz.puretorch.ui.VerticalSeekBar
-            android:id="@+id/seekbarAll"
+            android:id="@+id/seekbarGray"
             style="@style/VerticalVolumeBar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

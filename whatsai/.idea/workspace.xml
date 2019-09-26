@@ -70,12 +70,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7942eab7-9a4b-4a24-91a2-a857d006b65a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/AudioUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MultiAuthDialogFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/multiauth_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureTorch/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureTorch/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureTorch/app/build/generated/source/buildConfig/debug/com/liz/puretorch/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/app/build/generated/source/buildConfig/debug/com/liz/puretorch/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureTorch/app/src/main/java/com/liz/puretorch/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/app/src/main/java/com/liz/puretorch/ui/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureTorch/app/src/main/res/layout/layout_v5_top.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/app/src/main/res/layout/layout_v5_top.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/liz/whatsai/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/liz/whatsai/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJniLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug-mergeJniLibs/merge-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/debug/__content__.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJavaRes/debug/__content__.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJniLibs/debug/__content__.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/mergeJniLibs/debug/__content__.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/TaskGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/TaskGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,10 +124,34 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/TextActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="23" column="25" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MultiAuthDialogFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/multiauth_dialog.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="204" column="49" selection-start-line="204" selection-start-column="49" selection-end-line="204" selection-end-column="49" />
+            <state relative-caret-position="322">
+              <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -105,137 +160,46 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_node.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5589">
-              <caret line="243" column="44" selection-start-line="243" selection-start-column="33" selection-end-line="243" selection-end-column="44" />
+            <state relative-caret-position="4945">
+              <caret line="215" column="42" selection-start-line="215" selection-start-column="42" selection-end-line="215" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/add_node_dlg.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="137" column="9" selection-start-line="137" selection-start-column="9" selection-end-line="137" selection-end-column="9" />
+            <state relative-caret-position="460">
+              <caret line="93" column="48" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1762#1763#0" expanded="true" />
-                <element signature="e#1812#1813#0" expanded="true" />
-                <element signature="e#2465#2466#0" expanded="true" />
-                <element signature="e#2501#2502#0" expanded="true" />
-                <element signature="e#2549#2550#0" expanded="true" />
-                <element signature="e#2589#2590#0" expanded="true" />
-                <element signature="e#2625#2626#0" expanded="true" />
-                <element signature="e#2676#2677#0" expanded="true" />
-                <element signature="e#3226#3227#0" expanded="true" />
-                <element signature="e#3265#3266#0" expanded="true" />
-                <element signature="e#3304#3305#0" expanded="true" />
-                <element signature="e#3340#3341#0" expanded="true" />
-                <element signature="e#4568#4569#0" expanded="true" />
-                <element signature="e#4627#4628#0" expanded="true" />
-                <element signature="e#6322#6323#0" expanded="true" />
-                <element signature="e#6388#6389#0" expanded="true" />
-                <element signature="e#6419#6420#0" expanded="true" />
-                <element signature="e#6461#6462#0" expanded="true" />
-                <element signature="e#6492#6493#0" expanded="true" />
-                <element signature="e#6554#6555#0" expanded="true" />
-                <element signature="e#6584#6585#0" expanded="true" />
-                <element signature="e#6653#6654#0" expanded="true" />
-                <element signature="e#7160#7161#0" expanded="true" />
-                <element signature="e#7187#7188#0" expanded="true" />
+                <element signature="e#4053#4743#0" expanded="true" />
+                <element signature="e#4742#4743#0" expanded="true" />
+                <element signature="e#6567#7227#0" expanded="true" />
+                <element signature="e#7226#7227#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/StorageJSON.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2254">
-              <caret line="120" column="23" selection-start-line="120" selection-start-column="23" selection-end-line="120" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="18" column="75" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="181" column="6" lean-forward="true" selection-start-line="181" selection-start-column="6" selection-end-line="181" selection-end-column="6" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#499#532#0" expanded="true" />
-                <element signature="e#708#709#0" expanded="true" />
-                <element signature="e#757#758#0" expanded="true" />
-                <element signature="e#866#867#0" expanded="true" />
-                <element signature="e#909#910#0" expanded="true" />
-                <element signature="e#991#992#0" expanded="true" />
-                <element signature="e#1037#1038#0" expanded="true" />
-                <element signature="e#3415#4466#0" expanded="true" />
-                <element signature="e#4465#4466#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/java/util/concurrent/ThreadPoolExecutor.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="10" column="82" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="87" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="414">
-              <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+              <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3406#3407#0" expanded="true" />
-                <element signature="e#3440#3441#0" expanded="true" />
-                <element signature="e#3479#3480#0" expanded="true" />
-                <element signature="e#3522#3523#0" expanded="true" />
-                <element signature="e#3568#3569#0" expanded="true" />
-                <element signature="e#3612#3613#0" expanded="true" />
-                <element signature="e#3650#3651#0" expanded="true" />
-                <element signature="e#3694#3695#0" expanded="true" />
-                <element signature="e#3738#3739#0" expanded="true" />
-                <element signature="e#3794#3795#0" expanded="true" />
-                <element signature="e#3834#3835#0" expanded="true" />
-                <element signature="e#3887#3888#0" expanded="true" />
+                <element signature="e#816#834#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="55" column="70" selection-start-line="55" selection-start-column="59" selection-end-line="55" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiDir.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -251,19 +215,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Log.d(TAG,</find>
-      <find>toolbar_cloud_save</find>
-      <find>node2JsonStr</find>
-      <find>cloud_save</find>
-      <find>WhatsaiMail.start</find>
-      <find>WHATSAI_DATA_PATH</find>
-      <find>local_save</find>
-      <find>WhatsaiReceiver</find>
-      <find>Cloud</find>
-      <find>Tools</find>
-      <find>action_settings</find>
-      <find>startActivity</find>
-      <find>TextA</find>
       <find>ImageView</find>
       <find> </find>
       <find>sync_time</find>
@@ -273,20 +224,35 @@
       <find>Add</find>
       <find>AddNodeDlg</find>
       <find>Modify</find>
-      <find>TextActivity</find>
-      <find>openTextNode</find>
       <find>openNode</find>
       <find>TAG_PASSWORD</find>
       <find>is_open</find>
       <find>mAudioFormat</find>
       <find>mChannelConfig</find>
       <find>mTmpFileAbs</find>
+      <find>mRecorderBufferSize</find>
+      <find>openTextNode</find>
+      <find>setPassword</find>
+      <find>Cloud</find>
+      <find>action_cloud_save</find>
+      <find>WHATSAI_SAVING_TIMER</find>
+      <find>setDirty(true);</find>
+      <find>reverseDone</find>
+      <find>DataLogic.setDirty</find>
+      <find>setDirty</find>
+      <find>TextActivity</find>
+      <find>EditText</find>
+      <find>Button</find>
+      <find>interface</find>
+      <find>MainActivity</find>
     </findStrings>
     <replaceStrings>
       <replace>WHATSAI_</replace>
       <replace>mEditSummary</replace>
       <replace>LogUtils.d(</replace>
       <replace>PasswordDlg</replace>
+      <replace>setDirty();</replace>
+      <replace>WhatsaiActivity</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -295,8 +261,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/WhatsaiReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/NodeListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AlarmActivity.java" />
@@ -311,23 +275,18 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Reminder.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/StorageXML.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiFile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Task.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiText.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/liz/whatsai/ExampleUnitTest.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/whatsai/ExampleInstrumentedTest.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/liz/ExampleUnitTest.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/com/liz/WhatsaiUnitTest.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/TaskGroup.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/liz/ExampleInstrumentedTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/add_node_dlg.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiMail.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/ThisApp.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_text.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/bg_special_disease_circle.xml" />
@@ -340,20 +299,27 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_node.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/PasswordDlg.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AddNodeDlg.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Task.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/TaskGroup.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/FingerprintDialogFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MultiAuthDialogFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="1932" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -363,25 +329,54 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="ProjectPane">
+      <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
-              <item name="whatsai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="whatsai" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
             </path>
             <path>
-              <item name="whatsai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="whatsai" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
-              <item name="whatsai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="whatsai" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="whatsai" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="whatsai" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="whatsai" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -392,9 +387,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="192.168.1.4:2727" />
+    <property name="device.picker.selection" value="10.11.97.154:2727" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../CloudMinds/proj/IntelContainer/src/CamTestDemo" />
+    <property name="last_opened_file_path" value="D:/Temp/audioWaveCanvas-master/audioWaveCanvas-master" />
     <property name="project.structure.last.edited" value="Suggestions" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.4620462" />
@@ -409,9 +404,9 @@
       <recent name="com.liz.whatsai" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WorkSpace\Android\whatsai\app\src\main\res\layout" />
       <recent name="D:\WorkSpace\Android\whatsai\app\src\main\res\drawable-v24" />
       <recent name="D:\WorkSpace\Android\whatsai\app\src\main\res\drawable" />
-      <recent name="D:\WorkSpace\Android\whatsai\app\src\main\res\layout" />
       <recent name="D:\WorkSpace\Android\whatsai\app\src\test\java" />
       <recent name="D:\WorkSpace\Android\whatsai\app\src\main\java\com\liz\whatsai" />
     </key>
@@ -721,19 +716,19 @@
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
       <window_info id="Designer" order="5" />
-      <window_info content_ui="combo" id="Project" order="6" sideWeight="0.4988864" weight="0.15405117" />
+      <window_info content_ui="combo" id="Project" order="6" sideWeight="0.4988864" visible="true" weight="0.15351813" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.36859688" />
       <window_info anchor="bottom" id="TODO" order="1" weight="0.32962137" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.34855235" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.29064587" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.32962137" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32962137" />
-      <window_info anchor="bottom" id="Build" order="6" weight="0.23051225" />
+      <window_info active="true" anchor="bottom" id="Build" order="6" visible="true" weight="0.2271715" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.32962137" />
-      <window_info anchor="bottom" x="-2" y="687" width="1908" height="292" id="Logcat" order="9" type="FLOATING" weight="0.30289534" />
+      <window_info anchor="bottom" x="0" y="0" width="1920" height="1040" id="Logcat" order="9" type="FLOATING" weight="0.30289534" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
@@ -748,17 +743,17 @@
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
       <window_info id="Designer" order="5" />
-      <window_info content_ui="combo" id="Project" order="6" sideWeight="0.4988864" visible="true" weight="0.15405117" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" sideWeight="0.4988864" visible="true" weight="0.15351813" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.36859688" />
       <window_info anchor="bottom" id="TODO" order="1" weight="0.32962137" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.34855235" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.29064587" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.32962137" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.32962137" />
-      <window_info active="true" anchor="bottom" id="Build" order="6" visible="true" weight="0.23051225" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" />
+      <window_info anchor="bottom" id="Build" order="6" visible="true" weight="0.2271715" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.32962137" />
       <window_info anchor="bottom" x="-2" y="687" width="1908" height="292" id="Logcat" order="9" type="FLOATING" weight="0.30289534" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
@@ -816,104 +811,20 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java</url>
-          <line>123</line>
+          <line>120</line>
           <properties />
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java</url>
-          <line>151</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java</url>
+          <line>182</line>
           <properties />
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java</url>
-          <line>127</line>
-          <properties />
-          <option name="timeStamp" value="39" />
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_edittext_normal.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/list_selector.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/NodeListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#895#896#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/add_node_dlg.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="989">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../_bin/AndroidUtils.jar!/com/liz/androidutils/MailSender.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="60" column="19" selection-start-line="60" selection-start-column="19" selection-end-line="60" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1127">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/android/content/pm/PackageManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="193" column="28" selection-start-line="193" selection-start-column="28" selection-end-line="193" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/WhatsaiReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.0.1/ae10d2e1965b944830c2c2aaf154765ceb32e0bc/core-1.0.1-sources.jar!/androidx/core/app/ActivityCompat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10258">
-          <caret line="488" column="23" selection-start-line="488" selection-start-column="23" selection-end-line="488" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/ThisApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-          <folding>
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1204#1205#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiMail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="667">
@@ -924,25 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="40" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="40" />
-          <folding>
-            <element signature="e#273#299#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="526">
@@ -950,24 +842,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_text.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="31" column="59" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
-          <folding>
-            <element signature="e#3556#3574#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
@@ -1048,37 +922,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/PasswordDlg.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2714">
-          <caret line="141" selection-start-line="141" selection-end-line="141" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/TextActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3059">
-          <caret line="152" column="26" selection-start-line="139" selection-end-line="161" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AddNodeDlg.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -1086,14 +929,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_node.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5589">
-          <caret line="243" column="44" selection-start-line="243" selection-start-column="33" selection-end-line="243" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1107,80 +942,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java">
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/java/io/File.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="204" column="49" selection-start-line="204" selection-start-column="49" selection-end-line="204" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="137" column="9" selection-start-line="137" selection-start-column="9" selection-end-line="137" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1762#1763#0" expanded="true" />
-            <element signature="e#1812#1813#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
-            <element signature="e#2501#2502#0" expanded="true" />
-            <element signature="e#2549#2550#0" expanded="true" />
-            <element signature="e#2589#2590#0" expanded="true" />
-            <element signature="e#2625#2626#0" expanded="true" />
-            <element signature="e#2676#2677#0" expanded="true" />
-            <element signature="e#3226#3227#0" expanded="true" />
-            <element signature="e#3265#3266#0" expanded="true" />
-            <element signature="e#3304#3305#0" expanded="true" />
-            <element signature="e#3340#3341#0" expanded="true" />
-            <element signature="e#4568#4569#0" expanded="true" />
-            <element signature="e#4627#4628#0" expanded="true" />
-            <element signature="e#6322#6323#0" expanded="true" />
-            <element signature="e#6388#6389#0" expanded="true" />
-            <element signature="e#6419#6420#0" expanded="true" />
-            <element signature="e#6461#6462#0" expanded="true" />
-            <element signature="e#6492#6493#0" expanded="true" />
-            <element signature="e#6554#6555#0" expanded="true" />
-            <element signature="e#6584#6585#0" expanded="true" />
-            <element signature="e#6653#6654#0" expanded="true" />
-            <element signature="e#7160#7161#0" expanded="true" />
-            <element signature="e#7187#7188#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiDir.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3406#3407#0" expanded="true" />
-            <element signature="e#3440#3441#0" expanded="true" />
-            <element signature="e#3479#3480#0" expanded="true" />
-            <element signature="e#3522#3523#0" expanded="true" />
-            <element signature="e#3568#3569#0" expanded="true" />
-            <element signature="e#3612#3613#0" expanded="true" />
-            <element signature="e#3650#3651#0" expanded="true" />
-            <element signature="e#3694#3695#0" expanded="true" />
-            <element signature="e#3738#3739#0" expanded="true" />
-            <element signature="e#3794#3795#0" expanded="true" />
-            <element signature="e#3834#3835#0" expanded="true" />
-            <element signature="e#3887#3888#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="55" column="70" selection-start-line="55" selection-start-column="59" selection-end-line="55" selection-end-column="70" />
+        <state relative-caret-position="1886">
+          <caret line="128" column="19" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1191,29 +956,234 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="851">
+          <caret line="55" column="70" selection-start-line="55" selection-start-column="59" selection-end-line="55" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main_menu.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#452#479#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="18" column="75" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
+        <state relative-caret-position="322">
+          <caret line="38" column="48" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2944">
+          <caret line="155" column="16" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1730#1731#0" expanded="true" />
+            <element signature="e#1760#1761#0" expanded="true" />
+            <element signature="e#2144#2145#0" expanded="true" />
+            <element signature="e#2194#2195#0" expanded="true" />
+            <element signature="e#2228#2229#0" expanded="true" />
+            <element signature="e#2258#2259#0" expanded="true" />
+            <element signature="e#2642#2643#0" expanded="true" />
+            <element signature="e#2692#2693#0" expanded="true" />
+            <element signature="e#2937#2938#0" expanded="true" />
+            <element signature="e#2966#2967#0" expanded="true" />
+            <element signature="e#2999#3000#0" expanded="true" />
+            <element signature="e#3031#3032#0" expanded="true" />
+            <element signature="e#3305#3306#0" expanded="true" />
+            <element signature="e#3341#3342#0" expanded="true" />
+            <element signature="e#3629#3630#0" expanded="true" />
+            <element signature="e#3680#3681#0" expanded="true" />
+            <element signature="e#4230#4231#0" expanded="true" />
+            <element signature="e#4269#4270#0" expanded="true" />
+            <element signature="e#4308#4309#0" expanded="true" />
+            <element signature="e#4344#4345#0" expanded="true" />
+            <element signature="e#5605#5606#0" expanded="true" />
+            <element signature="e#5664#5665#0" expanded="true" />
+            <element signature="e#7359#7360#0" expanded="true" />
+            <element signature="e#7425#7426#0" expanded="true" />
+            <element signature="e#7456#7457#0" expanded="true" />
+            <element signature="e#7498#7499#0" expanded="true" />
+            <element signature="e#7529#7530#0" expanded="true" />
+            <element signature="e#7591#7592#0" expanded="true" />
+            <element signature="e#7621#7622#0" expanded="true" />
+            <element signature="e#7690#7691#0" expanded="true" />
+            <element signature="e#8197#8198#0" expanded="true" />
+            <element signature="e#8224#8225#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/TaskGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="181" column="6" lean-forward="true" selection-start-line="181" selection-start-column="6" selection-end-line="181" selection-end-column="6" />
+        <state relative-caret-position="1150">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#499#532#0" expanded="true" />
-            <element signature="e#708#709#0" expanded="true" />
-            <element signature="e#757#758#0" expanded="true" />
-            <element signature="e#866#867#0" expanded="true" />
-            <element signature="e#909#910#0" expanded="true" />
-            <element signature="e#991#992#0" expanded="true" />
-            <element signature="e#1037#1038#0" expanded="true" />
-            <element signature="e#3415#4466#0" expanded="true" />
-            <element signature="e#4465#4466#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3427">
+          <caret line="174" column="5" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1702">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiDir.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" selection-start-line="8" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_text.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1219">
+          <caret line="53" column="19" selection-start-line="14" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/FingerprintDialogFragment.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_node.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4945">
+          <caret line="215" column="42" selection-start-line="215" selection-start-column="42" selection-end-line="215" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/add_node_dlg.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="93" column="48" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/android/content/DialogInterface.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fingerprint_dialog.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/TextActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/multiauth_dialog.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MultiAuthDialogFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+          <folding>
+            <element signature="e#816#834#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding>
+            <element signature="e#4053#4743#0" expanded="true" />
+            <element signature="e#4742#4743#0" expanded="true" />
+            <element signature="e#6567#7227#0" expanded="true" />
+            <element signature="e#7226#7227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
         </state>
       </provider>
     </entry>

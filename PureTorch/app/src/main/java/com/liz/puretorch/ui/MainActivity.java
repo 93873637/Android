@@ -1,11 +1,9 @@
 package com.liz.puretorch.ui;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GestureDetectorCompat;
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SeekBar mSeekbarRed;
     private VerticalSeekBar mSeekbarGreen;
     private VerticalSeekBar mSeekbarBlue;
-    private VerticalSeekBar mSeekbarAll;
+    private VerticalSeekBar mSeekbarGray;
 
     private GestureDetectorCompat mDetector;
     TorchSwitchButton mBtnSwitch;
@@ -80,30 +78,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLayoutMain = findViewById(R.id.layoutMain);
         mTorchInfo = findViewById(R.id.torchInfo);
 
+        //the seek bar to adjust brightness
         mSeekbarLight = (SeekBar) findViewById(R.id.seekbarLight);
         mSeekbarLight.setMax(ComDef.SEEKBAR_MAX);
         mSeekbarLight.setProgress(DataLogic.lux); //TorchUtils.getSystemBrightness(this));
         mSeekbarLight.setOnSeekBarChangeListener(new OnLightSeekBakChangeListener());
 
-        mSeekbarRed = (SeekBar) findViewById(R.id.seekbarRed);
+        //the seek bar to adjust colors
+        mSeekbarRed = findViewById(R.id.seekbarRed);
         mSeekbarRed.setMax(ComDef.SEEKBAR_MAX);
         mSeekbarRed.setProgress(red);
         mSeekbarRed.setOnSeekBarChangeListener(new OnColorSeekBakChangeListener());
 
-        mSeekbarGreen = (VerticalSeekBar) findViewById(R.id.seekbarGreen);
+        mSeekbarGreen = findViewById(R.id.seekbarGreen);
         mSeekbarGreen.setMax(ComDef.SEEKBAR_MAX);
         mSeekbarGreen.setProgress(green);
         mSeekbarGreen.setOnSeekBarChangeListener(new OnColorSeekBakChangeListener());
 
-        mSeekbarBlue = (VerticalSeekBar) findViewById(R.id.seekbarBlue);
+        mSeekbarBlue = findViewById(R.id.seekbarBlue);
         mSeekbarBlue.setMax(ComDef.SEEKBAR_MAX);
         mSeekbarBlue.setProgress(blue);
         mSeekbarBlue.setOnSeekBarChangeListener(new OnColorSeekBakChangeListener());
 
-        mSeekbarAll = (VerticalSeekBar) findViewById(R.id.seekbarAll);
-        mSeekbarAll.setMax(ComDef.SEEKBAR_MAX);
-        mSeekbarAll.setProgress(ComDef.SEEKBAR_MAX);
-        mSeekbarAll.setOnSeekBarChangeListener(new OnAllSeekBakChangeListener());
+        //the seek bar to adjust grayness
+        mSeekbarGray = findViewById(R.id.seekbarGray);
+        mSeekbarGray.setMax(ComDef.SEEKBAR_MAX);
+        mSeekbarGray.setProgress(ComDef.SEEKBAR_MAX);
+        mSeekbarGray.setOnSeekBarChangeListener(new OnGraySeekBakChangeListener());
 
         mBtnSwitch = findViewById(R.id.btnSwitch);
         mBtnSwitch.setOnClickListener(this);
@@ -201,14 +202,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updateTorchInfo();
     }
 
+    public void updateColorBars(){
+        mSeekbarRed.setProgress(red);  //######@@@@@:
+    }
+
     public void updateAppBrightness() {
         TorchUtils.changeAppBrightness(MainActivity.this, DataLogic.lux);
     }
 
     public void updateBackgroundColor() {
-        //int red = mSeekbarRed.getProgress();
-        //int green = mSeekbarGreen.getProgress();
-        //int blue = mSeekbarBlue.getProgress();
         mLayoutMain.setBackgroundColor(Color.rgb(red, green, blue));
         LogUtils.d("updateBackgroundColor: red=" + red + ", green=" + green + ", blue=" + blue);
     }
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 //    public void updateSeekBarAll() {
-//        int all = mSeekbarAll.getProgress();
+//        int all = mSeekbarGray.getProgress();
 //        TorchUtils.changeAppBrightness(MainActivity.this, all);
 //        mLayoutMain.setBackgroundColor(Color.rgb(all, all, all));
 //        LogUtils.d("updateSeekBarAll: all=" + all);
@@ -289,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    class OnAllSeekBakChangeListener implements SeekBar.OnSeekBarChangeListener {
+    class OnGraySeekBakChangeListener implements SeekBar.OnSeekBarChangeListener {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             DataLogic.red = progress;
@@ -297,6 +299,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DataLogic.blue = progress;
             DataLogic.lux = progress;
             MainActivity.this.updateUI();
+            MainActivity.this.updateColorBars();
         }
 
         @Override

@@ -26,7 +26,7 @@ import java.util.TimerTask;
 public class WhatsaiStorage {
 
     private static Node mRootNode = null;
-    private static boolean mListDirty = false;
+    private static boolean mDirty = false;
 
     public static void init() {
         mRootNode = new WhatsaiDir();
@@ -56,12 +56,16 @@ public class WhatsaiStorage {
         return mRootNode;
     }
 
-    public static void setDirty(boolean dirty) {
-        mListDirty = dirty;
+    public static void setDirty() {
+        mDirty = true;
+    }
+
+    public static void clearDirty() {
+        mDirty = false;
     }
 
     private static boolean isDirty() {
-        return mListDirty;
+        return mDirty;
     }
 
     private static void startSavingTimer() {
@@ -144,7 +148,7 @@ public class WhatsaiStorage {
             output.flush();
             output.close();
             LogUtils.d("WhatsaiStorage: save to local file \"" + fileAbsolute + "\" succeed.");
-            setDirty(false);
+            clearDirty();
         } catch (Exception e) {
             LogUtils.e("WhatsaiStorage: save to local file \"" + fileAbsolute + "\" exception: " + e.toString());
         }

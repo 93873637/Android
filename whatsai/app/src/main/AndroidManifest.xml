@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 
     <application
         android:name=".app.ThisApp"
@@ -38,7 +39,7 @@
 
         <activity android:name=".ui.NodeActivity" />
         <activity android:name=".ui.AudioActivity" />
-        <activity android:name=".ui.TextActivity" />
+        <activity android:name=".ui.TextActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.AlarmActivity"/>
 
         <receiver

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="8dp"
+        android:text="Please Input Your Password:"
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:cursorVisible="true"
+        android:focusable="true"
+        android:textSize="18sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:hint="input your password here"
+        android:textStyle="italic"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/Cancel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textColor="#5d7883"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/OK"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:gravity="center"
+            android:text="OK"
+            android:textColor="#5d7883"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!-- BLENDED SEPARATOR -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="#ccc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="8dp"
+        android:text="*Fingerprint Unlock Supported*"
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/error_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="10dp"
+        android:maxLines="1"
+        android:textColor="#f45"
+        android:textSize="16sp" />
+</LinearLayout>

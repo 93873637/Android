@@ -9,6 +9,7 @@ import java.util.List;
  * Created by admin on 2018/9/17.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class TaskGroup extends WhatsaiDir {
     private ArrayList<Node> list = null;
     private int task_number = 0;
@@ -78,6 +79,8 @@ public class TaskGroup extends WhatsaiDir {
         while ((iter = iter.getParent()) != null) {
                 iter.incTaskNumber(tn);
         }
+
+        setDirty();
     }
 
     public void remove(int pos) {
@@ -91,6 +94,8 @@ public class TaskGroup extends WhatsaiDir {
         while ((iter = iter.getParent()) != null) {
             iter.decTaskNumber(tn);
         }
+
+        setDirty();
     }
 
     public Node get(int pos) {

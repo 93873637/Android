@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.CheckBox;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.liz.whatsai.R;
-import com.liz.whatsai.app.NodeListAdapter;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;

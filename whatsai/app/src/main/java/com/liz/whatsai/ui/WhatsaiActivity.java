@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.method.PasswordTransformationMethod;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -152,7 +150,6 @@ public class WhatsaiActivity extends AppCompatActivity
                         if (!TextUtils.equals(et.getText().toString(), node.getName())) {
                             node.setName(et.getText().toString());
                             NodeListAdapter.onDataChanged();
-                            DataLogic.setDirty(true);
                         }
                     }
                 }).setNegativeButton("Cancel", null).show();
@@ -188,28 +185,56 @@ public class WhatsaiActivity extends AppCompatActivity
                 openNode(id);
             }
             else {
-                //need password
-                final EditText et = new EditText(this);
-                et.setTransformationMethod(new PasswordTransformationMethod());
-                String title = "Please Input Password of \"" + node.getName() + "\": ";
-                new AlertDialog
-                        .Builder(this)
-                        .setTitle(title)
-                        .setIcon(android.R.drawable.sym_def_app_icon)
-                        .setView(et)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                String inputPassword = et.getText().toString();
-                                if (node.samePassword(inputPassword)) {
-                                    openNode(id);
-                                }
-                                else {
-                                    Toast.makeText(WhatsaiActivity.this, "Password Incorrect", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }).setNegativeButton("Cancel", null).show();
+                //check password only
+//                final EditText et = new EditText(this);
+//                et.setTransformationMethod(new PasswordTransformationMethod());
+//                String title = "Please Input Password of \"" + node.getName() + "\": ";
+//                new AlertDialog.Builder(this)
+//                        .setTitle(title)
+//                        .setIcon(android.R.drawable.sym_def_app_icon)
+//                        .setView(et)
+//                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                String inputPassword = et.getText().toString();
+//                                if (node.samePassword(inputPassword)) {
+//                                    openNode(id);
+//                                }
+//                                else {
+//                                    Toast.makeText(WhatsaiActivity.this, "Password Incorrect", Toast.LENGTH_LONG).show();
+//                                }
+//                            }
+//                        }).setNegativeButton("Cancel", null).show();
 
+                //check either password or fingerprint
+                new MultiAuthDialogFragment().openDlg(WhatsaiActivity.this, new MultiAuthDialogFragment.MultiAuthCallback() {
+                    @Override
+                    public boolean onCheckPassword(String passwordInput) {
+                        //Toast.makeText(WhatsaiActivity.this, "onCheckPassword", Toast.LENGTH_SHORT).show();
+                        return node.samePassword(passwordInput);
+                    }
+
+                    @Override
+                    public void onAuthenticationSucceeded() {
+                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationSucceeded", Toast.LENGTH_SHORT).show();
+                        openNode(id);
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed() {
+                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationFailed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthenticationCancel() {
+                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationCancel", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthenticationError() {
+                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationError", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
     }
@@ -297,7 +322,6 @@ public class WhatsaiActivity extends AppCompatActivity
             else {
                 arg1.setBackgroundColor(Color.WHITE);
             }
-            DataLogic.setDirty(true);
         }
     }
 

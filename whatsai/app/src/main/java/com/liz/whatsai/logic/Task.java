@@ -1,5 +1,9 @@
 package com.liz.whatsai.logic;
 
+import android.util.Log;
+
+import com.liz.androidutils.LogUtils;
+
 /**
  * Task.java
  * Created by liz on 2018/9/17.
@@ -19,7 +23,7 @@ public class Task extends WhatsaiFile {
     }
 
     public int getTaskNumber() {
-        return 1;  //only itself
+        return 1;  //task number only one of itself
     }
 
     @Override
@@ -34,11 +38,16 @@ public class Task extends WhatsaiFile {
 
     @Override
     public void setDone(boolean done) {
-        this.done = done;
+        if (this.done == done) {
+            LogUtils.d("Task: setDone: not change");
+            return;
+        }
+        setDirty();
     }
 
     @Override
     public void reverseDone() {
         this.done = !this.done;
+        setDirty();
     }
 }
