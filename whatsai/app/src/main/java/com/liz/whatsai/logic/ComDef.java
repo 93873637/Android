@@ -14,6 +14,7 @@ public class ComDef {
     private static final String WHATSAI_DATA_FILE_NAME = "whatsai.dat";
     //public static final String WHATSAI_DATA_PATH = "/storage/0CCD-50F4/0.sd/whatsai";  //for security, external storage can't write for android app!
     public static final String WHATSAI_DATA_PATH = "/sdcard/0.sd/whatsai";
+    public static final String WHATSAI_AUDIO_DATA_PATH = WHATSAI_DATA_PATH + "/audio";
     public static final String WHATSAI_DATA_FILE = WHATSAI_DATA_PATH  + "/" + WHATSAI_DATA_FILE_NAME;
     public static final String WHATSAI_DATA_FILE_TEMP = WHATSAI_DATA_FILE + ".tmp";
     public static final String WHATSAI_DATA_FILE_SYNC = WHATSAI_DATA_FILE + ".syn";
@@ -77,9 +78,8 @@ public class ComDef {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // List Menu Definitions
 
-    private static int ListMenuEnumID = 0;
-
-    public enum ListMenu {
+    private static int WhatsaiListMenuEnumID = 0;
+    public enum WhatsaiListMenu {
         OPEN("OPEN"),
         ADD("ADD"),
         MODIFY("MODIFY"),
@@ -88,9 +88,23 @@ public class ComDef {
 
         public int id;
         public String name;
-        ListMenu(String name) {
+        WhatsaiListMenu(String name) {
             this.name = name;
-            this.id = (ListMenuEnumID++);
+            this.id = (WhatsaiListMenuEnumID++);
+        }
+    }
+
+    private static int AudioListMenuEnumID = 0;
+    public enum AudioListMenu {
+        PLAY("PLAY"),
+        STOP("STOP"),
+        DEL("DELETE");
+
+        public int id;
+        public String name;
+        AudioListMenu(String name) {
+            this.name = name;
+            this.id = (AudioListMenuEnumID++);
         }
     }
 

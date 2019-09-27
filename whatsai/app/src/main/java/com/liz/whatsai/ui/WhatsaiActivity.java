@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -83,14 +82,14 @@ public class WhatsaiActivity extends AppCompatActivity
         listView.setOnItemClickListener(this);
         listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                for (ComDef.ListMenu c : ComDef.ListMenu.values()) {
+                for (ComDef.WhatsaiListMenu c : ComDef.WhatsaiListMenu.values()) {
                     menu.add(0, c.id, 0, c.name);
                 }
             }
         });
 
-        LinearLayout llWhatsai = findViewById(R.id.ll_whatsai);
-        llWhatsai.setOnClickListener(this);
+        findViewById(R.id.ll_whatsai).setOnClickListener(this);
+        findViewById(R.id.toolbar_listen).setOnClickListener(this);
 
         mWhatsaiLastClickTime = 0;
         mListItemLastClickTime = 0;
@@ -100,10 +99,13 @@ public class WhatsaiActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v){
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.ll_whatsai:
-            onClickWhatsaiLayout();
-            break;
+                onClickWhatsaiLayout();
+                break;
+            case R.id.toolbar_listen:
+                openAudioActivity();
+                break;
         }
 
         //anyhow, stop ring if have
@@ -114,19 +116,19 @@ public class WhatsaiActivity extends AppCompatActivity
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
-        if (itemId == ComDef.ListMenu.OPEN.id) {
+        if (itemId == ComDef.WhatsaiListMenu.OPEN.id) {
             onOpenNode(info.id);
             return true;
-        } else if (itemId == ComDef.ListMenu.ADD.id) {
+        } else if (itemId == ComDef.WhatsaiListMenu.ADD.id) {
             AddNodeDlg.onAddNode(this);
             return true;
-        } else if (itemId == ComDef.ListMenu.MODIFY.id) {
+        } else if (itemId == ComDef.WhatsaiListMenu.MODIFY.id) {
             onModifyNode(info.id);
             return true;
-        } else if (itemId == ComDef.ListMenu.DEL.id) {
+        } else if (itemId == ComDef.WhatsaiListMenu.DEL.id) {
             onDelNode(info.id);
             return true;
-        } else if (itemId == ComDef.ListMenu.PROP.id) {
+        } else if (itemId == ComDef.WhatsaiListMenu.PROP.id) {
             openNodeProperties(info.id);
             return true;
         } else {
@@ -372,7 +374,7 @@ public class WhatsaiActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(WhatsaiActivity.this, AudioActivity.class));
+            openAudioActivity();
             return true;
         }
         else if (id == R.id.action_cloud_backup) {
@@ -381,6 +383,10 @@ public class WhatsaiActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openAudioActivity() {
+        startActivity(new Intent(WhatsaiActivity.this, AudioActivity.class));
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

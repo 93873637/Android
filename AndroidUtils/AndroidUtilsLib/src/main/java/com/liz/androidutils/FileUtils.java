@@ -3,6 +3,8 @@ package com.liz.androidutils;
 import android.content.Context;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.io.File;
@@ -10,7 +12,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -44,11 +51,20 @@ public class FileUtils {
     }
 
     public static void removeFile(String fileName) {
-        File f = new File(fileName);
-        if (f.exists()) {
-            if (!f.delete()) {
-                System.out.println("Delete file " + fileName + " failed.");
-            }
+        removeFile(new File(fileName));
+    }
+
+    public static void removeFile(File f) {
+        if (f == null) {
+            System.out.println("ERROR: removeFile: file null");
+            return;
+        }
+        if (!f.exists()) {
+            System.out.println("ERROR: removeFile: file \"" + f.getAbsolutePath() + "\" not exist.");
+            return;
+        }
+        if (!f.delete()) {
+            System.out.println("ERROR: removeFile: delete file \"" + f.getAbsolutePath() + "\" failed.");
         }
     }
 
@@ -71,6 +87,75 @@ public class FileUtils {
         }
     }
 
+    public static void touchDir(String filePath) {
+        File path = new File(filePath);
+        if (!path.exists()) {
+            if (!path.mkdirs()) {
+                LogUtils.e("touchDir: create path \"" + filePath + "\" failed.");
+            }
+        }
+    }
+
+    public static final int ORDER_BY_DATE = 0;
+    public static final int ORDER_BY_DATE_DESC = 1;
+
+    public static File[] getFileList(String filePath) {
+        File path = new File(filePath);
+        if (!path.exists()) {
+            LogUtils.e("getFileList: file path \"" + filePath + "\" not exists.");
+            return new File[0];
+        }
+        File[] files = path.listFiles();
+        if (files == null) {
+            LogUtils.e("getFileList: file path \"" + filePath + "\" list files null.");
+            return new File[0];
+        }
+        else {
+            return files;
+        }
+    }
+
+    public static File[] getFileList(String filePath, int order) {
+        File[] files = getFileList(filePath);
+        orderByDate(files, order == ORDER_BY_DATE_DESC);
+        return files;
+    }
+
+    public static void orderByDate(@NonNull File[] files, boolean desc) {
+        final int compare_result = desc ? -1 : 1;
+        Arrays.sort(files, new Comparator<File>() {
+            public int compare(File f1, File f2) {
+                long diff = f1.lastModified() - f2.lastModified();
+                if (diff > 0)
+                    return compare_result;
+                else if (diff == 0)
+                    return 0;
+                else
+                    return -compare_result;
+            }
+        });
+    }
+
+    public static List<String> getFileNameList(String filePath) {
+        List<String> list = new ArrayList<>();
+        File path = new File(filePath);
+        if (!path.exists()) {
+            LogUtils.e("getFileList: file path \"" + filePath + "\" not exists.");
+        }
+        else {
+            File[] files = path.listFiles();
+            if (files == null) {
+                LogUtils.e("getFileList: file path \"" + filePath + "\" list files null.");
+            }
+            else {
+                for (File f : files) {
+                    list.add(f.getName());
+                }
+            }
+        }
+        return list;
+    }
+
     /**
      * Format As:
      * Log_IMEI_YYMMDD_hhmmss.zip
@@ -82,12 +167,29 @@ public class FileUtils {
         return "log_" + SysUtils.getIMEI(context) + "_" + strDateTime + ".zip";
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public static String getFormattedFileSize(String fileAbsolutePath) {
-        return FormatFileSize(FileUtils.getFileSize(fileAbsolutePath));
+        return formatFileSize(FileUtils.getFileSize(fileAbsolutePath));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static String getFormattedFileSize(File f) {
+        return formatFileSize(FileUtils.getFileSize(f));
+    }
+
+    public static long getFileSize(File file) {
+        long size = 0;
+        try {
+            if (file != null && file.exists()) {
+                FileInputStream fis;
+                fis = new FileInputStream(file);
+                size = fis.available();
+            }
+        }
+        catch(Exception e) {
+            LogUtils.e("ERROR: getFileSize exception " + e.toString());
+        }
+        return size;
+    }
+
     public static long getFileSize(String filePath) {
         long size = 0;
         try {
@@ -117,18 +219,7 @@ public class FileUtils {
         return size;
     }
 
-    public static long getFileSize(File file) throws Exception {
-        long size = 0;
-        if (file != null && file.exists()) {
-            FileInputStream fis;
-            fis = new FileInputStream(file);
-            size = fis.available();
-        }
-        return size;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static String FormatFileSize(long fileSize) {
+    public static String formatFileSize(long fileSize) {
         final long KB_V = 1024;   //real value
         final long KB_C = 1000;  //compare value, less than 4 degits
         final long MB_V = KB_V * KB_V;
@@ -138,8 +229,11 @@ public class FileUtils {
 
         String sizeString = "";
         DecimalFormat df = new DecimalFormat("#.0");
-        if (fileSize <= 0) {
-            LogUtils.w("FormatFileSize: wrong size " + fileSize);
+        if (fileSize < 0) {
+            LogUtils.w("formatFileSize: wrong size " + fileSize);
+        }
+        else if (fileSize == 0) {
+            sizeString = "0 B";
         }
         else if (fileSize < KB_C) {
             sizeString = df.format((double) fileSize)+ " B";
@@ -175,16 +269,18 @@ public class FileUtils {
 
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
+        ///sdcard/0.sd/whatsai/audio/19.0921.095007_8000.wav
+
         //String path1="D:\\Temp\\whatsai.zip";
         //String path2="D:\\Temp\\whatsai_tmp.zip";
-        String path1="D:\\Temp\\whatsai\\whatsai.dat";
-        String path2="D:\\Temp\\whatsai_tmp\\whatsai.dat";
-        if (sameFile(path1, path2)) {
-            System.out.println("same file");
-        }
-        else {
-            System.out.println("different file");
-        }
+//        String path1="D:\\Temp\\whatsai\\whatsai.dat";
+//        String path2="D:\\Temp\\whatsai_tmp\\whatsai.dat";
+//        if (sameFile(path1, path2)) {
+//            System.out.println("same file");
+//        }
+//        else {
+//            System.out.println("different file");
+//        }
 
 //        String path1="D:\\Temp\\test2.jpg";
 //        String path2="D:\\Temp\\test3.jpg";

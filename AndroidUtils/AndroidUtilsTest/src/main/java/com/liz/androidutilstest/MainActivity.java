@@ -67,13 +67,21 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_SysTools();
+        test_fileSort();
+        //test_SysTools();
         //test_image();
         //test_SysUtils();
         //test_saveByteBufferToFile();
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_fileSort() {
+        File[] files = FileUtils.getFileList("/sdcard/0.sd/whatsai/audio", FileUtils.ORDER_BY_DATE_DESC);
+        for (int i=0; i<files.length; i++) {
+            LogUtils.d("###@: " + files[i].getAbsolutePath());
+        }
     }
 
     public void test_SysTools() {

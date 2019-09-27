@@ -31,14 +31,7 @@ public class WhatsaiStorage {
     public static void init() {
         mRootNode = new WhatsaiDir();
         mRootNode.setName(ComDef.APP_NAME);
-
-        File path = new File(ComDef.WHATSAI_DATA_PATH);
-        if (!path.exists()) {
-            LogUtils.e("WhatsaiStorage: whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" not exists, create....");
-            if (!path.mkdirs()) {
-                LogUtils.e("WhatsaiStorage: create whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" failed.");
-            }
-        }
+        buildDirs();
 
         /*
         //##@: for test only
@@ -52,6 +45,19 @@ public class WhatsaiStorage {
         startSavingTimer();
     }
 
+    private static void buildDirs() {
+        FileUtils.touchDir(ComDef.WHATSAI_DATA_PATH);
+        FileUtils.touchDir(ComDef.WHATSAI_AUDIO_DATA_PATH);
+        /*
+        File path = new File(ComDef.WHATSAI_DATA_PATH);
+        if (!path.exists()) {
+            LogUtils.e("WhatsaiStorage: whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" not exists, create....");
+            if (!path.mkdirs()) {
+                LogUtils.e("WhatsaiStorage: create whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" failed.");
+            }
+        }
+        */
+    }
     public static Node getRootNode() {
         return mRootNode;
     }

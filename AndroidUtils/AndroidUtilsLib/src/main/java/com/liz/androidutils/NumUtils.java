@@ -12,6 +12,40 @@ public class NumUtils {
         return df.format(n);
     }
 
+    public static String formatSize(long size) {
+        final long K_V = 1024;   //real value
+        final long K_C = 1000;  //compare value, less than 4 degits
+        final long M_V = K_V * K_V;
+        final long M_C = K_C * K_C;
+        final long G_V = M_V * K_V;
+        final long G_C = M_C * K_C;
+
+        String sizeString;
+        DecimalFormat df = new DecimalFormat("#.0");
+
+        long absSize = Math.abs(size);
+        if (absSize == 0) {
+            sizeString = "0";
+        }
+        else if (absSize < K_C) {
+            sizeString = df.format((double) absSize);
+        }
+        else if (absSize < M_C) {
+            sizeString = df.format((double) absSize / K_V) + "K";
+        }
+        else if (absSize < G_C) {
+            sizeString = df.format((double) absSize / M_V)+ "M";
+        }
+        else {
+            sizeString = df.format((double) absSize / G_V) + "G";
+        }
+
+        if (size < 0) {
+            sizeString = "-" + sizeString;
+        }
+        return sizeString;
+    }
+
     public static byte[] int2Bytes(int num) {
         byte[] byteNum = new byte[4];
         byteNum[0] = (byte)((num >> 24) & 0xff);
