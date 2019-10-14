@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.liz.whatsai.logic.WhatsaiText;
 
 import org.json.JSONObject;
 

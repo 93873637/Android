@@ -30,7 +30,7 @@
             android:layout_toRightOf="@id/iv_image"
             />
         <TextView
-            android:id="@+id/tv_filesize"
+            android:id="@+id/tv_file_size"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingLeft="10dp"

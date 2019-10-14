@@ -1,5 +1,9 @@
 package com.liz.whatsai.logic;
 
+import android.widget.RadioButton;
+
+import com.liz.whatsai.R;
+
 /**
  * Common Definitions
  * Created by liz on 2018/3/8.
@@ -72,6 +76,23 @@ public class ComDef {
 
     public static final int NODE_TYPE_TASKGROUP = 3;
 
+    public static String getNodeTypeStr(int type) {
+        switch (type) {
+            case ComDef.NODE_TYPE_FILE:
+                return "FILE";
+            case ComDef.NODE_TYPE_DIR:
+                return "DIR";
+            case ComDef.NODE_TYPE_TASKGROUP:
+                return "TASKGROUP";
+            case ComDef.NODE_TYPE_TASK:
+                return "TASK";
+            case ComDef.NODE_TYPE_TEXT:
+                return "TEXT";
+            default:
+                return "UNKNOWN";
+        }
+    }
+
     // Node Type Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -142,4 +163,6 @@ public class ComDef {
     public static final int TIME_BEFORE = -1;
     public static final int TIME_AFTER = 1;
     public static final int TIME_SAME = 0;
+
+    public static final int INVALID_LIST_POS = -1;
 }

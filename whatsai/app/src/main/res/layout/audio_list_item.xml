@@ -18,16 +18,25 @@
             android:scaleType="fitXY"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginStart="5dp"
+            />
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_toRightOf="@id/iv_image"
+            />
+        <ImageView
+            android:id="@+id/iv_play_audio"
+            android:scaleType="fitXY"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/sound"
             />
         <LinearLayout
             android:orientation="horizontal"
@@ -35,11 +44,11 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"/>
         <TextView
-            android:id="@+id/tv_filesize"
+            android:id="@+id/tv_file_size"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="2dp"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_toRightOf="@id/tv_name"

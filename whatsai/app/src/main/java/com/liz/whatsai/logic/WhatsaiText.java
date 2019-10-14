@@ -6,20 +6,39 @@ package com.liz.whatsai.logic;
  */
 
 public class WhatsaiText extends WhatsaiFile {
-    private boolean done = false;
+    private int scroll_x;
+    private int scroll_y;
 
     public WhatsaiText() {
         super();
-        done = false;
+        scroll_x = 0;
+        scroll_y = 0;
     }
 
     public WhatsaiText(String name) {
         super(name);
-        done = false;
+        scroll_x = 0;
+        scroll_y = 0;
     }
 
     @Override
     public int getType() {
         return ComDef.NODE_TYPE_TEXT;
+    }
+
+    public int getScrollX() {
+        return scroll_x;
+    }
+
+    public void setScrollX(int x) {
+        scroll_x = x;
+    }
+
+    public int getScrollY() {
+        return scroll_y;
+    }
+
+    public void setScrollY(int y) {
+        scroll_y = y;
     }
 }

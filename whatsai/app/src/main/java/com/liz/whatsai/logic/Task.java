@@ -10,7 +10,7 @@ import com.liz.androidutils.LogUtils;
  */
 
 public class Task extends WhatsaiFile {
-    private boolean done = false;
+    private boolean done;
 
     public Task() {
         super();

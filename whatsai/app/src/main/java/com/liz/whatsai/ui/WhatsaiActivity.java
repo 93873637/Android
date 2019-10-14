@@ -340,6 +340,15 @@ public class WhatsaiActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_NODE_PROPERTIES) {
+            if (resultCode == RESULT_OK) {
+                NodeListAdapter.onDataChanged();
+            }
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {

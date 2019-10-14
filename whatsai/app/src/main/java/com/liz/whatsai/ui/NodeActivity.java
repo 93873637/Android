@@ -55,7 +55,8 @@ public class NodeActivity extends Activity implements View.OnClickListener {
         mEditName.setText(mNode.getName());
         mCheckDone.setChecked(mNode.isDone());
 
-        setCheckedType();
+        TextView textType = findViewById(R.id.textTypeValue);
+        textType.setText(ComDef.getNodeTypeStr(mNode.getType()));
 
         mEditRemind = findViewById(R.id.editRemind);
         mEditRemind.setText(mNode.getRemindString());
@@ -70,25 +71,25 @@ public class NodeActivity extends Activity implements View.OnClickListener {
         mCheckPassword.setOnClickListener(this);
     }
 
-    public void setCheckedType() {
-        switch (mNode.getType()) {
-            case ComDef.NODE_TYPE_DIR:
-                ((RadioButton)findViewById(R.id.rb_directory)).setChecked(true);
-                break;
-            case ComDef.NODE_TYPE_TASKGROUP:
-                ((RadioButton)findViewById(R.id.rb_taskgroup)).setChecked(true);
-                break;
-            case ComDef.NODE_TYPE_TASK:
-                ((RadioButton)findViewById(R.id.rb_task)).setChecked(true);
-                break;
-            case ComDef.NODE_TYPE_TEXT:
-                ((RadioButton)findViewById(R.id.rb_text)).setChecked(true);
-                break;
-            default:
-                ((RadioButton)findViewById(R.id.rb_file)).setChecked(true);
-                break;
-        }
-    }
+//    public void setCheckedType() {
+//        switch (mNode.getType()) {
+//            case ComDef.NODE_TYPE_DIR:
+//                ((RadioButton)findViewById(R.id.rb_directory)).setChecked(true);
+//                break;
+//            case ComDef.NODE_TYPE_TASKGROUP:
+//                ((RadioButton)findViewById(R.id.rb_taskgroup)).setChecked(true);
+//                break;
+//            case ComDef.NODE_TYPE_TASK:
+//                ((RadioButton)findViewById(R.id.rb_task)).setChecked(true);
+//                break;
+//            case ComDef.NODE_TYPE_TEXT:
+//                ((RadioButton)findViewById(R.id.rb_text)).setChecked(true);
+//                break;
+//            default:
+//                ((RadioButton)findViewById(R.id.rb_file)).setChecked(true);
+//                break;
+//        }
+//    }
 
     @Override
     public void onClick(View v) {

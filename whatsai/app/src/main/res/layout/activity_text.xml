@@ -101,9 +101,54 @@
                 android:gravity="end|center_vertical"
                 android:background="@drawable/icon_calendar_clock" />
 
+            <ImageButton
+                android:id="@+id/toolbar_undo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="6dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:contentDescription="@string/app_name"
+                android:gravity="end|center_vertical"
+                android:background="@drawable/icon_undo" />
+
+            <ImageButton
+                android:id="@+id/toolbar_redo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="6dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:contentDescription="@string/app_name"
+                android:gravity="end|center_vertical"
+                android:background="@drawable/icon_redo" />
+
+            <ImageButton
+                android:id="@+id/toolbar_to_up"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="6dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:contentDescription="@string/app_name"
+                android:gravity="end|center_vertical"
+                android:background="@drawable/icon_to_up" />
+
+            <ImageButton
+                android:id="@+id/toolbar_to_bottom"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="6dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:contentDescription="@string/app_name"
+                android:gravity="end|center_vertical"
+                android:background="@drawable/icon_to_bottom" />
+
         </LinearLayout>
         <!--tool bar-->
 
+        <!--edit control-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -117,7 +162,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="top|left"
+                android:gravity="top|start"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:cursorVisible="true"
@@ -128,8 +173,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:singleLine="false"
+                android:scrollbars="vertical"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbarFadeDuration="2000"
+                android:textIsSelectable="true"
                 android:background="@drawable/bg_edittext"
                 />
         </LinearLayout>
+        <!--edit control-->
+
     </LinearLayout>
 </LinearLayout>

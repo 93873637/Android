@@ -65,6 +65,12 @@ public class AudioActivity extends Activity implements View.OnClickListener,
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        setAudioButton();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.titlebar_menu:
@@ -84,12 +90,11 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
         if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            File f = AudioListAdapter.getAudioFile(info.id);
-            Toast.makeText(this, "open " + f.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            WhatsaiAudio.startPlay((int)info.id);
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            //####@:onOpenNode(info.id);
+            WhatsaiAudio.stopPlay((int)info.id);
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.DEL.id) {
@@ -130,8 +135,11 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         textAudioFiles.setText(AudioListAdapter.getAudioFilesInfo());
     }
 
-    protected void onSwitchAudio() {
-        WhatsaiAudio.switchAudio();
+    protected void setAudioButton() {
         mBtnSwitchAudio.setBackgroundResource(WhatsaiAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
     }
+
+    protected void onSwitchAudio() {
+        WhatsaiAudio.switchAudio();
+        setAudioButton();    }
 }

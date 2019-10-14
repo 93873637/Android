@@ -1,6 +1,7 @@
 package com.liz.whatsai.app;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.liz.androidutils.FileUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
+import com.liz.whatsai.logic.WhatsaiAudio;
+
 import java.io.File;
 
 public class AudioListAdapter extends BaseAdapter {
@@ -93,7 +96,8 @@ public class AudioListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.ivType = convertView.findViewById(R.id.iv_image);
             holder.tvName = convertView.findViewById(R.id.tv_name);
-            holder.tvSize = convertView.findViewById(R.id.tv_filesize);
+            holder.ivPlay = convertView.findViewById(R.id.iv_play_audio);
+            holder.tvSize = convertView.findViewById(R.id.tv_file_size);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();  //the Object stored in this view as a tag
@@ -103,13 +107,26 @@ public class AudioListAdapter extends BaseAdapter {
         holder.ivType.setImageResource(R.drawable.ic_file_default);
         holder.tvName.setText(f.getName());
         holder.tvSize.setText(FileUtils.formatFileSize(FileUtils.getFileSize(f)));
+        holder.ivPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+
+        if (position == WhatsaiAudio.getPlayItemPos()) {
+            convertView.setBackgroundColor(Color.GREEN);
+        }
+        else {
+            convertView.setBackgroundColor(Color.WHITE);
+        }
         return convertView;
     }
 
     public static class ViewHolder {
         ImageView ivType;
         TextView tvName;
+        ImageView ivPlay;
         TextView tvSize;
     }
 }
