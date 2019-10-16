@@ -128,13 +128,11 @@ public class TextActivity extends Activity implements View.OnClickListener {
             case R.id.toolbar_save:
                 if (mBtnSaveActive) {
                     localSave();
-                    setToolbarSave(false);
                 }
                 break;
             case R.id.toolbar_cloud_save:
                 if (mBtnCloudSaveActive) {
                     cloudSave();
-                    setToolbarCloudSave(false);
                 }
                 break;
             case R.id.toolbar_datetime:
@@ -169,11 +167,13 @@ public class TextActivity extends Activity implements View.OnClickListener {
         mTextNode.setScrollX(mEditContent.getScrollX());
         mTextNode.setScrollY(mEditContent.getScrollY());
         DataLogic.local_save();
+        setToolbarSave(false);
     }
 
     private void cloudSave() {
         localSave();
         DataLogic.cloud_save(this);
+        setToolbarCloudSave(false);
     }
 
     private void insertDateTime() {

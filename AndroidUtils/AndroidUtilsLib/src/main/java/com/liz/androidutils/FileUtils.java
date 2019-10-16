@@ -1,15 +1,15 @@
 package com.liz.androidutils;
 
 import android.content.Context;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -262,6 +262,39 @@ public class FileUtils {
         String md52 = DigestUtils.md5Hex(IOUtils.toByteArray(fis2));
         IOUtils.closeQuietly(fis2);
         return (size1 == size2) && md51.equals(md52);
+    }
+
+    public static ArrayList<String> readTxtFileLines(String filePath) {
+        File file = new File(filePath);
+        if (!file.exists())
+        {
+            LogUtils.e("readTxtFileLines: file \"" + filePath + "\" not exists.");
+            return null;
+        }
+
+        if (!file.isFile()){
+            LogUtils.e("readTxtFileLines: file \"" + filePath + "\" is NOT a file.");
+            return null;
+        }
+
+        try {
+            ArrayList<String> lineList = new ArrayList<>();
+            InputStream inputStream = new FileInputStream(file);
+            InputStreamReader inputReader = new InputStreamReader(inputStream);
+            BufferedReader bufferReader = new BufferedReader(inputReader);
+            String line;
+            while ((line = bufferReader.readLine()) != null) {
+                lineList.add(line + "\n");
+            }
+            inputStream.close();
+            return lineList;
+        } catch (java.io.FileNotFoundException e) {
+            LogUtils.e("readTxtFileLines: FileNotFoundException of file \"" + filePath + "\".");
+            return null;
+        } catch (IOException e) {
+            LogUtils.e("readTxtFileLines: read exception of file \"" + filePath + "\", ex=" + e.toString());
+            return null;
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

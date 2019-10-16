@@ -33,11 +33,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void checkPermissions() {
-        if (
-                ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-             && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-             && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
-        ) {
+        boolean allPermissionsGranted = true;
+        for (String permission : permissions) {
+            if (ActivityCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+                allPermissionsGranted = false;
+                break;
+            }
+        }
+
+        if (allPermissionsGranted) {
             openAppActivity();
         }
         else {

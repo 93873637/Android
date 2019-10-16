@@ -27,6 +27,7 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_fileSort();
+        test_fileReadLines();
+        //test_fileSort();
         //test_SysTools();
         //test_image();
         //test_SysUtils();
@@ -75,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_fileReadLines() {
+        ArrayList<String> lineList = FileUtils.readTxtFileLines("/sdcard/tellist.txt");
+        for (int i=0; i<lineList.size(); i++) {
+            LogUtils.d("#" + (i+1) + ": " + lineList.get(i));
+        }
     }
 
     public void test_fileSort() {

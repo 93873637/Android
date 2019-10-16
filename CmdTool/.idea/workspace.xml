@@ -2,32 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a186f87-7a15-4948-bfb6-c7f7e72c447b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/androidTest/debug/com/liz/puremusic/test/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/androidTest/debug/com/liz/puremusic/test/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/TelUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ReadCallLog/MyApplication/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/ComDef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiText.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiText.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/storage/StorageJSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/storage/StorageJSON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/NodeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/TextActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/TextActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_audio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_audio.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_node.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_node.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_text.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_text.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/audio_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/audio_list_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/node_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/node_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_redo.png" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_redo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_undo.png" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_undo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/multiauth_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/multiauth_dialog.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="388">
-              <caret line="87" column="41" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="41" />
+              <caret line="90" column="41" lean-forward="true" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -67,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="535">
-              <caret line="237" column="19" lean-forward="true" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+              <caret line="237" column="19" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
               <folding>
                 <element signature="e#7718#7719#0" expanded="true" />
                 <element signature="e#7818#7819#0" expanded="true" />
@@ -137,52 +124,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
-              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="AndroidView" />
       <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
@@ -220,7 +162,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.34488273" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.34861407" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -242,7 +184,7 @@
     </layout>
     <layout-to-restore>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.3411514" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.34861407" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -250,12 +192,12 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="0" />
-      <window_info anchor="bottom" id="Version Control" order="1" />
-      <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Build" order="5" visible="true" weight="0.32962137" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="TODO" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="2" />
+      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Build" order="4" visible="true" weight="0.32962137" />
+      <window_info anchor="bottom" id="Find" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
@@ -264,13 +206,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="87" column="41" selection-start-line="87" selection-start-column="33" selection-end-line="87" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -302,11 +237,18 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="535">
-          <caret line="237" column="19" lean-forward="true" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+          <caret line="237" column="19" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
           <folding>
             <element signature="e#7718#7719#0" expanded="true" />
             <element signature="e#7818#7819#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="90" column="41" lean-forward="true" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
         </state>
       </provider>
     </entry>

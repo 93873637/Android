@@ -11,33 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="570c8163-7272-44ac-b4fa-c9699c73d799" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/test/Pack01.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PureTorch/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/androidTest/java/com/liz/androidutils/ExampleInstrumentedTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/test/java/com/liz/androidutils/ExampleUnitTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureTorch/PureTorch.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/PureTorch.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureTorch/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../PureTorch/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/generated/source/buildConfig/debug/com/liz/whatsai/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/generated/source/buildConfig/debug/com/liz/whatsai/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/blame/res/debug/single/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/blame/res/debug/single/debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/outputs/apk/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/outputs/apk/debug/output.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_bitcomet1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/content_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/content_main.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +27,20 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -152,7 +139,6 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
@@ -164,11 +150,6 @@
             <path>
               <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
-            </path>
-            <path>
-              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
             <path>
@@ -182,23 +163,13 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="imagetools" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="logic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="ImageTools" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -304,6 +275,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20628998" />
@@ -322,7 +294,7 @@
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
       <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.18708241" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32962137" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" weight="0.32962137" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32962137" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -497,30 +469,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/edit_image_size.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
           <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1426">
-          <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/TimeUtils.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -577,17 +539,27 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="543">
           <caret line="39" column="11" lean-forward="true" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/utils/StringUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="634">
           <caret line="60" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/imagetools/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
