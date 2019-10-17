@@ -156,29 +156,36 @@
             android:layout_marginBottom="1dp"
             android:orientation="horizontal"
             android:gravity="start|center_vertical">
-
-            <EditText
-                android:id="@+id/editContent"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="top|start"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:cursorVisible="true"
-                android:focusable="true"
-                android:textSize="16sp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:singleLine="false"
-                android:scrollbars="vertical"
-                android:scrollbarStyle="insideOverlay"
-                android:scrollbarFadeDuration="2000"
-                android:textIsSelectable="true"
-                android:background="@drawable/bg_edittext"
-                />
+            <!--<ScrollView-->
+                <!--android:id="@+id/scrollInfo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:clickable="true"-->
+                <!--android:fastScrollEnabled="true"-->
+                <!--android:focusable="true"-->
+                <!--android:transcriptMode="normal">-->
+                <EditText
+                    android:id="@+id/editContent"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:cursorVisible="true"
+                    android:focusable="true"
+                    android:gravity="top|start"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
+                    android:scrollbarFadeDuration="2000"
+                    android:scrollbarStyle="insideOverlay"
+                    android:scrollbars="vertical"
+                    android:singleLine="false"
+                    android:textIsSelectable="true"
+                    android:textSize="16sp" />
+            <!--</ScrollView>-->
         </LinearLayout>
         <!--edit control-->
 

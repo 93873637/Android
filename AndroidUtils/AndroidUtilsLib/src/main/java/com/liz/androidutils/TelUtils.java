@@ -16,7 +16,7 @@ public class TelUtils {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (context.checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             context.startActivity(intent);
-            return "startCall: " + telNum;
+            return "OK";
         }
         else {
             return "ERROR: startCall: No permission of Manifest.permission.CALL_PHONE";
@@ -37,7 +37,7 @@ public class TelUtils {
             //access permitted
             mt.setAccessible(true);
             mt.invoke(obj);
-            return "endCall";
+            return "OK";
         } catch (Exception e) {
             e.printStackTrace();
             return "ERROR: endCall: exception: " + e.toString();

@@ -284,7 +284,7 @@ public class FileUtils {
             BufferedReader bufferReader = new BufferedReader(inputReader);
             String line;
             while ((line = bufferReader.readLine()) != null) {
-                lineList.add(line + "\n");
+                lineList.add(line);
             }
             inputStream.close();
             return lineList;
