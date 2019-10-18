@@ -1,8 +1,10 @@
 package com.liz.androidutils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 
 import java.lang.reflect.Method;
 
@@ -75,5 +77,10 @@ public class SysUtils {
         }
 
         return true;
+    }
+
+    public static Bitmap capture(Activity activity) {
+        activity.getWindow().getDecorView().setDrawingCacheEnabled(true);
+        return activity.getWindow().getDecorView().getDrawingCache();
     }
 }

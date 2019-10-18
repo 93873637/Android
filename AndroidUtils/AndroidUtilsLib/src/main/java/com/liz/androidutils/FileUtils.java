@@ -314,7 +314,6 @@ public class FileUtils {
 //        else {
 //            System.out.println("different file");
 //        }
-
 //        String path1="D:\\Temp\\test2.jpg";
 //        String path2="D:\\Temp\\test3.jpg";
         //mv(path2, path1);

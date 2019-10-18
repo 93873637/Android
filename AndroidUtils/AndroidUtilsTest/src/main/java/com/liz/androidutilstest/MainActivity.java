@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_fileReadLines();
+        test_screencapture();
+        //test_fileReadLines();
         //test_fileSort();
         //test_SysTools();
         //test_image();
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_screencapture() {
+        Bitmap bmp = SysUtils.capture(MainActivity.this);
+        ImageUtils.saveBitmap2JPGFile(bmp, "/sdcard/aa.jpg", 90);
     }
 
     public void test_fileReadLines() {
