@@ -5,10 +5,11 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.hardware.display.DisplayManager;
@@ -23,25 +24,26 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
-import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeUtils;
+import com.liz.multidialer.app.ThisApp;
+
+import org.w3c.dom.Node;
 
 import java.util.ArrayList;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TEL_LIST_FILE_NAME = "/sdcard/tellist.txt";
-    private static final long END_CALL_DELAY = 5000L;  //延迟n秒后自动挂断电话
+    private static final long END_CALL_DELAY = 3000L;  //延迟n秒后自动挂断电话
 
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
@@ -59,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private boolean mCaptureOnce = false;
-    private Lock mCaptureLock = new ReentrantLock();
-    private final Object mSyncObj = new Object();
-
     private static final int REQUEST_MEDIA_PROJECTION = 1;
 
     private int mResultCode;
@@ -76,165 +75,6 @@ public class MainActivity extends AppCompatActivity {
     private int mWindowHeight = 0;
     private int mScreenDensity = 0;
 
-    private ImageReader.OnImageAvailableListener mOnImageAvailableListener
-            = new ImageReader.OnImageAvailableListener() {
-        @Override
-        public void onImageAvailable(ImageReader reader) {
-            //showProgress("onImageAvailable");
-            Image img = reader.acquireNextImage();
-            tryCaptureOnce(img);
-            img.close();  //NOTE: you must close the image to get next
-        }
-    };
-
-    private void startScreenCapture() {
-        showProgress("startScreenCapture");
-
-        if (mMediaProjection == null) {
-            mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, mResultData);
-        }
-        else {
-            showProgress("ERROR: startScreenCapture: mMediaProjection already exists");
-        }
-
-        if (mImageReader == null) {
-            //
-            //NOTE: only PixelFormat.RGBA_8888(1) is supported for my A2H
-            //java.lang.UnsupportedOperationException: The producer output buffer format 0x1 doesn't match the ImageReader's configured buffer format 0x3.
-            //
-            mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 2); //ImageFormat.RGB_565
-            //####@: mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, null);
-        }
-        else {
-            showProgress("ERROR: startScreenCapture: mImageReader already exists");
-        }
-
-        if (mVirtualDisplay == null) {
-            mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen-mirror",
-                    mWindowWidth, mWindowHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                    mImageReader.getSurface(),
-                    null, null);
-        }
-        else {
-            showProgress("ERROR: startScreenCapture: mVirtualDisplay already exists");
-        }
-    }
-
-    private void stopScreenCapture() {
-        showProgress("stopScreenCapture");
-
-        if (mVirtualDisplay == null) {
-            showProgress("ERROR: stopScreenCapture: mVirtualDisplay null");
-        }
-        else {
-            mVirtualDisplay.release();
-            mVirtualDisplay = null;
-        }
-
-        if (mImageReader == null) {
-            showProgress("ERROR: stopScreenCapture: mImageReader null");
-        }
-        else {
-            mImageReader.setOnImageAvailableListener(null, null);
-            mImageReader.close();
-            mImageReader = null;
-        }
-
-        if (mMediaProjection == null) {
-            showProgress("ERROR: stopScreenCapture: mMediaProjection null");
-        }
-        else {
-            mMediaProjection.stop();
-            mMediaProjection = null;
-        }
-    }
-
-    public void captureOnce() {
-//        Bitmap bmp = SysUtils.capture(MainActivity.this);
-//
-//        String jpgFileName = "/sdcard/multidialer/" + getCurrentTelNumber() + ".jpg";
-//        int ret = ImageUtils.saveBitmap2JPGFile(bmp, jpgFileName, 90);
-//        if (ret < 0) {
-//            showProgress("save screen image to " + jpgFileName + " failed with error " + ret);
-//        } else {
-//            showProgress("screen image saved to " + jpgFileName);
-//        }
-
-
-        LogUtils.d("captureOnce: ThreadId=" + android.os.Process.myTid());
-        LogUtils.d("captureOnce: E...");
-        if (mImageReader == null) {
-            LogUtils.e("captureOnce: no image reader to capture");
-            return;
-        }
-
-        while(true) {
-            Image img = mImageReader.acquireLatestImage();
-            if (img == null) {
-                continue;
-            }
-            doCaptureOnce(img);
-            img.close();
-            break;
-        }
-
-        //mCaptureOnce = true;
-
-//        while(mCaptureOnce) {
-//            try {
-//                Thread.sleep(10L);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-////        synchronized (mSyncObj) {
-////                try {
-////                    LogUtils.d("captureOnce: wait...");
-////                    mSyncObj.wait();
-////                } catch (InterruptedException e) {
-////                    e.printStackTrace();
-////                }
-////        }
-//
-//        LogUtils.d("captureOnce: X.");
-    }
-
-    private void tryCaptureOnce(Image img) {
-        //LogUtils.d("tryCaptureOnce: ThreadId=" + android.os.Process.myTid());
-        //LogUtils.d("tryCaptureOnce: mCaptureOnce=" + mCaptureOnce);
-        if (mCaptureOnce) {
-            //synchronized (mSyncObj) {
-                LogUtils.d("tryCaptureOnce: start capture");
-                doCaptureOnce(img);
-                mCaptureOnce = false;
-              //  mSyncObj.notifyAll();
-
-            //
-                    //end current call
-//                    String retEndCall = TelUtils.endCall(MainActivity.this);
-//                    showProgress("End Call: " + retEndCall);
-//
-//                    //start next call
-//                    mTelIndex ++;
-//                    if (mTelIndex < mTelList.size()) {
-//                        startCallOnNum();
-//                    }
-                LogUtils.d("tryCaptureOnce: capture ok.");
-            //}
-        }
-    }
-
-    private void doCaptureOnce(Image img) {
-        LogUtils.d("doCaptureOnce: E...");
-        String jpgFileName = "/sdcard/multidialer/" + getCurrentTelNumber() + ".jpg";
-        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
-        if (ret < 0) {
-            showProgress("save screen image to " + jpgFileName + " failed with error " + ret);
-        } else {
-            showProgress("screen image saved to " + jpgFileName);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,15 +82,46 @@ public class MainActivity extends AppCompatActivity {
 
         checkPermissions();
 
+        mTextTelNumber = findViewById(R.id.text_tel_list_info);
         mTelList = FileUtils.readTxtFileLines(TEL_LIST_FILE_NAME);
 
-        mTextTelNumber = findViewById(R.id.text_tel_list_info);
-        mTextTelNumber.setText("电话号码数量(" + TEL_LIST_FILE_NAME + "): " + mTelList.size());
+        String telListInfo;
+        boolean bExit = false;
+        if (mTelList == null) {
+            telListInfo = "ERROR: 没有号码列表文件: " + TEL_LIST_FILE_NAME;
+            bExit = true;
+        }
+        else if (mTelList.size() == 0) {
+            telListInfo = "ERROR: 号码列表为空";
+            bExit = true;
+        }
+        else {
+            telListInfo = "电话号码数量(" + TEL_LIST_FILE_NAME + "): " + mTelList.size();
+        }
+        mTextTelNumber.setText(telListInfo);
+
+        Button btnCall = findViewById(R.id.btn_start_call);
+        if (bExit) {
+            btnCall.setText("退出");
+            btnCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ThisApp.exitApp();
+                }
+            });
+            return;
+        }
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startCallOnList();
+            }
+        });
 
         mTextProgress = findViewById(R.id.text_dial_info);
         mTextProgress.setText("");
         mScrollProgress = findViewById(R.id.scrollInfo);
-        mScrollProgress.setBackgroundColor(Color.LTGRAY);
         mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         WindowManager windowManager = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
@@ -269,17 +140,6 @@ public class MainActivity extends AppCompatActivity {
                 REQUEST_MEDIA_PROJECTION);
 
         LogUtils.d("MainThreadId=" + android.os.Process.myTid());
-        //##@: test
-//        for (int i=0; i<100; i++) {
-//            showProgress("#" + i + ": Start Call: 12345678901, OKssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-//        }
-
-        findViewById(R.id.btn_start_call).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startCallOnList();
-            }
-        });
     }
 
     @Override
@@ -368,20 +228,108 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showProgress(final String msg) {
-        Activity activity = MainActivity.this;
-        if (activity != null) {
-            activity.runOnUiThread(new Runnable() {
-                public void run() {
-                    String logMsg = TimeUtils.getLogTime() + " - " + msg;
-                    mTextProgress.append(logMsg + "\n");
-                    mScrollProgress.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mScrollProgress.smoothScrollTo(0, mTextProgress.getBottom());
-                        }
-                    });
-                }
-            });
+        runOnUiThread(new Runnable() {
+            public void run() {
+                String logMsg = TimeUtils.getLogTime() + " - " + msg;
+                mTextProgress.append(logMsg + "\n");
+                mScrollProgress.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mScrollProgress.smoothScrollTo(0, mTextProgress.getBottom());
+                    }
+                });
+            }
+        });
+    }
+
+    private void startScreenCapture() {
+        showProgress("startScreenCapture");
+
+        if (mMediaProjection == null) {
+            mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, mResultData);
+        }
+        else {
+            showProgress("ERROR: startScreenCapture: mMediaProjection already exists");
+        }
+
+        if (mImageReader == null) {
+            //
+            //NOTE: only PixelFormat.RGBA_8888(1) is supported for my A2H
+            //java.lang.UnsupportedOperationException: The producer output buffer format 0x1 doesn't match the ImageReader's configured buffer format 0x3.
+            //
+            mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 2); //ImageFormat.RGB_565
+            //####@: mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, null);
+        }
+        else {
+            showProgress("ERROR: startScreenCapture: mImageReader already exists");
+        }
+
+        if (mVirtualDisplay == null) {
+            mVirtualDisplay = mMediaProjection.createVirtualDisplay("screen-mirror",
+                    mWindowWidth, mWindowHeight, mScreenDensity, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+                    mImageReader.getSurface(),
+                    null, null);
+        }
+        else {
+            showProgress("ERROR: startScreenCapture: mVirtualDisplay already exists");
+        }
+    }
+
+    private void stopScreenCapture() {
+        showProgress("stopScreenCapture");
+
+        if (mVirtualDisplay == null) {
+            showProgress("ERROR: stopScreenCapture: mVirtualDisplay null");
+        }
+        else {
+            mVirtualDisplay.release();
+            mVirtualDisplay = null;
+        }
+
+        if (mImageReader == null) {
+            showProgress("ERROR: stopScreenCapture: mImageReader null");
+        }
+        else {
+            mImageReader.setOnImageAvailableListener(null, null);
+            mImageReader.close();
+            mImageReader = null;
+        }
+
+        if (mMediaProjection == null) {
+            showProgress("ERROR: stopScreenCapture: mMediaProjection null");
+        }
+        else {
+            mMediaProjection.stop();
+            mMediaProjection = null;
+        }
+    }
+
+    public void captureOnce() {
+        LogUtils.d("captureOnce: E...");
+        if (mImageReader == null) {
+            LogUtils.e("captureOnce: no image reader to capture");
+            return;
+        }
+
+        while(true) {
+            Image img = mImageReader.acquireLatestImage();
+            if (img == null) {
+                continue;
+            }
+            saveCaptureImage(img);
+            img.close();
+            break;
+        }
+    }
+
+    private void saveCaptureImage(Image img) {
+        LogUtils.d("saveCaptureImage: E...");
+        String jpgFileName = "/sdcard/multidialer/" + getCurrentTelNumber() + ".jpg";
+        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
+        if (ret < 0) {
+            showProgress("save screen image to " + jpgFileName + " failed with error " + ret);
+        } else {
+            showProgress("screen image saved to " + jpgFileName);
         }
     }
 }
