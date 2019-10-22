@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.telephony.TelephonyManager;
 
 import java.lang.reflect.Method;
+import java.util.regex.Pattern;
 
 public class TelUtils {
 
@@ -42,5 +43,29 @@ public class TelUtils {
             e.printStackTrace();
             return "ERROR: endCall: exception: " + e.toString();
         }
+    }
+
+    public static boolean isValidTelNumber(String strTelNumber) {
+        if (strTelNumber == null || strTelNumber.isEmpty()) {
+            return false;
+        }
+        String regex = "^[0-9]*$";
+        return Pattern.matches(regex, strTelNumber);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Test Functions
+
+    public static void testCheckTelNumber(String strTelNumber) {
+        System.out.println("isValidTelNumber(\"" + strTelNumber + "\")=" + isValidTelNumber(strTelNumber));
+    }
+
+    public static void main(String[] args) {
+        testCheckTelNumber("");
+        testCheckTelNumber("10086");
+        testCheckTelNumber("13910115737");
+        testCheckTelNumber("13910 5737");
+        testCheckTelNumber("13910a5737");
+        testCheckTelNumber("+8613910115737");
     }
 }

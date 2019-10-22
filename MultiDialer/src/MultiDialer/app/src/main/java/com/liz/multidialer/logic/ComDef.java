@@ -14,5 +14,7 @@ public class ComDef {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public static final String APP_NAME = "ScreenHelper";
 
+    public static final String DIALER_DIR = "/sdcard/multidialer";
+
     public static final int JPEG_QUALITY = 90;  //1~100
 }

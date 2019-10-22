@@ -5,9 +5,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -35,9 +33,9 @@ import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.app.ThisApp;
+import com.liz.multidialer.logic.ComDef;
 
-import org.w3c.dom.Node;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
     private TextView mTextTelNumber;
+    private Button mBtnCall;
 
     private int mTelIndex = 0;
     private ArrayList<String> mTelList;
+    private String mPictureDir = ComDef.DIALER_DIR;
 
     // Permissions Required
     private static final int REQUEST_CODE_PERMISSIONS = 1;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.CALL_PHONE
     };
 
-    private boolean mCaptureOnce = false;
+    private boolean mCallRunning = false;
     private static final int REQUEST_MEDIA_PROJECTION = 1;
 
     private int mResultCode;
@@ -100,10 +100,11 @@ public class MainActivity extends AppCompatActivity {
         }
         mTextTelNumber.setText(telListInfo);
 
-        Button btnCall = findViewById(R.id.btn_start_call);
+        mBtnCall = findViewById(R.id.btn_start_call);
         if (bExit) {
-            btnCall.setText("退出");
-            btnCall.setOnClickListener(new View.OnClickListener() {
+            mBtnCall.setText("请先退出，准备好号码文件后重试");
+            mBtnCall.setBackgroundColor(Color.RED);
+            mBtnCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ThisApp.exitApp();
@@ -112,10 +113,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        btnCall.setOnClickListener(new View.OnClickListener() {
+        mBtnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCallOnList();
+                if (!mCallRunning) {
+                    startCallOnList();
+                    mBtnCall.setText("停止拨号");
+                    mBtnCall.setBackgroundColor(Color.RED);
+                }
+                else {
+                    mBtnCall.setText("开始拨号");
+                    mBtnCall.setBackgroundColor(Color.GREEN);
+                }
+                mCallRunning = !mCallRunning;
             }
         });
 
@@ -146,24 +156,18 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_MEDIA_PROJECTION) {
             if (resultCode != Activity.RESULT_OK) {
-                String tip = "ERROR: resultCode = "+resultCode+", NOT OK";
+                String tip = "ERROR: onActivityResult failed, resultCode = " + resultCode;
                 showProgress(tip);
                 Toast.makeText(MainActivity.this, tip, Toast.LENGTH_SHORT).show();
-                return;
             }
-
-            Activity activity = MainActivity.this;
-            if (activity == null) {
-                showProgress("ERROR: activity is null");
-                return;
+            else {
+                showProgress("onActivityResult OK");
+                mResultCode = resultCode;
+                mResultData = data;
+                startScreenCapture();
             }
-
-            showProgress("onActivityResult OK");
-            mResultCode = resultCode;
-            mResultData = data;
-            startScreenCapture();
+            return;
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -185,12 +189,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void startCallOnList() {
         if (mTelList == null) {
-            showProgress("startCallOnList: list null");
+            showProgress("ERROR: startCallOnList: list null");
+            return;
         }
-        else {
-            mTelIndex = 0;
-            startCallOnNum();
+
+        if (!genPictureDir()) {
+            showProgress("ERROR: startCallOnList: create picture dir failed.");
+            return;
         }
+
+        mTelIndex = 0;
+        startCallOnNum();
     }
 
     private String getCurrentTelNumber() {
@@ -200,6 +209,11 @@ public class MainActivity extends AppCompatActivity {
     private void startCallOnNum() {
         LogUtils.d("startCallOnNum: ThreadId=" + android.os.Process.myTid());
         String strTel = getCurrentTelNumber();
+        if (!TelUtils.isValidTelNumber(strTel)) {
+            showProgress("#" + (mTelIndex+1) + ": Invalid Tel Number = \"" + strTel + "\"");
+            startNextCall();
+            return;
+        }
         try {
             String ret = TelUtils.startCall(MainActivity.this, strTel);
             showProgress("#" + (mTelIndex+1) + ": Start Call, Tel = " + strTel + ", " + ret);
@@ -213,17 +227,32 @@ public class MainActivity extends AppCompatActivity {
                     String retEndCall = TelUtils.endCall(MainActivity.this);
                     showProgress("End Call: " + retEndCall);
 
-                    //start next call
-                    mTelIndex ++;
-                    if (mTelIndex < mTelList.size()) {
-                        startCallOnNum();
-                    }
+                    startNextCall();
                 }
             }, END_CALL_DELAY);
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "OnClick Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             showProgress("startCallOnNum Exception: " + e.toString());
+        }
+    }
+
+    private void startNextCall() {
+        if (mCallRunning) {
+            mTelIndex++;
+            if (mTelIndex < mTelList.size()) {
+                startCallOnNum();
+            }
+            else {
+                mBtnCall.setText("拨号结束, 点击退出");
+                mBtnCall.setBackgroundColor(Color.BLUE);
+                mBtnCall.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ThisApp.exitApp();
+                    }
+                });
+            }
         }
     }
 
@@ -322,9 +351,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean genPictureDir() {
+        String strTimeDir = new SimpleDateFormat("yyMMdd.HHmmss").format(new java.util.Date());
+        mPictureDir = ComDef.DIALER_DIR + "/" + strTimeDir;
+        if (!FileUtils.touchDir(mPictureDir)) {
+            showProgress("ERROR: create picture dir " + mPictureDir + " failed.");
+            return false;
+        }
+        return true;
+    }
+
     private void saveCaptureImage(Image img) {
         LogUtils.d("saveCaptureImage: E...");
-        String jpgFileName = "/sdcard/multidialer/" + getCurrentTelNumber() + ".jpg";
+        String jpgFileName = mPictureDir + "/" + getCurrentTelNumber() + ".jpg";
         int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
         if (ret < 0) {
             showProgress("save screen image to " + jpgFileName + " failed with error " + ret);

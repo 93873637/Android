@@ -87,13 +87,15 @@ public class FileUtils {
         }
     }
 
-    public static void touchDir(String filePath) {
+    public static boolean touchDir(String filePath) {
         File path = new File(filePath);
         if (!path.exists()) {
             if (!path.mkdirs()) {
                 LogUtils.e("touchDir: create path \"" + filePath + "\" failed.");
+                return false;
             }
         }
+        return true;
     }
 
     public static final int ORDER_BY_DATE = 0;
