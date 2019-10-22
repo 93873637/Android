@@ -23,6 +23,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,9 +41,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TEL_LIST_FILE_NAME = "/sdcard/tellist.txt";
-    private static final long END_CALL_DELAY = 3000L;  //延迟n秒后自动挂断电话
-
+    private EditText mEditDialInterval;
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
     private TextView mTextTelNumber;
@@ -82,13 +81,16 @@ public class MainActivity extends AppCompatActivity {
 
         checkPermissions();
 
+        mEditDialInterval = findViewById(R.id.edit_dial_interval);
+        mEditDialInterval.setText("" + ComDef.END_CALL_DELAY);
+
         mTextTelNumber = findViewById(R.id.text_tel_list_info);
-        mTelList = FileUtils.readTxtFileLines(TEL_LIST_FILE_NAME);
+        mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_NAME);
 
         String telListInfo;
         boolean bExit = false;
         if (mTelList == null) {
-            telListInfo = "ERROR: 没有号码列表文件: " + TEL_LIST_FILE_NAME;
+            telListInfo = "ERROR: 没有号码列表文件: " + ComDef.TEL_LIST_FILE_NAME;
             bExit = true;
         }
         else if (mTelList.size() == 0) {
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             bExit = true;
         }
         else {
-            telListInfo = "电话号码数量(" + TEL_LIST_FILE_NAME + "): " + mTelList.size();
+            telListInfo = "电话号码数量(" + ComDef.TEL_LIST_FILE_NAME + "): " + mTelList.size();
         }
         mTextTelNumber.setText(telListInfo);
 
@@ -198,20 +200,23 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        int dialInterval = Integer.parseInt(mEditDialInterval.getText().toString());
+        showProgress("***startCallOnList: number=" + mTelList.size() + ", interval=" + dialInterval + "...");
+
         mTelIndex = 0;
-        startCallOnNum();
+        startCallOnNum(dialInterval);
     }
 
     private String getCurrentTelNumber() {
         return mTelList.get(mTelIndex);
     }
 
-    private void startCallOnNum() {
+    private void startCallOnNum(final int dialInterval) {
         LogUtils.d("startCallOnNum: ThreadId=" + android.os.Process.myTid());
         String strTel = getCurrentTelNumber();
         if (!TelUtils.isValidTelNumber(strTel)) {
             showProgress("#" + (mTelIndex+1) + ": Invalid Tel Number = \"" + strTel + "\"");
-            startNextCall();
+            startNextCall(dialInterval);
             return;
         }
         try {
@@ -227,9 +232,9 @@ public class MainActivity extends AppCompatActivity {
                     String retEndCall = TelUtils.endCall(MainActivity.this);
                     showProgress("End Call: " + retEndCall);
 
-                    startNextCall();
+                    startNextCall(dialInterval);
                 }
-            }, END_CALL_DELAY);
+            }, dialInterval);
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "OnClick Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -237,11 +242,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startNextCall() {
+    private void startNextCall(int dialInterval) {
         if (mCallRunning) {
             mTelIndex++;
             if (mTelIndex < mTelList.size()) {
-                startCallOnNum();
+                startCallOnNum(dialInterval);
             }
             else {
                 mBtnCall.setText("拨号结束, 点击退出");
@@ -252,7 +257,12 @@ public class MainActivity extends AppCompatActivity {
                         ThisApp.exitApp();
                     }
                 });
+                mCallRunning = false;
+                showProgress("***startNextCall: Calls Finished.");
             }
+        }
+        else {
+            showProgress("***startNextCall: Calls Canceled.");
         }
     }
 
