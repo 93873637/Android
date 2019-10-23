@@ -156,21 +156,19 @@
             android:layout_marginBottom="1dp"
             android:orientation="horizontal"
             android:gravity="start|center_vertical">
-            <!--<ScrollView-->
-                <!--android:id="@+id/scrollInfo"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:clickable="true"-->
-                <!--android:fastScrollEnabled="true"-->
-                <!--android:focusable="true"-->
-                <!--android:transcriptMode="normal">-->
+            <ScrollView
+                android:id="@+id/scrollInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:fastScrollEnabled="true"
+                android:focusable="true">
                 <EditText
                     android:id="@+id/editContent"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
-                    android:layout_weight="1"
                     android:background="@drawable/bg_edittext"
                     android:cursorVisible="true"
                     android:focusable="true"
@@ -185,7 +183,7 @@
                     android:singleLine="false"
                     android:textIsSelectable="true"
                     android:textSize="16sp" />
-            <!--</ScrollView>-->
+            </ScrollView>
         </LinearLayout>
         <!--edit control-->
 

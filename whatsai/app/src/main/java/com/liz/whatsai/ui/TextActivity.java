@@ -5,10 +5,13 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Selection;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,15 +55,16 @@ public class TextActivity extends Activity implements View.OnClickListener {
         mTextNode = (WhatsaiText) node;
 
         ((TextView)findViewById(R.id.titlebar_title)).setText(DataLogic.getPath() + "/" + mTextNode.getName());
+
         mEditContent = findViewById(R.id.editContent);
         mEditContent.setText(mTextNode.getContent());
-
-        if (mTextNode.getScrollX() == 0 && mTextNode.getScrollY() == 0) {
-            mEditContent.setSelection(mEditContent.getText().length());  //move to end
+        /*
+        //##@: test data
+        for(int i=0; i<500; i++) {
+            mEditContent.append(i + ": aabbccddeeff");
         }
-        else {
-            mEditContent.scrollTo(mTextNode.getScrollX(), mTextNode.getScrollY());
-        }
+        //*/
+        moveToBottom();
 
         findViewById(R.id.titlebar_menu).setOnClickListener(this);
         findViewById(R.id.titlebar_close).setOnClickListener(this);
@@ -145,14 +149,25 @@ public class TextActivity extends Activity implements View.OnClickListener {
                 //#####@:
                 break;
             case R.id.toolbar_to_up:
-                mEditContent.setSelection(0);
+                moveToUp();
                 break;
             case R.id.toolbar_to_bottom:
-                mEditContent.setSelection(mEditContent.getText().length());
+                moveToBottom();
                 break;
             default:
                 break;
         }
+    }
+
+    private void moveToUp() {
+        mEditContent.setSelection(0);
+    }
+
+    private void moveToBottom() {
+        mEditContent.setFocusable(true);
+        mEditContent.setFocusableInTouchMode(true);
+        mEditContent.requestFocus();
+        mEditContent.setSelection(mEditContent.getText().length());  //move to end
     }
 
     @Override
@@ -164,8 +179,8 @@ public class TextActivity extends Activity implements View.OnClickListener {
 
     private void localSave() {
         mTextNode.setContent(mEditContent.getText().toString());
-        mTextNode.setScrollX(mEditContent.getScrollX());
-        mTextNode.setScrollY(mEditContent.getScrollY());
+        //mTextNode.setScrollX(mEditContent.getScrollX());
+        //mTextNode.setScrollY(mEditContent.getScrollY());
         DataLogic.local_save();
         setToolbarSave(false);
     }

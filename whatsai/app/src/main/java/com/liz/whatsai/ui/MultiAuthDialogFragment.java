@@ -193,7 +193,6 @@ public class MultiAuthDialogFragment extends DialogFragment {
             public void onAuthenticationError(int errorCode, CharSequence errString) {
                 if (!mSelfCancel) {
                     Toast.makeText(mContext, errorCode + ":" + errString, Toast.LENGTH_LONG).show();
-                    dismiss();
                     stopListening();
                     if (mMultiAuthCallback != null) {
                         mMultiAuthCallback.onAuthenticationError();

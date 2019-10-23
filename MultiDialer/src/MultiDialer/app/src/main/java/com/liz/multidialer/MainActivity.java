@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         checkPermissions();
 
         mEditDialInterval = findViewById(R.id.edit_dial_interval);
-        mEditDialInterval.setText("" + ComDef.END_CALL_DELAY);
+        mEditDialInterval.setText("" + ComDef.CALL_INTERVAL);
 
         mTextTelNumber = findViewById(R.id.text_tel_list_info);
         mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_NAME);
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         int dialInterval = Integer.parseInt(mEditDialInterval.getText().toString());
-        showProgress("***startCallOnList: number=" + mTelList.size() + ", interval=" + dialInterval + "...");
+        showProgress("***startCallOnList: number=" + mTelList.size() + ", interval=" + dialInterval + "s...");
 
         mTelIndex = 0;
         startCallOnNum(dialInterval);
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
                     startNextCall(dialInterval);
                 }
-            }, dialInterval);
+            }, dialInterval*1000L);
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "OnClick Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();

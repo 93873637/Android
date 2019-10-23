@@ -29,17 +29,17 @@
                 android:gravity="start|top"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
-                android:text="拨号时间间隔(ms): "
+                android:text="拨号时间间隔(s): "
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edit_dial_interval"
-                android:layout_width="50dp"
+                android:layout_width="36dp"
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:maxLength="6"
+                android:maxLength="3"
                 android:fadeScrollbars="false"
                 android:focusable="true"
                 android:gravity="center"
