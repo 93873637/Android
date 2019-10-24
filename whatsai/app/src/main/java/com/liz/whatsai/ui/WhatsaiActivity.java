@@ -209,7 +209,8 @@ public class WhatsaiActivity extends AppCompatActivity
 //                        }).setNegativeButton("Cancel", null).show();
 
                 //check either password or fingerprint
-                new MultiAuthDialogFragment().openDlg(WhatsaiActivity.this, new MultiAuthDialogFragment.MultiAuthCallback() {
+                new MultiAuthDialog().openDlg(WhatsaiActivity.this,
+                        new MultiAuthDialog.MultiAuthCallback() {
                     @Override
                     public boolean onCheckPassword(String passwordInput) {
                         //Toast.makeText(WhatsaiActivity.this, "onCheckPassword", Toast.LENGTH_SHORT).show();

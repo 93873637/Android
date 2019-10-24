@@ -14,18 +14,28 @@ public class ComDef {
 
     public static final String APP_NAME = "whatsai";
 
-    //private static final String WHATSAI_DATA_FILE_NAME = "whatsai.xml";
-    private static final String WHATSAI_DATA_FILE_NAME = "whatsai.dat";
-    //public static final String WHATSAI_DATA_PATH = "/storage/0CCD-50F4/0.sd/whatsai";  //for security, external storage can't write for android app!
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // WhatsaiStorage Definitions
+
+    //unfortunately, external storage can't be written by app for security!
+    //public static final String WHATSAI_DATA_PATH = "/storage/0CCD-50F4/0.sd/whatsai";
     public static final String WHATSAI_DATA_PATH = "/sdcard/0.sd/whatsai";
-    public static final String WHATSAI_AUDIO_DATA_PATH = WHATSAI_DATA_PATH + "/audio";
+
+    private static final String WHATSAI_DATA_FILE_NAME = "whatsai.dat";
     public static final String WHATSAI_DATA_FILE = WHATSAI_DATA_PATH  + "/" + WHATSAI_DATA_FILE_NAME;
     public static final String WHATSAI_DATA_FILE_TEMP = WHATSAI_DATA_FILE + ".tmp";
     public static final String WHATSAI_DATA_FILE_SYNC = WHATSAI_DATA_FILE + ".syn";
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    // WhatsaiStorage Definitions
+    public static final String WHATSAI_AUDIO_DATA_PATH = WHATSAI_DATA_PATH + "/audio";
 
+    public static final int WHATSAI_SAVING_DELAY = 3 * 1000;  //unit by milliseconds
+    public static final int WHATSAI_SAVING_TIMER = 10 * 1000;  //unit by milliseconds
+    public static final long CLOUD_SAVE_PERIOD = 24 * 3600 * 1000;  //one day, unit by millisecond
+
+    public static final String CLOUD_FILE_NAME = "whatsai.zip";
+    public static final String CLOUD_FILE_PATH = WHATSAI_DATA_PATH  + "/" + CLOUD_FILE_NAME;
+
+    //tags for json
     public static final String TAG_TYPE = "TYPE";
     public static final String TAG_NAME = "NAME";
     public static final String TAG_LIST = "LIST";
@@ -34,18 +44,12 @@ public class ComDef {
     public static final String TAG_PASSWORD = "PASSWORD";
     public static final String TAG_SYNC_TIME = "SYNC_TIME";
 
+    //tags for xml
     public static final String XML_TAG_DIR = "dir";
     public static final String XML_TAG_FILE = "file";
     public static final String XML_ATTR_DONE = "DONE";
     public static final String XML_ATTR_REMIND = "remind";
     public static final String XML_BOOL_TRUE = "true";
-
-    public static final int WHATSAI_SAVING_DELAY = 3 * 1000;  //unit by milliseconds
-    public static final int WHATSAI_SAVING_TIMER = 10 * 1000;  //unit by milliseconds
-    public static final long CLOUD_SAVE_PERIOD = 24 * 3600 * 1000;  //one day, unit by millisecond
-
-    public static final String CLOUD_FILE_NAME = "whatsai.zip";
-    public static final String CLOUD_FILE_PATH = WHATSAI_DATA_PATH  + "/" + CLOUD_FILE_NAME;
 
     // WhatsaiStorage Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////

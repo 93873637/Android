@@ -1,10 +1,13 @@
 package com.liz.androidutils;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.fingerprint.FingerprintManager;
+import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
@@ -82,5 +85,32 @@ public class SysUtils {
     public static Bitmap capture(Activity activity) {
         activity.getWindow().getDecorView().setDrawingCacheEnabled(true);
         return activity.getWindow().getDecorView().getDrawingCache();
+    }
+
+    public static final String ERR_MSG_OK = "OK";
+
+    public static String supportFingerprint(Context context) {
+        String errMsg = ERR_MSG_OK;
+
+        /*
+        //unnecessary for our project's minimum version is 23
+        if (Build.VERSION.SDK_INT < 23) {
+            Toast.makeText(context, "您的系统版本过低，不支持指纹功能", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        */
+
+        KeyguardManager keyguardManager = context.getSystemService(KeyguardManager.class);
+        FingerprintManager fingerprintManager = context.getSystemService(FingerprintManager.class);
+
+        if (!fingerprintManager.isHardwareDetected()) {
+            errMsg = "No fingerprint hardware detected";
+        } else if (!keyguardManager.isKeyguardSecure()) {
+            errMsg = "Keyguard Secure not set, please add one fingerprint first";
+        } else if (!fingerprintManager.hasEnrolledFingerprints()) {
+            errMsg = "No enrolled fingerprint, please add one at least";
+        }
+
+        return errMsg;
     }
 }

@@ -2,15 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="8dp"
         android:text="Please Input Your Password:"
         android:textColor="#000"
@@ -22,6 +20,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
         android:cursorVisible="true"
         android:focusable="true"
         android:textSize="18sp"
@@ -71,39 +70,49 @@
         android:background="#ccc" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:gravity="start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="start|center_vertical"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="2dp">
+
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="39dp"
-            android:layout_height="39dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="start|center_vertical"
             android:background="@drawable/fingerprint37"
-            android:contentDescription="@string/nav_header_desc"
-            android:paddingTop="@dimen/nav_header_vertical_spacing" />
+            android:contentDescription="unlock by fingerprint" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="6dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="1dp"
             android:text="Fingerprint Unlock For Local User"
             android:textColor="#000"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/error_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="10dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="12dp"
         android:maxLines="1"
+        android:text="sssssssssssssssssssssssssssssssssssssssssssssss"
         android:textColor="#f45"
-        android:textSize="16sp" />
+        android:textSize="15sp"
+        android:textStyle="italic" />
+
+    <!--just take place to adjust vertical space-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        />
 </LinearLayout>
