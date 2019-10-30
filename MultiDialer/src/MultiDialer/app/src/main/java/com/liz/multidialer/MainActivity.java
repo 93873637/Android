@@ -18,8 +18,11 @@ import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -44,18 +47,21 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditDialInterval;
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
-    private TextView mTextTelNumber;
     private Button mBtnCall;
 
-    private int mTelIndex = 0;
     private ArrayList<String> mTelList;
     private String mPictureDir = ComDef.DIALER_DIR;
+
+    private int mTelIndex = 0;
+    private int mCallState = TelephonyManager.CALL_STATE_IDLE;
+    private int mCallInterval = ComDef.CALL_INTERVAL;
 
     // Permissions Required
     private static final int REQUEST_CODE_PERMISSIONS = 1;
     private static final String[] permissions = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.CALL_PHONE
     };
 
@@ -64,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int mResultCode;
     private Intent mResultData;
+
+    TelephonyManager mTelephonyManager;
 
     private MediaProjection mMediaProjection;
     private VirtualDisplay mVirtualDisplay;
@@ -79,12 +87,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        LogUtils.d("onCreate: MainThreadId=" + android.os.Process.myTid());
+
         checkPermissions();
 
         mEditDialInterval = findViewById(R.id.edit_dial_interval);
-        mEditDialInterval.setText("" + ComDef.CALL_INTERVAL);
+        String editInterval = "" + ComDef.CALL_INTERVAL;
+        mEditDialInterval.setText(editInterval);
 
-        mTextTelNumber = findViewById(R.id.text_tel_list_info);
         mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_NAME);
 
         String telListInfo;
@@ -100,7 +110,9 @@ public class MainActivity extends AppCompatActivity {
         else {
             telListInfo = "电话号码数量(" + ComDef.TEL_LIST_FILE_NAME + "): " + mTelList.size();
         }
-        mTextTelNumber.setText(telListInfo);
+
+        TextView textTelNumber = findViewById(R.id.text_tel_list_info);
+        textTelNumber.setText(telListInfo);
 
         mBtnCall = findViewById(R.id.btn_start_call);
         if (bExit) {
@@ -114,44 +126,42 @@ public class MainActivity extends AppCompatActivity {
             });
             return;
         }
-
-        mBtnCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mCallRunning) {
-                    startCallOnList();
-                    mBtnCall.setText("停止拨号");
-                    mBtnCall.setBackgroundColor(Color.RED);
+        else {
+            mBtnCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mEditDialInterval.clearFocus();
+                    if (!mCallRunning) {
+                        mCallRunning = true;
+                        mBtnCall.setText("停止拨号");
+                        mBtnCall.setBackgroundColor(Color.RED);
+                        startCallOnList();
+                    }
+                    else {
+                        mCallRunning = false;
+                        mBtnCall.setText("开始拨号");
+                        mBtnCall.setBackgroundColor(Color.GREEN);
+                    }
                 }
-                else {
-                    mBtnCall.setText("开始拨号");
-                    mBtnCall.setBackgroundColor(Color.GREEN);
-                }
-                mCallRunning = !mCallRunning;
-            }
-        });
+            });
+        }
 
         mTextProgress = findViewById(R.id.text_dial_info);
         mTextProgress.setText("");
         mScrollProgress = findViewById(R.id.scrollInfo);
         mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
+        mTelephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        initScreenCapture(MainActivity.this);
+        loopListenOnPhoneState();
+    }
 
-        WindowManager windowManager = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
-        mWindowWidth = windowManager.getDefaultDisplay().getWidth();
-        mWindowHeight = windowManager.getDefaultDisplay().getHeight();
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        mScreenDensity = displayMetrics.densityDpi;
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        mScreenDensity = metrics.densityDpi;
-        mMediaProjectionManager = (MediaProjectionManager)this.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-        startActivityForResult(
-                mMediaProjectionManager.createScreenCaptureIntent(),
-                REQUEST_MEDIA_PROJECTION);
-
-        LogUtils.d("MainThreadId=" + android.os.Process.myTid());
+    private void loopListenOnPhoneState() {
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                mTelephonyManager.listen(new PhoneCallListener(), PhoneStateListener.LISTEN_CALL_STATE);
+                loopListenOnPhoneState();
+            }
+        }, ComDef.LISTEN_CALL_STATE_TIME);
     }
 
     @Override
@@ -200,73 +210,91 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        int dialInterval = Integer.parseInt(mEditDialInterval.getText().toString());
-        showProgress("***startCallOnList: number=" + mTelList.size() + ", interval=" + dialInterval + "s...");
+        mCallInterval = Integer.parseInt(mEditDialInterval.getText().toString());
+        showProgress("***startCallOnList: number=" + mTelList.size() + ", interval=" + mCallInterval + "s...");
 
         mTelIndex = 0;
-        startCallOnNum(dialInterval);
+        callOnNum();
     }
 
     private String getCurrentTelNumber() {
+        LogUtils.d("getCurrentTelNumber: mTelIndex=" + mTelIndex);
         return mTelList.get(mTelIndex);
     }
 
-    private void startCallOnNum(final int dialInterval) {
-        LogUtils.d("startCallOnNum: ThreadId=" + android.os.Process.myTid());
+    private void callOnNum() {
+        LogUtils.d("callOnNum: mTelIndex=" + mTelIndex);
+        //LogUtils.d("callOnNum: mTelIndex=" + mTelIndex + ", ThreadId=" + android.os.Process.myTid());
+
         String strTel = getCurrentTelNumber();
         if (!TelUtils.isValidTelNumber(strTel)) {
             showProgress("#" + (mTelIndex+1) + ": Invalid Tel Number = \"" + strTel + "\"");
-            startNextCall(dialInterval);
+            callNextNum();
             return;
         }
+
+        if (mCallState != TelephonyManager.CALL_STATE_IDLE) {
+            showProgress("#" + (mTelIndex+1) + ": Last call not ended, try end and call again...");
+            TelUtils.endCall(MainActivity.this);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    callOnNum();
+                }
+            }, ComDef.WAIT_CALL_IDLE_TIME);
+            return;
+        }
+
         try {
             String ret = TelUtils.startCall(MainActivity.this, strTel);
             showProgress("#" + (mTelIndex+1) + ": Start Call, Tel = " + strTel + ", " + ret);
 
             new Handler().postDelayed(new Runnable() {
                 public void run() {
-                    //before end call, we should take screen picture
+                    mTelephonyManager.listen(new PhoneCallListener(), PhoneStateListener.LISTEN_CALL_STATE);
+
+                    //before end call, we take the screen picture
                     captureOnce();
 
                     //end current call
                     String retEndCall = TelUtils.endCall(MainActivity.this);
                     showProgress("End Call: " + retEndCall);
 
-                    startNextCall(dialInterval);
+                    callNextNum();
                 }
-            }, dialInterval*1000L);
+            }, mCallInterval*1000L);
         } catch (Exception e) {
-            Toast.makeText(MainActivity.this, "OnClick Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "callOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
+            showProgress("callOnNum Exception: " + e.toString());
             e.printStackTrace();
-            showProgress("startCallOnNum Exception: " + e.toString());
         }
     }
 
-    private void startNextCall(int dialInterval) {
-        if (mCallRunning) {
-            mTelIndex++;
-            if (mTelIndex < mTelList.size()) {
-                startCallOnNum(dialInterval);
-            }
-            else {
-                mBtnCall.setText("拨号结束, 点击退出");
-                mBtnCall.setBackgroundColor(Color.BLUE);
-                mBtnCall.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ThisApp.exitApp();
-                    }
-                });
-                mCallRunning = false;
-                showProgress("***startNextCall: Calls Finished.");
-            }
+    private void callNextNum() {
+        LogUtils.d("callNextNum: mTelIndex=" + mTelIndex);
+        if (!mCallRunning) {
+            showProgress("***callNextNum: Calls not running.");
+            return;
         }
-        else {
-            showProgress("***startNextCall: Calls Canceled.");
+
+        mTelIndex++;
+        if (mTelIndex < mTelList.size()) {
+            callOnNum();
+        } else {
+            mBtnCall.setText("拨号结束, 点击退出");
+            mBtnCall.setBackgroundColor(Color.BLUE);
+            mBtnCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ThisApp.exitApp();
+                }
+            });
+            mCallRunning = false;
+            showProgress("***callNextNum: All Calls Finished.");
         }
     }
 
     private void showProgress(final String msg) {
+        LogUtils.d("showProgress: " + msg);
         runOnUiThread(new Runnable() {
             public void run() {
                 String logMsg = TimeUtils.getLogTime() + " - " + msg;
@@ -279,6 +307,59 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public class PhoneCallListener extends PhoneStateListener {
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            //LogUtils.d("onCallStateChanged: ThreadId = " + android.os.Process.myTid());
+            mCallState = state;
+            LogUtils.d("onCallStateChanged: mCallState = " + mCallState);
+//            switch (state) {
+//                case TelephonyManager.CALL_STATE_IDLE:
+//                    LogUtils.d("onCallStateChanged: CALL_STATE_IDLE");
+//                    break;
+//                case TelephonyManager.CALL_STATE_OFFHOOK:  //接听 or 正在拨号
+//                    LogUtils.d("onCallStateChanged: CALL_STATE_OFFHOOK");
+//                    break;
+//                case TelephonyManager.CALL_STATE_RINGING:
+//                    LogUtils.d("onCallStateChanged: CALL_STATE_RINGING");
+//                    break;
+//            }
+            super.onCallStateChanged(state, incomingNumber);
+        }
+    }
+
+    private void initScreenCapture(Activity activity) {
+        WindowManager windowManager = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+        if (windowManager == null) {
+            Toast.makeText(activity, "ERROR: get WINDOW_SERVICE failed", Toast.LENGTH_LONG).show();
+            activity.finish();
+        } else {
+            Display display = windowManager.getDefaultDisplay();
+            if (display == null) {
+                Toast.makeText(activity, "ERROR: getDefaultDisplay failed", Toast.LENGTH_LONG).show();
+                activity.finish();
+            } else {
+                mWindowWidth = display.getWidth();
+                mWindowHeight = display.getHeight();
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                display.getMetrics(displayMetrics);
+                mScreenDensity = displayMetrics.densityDpi;
+                DisplayMetrics metrics = new DisplayMetrics();
+                display.getMetrics(metrics);
+                mScreenDensity = metrics.densityDpi;
+                mMediaProjectionManager = (MediaProjectionManager) activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+                if (mMediaProjectionManager == null) {
+                    Toast.makeText(activity, "ERROR: get MEDIA_PROJECTION_SERVICE failed", Toast.LENGTH_LONG).show();
+                    activity.finish();
+                } else {
+                    startActivityForResult(
+                            mMediaProjectionManager.createScreenCaptureIntent(),
+                            REQUEST_MEDIA_PROJECTION);
+                }
+            }
+        }
     }
 
     private void startScreenCapture() {
@@ -314,6 +395,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void captureOnce() {
+        LogUtils.d("captureOnce: E...");
+        if (mImageReader == null) {
+            LogUtils.e("captureOnce: no image reader to capture");
+            return;
+        }
+
+        while(true) {
+            Image img = mImageReader.acquireLatestImage();
+            if (img == null) {
+                LogUtils.e("captureOnce: acquireLatestImage return null");
+                continue;
+            }
+            saveCaptureImage(img);
+            img.close();
+            break;
+        }
+    }
+
     private void stopScreenCapture() {
         showProgress("stopScreenCapture");
 
@@ -340,24 +440,6 @@ public class MainActivity extends AppCompatActivity {
         else {
             mMediaProjection.stop();
             mMediaProjection = null;
-        }
-    }
-
-    public void captureOnce() {
-        LogUtils.d("captureOnce: E...");
-        if (mImageReader == null) {
-            LogUtils.e("captureOnce: no image reader to capture");
-            return;
-        }
-
-        while(true) {
-            Image img = mImageReader.acquireLatestImage();
-            if (img == null) {
-                continue;
-            }
-            saveCaptureImage(img);
-            img.close();
-            break;
         }
     }
 

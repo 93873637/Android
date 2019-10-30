@@ -12,13 +12,15 @@ public class ComDef {
      *  CONSTANT DEFINITIONS
      */
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    public static final String APP_NAME = "ScreenHelper";
-
+    public static final String APP_NAME = "MultiDialer";
 
     public static final String TEL_LIST_FILE_NAME = "/sdcard/tellist.txt";
 
-    public static final long CALL_INTERVAL = 5L;  //延迟n秒后自动挂断电话
+    public static final int CALL_INTERVAL = 5;  //延迟n秒后自动挂断电话
     public static final long END_CALL_DELAY = CALL_INTERVAL*1000L;
+
+    public static final long LISTEN_CALL_STATE_TIME = 500L;
+    public static final long WAIT_CALL_IDLE_TIME = 500L;
 
     public static final String DIALER_DIR = "/sdcard/multidialer";
 

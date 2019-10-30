@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -76,8 +77,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void openAppActivity() {
-        startActivity(new Intent(MainActivity.this, WhatsaiActivity.class));
-        ThisApp.init();
+        if (ThisApp.init()) {
+            startActivity(new Intent(MainActivity.this, WhatsaiActivity.class));
+        }
+        else {
+            Toast.makeText(MainActivity.this, "App Initialize Failed", Toast.LENGTH_LONG).show();
+        }
         MainActivity.this.finish();
     }
 }

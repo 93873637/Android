@@ -1,30 +1,32 @@
 package com.liz.androidutils;
 
-import android.os.Environment;
-import android.text.TextUtils;
-import android.util.Log;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by liz on 18-1-30.
  */
 
+@SuppressWarnings("unused, WeakerAccess")
 public class ZipUtils {
 
      public static boolean zip(String zipFileAbsolute, String fileAbsolute) {
 
          File zipFile = new File(zipFileAbsolute);
-         if (zipFile != null && zipFile.exists()) {
+         if (zipFile.exists()) {
              LogUtils.i("zip file \""+ zipFileAbsolute +"\" already exists, delete it to re-zip...");
              if (zipFile.delete()) {
                  LogUtils.e("delete zip file \"" + zipFileAbsolute + "\" failed.");
+                 return false;
              }
          }
          else {
@@ -45,7 +47,7 @@ public class ZipUtils {
              return false;
          }
 
-         ZipOutputStream outputStream = null;
+         ZipOutputStream outputStream;
          try {
              outputStream = new ZipOutputStream(new FileOutputStream(zipFileAbsolute));
              zipFile(outputStream, inputFile, "");
@@ -54,11 +56,8 @@ public class ZipUtils {
              LogUtils.e("ERROR: zip Exception: " + ex.toString());
              return false;
          }
-
          try {
-             if (outputStream != null) {
-                 outputStream.close();
-             }
+             outputStream.close();
          }
          catch (IOException ex) {
              LogUtils.e("outputStream close IOException: " + ex.toString());
@@ -67,107 +66,79 @@ public class ZipUtils {
          return true;
     }
 
-    /**
-     * zip: zip @param files to @param strZipFile
-     * @param strZipFile: zip file name with full path
-     * @param files: files to zip
-     * @return: true if success or false
-     */
     public static boolean zipFiles(String strZipFile, File... files) {
-        LogUtils.d("ZipUtils.zip: strZipFile=" + strZipFile);
-
-        if (TextUtils.isEmpty(strZipFile)) {
-            LogUtils.e("zip output file not valid");
-            return false;
-        }
-
-        if (files.length == 0) {
-            LogUtils.e("no file to zip");
-            return false;
-        }
-
-        File zipFile = new File(strZipFile);
-        if (zipFile != null && zipFile.exists()) {
-            LogUtils.i("zip file already exist, delete it to zip again");
-            zipFile.delete();
-        }
-
-        boolean ret = false;
-        ZipOutputStream outputStream = null;
-        try {
-            String filePath = strZipFile.substring(0, strZipFile.lastIndexOf("/"));
-            touchPath(filePath);
-            outputStream = new ZipOutputStream(new FileOutputStream(strZipFile));
-            for (int i=0; i<files.length; i++) {
-                if (files[i] != null) {
-                    zipFile(outputStream, files[i], "");
-                    ret = true;
-                }
+        List<File> fileList = new ArrayList<>();
+        for(File f : files) {
+            if (f != null) {
+                fileList.add(f);
             }
         }
-        catch (Exception ex) {
-            LogUtils.e("zip Exception: " + ex.toString());
-        }
-
-        try {
-            if (outputStream != null) {
-                outputStream.close();
-            }
-        }
-        catch (IOException ex) {
-            LogUtils.e("zip IOException: " + ex.toString());
-        }
-
-        return ret;
+        return zipFiles(strZipFile, fileList);
     }
 
-    public static boolean zipFiles(String strZipFile, List<String> fileAbsoluteList) {
-        LogUtils.d("ZipUtils.zip: strZipFile=" + strZipFile);
+    public static boolean zipFileAbsolutes(String strZipFile, String... fileAbsolutes) {
+        List<File> fileList = new ArrayList<>();
+        for(String fileAbsolute : fileAbsolutes) {
+            File f = new File(fileAbsolute);
+            fileList.add(f);
+        }
+        return zipFiles(strZipFile, fileList);
+    }
+
+    public static boolean zipFileAbsoluteList(String strZipFile, List<String> fileAbsoluteList) {
+        List<File> fileList = new ArrayList<>();
+        for(String fileAbsolute : fileAbsoluteList) {
+            File f = new File(fileAbsolute);
+            fileList.add(f);
+        }
+        return zipFiles(strZipFile, fileList);
+    }
+
+    public static boolean zipFiles(String strZipFile, @NonNull List<File> fileList) {
+        LogUtils.d("ZipUtils: zipFiles: strZipFile=" + strZipFile + ", fileListSize=" + fileList.size());
 
         if (TextUtils.isEmpty(strZipFile)) {
-            LogUtils.e("zip output file not valid");
+            LogUtils.e("ZipUtils: zipFiles: zip file empty");
             return false;
         }
 
-        if (fileAbsoluteList.size() == 0) {
-            LogUtils.e("no file to zip");
+        if (fileList.size() == 0) {
+            LogUtils.e("ZipUtils: zipFiles: No file to zip");
             return false;
         }
 
         File zipFile = new File(strZipFile);
-        if (zipFile != null && zipFile.exists()) {
-            LogUtils.i("zip file already exist, delete it to zip again");
-            zipFile.delete();
+        if (zipFile.exists()) {
+            LogUtils.i("ZipUtils: zipFiles: Zip file already exist, delete it to zip again...");
+            if (zipFile.delete()) {
+                LogUtils.e("ZipUtils: zipFiles: Delete old zip file \"" + strZipFile + "\" failed.");
+                return false;
+            }
         }
 
         boolean ret = false;
         ZipOutputStream outputStream = null;
         try {
-            //create output file path if not exist
             String filePath = strZipFile.substring(0, strZipFile.lastIndexOf("/"));
             touchPath(filePath);
-
-            //zip files one by one
             outputStream = new ZipOutputStream(new FileOutputStream(strZipFile));
-            for (int i = 0; i< fileAbsoluteList.size(); i++) {
-                File file = new File(fileAbsoluteList.get(i));
-                if (file != null) {
-                    zipFile(outputStream, file, "");
-                    ret = true;
-                }
+            for (int i = 0; i< fileList.size(); i++) {
+                zipFile(outputStream, fileList.get(i), "");
+                ret = true;
             }
         }
         catch (Exception ex) {
             LogUtils.e("zip Exception: " + ex.toString());
+            return false;
         }
-
-        try {
-            if (outputStream != null) {
-                outputStream.close();
+        finally {
+            try {
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            } catch (Exception ex) {
+                LogUtils.e("zipFiles Exception: " + ex.toString());
             }
-        }
-        catch (IOException ex) {
-            LogUtils.e("zip IOException: " + ex.toString());
         }
 
         return ret;
@@ -185,9 +156,10 @@ public class ZipUtils {
         if (f.isDirectory()) {
             //LogUtils.e("zip dir: " + fileName);
             File[] files = f.listFiles();
-            for (int i=0; i<files.length; i++) {
-                //recursive zip
-                zipFile(out, files[i], path + fn + "/");
+            if (files != null) {
+                for (File file : files) {
+                    zipFile(out, file, path + fn + "/");
+                }
             }
         }
         else {
@@ -205,10 +177,11 @@ public class ZipUtils {
         }
     }
 
-    private static void touchPath(String strPath) {
+    private static boolean touchPath(String strPath) {
         File fPath = new File(strPath);
         if (!fPath.exists()) {
-            fPath.mkdirs();
+            return fPath.mkdirs();
         }
+        return true;
     }
 }

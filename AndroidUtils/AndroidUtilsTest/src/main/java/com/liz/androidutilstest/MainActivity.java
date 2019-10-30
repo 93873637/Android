@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.liz.androidutils.SysTools;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeChecker;
+import com.liz.androidutils.ZipUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +30,7 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //String dir = Environment.getExternalStorageDirectory().getAbsolutePath();
+        //Toast.makeText(this, dir, Toast.LENGTH_LONG).show();
+
+        ZipUtils.zipFileAbsolutes("/sdcard/0.sd/whatsai/whatsai2.zip",
+                "/sdcard/0.sd/whatsai/whatsai.dat",
+                "/sdcard/0.sd/whatsai/whatsai.files");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

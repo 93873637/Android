@@ -28,10 +28,13 @@ public class WhatsaiStorage {
     private static Node mRootNode = null;
     private static boolean mDirty = false;
 
-    public static void init() {
+    public static boolean init() {
         mRootNode = new WhatsaiDir();
         mRootNode.setName(ComDef.APP_NAME);
-        buildDirs();
+        if (!buildDirs()) {
+            LogUtils.e("WhatsaiStorage: buildDirs failed.");
+            return false;
+        }
 
         /*
         //##@: for test only
@@ -43,21 +46,25 @@ public class WhatsaiStorage {
         //StorageXML.loadData((WhatsaiDir)mRootNode);
         StorageJSON.loadData((WhatsaiDir)mRootNode);
         startSavingTimer();
+        return true;
     }
 
-    private static void buildDirs() {
-        FileUtils.touchDir(ComDef.WHATSAI_DATA_PATH);
-        FileUtils.touchDir(ComDef.WHATSAI_AUDIO_DATA_PATH);
-        /*
-        File path = new File(ComDef.WHATSAI_DATA_PATH);
-        if (!path.exists()) {
-            LogUtils.e("WhatsaiStorage: whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" not exists, create....");
-            if (!path.mkdirs()) {
-                LogUtils.e("WhatsaiStorage: create whatsai data path \"" + ComDef.WHATSAI_DATA_PATH + "\" failed.");
-            }
+    private static boolean buildDirs() {
+        if (!FileUtils.touchDir(ComDef.WHATSAI_HOME)) {
+            LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_HOME + " failed.");
+            return false;
         }
-        */
+        if (!FileUtils.touchDir(ComDef.WHATSAI_DATA_DIR)) {
+            LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_DATA_DIR + " failed.");
+            return false;
+        }
+        if (!FileUtils.touchDir(ComDef.WHATSAI_AUDIO_DATA_PATH)) {
+            LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_AUDIO_DATA_PATH + " failed.");
+            return false;
+        }
+        return true;
     }
+
     public static Node getRootNode() {
         return mRootNode;
     }

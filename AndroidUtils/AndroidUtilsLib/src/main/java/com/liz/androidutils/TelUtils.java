@@ -7,8 +7,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.telephony.TelephonyManager;
 
+import com.android.internal.telephony.ITelephony;
+
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
+
+import static android.content.Context.TELEPHONY_SERVICE;
 
 public class TelUtils {
 
@@ -26,7 +30,7 @@ public class TelUtils {
 
     public static String endCall(Context context) {
         try {
-            TelephonyManager telMag = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager telMag = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
             Class<TelephonyManager> c = TelephonyManager.class;
             //get obj ITelephony by reflect
             Method mthEndCall = c.getDeclaredMethod("getITelephony", (Class[]) null);
@@ -51,6 +55,30 @@ public class TelUtils {
         }
         String regex = "^[0-9]*$";
         return Pattern.matches(regex, strTelNumber);
+    }
+
+    public static ITelephony getITelephony(Context context) {
+        TelephonyManager mTelephonyManager = (TelephonyManager) context
+                .getSystemService(TELEPHONY_SERVICE);
+        Class c = TelephonyManager.class;
+        Method getITelephonyMethod = null;
+        try {
+            getITelephonyMethod = c.getDeclaredMethod("getITelephony",
+                    (Class[]) null); // 获取声明的方法
+            getITelephonyMethod.setAccessible(true);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        try {
+            ITelephony iTelephony = (ITelephony) getITelephonyMethod.invoke(
+                    mTelephonyManager, (Object[]) null); // 获取实例
+            return iTelephony;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

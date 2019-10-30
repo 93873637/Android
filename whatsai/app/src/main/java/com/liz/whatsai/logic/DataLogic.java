@@ -2,6 +2,7 @@ package com.liz.whatsai.logic;
 
 import android.content.Context;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.app.ThisApp;
 import com.liz.whatsai.storage.WhatsaiStorage;
 
@@ -24,11 +25,15 @@ public class DataLogic extends WhatsaiStorage {
 
     private static Map<String, Node> mAlarmMap = new HashMap<String, Node>();
 
-    public static void init() {
-        WhatsaiStorage.init();
+    public static boolean init() {
+        if (!WhatsaiStorage.init()) {
+            LogUtils.e("DataLogic: WhatsaiStorage init failed.");
+            return false;
+        }
         mActiveNode = getRootNode();
         WhatsaiAudio.init();
         startAlarmTimer();
+        return true;
     }
 
     private static void startAlarmTimer() {

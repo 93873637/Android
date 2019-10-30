@@ -28,6 +28,8 @@ public abstract class Node implements Comparable<Node> {
     private int remind_type;
     private RemindTime remind_time;
 
+    private String attach_file;
+
     private Node parent;
     private List<Node> list;
 
@@ -291,6 +293,14 @@ public abstract class Node implements Comparable<Node> {
 
         LogUtils.d("Remind:parseRemind: get remind time at " + remind_time.hour + ":" + remind_time.minute + ":" + remind_time.second);
         remind_type = ComDef.REMIND_TYPE_DAILY_TIME;
+    }
+
+    public String getAttachFile() {
+        return attach_file;
+    }
+
+    public void setAttachFile(String attachFile) {
+        attach_file = attachFile;
     }
 
     public boolean isRemindValid() {

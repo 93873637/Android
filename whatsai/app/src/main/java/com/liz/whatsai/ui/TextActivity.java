@@ -55,7 +55,8 @@ public class TextActivity extends Activity implements View.OnClickListener {
             return;
         }
         mTextNode = (WhatsaiText) node;
-        ((TextView)findViewById(R.id.titlebar_title)).setText(DataLogic.getPath() + "/" + mTextNode.getName());
+        String titleName = DataLogic.getPath() + "/" + mTextNode.getName();
+        ((TextView)findViewById(R.id.titlebar_title)).setText(titleName);
 
         findViewById(R.id.titlebar_menu).setOnClickListener(this);
         findViewById(R.id.titlebar_close).setOnClickListener(this);

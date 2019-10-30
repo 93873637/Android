@@ -38,7 +38,7 @@ public class ThisApp extends Application {
         return mAppInst;
     }
 
-    public static void init() {
-        DataLogic.init();
+    public static boolean init() {
+        return DataLogic.init();
     }
 }

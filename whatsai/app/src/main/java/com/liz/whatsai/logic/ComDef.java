@@ -1,8 +1,6 @@
 package com.liz.whatsai.logic;
 
-import android.widget.RadioButton;
-
-import com.liz.whatsai.R;
+import android.os.Environment;
 
 /**
  * Common Definitions
@@ -18,22 +16,24 @@ public class ComDef {
     // WhatsaiStorage Definitions
 
     //unfortunately, external storage can't be written by app for security!
-    //public static final String WHATSAI_DATA_PATH = "/storage/0CCD-50F4/0.sd/whatsai";
-    public static final String WHATSAI_DATA_PATH = "/sdcard/0.sd/whatsai";
+    //public static final String WHATSAI_HOME = "/storage/0CCD-50F4/0.sd/whatsai";
+    public static final String WHATSAI_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/0.sd/whatsai";
 
     private static final String WHATSAI_DATA_FILE_NAME = "whatsai.dat";
-    public static final String WHATSAI_DATA_FILE = WHATSAI_DATA_PATH  + "/" + WHATSAI_DATA_FILE_NAME;
+    private static final String WHATSAI_DATA_DIR_NAME = "whatsai.files";
+    public static final String WHATSAI_DATA_FILE = WHATSAI_HOME + "/" + WHATSAI_DATA_FILE_NAME;
+    public static final String WHATSAI_DATA_DIR = WHATSAI_HOME + "/" + WHATSAI_DATA_DIR_NAME;
     public static final String WHATSAI_DATA_FILE_TEMP = WHATSAI_DATA_FILE + ".tmp";
     public static final String WHATSAI_DATA_FILE_SYNC = WHATSAI_DATA_FILE + ".syn";
 
-    public static final String WHATSAI_AUDIO_DATA_PATH = WHATSAI_DATA_PATH + "/audio";
+    public static final String WHATSAI_AUDIO_DATA_PATH = WHATSAI_HOME + "/audio";
 
     public static final int WHATSAI_SAVING_DELAY = 3 * 1000;  //unit by milliseconds
     public static final int WHATSAI_SAVING_TIMER = 10 * 1000;  //unit by milliseconds
     public static final long CLOUD_SAVE_PERIOD = 24 * 3600 * 1000;  //one day, unit by millisecond
 
     public static final String CLOUD_FILE_NAME = "whatsai.zip";
-    public static final String CLOUD_FILE_PATH = WHATSAI_DATA_PATH  + "/" + CLOUD_FILE_NAME;
+    public static final String CLOUD_FILE_PATH = WHATSAI_HOME + "/" + CLOUD_FILE_NAME;
 
     //tags for json
     public static final String TAG_TYPE = "TYPE";
