@@ -25,4 +25,6 @@ public class ComDef {
     public static final String DIALER_DIR = "/sdcard/multidialer";
 
     public static final int JPEG_QUALITY = 90;  //1~100
+
+    public static final String KEY_CURRENT_CALLED_INDEX = "CurrentCalledIndex";
 }

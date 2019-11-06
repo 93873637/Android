@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.multidialer.logic.ComDef;
+import com.liz.multidialer.logic.DataLogic;
 
 /**
  * ThisApp.java
@@ -26,6 +27,7 @@ public class ThisApp extends Application {
         mAppVersionShow = "";
 
         LogUtils.setTag(ComDef.APP_NAME);
+        DataLogic.init();
     }
 
     public static Context getAppContext() {

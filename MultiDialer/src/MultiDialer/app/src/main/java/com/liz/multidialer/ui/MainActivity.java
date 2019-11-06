@@ -5,9 +5,10 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -20,11 +21,16 @@ import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -37,14 +43,14 @@ import android.widget.Toast;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TelUtils;
-import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.R;
 import com.liz.multidialer.app.ThisApp;
 import com.liz.multidialer.logic.ComDef;
+import com.liz.multidialer.logic.DataLogic;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,19 +67,16 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_FLOATING_BUTTON = 2;
 
     private EditText mEditDialInterval;
-    private TextView mTextCalledNumber;
+    private TextView mTextTelListInfo;
+    private TextView mTextCalledIndex;
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
     private Button mBtnCall;
 
-    private ArrayList<String> mTelList;
-    private String mPictureDir = ComDef.DIALER_DIR;
+    private Timer mUpdateUITimer;
 
-    private int mTelIndex = 0;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private int mCallInterval = ComDef.CALL_INTERVAL;
-
-    private boolean mCallRunning = false;
 
     private int mResultCode;
     private Intent mResultData;
@@ -89,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
     private int mWindowHeight = 0;
     private int mScreenDensity = 0;
 
+    private Messenger sMessenger;
+    private boolean isConn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,37 +108,19 @@ public class MainActivity extends AppCompatActivity {
         String editInterval = "" + ComDef.CALL_INTERVAL;
         mEditDialInterval.setText(editInterval);
 
-        mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_NAME);
+        mTextTelListInfo = findViewById(R.id.text_tel_list_info);
 
-        String telListInfo;
-        boolean bExit = false;
-        if (mTelList == null) {
-            telListInfo = "ERROR: 没有号码列表文件: " + ComDef.TEL_LIST_FILE_NAME;
-            bExit = true;
-        }
-        else if (mTelList.size() == 0) {
-            telListInfo = "ERROR: 号码列表为空";
-            bExit = true;
-        }
-        else {
-            telListInfo = "电话号码数量(" + ComDef.TEL_LIST_FILE_NAME + "): " + mTelList.size();
-        }
-
-        TextView textTelNumber = findViewById(R.id.text_tel_list_info);
-        textTelNumber.setText(telListInfo);
-
-        setCalledNumber();
-        findViewById(R.id.text_reset_called_number).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.text_reset_called_index).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTelIndex = 0;
-                saveCurrentCallIndex();
-                setCalledNumber();
+                DataLogic.resetCalledIndex();
             }
         });
 
+        mTextCalledIndex = findViewById(R.id.text_called_index);
+
         mBtnCall = findViewById(R.id.btn_start_call);
-        if (bExit) {
+        if (!DataLogic.initCheck()) {
             mBtnCall.setText("请先退出，准备好号码文件后重试");
             mBtnCall.setBackgroundColor(Color.RED);
             mBtnCall.setOnClickListener(new View.OnClickListener() {
@@ -148,11 +136,14 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     mEditDialInterval.clearFocus();
-                    if (!mCallRunning) {
-                        startCallOnList();
+                    if (!DataLogic.isCallRunning()) {
+                        mCallInterval = Integer.parseInt(mEditDialInterval.getText().toString());
+                        if (DataLogic.startCall()){
+                            loopCallOnNum();
+                        }
                     }
                     else {
-                        stopCallOnList();
+                        DataLogic.stopCall();
                     }
                 }
             });
@@ -169,34 +160,85 @@ public class MainActivity extends AppCompatActivity {
         FloatingButtonService.setFloatingButtonCallback(new FloatingButtonService.FloatingButtonCallback() {
             @Override
             public void onFloatButtonClicked() {
-                stopCallOnList();
+                DataLogic.stopCall();
             }
         });
-        startFloatingButtonService(mBtnCall);
-    }
 
-    public void setCalledNumber() {
-        mTelIndex = readCurrentCallIndex();
-        String callInfo = "当前已拨打: " + mTelIndex;
-        mTextCalledNumber = findViewById(R.id.text_called_number);
-        mTextCalledNumber.setText(callInfo);
-    }
-
-    public void startFloatingButtonService(View view) {
-        if (FloatingButtonService.isStarted) {
-            return;
+        if (Settings.canDrawOverlays(this)) {
+            FloatingButtonService.start(this, conn);
         }
-        if (!Settings.canDrawOverlays(this)) {
-            Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT);
+        else {
+            Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT).show();
             startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), REQUEST_CODE_FLOATING_BUTTON);
-        } else {
-            startService(new Intent(MainActivity.this, FloatingButtonService.class));
+        }
+
+        startUITimer();
+    }
+
+    private void startUITimer() {
+        //detect and update NV21 files of /sdcard/camera
+        mUpdateUITimer = new Timer();
+        mUpdateUITimer.schedule(new TimerTask() {
+            public void run () {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        updateUI();
+                    }
+                });
+            }
+        }, 1000, 1000);
+    }
+
+    private void stopUITimer() {
+        if (mUpdateUITimer != null) {
+            mUpdateUITimer.cancel();
+            mUpdateUITimer = null;
         }
     }
 
-    public void stopFloatingButtonService() {
-        if (FloatingButtonService.isStarted) {
-            stopService(new Intent(MainActivity.this, FloatingButtonService.class));
+    protected void updateUI() {
+        mTextTelListInfo.setText(DataLogic.getTelListInfo());
+
+        String callIndexInfo = "当前已拨打: " + DataLogic.getCurrentCallIndex();
+        mTextCalledIndex.setText(callIndexInfo);
+
+        if (DataLogic.isCallRunning()) {
+            mBtnCall.setText("停止拨号");
+            mBtnCall.setBackgroundColor(Color.RED);
+
+
+            String progressInfo = "正在拨打 " + (DataLogic.getCurrentCallIndex()+1) + "/" + DataLogic.getTelNumber() + ": " + DataLogic.getCurrentTelNumber();
+            Toast.makeText(MainActivity.this, progressInfo, Toast.LENGTH_LONG).show();
+
+            // 初始化发送给Service的消息，并将cMessenger传递给Service
+            Message msg = Message.obtain();
+            msg.what = 0;
+            Bundle b = new Bundle();
+            b.putString("progressInfo", progressInfo);
+            msg.setData(b);
+            try {
+                sMessenger.send(msg);
+
+            } catch (RemoteException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        else {
+            if (DataLogic.isCallFinished()) {
+                mBtnCall.setText("拨号结束, 点击退出");
+                mBtnCall.setBackgroundColor(Color.BLUE);
+                mBtnCall.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ThisApp.exitApp();
+                    }
+                });
+            }
+            else {
+                mBtnCall.setText("开始拨号");
+                mBtnCall.setBackgroundColor(Color.GREEN);
+            }
         }
     }
 
@@ -230,13 +272,27 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "授权失败", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "授权成功", Toast.LENGTH_SHORT).show();
-                startService(new Intent(MainActivity.this, FloatingButtonService.class));
+                FloatingButtonService.start(this, conn);
             }
             return;
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    //定义Connection，作为启动Services的参数
+    private ServiceConnection conn=new ServiceConnection(){
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            sMessenger = new Messenger(service);
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            sMessenger=null;
+        }
+    };
 
     protected void checkPermissions() {
         boolean allPermissionsGranted = true;
@@ -254,77 +310,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startCallOnList() {
-        if (mTelList == null) {
-            showProgress("ERROR: startCallOnList: list null");
-            return;
-        }
+    private void loopCallOnNum() {
+        LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex());
+        //LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex() + ", ThreadId=" + android.os.Process.myTid());
 
-        if (!genPictureDir()) {
-            showProgress("ERROR: startCallOnList: create picture dir failed.");
-            return;
-        }
-
-        mTelIndex = readCurrentCallIndex();
-        if (mTelIndex >= mTelList.size()) {
-            showProgress("startCallOnList: All call numbers(" + mTelIndex + "/" + mTelList.size() + ") have been finished.");
-            return;
-        }
-
-        mCallRunning = true;
-        mBtnCall.setText("停止拨号");
-        mBtnCall.setBackgroundColor(Color.RED);
-
-        mCallInterval = Integer.parseInt(mEditDialInterval.getText().toString());
-        showProgress("***startCallOnList: current/total=" + mTelIndex + "/" + mTelList.size() + ", interval=" + mCallInterval + "s...");
-
-        callOnNum();
-    }
-
-    private void stopCallOnList() {
-        mCallRunning = false;
-        mBtnCall.setText("开始拨号");
-        mBtnCall.setBackgroundColor(Color.GREEN);
-    }
-
-    private String getCurrentTelNumber() {
-        LogUtils.d("getCurrentTelNumber: mTelIndex=" + mTelIndex);
-        return mTelList.get(mTelIndex);
-    }
-
-    private int readCurrentCallIndex() {
-        SharedPreferences sharedPreferences = getSharedPreferences("MultiDialerSharedPreferences", Context.MODE_PRIVATE);
-        return sharedPreferences.getInt("CallIndex", 0);
-    }
-
-    private void saveCurrentCallIndex() {
-        SharedPreferences sharedPreferences= getSharedPreferences("MultiDialerSharedPreferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("CallIndex", mTelIndex);
-        editor.apply();
-    }
-
-    private void callOnNum() {
-        LogUtils.d("callOnNum: mTelIndex=" + mTelIndex);
-        //LogUtils.d("callOnNum: mTelIndex=" + mTelIndex + ", ThreadId=" + android.os.Process.myTid());
-
-        String strTel = getCurrentTelNumber();
-
-        String progressInfo = "正在拨打 " + (mTelIndex+1) + "/" + mTelList.size() + ": " + strTel;
-        Toast.makeText(MainActivity.this, progressInfo, Toast.LENGTH_LONG).show();
-
+        String strTel = DataLogic.getCurrentTelNumber();
         if (!TelUtils.isValidTelNumber(strTel)) {
-            showProgress("#" + (mTelIndex+1) + ": Invalid Tel Number = \"" + strTel + "\"");
+            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
             callNextNum();
             return;
         }
 
         if (mCallState != TelephonyManager.CALL_STATE_IDLE) {
-            showProgress("#" + (mTelIndex+1) + ": Last call not ended, try end and call again...");
+            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end and call again...");
             TelUtils.endCall(MainActivity.this);
             new Handler().postDelayed(new Runnable() {
                 public void run() {
-                    callOnNum();
+                    loopCallOnNum();
                 }
             }, ComDef.WAIT_CALL_IDLE_TIME);
             return;
@@ -332,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             String ret = TelUtils.startCall(MainActivity.this, strTel);
-            showProgress("#" + (mTelIndex+1) + ": Start Call, Tel = " + strTel + ", " + ret);
+            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Start Call, Tel = " + strTel + ", " + ret);
 
             new Handler().postDelayed(new Runnable() {
                 public void run() {
@@ -349,34 +351,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, mCallInterval*1000L);
         } catch (Exception e) {
-            Toast.makeText(MainActivity.this, "callOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
-            showProgress("callOnNum Exception: " + e.toString());
+            Toast.makeText(MainActivity.this, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
+            showProgress("loopCallOnNum Exception: " + e.toString());
             e.printStackTrace();
         }
     }
 
     private void callNextNum() {
-        LogUtils.d("callNextNum: mTelIndex=" + mTelIndex);
-        if (!mCallRunning) {
-            showProgress("***callNextNum: Calls not running.");
-            return;
+        if (DataLogic.toNextCall()) {
+            loopCallOnNum();
         }
-
-        mTelIndex++;
-        saveCurrentCallIndex();
-        if (mTelIndex < mTelList.size()) {
-            callOnNum();
-        } else {
-            mBtnCall.setText("拨号结束, 点击退出");
-            mBtnCall.setBackgroundColor(Color.BLUE);
-            mBtnCall.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ThisApp.exitApp();
-                }
-            });
-            mCallRunning = false;
-            showProgress("***callNextNum: All Calls Finished.");
+        else {
+            LogUtils.d("callNextNum: can't go to next call.");
         }
     }
 
@@ -401,7 +387,7 @@ public class MainActivity extends AppCompatActivity {
         public void onCallStateChanged(int state, String incomingNumber) {
             //LogUtils.d("onCallStateChanged: ThreadId = " + android.os.Process.myTid());
             mCallState = state;
-            LogUtils.d("onCallStateChanged: mCallState = " + mCallState);
+            //LogUtils.d("onCallStateChanged: mCallState = " + mCallState);
 //            switch (state) {
 //                case TelephonyManager.CALL_STATE_IDLE:
 //                    LogUtils.d("onCallStateChanged: CALL_STATE_IDLE");
@@ -495,7 +481,7 @@ public class MainActivity extends AppCompatActivity {
                 LogUtils.e("captureOnce: acquireLatestImage return null");
                 continue;
             }
-            saveCaptureImage(img);
+            DataLogic.saveCaptureImage(img);
             img.close();
             break;
         }
@@ -530,24 +516,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean genPictureDir() {
-        String strTimeDir = new SimpleDateFormat("yyMMdd.HHmmss").format(new java.util.Date());
-        mPictureDir = ComDef.DIALER_DIR + "/" + strTimeDir;
-        if (!FileUtils.touchDir(mPictureDir)) {
-            showProgress("ERROR: create picture dir " + mPictureDir + " failed.");
-            return false;
-        }
-        return true;
-    }
-
-    private void saveCaptureImage(Image img) {
-        LogUtils.d("saveCaptureImage: E...");
-        String jpgFileName = mPictureDir + "/" + getCurrentTelNumber() + ".jpg";
-        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
-        if (ret < 0) {
-            showProgress("save screen image to " + jpgFileName + " failed with error " + ret);
-        } else {
-            showProgress("screen image saved to " + jpgFileName);
-        }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopUITimer();
     }
 }
