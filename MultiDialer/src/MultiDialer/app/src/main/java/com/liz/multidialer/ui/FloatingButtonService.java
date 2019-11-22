@@ -1,13 +1,13 @@
 package com.liz.multidialer.ui;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,14 +16,12 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.liz.androidutils.LogUtils;
@@ -32,23 +30,30 @@ import com.liz.androidutils.LogUtils;
  * Created by dongzhong on 2018/5/30.
  */
 
+@SuppressWarnings("unused")
 public class FloatingButtonService extends Service {
 
-    private static final int LAYOUT_PARAM_WIDTH = 500;
-    private static final int LAYOUT_PARAM_HEIGHT = 120;
+    private static final int LAYOUT_PARAM_WIDTH = 800;
+    private static final int LAYOUT_PARAM_HEIGHT = 160;
     private static final int LAYOUT_PARAM_X = 0;
-    private static final int LAYOUT_PARAM_Y = 200;
+    private static final int LAYOUT_PARAM_Y = 180;
+
+    private static final int MSG_CODE_SHOW_FLOATING_BUTTON = 0;
+    private static final int MSG_CODE_HIDE_FLOATING_BUTTON = 1;
+    private static final int MSG_CODE_PROGRESS_INFO = 2;
+
+    private static final String MSG_KEY_PROGRESS_INFO = "FB_ProgressInfo";
 
     private static final int BACKGROUND_COLOR_NORMAL = Color.RED;
     private static final int BACKGROUND_COLOR_DOWN = Color.GRAY;
 
-    private static boolean isStarted = false;
+    private static FloatingButtonService mFloatingButtonService = null;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Interface Functions
 
-    public static void start(Context context, ServiceConnection conn) {
-        if (!FloatingButtonService.isStarted) {
+    public static void start(Context context) {
+        if (mFloatingButtonService == null) {
             //context.startService(new Intent(context, FloatingButtonService.class));
             Intent intent = new Intent(context, FloatingButtonService.class);
             context.bindService(intent, conn, Context.BIND_AUTO_CREATE);
@@ -56,8 +61,41 @@ public class FloatingButtonService extends Service {
     }
 
     public static void stop(Context context) {
-        if (FloatingButtonService.isStarted) {
+        if (mFloatingButtonService != null) {
             context.stopService(new Intent(context, FloatingButtonService.class));
+        }
+    }
+
+    public static void updateInfo(String info) {
+        if (mFloatingButtonService == null) {
+            return;
+        }
+        Message msg = Message.obtain();
+        msg.what = MSG_CODE_PROGRESS_INFO;
+        Bundle b = new Bundle();
+        b.putString(MSG_KEY_PROGRESS_INFO, info);
+        msg.setData(b);
+        try {
+            sMessenger.send(msg);
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void showFloatingButton(boolean show) {
+        if (mFloatingButtonService == null) {
+            return;
+        }
+        Message msg = Message.obtain();
+        msg.what = show ? MSG_CODE_SHOW_FLOATING_BUTTON : MSG_CODE_HIDE_FLOATING_BUTTON;
+        Bundle b = new Bundle();
+        msg.setData(b);
+        try {
+            sMessenger.send(msg);
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
@@ -82,19 +120,17 @@ public class FloatingButtonService extends Service {
 
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mLayoutParams;
-    private FloatingButton mFloatButton;
+    private static FloatingButton mFloatButton;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         LogUtils.d("FloatingButtonService: onCreate");
-        isStarted = true;
+        mFloatingButtonService = this;
 
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mLayoutParams = genLayoutParams();
-
-        showFloatingWindow();
     }
 
     @Override
@@ -103,24 +139,50 @@ public class FloatingButtonService extends Service {
         return sMessenger.getBinder();
     }
 
-    // 定义Handler，重载Handler的消息处理方法
-    private Handler mHandler = new  Handler() {
+    private static Handler mHandler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
+        public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what) {
-                case 0:
-                    Bundle b = msg.getData();
-                    String progressInfo = b.getString("progressInfo");
-                    LogUtils.d("#################@: get what0: info=" + progressInfo);
-                    mFloatButton.setText(progressInfo);
+                case MSG_CODE_SHOW_FLOATING_BUTTON:
+                    if (mFloatingButtonService != null) {
+                        mFloatingButtonService.showFloatingWindow();
+                    }
+                    break;
+                case MSG_CODE_HIDE_FLOATING_BUTTON:
+                    if (mFloatingButtonService != null) {
+                        mFloatingButtonService.hideFloatingWindow();
+                    }
+                    break;
+                case MSG_CODE_PROGRESS_INFO:
+                    if (mFloatButton != null) {
+                        Bundle b = msg.getData();
+                        String progressInfo = b.getString(MSG_KEY_PROGRESS_INFO);
+                        LogUtils.d("FloatingButtonService: get progress info: " + progressInfo);
+                        mFloatButton.setText(progressInfo);
+                    }
+                    break;
+                default:
+                    LogUtils.e("ERROR: FloatingButtonService: Unknown message code: " + msg.what);
                     break;
             }
-            super.handleMessage(msg);
+            return false;
         }
-    };
+    });
 
     //初始化Messenger，用于消息发送和接收
-    private Messenger sMessenger= new Messenger(mHandler);
+    private static Messenger sMessenger= new Messenger(mHandler);
+
+    private static ServiceConnection conn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            sMessenger = new Messenger(service);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            sMessenger = null;
+        }
+    };
 
     private WindowManager.LayoutParams genLayoutParams() {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
@@ -144,13 +206,12 @@ public class FloatingButtonService extends Service {
 //    public IBinder onBind(Intent intent) {
 //        return null;
 //    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        LogUtils.d("FloatingButtonService: onStartCommand");
-        showFloatingWindow();
-        return super.onStartCommand(intent, flags, startId);
-    }
+//
+//    @Override
+//    public int onStartCommand(Intent intent, int flags, int startId) {
+//        LogUtils.d("FloatingButtonService: onStartCommand");
+//        return super.onStartCommand(intent, flags, startId);
+//    }
 
     private void showFloatingWindow() {
         if (!Settings.canDrawOverlays(this)) {
@@ -160,9 +221,18 @@ public class FloatingButtonService extends Service {
 
         if (mFloatButton == null) {
             mFloatButton = new FloatingButton(getApplicationContext());
+            mWindowManager.addView(mFloatButton, mLayoutParams);
         }
 
-        mWindowManager.addView(mFloatButton, mLayoutParams);
+        //mWindowManager.addView(mFloatButton, mLayoutParams);
+        mFloatButton.setVisibility(View.VISIBLE);
+    }
+
+    private void hideFloatingWindow() {
+        if (mFloatButton != null) {
+            mFloatButton.setVisibility(View.INVISIBLE);
+            //mWindowManager.removeView(mFloatButton);
+        }
     }
 
     private class FloatingButton extends AppCompatButton implements View.OnClickListener, View.OnTouchListener {
@@ -190,6 +260,7 @@ public class FloatingButtonService extends Service {
         @Override
         public void onClick(View v) {
             LogUtils.d("FloatingButton: onClick");
+            mFloatButton.setText("正在停止...");
             if (mFloatingButtonCallback != null) {
                 mFloatingButtonCallback.onFloatButtonClicked();
             }

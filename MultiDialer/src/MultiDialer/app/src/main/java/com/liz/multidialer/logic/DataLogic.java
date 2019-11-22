@@ -2,12 +2,12 @@ package com.liz.multidialer.logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.media.Image;
 
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.app.ThisApp;
 
 import java.text.SimpleDateFormat;
@@ -29,8 +29,12 @@ public class DataLogic {
     private static boolean mCallRunning = false;
 
     public static void init() {
-        mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_NAME);
+        loadTelList();
         genPictureDir();
+    }
+
+    public static void loadTelList() {
+        mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_NAME);
     }
 
     public static String getTelListInfo() {
@@ -105,7 +109,7 @@ public class DataLogic {
     }
 
     public static void resetCalledIndex() {
-        mCurrentCallIndex = 0;
+        mCurrentCallIndex = ComDef.INVALID_CALL_INDEX;
         saveCurrentCallIndex();
     }
 
@@ -126,6 +130,10 @@ public class DataLogic {
     }
 
     public static boolean startCall() {
+        if (mCurrentCallIndex == ComDef.INVALID_CALL_INDEX) {
+            mCurrentCallIndex = 0;
+        }
+
         if (mCurrentCallIndex >= mTelList.size()) {
             LogUtils.i("startCall: All call numbers(" + DataLogic.getCurrentCallIndex() + "/" + DataLogic.getTelNumber() + ") have been finished.");
             return false;
@@ -137,18 +145,19 @@ public class DataLogic {
     }
 
     public static boolean toNextCall() {
-        LogUtils.d("toNextCall: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex());
-        if (!mCallRunning) {
-            LogUtils.i("***callNextNum: Calls not running.");
-            return false;
-        }
+        LogUtils.d("toNextCall: DataLogic.mCurrentCallIndex=" + DataLogic.getCurrentCallIndex());
 
         mCurrentCallIndex ++;
         saveCurrentCallIndex();
 
         if (mCurrentCallIndex >= mTelList.size()) {
-            LogUtils.i("***toNextCall: All Calls Finished.");
+            LogUtils.i("toNextCall: All Calls Finished.");
             mCallRunning = false;
+            return false;
+        }
+
+        if (!mCallRunning) {
+            LogUtils.i("toNextCall: Calls not running.");
             return false;
         }
 
@@ -170,7 +179,8 @@ public class DataLogic {
 
     public static void saveCaptureImage(Image img) {
         LogUtils.d("saveCaptureImage: E...");
-        String jpgFileName = mPictureDir + "/" + getCurrentTelNumber() + ".jpg";
+        String jpgFileName = mPictureDir + "/" + getCurrentTelNumber() + "_" + TimeUtils.getFileTime() + ".jpg";
+
         int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
         if (ret < 0) {
             LogUtils.e("save screen image to " + jpgFileName + " failed with error " + ret);
