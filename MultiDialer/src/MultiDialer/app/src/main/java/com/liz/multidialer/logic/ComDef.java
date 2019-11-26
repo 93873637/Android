@@ -35,5 +35,5 @@ public class ComDef {
 
     public static final String KEY_CURRENT_CALLED_INDEX = "CurrentCalledIndex";
 
-    public static final int INVALID_CALL_INDEX = -1;
+    public static final String MULTIDIALER_SHARED_PREFERENCES = "MultiDialerSharedPreferences";
 }

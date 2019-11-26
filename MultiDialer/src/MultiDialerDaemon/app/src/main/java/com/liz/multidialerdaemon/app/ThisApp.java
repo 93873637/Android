@@ -1,16 +1,12 @@
-package com.liz.multidialer.app;
+package com.liz.multidialerdaemon.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 
 import com.liz.androidutils.LogUtils;
-import com.liz.multidialer.logic.ComDef;
-import com.liz.multidialer.logic.DataLogic;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import com.liz.multidialerdaemon.logic.ComDef;
+import com.liz.multidialerdaemon.logic.DataLogic;
 
 /**
  * ThisApp.java
@@ -34,7 +30,6 @@ public class ThisApp extends Application {
         LogUtils.d("ThisApp: onCreate, pid = " + android.os.Process.myPid());
 
         DataLogic.init();
-        startLifeTimer();
     }
 
     public static Context getAppContext() {
@@ -42,7 +37,6 @@ public class ThisApp extends Application {
     }
 
     public static void exitApp() {
-        stopLifeTimer();
         int pid = android.os.Process.myPid();
         LogUtils.d("exitApp, pid = " + pid);
         android.os.Process.killProcess(pid);
@@ -71,33 +65,4 @@ public class ThisApp extends Application {
         LogUtils.d("onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
     }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    public static final long LIFE_TIMER_DELAY = 1000L;  //unit by ms
-    public static final long LIFE_TIMER_PERIOD = 5000L;  //unit by ms
-    public static final String LIFE_BROADCAST_MSG = "com.liz.multidialer.LIFE_BROADCAST";
-
-    private static Timer mLifeTimer;
-
-    private static void startLifeTimer() {
-        LogUtils.d("startLifeTimer");
-        //detect and update NV21 files of /sdcard/camera
-        mLifeTimer = new Timer();
-        mLifeTimer.schedule(new TimerTask() {
-            public void run() {
-                LogUtils.d("sendBroadcast: " + LIFE_BROADCAST_MSG);
-                ThisApp.getAppContext().sendBroadcast(new Intent(LIFE_BROADCAST_MSG));
-            }
-        }, LIFE_TIMER_DELAY, LIFE_TIMER_PERIOD);
-    }
-
-    private static void stopLifeTimer() {
-        if (mLifeTimer != null) {
-            mLifeTimer.cancel();
-            mLifeTimer = null;
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
 }

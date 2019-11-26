@@ -31,6 +31,8 @@ public class DataLogic {
     public static void init() {
         loadTelList();
         genPictureDir();
+        mCurrentCallIndex = readCurrentCallIndex();
+
     }
 
     public static void loadTelList() {
@@ -109,17 +111,17 @@ public class DataLogic {
     }
 
     public static void resetCalledIndex() {
-        mCurrentCallIndex = ComDef.INVALID_CALL_INDEX;
+        mCurrentCallIndex = 0;
         saveCurrentCallIndex();
     }
 
     private static int readCurrentCallIndex() {
-        SharedPreferences sharedPreferences = ThisApp.getAppContext().getSharedPreferences("MultiDialerSharedPreferences", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = ThisApp.getAppContext().getSharedPreferences(ComDef.MULTIDIALER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(ComDef.KEY_CURRENT_CALLED_INDEX, 0);
     }
 
     private static void saveCurrentCallIndex() {
-        SharedPreferences sharedPreferences= ThisApp.getAppContext().getSharedPreferences("MultiDialerSharedPreferences", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences= ThisApp.getAppContext().getSharedPreferences(ComDef.MULTIDIALER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(ComDef.KEY_CURRENT_CALLED_INDEX, mCurrentCallIndex);
         editor.apply();
@@ -130,10 +132,6 @@ public class DataLogic {
     }
 
     public static boolean startCall() {
-        if (mCurrentCallIndex == ComDef.INVALID_CALL_INDEX) {
-            mCurrentCallIndex = 0;
-        }
-
         if (mCurrentCallIndex >= mTelList.size()) {
             LogUtils.i("startCall: All call numbers(" + DataLogic.getCurrentCallIndex() + "/" + DataLogic.getTelNumber() + ") have been finished.");
             return false;

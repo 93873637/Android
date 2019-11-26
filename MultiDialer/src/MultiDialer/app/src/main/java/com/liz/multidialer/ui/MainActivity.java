@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
@@ -54,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private Button mBtnCall;
 
     private Timer mUITimer;
-    //private Timer mCaptureTimer;
-    //private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private long mEndCallDelay = ComDef.DEFAULT_END_CALL_DELAY;
     TelephonyManager mTelephonyManager;
 
@@ -64,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LogUtils.d("onCreate: MainThreadId=" + android.os.Process.myTid());
+        LogUtils.d("MainActivity: onCreate: MainActivity Object = " + MainActivity.this);
+        LogUtils.d("MainActivity: onCreate: MainThreadId = " + android.os.Process.myTid());
 
         checkPermissions();
 
@@ -141,7 +141,14 @@ public class MainActivity extends AppCompatActivity {
         startUITimer();
 
         ScreenCapture.initScreenCapture(MainActivity.this);
-        //loopListenOnPhoneState();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String daemonAction = bundle.getString("MULTIDIALER_DAEMON_ACTION");
+            if (TextUtils.equals(daemonAction, "START")) {
+                onStartCall();
+            }
+        }
     }
 
     private void onCallButtonClicked() {
@@ -161,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
             loopCallOnNum();
         }
         FloatingButtonService.showFloatingButton(true);
-        //startCaptureTimer();
     }
 
     private void onStopCall() {
@@ -225,27 +231,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    private void loopListenOnPhoneState() {
-//        new Handler().postDelayed(new Runnable() {
-//            public void run() {
-//                mTelephonyManager.listen(new PhoneCallListener(), PhoneStateListener.LISTEN_CALL_STATE);
-//                loopListenOnPhoneState();
-//            }
-//        }, ComDef.LISTEN_CALL_STATE_TIME);
-//    }
-
-//    public boolean isTelephonyIdle(){
-//        return (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE);
-//    }
-
     public boolean isTelephonyCalling(){
         return (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) ||
                 (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_RINGING);
     }
-
-//    public boolean isTelephonyOffhook(){
-//        return (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK);
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -259,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ScreenCapture.onActivityResult(requestCode, resultCode, data);
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -325,20 +313,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, getCallNextDelay());
 
-//            //wait some time to end current call and call next
-//            new Handler().postDelayed(new Runnable() {
-//                public void run() {
-//                    //before end call, we take the screen picture
-//                    ScreenCapture.captureOnce();
-//
-//                    //end current call
-//                    String retEndCall = TelUtils.endCall(MainActivity.this);
-//                    showProgress("End Call: " + retEndCall);
-//
-//                    callNextNum();
-//                }
-//            }, mEndCallDelay);
-
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
             showProgress("loopCallOnNum Exception: " + e.toString());
@@ -359,36 +333,6 @@ public class MainActivity extends AppCompatActivity {
     private long getCallNextDelay() {
         return mEndCallDelay + ComDef.CALL_NEXT_OFFSET;
     }
-
-//    private void startCaptureTimer() {
-//        showProgress("startCaptureTimer");
-//        mCaptureTimer = new Timer();
-//        mCaptureTimer.schedule(new TimerTask() {
-//            public void run () {
-//                MainActivity.this.runOnUiThread(new Runnable() {
-//                    public void run() {
-//                        showProgress("startCaptureTimer: run...");
-//                        ScreenCapture.captureOnce();
-//                        //if (mCallState != TelephonyManager.CALL_STATE_OFFHOOK) {
-////                        if (isTelephonyOffhook()) {
-////                            showProgress("Call State is Not OFFHOOK, No Capture");
-////                        }
-////                        else {
-////                            ScreenCapture.captureOnce();
-////                        }
-//                    }
-//                });
-//            }
-//        }, ComDef.CAPTURE_TIMER_DELAY, ComDef.CAPTURE_TIMER_PERIOD);
-//    }
-//
-//    private void stopCaptureTimer() {
-//        showProgress("stopCaptureTimer");
-//        if (mCaptureTimer != null) {
-//            mCaptureTimer.cancel();
-//            mCaptureTimer = null;
-//        }
-//    }
 
     private void callNextNum() {
         if (DataLogic.toNextCall()) {
@@ -416,32 +360,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    public class PhoneCallListener extends PhoneStateListener {
-//        @Override
-//        public void onCallStateChanged(int state, String incomingNumber) {
-//            //LogUtils.d("onCallStateChanged: ThreadId = " + android.os.Process.myTid());
-//            //mCallState = state;
-//            //LogUtils.d("onCallStateChanged: mCallState = " + mCallState);
-////            switch (state) {
-////                case TelephonyManager.CALL_STATE_IDLE:
-////                    LogUtils.d("onCallStateChanged: CALL_STATE_IDLE");
-////                    break;
-////                case TelephonyManager.CALL_STATE_OFFHOOK:  //接听 or 正在拨号
-////                    LogUtils.d("onCallStateChanged: CALL_STATE_OFFHOOK");
-////                    break;
-////                case TelephonyManager.CALL_STATE_RINGING:
-////                    LogUtils.d("onCallStateChanged: CALL_STATE_RINGING");
-////                    break;
-////            }
-//            super.onCallStateChanged(state, incomingNumber);
-//        }
-//    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
+        LogUtils.d("MainActivity: onDestroy");
         FloatingButtonService.stop(this);
-        //stopCaptureTimer();
         stopUITimer();
     }
 }
