@@ -2,10 +2,13 @@ package com.liz.multidialerdaemon.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.multidialerdaemon.R;
@@ -35,11 +38,20 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_exit_app).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ThisApp.exitApp();
+                new AlertDialog
+                        .Builder(MainActivity.this)
+                        .setTitle("确定要退出 MultiDialerDaemon 吗？")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ThisApp.exitApp();
+                            }
+                        }).setNegativeButton("Cancel", null)
+                        .show();
             }
         });
 
-        startUITimer();
+        //startUITimer();
     }
 
     private void startUITimer() {

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -24,7 +25,6 @@ import androidx.core.app.ActivityCompat;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TelUtils;
-import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.R;
 import com.liz.multidialer.app.ThisApp;
 import com.liz.multidialer.logic.ComDef;
@@ -48,14 +48,15 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_FLOATING_BUTTON = 2;
 
     private EditText mEditDialInterval;
+    private EditText mEditMaxDialNum;
     private TextView mTextTelListInfo;
     private TextView mTextCalledIndex;
+    private TextView mTextCalledNum;
     private TextView mTextProgress;
     private ScrollView mScrollProgress;
     private Button mBtnCall;
 
     private Timer mUITimer;
-    private long mEndCallDelay = ComDef.DEFAULT_END_CALL_DELAY;
     TelephonyManager mTelephonyManager;
 
     @Override
@@ -89,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mTextCalledIndex = findViewById(R.id.text_called_index);
+
+        mEditMaxDialNum = findViewById(R.id.edit_max_call_num);
+        String textMaxCallNum = "" + DataLogic.getMaxCallNum();
+        mEditMaxDialNum.setText(textMaxCallNum);
+
+        mTextCalledNum = findViewById(R.id.text_called_num);
 
         mBtnCall = findViewById(R.id.btn_start_call);
         if (!DataLogic.initCheck()) {
@@ -163,7 +170,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onStartCall() {
-        mEndCallDelay = Integer.parseInt(mEditDialInterval.getText().toString());
+        DataLogic.setEndCallDelay(Integer.parseInt(mEditDialInterval.getText().toString()));
+        DataLogic.setMaxCallNum(Integer.parseInt(mEditMaxDialNum.getText().toString()));
         if (DataLogic.startCall()) {
             loopCallOnNum();
         }
@@ -198,10 +206,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void updateUI() {
-        mTextTelListInfo.setText(DataLogic.getTelListInfo());
+        mTextTelListInfo.setText(Html.fromHtml(DataLogic.getTelListInfo()));
 
-        String callIndexInfo = "当前已拨打: " + DataLogic.getCurrentCallIndex();
-        mTextCalledIndex.setText(callIndexInfo);
+        String callIndexInfo = "当前拨打位置:  <font color='#FF0000'>"
+                + DataLogic.getCurrentCallIndex()
+                + "</font>";
+        mTextCalledIndex.setText(Html.fromHtml(callIndexInfo));
+
+        String calledNumInfo = "已拨打号码数量:  <font color='#FF0000'>"
+                + DataLogic.getCalledNum()
+                + "</font>";
+        mTextCalledNum.setText(Html.fromHtml(calledNumInfo));
 
         if (DataLogic.isCallRunning()) {
             mBtnCall.setText("停止拨号");
@@ -215,18 +230,14 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             if (DataLogic.isCallFinished()) {
-                mBtnCall.setText("拨号结束, 点击退出");
+                mBtnCall.setText("拨号结束, 点击重置重新拨号");
                 mBtnCall.setBackgroundColor(Color.BLUE);
-                mBtnCall.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ThisApp.exitApp();
-                    }
-                });
+                mBtnCall.setEnabled(false);
             }
             else {
                 mBtnCall.setText("开始拨号");
                 mBtnCall.setBackgroundColor(Color.GREEN);
+                mBtnCall.setEnabled(true);
             }
         }
     }
@@ -305,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
                     String retEndCall = TelUtils.endCall(MainActivity.this);
                     showProgress("End Call: " + retEndCall);
                 }
-            }, mEndCallDelay);
+            }, DataLogic.getEndCallDelay());
 
             new Handler().postDelayed(new Runnable() {
                 public void run() {
@@ -321,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private long getScreenCaptureDelay() {
-        long delay = mEndCallDelay - ComDef.CAPTURE_SCREEN_OFFSET;
+        long delay = DataLogic.getEndCallDelay() - ComDef.CAPTURE_SCREEN_OFFSET;
         if (delay < 0) {
             return 0;
         }
@@ -331,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private long getCallNextDelay() {
-        return mEndCallDelay + ComDef.CALL_NEXT_OFFSET;
+        return DataLogic.getEndCallDelay() + ComDef.CALL_NEXT_OFFSET;
     }
 
     private void callNextNum() {
@@ -346,18 +357,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void showProgress(final String msg) {
         LogUtils.d("showProgress: " + msg);
-        runOnUiThread(new Runnable() {
-            public void run() {
-                String logMsg = TimeUtils.getLogTime() + " - " + msg;
-                mTextProgress.append(logMsg + "\n");
-                mScrollProgress.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mScrollProgress.smoothScrollTo(0, mTextProgress.getBottom());
-                    }
-                });
-            }
-        });
+        //###@: todo: write to log file
+//        runOnUiThread(new Runnable() {
+//            public void run() {
+//                String logMsg = TimeUtils.getLogTime() + " - " + msg;
+//                mTextProgress.append(logMsg + "\n");
+//                mScrollProgress.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mScrollProgress.smoothScrollTo(0, mTextProgress.getBottom());
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Override

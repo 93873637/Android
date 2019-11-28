@@ -48,7 +48,7 @@ public class DataLogic {
         mLifeCount --;
         if (mLifeCount <= ComDef.MIN_LIFE_COUNT) {
             mLifeCount = ComDef.MIN_LIFE_COUNT;
-            //startMultiDialerApp(ThisApp.getAppContext());
+            startMultiDialerApp(ThisApp.getAppContext());
         }
     }
 
@@ -57,7 +57,7 @@ public class DataLogic {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         ComponentName componentName = new ComponentName("com.liz.multidialer", "com.liz.multidialer.ui.MainActivity");
         intent.setComponent(componentName);
-        //intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("MULTIDIALER_DAEMON_ACTION", "START");
         context.startActivity(intent);
     }

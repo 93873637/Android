@@ -23,32 +23,55 @@ public class DataLogic {
 
     private static ArrayList<String> mTelList;
     private static int mCurrentCallIndex = 0;
-
+    private static int mMaxCallNum = ComDef.MAX_CALL_NUM;
+    private static long mEndCallDelay = ComDef.DEFAULT_END_CALL_DELAY;
+    private static int mCalledNum = 0;
     private static String mPictureDir = null;
-
     private static boolean mCallRunning = false;
 
     public static void init() {
+        LogUtils.d("DataLogic: init");
+
         loadTelList();
         genPictureDir();
         mCurrentCallIndex = readCurrentCallIndex();
 
+        LogUtils.d("DataLogic: TEL_LIST_FILE_PATH = " + ComDef.TEL_LIST_FILE_PATH);
+        LogUtils.d("DataLogic: DIALER_DIR = " + ComDef.DIALER_DIR);
+        LogUtils.d("DataLogic: mCurrentCallIndex = " + mCurrentCallIndex);
     }
 
     public static void loadTelList() {
-        mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_NAME);
+        mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_PATH);
+    }
+
+    public static int getMaxCallNum() {
+        return mMaxCallNum;
+    }
+
+    public static void setMaxCallNum(int maxCallNum) {
+        mMaxCallNum = maxCallNum;
+    }
+
+    public static long getEndCallDelay() {
+        return mEndCallDelay;
+    }
+
+    public static void setEndCallDelay(long endCallDelay) {
+        mEndCallDelay = endCallDelay;
     }
 
     public static String getTelListInfo() {
         String telListInfo;
         if (mTelList == null) {
-            telListInfo = "ERROR: 没有号码列表文件: " + ComDef.TEL_LIST_FILE_NAME;
+            telListInfo = "ERROR: 没有号码列表文件: " + ComDef.TEL_LIST_FILE_PATH;
         }
         else if (mTelList.size() == 0) {
             telListInfo = "ERROR: 号码列表为空";
         }
         else {
-            telListInfo = "电话号码数量(" + ComDef.TEL_LIST_FILE_NAME + "): " + mTelList.size();
+            telListInfo = "电话号码列表总数(" + ComDef.TEL_LIST_FILE_PATH
+                    + "):  <font color='#FF0000'>" + mTelList.size() + "</font>";
         }
         return telListInfo;
     }
@@ -106,6 +129,14 @@ public class DataLogic {
         }
     }
 
+    public static int getCalledNum() {
+        return mCalledNum;
+    }
+
+    public static void setCalledNum(int calledNum) {
+        mCalledNum = calledNum;
+    }
+
     public static int getCurrentCallIndex() {
         return mCurrentCallIndex;
     }
@@ -143,7 +174,15 @@ public class DataLogic {
     }
 
     public static boolean toNextCall() {
-        LogUtils.d("toNextCall: DataLogic.mCurrentCallIndex=" + DataLogic.getCurrentCallIndex());
+        LogUtils.d("toNextCall: mCurrentCallIndex=" + mCurrentCallIndex);
+
+        mCalledNum ++;
+        LogUtils.d("toNextCall: mCalledNum=" + mCalledNum);
+        if (mCalledNum >= mMaxCallNum) {
+            LogUtils.d("toNextCall: mCalledNum(" + mCalledNum + ") up to mMaxCallNum(" + mMaxCallNum + "), exit app...");
+            ThisApp.exitApp();
+            return false;
+        }
 
         mCurrentCallIndex ++;
         saveCurrentCallIndex();
