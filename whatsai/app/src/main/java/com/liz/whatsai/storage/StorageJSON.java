@@ -89,15 +89,20 @@ public class StorageJSON {
         if (node.isDir()) {
             try {
                 com.alibaba.fastjson.JSONArray jsonList = jobj.getJSONArray(ComDef.TAG_LIST);
-                for (int i = 0; i < jsonList.size(); i++) {
-                    com.alibaba.fastjson.JSONObject jsonObj = (com.alibaba.fastjson.JSONObject) jsonList.get(i);
-                    int type = (int) jsonObj.get(ComDef.TAG_TYPE);
-                    Node subNode = Node.createNode(type);
-                    jsonObj2Node(jsonObj, subNode);
-                    node.add(subNode);
+                if (jsonList == null) {
+                    LogUtils.d("jsonObj2Node: Null list from JSONObject");
+                }
+                else {
+                    for (int i = 0; i < jsonList.size(); i++) {
+                        com.alibaba.fastjson.JSONObject jsonObj = (com.alibaba.fastjson.JSONObject) jsonList.get(i);
+                        int type = (int) jsonObj.get(ComDef.TAG_TYPE);
+                        Node subNode = Node.createNode(type);
+                        jsonObj2Node(jsonObj, subNode);
+                        node.add(subNode);
+                    }
                 }
             } catch (Exception e) {
-                LogUtils.e("jsonObj2Node exception: " + e.toString());
+                LogUtils.e("jsonObj2Node: e = " + e.toString());
                 e.printStackTrace();
             }
         }

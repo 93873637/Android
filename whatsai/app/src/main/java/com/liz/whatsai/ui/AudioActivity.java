@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.liz.androidutils.FileUtils;
+import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.app.AudioListAdapter;
 import com.liz.whatsai.logic.ComDef;
@@ -29,6 +30,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LogUtils.d("AudioActivity:onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio);
 
@@ -66,6 +68,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onResume() {
+        LogUtils.d("AudioActivity:onResume");
         super.onResume();
         setAudioButton();
     }
@@ -83,6 +86,12 @@ public class AudioActivity extends Activity implements View.OnClickListener,
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        LogUtils.d("AudioActivity:onBackPressed");
+        super.onBackPressed();
     }
 
     @Override
@@ -136,6 +145,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
     }
 
     protected void setAudioButton() {
+        //LogUtils.d("AudioActivity:setAudioButton: isRecording = " + WhatsaiAudio.isRecording());
         mBtnSwitchAudio.setBackgroundResource(WhatsaiAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
     }
 

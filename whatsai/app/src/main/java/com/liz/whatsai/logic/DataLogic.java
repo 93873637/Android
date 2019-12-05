@@ -24,16 +24,39 @@ public class DataLogic extends WhatsaiStorage {
     private static Node mActiveNode = null;
 
     private static Map<String, Node> mAlarmMap = new HashMap<String, Node>();
+    private static int mInitState = ComDef.INIT_STATUS_INITING;
 
-    public static boolean init() {
-        if (!WhatsaiStorage.init()) {
+    public static void init() {
+        LogUtils.d("DataLogic:init: ThreadID = " + Thread.currentThread().getId());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                initThread();
+            }
+        }).start();
+    }
+
+    private static void initThread() {
+
+        // for test only
+        // try { Thread.sleep(4000); } catch (Exception e){}
+
+        mInitState = ComDef.INIT_STATUS_INITING;
+        if (!WhatsaiStorage.initStorage()) {
             LogUtils.e("DataLogic: WhatsaiStorage init failed.");
-            return false;
+            mInitState = ComDef.INIT_STATUS_FAILED;
         }
-        mActiveNode = getRootNode();
-        WhatsaiAudio.init();
-        startAlarmTimer();
-        return true;
+        else {
+            mActiveNode = getRootNode();
+            WhatsaiAudio.init();
+            startAlarmTimer();
+            mInitState = ComDef.INIT_STATUS_OK;
+        }
+    }
+
+    public static int getInitStatus() {
+        return mInitState;
     }
 
     private static void startAlarmTimer() {

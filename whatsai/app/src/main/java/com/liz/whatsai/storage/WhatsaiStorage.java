@@ -28,7 +28,7 @@ public class WhatsaiStorage {
     private static Node mRootNode = null;
     private static boolean mDirty = false;
 
-    public static boolean init() {
+    public static boolean initStorage() {
         mRootNode = new WhatsaiDir();
         mRootNode.setName(ComDef.APP_NAME);
         if (!buildDirs()) {

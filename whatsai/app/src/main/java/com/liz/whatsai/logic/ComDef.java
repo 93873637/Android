@@ -12,6 +12,10 @@ public class ComDef {
 
     public static final String APP_NAME = "whatsai";
 
+    public static final int INIT_STATUS_INITING = 0;
+    public static final int INIT_STATUS_OK = 1;
+    public static final int INIT_STATUS_FAILED = 2;
+
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // WhatsaiStorage Definitions
 

@@ -9,6 +9,7 @@ import android.media.MediaRecorder;
 import android.util.Log;
 
 import com.liz.androidutils.AudioUtils;
+import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.app.AudioListAdapter;
 
@@ -29,6 +30,7 @@ public class WhatsaiAudio {
     // Interfaces
 
     public static void init() {
+        LogUtils.d("WhatsaiAudio:init");
         mWhatsaiAudio = new WhatsaiAudio();
     }
 
@@ -53,6 +55,7 @@ public class WhatsaiAudio {
     }
 
     public static void startPlay(int pos) {
+        LogUtils.d("WhatsaiAudio:startPlay: pos = " + pos);
         if (pos == mPlayItemPos) {
             LogUtils.d("WhatsaiAudio: the play item already be " + pos);
         }
@@ -60,11 +63,13 @@ public class WhatsaiAudio {
             mPlayItemPos = pos;
             File f = AudioListAdapter.getAudioFile(pos);
             AudioListAdapter.onDataChanged();
-            WhatsaiAudio.playPCM(f);
+            WhatsaiAudio.playPCM(f, mWhatsaiAudio.mRecorderBufferSize, AUDIO_SAMPLE_RATE);
         }
     }
 
     public static void stopPlay(int pos) {
+        LogUtils.d("WhatsaiAudio:stopPlay: pos = " + pos);
+
         //####@:
     }
 
@@ -96,6 +101,7 @@ public class WhatsaiAudio {
 
     //Singleton Constructor
     private WhatsaiAudio() {
+        LogUtils.d("WhatsaiAudio:WhatsaiAudio");
         mRecorderBufferSize = AudioRecord.getMinBufferSize(AUDIO_SAMPLE_RATE,
                 AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT);
@@ -108,6 +114,7 @@ public class WhatsaiAudio {
     }
 
     private void _switchAudio() {
+        LogUtils.d("WhatsaiAudio:_switchAudio: mIsRecording = " + mIsRecording);
         if (mIsRecording) {
             stopRecord();
         }
@@ -117,6 +124,7 @@ public class WhatsaiAudio {
     }
 
     private void startRecord() {
+        LogUtils.d("WhatsaiAudio:startRecord: mIsRecording = " + mIsRecording);
         if (mIsRecording) {
             LogUtils.d("WhatsaiAudio: startRecord: already started");
             return;
@@ -143,17 +151,23 @@ public class WhatsaiAudio {
             @Override
             public void run() {
                 try {
+                    LogUtils.d("Save audio data to pcm file...");
                     FileOutputStream outputStream = new FileOutputStream(pcmFile.getAbsoluteFile());
                     while (mIsRecording) {
                         mAudioRecord.read(mAudioData, 0, mAudioData.length);
                         outputStream.write(mAudioData);
                     }
                     outputStream.close();
+
+                    LogUtils.d("Convert pcm file to wave...");
                     AudioUtils.pcmToWave(pcmFile.getAbsolutePath(), wavFile.getAbsolutePath(),
                             AUDIO_SAMPLE_RATE, mRecorderBufferSize, AudioUtils.AUDIO_TRACK_SINGLE);
                     if (mAudioCallback != null) {
                         mAudioCallback.onAudioFileGenerated();
                     }
+
+                    LogUtils.d("Remove pcm file");
+                    FileUtils.removeFile(pcmFile);
                 } catch (FileNotFoundException e) {
                     LogUtils.e("WhatsaiAudio: startRecord: FileNotFoundException");
                     e.printStackTrace();
@@ -169,6 +183,7 @@ public class WhatsaiAudio {
     }
 
     private void stopRecord() {
+        LogUtils.d("WhatsaiAudio:stopRecord: mIsRecording = " + mIsRecording);
         if (!mIsRecording) {
             LogUtils.d("WhatsaiAudio: stopRecord: already stopped");
             return;
@@ -195,36 +210,28 @@ public class WhatsaiAudio {
         return null;
     }
 
-    public static void playPCM(File pcmFile) {
-        final int bufferSizeInBytes = mWhatsaiAudio.mRecorderBufferSize;
-//        if (audioTrack != null){
-//            audioTrack.stop();
-//            audioTrack.release();
-//            audioTrack = null;
-//        }
-//先估算最小缓冲区大小
-        //mBufferSizeInBytes = AudioRecord.getMinBufferSize(mSampleRateInHz,mChannelConfig,mAudioFormat);
-//创建AudioTrack
+    public static void playPCM(File pcmFile, int bufferSize, int sampleRate) {
+        final int bufferSizeInBytes = bufferSize;
         final AudioTrack audioTrack = new AudioTrack(
                 new AudioAttributes.Builder()
                         .setUsage(AudioAttributes.USAGE_MEDIA)
                         .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                         .build(),
                 new AudioFormat.Builder()
-                        .setSampleRate(AUDIO_SAMPLE_RATE)
+                        .setSampleRate(sampleRate)
                         .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
                         .setChannelMask(AudioFormat.CHANNEL_CONFIGURATION_MONO)
                         .build(),
                 bufferSizeInBytes,
                 AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
         );
-        audioTrack.play();  //这个模式需要先play
+        audioTrack.play();  //this mode need play first
         final FileInputStream fileInputStream;
         if (pcmFile.exists()) {
             try {
                 fileInputStream = new FileInputStream(pcmFile);
             } catch (FileNotFoundException e) {
-                LogUtils.e("FileNotFoundException");
+                LogUtils.e("FileNotFoundException of file " + pcmFile);
                 return;
             }
             new Thread() {
