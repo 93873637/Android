@@ -13,7 +13,7 @@
         android:gravity="center|top"
         android:orientation="vertical">
 
-        <!--TelList-->
+        <!--Phone ID-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +21,55 @@
             android:gravity="start|center"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/text_tel_list_info"
+                android:id="@+id/text_phone_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:fadeScrollbars="false"
+                android:focusable="true"
+                android:gravity="start|top"
+                android:paddingStart="2dp"
+                android:paddingEnd="0dp"
+                android:text="设备编号: "
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_phone_id"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:fadeScrollbars="false"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:singleLine="true"
+                android:text="M01"
+                android:textSize="16sp"
+                android:textColor="#ff0000"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!--Phone ID-->
+
+        <!--Separator Line-->
+        <View
+            android:layout_width="360dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginStart="4dp"
+            android:layout_gravity="start"
+            android:background="#787878" />
+
+        <!--TelList File-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="start|center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/text_tel_list_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -30,21 +78,36 @@
                 android:gravity="start|top"
                 android:paddingStart="2dp"
                 android:paddingEnd="10dp"
-                android:text="TelNumber: 999"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/text_refresh_tel_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="刷新"
-                android:textColor="#0000FF"
+                android:text="号码文件:  M01_000001.txt"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
-        <!--TelList-->
+        <!--TelList File-->
 
-        <!--当前拨打位置-->
+        <!--TelList Number-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="start|center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/text_tel_list_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:fadeScrollbars="false"
+                android:focusable="true"
+                android:gravity="start|top"
+                android:paddingStart="2dp"
+                android:paddingEnd="10dp"
+                android:text="号码数量: 20000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!--TelList Number-->
+
+        <!--已拨打-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +125,7 @@
                 android:gravity="start|top"
                 android:paddingStart="2dp"
                 android:paddingEnd="10dp"
-                android:text="当前拨打位置: 999"
+                android:text="已拨打: 12345"
                 android:textSize="16sp"
                 android:textStyle="bold" />
             <TextView
@@ -74,7 +137,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
-        <!--当前拨打位置-->
+        <!--已拨打-->
 
         <!--Separator Line-->
         <View
@@ -86,80 +149,7 @@
             android:layout_gravity="start"
             android:background="#787878" />
 
-        <!--最多拨打号码数量-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/text_max_call_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fadeScrollbars="false"
-                android:focusable="true"
-                android:gravity="start|top"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:text="最多拨打号码数量: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edit_max_call_num"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="5"
-                android:fadeScrollbars="false"
-                android:focusable="true"
-                android:gravity="center"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:singleLine="true"
-                android:text="1000"
-                android:textSize="16sp"
-                android:textColor="#ff0000"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <!--最多拨打号码数量-->
-
-        <!--已拨打号码数量-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_gravity="start"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/text_called_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fadeScrollbars="false"
-                android:focusable="true"
-                android:gravity="start|top"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:text="已拨打号码数量: 100"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <!--已拨打号码数量-->
-
-        <!--Separator Line-->
-        <View
-            android:layout_width="360dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginStart="4dp"
-            android:layout_gravity="start"
-            android:background="#787878" />
-
-        <!--拨号时间间隔-->
+        <!--拨号间隔-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -175,7 +165,7 @@
                 android:gravity="start|top"
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
-                android:text="拨号时间间隔(ms): "
+                android:text="拨号间隔(ms): "
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -197,7 +187,7 @@
                 android:textColor="#ff0000"
                 android:textStyle="bold" />
         </LinearLayout>
-        <!--拨号时间间隔-->
+        <!--拨号间隔-->
 
         <Button
             android:id="@+id/btn_start_call"

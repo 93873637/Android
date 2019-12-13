@@ -133,13 +133,14 @@ public class WhatsaiAudio {
 
         //19.1103.173655
         String strFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
-        String pcmFileName = strFileTime + "_" + AUDIO_SAMPLE_RATE + ".pcm";
+        String pcmFileName = strFileTime + ".pcm";
         final File pcmFile = createFile(pcmFileName);
         if (pcmFile == null) {
             LogUtils.e("WhatsaiAudio: startRecord: create pcm file failed");
             return;
         }
-        String wavFileName = strFileTime + "_" + AUDIO_SAMPLE_RATE + ".wav";
+
+        String wavFileName = strFileTime + ".wav";
         final File wavFile = createFile(wavFileName);
         if (wavFile == null) {
             LogUtils.e("WhatsaiAudio: startRecord: create wav file failed");
@@ -151,11 +152,16 @@ public class WhatsaiAudio {
             @Override
             public void run() {
                 try {
-                    LogUtils.d("Save audio data to pcm file...");
                     FileOutputStream outputStream = new FileOutputStream(pcmFile.getAbsoluteFile());
+
+                    LogUtils.d("Continue save audio data to pcm file...");
                     while (mIsRecording) {
                         mAudioRecord.read(mAudioData, 0, mAudioData.length);
+                        for (int i = 0; i < mAudioData.length; i++) {
+                            mAudioData[i] = (byte) (mAudioData[i] * 5);
+                        }
                         outputStream.write(mAudioData);
+                        outputStream.flush();
                     }
                     outputStream.close();
 
@@ -166,7 +172,7 @@ public class WhatsaiAudio {
                         mAudioCallback.onAudioFileGenerated();
                     }
 
-                    LogUtils.d("Remove pcm file");
+                    LogUtils.d("Remove PCM file");
                     FileUtils.removeFile(pcmFile);
                 } catch (FileNotFoundException e) {
                     LogUtils.e("WhatsaiAudio: startRecord: FileNotFoundException");
@@ -254,10 +260,9 @@ public class WhatsaiAudio {
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
+                        Log.i("TAG", "Play finished on stream mode");
                         mPlayItemPos = ComDef.INVALID_LIST_POS;
-                        AudioListAdapter.onDataChanged();
                     }
-                    Log.i("TAG", "STREAM模式播放完成");
                 }
             }.start();
         }

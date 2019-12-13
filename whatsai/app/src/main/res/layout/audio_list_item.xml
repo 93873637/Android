@@ -19,6 +19,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="5dp"
+            android:background="@drawable/sound"
             />
         <TextView
             android:id="@+id/tv_name"
@@ -29,14 +30,6 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_toRightOf="@id/iv_image"
-            />
-        <ImageView
-            android:id="@+id/iv_play_audio"
-            android:scaleType="fitXY"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/sound"
             />
         <LinearLayout
             android:orientation="horizontal"

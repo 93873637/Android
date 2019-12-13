@@ -96,7 +96,6 @@ public class AudioListAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.ivType = convertView.findViewById(R.id.iv_image);
             holder.tvName = convertView.findViewById(R.id.tv_name);
-            holder.ivPlay = convertView.findViewById(R.id.iv_play_audio);
             holder.tvSize = convertView.findViewById(R.id.tv_file_size);
             convertView.setTag(holder);
         } else {
@@ -104,15 +103,14 @@ public class AudioListAdapter extends BaseAdapter {
         }
 
         File f = list[position];
-        holder.ivType.setImageResource(R.drawable.ic_file_default);
         holder.tvName.setText(f.getName());
         holder.tvSize.setText(FileUtils.formatFileSize(FileUtils.getFileSize(f)));
-        holder.ivPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        holder.ivPlay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
         if (position == WhatsaiAudio.getPlayItemPos()) {
             convertView.setBackgroundColor(Color.GREEN);
@@ -126,7 +124,7 @@ public class AudioListAdapter extends BaseAdapter {
     public static class ViewHolder {
         ImageView ivType;
         TextView tvName;
-        ImageView ivPlay;
+        //ImageView ivPlay;
         TextView tvSize;
     }
 }

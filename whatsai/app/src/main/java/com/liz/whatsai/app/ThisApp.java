@@ -36,7 +36,8 @@ public class ThisApp extends Application {
         WhatsaiMail.sendMail("93873637@qq.com", "ddaasfess111", "fease111", "/sdcard/whatsai/whatsai.xml");
         //*/
 
-        DataLogic.init();
+        //move to MainActivity
+        //DataLogic.init();
     }
 
     public static Context getAppContext() {

@@ -78,16 +78,22 @@ public class MainActivity extends AppCompatActivity {
         else {
             LogUtils.e("Request Permissions Failed");
             MainActivity.this.finish();
+            ThisApp.exitApp();
         }
     }
 
     protected void openAppActivity() {
         LogUtils.d("MainActivity:openAppActivity");
+        DataLogic.init();
+        tryOpenAppActivity();
+    }
+
+    protected  void tryOpenAppActivity() {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 switch (DataLogic.getInitStatus()) {
                     case ComDef.INIT_STATUS_INITING:
-                        openAppActivity();
+                        tryOpenAppActivity();
                         break;
                     case ComDef.INIT_STATUS_OK:
                         startActivity(new Intent(MainActivity.this, WhatsaiActivity.class));
@@ -96,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     case ComDef.INIT_STATUS_FAILED:
                         Toast.makeText(MainActivity.this, "ERROR: INITIALIZE FAILED, APP EXIT", Toast.LENGTH_LONG).show();
                         MainActivity.this.finish();
+                        // delay some time for toast show
                         new Handler().postDelayed(new Runnable() {
                             public void run() {
                                 ThisApp.exitApp();
