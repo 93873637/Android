@@ -11,12 +11,9 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Html;
-import android.text.TextUtils;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private static final int REQUEST_CODE_FLOATING_BUTTON = 2;
+    private static final int REQUEST_CODE_DEVICE_CONFIG = 3;
 
-    private EditText mEditDialInterval;
-    private EditText mEditMaxDialNum;
-    private TextView mTextTelListInfo;
-    private TextView mTextCalledIndex;
+    private TextView mTextDeviceId;
+    private TextView mTextTelListFile;
+    private TextView mTextTelListNum;
     private TextView mTextCalledNum;
-    private TextView mTextProgress;
-    private ScrollView mScrollProgress;
+    private EditText mEditDialInterval;
+
     private Button mBtnCall;
 
     private Timer mUITimer;
@@ -69,19 +66,28 @@ public class MainActivity extends AppCompatActivity {
 
         checkPermissions();
 
-        mEditDialInterval = findViewById(R.id.edit_dial_interval);
-        String editInterval = "" + ComDef.DEFAULT_END_CALL_DELAY;
-        mEditDialInterval.setText(editInterval);
+        initView();
+        initFloatingWindow();
+        startUITimer();
 
-        mTextTelListInfo = findViewById(R.id.text_tel_list_info);
-        findViewById(R.id.text_refresh_tel_list).setOnClickListener(new View.OnClickListener() {
+        mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        ScreenCapture.initScreenCapture(MainActivity.this);
+    }
+
+    private void initView() {
+        mTextDeviceId = findViewById(R.id.device_id);
+        findViewById(R.id.text_config_device).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataLogic.loadTelList();
-                updateUI();
+                startActivityForResult(new Intent(MainActivity.this, DeviceConfigActivity.class),
+                        REQUEST_CODE_DEVICE_CONFIG);
             }
         });
 
+        mTextTelListFile = findViewById(R.id.tel_list_file);
+        mTextTelListNum = findViewById(R.id.tel_list_num);
+
+        mTextCalledNum = findViewById(R.id.called_num);
         findViewById(R.id.text_reset_called_index).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,34 +95,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mTextCalledIndex = findViewById(R.id.text_called_index);
-
-        mEditMaxDialNum = findViewById(R.id.edit_max_call_num);
-        String textMaxCallNum = "" + DataLogic.getMaxCallNum();
-        mEditMaxDialNum.setText(textMaxCallNum);
-
-        mTextCalledNum = findViewById(R.id.text_called_num);
+        mEditDialInterval = findViewById(R.id.edit_dial_interval);
+        String editInterval = "" + ComDef.DEFAULT_END_CALL_DELAY;
+        mEditDialInterval.setText(editInterval);
 
         mBtnCall = findViewById(R.id.btn_start_call);
-        if (!DataLogic.initCheck()) {
-            mBtnCall.setText("初始化失败，请检查号码文件/图片目录后重试");
-            mBtnCall.setBackgroundColor(Color.RED);
-            mBtnCall.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ThisApp.exitApp();
-                }
-            });
-            return;
-        }
-        else {
-            mBtnCall.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onCallButtonClicked();
-                }
-            });
-        }
+        mBtnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCallButtonClicked();
+            }
+        });
 
         findViewById(R.id.btn_exit_app).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,13 +113,9 @@ public class MainActivity extends AppCompatActivity {
                 ThisApp.exitApp();
             }
         });
+    }
 
-        mTextProgress = findViewById(R.id.text_dial_info);
-        mTextProgress.setText("");
-        mScrollProgress = findViewById(R.id.scrollInfo);
-        mTextProgress.setMovementMethod(ScrollingMovementMethod.getInstance());
-        mTelephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-
+    private void initFloatingWindow() {
         FloatingButtonService.setFloatingButtonCallback(new FloatingButtonService.FloatingButtonCallback() {
             @Override
             public void onFloatButtonClicked() {
@@ -141,22 +126,26 @@ public class MainActivity extends AppCompatActivity {
 
         if (!Settings.canDrawOverlays(this)) {
             Toast.makeText(this, "当前无浮窗权限，请授权", Toast.LENGTH_SHORT).show();
-            startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), REQUEST_CODE_FLOATING_BUTTON);
+            startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())),
+                    REQUEST_CODE_FLOATING_BUTTON);
         }
-
-        FloatingButtonService.start(this);
-        startUITimer();
-
-        ScreenCapture.initScreenCapture(MainActivity.this);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            String daemonAction = bundle.getString("MULTIDIALER_DAEMON_ACTION");
-            if (TextUtils.equals(daemonAction, "START")) {
-                onStartCall();
-            }
+        else {
+            FloatingButtonService.start(this);
         }
     }
+
+//
+//    private void initScreenCapture() {
+//        ScreenCapture.initScreenCapture(MainActivity.this);
+//
+//        Bundle bundle = getIntent().getExtras();
+//        if (bundle != null) {
+//            String daemonAction = bundle.getString("MULTIDIALER_DAEMON_ACTION");
+//            if (TextUtils.equals(daemonAction, "START")) {
+//                onStartCall();
+//            }
+//        }
+//    }
 
     private void onCallButtonClicked() {
         mEditDialInterval.clearFocus();
@@ -171,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void onStartCall() {
         DataLogic.setEndCallDelay(Integer.parseInt(mEditDialInterval.getText().toString()));
-        DataLogic.setMaxCallNum(Integer.parseInt(mEditMaxDialNum.getText().toString()));
         if (DataLogic.startCall()) {
             loopCallOnNum();
         }
@@ -185,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startUITimer() {
-        //detect and update NV21 files of /sdcard/camera
         mUITimer = new Timer();
         mUITimer.schedule(new TimerTask() {
             public void run () {
@@ -206,16 +193,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void updateUI() {
-        mTextTelListInfo.setText(Html.fromHtml(DataLogic.getTelListInfo()));
+        //###@: set/update device id
 
-        String callIndexInfo = "当前拨打位置:  <font color='#FF0000'>"
-                + DataLogic.getCurrentCallIndex()
-                + "</font>";
-        mTextCalledIndex.setText(Html.fromHtml(callIndexInfo));
-
-        String calledNumInfo = "已拨打号码数量:  <font color='#FF0000'>"
-                + DataLogic.getCalledNum()
-                + "</font>";
+        String calledNumInfo = "" + DataLogic.getCalledNum();
         mTextCalledNum.setText(Html.fromHtml(calledNumInfo));
 
         if (DataLogic.isCallRunning()) {
@@ -250,11 +230,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_FLOATING_BUTTON) {
-                if (!Settings.canDrawOverlays(this)) {
+            if (!Settings.canDrawOverlays(this)) {
                 Toast.makeText(this, "浮窗权限授权失败", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "浮窗权限授权成功", Toast.LENGTH_SHORT).show();
             }
+            return;
+        }
+
+        if (requestCode == REQUEST_CODE_DEVICE_CONFIG) {
+            updateUI();
             return;
         }
 
