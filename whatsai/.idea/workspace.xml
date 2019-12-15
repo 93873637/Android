@@ -70,10 +70,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7942eab7-9a4b-4a24-91a2-a857d006b65a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/DeviceConfigActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/res/layout/activity_device_config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/ComDef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/DeviceConfigActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/DeviceConfigActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/res/layout/activity_device_config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/res/layout/activity_device_config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>

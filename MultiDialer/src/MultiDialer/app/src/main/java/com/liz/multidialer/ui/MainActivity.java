@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         mTextDeviceId = findViewById(R.id.device_id);
+        mTextDeviceId.setText(DataLogic.getDeviceId());
         findViewById(R.id.text_config_device).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,19 +135,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//
-//    private void initScreenCapture() {
-//        ScreenCapture.initScreenCapture(MainActivity.this);
-//
-//        Bundle bundle = getIntent().getExtras();
-//        if (bundle != null) {
-//            String daemonAction = bundle.getString("MULTIDIALER_DAEMON_ACTION");
-//            if (TextUtils.equals(daemonAction, "START")) {
-//                onStartCall();
-//            }
-//        }
-//    }
-
     private void onCallButtonClicked() {
         mEditDialInterval.clearFocus();
         if (DataLogic.isCallRunning()) {
@@ -193,7 +181,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void updateUI() {
-        //###@: set/update device id
+        mTextDeviceId.setText(DataLogic.getDeviceId());
+
+        mTextTelListFile.setText(DataLogic.getTelListFileInfo());
+        mTextTelListNum.setText(DataLogic.getTelListNumInfo());
 
         String calledNumInfo = "" + DataLogic.getCalledNum();
         mTextCalledNum.setText(Html.fromHtml(calledNumInfo));
@@ -201,24 +192,15 @@ public class MainActivity extends AppCompatActivity {
         if (DataLogic.isCallRunning()) {
             mBtnCall.setText("停止拨号");
             mBtnCall.setBackgroundColor(Color.RED);
-
             String progressInfo = "正在拨打 " + (DataLogic.getCurrentCallIndex()+1)
-                    + "/" + DataLogic.getTelNumber() + ": "
+                    + "/" + DataLogic.getTelListNum() + ": "
                     + DataLogic.getCurrentTelNumber() + "\n"
                     + "点击停止";
             FloatingButtonService.updateInfo(progressInfo);
-        }
-        else {
-            if (DataLogic.isCallFinished()) {
-                mBtnCall.setText("拨号结束, 点击重置重新拨号");
-                mBtnCall.setBackgroundColor(Color.BLUE);
-                mBtnCall.setEnabled(false);
-            }
-            else {
-                mBtnCall.setText("开始拨号");
-                mBtnCall.setBackgroundColor(Color.GREEN);
-                mBtnCall.setEnabled(true);
-            }
+        } else {
+            mBtnCall.setText("开始拨号");
+            mBtnCall.setBackgroundColor(Color.GREEN);
+            mBtnCall.setEnabled(true);
         }
     }
 

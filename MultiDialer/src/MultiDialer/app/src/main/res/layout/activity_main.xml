@@ -227,6 +227,7 @@
         </LinearLayout>
         <!--拨号间隔-->
 
+        <!--拨号信息-->
         <Button
             android:id="@+id/btn_start_call"
             android:layout_width="match_parent"
@@ -264,6 +265,7 @@
                 android:textIsSelectable="true"
                 android:textSize="11sp" />
         </ScrollView>
+        <!--拨号信息-->
 
         <Button
             android:id="@+id/btn_exit_app"

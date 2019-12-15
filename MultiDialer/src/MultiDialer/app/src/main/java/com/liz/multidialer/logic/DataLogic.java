@@ -1,8 +1,7 @@
 package com.liz.multidialer.logic;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.Image;
+import android.text.TextUtils;
 
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class DataLogic {
 
+    private static String mTelListFile = "";
+
     private static ArrayList<String> mTelList;
     private static int mCurrentCallIndex = 0;
     private static int mMaxCallNum = ComDef.MAX_CALL_NUM;
@@ -29,15 +30,23 @@ public class DataLogic {
     private static String mPictureDir = null;
     private static boolean mCallRunning = false;
 
+    private static String mDeviceId = "";
+    private static String mServerAddress = "";
+    private static String mUserName = "";
+    private static String mPassword = "";
+    private static String mNetworkType = ComDef.DEFAULT_NETWORK_TYPE;
+
     public static void init() {
         LogUtils.d("DataLogic: init");
 
-        loadTelList();
+        loadSettings();
+        // loadTelList();
+        //LogUtils.d("DataLogic: DIALER_DIR = " + ComDef.DIALER_DIR);
+
         genPictureDir();
-        mCurrentCallIndex = readCurrentCallIndex();
+        mCurrentCallIndex = Settings.readCurrentCallIndex();
 
         LogUtils.d("DataLogic: TEL_LIST_FILE_PATH = " + ComDef.TEL_LIST_FILE_PATH);
-        LogUtils.d("DataLogic: DIALER_DIR = " + ComDef.DIALER_DIR);
         LogUtils.d("DataLogic: mCurrentCallIndex = " + mCurrentCallIndex);
     }
 
@@ -45,10 +54,55 @@ public class DataLogic {
         mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_PATH);
     }
 
+    public static void loadSettings() {
+        mDeviceId = Settings.readDeviceId();
+        mServerAddress = Settings.readServerAddress();
+        mUserName = Settings.readUserName();
+        mPassword = Settings.readPassword();
+        mNetworkType = Settings.readNetworkType();
+    }
+
+    public static String getDeviceId() { return mDeviceId;  }
+    public static void setDeviceId(String value) { mDeviceId = value; Settings.saveDeviceId(value); }
+
+    public static String getServerAddress() {
+        return mServerAddress;
+    }
+    public static void setServerAddress(String value) {
+        mServerAddress = value;
+        Settings.saveServerAddress(value);
+    }
+
+    public static String getUserName() {
+        return mUserName;
+    }
+    public static void setUserName(String value) {
+        mUserName = value;
+        Settings.saveUserName(value);
+    }
+
+    public static String getPassword() {
+        return mPassword;
+    }
+    public static void setPassword(String value) {
+        mPassword = value;
+        Settings.savePassword(value);
+    }
+
+    public static String getNetworkType() {
+        return mNetworkType;
+    }
+    public static void setNetworkType(String value) {
+        mNetworkType = value;
+        Settings.saveNetworkType(value);
+    }
+
+    public static String getTelListFile() { return mTelListFile; }
+    public static void setTelListFile(String value) { mTelListFile = value; Settings.saveFileListFile(value); }
+
     public static int getMaxCallNum() {
         return mMaxCallNum;
     }
-
     public static void setMaxCallNum(int maxCallNum) {
         mMaxCallNum = maxCallNum;
     }
@@ -56,9 +110,17 @@ public class DataLogic {
     public static long getEndCallDelay() {
         return mEndCallDelay;
     }
-
     public static void setEndCallDelay(long endCallDelay) {
         mEndCallDelay = endCallDelay;
+    }
+
+    public static String getTelListFileInfo() {
+        if (TextUtils.isEmpty(mTelListFile)) {
+            return "未知";
+        }
+        else {
+            return mTelListFile;
+        }
     }
 
     public static String getTelListInfo() {
@@ -104,9 +166,13 @@ public class DataLogic {
         }
     }
 
-    public static int getTelNumber() {
+    public static String getTelListNumInfo() {
+        return "" + getTelListNum();
+    }
+
+    public static int getTelListNum() {
         if (mTelList == null) {
-            LogUtils.e("ERROR: getTelNumber: list null");
+            LogUtils.e("ERROR: getTelListNum: list null");
             return 0;
         }
         else {
@@ -117,11 +183,11 @@ public class DataLogic {
     public static String getCurrentTelNumber() {
         LogUtils.d("getCurrentTelNumber: mCurrentCallIndex=" + mCurrentCallIndex);
         if (mTelList == null) {
-            LogUtils.e("ERROR: getTelNumber: list null");
+            LogUtils.e("ERROR: getTelListNum: list null");
             return "";
         }
         else if (mCurrentCallIndex < 0 || mCurrentCallIndex >= mTelList.size()) {
-            LogUtils.e("ERROR: getTelNumber: invalid tel index = " + mCurrentCallIndex);
+            LogUtils.e("ERROR: getTelListNum: invalid tel index = " + mCurrentCallIndex);
             return "";
         }
         else {
@@ -143,19 +209,7 @@ public class DataLogic {
 
     public static void resetCalledIndex() {
         mCurrentCallIndex = 0;
-        saveCurrentCallIndex();
-    }
-
-    private static int readCurrentCallIndex() {
-        SharedPreferences sharedPreferences = ThisApp.getAppContext().getSharedPreferences(ComDef.MULTIDIALER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(ComDef.KEY_CURRENT_CALLED_INDEX, 0);
-    }
-
-    private static void saveCurrentCallIndex() {
-        SharedPreferences sharedPreferences= ThisApp.getAppContext().getSharedPreferences(ComDef.MULTIDIALER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(ComDef.KEY_CURRENT_CALLED_INDEX, mCurrentCallIndex);
-        editor.apply();
+        Settings.saveCurrentCallIndex(mCurrentCallIndex);
     }
 
     public static boolean isCallRunning() {
@@ -164,12 +218,12 @@ public class DataLogic {
 
     public static boolean startCall() {
         if (mCurrentCallIndex >= mTelList.size()) {
-            LogUtils.i("startCall: All call numbers(" + DataLogic.getCurrentCallIndex() + "/" + DataLogic.getTelNumber() + ") have been finished.");
+            LogUtils.i("startCall: All call numbers(" + DataLogic.getCurrentCallIndex() + "/" + DataLogic.getTelListNum() + ") have been finished.");
             return false;
         }
 
         mCallRunning = true;
-        LogUtils.i("***startCall: current/total=" + DataLogic.getCurrentCallIndex() + "/" + DataLogic.getTelNumber());
+        LogUtils.i("***startCall: current/total=" + DataLogic.getCurrentCallIndex() + "/" + DataLogic.getTelListNum());
         return true;
     }
 
@@ -185,7 +239,7 @@ public class DataLogic {
         }
 
         mCurrentCallIndex ++;
-        saveCurrentCallIndex();
+        Settings.saveCurrentCallIndex(mCurrentCallIndex);
 
         if (mCurrentCallIndex >= mTelList.size()) {
             LogUtils.i("toNextCall: All Calls Finished.");

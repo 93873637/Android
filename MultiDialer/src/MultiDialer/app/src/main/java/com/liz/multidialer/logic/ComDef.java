@@ -40,7 +40,20 @@ public class ComDef {
 
     public static final int JPEG_QUALITY = 90;  //1~100
 
+    public static final String MULTIDIALER_SHARED_PREFERENCES = "MultiDialerSharedPreferences";
+    public static final String KEY_DEVICE_ID = "DeviceId";
+    public static final String KEY_SERVER_ADDRESS = "ServerAddress";
+    public static final String KEY_USER_NAME = "UserName";
+    public static final String KEY_PASSWORD = "Password";
+    public static final String KEY_NETWORK_TYPE = "NetworkType";
+    public static final String KEY_TEL_LIST_FILE = "TelListFile";
     public static final String KEY_CURRENT_CALLED_INDEX = "CurrentCalledIndex";
 
-    public static final String MULTIDIALER_SHARED_PREFERENCES = "MultiDialerSharedPreferences";
+    public static final String DEFAULT_DEVICE_ID = "";
+    public static final String DEFAULT_SERVER_ADDRESS = "";
+    public static final String DEFAULT_USER_NAME = "";
+    public static final String DEFAULT_PASSWORD = "";
+    public static final String DEFAULT_NETWORK_TYPE = "sftp";
+    public static final String DEFAULT_TEL_LIST_FILE = "";
+    public static final int DEFAULT_CURRENT_CALLED_INDEX = 0;
 }
