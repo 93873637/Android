@@ -56,4 +56,6 @@ public class ComDef {
     public static final String DEFAULT_NETWORK_TYPE = "sftp";
     public static final String DEFAULT_TEL_LIST_FILE = "";
     public static final int DEFAULT_CURRENT_CALLED_INDEX = 0;
+
+    public static final String UPLOAD_FILE_PATH = "upload_file_path";
 }

@@ -8,6 +8,7 @@ import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.app.ThisApp;
+import com.liz.multidialer.net.SFTPUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,6 +49,17 @@ public class DataLogic {
 
         LogUtils.d("DataLogic: TEL_LIST_FILE_PATH = " + ComDef.TEL_LIST_FILE_PATH);
         LogUtils.d("DataLogic: mCurrentCallIndex = " + mCurrentCallIndex);
+
+
+        new Thread() {
+            @Override
+            public void run() {
+
+                SFTPUtils sftp = new SFTPUtils("192.168.1.4", "liz","jujube***");
+                sftp.connect();
+            }
+        }.start();
+
     }
 
     public static void loadTelList() {
