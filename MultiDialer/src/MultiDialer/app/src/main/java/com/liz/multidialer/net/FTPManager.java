@@ -3,7 +3,6 @@ package com.liz.multidialer.net;
 import android.content.Context;
 
 import com.liz.androidutils.LogUtils;
-import com.liz.multidialer.logic.DataLogic;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -25,7 +24,7 @@ public class FTPManager {
         ftpClient = new FTPClient();
     }  
   
-    public synchronized boolean openFTP() throws Exception {
+    public synchronized boolean openFTP(String serverAddress, int port) throws Exception {
         boolean result = false;
 
         if (ftpClient.isConnected()) {
@@ -36,7 +35,7 @@ public class FTPManager {
         ftpClient.setDataTimeout(FTP_DATA_TIMEOUT);
         //ftpClient.setControlEncoding("utf-8"); 
         //ftpClient.sendCommand("quote PASV");
-        ftpClient.connect(DataLogic.getServerAddress(), 21); //####@: ComDef.FTP_SERVER_PORT);
+        ftpClient.connect(serverAddress, port);
 
         // Determine if a reply code is a positive completion response.
         // All codes beginning with a 2 are positive completion responses.

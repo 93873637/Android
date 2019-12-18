@@ -1,5 +1,6 @@
 package com.liz.multidialer.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,9 @@ import com.liz.multidialer.R;
 import com.liz.multidialer.logic.DataLogic;
 
 public class DeviceConfigActivity extends AppCompatActivity {
+
+    public static final int RESULT_CODE_UPDATE = 0;
+    public static final int RESULT_CODE_CANCEL = 1;
 
     private EditText mEditDeviceId;
     private EditText mEditServerAddress;
@@ -40,6 +44,14 @@ public class DeviceConfigActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 update_config();
+                setResult(RESULT_CODE_UPDATE, new Intent());
+                DeviceConfigActivity.this.finish();
+            }
+        });
+        findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_CODE_CANCEL, new Intent());
                 DeviceConfigActivity.this.finish();
             }
         });

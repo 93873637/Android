@@ -1,7 +1,6 @@
 package com.liz.multidialer.net;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -21,26 +20,25 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.Vector;
 
-public class SFTPUtils {
 
-    private String TAG="SFTPUtils";
+public class SFTPManager {
     private String host;
+    private int port;
     private String username;
     private String password;
-    private int port = 2222;
-    private ChannelSftp sftp = null;
-    private Session sshSession = null;
+    private ChannelSftp sftp;
+    private Session sshSession;
 
-    public SFTPUtils (String host, String username, String password) {
+    public SFTPManager(String host, int port, String username, String password) {
         this.host = host;
+        this.port = port;
         this.username = username;
         this.password = password;
+        this.sftp = null;
+        this.sshSession = null;
     }
 
-    /**
-     * connect server via sftp
-     */
-    public ChannelSftp connect() {
+    public boolean connect() {
         JSch jsch = new JSch();
         try {
             sshSession = jsch.getSession(username, host, port);
@@ -50,46 +48,35 @@ public class SFTPUtils {
             sshSession.setConfig(sshConfig);
             sshSession.connect();
             Channel channel = sshSession.openChannel("sftp");
-            if (channel != null) {
-                channel.connect();
-            } else {
-                Log.e(TAG, "channel connecting failed.");
+            if (channel == null) {
+                LogUtils.e("channel connecting failed.");
+                return false;
             }
+            channel.connect();
             sftp = (ChannelSftp) channel;
+            return true;
         } catch (JSchException e) {
+            LogUtils.e("connect failed, ex = " + e.toString());
             e.printStackTrace();
+            return false;
         }
-        LogUtils.d("SFTPUtils: connect ok!");
-        return sftp;
     }
 
-
-    /**
-     * 断开服务器
-     */
     public void disconnect() {
-        if (this.sftp != null) {
-            if (this.sftp.isConnected()) {
-                this.sftp.disconnect();
-                Log.d(TAG,"sftp is closed already");
+        if (sftp != null) {
+            if (sftp.isConnected()) {
+                sftp.disconnect();
             }
+            sftp = null;
         }
-        if (this.sshSession != null) {
-            if (this.sshSession.isConnected()) {
-                this.sshSession.disconnect();
-                Log.d(TAG,"sshSession is closed already");
+        if (sshSession != null) {
+            if (sshSession.isConnected()) {
+                sshSession.disconnect();
             }
+            sshSession = null;
         }
     }
 
-    /**
-     * 单个文件上传
-     * @param remotePath
-     * @param remoteFileName
-     * @param localPath
-     * @param localFileName
-     * @return
-     */
     public boolean uploadFile(String remotePath, String remoteFileName,
                               String localPath, String localFileName) {
         FileInputStream in = null;
@@ -118,15 +105,7 @@ public class SFTPUtils {
         return false;
     }
 
-    /**
-     * 批量上传
-     * @param remotePath
-     * @param localPath
-     * @param del
-     * @return
-     */
-    public boolean bacthUploadFile(String remotePath, String localPath,
-                                   boolean del) {
+    public boolean bacthUploadFile(String remotePath, String localPath, boolean del) {
         try {
             File file = new File(localPath);
             File[] files = file.listFiles();
@@ -149,7 +128,6 @@ public class SFTPUtils {
             this.disconnect();
         }
         return false;
-
     }
 
     /**
@@ -250,7 +228,7 @@ public class SFTPUtils {
         try {
             if (isDirExist(createpath)) {
                 this.sftp.cd(createpath);
-                Log.d(TAG,createpath);
+                LogUtils.d(createpath);
                 return true;
             }
             String pathArry[] = createpath.split("/");

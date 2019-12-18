@@ -11,7 +11,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="2dp"
         android:gravity="center|top"
         android:orientation="vertical">
 
@@ -227,7 +227,6 @@
         </LinearLayout>
         <!--拨号间隔-->
 
-        <!--拨号信息-->
         <Button
             android:id="@+id/btn_start_call"
             android:layout_width="match_parent"
@@ -239,8 +238,9 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <!--拨号信息-->
         <ScrollView
-            android:id="@+id/scrollInfo"
+            android:id="@+id/scroll_progress_info"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -248,9 +248,8 @@
             android:fastScrollEnabled="true"
             android:focusable="true"
             android:transcriptMode="normal">
-
             <TextView
-                android:id="@+id/text_dial_info"
+                android:id="@+id/text_progress_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -263,7 +262,7 @@
                 android:scrollbarStyle="insideOverlay"
                 android:scrollbars="vertical"
                 android:textIsSelectable="true"
-                android:textSize="11sp" />
+                android:textSize="12sp" />
         </ScrollView>
         <!--拨号信息-->
 

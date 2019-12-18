@@ -8,7 +8,6 @@ import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.app.ThisApp;
-import com.liz.multidialer.net.SFTPUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  */
 
 @SuppressWarnings("unused")
-public class DataLogic {
+public class DataLogic extends MultiDialClient {
 
     private static String mTelListFile = "";
 
@@ -31,12 +30,6 @@ public class DataLogic {
     private static String mPictureDir = null;
     private static boolean mCallRunning = false;
 
-    private static String mDeviceId = "";
-    private static String mServerAddress = "";
-    private static String mUserName = "";
-    private static String mPassword = "";
-    private static String mNetworkType = ComDef.DEFAULT_NETWORK_TYPE;
-
     public static void init() {
         LogUtils.d("DataLogic: init");
 
@@ -47,66 +40,21 @@ public class DataLogic {
         genPictureDir();
         mCurrentCallIndex = Settings.readCurrentCallIndex();
 
-        LogUtils.d("DataLogic: TEL_LIST_FILE_PATH = " + ComDef.TEL_LIST_FILE_PATH);
-        LogUtils.d("DataLogic: mCurrentCallIndex = " + mCurrentCallIndex);
+        LogUtils.d("DataLogic: mTelListFile = " + mTelListFile + ", mCurrentCallIndex = " + mCurrentCallIndex);
 
-
-        new Thread() {
-            @Override
-            public void run() {
-
-                SFTPUtils sftp = new SFTPUtils("192.168.1.4", "liz","jujube***");
-                sftp.connect();
-            }
-        }.start();
-
+//        //##@: test
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                //SFTPManager sftp = new SFTPManager("192.168.1.4", "liz","jujube***");
+//                SFTPManager sftp = new SFTPManager("10.11.98.240", 2222, "liz","jujube***");
+//                sftp.connect();
+//            }
+//        }.start();
     }
 
     public static void loadTelList() {
         mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_PATH);
-    }
-
-    public static void loadSettings() {
-        mDeviceId = Settings.readDeviceId();
-        mServerAddress = Settings.readServerAddress();
-        mUserName = Settings.readUserName();
-        mPassword = Settings.readPassword();
-        mNetworkType = Settings.readNetworkType();
-    }
-
-    public static String getDeviceId() { return mDeviceId;  }
-    public static void setDeviceId(String value) { mDeviceId = value; Settings.saveDeviceId(value); }
-
-    public static String getServerAddress() {
-        return mServerAddress;
-    }
-    public static void setServerAddress(String value) {
-        mServerAddress = value;
-        Settings.saveServerAddress(value);
-    }
-
-    public static String getUserName() {
-        return mUserName;
-    }
-    public static void setUserName(String value) {
-        mUserName = value;
-        Settings.saveUserName(value);
-    }
-
-    public static String getPassword() {
-        return mPassword;
-    }
-    public static void setPassword(String value) {
-        mPassword = value;
-        Settings.savePassword(value);
-    }
-
-    public static String getNetworkType() {
-        return mNetworkType;
-    }
-    public static void setNetworkType(String value) {
-        mNetworkType = value;
-        Settings.saveNetworkType(value);
     }
 
     public static String getTelListFile() { return mTelListFile; }

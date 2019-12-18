@@ -14,6 +14,7 @@ import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TelUtils;
+import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.R;
 import com.liz.multidialer.app.ThisApp;
 import com.liz.multidialer.logic.ComDef;
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditDialInterval;
 
     private Button mBtnCall;
+
+    private ScrollView mScrollProgressInfo;
+    private TextView mTextProgressInfo;
 
     private Timer mUITimer;
     TelephonyManager mTelephonyManager;
@@ -108,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
+        mTextProgressInfo = findViewById(R.id.text_progress_info);
+
         findViewById(R.id.btn_exit_app).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingButtonService.setFloatingButtonCallback(new FloatingButtonService.FloatingButtonCallback() {
             @Override
             public void onFloatButtonClicked() {
-                showProgress("Floating Button Clicked to Stop Call...");
+                showProgressInfo("Floating Button Clicked to Stop Call...");
                 onStopCall();
             }
         });
@@ -138,11 +146,11 @@ public class MainActivity extends AppCompatActivity {
     private void onCallButtonClicked() {
         mEditDialInterval.clearFocus();
         if (DataLogic.isCallRunning()) {
-            showProgress("Call Button Clicked to Stop Call...");
-            onStopCall();
+            showProgressInfo("Call Button Clicked to Stop Call...");
+            //###@: onStopCall();
         } else {
-            showProgress("Call Button Clicked to Start Call...");
-            onStartCall();
+            showProgressInfo("Call Button Clicked to Start Call...");
+            //####@: onStartCall();
         }
     }
 
@@ -156,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void onStopCall() {
         DataLogic.stopCall();
-        //stopCaptureTimer();
         FloatingButtonService.showFloatingButton(false);
     }
 
@@ -211,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        LogUtils.d("MainActivity: onActivityResult: requestCode = " + requestCode + ", resultCode = " + resultCode);
         if (requestCode == REQUEST_CODE_FLOATING_BUTTON) {
             if (!Settings.canDrawOverlays(this)) {
                 Toast.makeText(this, "浮窗权限授权失败", Toast.LENGTH_SHORT).show();
@@ -219,12 +227,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return;
         }
-
         if (requestCode == REQUEST_CODE_DEVICE_CONFIG) {
-            updateUI();
+            if (resultCode == DeviceConfigActivity.RESULT_CODE_UPDATE) {
+                updateUI();
+            }
             return;
         }
-
         ScreenCapture.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -251,14 +259,14 @@ public class MainActivity extends AppCompatActivity {
 
         String strTel = DataLogic.getCurrentTelNumber();
         if (!TelUtils.isValidTelNumber(strTel)) {
-            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
+            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
             callNextNum();
             return;
         }
 
         //if (mCallState != TelephonyManager.CALL_STATE_IDLE) {
         if (isTelephonyCalling()) {
-            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end it and call again...");
+            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end it and call again...");
             TelUtils.endCall(MainActivity.this);
             new Handler().postDelayed(new Runnable() {
                 public void run() {
@@ -270,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             String ret = TelUtils.startCall(MainActivity.this, strTel);
-            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Start Call, Tel = " + strTel + ", " + ret);
+            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Start Call, Tel = " + strTel + ", " + ret);
 
             new Handler().postDelayed(new Runnable() {
                 public void run() {
@@ -281,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 public void run() {
                     String retEndCall = TelUtils.endCall(MainActivity.this);
-                    showProgress("End Call: " + retEndCall);
+                    showProgressInfo("End Call: " + retEndCall);
                 }
             }, DataLogic.getEndCallDelay());
 
@@ -293,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
-            showProgress("loopCallOnNum Exception: " + e.toString());
+            showProgressInfo("loopCallOnNum Exception: " + e.toString());
             e.printStackTrace();
         }
     }
@@ -317,26 +325,25 @@ public class MainActivity extends AppCompatActivity {
             loopCallOnNum();
         }
         else {
-            showProgress("callNextNum: No next call.");
+            showProgressInfo("callNextNum: No next call.");
             FloatingButtonService.showFloatingButton(false);
         }
     }
 
-    private void showProgress(final String msg) {
-        LogUtils.d("showProgress: " + msg);
+    private void showProgressInfo(final String msg) {
         //###@: todo: write to log file
-//        runOnUiThread(new Runnable() {
-//            public void run() {
-//                String logMsg = TimeUtils.getLogTime() + " - " + msg;
-//                mTextProgress.append(logMsg + "\n");
-//                mScrollProgress.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mScrollProgress.smoothScrollTo(0, mTextProgress.getBottom());
-//                    }
-//                });
-//            }
-//        });
+        runOnUiThread(new Runnable() {
+            public void run() {
+                String logMsg = TimeUtils.getLogTime() + " - " + msg;
+                mTextProgressInfo.setText(logMsg + "\n");
+                mScrollProgressInfo.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mScrollProgressInfo.smoothScrollTo(0, mTextProgressInfo.getBottom());
+                    }
+                });
+            }
+        });
     }
 
     @Override

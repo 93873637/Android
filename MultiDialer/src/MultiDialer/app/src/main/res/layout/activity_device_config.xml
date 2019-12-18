@@ -204,6 +204,16 @@
             android:textAllCaps="false"
             android:textSize="18sp"
             android:textStyle="bold" />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#ff0000"
+            android:text="取消"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
