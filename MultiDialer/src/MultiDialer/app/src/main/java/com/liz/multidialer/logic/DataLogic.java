@@ -9,6 +9,7 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.app.ThisApp;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -20,8 +21,6 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class DataLogic extends MultiDialClient {
 
-    private static String mTelListFile = "";
-
     private static ArrayList<String> mTelList;
     private static int mCurrentCallIndex = 0;
     private static int mMaxCallNum = ComDef.MAX_CALL_NUM;
@@ -31,34 +30,94 @@ public class DataLogic extends MultiDialClient {
     private static boolean mCallRunning = false;
 
     public static void init() {
-        LogUtils.d("DataLogic: init");
+        showProgress("DataLogic: init");
 
         loadSettings();
-        // loadTelList();
-        //LogUtils.d("DataLogic: DIALER_DIR = " + ComDef.DIALER_DIR);
-
         genPictureDir();
+
+        if (!loadTelList()) {
+            MultiDialClient.fetchTelListFile();
+        }
+    }
+
+    protected static void loadSettings() {
+        MultiDialClient.loadSettings();
         mCurrentCallIndex = Settings.readCurrentCallIndex();
-
-        LogUtils.d("DataLogic: mTelListFile = " + mTelListFile + ", mCurrentCallIndex = " + mCurrentCallIndex);
-
-//        //##@: test
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                //SFTPManager sftp = new SFTPManager("192.168.1.4", "liz","jujube***");
-//                SFTPManager sftp = new SFTPManager("10.11.98.240", 2222, "liz","jujube***");
-//                sftp.connect();
-//            }
-//        }.start();
     }
 
-    public static void loadTelList() {
-        mTelList = FileUtils.readTxtFileLines(ComDef.TEL_LIST_FILE_PATH);
+    private static boolean loadTelList() {
+        if (!checkTelListFile()) {
+            showProgress("ERROR: loadTelList: check tel list file failed.");
+            return false;
+        }
+
+        mTelList = FileUtils.readTxtFileLines(mTelListFile);
+        if (!checkTelList()) {
+            showProgress("ERROR: loadTelList: check tel list failed.");
+            return false;
+        }
+
+        //load success, init call index
+        mCurrentCallIndex = 0;
+
+        showProgress("loadTelList: size = " + mTelList.size());
+        return true;
     }
 
-    public static String getTelListFile() { return mTelListFile; }
-    public static void setTelListFile(String value) { mTelListFile = value; Settings.saveFileListFile(value); }
+    private static boolean checkTelListFile() {
+        if (TextUtils.isEmpty(mTelListFile)) {
+            showProgress("ERROR: TelListFile Empty");
+            return false;
+        }
+        File f = new File(mTelListFile);
+        if (!f.exists()) {
+            showProgress("ERROR: TelListFile " + mTelListFile + " not exist");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean checkTelList() {
+        if (mTelList == null) {
+            showProgress("ERROR: mTelList null");
+            return false;
+        }
+        if (mTelList.size() == 0) {
+            showProgress("ERROR: mTelList empty");
+            return false;
+        }
+        return true;
+    }
+
+    public static String getTelListFileInfo() {
+        if (TextUtils.isEmpty(mTelListFile)) {
+            return "未知";
+        }
+        else {
+            return mTelListFile;
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // UI Progress Info Callback
+
+    public interface ShowProgressCallback {
+        void onShowProgress(String msg);
+    }
+
+    private static ShowProgressCallback mProgressCallback;
+    public static void setProgressCallback(ShowProgressCallback callback) {
+        mProgressCallback = callback;
+    }
+
+    public static void showProgress(String msg) {
+        if (mProgressCallback != null) {
+            mProgressCallback.onShowProgress(msg);
+        }
+    }
+
+    // UI Progress Info Callback
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     public static int getMaxCallNum() {
         return mMaxCallNum;
@@ -74,15 +133,6 @@ public class DataLogic extends MultiDialClient {
         mEndCallDelay = endCallDelay;
     }
 
-    public static String getTelListFileInfo() {
-        if (TextUtils.isEmpty(mTelListFile)) {
-            return "未知";
-        }
-        else {
-            return mTelListFile;
-        }
-    }
-
     public static String getTelListInfo() {
         String telListInfo;
         if (mTelList == null) {
@@ -96,25 +146,6 @@ public class DataLogic extends MultiDialClient {
                     + "):  <font color='#FF0000'>" + mTelList.size() + "</font>";
         }
         return telListInfo;
-    }
-
-    public static boolean initCheck() {
-        if (mTelList == null) {
-            LogUtils.e("ERROR: mTelList is null");
-            return false;
-        }
-
-        if (mTelList.size() == 0) {
-            LogUtils.e("ERROR: mTelList empty");
-            return false;
-        }
-
-        if (mPictureDir == null) {
-            LogUtils.e("ERROR: No picture dir");
-            return false;
-        }
-
-        return true;
     }
 
     private static void genPictureDir() {
@@ -177,6 +208,21 @@ public class DataLogic extends MultiDialClient {
     }
 
     public static boolean startCall() {
+        if (mTelList == null) {
+            showProgress("ERROR: mTelList null");
+            return false;
+        }
+
+        if (mTelList.size() == 0) {
+            showProgress("ERROR: mTelList empty");
+            return false;
+        }
+
+        if (mPictureDir == null) {
+            showProgress("ERROR: Picture Dir null");
+            return false;
+        }
+
         if (mCurrentCallIndex >= mTelList.size()) {
             LogUtils.i("startCall: All call numbers(" + DataLogic.getCurrentCallIndex() + "/" + DataLogic.getTelListNum() + ") have been finished.");
             return false;

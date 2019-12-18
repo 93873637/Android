@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.StringBufferQueue;
 import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.R;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ScrollView mScrollProgressInfo;
     private TextView mTextProgressInfo;
+    private StringBufferQueue mProgressBuffer;
 
     private Timer mUITimer;
     TelephonyManager mTelephonyManager;
@@ -115,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
 
         mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
+        mProgressBuffer = new StringBufferQueue();
+        DataLogic.setProgressCallback(new DataLogic.ShowProgressCallback(){
+            @Override
+            public void onShowProgress(String msg) {
+                MainActivity.this.showProgressInfo(msg);
+            }
+        });
 
         findViewById(R.id.btn_exit_app).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,10 +156,10 @@ public class MainActivity extends AppCompatActivity {
         mEditDialInterval.clearFocus();
         if (DataLogic.isCallRunning()) {
             showProgressInfo("Call Button Clicked to Stop Call...");
-            //###@: onStopCall();
+            onStopCall();
         } else {
             showProgressInfo("Call Button Clicked to Start Call...");
-            //####@: onStartCall();
+            onStartCall();
         }
     }
 
@@ -158,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
         DataLogic.setEndCallDelay(Integer.parseInt(mEditDialInterval.getText().toString()));
         if (DataLogic.startCall()) {
             loopCallOnNum();
+            FloatingButtonService.showFloatingButton(true);
         }
-        FloatingButtonService.showFloatingButton(true);
     }
 
     private void onStopCall() {
@@ -335,7 +344,8 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             public void run() {
                 String logMsg = TimeUtils.getLogTime() + " - " + msg;
-                mTextProgressInfo.setText(logMsg + "\n");
+                mProgressBuffer.append(logMsg);
+                mTextProgressInfo.setText(mProgressBuffer.getBuffer());
                 mScrollProgressInfo.post(new Runnable() {
                     @Override
                     public void run() {

@@ -18,6 +18,9 @@ public class Settings {
     public static String readServerAddress() { return readItem(ComDef.KEY_SERVER_ADDRESS, ComDef.DEFAULT_SERVER_ADDRESS); }
     public static void saveServerAddress(String value) { saveItem(ComDef.KEY_SERVER_ADDRESS, value); }
 
+    public static int readServerPort() { return readItemInt(ComDef.KEY_SERVER_PORT, ComDef.DEFAULT_SERVER_PORT); }
+    public static void saveServerPort(int value) { saveItemInt(ComDef.KEY_SERVER_PORT, value); }
+
     public static String readUserName() { return readItem(ComDef.KEY_USER_NAME, ComDef.DEFAULT_USER_NAME); }
     public static void saveUserName(String value) { saveItem(ComDef.KEY_USER_NAME, value); }
 

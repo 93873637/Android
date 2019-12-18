@@ -43,6 +43,7 @@ public class ComDef {
     public static final String MULTIDIALER_SHARED_PREFERENCES = "MultiDialerSharedPreferences";
     public static final String KEY_DEVICE_ID = "DeviceId";
     public static final String KEY_SERVER_ADDRESS = "ServerAddress";
+    public static final String KEY_SERVER_PORT = "ServerPort";
     public static final String KEY_USER_NAME = "UserName";
     public static final String KEY_PASSWORD = "Password";
     public static final String KEY_NETWORK_TYPE = "NetworkType";
@@ -51,6 +52,7 @@ public class ComDef {
 
     public static final String DEFAULT_DEVICE_ID = "";
     public static final String DEFAULT_SERVER_ADDRESS = "";
+    public static final int DEFAULT_SERVER_PORT = 22;
     public static final String DEFAULT_USER_NAME = "";
     public static final String DEFAULT_PASSWORD = "";
     public static final String DEFAULT_NETWORK_TYPE = "sftp";

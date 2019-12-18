@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a186f87-7a15-4948-bfb6-c7f7e72c447b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/TelUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ReadCallLog/MyApplication/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ImageTools/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/TextActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/TextActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_redo.png" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_redo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_undo.png" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/drawable/icon_undo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/multiauth_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/multiauth_dialog.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="90" column="41" lean-forward="true" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
+            <state relative-caret-position="273">
+              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
             </state>
           </provider>
         </entry>
@@ -54,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="237" column="19" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+            <state relative-caret-position="742">
+              <caret line="223" column="27" selection-start-line="223" selection-start-column="19" selection-end-line="223" selection-end-column="27" />
               <folding>
                 <element signature="e#7718#7719#0" expanded="true" />
                 <element signature="e#7818#7819#0" expanded="true" />
@@ -104,16 +95,17 @@
       <find>EditText</find>
       <find>textInfo</find>
       <find>mTextInfo</find>
+      <find>progress</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="y" value="2" />
-    <option name="width" value="1932" />
-    <option name="height" value="1045" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -123,10 +115,88 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="ProjectPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="liz" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="liz" type="462c0819:PsiDirectoryNode" />
+              <item name="cmdtool" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CmdTool" type="1abcf292:AndroidViewProjectNode" />
+              <item name="CmdTool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="liz" type="462c0819:PsiDirectoryNode" />
+              <item name="cmdtool" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -159,10 +229,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" weight="0.34861407" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.34861407" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -206,6 +275,13 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -236,19 +312,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="237" column="19" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+        <state relative-caret-position="742">
+          <caret line="223" column="27" selection-start-line="223" selection-start-column="19" selection-end-line="223" selection-end-column="27" />
           <folding>
             <element signature="e#7718#7719#0" expanded="true" />
             <element signature="e#7818#7819#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="90" column="41" lean-forward="true" selection-start-line="90" selection-start-column="41" selection-end-line="90" selection-end-column="41" />
         </state>
       </provider>
     </entry>

@@ -17,6 +17,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
 
     private EditText mEditDeviceId;
     private EditText mEditServerAddress;
+    private EditText mEditServerPort;
     private EditText mEditUserName;
     private EditText mEditPassword;
     private EditText mEditNetworkType;
@@ -30,12 +31,14 @@ public class DeviceConfigActivity extends AppCompatActivity {
 
         mEditDeviceId = findViewById(R.id.edit_device_id);
         mEditServerAddress = findViewById(R.id.edit_server_address);
+        mEditServerPort = findViewById(R.id.edit_server_port);
         mEditUserName = findViewById(R.id.edit_user_name);
         mEditPassword = findViewById(R.id.edit_password);
         mEditNetworkType = findViewById(R.id.edit_network_type);
 
         mEditDeviceId.setText(DataLogic.getDeviceId());
         mEditServerAddress.setText(DataLogic.getServerAddress());
+        mEditServerPort.setText("" + DataLogic.getServerPort());
         mEditUserName.setText(DataLogic.getUserName());
         mEditPassword.setText(DataLogic.getPassword());
         mEditNetworkType.setText(DataLogic.getNetworkType());
@@ -60,6 +63,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
     private void update_config() {
         DataLogic.setDeviceId(mEditDeviceId.getText().toString());
         DataLogic.setServerAddress(mEditServerAddress.getText().toString());
+        DataLogic.setServerPort(Integer.parseInt(mEditServerPort.getText().toString()));
         DataLogic.setUserName(mEditUserName.getText().toString());
         DataLogic.setPassword(mEditPassword.getText().toString());
         DataLogic.setNetworkType(mEditNetworkType.getText().toString());
