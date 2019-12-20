@@ -1,16 +1,12 @@
 package com.liz.multidialer.ui;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
-import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +19,6 @@ import androidx.core.app.ActivityCompat;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.StringBufferQueue;
-import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.R;
 import com.liz.multidialer.app.ThisApp;
@@ -61,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private StringBufferQueue mProgressBuffer;
 
     private Timer mUITimer;
-    TelephonyManager mTelephonyManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         initFloatingWindow();
         startUITimer();
 
-        mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         ScreenCapture.initScreenCapture(MainActivity.this);
     }
 
@@ -117,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
-        mProgressBuffer = new StringBufferQueue();
+        mProgressBuffer = new StringBufferQueue(16);
         DataLogic.setProgressCallback(new DataLogic.ShowProgressCallback(){
             @Override
             public void onShowProgress(String msg) {
@@ -154,7 +147,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void onCallButtonClicked() {
         mEditDialInterval.clearFocus();
-        if (DataLogic.isCallRunning()) {
+        DataLogic.setEndCallDelay(Integer.parseInt(mEditDialInterval.getText().toString()));
+
+        if (DataLogic.isWorking()) {
             showProgressInfo("Call Button Clicked to Stop Call...");
             onStopCall();
         } else {
@@ -164,15 +159,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onStartCall() {
-        DataLogic.setEndCallDelay(Integer.parseInt(mEditDialInterval.getText().toString()));
-        if (DataLogic.startCall()) {
-            loopCallOnNum();
-            FloatingButtonService.showFloatingButton(true);
-        }
+        DataLogic.startWorking(MainActivity.this);
+        FloatingButtonService.showFloatingButton(true);
     }
 
     private void onStopCall() {
-        DataLogic.stopCall();
+        DataLogic.stopWorking();
         FloatingButtonService.showFloatingButton(false);
     }
 
@@ -201,28 +193,16 @@ public class MainActivity extends AppCompatActivity {
 
         mTextTelListFile.setText(DataLogic.getTelListFileInfo());
         mTextTelListNum.setText(DataLogic.getTelListNumInfo());
+        mTextCalledNum.setText(DataLogic.getCalledNumInfo());
 
-        String calledNumInfo = "" + DataLogic.getCalledNum();
-        mTextCalledNum.setText(Html.fromHtml(calledNumInfo));
-
-        if (DataLogic.isCallRunning()) {
+        if (DataLogic.isWorking()) {
             mBtnCall.setText("停止拨号");
             mBtnCall.setBackgroundColor(Color.RED);
-            String progressInfo = "正在拨打 " + (DataLogic.getCurrentCallIndex()+1)
-                    + "/" + DataLogic.getTelListNum() + ": "
-                    + DataLogic.getCurrentTelNumber() + "\n"
-                    + "点击停止";
-            FloatingButtonService.updateInfo(progressInfo);
+            FloatingButtonService.updateInfo(DataLogic.getProgressInfo());
         } else {
             mBtnCall.setText("开始拨号");
             mBtnCall.setBackgroundColor(Color.GREEN);
-            mBtnCall.setEnabled(true);
         }
-    }
-
-    public boolean isTelephonyCalling(){
-        return (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) ||
-                (mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_RINGING);
     }
 
     @Override
@@ -261,83 +241,59 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE_PERMISSIONS);
         }
     }
-
-    private void loopCallOnNum() {
-        LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex());
-        //LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex() + ", ThreadId=" + android.os.Process.myTid());
-
-        String strTel = DataLogic.getCurrentTelNumber();
-        if (!TelUtils.isValidTelNumber(strTel)) {
-            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
-            callNextNum();
-            return;
-        }
-
-        //if (mCallState != TelephonyManager.CALL_STATE_IDLE) {
-        if (isTelephonyCalling()) {
-            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end it and call again...");
-            TelUtils.endCall(MainActivity.this);
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    loopCallOnNum();
-                }
-            }, ComDef.WAIT_CALL_IDLE_DELAY);
-            return;
-        }
-
-        try {
-            String ret = TelUtils.startCall(MainActivity.this, strTel);
-            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Start Call, Tel = " + strTel + ", " + ret);
-
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    ScreenCapture.captureOnce();
-                }
-            }, getScreenCaptureDelay());
-
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    String retEndCall = TelUtils.endCall(MainActivity.this);
-                    showProgressInfo("End Call: " + retEndCall);
-                }
-            }, DataLogic.getEndCallDelay());
-
-            new Handler().postDelayed(new Runnable() {
-                public void run() {
-                    callNextNum();
-                }
-            }, getCallNextDelay());
-
-        } catch (Exception e) {
-            Toast.makeText(MainActivity.this, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
-            showProgressInfo("loopCallOnNum Exception: " + e.toString());
-            e.printStackTrace();
-        }
-    }
-
-    private long getScreenCaptureDelay() {
-        long delay = DataLogic.getEndCallDelay() - ComDef.CAPTURE_SCREEN_OFFSET;
-        if (delay < 0) {
-            return 0;
-        }
-        else {
-            return delay;
-        }
-    }
-
-    private long getCallNextDelay() {
-        return DataLogic.getEndCallDelay() + ComDef.CALL_NEXT_OFFSET;
-    }
-
-    private void callNextNum() {
-        if (DataLogic.toNextCall()) {
-            loopCallOnNum();
-        }
-        else {
-            showProgressInfo("callNextNum: No next call.");
-            FloatingButtonService.showFloatingButton(false);
-        }
-    }
+//
+//    private static void loopCallOnNum() {
+//        LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex());
+//        //LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex() + ", ThreadId=" + android.os.Process.myTid());
+//
+//        String strTel = DataLogic.getCurrentTelNumber();
+//        if (!TelUtils.isValidTelNumber(strTel)) {
+//            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
+//            callNextNum();
+//            return;
+//        }
+//
+//        //if (mCallState != TelephonyManager.CALL_STATE_IDLE) {
+//        if (isTelephonyCalling()) {
+//            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end it and call again...");
+//            TelUtils.endCall(MainActivity.this);
+//            new Handler().postDelayed(new Runnable() {
+//                public void run() {
+//                    loopCallOnNum();
+//                }
+//            }, ComDef.WAIT_CALL_IDLE_DELAY);
+//            return;
+//        }
+//
+//        try {
+//            String ret = TelUtils.startWorking(MainActivity.this, strTel);
+//            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Start Call, Tel = " + strTel + ", " + ret);
+//
+//            new Handler().postDelayed(new Runnable() {
+//                public void run() {
+//                    ScreenCapture.captureOnce();
+//                }
+//            }, getScreenCaptureDelay());
+//
+//            new Handler().postDelayed(new Runnable() {
+//                public void run() {
+//                    String retEndCall = TelUtils.endCall(MainActivity.this);
+//                    showProgressInfo("End Call: " + retEndCall);
+//                }
+//            }, DataLogic.getEndCallDelay());
+//
+//            new Handler().postDelayed(new Runnable() {
+//                public void run() {
+//                    callNextNum();
+//                }
+//            }, getCallNextDelay());
+//
+//        } catch (Exception e) {
+//            Toast.makeText(MainActivity.this, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
+//            showProgressInfo("loopCallOnNum Exception: " + e.toString());
+//            e.printStackTrace();
+//        }
+//    }
 
     private void showProgressInfo(final String msg) {
         //###@: todo: write to log file

@@ -12,11 +12,21 @@
     <TextView
         android:id="@+id/torchInfo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
+        android:background="#ff0000ff"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text=""
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/colorInfo"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:background="#550000ff"
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         android:padding="@dimen/activity_horizontal_margin"
-        android:text="FlashLight is Busy , Sorry！"
+        android:text=""
         android:textStyle="bold" />
 
 </android.support.constraint.ConstraintLayout>

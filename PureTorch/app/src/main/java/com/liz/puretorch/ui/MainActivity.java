@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TorchSwitchButton mBtnSwitch;
 
     private TextView mTorchInfo;
+    private TextView mColorInfo;
 
     /*
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        mWakeLock = mPowerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, this.getClass().getName());
 
         mLayoutMain = findViewById(R.id.layoutMain);
+        mColorInfo = findViewById(R.id.colorInfo);
         mTorchInfo = findViewById(R.id.torchInfo);
 
         //the seek bar to adjust brightness
@@ -125,44 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-//        mBtnSwitch.setOnTouchListener(new View.OnTouchListener() {
-//
-//            float mPosX;
-//            float mPosY;
-//            float mCurPosX;
-//            float mCurPosY;
-//
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                mDetector.onTouchEvent(event);
-//
-//                // TODO Auto-generated method stub
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        mPosX = event.getX();
-//                        mPosY = event.getY();
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        mCurPosX = event.getX();
-//                        mCurPosY = event.getY();
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        if (mCurPosY - mPosY > 0
-//                                && (Math.abs(mCurPosY - mPosY) > 25)) {
-//                            //向下滑動
-//
-//                        } else if (mCurPosY - mPosY < 0
-//                                && (Math.abs(mCurPosY - mPosY) > 25)) {
-//                            //向上滑动
-//                            //collapse();
-//                        }
-//                        v.performClick();
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
-
         // Instantiate the gesture detector with the
         // application context and an implementation of
         // GestureDetector.OnGestureListener
@@ -184,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             );
         }
         else {
-            TorchUtils.enableTorch(MainActivity.this, true);
+            onEnableTorch(true);
             /*
             //to flash activity
             Intent intent = new Intent();
@@ -199,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void updateUI() {
         updateAppBrightness();
         updateBackgroundColor();
-        updateTorchInfo();
+        updateColorInfo();
     }
 
     public void updateColorBars(){
@@ -215,8 +179,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LogUtils.d("updateBackgroundColor: red=" + red + ", green=" + green + ", blue=" + blue);
     }
 
-    public void updateTorchInfo() {
-        mTorchInfo.setText(DataLogic.getTorchInfo());
+    public void updateColorInfo() {
+        mColorInfo.setText(DataLogic.getTorchInfo());
     }
 
 //    public void updateSeekBarAll() {
@@ -225,6 +189,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        mLayoutMain.setBackgroundColor(Color.rgb(all, all, all));
 //        LogUtils.d("updateSeekBarAll: all=" + all);
 //    }
+
+    public void onEnableTorch(boolean bEnable) {
+        TorchUtils.enableTorch(MainActivity.this, bEnable);
+        updateTorchInfo();
+    }
+
+    public void onSwitchTorch() {
+        TorchUtils.switchTorch(MainActivity.this);
+        updateTorchInfo();
+    }
+
+    private void updateTorchInfo() {
+        int color = 0xff0000ff;
+        if (TorchUtils.isTorchEnabled()) {
+            color = 0xffff0000;
+        }
+        mTorchInfo.setBackgroundColor(color);
+    }
 
     @Override
     protected void onResume() {
@@ -249,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //Toast.makeText(MainActivity.this, "onRequestPermissionsResult of REQUEST_CAMERA", Toast.LENGTH_SHORT).show();
         if (requestCode == REQUEST_CAMERA) {
-            TorchUtils.enableTorch(MainActivity.this, true);
+            onEnableTorch(true);
         }
     }
 
@@ -257,13 +239,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btnSwitch:
-                LogUtils.d("fastFling=" + mBtnSwitch.fastFling);
-                if (mBtnSwitch.fastFling) {
-                    TorchUtils.enableTorch(MainActivity.this, false);
-                    this.finish();
-                }
-                else {
-                    TorchUtils.switchTorch(MainActivity.this);
+                int flingType = mBtnSwitch.getFlingType();
+                LogUtils.d("FlingType = " + flingType);
+                switch (flingType) {
+                    case TorchSwitchButton.FLING_TYPE_EXIT:
+                        onEnableTorch(false);
+                        this.finish();
+                        break;
+                    case TorchSwitchButton.FLING_TYPE_SWITCH:
+                        onSwitchTorch();
+                        break;
+                    default:
+                        LogUtils.e("ERROR: Unknown fling type " + flingType);
+                        break;
                 }
                 break;
         }
@@ -271,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        TorchUtils.enableTorch(MainActivity.this, false);
+        onEnableTorch(false);
         super.onBackPressed();
     }
 

@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
+
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class TelUtils {
 
     public static String startCall(Context context, String telNum) {
@@ -49,6 +51,12 @@ public class TelUtils {
         }
     }
 
+    public static boolean isCalling(Context context){
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return (telephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) ||
+                (telephonyManager.getCallState() == TelephonyManager.CALL_STATE_RINGING);
+    }
+
     public static boolean isValidTelNumber(String strTelNumber) {
         if (strTelNumber == null || strTelNumber.isEmpty()) {
             return false;
@@ -58,13 +66,11 @@ public class TelUtils {
     }
 
     public static ITelephony getITelephony(Context context) {
-        TelephonyManager mTelephonyManager = (TelephonyManager) context
-                .getSystemService(TELEPHONY_SERVICE);
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
         Class c = TelephonyManager.class;
         Method getITelephonyMethod = null;
         try {
-            getITelephonyMethod = c.getDeclaredMethod("getITelephony",
-                    (Class[]) null); // 获取声明的方法
+            getITelephonyMethod = c.getDeclaredMethod("getITelephony", (Class[]) null);
             getITelephonyMethod.setAccessible(true);
         } catch (SecurityException e) {
             e.printStackTrace();
@@ -72,8 +78,7 @@ public class TelUtils {
             e.printStackTrace();
         }
         try {
-            ITelephony iTelephony = (ITelephony) getITelephonyMethod.invoke(
-                    mTelephonyManager, (Object[]) null); // 获取实例
+            ITelephony iTelephony = (ITelephony) getITelephonyMethod.invoke(telephonyManager, (Object[]) null);
             return iTelephony;
         } catch (Exception e) {
             e.printStackTrace();

@@ -23,10 +23,18 @@ android {
     // for build jar
 
     //
-    //Usage:
-    //1. On Android Studio's Terminal window, input 'gradlew buildJar'
-    //D:\WorkSpace\Android\AndroidUtils>gradlew buildJar
-    //2. Then you can get AndroidUtils.jar on D:/WorkSpace/Android/_bin
+    // Usage:
+    // 1. On Android Studio's Terminal window(generally bottom-right of Android Studio window), input command:
+    //    # gradlew buildJar
+    //    Also, you can run directly on window cmd window:
+    //    D:\WorkSpace\Android\AndroidUtils>gradlew buildJar
+    // 2. If success, you can get AndroidUtils.jar on D:/WorkSpace/Android/_bin, or debug.
+    // 3. Then you can use the jar on your app by adding it to your app's build.gradle:
+    //    ...
+    //    dependencies {
+    //    ...
+    //    implementation files('D:/WorkSpace/Android/_bin/AndroidUtils.jar')
+    //    ...
     //
 
     def jarFileName = "AndroidUtils"

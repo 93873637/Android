@@ -39,6 +39,10 @@ public class TorchUtils {
         enableTorch(context, mTorchEnabled);
     }
 
+    public static boolean isTorchEnabled() {
+        return mTorchEnabled;
+    }
+
     public static int getSystemBrightness(Context context) {
         int systemBrightness = 0;
         try {
