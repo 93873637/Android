@@ -11,8 +11,6 @@ public class MultiDialClient {
     private static String mPassword = "";
     private static String mNetworkType = ComDef.DEFAULT_NETWORK_TYPE;
 
-    protected static String mTelListFile;
-
     protected static void loadSettings() {
         mDeviceId = Settings.readDeviceId();
         mServerAddress = Settings.readServerAddress();
@@ -20,23 +18,22 @@ public class MultiDialClient {
         mUserName = Settings.readUserName();
         mPassword = Settings.readPassword();
         mNetworkType = Settings.readNetworkType();
-        mTelListFile = Settings.readFileListFile();
     }
 
     protected static void fetchTelListFile() {
         //fetch tellist file from server
-        new Thread() {
-            @Override
-            public void run() {
                 SFTPManager sftp = new SFTPManager(getServerAddress(), getServerPort(), getUserName(),getPassword());
-                sftp.connect();
-                //####@:
-            }
-        }.start();
-    }
+                if (!sftp.connect()) {
+                    DataLogic.showProgress("sftp connect failed.");
+                }
+                else {
+                    //sftp.listFiles("");
 
-    public static String getTelListFile() { return mTelListFile; }
-    public static void setTelListFile(String value) { mTelListFile = value; Settings.saveFileListFile(value); }
+                    //sftp.downloadFile()fetchtellistfile
+                    //DataLogic.loadTelList()
+                }
+
+    }
 
     public static String getDeviceId() { return mDeviceId;  }
     public static void setDeviceId(String value) { mDeviceId = value; Settings.saveDeviceId(value); }

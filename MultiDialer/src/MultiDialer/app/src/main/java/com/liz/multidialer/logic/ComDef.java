@@ -34,6 +34,7 @@ public class ComDef {
 
     //public static final String DIALER_DIR = "/sdcard/multidialer";
     public static final String DIALER_DIR = Environment.getExternalStorageDirectory().getPath() + "/multidialer";
+    public static final String DIALER_PIC_DIR = DIALER_DIR + "/pic";
 
     //该程序运行一次最多能拨打的号码数量
     public static final int MAX_CALL_NUM = Integer.MAX_VALUE;

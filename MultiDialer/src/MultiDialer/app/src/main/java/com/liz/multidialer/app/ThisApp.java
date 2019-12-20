@@ -34,7 +34,7 @@ public class ThisApp extends Application {
         LogUtils.d("ThisApp: onCreate, pid = " + android.os.Process.myPid());
 
         DataLogic.init();
-        startLifeTimer();
+        //##@: startLifeTimer();
     }
 
     public static Context getAppContext() {
@@ -73,16 +73,16 @@ public class ThisApp extends Application {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Life Timer: Heart Beat Timer
 
     public static final long LIFE_TIMER_DELAY = 1000L;  //unit by ms
     public static final long LIFE_TIMER_PERIOD = 5000L;  //unit by ms
     public static final String LIFE_BROADCAST_MSG = "com.liz.multidialer.LIFE_BROADCAST";
 
-    private static Timer mLifeTimer;
+    private static Timer mLifeTimer = null;
 
     private static void startLifeTimer() {
         LogUtils.d("startLifeTimer");
-        //detect and update NV21 files of /sdcard/camera
         mLifeTimer = new Timer();
         mLifeTimer.schedule(new TimerTask() {
             public void run() {
@@ -99,5 +99,6 @@ public class ThisApp extends Application {
         }
     }
 
+    // Life Timer: Heart Beat Timer
     ///////////////////////////////////////////////////////////////////////////////////////////////
 }

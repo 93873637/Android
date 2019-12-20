@@ -15,8 +15,9 @@ import com.liz.multidialer.app.ThisApp;
 import com.liz.multidialer.ui.FloatingButtonService;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * DataLogic:
@@ -26,27 +27,33 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class DataLogic extends MultiDialClient {
 
-    private static ArrayList<String> mTelList;
+    private static ArrayList<String> mTelList = null;
+    private static String mTelListFileName = "";
     private static int mCurrentCallIndex = 0;
+    private static String mPicturePath = "";
     private static int mMaxCallNum = ComDef.MAX_CALL_NUM;
     private static long mEndCallDelay = ComDef.DEFAULT_END_CALL_DELAY;
     private static int mCalledNum = 0;
-    private static String mPictureDir = null;
     private static boolean mWorking = false;
+    private static boolean mDialing = false;
 
     public static void init() {
         showProgress("DataLogic: init");
-
         loadSettings();
-        genPictureDir();
-
         if (!loadTelList()) {
-            MultiDialClient.fetchTelListFile();
+            // network operation can't run on main thread
+            new Thread() {
+                @Override
+                public void run() {
+                    MultiDialClient.fetchTelListFile();
+                }
+            }.start();
         }
     }
 
     protected static void loadSettings() {
         MultiDialClient.loadSettings();
+        mTelListFileName = Settings.readFileListFile();
         mCurrentCallIndex = Settings.readCurrentCallIndex();
     }
 
@@ -56,13 +63,19 @@ public class DataLogic extends MultiDialClient {
             return false;
         }
 
-        mTelList = FileUtils.readTxtFileLines(mTelListFile);
+        String filePath = getTelListFilePath();
+        mTelList = FileUtils.readTxtFileLines(filePath);
         if (!checkTelList()) {
-            showProgress("ERROR: loadTelList: check tel list failed.");
+            showProgress("ERROR: loadTelList: read tel list from file \"" + filePath + "\" failed.");
             return false;
         }
 
-        //load success, init call index
+        if (!genPicturePath()) {
+            showProgress("ERROR: loadTelList: generate picture path for \"" + mTelListFileName + "\" failed.");
+            return false;
+        }
+
+        //init call index when load success
         mCurrentCallIndex = 0;
 
         showProgress("loadTelList: size = " + mTelList.size());
@@ -70,16 +83,33 @@ public class DataLogic extends MultiDialClient {
     }
 
     private static boolean checkTelListFile() {
-        if (TextUtils.isEmpty(mTelListFile)) {
-            showProgress("ERROR: TelListFile Empty");
+        if (TextUtils.isEmpty(mTelListFileName)) {
+            DataLogic.showProgress("ERROR: TelList file name empty");
             return false;
         }
-        File f = new File(mTelListFile);
+        String filePath = getTelListFilePath();
+        File f = new File(filePath);
         if (!f.exists()) {
-            showProgress("ERROR: TelListFile " + mTelListFile + " not exist");
+            DataLogic.showProgress("ERROR: TelListFile " + filePath + " not exist");
             return false;
         }
         return true;
+    }
+
+    private static String getTelListFilePath() {
+        return ComDef.DIALER_DIR + "/" + mTelListFileName;
+    }
+
+    private static boolean genPicturePath() {
+        String picPath = ComDef.DIALER_PIC_DIR + "/" + FileUtils.getFileNeatName(mTelListFileName);
+        if (FileUtils.touchDir(picPath)) {
+            mPicturePath = picPath;
+            return true;
+        }
+        else {
+            mPicturePath = null;
+            return false;
+        }
     }
 
     private static boolean checkTelList() {
@@ -94,15 +124,6 @@ public class DataLogic extends MultiDialClient {
         return true;
     }
 
-    public static String getTelListFileInfo() {
-        if (TextUtils.isEmpty(mTelListFile)) {
-            return "未知";
-        }
-        else {
-            return mTelListFile;
-        }
-    }
-
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // UI Progress Info Callback
 
@@ -115,7 +136,7 @@ public class DataLogic extends MultiDialClient {
         mProgressCallback = callback;
     }
 
-    private static void showProgress(String msg) {
+    public static void showProgress(String msg) {
         if (mProgressCallback != null) {
             mProgressCallback.onShowProgress(msg);
         }
@@ -123,6 +144,18 @@ public class DataLogic extends MultiDialClient {
 
     // UI Progress Info Callback
     ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static String getTelListFileInfo() {
+        if (TextUtils.isEmpty(mTelListFileName)) {
+            return "未知";
+        }
+        else {
+            return mTelListFileName;
+        }
+    }
+
+    public static String getTelListFileName() { return mTelListFileName; }
+    public static void setTelListFileName(String value) { mTelListFileName = value; Settings.saveFileListFile(value); }
 
     public static int getMaxCallNum() {
         return mMaxCallNum;
@@ -153,14 +186,14 @@ public class DataLogic extends MultiDialClient {
         return telListInfo;
     }
 
-    private static void genPictureDir() {
-        String strTimeDir = new SimpleDateFormat("yyMMdd.HHmmss").format(new java.util.Date());
-        mPictureDir = ComDef.DIALER_DIR + "/" + strTimeDir;
-        if (!FileUtils.touchDir(mPictureDir)) {
-            LogUtils.e("ERROR: create picture dir " + mPictureDir + " failed.");
-            mPictureDir = null;
-        }
-    }
+//    private static void genPictureDir() {
+//        String strTimeDir = new SimpleDateFormat("yyMMdd.HHmmss").format(new java.util.Date());
+//        mPictureDir = ComDef.DIALER_DIR + "/" + strTimeDir;
+//        if (!FileUtils.touchDir(mPictureDir)) {
+//            LogUtils.e("ERROR: create picture dir " + mPictureDir + " failed.");
+//            mPictureDir = null;
+//        }
+//    }
 
     public static String getTelListNumInfo() {
         return "" + getTelListNum();
@@ -226,40 +259,78 @@ public class DataLogic extends MultiDialClient {
 
     public static void startWorking(Context context) {
         mWorking = true;
-        if (canWork()) {
-            loopCallOnNum(context);
-        } else {
-            //######@:
-            daemon timer to check start working...
-        }
+        startWorkingTimer(context);
     }
 
     public static void stopWorking() {
         mWorking = false;
+        stopWorkingTimer();
     }
 
-    private static boolean canWork() {
+    private static void checkDialing(Context context) {
+        LogUtils.d("DataLogic: checkDialing: mDialing = " + mDialing);
+        if (!mDialing) {
+            if (canDial()) {
+                mDialing = true;
+                loopCallOnNum(context);
+            } else {
+                MultiDialClient.fetchTelListFile();
+            }
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Daemon Timer
+
+    private static final long WORKING_TIMER_DELAY = 1000L;  //unit by ms
+    private static final long WORKING_TIMER_PERIOD = 5000L;  //unit by ms
+
+    private static Timer mWorkingTimer = null;
+
+    private static void startWorkingTimer(final Context context) {
+        showProgress("startWorkingTimer");
+        mWorkingTimer = new Timer();
+        mWorkingTimer.schedule(new TimerTask() {
+            public void run() {
+                LogUtils.d("DataLogic: startWorkingTimer: ThreadId = " + android.os.Process.myTid());
+                DataLogic.checkDialing(context);
+            }
+        }, WORKING_TIMER_DELAY, WORKING_TIMER_PERIOD);
+    }
+
+    private static void stopWorkingTimer() {
+        showProgress("stopWorkingTimer");
+        if (mWorkingTimer != null) {
+            mWorkingTimer.cancel();
+            mWorkingTimer = null;
+        }
+    }
+
+    // Daemon Timer
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    private static boolean canDial() {
         if (mTelList == null) {
-            showProgress("ERROR: mTelList null");
+            showProgress("ERROR: canDial: mTelList null");
             return false;
         }
 
         if (mTelList.size() == 0) {
-            showProgress("ERROR: mTelList empty");
+            showProgress("ERROR: canDial: mTelList empty");
             return false;
         }
 
-        if (mPictureDir == null) {
-            showProgress("ERROR: Picture Dir null");
+        if (TextUtils.isEmpty(mPicturePath)) {
+            showProgress("ERROR: canDial: mPicturePath empty");
             return false;
         }
 
         if (mCurrentCallIndex >= mTelList.size()) {
-            showProgress("***All call numbers(" + getCurrentCallIndex() + "/" + getTelListNum() + ") have been finished.");
+            showProgress("***canDial: All call numbers(" + mCurrentCallIndex + "/" + mTelList.size() + ") have been finished.");
             return false;
         }
 
-        showProgress("***current/total=" + getCurrentCallIndex() + "/" + getTelListNum());
+        showProgress("***canDial: yes");
         return true;
     }
 
@@ -377,9 +448,9 @@ public class DataLogic extends MultiDialClient {
         }
     }
 
-    private static void saveCaptureImage(Image img) {
+    protected static void saveCaptureImage(Image img) {
         LogUtils.d("saveCaptureImage: E...");
-        String jpgFileName = mPictureDir + "/" + getCurrentTelNumber() + "_" + TimeUtils.getFileTime() + ".jpg";
+        String jpgFileName = mPicturePath + "/" + getCurrentTelNumber() + "_" + TimeUtils.getFileTime() + ".jpg";
 
         int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
         if (ret < 0) {

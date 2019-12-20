@@ -30,9 +30,11 @@ import org.apache.commons.io.IOUtils;
 public class FileUtils {
     /**
      * @return get file extension name from file absolute path
+     * such as: /home/liz/aaa.txt -> txt
      */
     public static String getFileExtension(String fileAbsolute) {
-        int index = fileAbsolute.lastIndexOf(".");
+        final String FILE_EXT_SEPARATOR = ".";
+        int index = fileAbsolute.lastIndexOf(FILE_EXT_SEPARATOR);
         if (index == -1) {
             return "";
         }
@@ -41,6 +43,7 @@ public class FileUtils {
 
     /**
      * @return get file path from file absolute path
+     * such as: /home/liz/aaa.txt -> /home/liz
      */
     public static String getFilePath(String fileAbsolute) {
         int index = fileAbsolute.lastIndexOf(File.separator);
@@ -48,6 +51,36 @@ public class FileUtils {
             return "";
         }
         return fileAbsolute.substring(0, index);
+    }
+
+    /**
+     * @return get file name from file path
+     * such as:
+     * /home/liz/aaa.txt -> aaa.txt
+     * aaa.txt -> aaa.txt
+     */
+    public static String getFileName(String filePath) {
+        int index = filePath.lastIndexOf(File.separator);
+        if (index == -1) {
+            return filePath;
+        }
+        return filePath.substring(index + 1);
+    }
+
+    /**
+     * @return get file neat name from file path
+     * such as:
+     * /home/liz/aaa.txt -> aaa
+     * aaa.txt -> aaa
+     */
+    public static String getFileNeatName(String filePath) {
+        String fileName = getFileName(filePath);
+        final String FILE_EXT_SEPARATOR = ".";
+        int index = fileName.lastIndexOf(FILE_EXT_SEPARATOR);
+        if (index == -1) {
+            return "";
+        }
+        return fileName.substring(0, index);
     }
 
     public static void removeFile(String fileName) {
@@ -304,8 +337,67 @@ public class FileUtils {
 
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
-        ///sdcard/0.sd/whatsai/audio/19.0921.095007_8000.wav
+        {
+            String fileAbs = "/home/liz/aaa.txt";
+            System.out.println("getFileExtension(\"" + fileAbs + "\")=\"" + getFileExtension(fileAbs) + "\"");
+        }
+        {
+            String fileAbs = "/home/liz/aaa.t";
+            System.out.println("getFileExtension(\"" + fileAbs + "\")=\"" + getFileExtension(fileAbs) + "\"");
+        }
+        {
+            String fileAbs = "/home/liz/aaa";
+            System.out.println("getFileExtension(\"" + fileAbs + "\")=\"" + getFileExtension(fileAbs) + "\"");
+        }
+        {
+            //String fileAbs = "/home/liz/aaa.txt";  //for unix
+            String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows
+            System.out.println("getFilePath(\"" + fileAbs + "\")=\"" + getFilePath(fileAbs) + "\"");
+        }
+        {
+            //String fileAbs = "/home/liz/aaa.txt";  //for unix
+            String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows
+            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+        }
+        {
+            //String fileAbs = "/home/liz/aaa.txt";  //for unix
+            String fileAbs = "D:\\home\\liz\\aaa.t";  //for windows
+            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+        }
+        {
+            //String fileAbs = "/home/liz/aaa.txt";  //for unix
+            String fileAbs = "D:\\home\\liz\\aaa.";  //for windows
+            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+        }
+        {
+            String fileAbs = "aaa.txt";
+            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+        }
+        {
+            //String fileAbs = "/home/liz/aaa.txt";  //for unix
+            String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows
+            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+        }
+        {
+            //String fileAbs = "/home/liz/aaa.txt";  //for unix
+            String fileAbs = "D:\\home\\liz\\aaa.t";  //for windows
+            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+        }
+        {
+            //String fileAbs = "/home/liz/aaa.txt";  //for unix
+            String fileAbs = "D:\\home\\liz\\aaa.";  //for windows
+            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+        }
+        {
+            String fileAbs = "aaa.txt";
+            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+        }
+        {
+            String fileAbs = ".txt";
+            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+        }
 
+        assert false;
         //String path1="D:\\Temp\\whatsai.zip";
         //String path2="D:\\Temp\\whatsai_tmp.zip";
 //        String path1="D:\\Temp\\whatsai\\whatsai.dat";

@@ -241,59 +241,6 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE_PERMISSIONS);
         }
     }
-//
-//    private static void loopCallOnNum() {
-//        LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex());
-//        //LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex() + ", ThreadId=" + android.os.Process.myTid());
-//
-//        String strTel = DataLogic.getCurrentTelNumber();
-//        if (!TelUtils.isValidTelNumber(strTel)) {
-//            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
-//            callNextNum();
-//            return;
-//        }
-//
-//        //if (mCallState != TelephonyManager.CALL_STATE_IDLE) {
-//        if (isTelephonyCalling()) {
-//            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end it and call again...");
-//            TelUtils.endCall(MainActivity.this);
-//            new Handler().postDelayed(new Runnable() {
-//                public void run() {
-//                    loopCallOnNum();
-//                }
-//            }, ComDef.WAIT_CALL_IDLE_DELAY);
-//            return;
-//        }
-//
-//        try {
-//            String ret = TelUtils.startWorking(MainActivity.this, strTel);
-//            showProgressInfo("#" + (DataLogic.getCurrentCallIndex()+1) + ": Start Call, Tel = " + strTel + ", " + ret);
-//
-//            new Handler().postDelayed(new Runnable() {
-//                public void run() {
-//                    ScreenCapture.captureOnce();
-//                }
-//            }, getScreenCaptureDelay());
-//
-//            new Handler().postDelayed(new Runnable() {
-//                public void run() {
-//                    String retEndCall = TelUtils.endCall(MainActivity.this);
-//                    showProgressInfo("End Call: " + retEndCall);
-//                }
-//            }, DataLogic.getEndCallDelay());
-//
-//            new Handler().postDelayed(new Runnable() {
-//                public void run() {
-//                    callNextNum();
-//                }
-//            }, getCallNextDelay());
-//
-//        } catch (Exception e) {
-//            Toast.makeText(MainActivity.this, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
-//            showProgressInfo("loopCallOnNum Exception: " + e.toString());
-//            e.printStackTrace();
-//        }
-//    }
 
     private void showProgressInfo(final String msg) {
         //###@: todo: write to log file
