@@ -335,20 +335,10 @@ public class FileUtils {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Test Functions
 
-    public static void main(String[] args) throws IOException {
-        // TODO Auto-generated method stub
-        {
-            String fileAbs = "/home/liz/aaa.txt";
-            System.out.println("getFileExtension(\"" + fileAbs + "\")=\"" + getFileExtension(fileAbs) + "\"");
-        }
-        {
-            String fileAbs = "/home/liz/aaa.t";
-            System.out.println("getFileExtension(\"" + fileAbs + "\")=\"" + getFileExtension(fileAbs) + "\"");
-        }
-        {
-            String fileAbs = "/home/liz/aaa";
-            System.out.println("getFileExtension(\"" + fileAbs + "\")=\"" + getFileExtension(fileAbs) + "\"");
-        }
+    public static void main(String[] args) {
+        AssertUtils.Assert(getFileExtension("/home/liz/aaa.txt").equals("txt"));
+        AssertUtils.Assert(getFileExtension("/home/liz/aaa.t").equals("t"));
+        AssertUtils.Assert(getFileExtension("/home/liz/aaa").equals(""));
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows

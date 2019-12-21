@@ -3,8 +3,8 @@ package com.liz.multidialer.logic;
 import android.content.Context;
 import android.media.Image;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
@@ -41,13 +41,7 @@ public class DataLogic extends MultiDialClient {
         showProgress("DataLogic: init");
         loadSettings();
         if (!loadTelList()) {
-            // network operation can't run on main thread
-            new Thread() {
-                @Override
-                public void run() {
-                    MultiDialClient.fetchTelListFile();
-                }
-            }.start();
+            MultiDialClient.fetchTelListFile();
         }
     }
 
@@ -57,7 +51,7 @@ public class DataLogic extends MultiDialClient {
         mCurrentCallIndex = Settings.readCurrentCallIndex();
     }
 
-    private static boolean loadTelList() {
+    public static boolean loadTelList() {
         if (!checkTelListFile()) {
             showProgress("ERROR: loadTelList: check tel list file failed.");
             return false;
@@ -267,12 +261,19 @@ public class DataLogic extends MultiDialClient {
         stopWorkingTimer();
     }
 
-    private static void checkDialing(Context context) {
+    private static void checkDialing(final Context context) {
         LogUtils.d("DataLogic: checkDialing: mDialing = " + mDialing);
         if (!mDialing) {
             if (canDial()) {
                 mDialing = true;
-                loopCallOnNum(context);
+                //loopCallOnNum(context);
+                Handler mainHandler = new Handler(Looper.getMainLooper());
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        loopCallOnNum(context);
+                    }
+                });
             } else {
                 MultiDialClient.fetchTelListFile();
             }
@@ -381,7 +382,7 @@ public class DataLogic extends MultiDialClient {
             }, getCallNextDelay());
 
         } catch (Exception e) {
-            Toast.makeText(context, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "loopCallOnNum Exception: " + e.toString(), Toast.LENGTH_SHORT).show();
             showProgress("loopCallOnNum Exception: " + e.toString());
             e.printStackTrace();
         }

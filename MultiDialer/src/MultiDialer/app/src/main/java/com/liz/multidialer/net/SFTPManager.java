@@ -175,7 +175,7 @@ public class SFTPManager {
                     }
                 }
             }
-        } catch (SftpException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             this.disconnect();
@@ -183,14 +183,6 @@ public class SFTPManager {
         return false;
     }
 
-    /**
-     * 单个文件下载
-     * @param remotePath
-     * @param remoteFileName
-     * @param localPath
-     * @param localFileName
-     * @return
-     */
     public boolean downloadFile(String remotePath, String remoteFileName,
                                 String localPath, String localFileName) {
         try {
@@ -295,16 +287,14 @@ public class SFTPManager {
         }
     }
 
-    /**
-     * 列出目录文件
-     * @param directory
-     * @return
-     * @throws SftpException
-     */
-
     @SuppressWarnings("rawtypes")
-    public Vector listFiles(String directory) throws SftpException {
-        return sftp.ls(directory);
+    public Vector listFiles(String dir) {
+        try {
+            return sftp.ls(dir);
+        }
+        catch (Exception e) {
+            LogUtils.e("SFTP: list files of dir \"" + dir + "\" failed, ex = " + e.toString());
+            return null;
+        }
     }
-
 }

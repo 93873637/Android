@@ -1,6 +1,9 @@
 package com.liz.multidialer.logic;
 
+import com.jcraft.jsch.ChannelSftp;
 import com.liz.multidialer.net.SFTPManager;
+
+import java.util.Vector;
 
 public class MultiDialClient {
 
@@ -21,18 +24,44 @@ public class MultiDialClient {
     }
 
     protected static void fetchTelListFile() {
+        // NOTE: network operation can't run on main thread
+        new Thread() {
+            @Override
+            public void run() {
+                _fetchTelListFile();
+            }
+        }.start();
+    }
+
+    private static void _fetchTelListFile() {
         //fetch tellist file from server
-                SFTPManager sftp = new SFTPManager(getServerAddress(), getServerPort(), getUserName(),getPassword());
-                if (!sftp.connect()) {
-                    DataLogic.showProgress("sftp connect failed.");
-                }
-                else {
-                    //sftp.listFiles("");
-
-                    //sftp.downloadFile()fetchtellistfile
-                    //DataLogic.loadTelList()
-                }
-
+        SFTPManager sftp = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
+        DataLogic.showProgress("sftp connect " + getServerAddress() + ":" + getServerPort() + "...");
+        if (!sftp.connect()) {
+            DataLogic.showProgress("sftp connect failed.");
+        } else {
+            DataLogic.showProgress("sftp connect ok");
+            Vector vf = sftp.listFiles("/home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/M01*.txt");
+            if (vf == null) {
+                DataLogic.showProgress("sftp list files failed.");
+                return;
+            }
+            DataLogic.showProgress("sftp list files success, size = " + vf.size());
+            if (vf.size() < 1) {
+                DataLogic.showProgress("sftp list files empty.");
+                return;
+            }
+            String fileName = ((ChannelSftp.LsEntry)vf.get(0)).getFilename();
+            DataLogic.showProgress("sftp get tel list file, name = " + fileName + ", download...");
+            if (!sftp.downloadFile("/home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/", fileName,
+                    ComDef.DIALER_DIR + "/", fileName)) {
+                DataLogic.showProgress("sftp download file failed.");
+                return;
+            }
+            DataLogic.showProgress("sftp download file success.");
+            DataLogic.setTelListFileName(fileName);
+            DataLogic.loadTelList();
+        }
     }
 
     public static String getDeviceId() { return mDeviceId;  }
