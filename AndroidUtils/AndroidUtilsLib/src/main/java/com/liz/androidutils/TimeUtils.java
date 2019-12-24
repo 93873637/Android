@@ -40,6 +40,24 @@ public class TimeUtils {
     /**
      * @return String of file name format as 191103.173655.626
      */
+    public static String getFileTime(boolean withMS) {
+        String strFileTime = new SimpleDateFormat("yyMMdd.HHmmss").format(new java.util.Date());
+        if (withMS) {
+            long currentTimeMillis = System.currentTimeMillis();
+            long ms = currentTimeMillis % 1000;
+            if (ms < 10)
+                strFileTime += ".00" + ms;
+            else if (ms < 100)
+                strFileTime += ".0" + ms;
+            else
+                strFileTime += "." + ms;
+        }
+        return strFileTime;
+    }
+
+    /**
+     * @return String of file name format as 191103.173655.626
+     */
     public static String genTimeID() {
         return "" + System.currentTimeMillis();
     }

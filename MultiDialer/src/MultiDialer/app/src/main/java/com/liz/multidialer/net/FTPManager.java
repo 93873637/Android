@@ -96,11 +96,11 @@ public class FTPManager {
                 LogUtils.i("resume uploading from break point...");
             }
             else {
-                LogUtils.i("client file changed, delete server file to re-upload");
+                LogUtils.i("client file changed, deleteFile server file to re-upload");
                 if (ftpClient.deleteFile(fileName)) {
                     serverSize = 0;
                 } else {
-                    LogUtils.i("failed to delete server file for re-upload.");
+                    LogUtils.i("failed to deleteFile server file for re-upload.");
                     return false;
                 }
             }

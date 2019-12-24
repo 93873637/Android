@@ -11,11 +11,13 @@ import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.TimeUtils;
+import com.liz.androidutils.ZipUtils;
 import com.liz.multidialer.app.ThisApp;
-import com.liz.multidialer.ui.FloatingButtonService;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,6 +45,16 @@ public class DataLogic extends MultiDialClient {
         if (!loadTelList()) {
             MultiDialClient.fetchTelListFile();
         }
+
+        // ##@: test
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                SFTPManager sftpMgr = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
+//                sftpMgr.connect();
+//                sftpMgr.exec("mv /home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/M01_000001.txt /home/shandong1/PUB_SPACE/NUM_DATA/RUN_DATA/M01_000001.txt");
+//            }
+//        }.start();
     }
 
     protected static void loadSettings() {
@@ -69,11 +81,22 @@ public class DataLogic extends MultiDialClient {
             return false;
         }
 
+        showProgress("loadTelList: get picture path \"" + mPicturePath + "\"");
+
         //init call index when load success
+        mCalledNum = 0;
         mCurrentCallIndex = 0;
 
         showProgress("loadTelList: size = " + mTelList.size());
         return true;
+    }
+
+    public static void clearTelListFile() {
+        setTelListFileName("");
+        if (mTelList != null) {
+            mTelList.clear();
+        }
+        setCalledNum(0);
     }
 
     private static boolean checkTelListFile() {
@@ -266,7 +289,8 @@ public class DataLogic extends MultiDialClient {
         if (!mDialing) {
             if (canDial()) {
                 mDialing = true;
-                //loopCallOnNum(context);
+
+                //loopCallOnNum has handler, here using Main looper
                 Handler mainHandler = new Handler(Looper.getMainLooper());
                 mainHandler.post(new Runnable() {
                     @Override
@@ -312,26 +336,26 @@ public class DataLogic extends MultiDialClient {
 
     private static boolean canDial() {
         if (mTelList == null) {
-            showProgress("ERROR: canDial: mTelList null");
+            LogUtils.e("ERROR: canDial: mTelList null");
             return false;
         }
 
         if (mTelList.size() == 0) {
-            showProgress("ERROR: canDial: mTelList empty");
+            LogUtils.e("ERROR: canDial: mTelList empty");
             return false;
         }
 
         if (TextUtils.isEmpty(mPicturePath)) {
-            showProgress("ERROR: canDial: mPicturePath empty");
+            LogUtils.e("ERROR: canDial: mPicturePath empty");
             return false;
         }
 
         if (mCurrentCallIndex >= mTelList.size()) {
-            showProgress("***canDial: All call numbers(" + mCurrentCallIndex + "/" + mTelList.size() + ") have been finished.");
+            LogUtils.i("***canDial: All call numbers(" + mCurrentCallIndex + "/" + mTelList.size() + ") have been finished.");
             return false;
         }
 
-        showProgress("***canDial: yes");
+        LogUtils.i("***canDial: yes");
         return true;
     }
 
@@ -342,7 +366,7 @@ public class DataLogic extends MultiDialClient {
         String strTel = DataLogic.getCurrentTelNumber();
         if (!TelUtils.isValidTelNumber(strTel)) {
             showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
-            callNextNum(context);
+            callNextNumber(context);
             return;
         }
 
@@ -377,7 +401,7 @@ public class DataLogic extends MultiDialClient {
 
             new Handler().postDelayed(new Runnable() {
                 public void run() {
-                    callNextNum(context);
+                    callNextNumber(context);
                 }
             }, getCallNextDelay());
 
@@ -402,18 +426,50 @@ public class DataLogic extends MultiDialClient {
         return DataLogic.getEndCallDelay() + ComDef.CALL_NEXT_OFFSET;
     }
 
-    private static void callNextNum(final Context context) {
+    private static void callNextNumber(final Context context) {
         if (DataLogic.toNextCall()) {
             loopCallOnNum(context);
         }
         else {
-            showProgress("callNextNum: No next call.");
-            FloatingButtonService.showFloatingButton(false);
+            showProgress("callNextNumber: No next call.");
+            onAllCallFinished();
         }
+    }
+
+    private static void onAllCallFinished() {
+        LogUtils.i("onAllCallFinished");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyMMdd_HHmmss");
+        String strDateTime = format.format(new Date(System.currentTimeMillis()));
+
+        //zip pic data and upload
+        String zipFileName = FileUtils.getFileNeatName(mTelListFileName) + "_" + strDateTime + ".zip";
+        String zipFileNameDone = FileUtils.getFileNeatName(mTelListFileName) + "_" + strDateTime + "_done.zip";
+        String zipFilePath = ComDef.DIALER_PIC_DIR + "/" + zipFileName;
+        LogUtils.d("onAllCallFinished: mPicturePath = " + mPicturePath);
+        LogUtils.d("onAllCallFinished: zipFilePath = " + zipFilePath);
+
+        if (!ZipUtils.zip(zipFilePath, mPicturePath)) {
+            LogUtils.e("ERROR: onAllCallFinished: zip pic failed");
+            onUploadFinished();
+        }
+        else {
+            MultiDialClient.uploadPicData(zipFileName, zipFileNameDone);
+        }
+    }
+
+    public static void onUploadFinished() {
+        MultiDialClient.moveRunDataToEnd(mTelListFileName);
+        mDialing = false;
     }
 
     private static boolean toNextCall() {
         LogUtils.d("toNextCall: mCurrentCallIndex=" + mCurrentCallIndex);
+
+        if (!mWorking) {
+            LogUtils.i("toNextCall: Working stopped.");
+            return false;
+        }
 
         mCalledNum ++;
         LogUtils.d("toNextCall: mCalledNum=" + mCalledNum);
@@ -427,13 +483,7 @@ public class DataLogic extends MultiDialClient {
         Settings.saveCurrentCallIndex(mCurrentCallIndex);
 
         if (mCurrentCallIndex >= mTelList.size()) {
-            LogUtils.i("toNextCall: All Calls Finished.");
-            mWorking = false;
-            return false;
-        }
-
-        if (!mWorking) {
-            LogUtils.i("toNextCall: Calls not running.");
+            LogUtils.d("toNextCall: mCurrentCallIndex(" + mCurrentCallIndex + ") up to tel list size(" + mTelList.size() + ")");
             return false;
         }
 
@@ -451,9 +501,9 @@ public class DataLogic extends MultiDialClient {
 
     protected static void saveCaptureImage(Image img) {
         LogUtils.d("saveCaptureImage: E...");
-        String jpgFileName = mPicturePath + "/" + getCurrentTelNumber() + "_" + TimeUtils.getFileTime() + ".jpg";
+        String jpgFileName = mPicturePath + "/" + getCurrentTelNumber() + "_" + TimeUtils.getFileTime(false) + ".jpg";
 
-        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName);
+        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName, ComDef.JPEG_QUALITY);
         if (ret < 0) {
             LogUtils.e("save screen image to " + jpgFileName + " failed with error " + ret);
         } else {

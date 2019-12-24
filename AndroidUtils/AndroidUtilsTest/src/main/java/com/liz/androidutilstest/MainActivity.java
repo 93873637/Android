@@ -24,6 +24,7 @@ import com.liz.androidutils.TimeChecker;
 import com.liz.androidutils.ZipUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -77,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_screencapture();
+        test_ImageCompress();
+        //test_ziputils();
+        //test_screencapture();
         //test_fileReadLines();
         //test_fileSort();
         //test_SysTools();
@@ -87,6 +90,25 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_ImageCompress() {
+        try {
+            FileInputStream fis = new FileInputStream("/sdcard/test/test.jpg");
+            Bitmap bmp = BitmapFactory.decodeStream(fis);
+            int step = 10;
+            for (int i=0; i<10; i++) {
+                int quality = 100 - i*step;
+                ImageUtils.saveBitmap2JPGFile(bmp, "/sdcard/test/test" + quality + ".jpg", quality);
+            }
+        }
+        catch (Exception e) {
+            LogUtils.e("ERROR: test_ImageCompress exception: ex = " + e.toString());
+        }
+    }
+
+    public void test_ziputils() {
+        ZipUtils.zip("/sdcard/multidialer/pic/M01_000001.zip", "/sdcard/multidialer/pic/M01_000001");
     }
 
     public void test_screencapture() {

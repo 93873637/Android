@@ -87,12 +87,19 @@ public class MainActivity extends AppCompatActivity {
 
         mTextTelListFile = findViewById(R.id.tel_list_file);
         mTextTelListNum = findViewById(R.id.tel_list_num);
-
         mTextCalledNum = findViewById(R.id.called_num);
-        findViewById(R.id.text_reset_called_index).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.text_clear_numfile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataLogic.resetCalledIndex();
+                DataLogic.clearTelListFile();
+            }
+        });
+
+        findViewById(R.id.text_config_device).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(MainActivity.this, DeviceConfigActivity.class),
+                        REQUEST_CODE_DEVICE_CONFIG);
             }
         });
 
@@ -110,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
-        mProgressBuffer = new StringBufferQueue();
+        mProgressBuffer = new StringBufferQueue(32);  //###@:
         DataLogic.setProgressCallback(new DataLogic.ShowProgressCallback(){
             @Override
             public void onShowProgress(String msg) {
@@ -247,8 +254,10 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             public void run() {
                 String logMsg = TimeUtils.getLogTime() + " - " + msg;
+                LogUtils.d(logMsg);
                 mProgressBuffer.append(logMsg);
-                mTextProgressInfo.setText(mProgressBuffer.getBuffer());
+                String progressInfo = mProgressBuffer.getBuffer() + "\n";
+                mTextProgressInfo.setText(progressInfo);
                 mScrollProgressInfo.post(new Runnable() {
                     @Override
                     public void run() {

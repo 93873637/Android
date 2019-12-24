@@ -3,6 +3,7 @@ package com.liz.multidialer.net;
 import android.annotation.SuppressLint;
 
 import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -45,6 +46,7 @@ public class SFTPManager {
             sshSession.setPassword(password);
             Properties sshConfig = new Properties();
             sshConfig.put("StrictHostKeyChecking", "no");
+            sshConfig.put("PreferredAuthentications","password");
             sshSession.setConfig(sshConfig);
             sshSession.connect();
             Channel channel = sshSession.openChannel("sftp");
@@ -116,7 +118,7 @@ public class SFTPManager {
                         if (this.uploadFile(remotePath, files[i].getName(),
                                 localPath, files[i].getName())
                                 && del) {
-                            deleteFile(localPath + files[i].getName());
+                            deleteLocalFile(localPath + files[i].getName());
                         }
                     }
                 }
@@ -162,14 +164,14 @@ public class SFTPManager {
                                 if (this.downloadFile(remotPath, filename,
                                         localPath, filename)
                                         && del) {
-                                    deleteSFTP(remotPath, filename);
+                                    deleteRemoteFile(remotPath, filename);
                                 }
                             }
                         } else {
                             if (this.downloadFile(remotPath, filename,
                                     localPath, filename)
                                     && del) {
-                                deleteSFTP(remotPath, filename);
+                                deleteRemoteFile(remotPath, filename);
                             }
                         }
                     }
@@ -200,12 +202,7 @@ public class SFTPManager {
         return false;
     }
 
-    /**
-     * 删除文件
-     * @param filePath
-     * @return
-     */
-    public boolean deleteFile(String filePath) {
+    public boolean deleteLocalFile(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
             return false;
@@ -214,6 +211,15 @@ public class SFTPManager {
             return false;
         }
         return file.delete();
+    }
+
+    public void deleteRemoteFile(String directory, String fileName) {
+        try {
+            sftp.cd(directory);
+            sftp.rm(fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean createDir(String createpath) {
@@ -265,15 +271,6 @@ public class SFTPManager {
         return isDirExistFlag;
     }
 
-    public void deleteSFTP(String directory, String deleteFile) {
-        try {
-            sftp.cd(directory);
-            sftp.rm(deleteFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * 创建目录
      * @param path
@@ -295,6 +292,26 @@ public class SFTPManager {
         catch (Exception e) {
             LogUtils.e("SFTP: list files of dir \"" + dir + "\" failed, ex = " + e.toString());
             return null;
+        }
+    }
+
+    public void mv(String srcFilePath, String tarFilePath) {
+        String cmd = "mv " + srcFilePath + " " + tarFilePath;
+        exec(cmd);
+    }
+
+    public void exec(String command) {
+        ChannelExec channelExec = null;
+        try {
+            Channel channel = sshSession.openChannel("exec");
+            channelExec = (ChannelExec) channel;
+            channelExec.setCommand(command);
+            channelExec.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+            channelExec = null;
+        }finally {
+            channelExec.disconnect();
         }
     }
 }

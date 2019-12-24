@@ -30,6 +30,9 @@ public class Settings {
     public static String readNetworkType() { return readItem(ComDef.KEY_NETWORK_TYPE, ComDef.DEFAULT_NETWORK_TYPE); }
     public static void saveNetworkType(String value) { saveItem(ComDef.KEY_NETWORK_TYPE, value); }
 
+    public static String readServerHome() { return readItem(ComDef.KEY_SERVER_HOME, ComDef.DEFAULT_SERVER_HOME); }
+    public static void saveServerHome(String value) { saveItem(ComDef.KEY_SERVER_HOME, value); }
+
     public static String readFileListFile() { return readItem(ComDef.KEY_TEL_LIST_FILE, ComDef.DEFAULT_TEL_LIST_FILE); }
     public static void saveFileListFile(String value) { saveItem(ComDef.KEY_TEL_LIST_FILE, value); }
 

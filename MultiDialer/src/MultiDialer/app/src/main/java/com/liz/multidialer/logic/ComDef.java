@@ -39,7 +39,7 @@ public class ComDef {
     //该程序运行一次最多能拨打的号码数量
     public static final int MAX_CALL_NUM = Integer.MAX_VALUE;
 
-    public static final int JPEG_QUALITY = 90;  //1~100
+    public static final int JPEG_QUALITY = 10;  //1~100
 
     public static final String MULTIDIALER_SHARED_PREFERENCES = "MultiDialerSharedPreferences";
     public static final String KEY_DEVICE_ID = "DeviceId";
@@ -48,6 +48,7 @@ public class ComDef {
     public static final String KEY_USER_NAME = "UserName";
     public static final String KEY_PASSWORD = "Password";
     public static final String KEY_NETWORK_TYPE = "NetworkType";
+    public static final String KEY_SERVER_HOME = "ServerHome";
     public static final String KEY_TEL_LIST_FILE = "TelListFile";
     public static final String KEY_CURRENT_CALLED_INDEX = "CurrentCalledIndex";
 
@@ -57,8 +58,28 @@ public class ComDef {
     public static final String DEFAULT_USER_NAME = "";
     public static final String DEFAULT_PASSWORD = "";
     public static final String DEFAULT_NETWORK_TYPE = "sftp";
+    public static final String DEFAULT_SERVER_HOME = "/home/shandong1";
     public static final String DEFAULT_TEL_LIST_FILE = "";
     public static final int DEFAULT_CURRENT_CALLED_INDEX = 0;
 
     public static final String UPLOAD_FILE_PATH = "upload_file_path";
+
+    // Dir settings of remote sftp server
+    public static final String SFTP_PUB_SPACE = "PUB_SPACE";
+    public static final String SFTP_NUM_DATA = "NUM_DATA";
+    public static final String SFTP_PIC_DATA = "PIC_DATA";
+    public static final String SFTP_WAIT_DATA = "WAIT_DATA";
+    public static final String SFTP_RUN_DATA = "RUN_DATA";
+    public static final String SFTP_END_DATA = "END_DATA";
+
+    public static final String SFTP_PATH_PUB_SPACE = DEFAULT_SERVER_HOME + "/" + SFTP_PUB_SPACE;
+
+    public static final String SFTP_PATH_NUM_DATA = SFTP_PATH_PUB_SPACE + "/" + SFTP_NUM_DATA;
+    public static final String SFTP_PATH_PIC_DATA = SFTP_PATH_PUB_SPACE + "/" + SFTP_PIC_DATA;
+
+    public static final String SFTP_PATH_NUM_WAIT_DATA = SFTP_PATH_NUM_DATA + "/" + SFTP_WAIT_DATA;
+    public static final String SFTP_PATH_NUM_RUN_DATA = SFTP_PATH_NUM_DATA + "/" + SFTP_RUN_DATA;
+    public static final String SFTP_PATH_NUM_END_DATA = SFTP_PATH_NUM_DATA + "/" + SFTP_END_DATA;
+
+    public static final String SFTP_PATH_PIC_WAIT_DATA = SFTP_PATH_PIC_DATA + "/" + SFTP_WAIT_DATA;
 }

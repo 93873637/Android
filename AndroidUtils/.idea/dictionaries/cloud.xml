@@ -2,8 +2,11 @@
   <dictionary name="cloud">
     <words>
       <w>baos</w>
+      <w>multidialer</w>
+      <w>screencapture</w>
       <w>sina</w>
       <w>smtp</w>
+      <w>ziputils</w>
     </words>
   </dictionary>
 </component>

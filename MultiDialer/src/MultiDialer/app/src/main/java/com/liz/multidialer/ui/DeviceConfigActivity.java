@@ -21,6 +21,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
     private EditText mEditUserName;
     private EditText mEditPassword;
     private EditText mEditNetworkType;
+    private EditText mEditServerHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,15 @@ public class DeviceConfigActivity extends AppCompatActivity {
         mEditUserName = findViewById(R.id.edit_user_name);
         mEditPassword = findViewById(R.id.edit_password);
         mEditNetworkType = findViewById(R.id.edit_network_type);
+        mEditServerHome = findViewById(R.id.edit_server_home);
 
         mEditDeviceId.setText(DataLogic.getDeviceId());
         mEditServerAddress.setText(DataLogic.getServerAddress());
-        mEditServerPort.setText("" + DataLogic.getServerPort());
+        mEditServerPort.setText(DataLogic.getServerPortInfo());
         mEditUserName.setText(DataLogic.getUserName());
         mEditPassword.setText(DataLogic.getPassword());
         mEditNetworkType.setText(DataLogic.getNetworkType());
+        mEditServerHome.setText(DataLogic.getServerHome());
 
         findViewById(R.id.btn_update_config).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,5 +70,6 @@ public class DeviceConfigActivity extends AppCompatActivity {
         DataLogic.setUserName(mEditUserName.getText().toString());
         DataLogic.setPassword(mEditPassword.getText().toString());
         DataLogic.setNetworkType(mEditNetworkType.getText().toString());
+        DataLogic.setServerHome(mEditServerHome.getText().toString());
     }
 }

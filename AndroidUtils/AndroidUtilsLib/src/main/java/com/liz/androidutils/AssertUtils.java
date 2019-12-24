@@ -16,7 +16,7 @@ public class AssertUtils {
 
     private static void createNullException() {
         String a = null;
-        if (a.equals("fffffff")) {
+        if (a.equals("foo")) {
             a.isEmpty();
         }
     }

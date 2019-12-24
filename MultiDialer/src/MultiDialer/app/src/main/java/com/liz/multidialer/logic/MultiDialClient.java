@@ -1,10 +1,15 @@
 package com.liz.multidialer.logic;
 
+import android.text.TextUtils;
+
 import com.jcraft.jsch.ChannelSftp;
+import com.liz.androidutils.FileUtils;
+import com.liz.androidutils.LogUtils;
 import com.liz.multidialer.net.SFTPManager;
 
 import java.util.Vector;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class MultiDialClient {
 
     private static String mDeviceId = "";
@@ -13,6 +18,7 @@ public class MultiDialClient {
     private static String mUserName = "";
     private static String mPassword = "";
     private static String mNetworkType = ComDef.DEFAULT_NETWORK_TYPE;
+    private static String mServerHome;
 
     protected static void loadSettings() {
         mDeviceId = Settings.readDeviceId();
@@ -21,10 +27,15 @@ public class MultiDialClient {
         mUserName = Settings.readUserName();
         mPassword = Settings.readPassword();
         mNetworkType = Settings.readNetworkType();
+        mServerHome = Settings.readServerHome();
     }
 
+    private static String getListFileString() {
+        return ComDef.SFTP_PATH_NUM_WAIT_DATA + "/" + DataLogic.getDeviceId() + "*.txt";
+    }
+
+    // NOTE: network operation can't run on main thread
     protected static void fetchTelListFile() {
-        // NOTE: network operation can't run on main thread
         new Thread() {
             @Override
             public void run() {
@@ -33,34 +44,118 @@ public class MultiDialClient {
         }.start();
     }
 
+    //
+    //do fetch tellist file from server
+    //
     private static void _fetchTelListFile() {
-        //fetch tellist file from server
-        SFTPManager sftp = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
-        DataLogic.showProgress("sftp connect " + getServerAddress() + ":" + getServerPort() + "...");
-        if (!sftp.connect()) {
-            DataLogic.showProgress("sftp connect failed.");
+        SFTPManager sftpMgr = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
+        LogUtils.d("SFTP: connect " + getServerAddress() + ":" + getServerPort() + "...");
+        if (!sftpMgr.connect()) {
+            LogUtils.d("SFTP: connect failed.");
         } else {
-            DataLogic.showProgress("sftp connect ok");
-            Vector vf = sftp.listFiles("/home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/M01*.txt");
+            LogUtils.d("SFTP: connect ok, list file of " + getListFileString() + "...");
+            Vector vf = sftpMgr.listFiles(getListFileString());
             if (vf == null) {
-                DataLogic.showProgress("sftp list files failed.");
+                LogUtils.d("SFTP: list files failed.");
                 return;
             }
-            DataLogic.showProgress("sftp list files success, size = " + vf.size());
+            LogUtils.d("SFTP: list files success, size = " + vf.size());
             if (vf.size() < 1) {
-                DataLogic.showProgress("sftp list files empty.");
+                LogUtils.d("SFTP: list files empty.");
                 return;
             }
             String fileName = ((ChannelSftp.LsEntry)vf.get(0)).getFilename();
-            DataLogic.showProgress("sftp get tel list file, name = " + fileName + ", download...");
-            if (!sftp.downloadFile("/home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/", fileName,
-                    ComDef.DIALER_DIR + "/", fileName)) {
-                DataLogic.showProgress("sftp download file failed.");
+            LogUtils.d("SFTP: get tel list file, name = " + fileName + ", download...");
+            if (!sftpMgr.downloadFile(FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA), fileName,
+                    FileUtils.dirSeparator(ComDef.DIALER_DIR), fileName)) {
+                LogUtils.d("SFTP: download file failed.");
                 return;
             }
-            DataLogic.showProgress("sftp download file success.");
+            LogUtils.d("SFTP: download file success.");
+
+            String srcFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA) + fileName;
+            String tarFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_RUN_DATA) + fileName;
+            LogUtils.d("SFTP: mv file " + srcFilePath + " to " + tarFilePath + "...");
+            sftpMgr.mv(srcFilePath, tarFilePath);
+
             DataLogic.setTelListFileName(fileName);
             DataLogic.loadTelList();
+            sftpMgr.disconnect();
+        }
+    }
+
+    // NOTE: network operation can't run on main thread
+    public static void uploadPicData(final String fileName, final String fileNameDone) {
+        new Thread() {
+            @Override
+            public void run() {
+                _uploadPicData(fileName, fileNameDone);
+                DataLogic.onUploadFinished();
+            }
+        }.start();
+    }
+
+    private static void _uploadPicData(String fileName, String fileNameDone) {
+        LogUtils.d("_uploadPicData: fileName = " + fileName);
+        if (TextUtils.isEmpty(fileName)) {
+            LogUtils.e("ERROR: _uploadPicData: no file name to upload");
+            return;
+        }
+        SFTPManager sftpMgr = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
+        DataLogic.showProgress("_uploadPicData: SFTP: connect " + getServerAddress() + ":" + getServerPort() + "...");
+        if (!sftpMgr.connect()) {
+            DataLogic.showProgress("_uploadPicData: SFTP: connect failed.");
+        } else {
+            DataLogic.showProgress("_uploadPicData: SFTP: connect ok");
+
+            String remotePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_PIC_WAIT_DATA);
+            String remoteFileName = fileName;
+            String localPath = FileUtils.dirSeparator(ComDef.DIALER_PIC_DIR);
+            String localFileName = fileName;
+
+            DataLogic.showProgress("_uploadPicData: SFTP: upload file " + fileName + " to " + remotePath + "...");
+            if (!sftpMgr.uploadFile(remotePath, remoteFileName, localPath, localFileName)) {
+                LogUtils.e("ERROR: upload failed.");
+            }
+            else {
+                LogUtils.d("_uploadPicData: upload success");
+                String srcFilePath = remotePath + fileName;
+                String tarFilePath = remotePath + fileNameDone;
+                DataLogic.showProgress("SFTP: rename file " + srcFilePath + " to " + tarFilePath + "...");
+                sftpMgr.mv(srcFilePath, tarFilePath);
+            }
+
+            sftpMgr.disconnect();
+        }
+    }
+
+    // NOTE: network operation can't run on main thread
+    protected static void moveRunDataToEnd(String fileName) {
+        final String _fileName = fileName;
+        new Thread() {
+            @Override
+            public void run() {
+                _moveRunDataToEnd(_fileName);
+            }
+        }.start();
+    }
+
+    public static void _moveRunDataToEnd(String fileName) {
+        if (TextUtils.isEmpty(fileName)) {
+            LogUtils.e("ERROR: _moveRunDataToEnd: no file name to mv");
+            return;
+        }
+        SFTPManager sftpMgr = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
+        DataLogic.showProgress("_moveRunDataToEnd: SFTP: connect " + getServerAddress() + ":" + getServerPort() + "...");
+        if (!sftpMgr.connect()) {
+            DataLogic.showProgress("_moveRunDataToEnd: SFTP: connect failed.");
+        } else {
+            DataLogic.showProgress("_moveRunDataToEnd: SFTP: connect ok");
+            String srcFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_RUN_DATA) + fileName;
+            String tarFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_END_DATA) + fileName;
+            DataLogic.showProgress("_moveRunDataToEnd: SFTP: mv file " + srcFilePath + " to " + tarFilePath + "...");
+            sftpMgr.mv(srcFilePath, tarFilePath);
+            sftpMgr.disconnect();
         }
     }
 
@@ -71,6 +166,7 @@ public class MultiDialClient {
     public static void setServerAddress(String value) { mServerAddress = value; Settings.saveServerAddress(value); }
 
     public static int getServerPort() { return mServerPort; }
+    public static String getServerPortInfo() { return mServerPort + ""; }
     public static void setServerPort(int value) { mServerPort = value; Settings.saveServerPort(value); }
 
     public static String getUserName() { return mUserName; }
@@ -81,4 +177,7 @@ public class MultiDialClient {
 
     public static String getNetworkType() { return mNetworkType; }
     public static void setNetworkType(String value) { mNetworkType = value; Settings.saveNetworkType(value); }
+
+    public static String getServerHome() { return mServerHome; }
+    public static void setServerHome(String value) { mServerHome = value; Settings.saveServerHome(value); }
 }

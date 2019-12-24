@@ -131,6 +131,15 @@ public class FileUtils {
         return true;
     }
 
+    public static String dirSeparator(String dir) {
+        if (dir.endsWith("/")) {
+            return dir;
+        }
+        else {
+            return dir + "/";
+        }
+    }
+
     public static final int ORDER_BY_DATE = 0;
     public static final int ORDER_BY_DATE_DESC = 1;
 
@@ -339,6 +348,11 @@ public class FileUtils {
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.txt").equals("txt"));
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.t").equals("t"));
         AssertUtils.Assert(getFileExtension("/home/liz/aaa").equals(""));
+
+        AssertUtils.Assert(dirSeparator("/home/liz/aaa").equals("/home/liz/aaa/"));
+        AssertUtils.Assert(dirSeparator("/home/liz/aaa/").equals("/home/liz/aaa/"));
+
+
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows

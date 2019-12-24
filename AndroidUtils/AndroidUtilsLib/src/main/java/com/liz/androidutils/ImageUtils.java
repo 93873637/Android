@@ -135,12 +135,19 @@ public class ImageUtils {
     //NOTE: this function can only run on android
     //
     public static int saveByteBuffer2JPGFile(@NonNull ByteBuffer byteBuffer, @NonNull String fileAbsolute, int width, int height, int padding) {
+        return saveByteBuffer2JPGFile(byteBuffer, fileAbsolute, width, height, padding, 100);
+    }
+
+    //
+    //NOTE: this function can only run on android
+    //
+    public static int saveByteBuffer2JPGFile(@NonNull ByteBuffer byteBuffer, @NonNull String fileAbsolute, int width, int height, int padding, int quality) {
         Bitmap bitmap = byteBuffer2Bitmap(byteBuffer, width, height, padding, Bitmap.Config.ARGB_8888, 1.0);
         if (bitmap == null) {
             System.out.println("ERROR: saveByteBuffer2JPGFile: convert byte buffer to bitmap null");
             return -1;
         }
-        if (saveBitmap2JPGFile(bitmap, fileAbsolute, 100) < 0) {
+        if (saveBitmap2JPGFile(bitmap, fileAbsolute, quality) < 0) {
             System.out.println("ERROR: saveByteBuffer2JPGFile: save bitmap failed.");
             return -2;
         }
@@ -148,6 +155,10 @@ public class ImageUtils {
     }
 
     public static int saveImage2JPGFile(Image image, String fileAbsolute) {
+        return saveImage2JPGFile(image, fileAbsolute, 100);
+    }
+
+    public static int saveImage2JPGFile(Image image, String fileAbsolute, int quality) {
         System.out.println("saveImage2JPGFile: fileAbsolute = " + fileAbsolute + "...");
 
         File filePath = new File(FileUtils.getFilePath(fileAbsolute));
@@ -168,7 +179,7 @@ public class ImageUtils {
         int rowPadding = rowStride - pixelStride * width;
         int paddingWidth = rowPadding / pixelStride;
 
-        if (saveByteBuffer2JPGFile(buffer, fileAbsolute, width, height, paddingWidth) < 0) {
+        if (saveByteBuffer2JPGFile(buffer, fileAbsolute, width, height, paddingWidth, quality) < 0) {
             System.out.println("ERROR: saveImage2JPGFile: save bitmap to file \"" + fileAbsolute + "\" failed.");
             return -2;
         }

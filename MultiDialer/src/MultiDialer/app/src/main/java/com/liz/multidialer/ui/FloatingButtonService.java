@@ -36,7 +36,7 @@ public class FloatingButtonService extends Service {
     private static final int LAYOUT_PARAM_WIDTH = 800;
     private static final int LAYOUT_PARAM_HEIGHT = 160;
     private static final int LAYOUT_PARAM_X = 0;
-    private static final int LAYOUT_PARAM_Y = 180;
+    private static final int LAYOUT_PARAM_Y = 1230;
 
     private static final int MSG_CODE_SHOW_FLOATING_BUTTON = 0;
     private static final int MSG_CODE_HIDE_FLOATING_BUTTON = 1;
