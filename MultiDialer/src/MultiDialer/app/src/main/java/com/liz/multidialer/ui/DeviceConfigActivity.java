@@ -22,6 +22,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
     private EditText mEditPassword;
     private EditText mEditNetworkType;
     private EditText mEditServerHome;
+    private EditText mEditJpegQuality;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
         mEditPassword = findViewById(R.id.edit_password);
         mEditNetworkType = findViewById(R.id.edit_network_type);
         mEditServerHome = findViewById(R.id.edit_server_home);
+        mEditJpegQuality = findViewById(R.id.edit_jpeg_quality);
 
         mEditDeviceId.setText(DataLogic.getDeviceId());
         mEditServerAddress.setText(DataLogic.getServerAddress());
@@ -45,6 +47,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
         mEditPassword.setText(DataLogic.getPassword());
         mEditNetworkType.setText(DataLogic.getNetworkType());
         mEditServerHome.setText(DataLogic.getServerHome());
+        mEditJpegQuality.setText(DataLogic.getJpegQualityInfo());
 
         findViewById(R.id.btn_update_config).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,5 +74,6 @@ public class DeviceConfigActivity extends AppCompatActivity {
         DataLogic.setPassword(mEditPassword.getText().toString());
         DataLogic.setNetworkType(mEditNetworkType.getText().toString());
         DataLogic.setServerHome(mEditServerHome.getText().toString());
+        DataLogic.setJpegQuality(Integer.parseInt(mEditJpegQuality.getText().toString()));
     }
 }

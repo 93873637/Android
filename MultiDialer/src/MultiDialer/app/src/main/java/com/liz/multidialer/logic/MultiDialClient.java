@@ -19,6 +19,7 @@ public class MultiDialClient {
     private static String mPassword = "";
     private static String mNetworkType = ComDef.DEFAULT_NETWORK_TYPE;
     private static String mServerHome;
+    private static int mJpegQuality;
 
     protected static void loadSettings() {
         mDeviceId = Settings.readDeviceId();
@@ -28,6 +29,7 @@ public class MultiDialClient {
         mPassword = Settings.readPassword();
         mNetworkType = Settings.readNetworkType();
         mServerHome = Settings.readServerHome();
+        mJpegQuality = Settings.readJpegQuality();
     }
 
     private static String getListFileString() {
@@ -180,4 +182,8 @@ public class MultiDialClient {
 
     public static String getServerHome() { return mServerHome; }
     public static void setServerHome(String value) { mServerHome = value; Settings.saveServerHome(value); }
+
+    public static int getJpegQuality() { return mJpegQuality; }
+    public static String getJpegQualityInfo() { return mJpegQuality + ""; }
+    public static void setJpegQuality(int value) { mJpegQuality = value; Settings.saveJpegQuality(value); }
 }

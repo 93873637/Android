@@ -39,8 +39,6 @@ public class ComDef {
     //该程序运行一次最多能拨打的号码数量
     public static final int MAX_CALL_NUM = Integer.MAX_VALUE;
 
-    public static final int JPEG_QUALITY = 10;  //1~100
-
     public static final String MULTIDIALER_SHARED_PREFERENCES = "MultiDialerSharedPreferences";
     public static final String KEY_DEVICE_ID = "DeviceId";
     public static final String KEY_SERVER_ADDRESS = "ServerAddress";
@@ -49,6 +47,7 @@ public class ComDef {
     public static final String KEY_PASSWORD = "Password";
     public static final String KEY_NETWORK_TYPE = "NetworkType";
     public static final String KEY_SERVER_HOME = "ServerHome";
+    public static final String KEY_JPEG_QUALITY = "JpegQuality";
     public static final String KEY_TEL_LIST_FILE = "TelListFile";
     public static final String KEY_CURRENT_CALLED_INDEX = "CurrentCalledIndex";
 
@@ -59,6 +58,7 @@ public class ComDef {
     public static final String DEFAULT_PASSWORD = "";
     public static final String DEFAULT_NETWORK_TYPE = "sftp";
     public static final String DEFAULT_SERVER_HOME = "/home/shandong1";
+    public static final int DEFAULT_JPEG_QUALITY = 30;  //1~100%
     public static final String DEFAULT_TEL_LIST_FILE = "";
     public static final int DEFAULT_CURRENT_CALLED_INDEX = 0;
 

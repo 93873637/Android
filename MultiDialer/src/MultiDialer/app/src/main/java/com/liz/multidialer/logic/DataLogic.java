@@ -503,7 +503,7 @@ public class DataLogic extends MultiDialClient {
         LogUtils.d("saveCaptureImage: E...");
         String jpgFileName = mPicturePath + "/" + getCurrentTelNumber() + "_" + TimeUtils.getFileTime(false) + ".jpg";
 
-        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName, ComDef.JPEG_QUALITY);
+        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName, DataLogic.getJpegQuality());
         if (ret < 0) {
             LogUtils.e("save screen image to " + jpgFileName + " failed with error " + ret);
         } else {

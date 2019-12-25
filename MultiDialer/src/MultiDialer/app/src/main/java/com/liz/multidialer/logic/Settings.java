@@ -33,6 +33,9 @@ public class Settings {
     public static String readServerHome() { return readItem(ComDef.KEY_SERVER_HOME, ComDef.DEFAULT_SERVER_HOME); }
     public static void saveServerHome(String value) { saveItem(ComDef.KEY_SERVER_HOME, value); }
 
+    public static int readJpegQuality() { return readItemInt(ComDef.KEY_JPEG_QUALITY, ComDef.DEFAULT_JPEG_QUALITY); }
+    public static void saveJpegQuality(int value) { saveItemInt(ComDef.KEY_JPEG_QUALITY, value); }
+
     public static String readFileListFile() { return readItem(ComDef.KEY_TEL_LIST_FILE, ComDef.DEFAULT_TEL_LIST_FILE); }
     public static void saveFileListFile(String value) { saveItem(ComDef.KEY_TEL_LIST_FILE, value); }
 
