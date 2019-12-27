@@ -69,7 +69,7 @@ public class MultiDialClient {
             String fileName = ((ChannelSftp.LsEntry)vf.get(0)).getFilename();
             LogUtils.d("SFTP: get tel list file, name = " + fileName + ", download...");
             if (!sftpMgr.downloadFile(FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA), fileName,
-                    FileUtils.dirSeparator(ComDef.DIALER_DIR), fileName)) {
+                    FileUtils.dirSeparator(ComDef.DIALER_NUM_DIR), fileName)) {
                 LogUtils.d("SFTP: download file failed.");
                 return;
             }

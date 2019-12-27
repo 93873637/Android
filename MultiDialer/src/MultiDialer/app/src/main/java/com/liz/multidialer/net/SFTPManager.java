@@ -88,7 +88,9 @@ public class SFTPManager {
             File file = new File(localPath + localFileName);
             in = new FileInputStream(file);
             System.out.println(in);
-            sftp.put(in, remoteFileName);
+            SFTPMonitor monitor = new SFTPMonitor(file.length());
+            sftp.put(in, file.getName(), monitor);
+            //sftp.put(in, remoteFileName);
             System.out.println(sftp);
             return true;
         } catch (FileNotFoundException e) {

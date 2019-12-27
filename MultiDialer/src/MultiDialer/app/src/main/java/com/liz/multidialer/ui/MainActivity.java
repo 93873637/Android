@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
         mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
-        mProgressBuffer = new StringBufferQueue(32);  //###@:
+        mProgressBuffer = new StringBufferQueue(32);
         DataLogic.setProgressCallback(new DataLogic.ShowProgressCallback(){
             @Override
             public void onShowProgress(String msg) {

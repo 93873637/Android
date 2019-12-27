@@ -40,7 +40,10 @@ public class DataLogic extends MultiDialClient {
     private static boolean mDialing = false;
 
     public static void init() {
-        showProgress("DataLogic: init");
+        LogUtils.d("DataLogic: init");
+        if (createDirs()) {
+            LogUtils.e("ERROR: create directories failed.");
+        }
         loadSettings();
         if (!loadTelList()) {
             MultiDialClient.fetchTelListFile();
@@ -55,6 +58,23 @@ public class DataLogic extends MultiDialClient {
 //                sftpMgr.exec("mv /home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/M01_000001.txt /home/shandong1/PUB_SPACE/NUM_DATA/RUN_DATA/M01_000001.txt");
 //            }
 //        }.start();
+    }
+
+
+    private static boolean createDirs() {
+        if (!FileUtils.touchDir(ComDef.DIALER_DIR)) {
+            LogUtils.e("ERROR: create dir \"" + ComDef.DIALER_DIR + "\" failed.");
+            return false;
+        }
+        if (!FileUtils.touchDir(ComDef.DIALER_NUM_DIR)) {
+            LogUtils.e("ERROR: create dir \"" + ComDef.DIALER_NUM_DIR + "\" failed.");
+            return false;
+        }
+        if (!FileUtils.touchDir(ComDef.DIALER_PIC_DIR)) {
+            LogUtils.e("ERROR: create dir \"" + ComDef.DIALER_PIC_DIR + "\" failed.");
+            return false;
+        }
+        return true;
     }
 
     protected static void loadSettings() {
@@ -76,7 +96,7 @@ public class DataLogic extends MultiDialClient {
             return false;
         }
 
-        if (!genPicturePath()) {
+        if (!genPicturePathForTelList(mTelListFileName)) {
             showProgress("ERROR: loadTelList: generate picture path for \"" + mTelListFileName + "\" failed.");
             return false;
         }
@@ -114,13 +134,15 @@ public class DataLogic extends MultiDialClient {
     }
 
     private static String getTelListFilePath() {
-        return ComDef.DIALER_DIR + "/" + mTelListFileName;
+        return ComDef.DIALER_NUM_DIR + "/" + mTelListFileName;
     }
 
-    private static boolean genPicturePath() {
-        String picPath = ComDef.DIALER_PIC_DIR + "/" + FileUtils.getFileNeatName(mTelListFileName);
+    private static boolean genPicturePathForTelList(String telListFileName) {
+        String strDateTime = new SimpleDateFormat("yyMMdd_HHmmss").format(new Date(System.currentTimeMillis()));
+        String picPath = ComDef.DIALER_PIC_DIR + "/" + FileUtils.getFileNeatName(telListFileName) + "_" + strDateTime;
         if (FileUtils.touchDir(picPath)) {
             mPicturePath = picPath;
+            showProgress("generate picture path \"" + mPicturePath + "\"");
             return true;
         }
         else {
@@ -202,15 +224,6 @@ public class DataLogic extends MultiDialClient {
         }
         return telListInfo;
     }
-
-//    private static void genPictureDir() {
-//        String strTimeDir = new SimpleDateFormat("yyMMdd.HHmmss").format(new java.util.Date());
-//        mPictureDir = ComDef.DIALER_DIR + "/" + strTimeDir;
-//        if (!FileUtils.touchDir(mPictureDir)) {
-//            LogUtils.e("ERROR: create picture dir " + mPictureDir + " failed.");
-//            mPictureDir = null;
-//        }
-//    }
 
     public static String getTelListNumInfo() {
         return "" + getTelListNum();
@@ -438,9 +451,7 @@ public class DataLogic extends MultiDialClient {
 
     private static void onAllCallFinished() {
         LogUtils.i("onAllCallFinished");
-
-        SimpleDateFormat format = new SimpleDateFormat("yyMMdd_HHmmss");
-        String strDateTime = format.format(new Date(System.currentTimeMillis()));
+        String strDateTime = new SimpleDateFormat("yyMMdd_HHmmss").format(new Date(System.currentTimeMillis()));
 
         //zip pic data and upload
         String zipFileName = FileUtils.getFileNeatName(mTelListFileName) + "_" + strDateTime + ".zip";
