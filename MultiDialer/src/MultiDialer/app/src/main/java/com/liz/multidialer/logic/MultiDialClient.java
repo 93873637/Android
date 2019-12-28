@@ -7,6 +7,8 @@ import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.multidialer.net.SFTPManager;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
@@ -66,6 +68,31 @@ public class MultiDialClient {
                 LogUtils.d("SFTP: list files empty.");
                 return;
             }
+
+            /*###@:
+            LogUtils.d("------------------------------------------");
+            LogUtils.d("SFTP: get list, size = " + vf.size());
+            for (int i=0; i<vf.size(); i++) {
+                LogUtils.d("#" + i + ": " + ((ChannelSftp.LsEntry)vf.get(i)).getFilename());
+            }
+            LogUtils.d("------------------------------------------");
+            */
+
+            Collections.sort(vf, new Comparator() {
+                public int compare(Object obj1, Object obj2) {
+                    return ((ChannelSftp.LsEntry)obj1).getFilename().compareTo(((ChannelSftp.LsEntry)obj2).getFilename());
+                }
+            });
+
+            /*
+            LogUtils.d("------------------------------------------");
+            LogUtils.d("SFTP: get list22222, size = " + vf.size());
+            for (int i=0; i<vf.size(); i++) {
+                LogUtils.d("#" + i + ": " + ((ChannelSftp.LsEntry)vf.get(i)).getFilename());
+            }
+            LogUtils.d("------------------------------------------");
+            */
+
             String fileName = ((ChannelSftp.LsEntry)vf.get(0)).getFilename();
             LogUtils.d("SFTP: get tel list file, name = " + fileName + ", download...");
             if (!sftpMgr.downloadFile(FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA), fileName,

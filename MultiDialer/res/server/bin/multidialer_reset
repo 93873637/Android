@@ -1,0 +1,35 @@
+#!/bin/bash
+
+SERVER_HOME=/home/shandong1
+MULTIDIALER_HOME=${SERVER_HOME}/PUB_SPACE
+MULTIDIALER_NUM_DATA=${MULTIDIALER_HOME}/NUM_DATA
+MULTIDIALER_PIC_DATA=${MULTIDIALER_HOME}/PIC_DATA
+
+echo ''
+
+cd ${SERVER_HOME}
+
+echo 'remove current space...'
+rm -rf PUB_SPACE
+
+echo 'restore original space...'
+cp -rf PUB_SPACE.org PUB_SPACE
+
+echo '---------------------------------------------'
+echo '[ NUM_DATA/WAIT_DATA ]'
+ls -l ${MULTIDIALER_NUM_DATA}/WAIT_DATA
+
+echo ''
+echo '[ NUM_DATA/RUN_DATA ]'
+ls -l ${MULTIDIALER_NUM_DATA}/RUN_DATA
+
+echo ''
+echo '[ NUM_DATA/END_DATA ]'
+ls -l ${MULTIDIALER_NUM_DATA}/END_DATA
+
+echo ''
+echo '[ PIC_DATA/WAIT_DATA ]'
+ls -l ${MULTIDIALER_PIC_DATA}/WAIT_DATA
+echo '---------------------------------------------'
+
+echo ''
