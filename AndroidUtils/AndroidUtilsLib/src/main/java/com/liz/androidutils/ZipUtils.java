@@ -19,51 +19,59 @@ import androidx.annotation.NonNull;
 @SuppressWarnings("unused, WeakerAccess")
 public class ZipUtils {
 
-     public static boolean zip(String zipFileAbsolute, String fileAbsolute) {
+    public static boolean zip(String zipFileAbsolute, String fileAbsolute) {
+        return zip(zipFileAbsolute, fileAbsolute, false);
+    }
 
-         File zipFile = new File(zipFileAbsolute);
-         if (zipFile.exists()) {
-             LogUtils.i("zip file \""+ zipFileAbsolute +"\" already exists, delete it to re-zip...");
-             if (zipFile.delete()) {
-                 LogUtils.e("delete zip file \"" + zipFileAbsolute + "\" failed.");
-                 return false;
-             }
-         }
-         else {
-             //ensure output path exists
-             try {
-                 String zipFilePath = zipFileAbsolute.substring(0, zipFileAbsolute.lastIndexOf("/"));
-                 touchPath(zipFilePath);
-             } catch (Exception ex) {
-                 LogUtils.e("ERROR: Exception for touch zip file path: " + ex.toString());
-                 return false;
-             }
-         }
+    public static boolean zip(String zipFileAbsolute, String fileAbsolute, boolean deleteOrg) {
 
-         //check input file for zip
-         File inputFile = new File(fileAbsolute);
-         if (!inputFile.exists()) {
-             LogUtils.i("ERROR: zip failed for input file \"" + fileAbsolute + "\" not found.");
-             return false;
-         }
+        File zipFile = new File(zipFileAbsolute);
+        if (zipFile.exists()) {
+            LogUtils.i("ZipUtils: zip: zip file \"" + zipFileAbsolute + "\" already exists, delete it to re-zip...");
+            if (zipFile.delete()) {
+                LogUtils.e("ZipUtils: zip: delete zip file \"" + zipFileAbsolute + "\" failed.");
+                return false;
+            }
+        } else {
+            //ensure output path exists
+            try {
+                String zipFilePath = zipFileAbsolute.substring(0, zipFileAbsolute.lastIndexOf("/"));
+                touchPath(zipFilePath);
+            } catch (Exception ex) {
+                LogUtils.e("ERROR: ZipUtils: zip: Exception for touch zip file path: " + ex.toString());
+                return false;
+            }
+        }
 
-         ZipOutputStream outputStream;
-         try {
-             outputStream = new ZipOutputStream(new FileOutputStream(zipFileAbsolute));
-             zipFile(outputStream, inputFile, "");
-         }
-         catch (Exception ex) {
-             LogUtils.e("ERROR: zip Exception: " + ex.toString());
-             return false;
-         }
-         try {
-             outputStream.close();
-         }
-         catch (IOException ex) {
-             LogUtils.e("outputStream close IOException: " + ex.toString());
-         }
+        //check input file for zip
+        File inputFile = new File(fileAbsolute);
+        if (!inputFile.exists()) {
+            LogUtils.i("ERROR: ZipUtils: zip: zip failed for input file \"" + fileAbsolute + "\" not found.");
+            return false;
+        }
 
-         return true;
+        ZipOutputStream outputStream;
+        try {
+            outputStream = new ZipOutputStream(new FileOutputStream(zipFileAbsolute));
+            zipFile(outputStream, inputFile, "");
+        } catch (Exception ex) {
+            LogUtils.e("ERROR: ZipUtils: zip: zip Exception: " + ex.toString());
+            return false;
+        }
+
+        try {
+            outputStream.close();
+        } catch (IOException ex) {
+            LogUtils.e("ZipUtils: zip: outputStream close IOException: " + ex.toString());
+        }
+
+        if (deleteOrg) {
+            if (inputFile.delete()) {
+                LogUtils.e("ZipUtils: zip: delete original file failed");
+            }
+        }
+
+        return true;
     }
 
     public static boolean zipFiles(String strZipFile, File... files) {

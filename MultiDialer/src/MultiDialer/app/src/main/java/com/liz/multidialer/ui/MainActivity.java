@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         String editInterval = "" + ComDef.DEFAULT_END_CALL_DELAY;
         mEditDialInterval.setText(editInterval);
 
-        mBtnCall = findViewById(R.id.btn_start_call);
+        mBtnCall = findViewById(R.id.btn_call);
         mBtnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,8 +137,8 @@ public class MainActivity extends AppCompatActivity {
         FloatingButtonService.setFloatingButtonCallback(new FloatingButtonService.FloatingButtonCallback() {
             @Override
             public void onFloatButtonClicked() {
-                showProgressInfo("Floating Button Clicked to Stop Call...");
-                onStopCall();
+                LogUtils.d("Floating Button Clicked...");
+                DataLogic.switchPauseOrContinue(MainActivity.this);
             }
         });
 
@@ -205,11 +205,12 @@ public class MainActivity extends AppCompatActivity {
         if (DataLogic.isWorking()) {
             mBtnCall.setText("停止拨号");
             mBtnCall.setBackgroundColor(Color.RED);
-            FloatingButtonService.updateInfo(DataLogic.getProgressInfo());
         } else {
             mBtnCall.setText("开始拨号");
             mBtnCall.setBackgroundColor(Color.GREEN);
         }
+
+        FloatingButtonService.updateTextInfo(DataLogic.getFloatingButtonInfo());
     }
 
     @Override

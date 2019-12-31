@@ -237,12 +237,12 @@
         <!--拨号间隔-->
 
         <Button
-            android:id="@+id/btn_start_call"
+            android:id="@+id/btn_call"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="#00ff00"
-            android:text="开始拨打"
+            android:text="开始/停止"
             android:textAllCaps="false"
             android:textSize="18sp"
             android:textStyle="bold" />

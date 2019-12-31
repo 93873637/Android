@@ -38,6 +38,7 @@ public class DataLogic extends MultiDialClient {
     private static int mCalledNum = 0;
     private static boolean mWorking = false;
     private static boolean mDialing = false;
+    private static boolean mPaused = false;
 
     public static void init() {
         LogUtils.d("DataLogic: init");
@@ -233,12 +234,28 @@ public class DataLogic extends MultiDialClient {
         return "" + getCalledNum();
     }
 
-    public static String getProgressInfo() {
-        return "正在拨打 "
-                + (getCurrentCallIndex() + 1)
-                + "/" + getTelListNum() + ": "
-                + getCurrentTelNumber() + "\n"
-                + "点击停止";
+    public static String getFloatingButtonInfo() {
+        if (!mWorking) {
+            return "NOT WORKING";
+        }
+        else {
+            if (!mDialing) {
+                return "NOT DIALING";
+            }
+            else {
+                String dialInfo = "DIALING "
+                        + (getCurrentCallIndex() + 1) + "/" + getTelListNum() + ": "
+                        + getCurrentTelNumber()
+                        + "\n";
+                if (mPaused) {
+                    dialInfo += "已暂停，点击继续";
+                }
+                else {
+                    dialInfo += "拨号中，点击暂停";
+                }
+                return dialInfo;
+            }
+        }
     }
 
     private static int getTelListNum() {
@@ -287,6 +304,14 @@ public class DataLogic extends MultiDialClient {
         return mWorking;
     }
 
+    public static boolean isDialing() {
+        return mDialing;
+    }
+
+    public static boolean isPaused() {
+        return mPaused;
+    }
+
     public static void startWorking(Context context) {
         mWorking = true;
         startWorkingTimer(context);
@@ -295,26 +320,47 @@ public class DataLogic extends MultiDialClient {
     public static void stopWorking() {
         mWorking = false;
         stopWorkingTimer();
+        mDialing = false;
+        mPaused = false;
     }
 
-    private static void checkDialing(final Context context) {
+    public static void switchPauseOrContinue(Context context) {
+        if (!mWorking) {
+            LogUtils.d("switchPauseOrContinue: NOT Working");
+            return;
+        }
+        if (!mDialing) {
+            LogUtils.d("switchPauseOrContinue: NOT Dialing");
+            return;
+        }
+        showProgress("switchPauseOrContinue: mPaused = " + mPaused + " -> " + !mPaused);
+        mPaused = !mPaused;
+        if (!mPaused) {
+            startLoopCallOnNum(context);
+        }
+    }
+
+    private static void checkDialing(Context context) {
         LogUtils.d("DataLogic: checkDialing: mDialing = " + mDialing);
         if (!mDialing) {
             if (canDial()) {
                 mDialing = true;
-
-                //loopCallOnNum has handler, here using Main looper
-                Handler mainHandler = new Handler(Looper.getMainLooper());
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        loopCallOnNum(context);
-                    }
-                });
+                startLoopCallOnNum(context);
             } else {
                 MultiDialClient.fetchTelListFile();
             }
         }
+    }
+
+    //loopCallOnNum has handler, here using Main looper
+    private static void startLoopCallOnNum(final Context context) {
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                loopCallOnNum(context);
+            }
+        });
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -376,6 +422,11 @@ public class DataLogic extends MultiDialClient {
         LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex());
         //LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex() + ", ThreadId=" + android.os.Process.myTid());
 
+        if (mPaused) {
+            LogUtils.d("loopCallOnNum: Paused");
+            return;
+        }
+
         String strTel = DataLogic.getCurrentTelNumber();
         if (!TelUtils.isValidTelNumber(strTel)) {
             showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
@@ -383,7 +434,6 @@ public class DataLogic extends MultiDialClient {
             return;
         }
 
-        //if (mCallState != TelephonyManager.CALL_STATE_IDLE) {
         if (TelUtils.isCalling(context)) {
             showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end it and call again...");
             TelUtils.endCall(context);
@@ -460,7 +510,7 @@ public class DataLogic extends MultiDialClient {
         LogUtils.d("onAllCallFinished: mPicturePath = " + mPicturePath);
         LogUtils.d("onAllCallFinished: zipFilePath = " + zipFilePath);
 
-        if (!ZipUtils.zip(zipFilePath, mPicturePath)) {
+        if (!ZipUtils.zip(zipFilePath, mPicturePath, true)) {
             LogUtils.e("ERROR: onAllCallFinished: zip pic failed");
             onUploadFinished();
         }
@@ -472,6 +522,7 @@ public class DataLogic extends MultiDialClient {
     public static void onUploadFinished() {
         MultiDialClient.moveRunDataToEnd(mTelListFileName);
         mDialing = false;
+        mPaused = false;
     }
 
     private static boolean toNextCall() {

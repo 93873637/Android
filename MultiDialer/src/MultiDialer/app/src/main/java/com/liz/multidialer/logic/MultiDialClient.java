@@ -48,6 +48,15 @@ public class MultiDialClient {
         }.start();
     }
 
+    private static void logVector(Vector<ChannelSftp.LsEntry> vf, String tag) {
+        LogUtils.d("------------------------------------------");
+        LogUtils.d("Vector(" + tag + "): size = " + vf.size());
+        for (int i=0; i<vf.size(); i++) {
+            LogUtils.d("#" + i + ": " + vf.get(i).getFilename());
+        }
+        LogUtils.d("------------------------------------------");
+    }
+
     //
     //do fetch tellist file from server
     //
@@ -69,29 +78,13 @@ public class MultiDialClient {
                 return;
             }
 
-            /*###@:
-            LogUtils.d("------------------------------------------");
-            LogUtils.d("SFTP: get list, size = " + vf.size());
-            for (int i=0; i<vf.size(); i++) {
-                LogUtils.d("#" + i + ": " + ((ChannelSftp.LsEntry)vf.get(i)).getFilename());
-            }
-            LogUtils.d("------------------------------------------");
-            */
-
+            //##@: logVector(vf, "Before Sort");
             Collections.sort(vf, new Comparator() {
                 public int compare(Object obj1, Object obj2) {
                     return ((ChannelSftp.LsEntry)obj1).getFilename().compareTo(((ChannelSftp.LsEntry)obj2).getFilename());
                 }
             });
-
-            /*
-            LogUtils.d("------------------------------------------");
-            LogUtils.d("SFTP: get list22222, size = " + vf.size());
-            for (int i=0; i<vf.size(); i++) {
-                LogUtils.d("#" + i + ": " + ((ChannelSftp.LsEntry)vf.get(i)).getFilename());
-            }
-            LogUtils.d("------------------------------------------");
-            */
+            //##@: logVector(vf, "After Sort");
 
             String fileName = ((ChannelSftp.LsEntry)vf.get(0)).getFilename();
             LogUtils.d("SFTP: get tel list file, name = " + fileName + ", download...");
@@ -148,10 +141,17 @@ public class MultiDialClient {
             }
             else {
                 LogUtils.d("_uploadPicData: upload success");
+
+                //rename remote file name
                 String srcFilePath = remotePath + fileName;
                 String tarFilePath = remotePath + fileNameDone;
                 DataLogic.showProgress("SFTP: rename file " + srcFilePath + " to " + tarFilePath + "...");
                 sftpMgr.mv(srcFilePath, tarFilePath);
+
+                //delete local file
+                String localFilePath = localPath + localFileName;
+                DataLogic.showProgress("MultiDialClient: delete local picture file " + localFilePath);
+                FileUtils.removeFile(localFileName);
             }
 
             sftpMgr.disconnect();
