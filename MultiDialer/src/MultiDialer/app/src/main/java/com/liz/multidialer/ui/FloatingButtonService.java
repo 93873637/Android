@@ -40,9 +40,10 @@ public class FloatingButtonService extends Service {
 
     private static final int MSG_CODE_SHOW_FLOATING_BUTTON = 0;
     private static final int MSG_CODE_HIDE_FLOATING_BUTTON = 1;
-    private static final int MSG_CODE_PROGRESS_INFO = 2;
+    private static final int MSG_CODE_BUTTON_INFO = 2;
 
-    private static final String MSG_KEY_PROGRESS_INFO = "FB_ProgressInfo";
+    private static final String MSG_KEY_BUTTON_TEXT = "FB_TEXT";
+    private static final String MSG_KEY_BUTTON_COLOR = "FB_COLOR";
 
     private static final int BACKGROUND_COLOR_NORMAL = Color.RED;
     private static final int BACKGROUND_COLOR_DOWN = Color.GRAY;
@@ -66,14 +67,15 @@ public class FloatingButtonService extends Service {
         }
     }
 
-    public static void updateTextInfo(String info) {
+    public static void updateButtonInfo(String text, int color) {
         if (mFloatingButtonService == null) {
             return;
         }
         Message msg = Message.obtain();
-        msg.what = MSG_CODE_PROGRESS_INFO;
+        msg.what = MSG_CODE_BUTTON_INFO;
         Bundle b = new Bundle();
-        b.putString(MSG_KEY_PROGRESS_INFO, info);
+        b.putString(MSG_KEY_BUTTON_TEXT, text);
+        b.putInt(MSG_KEY_BUTTON_COLOR, color);
         msg.setData(b);
         try {
             sMessenger.send(msg);
@@ -153,12 +155,17 @@ public class FloatingButtonService extends Service {
                         mFloatingButtonService.hideFloatingWindow();
                     }
                     break;
-                case MSG_CODE_PROGRESS_INFO:
+                case MSG_CODE_BUTTON_INFO:
                     if (mFloatButton != null) {
                         Bundle b = msg.getData();
-                        String progressInfo = b.getString(MSG_KEY_PROGRESS_INFO);
-                        LogUtils.d("FloatingButtonService: get progress info: " + progressInfo);
-                        mFloatButton.setText(progressInfo);
+                        String progressInfo = b.getString(MSG_KEY_BUTTON_TEXT);
+                        LogUtils.d("FloatingButtonService: get button text: " + progressInfo);
+                        if (progressInfo != null) {
+                            mFloatButton.setText(progressInfo);
+                        }
+                        int color = b.getInt(MSG_KEY_BUTTON_COLOR);
+                        LogUtils.d("FloatingButtonService: get button color: " + color);
+                        mFloatButton.setBackgroundColor(color);
                     }
                     break;
                 default:

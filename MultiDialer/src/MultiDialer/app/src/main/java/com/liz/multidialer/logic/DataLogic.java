@@ -1,6 +1,7 @@
 package com.liz.multidialer.logic;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Handler;
 import android.os.Looper;
@@ -234,7 +235,7 @@ public class DataLogic extends MultiDialClient {
         return "" + getCalledNum();
     }
 
-    public static String getFloatingButtonInfo() {
+    public static String getFloatingButtonText() {
         if (!mWorking) {
             return "NOT WORKING";
         }
@@ -256,6 +257,10 @@ public class DataLogic extends MultiDialClient {
                 return dialInfo;
             }
         }
+    }
+
+    public static int getFloatingButtonColor() {
+        return mPaused ? Color.GREEN : Color.RED;
     }
 
     private static int getTelListNum() {

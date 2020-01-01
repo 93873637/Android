@@ -210,7 +210,10 @@ public class MainActivity extends AppCompatActivity {
             mBtnCall.setBackgroundColor(Color.GREEN);
         }
 
-        FloatingButtonService.updateTextInfo(DataLogic.getFloatingButtonInfo());
+        FloatingButtonService.updateButtonInfo(
+                DataLogic.getFloatingButtonText(),
+                DataLogic.getFloatingButtonColor()
+        );
     }
 
     @Override
