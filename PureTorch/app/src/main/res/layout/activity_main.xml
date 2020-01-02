@@ -7,17 +7,33 @@
     android:layout_height="match_parent"
     tools:context="com.liz.puretorch.ui.MainActivity">
 
+    <!--add border to show if torch turn on/off-->
+    <LinearLayout
+        android:id="@+id/layoutBorder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:background="#ff0000"
+        android:orientation="vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
+        >
+
     <include android:layout_width="fill_parent" android:layout_height="fill_parent" layout="@layout/layout_v5_top" />
 
-    <TextView
-        android:id="@+id/torchInfo"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:background="#ff0000ff"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:text=""
-        android:textStyle="bold" />
+    </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:id="@+id/torchInfo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="16dp"-->
+        <!--android:background="#ff0000ff"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/constraintLayout"-->
+        <!--android:padding="@dimen/activity_horizontal_margin"-->
+        <!--android:text=""-->
+        <!--android:textStyle="bold" />-->
 
     <TextView
         android:id="@+id/colorInfo"

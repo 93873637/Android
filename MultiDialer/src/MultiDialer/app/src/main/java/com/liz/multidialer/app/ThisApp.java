@@ -75,7 +75,7 @@ public class ThisApp extends Application {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Life Timer: Heart Beat Timer
 
-    public static final long LIFE_TIMER_DELAY = 1000L;  //unit by ms
+    public static final long LIFE_TIMER_DELAY = 2000L;  //unit by ms
     public static final long LIFE_TIMER_PERIOD = 5000L;  //unit by ms
     public static final String LIFE_BROADCAST_MSG = "com.liz.multidialer.LIFE_BROADCAST";
 

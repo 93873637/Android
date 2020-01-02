@@ -115,15 +115,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
-        mTextProgressInfo = findViewById(R.id.text_progress_info);
-        mProgressBuffer = new StringBufferQueue(32);
-        DataLogic.setProgressCallback(new DataLogic.ShowProgressCallback(){
-            @Override
-            public void onShowProgress(String msg) {
-                MainActivity.this.showProgressInfo(msg);
-            }
-        });
+        if (ComDef.DEBUG) {
+            mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
+            mTextProgressInfo = findViewById(R.id.text_progress_info);
+            mProgressBuffer = new StringBufferQueue(32);
+            DataLogic.setProgressCallback(new DataLogic.ShowProgressCallback() {
+                @Override
+                public void onShowProgress(String msg) {
+                    MainActivity.this.showProgressInfo(msg);
+                }
+            });
+        }
 
         findViewById(R.id.btn_exit_app).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -254,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showProgressInfo(final String msg) {
-        //###@: todo: write to log file
         runOnUiThread(new Runnable() {
             public void run() {
                 String logMsg = TimeUtils.getLogTime() + " - " + msg;

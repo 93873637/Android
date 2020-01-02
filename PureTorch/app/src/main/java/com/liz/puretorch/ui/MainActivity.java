@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GestureDetectorCompat mDetector;
     TorchSwitchButton mBtnSwitch;
 
-    private TextView mTorchInfo;
+    //private TextView mTorchBorder;
+    private LinearLayout mTorchBorder;
     private TextView mColorInfo;
 
     /*
@@ -78,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mLayoutMain = findViewById(R.id.layoutMain);
         mColorInfo = findViewById(R.id.colorInfo);
-        mTorchInfo = findViewById(R.id.torchInfo);
+        mTorchBorder = findViewById(R.id.layoutBorder);
+        //mTorchBorder = findViewById(R.id.torchInfo);
 
         //the seek bar to adjust brightness
         mSeekbarLight = (SeekBar) findViewById(R.id.seekbarLight);
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (TorchUtils.isTorchEnabled()) {
             color = 0xffff0000;
         }
-        mTorchInfo.setBackgroundColor(color);
+        mTorchBorder.setBackgroundColor(color);
     }
 
     @Override

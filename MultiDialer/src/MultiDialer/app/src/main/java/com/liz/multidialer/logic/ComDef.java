@@ -16,6 +16,8 @@ public class ComDef {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public static final String APP_NAME = "MultiDialer";
 
+    public static final boolean DEBUG = true;  //###@:
+
     //public static final String TEL_LIST_FILE_PATH = "/sdcard/tellist.txt";
     public static final String TEL_LIST_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + "/tellist.txt";
 

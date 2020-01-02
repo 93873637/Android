@@ -208,24 +208,6 @@ public class FloatingButtonService extends Service {
         return layoutParams;
     }
 
-    //###@:
-    private WindowManager.LayoutParams genLayoutParams2() {
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        } else {
-            layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
-        }
-        layoutParams.format = PixelFormat.RGBA_8888;
-        layoutParams.gravity = Gravity.TOP;
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        layoutParams.width = LAYOUT_PARAM_WIDTH;
-        layoutParams.height = LAYOUT_PARAM_HEIGHT;
-        layoutParams.x = LAYOUT_PARAM_X;
-        layoutParams.y = LAYOUT_PARAM_Y+LAYOUT_PARAM_HEIGHT;
-        return layoutParams;
-    }
-
 //    @Nullable
 //    @Override
 //    public IBinder onBind(Intent intent) {
@@ -247,9 +229,6 @@ public class FloatingButtonService extends Service {
         if (mFloatButton == null) {
             mFloatButton = new FloatingButton(getApplicationContext());
             mWindowManager.addView(mFloatButton, mLayoutParams);
-            //####@:
-            //FloatingButton mFloatButton2 = new FloatingButton(getApplicationContext());
-            //mWindowManager.addView(mFloatButton2, genLayoutParams2());
         }
 
         //mWindowManager.addView(mFloatButton, mLayoutParams);

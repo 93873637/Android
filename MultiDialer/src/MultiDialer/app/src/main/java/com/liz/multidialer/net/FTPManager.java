@@ -43,7 +43,7 @@ public class FTPManager {
         int replyCode = ftpClient.getReplyCode();
         if (FTPReply.isPositiveCompletion(replyCode)) {
             LogUtils.e("ftp connect ok, error=" + replyCode);
-            if (ftpClient.login("username", "password")) { //####@: omDef.FTP_USERNAME, ComDef.FTP_PASSWORD)) {
+            if (ftpClient.login("username", "password")) {
                 result = true;
                 LogUtils.d("ftp login successfully.");
             }
