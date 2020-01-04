@@ -11,6 +11,8 @@ import android.support.v7.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.liz.puretorch.utils.LogUtils;
+
 /**
  * Class to create a vertical slider
  */
@@ -30,15 +32,18 @@ public class VerticalSeekBar extends AppCompatSeekBar {
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(h, w, oldh, oldw);
+        LogUtils.d("VerticalSeekBar: onSizeChanged, w=" + w + ", h=" + h + ", oldw=" + oldw + ", oldh=" + oldh);
     }
 
     @Override
     protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        LogUtils.d("VerticalSeekBar: onMeasure, widthMeasureSpec=" + widthMeasureSpec + ", heightMeasureSpec=" + heightMeasureSpec);
         super.onMeasure(heightMeasureSpec, widthMeasureSpec);
         setMeasuredDimension(getMeasuredHeight(), getMeasuredWidth());
     }
 
     protected void onDraw(Canvas c) {
+        LogUtils.d("VerticalSeekBar: onDraw: height=" + getHeight());
         c.rotate(-90);
         c.translate(-getHeight(), 0);
         super.onDraw(c);
