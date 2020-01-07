@@ -58,6 +58,10 @@ public class SFTPManager {
             sftp = (ChannelSftp) channel;
             return true;
         } catch (JSchException e) {
+            LogUtils.e("connect failed with JSchException, ex = " + e.toString());
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
             LogUtils.e("connect failed, ex = " + e.toString());
             e.printStackTrace();
             return false;
@@ -94,8 +98,13 @@ public class SFTPManager {
             System.out.println(sftp);
             return true;
         } catch (FileNotFoundException e) {
+            LogUtils.e("uploadFile with FileNotFoundException, ex = " + e.toString());
             e.printStackTrace();
         } catch (SftpException e) {
+            LogUtils.e("uploadFile with SftpException, ex = " + e.toString());
+            e.printStackTrace();
+        } catch (Exception e) {
+            LogUtils.e("uploadFile Exception, ex = " + e.toString());
             e.printStackTrace();
         } finally {
             if (in != null) {
@@ -196,8 +205,13 @@ public class SFTPManager {
             sftp.get(remoteFileName, new FileOutputStream(file));
             return true;
         } catch (FileNotFoundException e) {
+            LogUtils.e("downloadFile FileNotFoundException, ex = " + e.toString());
             e.printStackTrace();
         } catch (SftpException e) {
+            LogUtils.e("downloadFile SftpException, ex = " + e.toString());
+            e.printStackTrace();
+        } catch (Exception e) {
+            LogUtils.e("downloadFile Exception, ex = " + e.toString());
             e.printStackTrace();
         }
 

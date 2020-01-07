@@ -60,8 +60,10 @@ public class DataLogic extends MultiDialClient {
 //                sftpMgr.exec("mv /home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/M01_000001.txt /home/shandong1/PUB_SPACE/NUM_DATA/RUN_DATA/M01_000001.txt");
 //            }
 //        }.start();
-    }
 
+        String fileAbsolute = "/storage/emulated/0/multidialer/pic/M02_000001_200108_000715";
+        FileUtils.delete(fileAbsolute);
+    }
 
     private static boolean createDirs() {
         if (!FileUtils.touchDir(ComDef.DIALER_DIR)) {

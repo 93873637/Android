@@ -151,7 +151,7 @@ public class MultiDialClient {
                 //delete local file
                 String localFilePath = localPath + localFileName;
                 DataLogic.showProgress("MultiDialClient: delete local picture file " + localFilePath);
-                FileUtils.removeFile(localFileName);
+                FileUtils.removeFile(localFilePath);
             }
 
             sftpMgr.disconnect();

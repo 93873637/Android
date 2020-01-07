@@ -89,15 +89,15 @@ public class FileUtils {
 
     public static void removeFile(File f) {
         if (f == null) {
-            System.out.println("ERROR: removeFile: file null");
+            LogUtils.e("ERROR: removeFile: file null");
             return;
         }
         if (!f.exists()) {
-            System.out.println("ERROR: removeFile: file \"" + f.getAbsolutePath() + "\" not exist.");
+            LogUtils.e("ERROR: removeFile: file \"" + f.getAbsolutePath() + "\" not exist.");
             return;
         }
         if (!f.delete()) {
-            System.out.println("ERROR: removeFile: delete file \"" + f.getAbsolutePath() + "\" failed.");
+            LogUtils.e("ERROR: removeFile: delete file \"" + f.getAbsolutePath() + "\" failed.");
         }
     }
 
@@ -106,7 +106,7 @@ public class FileUtils {
         File fileTo = new File(filePathTo);
         if (fileTo.exists()) {
             if (!fileTo.delete()) {
-                System.out.println("Delete to file " + filePathTo + " failed.");
+                LogUtils.e("Delete to file " + filePathTo + " failed.");
                 return;
             }
         }
@@ -115,7 +115,7 @@ public class FileUtils {
         File fileFrom = new File(filePathFrom);
         if (fileFrom.exists()) {
             if (!fileFrom.renameTo(fileTo)) {
-                System.out.println("Rename file to " + filePathTo + " failed.");
+                LogUtils.e("Rename file to " + filePathTo + " failed.");
             }
         }
     }
@@ -310,13 +310,12 @@ public class FileUtils {
 
     public static ArrayList<String> readTxtFileLines(String filePath) {
         File file = new File(filePath);
-        if (!file.exists())
-        {
+        if (!file.exists()) {
             LogUtils.e("readTxtFileLines: file \"" + filePath + "\" not exists.");
             return null;
         }
 
-        if (!file.isFile()){
+        if (!file.isFile()) {
             LogUtils.e("readTxtFileLines: file \"" + filePath + "\" is NOT a file.");
             return null;
         }
@@ -341,6 +340,87 @@ public class FileUtils {
         }
     }
 
+    public static boolean delete(String fileAbsolute) {
+        File file = new File(fileAbsolute);
+        if (!file.exists()) {
+            LogUtils.e("ERROR: FileUtils.delete: " + fileAbsolute + " not exist");
+            return false;
+        } else {
+            if (file.isFile()) {
+                return deleteFile(fileAbsolute);
+            }
+            else if (file.isDirectory()){
+                return deleteDirectory(fileAbsolute);
+            }
+            else {
+                LogUtils.e("ERROR: FileUtils.delete: " + fileAbsolute + " not file/dir");
+                return false;
+            }
+        }
+    }
+
+    public static boolean deleteFile(String fileAbsolute) {
+        File file = new File(fileAbsolute);
+        if (file.exists() && file.isFile()) {
+            if (file.delete()) {
+                return true;
+            } else {
+                LogUtils.e("ERROR: FileUtils.deleteFile: delete " + fileAbsolute + " failed");
+                return false;
+            }
+        } else {
+            LogUtils.e("ERROR: FileUtils.deleteFile: " + fileAbsolute + " not exist");
+            return false;
+        }
+    }
+
+    public static boolean deleteDirectory(String dir) {
+        //add separator on end of dir
+        if (!dir.endsWith(File.separator))
+            dir = dir + File.separator;
+
+        File dirFile = new File(dir);
+        if ((!dirFile.exists()) || (!dirFile.isDirectory())) {
+            LogUtils.e("ERROR: FileUtils.deleteDirectory: " + dir + " not exist");
+            return false;
+        }
+
+        boolean flag = true;
+
+        // delete all sub files and dirs
+        File[] files = dirFile.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            String absolutePath = files[i].getAbsolutePath();
+            if (files[i].isFile()) {
+                flag = deleteFile(absolutePath);
+            }
+            else if (files[i].isDirectory()) {
+                flag = deleteDirectory(files[i].getAbsolutePath());
+            }
+            else {
+                LogUtils.e("ERROR: FileUtils.deleteDirectory: " + absolutePath + " not file/dir");
+                flag = false;
+                break;
+            }
+            if (!flag) {
+                LogUtils.e("ERROR: FileUtils.deleteDirectory: delete " + absolutePath + " failed");
+                break;
+            }
+        }
+        if (!flag) {
+            LogUtils.e("ERROR: FileUtils.deleteDirectory: delete dir " + dir + " failed");
+            return false;
+        }
+
+        // finally, delete the empty dir
+        if (!dirFile.delete()) {
+            LogUtils.e("ERROR: FileUtils.deleteDirectory: dirFile delete of " + dir + " failed");
+            return false;
+        }
+
+        return true;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Test Functions
 
@@ -352,53 +432,52 @@ public class FileUtils {
         AssertUtils.Assert(dirSeparator("/home/liz/aaa").equals("/home/liz/aaa/"));
         AssertUtils.Assert(dirSeparator("/home/liz/aaa/").equals("/home/liz/aaa/"));
 
-
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows
-            System.out.println("getFilePath(\"" + fileAbs + "\")=\"" + getFilePath(fileAbs) + "\"");
+            LogUtils.e("getFilePath(\"" + fileAbs + "\")=\"" + getFilePath(fileAbs) + "\"");
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows
-            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+            LogUtils.e("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.t";  //for windows
-            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+            LogUtils.e("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.";  //for windows
-            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+            LogUtils.e("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
         }
         {
             String fileAbs = "aaa.txt";
-            System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
+            LogUtils.e("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows
-            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+            LogUtils.e("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.t";  //for windows
-            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+            LogUtils.e("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.";  //for windows
-            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+            LogUtils.e("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
         }
         {
             String fileAbs = "aaa.txt";
-            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+            LogUtils.e("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
         }
         {
             String fileAbs = ".txt";
-            System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
+            LogUtils.e("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
         }
 
         assert false;
@@ -407,10 +486,10 @@ public class FileUtils {
 //        String path1="D:\\Temp\\whatsai\\whatsai.dat";
 //        String path2="D:\\Temp\\whatsai_tmp\\whatsai.dat";
 //        if (sameFile(path1, path2)) {
-//            System.out.println("same file");
+//            LogUtils.e("same file");
 //        }
 //        else {
-//            System.out.println("different file");
+//            LogUtils.e("different file");
 //        }
 //        String path1="D:\\Temp\\test2.jpg";
 //        String path2="D:\\Temp\\test3.jpg";

@@ -10,10 +10,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcbeb664-2383-4ba5-b93d-4ea0947c53e4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/VerticalSeekBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/VerticalSeekBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_v5_top.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_v5_top.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/TroubleMaker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/app/UnCeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/MultiDialer1223_test_no_upload.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/autodialer.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/autodialer2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/autodialer3.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/calllogreader.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/calllogreader.rar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/dialer.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/dialer0.rar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1022.1140.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1022.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1023.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1030.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1105.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1127/MultiDialer.2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1127/MultiDialer.3.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1127/MultiDialer.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1127/MultiDialerDaemon.2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1127/MultiDialerDaemon.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1224.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1224_2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1225.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1225_2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1230.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer1231.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/app/ThisApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/app/ThisApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/ScreenCapture.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/ScreenCapture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/net/SFTPManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/net/SFTPManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,68 +143,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="puretorch" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="puretorch" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="color" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="puretorch" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="puretorch" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="20555940" />
+    <property name="device.picker.selection" value="5a222bac" />
     <property name="last_opened_file_path" value="D:/Download/VerticalSeekbar-master/VerticalSeekbar-master" />
   </component>
   <component name="RecentsManager">
@@ -289,9 +266,9 @@
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="4" weight="0.22939867" />
+      <window_info anchor="bottom" id="Build" order="4" visible="true" weight="0.22939867" />
       <window_info anchor="bottom" id="Run" order="5" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="6" visible="true" weight="0.32962137" />
+      <window_info anchor="bottom" id="Logcat" order="6" weight="0.32925472" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32962137" />

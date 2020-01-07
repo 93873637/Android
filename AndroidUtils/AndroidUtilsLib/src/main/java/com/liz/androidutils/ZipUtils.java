@@ -66,8 +66,8 @@ public class ZipUtils {
         }
 
         if (deleteOrg) {
-            if (inputFile.delete()) {
-                LogUtils.e("ZipUtils: zip: delete original file failed");
+            if (!FileUtils.delete(fileAbsolute)) {
+                LogUtils.e("ZipUtils: zip: delete original file " + fileAbsolute +" failed");
             }
         }
 

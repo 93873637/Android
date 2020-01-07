@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         LogUtils.d("MainActivity: onCreate: MainActivity Object = " + MainActivity.this);
         LogUtils.d("MainActivity: onCreate: MainThreadId = " + android.os.Process.myTid());
+        ((ThisApp)getApplication()).addActivity(this);
 
         checkPermissions();
 
