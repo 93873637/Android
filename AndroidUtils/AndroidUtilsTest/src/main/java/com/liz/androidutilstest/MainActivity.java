@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_ImageCompress();
+        test_logfile();
+        //test_ImageCompress();
         //test_ziputils();
         //test_screencapture();
         //test_fileReadLines();
@@ -90,6 +91,17 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_logfile() {
+        LogUtils.setLogDir("/sdcard/test/");
+        LogUtils.setTag("MultiDialer");
+        LogUtils.setSaveToFile(true);
+        LogUtils.setMaxLogFileSize(1024);
+
+        for (int i=0; i<1000; i++) {
+            LogUtils.d("#" + i + " - this is test log message");
+        }
     }
 
     public void test_ImageCompress() {

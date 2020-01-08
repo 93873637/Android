@@ -27,7 +27,7 @@ import java.util.TimerTask;
  * Created by liz on 2018/3/8.
  */
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class DataLogic extends MultiDialClient {
 
     private static ArrayList<String> mTelList = null;
@@ -180,8 +180,12 @@ public class DataLogic extends MultiDialClient {
     }
 
     public static void showProgress(String msg) {
-        if (mProgressCallback != null) {
+        if (ComDef.DEBUG && mProgressCallback != null) {
             mProgressCallback.onShowProgress(msg);
+        }
+        else {
+            //not show log on ui, only log by android
+            LogUtils.i(msg);
         }
     }
 

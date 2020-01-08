@@ -257,10 +257,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showProgressInfo(final String msg) {
+        LogUtils.i(msg);
         runOnUiThread(new Runnable() {
             public void run() {
                 String logMsg = TimeUtils.getLogTime() + " - " + msg;
-                LogUtils.d(logMsg);
                 mProgressBuffer.append(logMsg);
                 String progressInfo = mProgressBuffer.getBuffer() + "\n";
                 mTextProgressInfo.setText(progressInfo);
