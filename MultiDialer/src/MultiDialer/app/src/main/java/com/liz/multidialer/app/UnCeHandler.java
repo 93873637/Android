@@ -57,6 +57,7 @@ public class UnCeHandler implements Thread.UncaughtExceptionHandler {
         if (ex == null) {
             return false;
         }
+        LogUtils.e("ERROR: unhandled exception ex = " + ex.toString());
         //使用Toast来显示异常信息
         new Thread() {
             @Override

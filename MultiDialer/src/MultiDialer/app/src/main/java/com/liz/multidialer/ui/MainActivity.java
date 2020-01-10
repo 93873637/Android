@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFloatButtonClicked() {
                 LogUtils.d("Floating Button Clicked...");
-                DataLogic.switchPauseOrContinue(MainActivity.this);
+                DataLogic.stopWorking();
             }
         });
 
@@ -258,20 +258,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void showProgressInfo(final String msg) {
         LogUtils.i(msg);
-        runOnUiThread(new Runnable() {
-            public void run() {
-                String logMsg = TimeUtils.getLogTime() + " - " + msg;
-                mProgressBuffer.append(logMsg);
-                String progressInfo = mProgressBuffer.getBuffer() + "\n";
-                mTextProgressInfo.setText(progressInfo);
-                mScrollProgressInfo.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mScrollProgressInfo.smoothScrollTo(0, mTextProgressInfo.getBottom());
-                    }
-                });
-            }
-        });
+        if (ComDef.DEBUG) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    String logMsg = TimeUtils.getLogTime() + " - " + msg;
+                    mProgressBuffer.append(logMsg);
+                    String progressInfo = mProgressBuffer.getBuffer() + "\n";
+                    mTextProgressInfo.setText(progressInfo);
+                    mScrollProgressInfo.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mScrollProgressInfo.smoothScrollTo(0, mTextProgressInfo.getBottom());
+                        }
+                    });
+                }
+            });
+        }
     }
 
     @Override

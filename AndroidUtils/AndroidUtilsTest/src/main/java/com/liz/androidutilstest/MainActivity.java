@@ -95,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void test_logfile() {
         LogUtils.setLogDir("/sdcard/test/");
-        LogUtils.setTag("MultiDialer");
+        LogUtils.setTag("###@:");
         LogUtils.setSaveToFile(true);
-        LogUtils.setMaxLogFileSize(1024);
+        LogUtils.setMaxLogFileSize(20*1024);
 
         for (int i=0; i<1000; i++) {
             LogUtils.d("#" + i + " - this is test log message");

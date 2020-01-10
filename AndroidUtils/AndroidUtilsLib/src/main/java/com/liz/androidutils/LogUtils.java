@@ -206,9 +206,9 @@ public class LogUtils {
 	}
 
 	private static void genLogFileName() {
-		SimpleDateFormat format = new SimpleDateFormat("yyMMdd_HHmmss");
-		String strDateTime = format.format(new Date(System.currentTimeMillis()));
-		mLogFileName = "log_" + strDateTime + ".txt";
+		//SimpleDateFormat format = new SimpleDateFormat("yyMMdd_HHmmss");
+		//String strDateTime = format.format(new Date(System.currentTimeMillis()));
+		mLogFileName = "log_" + System.currentTimeMillis() + ".txt";
 		Log.d(mTag, "genLogFileName: " + mLogFileName);
 	}
 
@@ -250,7 +250,7 @@ public class LogUtils {
 		String logFilePath = getLogFilePath();
 
 		//01-04 11:37:58.499 E/AndroidRuntime(23013): FATAL EXCEPTION: Thread-12
-		String logInfo = TimeUtils.getLogTime() + " " + type + "/" + tag + ": " + msg;
+		String logInfo = TimeUtils.getLogTime() + " " + type + "/" + tag + ": " + msg + "\n";
 
 		//check if current log file size exceed max
 		if (FileUtils.getFileSize(logFilePath) >= mMaxLogFileSize) {

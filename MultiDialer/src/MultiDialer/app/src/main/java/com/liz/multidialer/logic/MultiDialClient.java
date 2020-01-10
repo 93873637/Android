@@ -100,8 +100,7 @@ public class MultiDialClient {
             LogUtils.d("SFTP: mv file " + srcFilePath + " to " + tarFilePath + "...");
             sftpMgr.mv(srcFilePath, tarFilePath);
 
-            DataLogic.setTelListFileName(fileName);
-            DataLogic.loadTelList();
+            DataLogic.onTelListFileUpdate(fileName);
             sftpMgr.disconnect();
         }
     }

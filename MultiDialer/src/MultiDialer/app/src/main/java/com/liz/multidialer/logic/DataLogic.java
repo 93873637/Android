@@ -13,9 +13,7 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.androidutils.ZipUtils;
-import com.liz.multidialer.app.ThisApp;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,51 +32,49 @@ public class DataLogic extends MultiDialClient {
     private static String mTelListFileName = "";
     private static int mCurrentCallIndex = 0;
     private static String mPicturePath = "";
-    private static int mMaxCallNum = ComDef.MAX_CALL_NUM;
     private static long mEndCallDelay = ComDef.DEFAULT_END_CALL_DELAY;
-    private static int mCalledNum = 0;
+    private static int mTotalCalledNum = 0;
     private static boolean mWorking = false;
     private static boolean mDialing = false;
-    private static boolean mPaused = false;
 
     public static void init() {
         LogUtils.d("DataLogic: init");
-        if (createDirs()) {
-            LogUtils.e("ERROR: create directories failed.");
-        }
+
+        touchDirs();
         loadSettings();
-        if (!loadTelList()) {
+        if (loadTelList()) {
+            //#####@: todo: check if picture path already exists
+            //should read from preferences to check if picture path exists
+            //if (mCurrentCallIndex)
+            //    genPicturePathForTelList(fileName);
+        }
+        else {
             MultiDialClient.fetchTelListFile();
         }
 
-        // ##@: test
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                SFTPManager sftpMgr = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
-//                sftpMgr.connect();
-//                sftpMgr.exec("mv /home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/M01_000001.txt /home/shandong1/PUB_SPACE/NUM_DATA/RUN_DATA/M01_000001.txt");
-//            }
-//        }.start();
-
-        String fileAbsolute = "/storage/emulated/0/multidialer/pic/M02_000001_200108_000715";
-        FileUtils.delete(fileAbsolute);
+        /*
+        //##@: test
+        new Thread() {
+            @Override
+            public void run() {
+                SFTPManager sftpMgr = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
+                sftpMgr.connect();
+                sftpMgr.exec("mv /home/shandong1/PUB_SPACE/NUM_DATA/WAIT_DATA/M01_000001.txt /home/shandong1/PUB_SPACE/NUM_DATA/RUN_DATA/M01_000001.txt");
+            }
+        }.start();
+        //*/
     }
 
-    private static boolean createDirs() {
+    private static void touchDirs() {
         if (!FileUtils.touchDir(ComDef.DIALER_DIR)) {
-            LogUtils.e("ERROR: create dir \"" + ComDef.DIALER_DIR + "\" failed.");
-            return false;
+            LogUtils.e("ERROR: touch dir \"" + ComDef.DIALER_DIR + "\" failed.");
         }
         if (!FileUtils.touchDir(ComDef.DIALER_NUM_DIR)) {
-            LogUtils.e("ERROR: create dir \"" + ComDef.DIALER_NUM_DIR + "\" failed.");
-            return false;
+            LogUtils.e("ERROR: touch dir \"" + ComDef.DIALER_NUM_DIR + "\" failed.");
         }
         if (!FileUtils.touchDir(ComDef.DIALER_PIC_DIR)) {
-            LogUtils.e("ERROR: create dir \"" + ComDef.DIALER_PIC_DIR + "\" failed.");
-            return false;
+            LogUtils.e("ERROR: touch dir \"" + ComDef.DIALER_PIC_DIR + "\" failed.");
         }
-        return true;
     }
 
     protected static void loadSettings() {
@@ -87,31 +83,31 @@ public class DataLogic extends MultiDialClient {
         mCurrentCallIndex = Settings.readCurrentCallIndex();
     }
 
+    public static void onTelListFileUpdate(String fileName) {
+        setTelListFileName(fileName);
+        if (!loadTelList()) {
+            showProgress("ERROR: onTelListFileUpdate: load tel list failed by name \"" + fileName + "\"");
+        }
+        else {
+            setCurrentCallIndex(0);
+            genPicturePathForTelList(fileName);
+        }
+    }
+
     public static boolean loadTelList() {
-        if (!checkTelListFile()) {
-            showProgress("ERROR: loadTelList: check tel list file failed.");
+        String filePath = getTelListFilePath();
+        if (!FileUtils.isExists(filePath)) {
+            showProgress("ERROR: loadTelList: tel list file not exist by name \"" + filePath + "\"");
             return false;
         }
 
-        String filePath = getTelListFilePath();
         mTelList = FileUtils.readTxtFileLines(filePath);
         if (!checkTelList()) {
             showProgress("ERROR: loadTelList: read tel list from file \"" + filePath + "\" failed.");
             return false;
         }
 
-        if (!genPicturePathForTelList(mTelListFileName)) {
-            showProgress("ERROR: loadTelList: generate picture path for \"" + mTelListFileName + "\" failed.");
-            return false;
-        }
-
-        showProgress("loadTelList: get picture path \"" + mPicturePath + "\"");
-
-        //init call index when load success
-        mCalledNum = 0;
-        mCurrentCallIndex = 0;
-
-        showProgress("loadTelList: size = " + mTelList.size());
+        showProgress("loadTelList: load success, size = " + mTelList.size());
         return true;
     }
 
@@ -120,21 +116,7 @@ public class DataLogic extends MultiDialClient {
         if (mTelList != null) {
             mTelList.clear();
         }
-        setCalledNum(0);
-    }
-
-    private static boolean checkTelListFile() {
-        if (TextUtils.isEmpty(mTelListFileName)) {
-            DataLogic.showProgress("ERROR: TelList file name empty");
-            return false;
-        }
-        String filePath = getTelListFilePath();
-        File f = new File(filePath);
-        if (!f.exists()) {
-            DataLogic.showProgress("ERROR: TelListFile " + filePath + " not exist");
-            return false;
-        }
-        return true;
+        setCurrentCallIndex(0);
     }
 
     private static String getTelListFilePath() {
@@ -146,11 +128,16 @@ public class DataLogic extends MultiDialClient {
         String picPath = ComDef.DIALER_PIC_DIR + "/" + FileUtils.getFileNeatName(telListFileName) + "_" + strDateTime;
         if (FileUtils.touchDir(picPath)) {
             mPicturePath = picPath;
-            showProgress("generate picture path \"" + mPicturePath + "\"");
+            showProgress("genPicturePathForTelList: generate picture path \"" + mPicturePath + "\"");
+
+            //####@: todo: should save picture path for app exit
+            //because we add time on the pic path
+
             return true;
         }
         else {
             mPicturePath = null;
+            showProgress("ERROR: genPicturePathForTelList: touch dir failed for \"" + picPath + "\"");
             return false;
         }
     }
@@ -204,13 +191,6 @@ public class DataLogic extends MultiDialClient {
     public static String getTelListFileName() { return mTelListFileName; }
     public static void setTelListFileName(String value) { mTelListFileName = value; Settings.saveFileListFile(value); }
 
-    public static int getMaxCallNum() {
-        return mMaxCallNum;
-    }
-    public static void setMaxCallNum(int maxCallNum) {
-        mMaxCallNum = maxCallNum;
-    }
-
     private static long getEndCallDelay() {
         return mEndCallDelay;
     }
@@ -238,7 +218,7 @@ public class DataLogic extends MultiDialClient {
     }
 
     public static String getCalledNumInfo() {
-        return "" + getCalledNum();
+        return "" + mCurrentCallIndex;
     }
 
     public static String getFloatingButtonText() {
@@ -251,22 +231,17 @@ public class DataLogic extends MultiDialClient {
             }
             else {
                 String dialInfo = "DIALING "
-                        + (getCurrentCallIndex() + 1) + "/" + getTelListNum() + ": "
+                        + (mCurrentCallIndex + 1) + "/" + getTelListNum() + ": "
                         + getCurrentTelNumber()
-                        + "\n";
-                if (mPaused) {
-                    dialInfo += "已暂停，点击继续";
-                }
-                else {
-                    dialInfo += "拨号中，点击暂停";
-                }
+                        + "\n"
+                        + "点击暂停";
                 return dialInfo;
             }
         }
     }
 
     public static int getFloatingButtonColor() {
-        return mPaused ? Color.GREEN : Color.RED;
+        return Color.RED;
     }
 
     private static int getTelListNum() {
@@ -280,35 +255,22 @@ public class DataLogic extends MultiDialClient {
     }
 
     private static String getCurrentTelNumber() {
-        LogUtils.d("getCurrentTelNumber: mCurrentCallIndex=" + mCurrentCallIndex);
+        return getTelNumber(mCurrentCallIndex);
+    }
+
+    private static String getTelNumber(int index) {
+        LogUtils.d("getTelNumber: index=" + index);
         if (mTelList == null) {
-            LogUtils.e("ERROR: getTelListNum: list null");
+            LogUtils.e("ERROR: getTelNumber: list null");
             return "";
         }
-        else if (mCurrentCallIndex < 0 || mCurrentCallIndex >= mTelList.size()) {
-            LogUtils.e("ERROR: getTelListNum: invalid tel index = " + mCurrentCallIndex);
+        else if (index < 0 || index >= mTelList.size()) {
+            LogUtils.e("ERROR: getTelNumber: invalid tel index = " + index);
             return "";
         }
         else {
-            return mTelList.get(mCurrentCallIndex);
+            return mTelList.get(index);
         }
-    }
-
-    private static int getCalledNum() {
-        return mCalledNum;
-    }
-
-    public static void setCalledNum(int calledNum) {
-        mCalledNum = calledNum;
-    }
-
-    private static int getCurrentCallIndex() {
-        return mCurrentCallIndex;
-    }
-
-    public static void resetCalledIndex() {
-        mCurrentCallIndex = 0;
-        Settings.saveCurrentCallIndex(mCurrentCallIndex);
     }
 
     public static boolean isWorking() {
@@ -317,10 +279,6 @@ public class DataLogic extends MultiDialClient {
 
     public static boolean isDialing() {
         return mDialing;
-    }
-
-    public static boolean isPaused() {
-        return mPaused;
     }
 
     public static void startWorking(Context context) {
@@ -332,23 +290,6 @@ public class DataLogic extends MultiDialClient {
         mWorking = false;
         stopWorkingTimer();
         mDialing = false;
-        mPaused = false;
-    }
-
-    public static void switchPauseOrContinue(Context context) {
-        if (!mWorking) {
-            LogUtils.d("switchPauseOrContinue: NOT Working");
-            return;
-        }
-        if (!mDialing) {
-            LogUtils.d("switchPauseOrContinue: NOT Dialing");
-            return;
-        }
-        showProgress("switchPauseOrContinue: mPaused = " + mPaused + " -> " + !mPaused);
-        mPaused = !mPaused;
-        if (!mPaused) {
-            startLoopCallOnNum(context);
-        }
     }
 
     private static void checkDialing(Context context) {
@@ -388,7 +329,7 @@ public class DataLogic extends MultiDialClient {
         mWorkingTimer.schedule(new TimerTask() {
             public void run() {
                 LogUtils.d("DataLogic: startWorkingTimer: ThreadId = " + android.os.Process.myTid());
-                DataLogic.checkDialing(context);
+                checkDialing(context);
             }
         }, WORKING_TIMER_DELAY, WORKING_TIMER_PERIOD);
     }
@@ -430,23 +371,17 @@ public class DataLogic extends MultiDialClient {
     }
 
     private static void loopCallOnNum(final Context context) {
-        LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex());
-        //LogUtils.d("loopCallOnNum: DataLogic.getCurrentCallIndex()=" + DataLogic.getCurrentCallIndex() + ", ThreadId=" + android.os.Process.myTid());
+        LogUtils.d("loopCallOnNum: mCurrentCallIndex=" + mCurrentCallIndex);
 
-        if (mPaused) {
-            LogUtils.d("loopCallOnNum: Paused");
-            return;
-        }
-
-        String strTel = DataLogic.getCurrentTelNumber();
+        String strTel = getCurrentTelNumber();
         if (!TelUtils.isValidTelNumber(strTel)) {
-            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Invalid Tel Number = \"" + strTel + "\"");
+            showProgress("#" + (mCurrentCallIndex+1) + ": Invalid Tel Number = \"" + strTel + "\"");
             callNextNumber(context);
             return;
         }
 
         if (TelUtils.isCalling(context)) {
-            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Last call not ended, try end it and call again...");
+            showProgress("#" + (mCurrentCallIndex+1) + ": Last call not ended, try end it and call again...");
             TelUtils.endCall(context);
             new Handler().postDelayed(new Runnable() {
                 public void run() {
@@ -458,7 +393,7 @@ public class DataLogic extends MultiDialClient {
 
         try {
             String ret = TelUtils.startCall(context, strTel);
-            showProgress("#" + (DataLogic.getCurrentCallIndex()+1) + ": Start Call, Tel = " + strTel + ", " + ret);
+            showProgress("#" + (mCurrentCallIndex+1) + ": Start Call, Tel = " + strTel + ", " + ret);
 
             new Handler().postDelayed(new Runnable() {
                 public void run() {
@@ -471,7 +406,7 @@ public class DataLogic extends MultiDialClient {
                     String retEndCall = TelUtils.endCall(context);
                     showProgress("End Call: " + retEndCall);
                 }
-            }, DataLogic.getEndCallDelay());
+            }, getEndCallDelay());
 
             new Handler().postDelayed(new Runnable() {
                 public void run() {
@@ -487,7 +422,7 @@ public class DataLogic extends MultiDialClient {
     }
 
     private static long getScreenCaptureDelay() {
-        long delay = DataLogic.getEndCallDelay() - ComDef.CAPTURE_SCREEN_OFFSET;
+        long delay = getEndCallDelay() - ComDef.CAPTURE_SCREEN_OFFSET;
         if (delay < 0) {
             return 0;
         }
@@ -497,17 +432,33 @@ public class DataLogic extends MultiDialClient {
     }
 
     private static long getCallNextDelay() {
-        return DataLogic.getEndCallDelay() + ComDef.CALL_NEXT_OFFSET;
+        return getEndCallDelay() + ComDef.CALL_NEXT_OFFSET;
     }
 
     private static void callNextNumber(final Context context) {
-        if (DataLogic.toNextCall()) {
-            loopCallOnNum(context);
+        if (!mWorking) {
+            LogUtils.d("callNextNumber: Working stopped.");
+            return;
         }
-        else {
-            showProgress("callNextNumber: No next call.");
+
+        mTotalCalledNum++;
+        LogUtils.d("callNextNumber: mTotalCalledNum = " + mTotalCalledNum);
+
+        setCurrentCallIndex(mCurrentCallIndex + 1);
+
+        if (mCurrentCallIndex >= mTelList.size()) {
+            LogUtils.d("callNextNumber: mCurrentCallIndex(" + mCurrentCallIndex + ") up to tel list size(" + mTelList.size() + ")");
             onAllCallFinished();
         }
+        else {
+            loopCallOnNum(context);
+        }
+    }
+
+    private static void setCurrentCallIndex(int index) {
+        LogUtils.d("setCurrentCallIndex: index = " + index);
+        mCurrentCallIndex = index;
+        Settings.saveCurrentCallIndex(mCurrentCallIndex);
     }
 
     private static void onAllCallFinished() {
@@ -533,50 +484,13 @@ public class DataLogic extends MultiDialClient {
     public static void onUploadFinished() {
         MultiDialClient.moveRunDataToEnd(mTelListFileName);
         mDialing = false;
-        mPaused = false;
-    }
-
-    private static boolean toNextCall() {
-        LogUtils.d("toNextCall: mCurrentCallIndex=" + mCurrentCallIndex);
-
-        if (!mWorking) {
-            LogUtils.i("toNextCall: Working stopped.");
-            return false;
-        }
-
-        mCalledNum ++;
-        LogUtils.d("toNextCall: mCalledNum=" + mCalledNum);
-        if (mCalledNum >= mMaxCallNum) {
-            LogUtils.d("toNextCall: mCalledNum(" + mCalledNum + ") up to mMaxCallNum(" + mMaxCallNum + "), exit app...");
-            ThisApp.exitApp();
-            return false;
-        }
-
-        mCurrentCallIndex ++;
-        Settings.saveCurrentCallIndex(mCurrentCallIndex);
-
-        if (mCurrentCallIndex >= mTelList.size()) {
-            LogUtils.d("toNextCall: mCurrentCallIndex(" + mCurrentCallIndex + ") up to tel list size(" + mTelList.size() + ")");
-            return false;
-        }
-
-        return true;
-    }
-
-    public static boolean isCallFinished() {
-        if (mTelList == null) {
-            return true;
-        }
-        else {
-            return mCurrentCallIndex >= mTelList.size();
-        }
     }
 
     protected static void saveCaptureImage(Image img) {
         LogUtils.d("saveCaptureImage: E...");
         String jpgFileName = mPicturePath + "/" + getCurrentTelNumber() + "_" + TimeUtils.getFileTime(false) + ".jpg";
 
-        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName, DataLogic.getJpegQuality());
+        int ret = ImageUtils.saveImage2JPGFile(img, jpgFileName, getJpegQuality());
         if (ret < 0) {
             LogUtils.e("save screen image to " + jpgFileName + " failed with error " + ret);
         } else {
