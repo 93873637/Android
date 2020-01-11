@@ -42,11 +42,11 @@ public class DataLogic extends MultiDialClient {
 
         touchDirs();
         loadSettings();
+
         if (loadTelList()) {
-            //#####@: todo: check if picture path already exists
-            //should read from preferences to check if picture path exists
-            //if (mCurrentCallIndex)
-            //    genPicturePathForTelList(fileName);
+            if (!FileUtils.isExists(mPicturePath)) {
+                genPicturePathForTelList(mTelListFileName);
+            }
         }
         else {
             MultiDialClient.fetchTelListFile();
@@ -81,6 +81,10 @@ public class DataLogic extends MultiDialClient {
         MultiDialClient.loadSettings();
         mTelListFileName = Settings.readFileListFile();
         mCurrentCallIndex = Settings.readCurrentCallIndex();
+        mPicturePath = Settings.readPicturePath();
+        LogUtils.d("loadSettings: mTelListFileName = " + mTelListFileName);
+        LogUtils.d("loadSettings: mCurrentCallIndex = " + mCurrentCallIndex);
+        LogUtils.d("loadSettings: mPicturePath = " + mPicturePath);
     }
 
     public static void onTelListFileUpdate(String fileName) {
@@ -123,23 +127,18 @@ public class DataLogic extends MultiDialClient {
         return ComDef.DIALER_NUM_DIR + "/" + mTelListFileName;
     }
 
-    private static boolean genPicturePathForTelList(String telListFileName) {
+    private static void genPicturePathForTelList(String telListFileName) {
         String strDateTime = new SimpleDateFormat("yyMMdd_HHmmss").format(new Date(System.currentTimeMillis()));
         String picPath = ComDef.DIALER_PIC_DIR + "/" + FileUtils.getFileNeatName(telListFileName) + "_" + strDateTime;
         if (FileUtils.touchDir(picPath)) {
             mPicturePath = picPath;
             showProgress("genPicturePathForTelList: generate picture path \"" + mPicturePath + "\"");
-
-            //####@: todo: should save picture path for app exit
-            //because we add time on the pic path
-
-            return true;
         }
         else {
             mPicturePath = null;
             showProgress("ERROR: genPicturePathForTelList: touch dir failed for \"" + picPath + "\"");
-            return false;
         }
+        Settings.savePicturePath(mPicturePath);
     }
 
     private static boolean checkTelList() {

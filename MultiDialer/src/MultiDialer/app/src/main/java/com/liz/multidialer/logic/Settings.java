@@ -42,6 +42,9 @@ public class Settings {
     public static int readCurrentCallIndex() { return readItemInt(ComDef.KEY_CURRENT_CALLED_INDEX, ComDef.DEFAULT_CURRENT_CALLED_INDEX); }
     public static void saveCurrentCallIndex(int currentCallIndex) { saveItemInt(ComDef.KEY_CURRENT_CALLED_INDEX, currentCallIndex); }
 
+    public static String readPicturePath() { return readItem(ComDef.KEY_PICTURE_PATH, ComDef.DEFAULT_PICTURE_PATH); }
+    public static void savePicturePath(String value) { saveItem(ComDef.KEY_PICTURE_PATH, value); }
+
     //Interface Functions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 

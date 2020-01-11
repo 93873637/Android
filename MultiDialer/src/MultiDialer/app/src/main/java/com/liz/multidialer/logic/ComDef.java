@@ -50,6 +50,7 @@ public class ComDef {
     public static final String KEY_JPEG_QUALITY = "JpegQuality";
     public static final String KEY_TEL_LIST_FILE = "TelListFile";
     public static final String KEY_CURRENT_CALLED_INDEX = "CurrentCalledIndex";
+    public static final String KEY_PICTURE_PATH = "PicturePath";
 
     public static final String DEFAULT_DEVICE_ID = "";
     public static final String DEFAULT_SERVER_ADDRESS = "";
@@ -61,6 +62,7 @@ public class ComDef {
     public static final int DEFAULT_JPEG_QUALITY = 30;  //1~100%
     public static final String DEFAULT_TEL_LIST_FILE = "";
     public static final int DEFAULT_CURRENT_CALLED_INDEX = 0;
+    public static final String DEFAULT_PICTURE_PATH = "";
 
     public static final String UPLOAD_FILE_PATH = "upload_file_path";
 
