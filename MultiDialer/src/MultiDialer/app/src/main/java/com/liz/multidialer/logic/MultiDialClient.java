@@ -88,15 +88,15 @@ public class MultiDialClient {
 
             String fileName = ((ChannelSftp.LsEntry)vf.get(0)).getFilename();
             LogUtils.d("SFTP: get tel list file, name = " + fileName + ", download...");
-            if (!sftpMgr.downloadFile(FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA), fileName,
-                    FileUtils.dirSeparator(ComDef.DIALER_NUM_DIR), fileName)) {
+            if (!sftpMgr.downloadFile(FileUtils.formatDirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA), fileName,
+                    FileUtils.formatDirSeparator(ComDef.DIALER_NUM_DIR), fileName)) {
                 LogUtils.d("SFTP: download file failed.");
                 return;
             }
             LogUtils.d("SFTP: download file success.");
 
-            String srcFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA) + fileName;
-            String tarFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_RUN_DATA) + fileName;
+            String srcFilePath = FileUtils.formatDirSeparator(ComDef.SFTP_PATH_NUM_WAIT_DATA) + fileName;
+            String tarFilePath = FileUtils.formatDirSeparator(ComDef.SFTP_PATH_NUM_RUN_DATA) + fileName;
             LogUtils.d("SFTP: mv file " + srcFilePath + " to " + tarFilePath + "...");
             sftpMgr.mv(srcFilePath, tarFilePath);
 
@@ -129,9 +129,9 @@ public class MultiDialClient {
         } else {
             DataLogic.showProgress("_uploadPicData: SFTP: connect ok");
 
-            String remotePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_PIC_WAIT_DATA);
+            String remotePath = FileUtils.formatDirSeparator(ComDef.SFTP_PATH_PIC_WAIT_DATA);
             String remoteFileName = fileName;
-            String localPath = FileUtils.dirSeparator(ComDef.DIALER_PIC_DIR);
+            String localPath = FileUtils.formatDirSeparator(ComDef.DIALER_PIC_DIR);
             String localFileName = fileName;
 
             DataLogic.showProgress("_uploadPicData: SFTP: upload file " + fileName + " to " + remotePath + "...");
@@ -179,8 +179,8 @@ public class MultiDialClient {
             DataLogic.showProgress("_moveRunDataToEnd: SFTP: connect failed.");
         } else {
             DataLogic.showProgress("_moveRunDataToEnd: SFTP: connect ok");
-            String srcFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_RUN_DATA) + fileName;
-            String tarFilePath = FileUtils.dirSeparator(ComDef.SFTP_PATH_NUM_END_DATA) + fileName;
+            String srcFilePath = FileUtils.formatDirSeparator(ComDef.SFTP_PATH_NUM_RUN_DATA) + fileName;
+            String tarFilePath = FileUtils.formatDirSeparator(ComDef.SFTP_PATH_NUM_END_DATA) + fileName;
             DataLogic.showProgress("_moveRunDataToEnd: SFTP: mv file " + srcFilePath + " to " + tarFilePath + "...");
             sftpMgr.mv(srcFilePath, tarFilePath);
             sftpMgr.disconnect();

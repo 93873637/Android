@@ -132,12 +132,12 @@ public class FileUtils {
         return true;
     }
 
-    public static String dirSeparator(String dir) {
-        if (dir.endsWith("/")) {
+    public static String formatDirSeparator(String dir) {
+        if (dir.endsWith(File.separator)) {
             return dir;
         }
         else {
-            return dir + "/";
+            return dir + File.separator;
         }
     }
 
@@ -275,7 +275,7 @@ public class FileUtils {
         String sizeString = "";
         DecimalFormat df = new DecimalFormat("#.0");
         if (fileSize < 0) {
-            LogUtils.w("formatFileSize: wrong size " + fileSize);
+            System.out.println("WARNING: formatFileSize: wrong size " + fileSize);
         }
         else if (fileSize == 0) {
             sizeString = "0 B";
@@ -438,8 +438,8 @@ public class FileUtils {
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.t").equals("t"));
         AssertUtils.Assert(getFileExtension("/home/liz/aaa").equals(""));
 
-        AssertUtils.Assert(dirSeparator("/home/liz/aaa").equals("/home/liz/aaa/"));
-        AssertUtils.Assert(dirSeparator("/home/liz/aaa/").equals("/home/liz/aaa/"));
+        AssertUtils.Assert(formatDirSeparator("/home/liz/aaa").equals("/home/liz/aaa" + File.separator));
+        AssertUtils.Assert(formatDirSeparator("/home/liz/aaa" + File.separator).equals("/home/liz/aaa" + File.separator));
 
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix

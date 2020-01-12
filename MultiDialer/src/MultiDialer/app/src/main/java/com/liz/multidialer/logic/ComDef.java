@@ -19,7 +19,7 @@ public class ComDef {
     public static final boolean DEBUG = false;
 
     //public static final String TEL_LIST_FILE_PATH = "/sdcard/tellist.txt";
-    public static final String TEL_LIST_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + "/tellist.txt";
+    //public static final String TEL_LIST_FILE_PATH = Environment.getExternalStorageDirectory().getPath() + "/tellist.txt";
 
     public static final long DEFAULT_END_CALL_DELAY = 3000L;  //挂断电话延迟时间(ms)
     public static final long CAPTURE_SCREEN_OFFSET = 500L;  //截屏延迟时间(ms) = 挂断电话延迟时间 - OFFSET
@@ -38,6 +38,7 @@ public class ComDef {
     public static final String DIALER_DIR = Environment.getExternalStorageDirectory().getPath() + "/multidialer";
     public static final String DIALER_NUM_DIR = DIALER_DIR + "/num";
     public static final String DIALER_PIC_DIR = DIALER_DIR + "/pic";
+    public static final String DIALER_LOG_DIR = DIALER_DIR + "/log";
 
     public static final String MULTIDIALER_SHARED_PREFERENCES = "MultiDialerSharedPreferences";
     public static final String KEY_DEVICE_ID = "DeviceId";

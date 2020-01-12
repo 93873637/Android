@@ -179,7 +179,7 @@ public class LogUtils {
 	private static final long DEFAULT_MAX_LOG_FILE_SIZE = 2*1024*1024;  //unit by bytes
 
 	private static boolean mSaveToFile = false;
-	private static String mLogDir = "";  //NOTE: end with "/"
+	private static String mLogDir = "";
 	private static String mLogFileName = "";
 	private static int mMaxLogFileNum = DEFAULT_MAX_LOG_FILE_NUM;
 	private static long mMaxLogFileSize = DEFAULT_MAX_LOG_FILE_SIZE;
@@ -190,7 +190,7 @@ public class LogUtils {
 	}
 
 	public static void setLogDir(String dir) {
-		mLogDir = dir;
+		mLogDir = FileUtils.formatDirSeparator(dir);
 	}
 
 	public static void setMaxLogFileNum(int maxNum) {
@@ -247,17 +247,16 @@ public class LogUtils {
 			createLogFile();
 		}
 
+		//get and check log file
 		String logFilePath = getLogFilePath();
-
-		//01-04 11:37:58.499 E/AndroidRuntime(23013): FATAL EXCEPTION: Thread-12
-		String logInfo = TimeUtils.getLogTime() + " " + type + "/" + tag + ": " + msg + "\n";
-
-		//check if current log file size exceed max
 		if (FileUtils.getFileSize(logFilePath) >= mMaxLogFileSize) {
 			removeLogFile();
 			createLogFile();
 			logFilePath = getLogFilePath();
 		}
+
+		//01-04 11:37:58.499 E/AndroidRuntime(23013): FATAL EXCEPTION: Thread-12
+		String logInfo = TimeUtils.getLogTime() + " " + type + "/" + tag + ": " + msg + "\n";
 
 		FileOutputStream fos;
 		BufferedWriter bw = null;

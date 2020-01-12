@@ -85,13 +85,14 @@ public class FloatingButtonService extends Service {
         }
     }
 
-    public static void showFloatingButton(boolean show) {
+    public static void showFloatingButton(boolean show, String text) {
         if (mFloatingButtonService == null) {
             return;
         }
         Message msg = Message.obtain();
         msg.what = show ? MSG_CODE_SHOW_FLOATING_BUTTON : MSG_CODE_HIDE_FLOATING_BUTTON;
         Bundle b = new Bundle();
+        b.putString(MSG_KEY_BUTTON_TEXT, text);
         msg.setData(b);
         try {
             sMessenger.send(msg);
@@ -147,7 +148,9 @@ public class FloatingButtonService extends Service {
             switch (msg.what) {
                 case MSG_CODE_SHOW_FLOATING_BUTTON:
                     if (mFloatingButtonService != null) {
-                        mFloatingButtonService.showFloatingWindow();
+                        Bundle b = msg.getData();
+                        String textInfo = b.getString(MSG_KEY_BUTTON_TEXT);
+                        mFloatingButtonService.showFloatingWindow(textInfo);
                     }
                     break;
                 case MSG_CODE_HIDE_FLOATING_BUTTON:
@@ -220,7 +223,7 @@ public class FloatingButtonService extends Service {
 //        return super.onStartCommand(intent, flags, startId);
 //    }
 
-    private void showFloatingWindow() {
+    private void showFloatingWindow(String textInfo) {
         if (!Settings.canDrawOverlays(this)) {
             LogUtils.e("ERROR: FloatingButtonService: showFloatingWindow: can't draw overlays");
             return;
@@ -233,6 +236,7 @@ public class FloatingButtonService extends Service {
 
         //mWindowManager.addView(mFloatButton, mLayoutParams);
         mFloatButton.setVisibility(View.VISIBLE);
+        mFloatButton.setText(textInfo);
     }
 
     private void hideFloatingWindow() {

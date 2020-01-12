@@ -197,6 +197,8 @@ public class DataLogic extends MultiDialClient {
         mEndCallDelay = endCallDelay;
     }
 
+    /*
+    //since we got tellist from network, this is unnecessary
     public static String getTelListInfo() {
         String telListInfo;
         if (mTelList == null) {
@@ -211,6 +213,7 @@ public class DataLogic extends MultiDialClient {
         }
         return telListInfo;
     }
+    //*/
 
     public static String getTelListNumInfo() {
         return "" + getTelListNum();
@@ -222,18 +225,18 @@ public class DataLogic extends MultiDialClient {
 
     public static String getFloatingButtonText() {
         if (!mWorking) {
-            return "NOT WORKING";
+            return "NOT WORKING\n点击隐藏";
         }
         else {
             if (!mDialing) {
-                return "NOT DIALING";
+                return "NOT DIALING\n点击停止";
             }
             else {
                 String dialInfo = "DIALING "
                         + (mCurrentCallIndex + 1) + "/" + getTelListNum() + ": "
                         + getCurrentTelNumber()
                         + "\n"
-                        + "点击暂停";
+                        + "点击停止";
                 return dialInfo;
             }
         }
@@ -435,22 +438,21 @@ public class DataLogic extends MultiDialClient {
     }
 
     private static void callNextNumber(final Context context) {
-        if (!mWorking) {
-            LogUtils.d("callNextNumber: Working stopped.");
-            return;
-        }
-
         mTotalCalledNum++;
         LogUtils.d("callNextNumber: mTotalCalledNum = " + mTotalCalledNum);
-
-        setCurrentCallIndex(mCurrentCallIndex + 1);
-
+        mCurrentCallIndex ++;
+        setCurrentCallIndex(mCurrentCallIndex);
         if (mCurrentCallIndex >= mTelList.size()) {
             LogUtils.d("callNextNumber: mCurrentCallIndex(" + mCurrentCallIndex + ") up to tel list size(" + mTelList.size() + ")");
             onAllCallFinished();
         }
         else {
-            loopCallOnNum(context);
+            if (mWorking) {
+                loopCallOnNum(context);
+            }
+            else {
+                LogUtils.i("callNextNumber: Working stopped, no next call");
+            }
         }
     }
 

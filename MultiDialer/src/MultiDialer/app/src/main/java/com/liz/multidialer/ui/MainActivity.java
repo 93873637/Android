@@ -140,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
         FloatingButtonService.setFloatingButtonCallback(new FloatingButtonService.FloatingButtonCallback() {
             @Override
             public void onFloatButtonClicked() {
-                LogUtils.d("Floating Button Clicked...");
-                DataLogic.stopWorking();
+                showProgressInfo("Floating Button Clicked to Stop Call...");
+                onStopCall();
             }
         });
 
@@ -170,12 +170,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void onStartCall() {
         DataLogic.startWorking(MainActivity.this);
-        FloatingButtonService.showFloatingButton(true);
+        FloatingButtonService.showFloatingButton(true, DataLogic.getFloatingButtonText());
     }
 
     private void onStopCall() {
         DataLogic.stopWorking();
-        FloatingButtonService.showFloatingButton(false);
+        FloatingButtonService.showFloatingButton(false, DataLogic.getFloatingButtonText());
     }
 
     private void startUITimer() {

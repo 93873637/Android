@@ -35,7 +35,7 @@ public class ThisApp extends Application {
         mAppVersionShow = "";
 
         LogUtils.setTag(ComDef.APP_NAME);
-        LogUtils.setLogDir(ComDef.DIALER_DIR + "/");
+        LogUtils.setLogDir(ComDef.DIALER_LOG_DIR);
         LogUtils.setSaveToFile(true);
 
         LogUtils.d("ThisApp: onCreate, pid = " + android.os.Process.myPid());
