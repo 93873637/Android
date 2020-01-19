@@ -23,6 +23,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
     private EditText mEditNetworkType;
     private EditText mEditServerHome;
     private EditText mEditJpegQuality;
+    private EditText mEditHeartbeatTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
         mEditNetworkType = findViewById(R.id.edit_network_type);
         mEditServerHome = findViewById(R.id.edit_server_home);
         mEditJpegQuality = findViewById(R.id.edit_jpeg_quality);
+        mEditHeartbeatTimer = findViewById(R.id.edit_heartbeat_timer);
 
         mEditDeviceId.setText(DataLogic.getDeviceId());
         mEditServerAddress.setText(DataLogic.getServerAddress());
@@ -48,6 +50,7 @@ public class DeviceConfigActivity extends AppCompatActivity {
         mEditNetworkType.setText(DataLogic.getNetworkType());
         mEditServerHome.setText(DataLogic.getServerHome());
         mEditJpegQuality.setText(DataLogic.getJpegQualityInfo());
+        mEditHeartbeatTimer.setText(DataLogic.getHeartbeatTimerInfo());
 
         findViewById(R.id.btn_update_config).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,5 +78,6 @@ public class DeviceConfigActivity extends AppCompatActivity {
         DataLogic.setNetworkType(mEditNetworkType.getText().toString());
         DataLogic.setServerHome(mEditServerHome.getText().toString());
         DataLogic.setJpegQuality(Integer.parseInt(mEditJpegQuality.getText().toString()));
+        DataLogic.setHeartbeatTimer(Long.parseLong(mEditHeartbeatTimer.getText().toString())*1000);
     }
 }

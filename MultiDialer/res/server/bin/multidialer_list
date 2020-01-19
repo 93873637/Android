@@ -24,6 +24,10 @@ echo '[ NUM_DATA/END_DATA ]'
 ls -l ${MULTIDIALER_NUM_DATA}/END_DATA
 
 echo ''
+echo '[ DEV_RES ]'
+ls -l ${MULTIDIALER_NUM_DATA}/DEV_RES
+
+echo ''
 echo '[ PIC_DATA/WAIT_DATA ]'
 ls -l ${MULTIDIALER_PIC_DATA}/WAIT_DATA
 echo '---------------------------------------------'

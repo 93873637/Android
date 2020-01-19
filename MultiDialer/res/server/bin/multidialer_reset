@@ -15,21 +15,5 @@ rm -rf PUB_SPACE
 echo 'restore original space...'
 cp -rf PUB_SPACE.org PUB_SPACE
 
-echo '---------------------------------------------'
-echo '[ NUM_DATA/WAIT_DATA ]'
-ls -l ${MULTIDIALER_NUM_DATA}/WAIT_DATA
-
-echo ''
-echo '[ NUM_DATA/RUN_DATA ]'
-ls -l ${MULTIDIALER_NUM_DATA}/RUN_DATA
-
-echo ''
-echo '[ NUM_DATA/END_DATA ]'
-ls -l ${MULTIDIALER_NUM_DATA}/END_DATA
-
-echo ''
-echo '[ PIC_DATA/WAIT_DATA ]'
-ls -l ${MULTIDIALER_PIC_DATA}/WAIT_DATA
-echo '---------------------------------------------'
-
-echo ''
+echo 'list current space...'
+multidialer_list

@@ -45,6 +45,9 @@ public class Settings {
     public static String readPicturePath() { return readItem(ComDef.KEY_PICTURE_PATH, ComDef.DEFAULT_PICTURE_PATH); }
     public static void savePicturePath(String value) { saveItem(ComDef.KEY_PICTURE_PATH, value); }
 
+    public static long readHeartbeatTimer() { return readItemLong(ComDef.KEY_HEARTBEAT_TIMER, ComDef.DEFAULT_HEARTBEAT_TIMER_PERIOD); }
+    public static void saveHeartbeatTimer(long value) { saveItemLong(ComDef.KEY_HEARTBEAT_TIMER, value); }
+
     //Interface Functions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,6 +60,18 @@ public class Settings {
         SharedPreferences sharedPreferences= ThisApp.getAppContext().getSharedPreferences(ComDef.MULTIDIALER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(key, value);
+        editor.apply();
+    }
+
+    private static long readItemLong(String key, long defaultValue) {
+        SharedPreferences sharedPreferences = ThisApp.getAppContext().getSharedPreferences(ComDef.MULTIDIALER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        return sharedPreferences.getLong(key, defaultValue);
+    }
+
+    private static void saveItemLong(String key, long value) {
+        SharedPreferences sharedPreferences= ThisApp.getAppContext().getSharedPreferences(ComDef.MULTIDIALER_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong(key, value);
         editor.apply();
     }
 

@@ -88,14 +88,10 @@ public class SFTPManager {
         FileInputStream in = null;
         try {
             createDir(remotePath);
-            System.out.println(remotePath);
             File file = new File(localPath + localFileName);
             in = new FileInputStream(file);
-            System.out.println(in);
             SFTPMonitor monitor = new SFTPMonitor(file.length());
             sftp.put(in, file.getName(), monitor);
-            //sftp.put(in, remoteFileName);
-            System.out.println(sftp);
             return true;
         } catch (FileNotFoundException e) {
             LogUtils.e("uploadFile with FileNotFoundException, ex = " + e.toString());

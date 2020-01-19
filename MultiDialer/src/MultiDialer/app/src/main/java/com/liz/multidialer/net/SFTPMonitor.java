@@ -10,14 +10,17 @@ import java.util.concurrent.TimeUnit;
 
 public class SFTPMonitor implements SftpProgressMonitor, Runnable {
 
-    private long maxCount = 0;// 文件的总大小
-    private long startTime = 0L;
-    private long uploaded = 0;
-    private boolean isScheduled = false;
-    private ScheduledExecutorService executorService;
+    private static final long SCHEDULE_DELAY = 1;  //unit by seconds
+    private static final long SCHEDULE_PERIOD = 5;  //unit by seconds
 
-    public SFTPMonitor(long maxCount) {
-        this.maxCount = maxCount;
+    private long mTotal;
+    private long mStartTime = 0L;
+    private long mUploaded = 0;
+    private boolean mIsScheduled = false;
+    private ScheduledExecutorService mExecutorService;
+
+    SFTPMonitor(long total) {
+        this.mTotal = total;
     }
 
     @Override
@@ -25,12 +28,12 @@ public class SFTPMonitor implements SftpProgressMonitor, Runnable {
         NumberFormat format = NumberFormat.getPercentInstance();
         format.setMaximumFractionDigits(2);
         format.setMinimumFractionDigits(2);
-        String value = format.format((uploaded / (double) maxCount));
-        LogUtils.d("已传输：" + uploaded / 1024 + "KB, 传输进度：" + value);
-        if (uploaded == maxCount) {
+        String value = format.format((mUploaded / (double) mTotal));
+        LogUtils.d("已传输：" + mUploaded / 1024 + "KB, 传输进度：" + value);
+        if (mUploaded == mTotal) {
             stop();
             long endTime = System.currentTimeMillis();
-            LogUtils.d("传输完成！用时：" + (endTime - startTime) / 1000 + "s");
+            LogUtils.d("传输完成！用时：" + (endTime - mStartTime) / 1000 + "s");
         }
     }
 
@@ -39,11 +42,11 @@ public class SFTPMonitor implements SftpProgressMonitor, Runnable {
      */
     @Override
     public boolean count(long count) {
-        if (!isScheduled) {
+        //LogUtils.d("本次上传大小：" + count / 1024 + "KB,");
+        if (!mIsScheduled) {
             createTread();
         }
-        uploaded += count;
-        //LogUtils.d("本次上传大小：" + count / 1024 + "KB,");
+        mUploaded += count;
         if (count > 0) {
             return true;
         }
@@ -63,28 +66,27 @@ public class SFTPMonitor implements SftpProgressMonitor, Runnable {
      */
     @Override
     public void init(int op, String src, String dest, long max) {
-        LogUtils.d("开始上传文件：" + src + "至远程：" + dest + "文件总大小:" + maxCount
-                / 1024 + "KB");
-        startTime = System.currentTimeMillis();
+        LogUtils.d("开始上传文件：" + src + "至远程：" + dest + "文件总大小:" + (mTotal/1024) + "KB");
+        mStartTime = System.currentTimeMillis();
     }
 
     /**
      * 创建一个线程每隔一定时间，输出一下上传进度
      */
     private void createTread() {
-        executorService = Executors.newSingleThreadScheduledExecutor();
+        mExecutorService = Executors.newSingleThreadScheduledExecutor();
         // 1秒钟后开始执行，每2杪钟执行一次
-        executorService.scheduleWithFixedDelay(this, 1, 2, TimeUnit.SECONDS);
-        isScheduled = true;
+        mExecutorService.scheduleWithFixedDelay(this, SCHEDULE_DELAY, SCHEDULE_PERIOD, TimeUnit.SECONDS);
+        mIsScheduled = true;
     }
 
     /**
      * 停止方法
      */
     private void stop() {
-        boolean isShutdown = executorService.isShutdown();
+        boolean isShutdown = mExecutorService.isShutdown();
         if (!isShutdown) {
-            executorService.shutdown();
+            mExecutorService.shutdown();
         }
     }
 }

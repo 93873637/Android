@@ -2,6 +2,7 @@ package com.liz.androidutils;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -11,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +27,9 @@ import org.apache.commons.io.IOUtils;
 /**
  * FileUtils:
  * Created by liz on 2019/1/14.
+ *
+ * NOTE: don't using LogUtils, since LogUtils has function which called this file
+ * or you will get recursive error, lead to stack overflow
  */
 
 @SuppressWarnings("unused, WeakerAccess")
@@ -312,12 +317,12 @@ public class FileUtils {
     public static ArrayList<String> readTxtFileLines(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
-            System.out.println("readTxtFileLines: file \"" + filePath + "\" not exists.");
+            System.out.println("ERROR: readTxtFileLines: file \"" + filePath + "\" not exists.");
             return null;
         }
 
         if (!file.isFile()) {
-            System.out.println("readTxtFileLines: file \"" + filePath + "\" is NOT a file.");
+            System.out.println("ERROR: readTxtFileLines: file \"" + filePath + "\" is NOT a file.");
             return null;
         }
 
@@ -333,12 +338,40 @@ public class FileUtils {
             inputStream.close();
             return lineList;
         } catch (java.io.FileNotFoundException e) {
-            System.out.println("readTxtFileLines: FileNotFoundException of file \"" + filePath + "\".");
+            System.out.println("ERROR: readTxtFileLines: FileNotFoundException of file \"" + filePath + "\".");
             return null;
         } catch (IOException e) {
-            System.out.println("readTxtFileLines: read exception of file \"" + filePath + "\", ex=" + e.toString());
+            System.out.println("ERROR: readTxtFileLines: read exception of file \"" + filePath + "\", ex=" + e.toString());
             return null;
         }
+    }
+
+    public static boolean appendTxtFile(@NonNull String fileAbsolute, @NonNull String content)
+    {
+        try {
+            File file = new File(fileAbsolute);
+            if (!file.exists()) {
+                if (!file.createNewFile()) {
+                    System.out.println("ERROR: appendTxtFile: FileNotFoundException of file \"" + fileAbsolute + "\".");
+                    return false;
+                }
+            }
+
+            if (!file.isFile()) {
+                System.out.println("ERROR: appendTxtFile: file \"" + fileAbsolute + "\" is NOT a file!");
+                return false;
+            }
+
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+            raf.seek(file.length());
+            raf.write(content.getBytes());
+            raf.close();
+        } catch (Exception e) {
+            System.out.println("ERROR: appendTxtFile: exception = " + e.toString());
+            return false;
+        }
+
+        return true;
     }
 
     public static boolean delete(String fileAbsolute) {
@@ -434,6 +467,12 @@ public class FileUtils {
     // Test Functions
 
     public static void main(String[] args) {
+
+        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "aaa\n"));
+        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "bbb\n"));
+
+        /*
+        //assert true
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.txt").equals("txt"));
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.t").equals("t"));
         AssertUtils.Assert(getFileExtension("/home/liz/aaa").equals(""));
@@ -489,6 +528,7 @@ public class FileUtils {
             System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
         }
 
+
         assert false;
         //String path1="D:\\Temp\\whatsai.zip";
         //String path2="D:\\Temp\\whatsai_tmp.zip";
@@ -503,5 +543,6 @@ public class FileUtils {
 //        String path1="D:\\Temp\\test2.jpg";
 //        String path2="D:\\Temp\\test3.jpg";
         //mv(path2, path1);
+        //*/
     }
 }

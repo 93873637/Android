@@ -22,6 +22,7 @@ public class MultiDialClient {
     private static String mNetworkType = ComDef.DEFAULT_NETWORK_TYPE;
     private static String mServerHome;
     private static int mJpegQuality;
+    private static long mHeartbeatTimer;
 
     protected static void loadSettings() {
         mDeviceId = Settings.readDeviceId();
@@ -32,6 +33,7 @@ public class MultiDialClient {
         mNetworkType = Settings.readNetworkType();
         mServerHome = Settings.readServerHome();
         mJpegQuality = Settings.readJpegQuality();
+        mHeartbeatTimer = Settings.readHeartbeatTimer();
     }
 
     private static String getListFileString() {
@@ -105,6 +107,46 @@ public class MultiDialClient {
         }
     }
 
+    public static void uploadHeartBeatFile(final String fileName) {
+        new Thread() {
+            @Override
+            public void run() {
+                _uploadHeartBeatFile(fileName);
+            }
+        }.start();
+    }
+
+    private static void _uploadHeartBeatFile(String fileName) {
+        LogUtils.d("_uploadHeartBeatFile: fileName = " + fileName);
+        if (TextUtils.isEmpty(fileName)) {
+            LogUtils.e("ERROR: _uploadHeartBeatFile: no file name to upload");
+            return;
+        }
+
+        SFTPManager sftpMgr = new SFTPManager(getServerAddress(), getServerPort(), getUserName(), getPassword());
+        DataLogic.showProgress("_uploadHeartBeatFile: SFTP: connect " + getServerAddress() + ":" + getServerPort() + "...");
+        if (!sftpMgr.connect()) {
+            DataLogic.showProgress("_uploadHeartBeatFile: SFTP: connect failed.");
+        } else {
+            DataLogic.showProgress("_uploadHeartBeatFile: SFTP: connect ok");
+
+            String remotePath = FileUtils.formatDirSeparator(ComDef.SFTP_PATH_HEARTBEAT);
+            String remoteFileName = fileName;
+            String localPath = FileUtils.formatDirSeparator(ComDef.DIALER_DIR);
+            String localFileName = fileName;
+
+            DataLogic.showProgress("_uploadHeartBeatFile: SFTP: upload file " + fileName + " to " + remotePath + "...");
+            if (!sftpMgr.uploadFile(remotePath, remoteFileName, localPath, localFileName)) {
+                LogUtils.e("ERROR: _uploadHeartBeatFile: upload failed.");
+            }
+            else {
+                LogUtils.d("_uploadHeartBeatFile: upload success");
+            }
+
+            sftpMgr.disconnect();
+        }
+    }
+
     // NOTE: network operation can't run on main thread
     public static void uploadPicData(final String fileName, final String fileNameDone) {
         new Thread() {
@@ -136,7 +178,8 @@ public class MultiDialClient {
 
             DataLogic.showProgress("_uploadPicData: SFTP: upload file " + fileName + " to " + remotePath + "...");
             if (!sftpMgr.uploadFile(remotePath, remoteFileName, localPath, localFileName)) {
-                LogUtils.e("ERROR: upload failed.");
+                LogUtils.e("ERROR: _uploadPicData: upload failed.");
+                DataLogic.addDaemonTask(fileName, fileNameDone);
             }
             else {
                 LogUtils.d("_uploadPicData: upload success");
@@ -210,6 +253,18 @@ public class MultiDialClient {
     public static void setServerHome(String value) { mServerHome = value; Settings.saveServerHome(value); }
 
     public static int getJpegQuality() { return mJpegQuality; }
-    public static String getJpegQualityInfo() { return mJpegQuality + ""; }
+    public static String getJpegQualityInfo() { return "" + mJpegQuality; }
     public static void setJpegQuality(int value) { mJpegQuality = value; Settings.saveJpegQuality(value); }
+
+    public static long getHeartbeatTimer() { return mHeartbeatTimer; }
+    public static String getHeartbeatTimerInfo() { return "" + mHeartbeatTimer/1000; }
+    public static void setHeartbeatTimer(long value) {
+        if (value >= ComDef.HEARTBEAT_TIMER_MIN) {
+            if (value != mHeartbeatTimer) {
+                mHeartbeatTimer = value;
+                Settings.saveHeartbeatTimer(value);
+                DataLogic.onHeartbeatTimerUpdated();
+            }
+        }
+    }
 }

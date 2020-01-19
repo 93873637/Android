@@ -17,6 +17,7 @@ import com.liz.androidutils.ZipUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,8 +50,11 @@ public class DataLogic extends MultiDialClient {
             }
         }
         else {
+            setCurrentCallIndex(0);  //reset call index when failed
             MultiDialClient.fetchTelListFile();
         }
+
+        startHeartbeatTimer();
 
         /*
         //##@: test
@@ -64,6 +68,42 @@ public class DataLogic extends MultiDialClient {
         }.start();
         //*/
     }
+
+    public static void release() {
+        stopHeartbeatTimer();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Heartbeat Timer
+
+    private static Timer mHeartbeatTimer = null;
+
+    private static void startHeartbeatTimer() {
+        LogUtils.d("startHeartbeatTimer: time = " + (MultiDialClient.getHeartbeatTimer()/1000) + "s");
+        mHeartbeatTimer = new Timer();
+        mHeartbeatTimer.schedule(new TimerTask() {
+            public void run() {
+                DataLogic.onHeartbeatTimer();
+            }
+        }, ComDef.HEARTBEAT_TIMER_DELAY, MultiDialClient.getHeartbeatTimer());
+    }
+
+    private static void stopHeartbeatTimer() {
+        LogUtils.d("stopHeartbeatTimer");
+        if (mHeartbeatTimer != null) {
+            mHeartbeatTimer.cancel();
+            mHeartbeatTimer = null;
+        }
+    }
+
+    public static void onHeartbeatTimerUpdated() {
+        LogUtils.d("onHeartbeatTimerUpdated: time = " + (MultiDialClient.getHeartbeatTimer()/1000) + "s");
+        stopHeartbeatTimer();
+        startHeartbeatTimer();
+    }
+
+    // Heartbeat Timer
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     private static void touchDirs() {
         if (!FileUtils.touchDir(ComDef.DIALER_DIR)) {
@@ -139,6 +179,10 @@ public class DataLogic extends MultiDialClient {
             showProgress("ERROR: genPicturePathForTelList: touch dir failed for \"" + picPath + "\"");
         }
         Settings.savePicturePath(mPicturePath);
+    }
+
+    private static int getTelListSize() {
+        return (mTelList == null) ? 0 : mTelList.size();
     }
 
     private static boolean checkTelList() {
@@ -330,7 +374,7 @@ public class DataLogic extends MultiDialClient {
         mWorkingTimer = new Timer();
         mWorkingTimer.schedule(new TimerTask() {
             public void run() {
-                LogUtils.d("DataLogic: startWorkingTimer: ThreadId = " + android.os.Process.myTid());
+                //LogUtils.d("DataLogic: startWorkingTimer: ThreadId = " + android.os.Process.myTid());
                 checkDialing(context);
             }
         }, WORKING_TIMER_DELAY, WORKING_TIMER_PERIOD);
@@ -346,6 +390,38 @@ public class DataLogic extends MultiDialClient {
 
     // Daemon Timer
     ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    //
+    // 1、设备心跳上传（以便服务端判别手机设备的运行状态）：
+    //（1）上传目录（可配置）：/home/shandong1/PUB_SPACE/NUM_DATA/DEV_RES
+    //（2）上传文件名：设备标识.txt，示例：M01.txt
+    //（3）上传文件内容（每个字段中间用英文半角竖线隔开）：
+    //    样式：设备标识|当前时间（格式：yyyymmddhhmiss）|当前运行数据文件名|当前运行进度
+    //    示例：M01|20200115090834|M01_800008.txt|1434/20000
+    //（4）上传频次（可配置）：手机在运行时，每隔5分钟上传一次心跳文件。
+    //
+    public static void onHeartbeatTimer() {
+        if (TextUtils.isEmpty(MultiDialClient.getDeviceId())) {
+            LogUtils.e("ERROR: onHeartbeatTimer: no device id.");
+            return;
+        }
+
+        String content = MultiDialClient.getDeviceId();
+        String strDateTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date(System.currentTimeMillis()));
+        content += "|" + strDateTime;
+        content += "|" + mTelListFileName;
+        content += "|" + mCurrentCallIndex + "/" + getTelListSize();
+        content += "\n";
+
+        String fileName = MultiDialClient.getDeviceId() + ".txt";
+        String filePath = ComDef.DIALER_DIR  + "/" + fileName;
+        if (!FileUtils.appendTxtFile(filePath, content)) {
+            LogUtils.e("ERROR: onHeartbeatTimer: append heartbeat info to file " + filePath + " failed");
+            return;
+        }
+
+        MultiDialClient.uploadHeartBeatFile(fileName);
+    }
 
     private static boolean canDial() {
         if (mTelList == null) {
@@ -498,4 +574,76 @@ public class DataLogic extends MultiDialClient {
             LogUtils.i("screen image saved to " + jpgFileName);
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    // Daemon Task
+
+    private static ArrayList<FileUploadTask> mFileUploadTaskList = new ArrayList<>();
+
+    private static class FileUploadTask {
+        public String fileName;
+        public String fileNameDone;
+
+        FileUploadTask(String fileName, String fileNameDone) {
+            this.fileName = fileName;
+            this.fileNameDone = fileNameDone;
+        }
+    }
+
+    public static void addDaemonTask(String fileName, String fileNameDone) {
+        mFileUploadTaskList.add(new FileUploadTask(fileName, fileNameDone));
+    }
+
+    public static void onDaemonTaskTimer() {
+        LogUtils.d("onDaemonTaskTimer: E, task number " + mFileUploadTaskList.size());
+        if (mFileUploadTaskList == null) {
+            LogUtils.d("onDaemonTaskTimer: Task list null");
+            return;
+        }
+
+        if (mFileUploadTaskList.size() == 0) {
+            LogUtils.d("onDaemonTaskTimer: Task list empty");
+            return;
+        }
+
+        Iterator it = mFileUploadTaskList.iterator();
+        while (it.hasNext()) {
+            FileUploadTask obj = (FileUploadTask) it.next();
+
+            //###@:
+
+            it.remove();
+        }
+
+        LogUtils.d("onDaemonTaskTimer: X, task number = " + mFileUploadTaskList.size());
+    }
+
+    // Daemon Task
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // DaemonTask Timer
+
+    private static Timer mDaemonTaskTimer = null;
+
+    private static void startDaemonTaskTimer() {
+        LogUtils.d("startDaemonTaskTimer: time = " + ComDef.DAEMON_TASK_TIMER_DELAY + "s");
+        mDaemonTaskTimer = new Timer();
+        mDaemonTaskTimer.schedule(new TimerTask() {
+            public void run() {
+                DataLogic.onDaemonTaskTimer();
+            }
+        }, ComDef.DAEMON_TASK_TIMER_DELAY, ComDef.DAEMON_TASK_TIMER_PERIOD);
+    }
+
+    private static void stopDaemonTaskTimer() {
+        LogUtils.d("stopDaemonTaskTimer");
+        if (mDaemonTaskTimer != null) {
+            mDaemonTaskTimer.cancel();
+            mDaemonTaskTimer = null;
+        }
+    }
+
+    // DaemonTask Timer
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 }

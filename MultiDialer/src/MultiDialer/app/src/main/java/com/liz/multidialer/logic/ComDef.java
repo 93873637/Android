@@ -31,8 +31,11 @@ public class ComDef {
     public static final long UI_TIMER_DELAY = 500L;  //unit by ms
     public static final long UI_TIMER_PERIOD = 1000L;  //unit by ms
 
-    public static final long CAPTURE_TIMER_DELAY = 1000L;  //unit by ms
-    public static final long CAPTURE_TIMER_PERIOD = 1000L;  //unit by ms
+    public static final long HEARTBEAT_TIMER_DELAY = 60*1000L;  //unit by ms
+    public static final long HEARTBEAT_TIMER_MIN = 5*1000L;  //unit by ms
+
+    public static final long DAEMON_TASK_TIMER_DELAY = 60*1000L;  //unit by ms
+    public static final long DAEMON_TASK_TIMER_PERIOD = 10*60*1000L;  //unit by ms
 
     //public static final String DIALER_DIR = "/sdcard/multidialer";
     public static final String DIALER_DIR = Environment.getExternalStorageDirectory().getPath() + "/multidialer";
@@ -52,6 +55,7 @@ public class ComDef {
     public static final String KEY_TEL_LIST_FILE = "TelListFile";
     public static final String KEY_CURRENT_CALLED_INDEX = "CurrentCalledIndex";
     public static final String KEY_PICTURE_PATH = "PicturePath";
+    public static final String KEY_HEARTBEAT_TIMER = "HeartbeatTimer";
 
     public static final String DEFAULT_DEVICE_ID = "";
     public static final String DEFAULT_SERVER_ADDRESS = "";
@@ -64,6 +68,7 @@ public class ComDef {
     public static final String DEFAULT_TEL_LIST_FILE = "";
     public static final int DEFAULT_CURRENT_CALLED_INDEX = 0;
     public static final String DEFAULT_PICTURE_PATH = "";
+    public static final long DEFAULT_HEARTBEAT_TIMER_PERIOD = 5*60*1000L;  //unit by ms
 
     public static final String UPLOAD_FILE_PATH = "upload_file_path";
 
@@ -75,6 +80,8 @@ public class ComDef {
     public static final String SFTP_RUN_DATA = "RUN_DATA";
     public static final String SFTP_END_DATA = "END_DATA";
 
+    public static final String SFTP_DEV_RES = "DEV_RES";
+
     public static final String SFTP_PATH_PUB_SPACE = DEFAULT_SERVER_HOME + "/" + SFTP_PUB_SPACE;
 
     public static final String SFTP_PATH_NUM_DATA = SFTP_PATH_PUB_SPACE + "/" + SFTP_NUM_DATA;
@@ -83,6 +90,7 @@ public class ComDef {
     public static final String SFTP_PATH_NUM_WAIT_DATA = SFTP_PATH_NUM_DATA + "/" + SFTP_WAIT_DATA;
     public static final String SFTP_PATH_NUM_RUN_DATA = SFTP_PATH_NUM_DATA + "/" + SFTP_RUN_DATA;
     public static final String SFTP_PATH_NUM_END_DATA = SFTP_PATH_NUM_DATA + "/" + SFTP_END_DATA;
+    public static final String SFTP_PATH_HEARTBEAT = SFTP_PATH_NUM_DATA + "/" + SFTP_DEV_RES;
 
     public static final String SFTP_PATH_PIC_WAIT_DATA = SFTP_PATH_PIC_DATA + "/" + SFTP_WAIT_DATA;
 }
