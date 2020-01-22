@@ -7,8 +7,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
+import java.io.DataOutputStream;
 import java.lang.reflect.Method;
 
 /**
@@ -24,7 +27,7 @@ public class SysUtils {
             PackageManager manager = context.getPackageManager();
             String packageName = context.getPackageName();
             LogUtils.d("packageName=" + packageName);
-            PackageInfo info = manager.getPackageInfo(packageName,0);
+            PackageInfo info = manager.getPackageInfo(packageName, 0);
             ver = info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             LogUtils.e("getPackageInfo exception: " + e.toString());
@@ -112,5 +115,55 @@ public class SysUtils {
         }
 
         return errMsg;
+    }
+
+    public static boolean checkRootExecutable() {
+        Process process = null;
+        DataOutputStream os = null;
+        try {
+            process = Runtime.getRuntime().exec("su");
+            os = new DataOutputStream(process.getOutputStream());
+            os.writeBytes("exit\n");
+            os.flush();
+            int exitValue = process.waitFor();
+            if (exitValue == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            Log.e("SysUtils", "checkRootExecutable exception: " + e.getMessage());
+            return false;
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+                if (process != null) {
+                    process.destroy();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /* Checks if external storage is available for read and write */
+    public static boolean isExternalStorageWritable () {
+        String state = Environment. getExternalStorageState ();
+        if ( Environment . MEDIA_MOUNTED . equals ( state )) {
+            return true ;
+        }
+        return false ;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public static boolean isExternalStorageReadable () {
+        String state = Environment . getExternalStorageState ();
+        if ( Environment . MEDIA_MOUNTED . equals ( state ) ||
+                Environment . MEDIA_MOUNTED_READ_ONLY . equals ( state )) {
+            return true ;
+        }
+        return false ;
     }
 }

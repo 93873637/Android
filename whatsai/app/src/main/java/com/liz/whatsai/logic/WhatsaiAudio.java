@@ -199,7 +199,7 @@ public class WhatsaiAudio {
     }
 
     private File createFile(String fileName) {
-        String filePath = ComDef.WHATSAI_AUDIO_DATA_PATH + "/" + fileName;
+        String filePath = ComDef.WHATSAI_AUDIO_DIR + "/" + fileName;
         File objFile = new File(filePath);
         if (!objFile.exists()) {
             try {

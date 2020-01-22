@@ -35,7 +35,7 @@ public class LJson {
     }
 
     public static String compactJson(@NonNull String jsonStr) {
-        return StrUtils.deleteCharsOutsideQuotes(jsonStr, " \n\t");
+        return StringUtils.deleteCharsOutsideQuotes(jsonStr, " \n\t");
     }
 
     //

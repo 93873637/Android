@@ -33,8 +33,6 @@ public abstract class Node implements Comparable<Node> {
     private Node parent;
     private List<Node> list;
 
-    private long sync_time;  //time for sync to cloud
-
     Node() {
         init();
     }
@@ -52,7 +50,6 @@ public abstract class Node implements Comparable<Node> {
         remind_type = ComDef.REMIND_TYPE_INVALID;
         remind_time = new RemindTime();
         list = new ArrayList<>();
-        sync_time = 0;
     }
 
     protected void setDirty() {
@@ -136,19 +133,6 @@ public abstract class Node implements Comparable<Node> {
 
     public Node getParent() {
         return parent;
-    }
-
-    public long getSyncTime() {
-        return sync_time;
-    }
-
-    public void setSyncTime(long sync_time) {
-        if (this.sync_time == sync_time) {
-            LogUtils.d("Node: setSyncTime: not change");
-            return;
-        }
-        this.sync_time = sync_time;
-        setDirty();
     }
 
     public String getPassword() {
@@ -317,6 +301,10 @@ public abstract class Node implements Comparable<Node> {
 
     public boolean isDir() {
         return (this.getType() & 0x1) == ComDef.NODE_TYPE_DIR;
+    }
+
+    public boolean isEmpty() {
+        return list == null || list.size() == 0;
     }
 
     public static Node createNode(int type) {

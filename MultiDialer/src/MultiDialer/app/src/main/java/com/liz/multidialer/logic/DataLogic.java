@@ -17,7 +17,6 @@ import com.liz.androidutils.ZipUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,6 +54,7 @@ public class DataLogic extends MultiDialClient {
         }
 
         startHeartbeatTimer();
+        startDaemonTaskTimer();
 
         /*
         //##@: test
@@ -71,6 +71,7 @@ public class DataLogic extends MultiDialClient {
 
     public static void release() {
         stopHeartbeatTimer();
+        stopDaemonTaskTimer();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -415,7 +416,7 @@ public class DataLogic extends MultiDialClient {
 
         String fileName = MultiDialClient.getDeviceId() + ".txt";
         String filePath = ComDef.DIALER_DIR  + "/" + fileName;
-        if (!FileUtils.appendTxtFile(filePath, content)) {
+        if (!FileUtils.writeTxtFile(filePath, content)) {
             LogUtils.e("ERROR: onHeartbeatTimer: append heartbeat info to file " + filePath + " failed");
             return;
         }
@@ -606,14 +607,18 @@ public class DataLogic extends MultiDialClient {
             return;
         }
 
+        FileUploadTask task = mFileUploadTaskList.get(0);
+        mFileUploadTaskList.remove(0);
+        MultiDialClient.uploadPicData(task.fileName, task.fileNameDone);
+
+        /*
         Iterator it = mFileUploadTaskList.iterator();
         while (it.hasNext()) {
             FileUploadTask obj = (FileUploadTask) it.next();
-
-            //###@:
-
+            //##@: do something with this object
             it.remove();
         }
+        //*/
 
         LogUtils.d("onDaemonTaskTimer: X, task number = " + mFileUploadTaskList.size());
     }

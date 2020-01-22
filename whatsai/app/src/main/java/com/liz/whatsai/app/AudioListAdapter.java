@@ -55,7 +55,7 @@ public class AudioListAdapter extends BaseAdapter {
     }
 
     private void loadListData() {
-        this.list = FileUtils.getFileList(ComDef.WHATSAI_AUDIO_DATA_PATH, FileUtils.ORDER_BY_DATE_DESC);
+        this.list = FileUtils.getFileList(ComDef.WHATSAI_AUDIO_DIR, FileUtils.ORDER_BY_DATE_DESC);
     }
 
     private String getListInfo() {

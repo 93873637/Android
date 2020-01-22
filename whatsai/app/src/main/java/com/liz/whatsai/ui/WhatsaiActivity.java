@@ -358,7 +358,7 @@ public class WhatsaiActivity extends AppCompatActivity
             //super.onBackPressed();
             if (DataLogic.isRootActive()) {
                 super.onBackPressed(); //exit activity
-                DataLogic.local_save();
+                DataLogic.onLocalSaveTimer();
             }
             else {
                 //not exit, go to upper node

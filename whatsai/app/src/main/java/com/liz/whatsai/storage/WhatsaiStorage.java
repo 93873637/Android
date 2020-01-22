@@ -1,11 +1,14 @@
 package com.liz.whatsai.storage;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.TimeUtils;
 import com.liz.androidutils.ZipUtils;
 import com.liz.whatsai.logic.ComDef;
+import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
 import com.liz.whatsai.logic.Task;
 import com.liz.whatsai.logic.WhatsaiDir;
@@ -27,6 +30,8 @@ public class WhatsaiStorage {
 
     private static Node mRootNode = null;
     private static boolean mDirty = false;
+    private static long mLastSyncTime = 0;
+    private static String mLastSyncFile = "";
 
     public static boolean initStorage() {
         mRootNode = new WhatsaiDir();
@@ -36,18 +41,72 @@ public class WhatsaiStorage {
             return false;
         }
 
-        /*
-        //##@: for test only
-        //StorageJSON.test();
-        mRootNode = loadTestData();
-        local_save();
-        //*/
-
-        //StorageXML.loadData((WhatsaiDir)mRootNode);
         StorageJSON.loadData((WhatsaiDir)mRootNode);
-        startSavingTimer();
+        DataLogic.clearDirty();  //not dirty for load data
+
+        WhatsaiMail.setWhatsaiMailCallback(new WhatsaiMail.WhatsaiMailCallback() {
+            @Override
+            public void onSendMailSuccess(String fileAbsolute) {
+                // remove old file
+                if (!TextUtils.isEmpty(mLastSyncFile)) {
+                    LogUtils.d("WhatsaiStorage: onSendMailSuccess: remove old sync file = " + mLastSyncFile);
+                    FileUtils.removeFile(mLastSyncFile);
+                }
+                mLastSyncTime = System.currentTimeMillis();
+                mLastSyncFile = fileAbsolute;
+                LogUtils.d("WhatsaiStorage: onSendMailSuccess: mLastSyncFile = " + mLastSyncFile + ", mLastSyncTime = " + mLastSyncTime);
+            }
+        });
+
+        startLocalSaveTimer();
+        startCloudSaveTimer();
         return true;
     }
+
+    public static void releaseStorage() {
+        stopLocalSaveTimer();
+        stopCloudSaveTimer();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Local Save Timer
+    private static Timer mLocalSaveTimer = null;
+    private static void startLocalSaveTimer() {
+        mLocalSaveTimer = new Timer();
+        mLocalSaveTimer.schedule(new TimerTask() {
+            public void run() {
+                onLocalSaveTimer();
+            }
+        }, ComDef.LOCAL_SAVE_DELAY, ComDef.LOCAL_SAVE_TIMER);
+    }
+    private static void stopLocalSaveTimer() {
+        if (mLocalSaveTimer != null) {
+            mLocalSaveTimer.cancel();
+            mLocalSaveTimer = null;
+        }
+    }
+    // Local Save Timer
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Cloud Save Timer
+    private static Timer mCloudSaveTimer = null;
+    private static void startCloudSaveTimer() {
+        mCloudSaveTimer = new Timer();
+        mCloudSaveTimer.schedule(new TimerTask() {
+            public void run() {
+                onCloudSaveTimer();
+            }
+        }, ComDef.CLOUD_SAVE_DELAY, ComDef.CLOUD_SAVE_TIMER);
+    }
+    private static void stopCloudSaveTimer() {
+        if (mCloudSaveTimer != null) {
+            mCloudSaveTimer.cancel();
+            mCloudSaveTimer = null;
+        }
+    }
+    // Cloud Save Timer
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
     private static boolean buildDirs() {
         if (!FileUtils.touchDir(ComDef.WHATSAI_HOME)) {
@@ -58,8 +117,12 @@ public class WhatsaiStorage {
             LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_DATA_DIR + " failed.");
             return false;
         }
-        if (!FileUtils.touchDir(ComDef.WHATSAI_AUDIO_DATA_PATH)) {
-            LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_AUDIO_DATA_PATH + " failed.");
+        if (!FileUtils.touchDir(ComDef.WHATSAI_AUDIO_DIR)) {
+            LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_AUDIO_DIR + " failed.");
+            return false;
+        }
+        if (!FileUtils.touchDir(ComDef.WHATSAI_CACHE_DIR)) {
+            LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_CACHE_DIR + " failed.");
             return false;
         }
         return true;
@@ -81,72 +144,122 @@ public class WhatsaiStorage {
         return mDirty;
     }
 
-    private static void startSavingTimer() {
-        new Timer().schedule(new TimerTask() {
-            public void run () {
-                local_save_period();
-                cloud_save_period();
-            }
-        }, ComDef.WHATSAI_SAVING_DELAY, ComDef.WHATSAI_SAVING_TIMER);
-    }
+    public static void onLocalSaveTimer() {
+        LogUtils.d("WhatsaiStorage: onLocalSaveTimer: E...");
 
-    private static void local_save_period() {
-        if (isDirty()) {
-            local_save();
+        if (!isDirty()) {
+            LogUtils.d("WhatsaiStorage: onLocalSaveTimer: data not change.");
+            return;
         }
-        else {
-            LogUtils.v("WhatsaiStorage: list data not change for local save.");
-        }
-    }
 
-    private static void cloud_save_period() {
-        if (cloud_save_required()) {
-            cloud_save(null);
-        } else {
-            LogUtils.d("WhatsaiStorage: not need cloud save.");
+        if (mRootNode.isEmpty()) {
+            LogUtils.d("WhatsaiStorage: onLocalSaveTimer: root node empty");
+            return;
         }
+
+        LogUtils.d("WhatsaiStorage: onLocalSaveTimer: local_save...");
+        local_save();
     }
 
     //
-    //Two Conditions:
-    //1. time up to sync
-    //2. data file changed
+    // Cloud save including:
+    // 1. local save
+    // 2. check modification
+    // 3. upload if modified
     //
-    private static boolean cloud_save_required() {
-        LogUtils.d("WhatsaiStorage: cloud_save_required: sync_time = " +  mRootNode.getSyncTime());
+    // Cloud save must satisfy two conditions:
+    // 1. time is up
+    // 2. data not empty
+    // 3. data changed
+    //
+    private static void onCloudSaveTimer() {
+        if (!isDirty()) {
+            LogUtils.d("WhatsaiStorage: onCloudSaveTimer: data not change.");
+            return;
+        }
+
+        if (mRootNode.isEmpty()) {
+            LogUtils.d("WhatsaiStorage: onCloudSaveTimer: root node empty");
+            return;
+        }
 
         // check if time up to cloud save period
-        long diff = System.currentTimeMillis() - mRootNode.getSyncTime();
-        if (diff < ComDef.CLOUD_SAVE_PERIOD) {
-            LogUtils.d("WhatsaiStorage: cloud_save_required: current diff " + diff
-                    + " not up to cloud save period " + ComDef.CLOUD_SAVE_PERIOD + ", check failed");
-            return false;
+        LogUtils.d("WhatsaiStorage: onCloudSaveTimer: mLastSyncTime = " +  mLastSyncTime);
+        long diff = System.currentTimeMillis() - mLastSyncTime;
+        if (diff < ComDef.CLOUD_SAVE_TIMER) {
+            LogUtils.i("WhatsaiStorage: onCloudSaveTimer: current time diff " + diff
+                    + " not up to cloud save time " + ComDef.CLOUD_SAVE_TIMER);
+            return;
         }
 
-        // anyway, update local save file
-        saveToFile((WhatsaiDir)mRootNode, ComDef.WHATSAI_DATA_FILE_TEMP);
+        // anyway, local save first
+        LogUtils.d("WhatsaiStorage: onCloudSaveTimer: local save...");
+        local_save();
 
-        // check if data file changed
-        try {
-            if (FileUtils.sameFile(ComDef.WHATSAI_DATA_FILE_SYNC, ComDef.WHATSAI_DATA_FILE_TEMP)) {
-                LogUtils.i("WhatsaiStorage: cloud_save_required: data file not changed, check failed");
-                return false;
+        // generate a new zip file
+        String zipFileAbsolute = genCloudSaveFileAbsolute();
+        if (!ZipUtils.zipFileAbsolutes(zipFileAbsolute, ComDef.WHATSAI_DATA_FILE, ComDef.WHATSAI_DATA_DIR)) {
+            LogUtils.e("WhatsaiStorage: onCloudSaveTimer: zip cloud file failed");
+            return;
+        }
+
+        // check if upload file changed
+        if (TextUtils.isEmpty(mLastSyncFile)) {
+            LogUtils.i("WhatsaiStorage: onCloudSaveTimer: last sync file empty");
+        }
+        else {
+            try {
+                if (FileUtils.sameFile(zipFileAbsolute, mLastSyncFile)) {
+                    LogUtils.i("WhatsaiStorage: onCloudSaveTimer: upload file not changed");
+                    return;
+                }
+            } catch (Exception e) {
+                LogUtils.e("WhatsaiStorage: onCloudSaveTimer: compare same file exception: " + e.toString());
+                // think as not same, continue cloud save
             }
-        } catch (Exception e) {
-            LogUtils.e("WhatsaiStorage: cloud_save_required: compare same file exception: " + e.toString());
-            // think as not same
         }
 
         // finally, cloud save required
-        LogUtils.d("WhatsaiStorage: cloud_save_required: check pass");
-        return true;
+        LogUtils.d("WhatsaiStorage: onCloudSaveTimer: upload new cloud file \"" + zipFileAbsolute + "\"...");
+        WhatsaiMail.start(null, zipFileAbsolute);
     }
 
+    //
+    // no check, direct save to cloud
+    //
     public static void local_save() {
         saveToFile((WhatsaiDir)mRootNode, ComDef.WHATSAI_DATA_FILE);
     }
 
+    //
+    // no check, direct save to cloud
+    //
+    public static void cloud_save(Activity activity) {
+        LogUtils.d("WhatsaiStorage: cloud save: E...");
+
+        // local save first
+        local_save();
+
+        //prepare file to upload
+        String zipFileAbsolute = genCloudSaveFileAbsolute();
+        if (!ZipUtils.zipFileAbsolutes(zipFileAbsolute, ComDef.WHATSAI_DATA_FILE, ComDef.WHATSAI_DATA_DIR)) {
+            LogUtils.e("WhatsaiStorage: cloud_save: zip cloud file failed");
+            return;
+        }
+
+        //finally, save file to cloud
+        WhatsaiMail.start(activity, zipFileAbsolute);
+    }
+
+    private static String genCloudSaveFileAbsolute() {
+        return ComDef.WHATSAI_CACHE_DIR + "/"
+                + ComDef.CLOUD_FILE_NAME_PREFIX + "_"
+                + TimeUtils.getFileTime(false)
+                + ComDef.CLOUD_FILE_NAME_SUFFIX;
+    }
+
     private static void saveToFile(WhatsaiDir dir, String fileAbsolute) {
+        LogUtils.d("WhatsaiStorage: saveToFile: \"" + fileAbsolute + "\"...");
         try {
             File f = new File(fileAbsolute);
             if (!f.exists()) {
@@ -156,7 +269,6 @@ public class WhatsaiStorage {
                 }
             }
             OutputStream output = new FileOutputStream(f);
-            //##@: StorageXML.saveToXML(output, (WhatsaiDir) mRootNode);
             StorageJSON.saveToJSON(output, dir);
             output.flush();
             output.close();
@@ -165,26 +277,6 @@ public class WhatsaiStorage {
         } catch (Exception e) {
             LogUtils.e("WhatsaiStorage: save to local file \"" + fileAbsolute + "\" exception: " + e.toString());
         }
-    }
-
-    public static void cloud_save(Activity activity) {
-        LogUtils.d("WhatsaiStorage: cloud save: E...");
-
-        //update sync time of root node
-        mRootNode.setSyncTime(System.currentTimeMillis());
-
-        //update local save file
-        saveToFile((WhatsaiDir)mRootNode, ComDef.WHATSAI_DATA_FILE_SYNC);
-
-        //zip local file to cloud file
-        if (!ZipUtils.zip(ComDef.CLOUD_FILE_PATH, ComDef.WHATSAI_DATA_FILE_SYNC)) {
-            LogUtils.e("WhatsaiStorage: cloud_save: zip cloud file failed");
-            return;
-        }
-
-        //finally, save file to cloud
-        LogUtils.i("WhatsaiStorage: cloud_save: sync_time = " + mRootNode.getSyncTime());
-        WhatsaiMail.start(activity);
     }
 
     ///* for test

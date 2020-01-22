@@ -45,6 +45,7 @@ public class ThisApp extends Application {
     }
 
     public static void exitApp() {
+        DataLogic.release();
         int pid = android.os.Process.myPid();
         LogUtils.d("exitApp, pid = " + pid);
         android.os.Process.killProcess(pid);

@@ -56,9 +56,9 @@ public class TestArrayList {
         }
         //*/
 
-        System.out.println(list.get(0).fileName);
+        FileUploadTask obj = list.get(0);
         list.remove(0);
-
+        System.out.println(obj.fileName + " removed");
 
         print_list("END");
     }

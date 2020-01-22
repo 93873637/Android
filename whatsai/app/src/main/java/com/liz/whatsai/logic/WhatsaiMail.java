@@ -9,36 +9,45 @@ import com.liz.androidutils.MailSender;
 @SuppressWarnings("unused, WeakerAccess")
 public class WhatsaiMail {
 
-    private static MailSender mMailSender = null;
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    private static WhatsaiMailCallback mWhatsaiMailCallback = null;
+    public interface WhatsaiMailCallback {
+        void onSendMailSuccess(String fileAbsolute);
+    }
+    public static void setWhatsaiMailCallback(WhatsaiMailCallback callback) {
+        mWhatsaiMailCallback = callback;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static void start(final Activity activity) {
+    public static void start(final Activity activity, final String fileAbsolute) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                send(activity);
+                send(activity, fileAbsolute);
             }
         }).start();
     }
 
-    private static void send(final Activity activity) {
-        if (mMailSender == null) {
-            mMailSender = new MailSender();
-            mMailSender.fromAddress = ComDef.MAIL_FROM_ADDRESS;
-            mMailSender.fromAccount = ComDef.MAIL_FROM_ACCOUNT;
-            mMailSender.fromPassword = ComDef.MAIL_FROM_PASSWORD;
-            mMailSender.toAddress = ComDef.MAIL_TO_ADDRESS;
-            mMailSender.ccAddress = ComDef.MAIL_CC_ADDRESS;
-            mMailSender.smtpHost = ComDef.MAIL_SMTP_HOST;
-            mMailSender.addAttachFile(ComDef.CLOUD_FILE_PATH);
-        }
+    private static void send(final Activity activity, final String fileAbsolute) {
+        LogUtils.d("WhatsaiMail: send: activity = " + activity + ", fileAbsolute = " + fileAbsolute);
+
+        MailSender mMailSender = new MailSender();
+        mMailSender.fromAddress = ComDef.MAIL_FROM_ADDRESS;
+        mMailSender.fromAccount = ComDef.MAIL_FROM_ACCOUNT;
+        mMailSender.fromPassword = ComDef.MAIL_FROM_PASSWORD;
+        mMailSender.toAddress = ComDef.MAIL_TO_ADDRESS;
+        mMailSender.ccAddress = ComDef.MAIL_CC_ADDRESS;
+        mMailSender.smtpHost = ComDef.MAIL_SMTP_HOST;
+        mMailSender.addAttachFile(fileAbsolute);
 
         String msg;
         if (mMailSender.send()) {
-            msg = "WhatsaiMail: mail sent successfully";
+            msg = "WhatsaiMail: mail sent successfully, attach = " + fileAbsolute;
             LogUtils.d(msg);
+            mWhatsaiMailCallback.onSendMailSuccess(fileAbsolute);
         }
         else {
-            msg = "WhatsaiMail: send failed, error = " + mMailSender.errMsg;
+            msg = "WhatsaiMail: send mail with attach \"" + fileAbsolute + "\" failed, error = " + mMailSender.errMsg;
             LogUtils.e(msg);
         }
 

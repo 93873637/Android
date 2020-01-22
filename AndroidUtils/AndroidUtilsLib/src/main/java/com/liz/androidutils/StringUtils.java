@@ -3,7 +3,7 @@ package com.liz.androidutils;
 import androidx.annotation.NonNull;
 
 @SuppressWarnings("unused, WeakerAccess")
-public class StrUtils {
+public class StringUtils {
 
     public static String removeChars(@NonNull String srcStr, @NonNull String delChars) {
         String tarStr = srcStr;

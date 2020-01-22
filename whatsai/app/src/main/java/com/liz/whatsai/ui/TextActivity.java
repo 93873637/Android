@@ -68,7 +68,7 @@ public class TextActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.toolbar_to_up).setOnClickListener(this);
         findViewById(R.id.toolbar_to_bottom).setOnClickListener(this);
 
-        setToolbarSave(false);
+        setToolbarLocalSave(false);
         setToolbarCloudSave(false);
         initEditContent();
     }
@@ -82,12 +82,12 @@ public class TextActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.toolbar_save:
                 if (mBtnSaveActive) {
-                    localSave();
+                    onLocalSave();
                 }
                 break;
             case R.id.toolbar_cloud_save:
                 if (mBtnCloudSaveActive) {
-                    cloudSave();
+                    onCloudSave();
                 }
                 break;
             case R.id.toolbar_datetime:
@@ -110,7 +110,7 @@ public class TextActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private void setToolbarSave(boolean active) {
+    private void setToolbarLocalSave(boolean active) {
         mBtnSaveActive = active;
         ImageButton toolbarSave = findViewById(R.id.toolbar_save);
         ColorMatrix cm = new ColorMatrix();
@@ -155,7 +155,7 @@ public class TextActivity extends Activity implements View.OnClickListener {
             @Override
             public void afterTextChanged(Editable s) {
                 LogUtils.d("afterTextChanged: " + s);
-                setToolbarSave(true);
+                setToolbarLocalSave(true);
                 setToolbarCloudSave(true);
                 mContentDirty = true;
             }
@@ -176,28 +176,27 @@ public class TextActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
-        localSave();
+        onLocalSave();
         setResult(RESULT_OK);
         super.onBackPressed();
     }
 
-    private void localSave() {
-        LogUtils.d("TextActivity: localSave: mContentDirty = " + mContentDirty);
+    private void onLocalSave() {
+        LogUtils.d("TextActivity: onLocalSave: mContentDirty = " + mContentDirty);
         if (mContentDirty) {
             mTextNode.setContent(mEditContent.getText().toString());
             DataLogic.local_save();
-            setToolbarSave(false);
+            setToolbarLocalSave(false);
             mContentDirty = false;
         }
     }
 
-    private void cloudSave() {
-        LogUtils.d("TextActivity: cloudSave: mContentDirty = " + mContentDirty);
+    private void onCloudSave() {
+        LogUtils.d("TextActivity: onCloudSave: mContentDirty = " + mContentDirty);
         if (mContentDirty) {
             mTextNode.setContent(mEditContent.getText().toString());
-            DataLogic.local_save();
             DataLogic.cloud_save(this);
-            setToolbarSave(false);
+            setToolbarLocalSave(false);
             setToolbarCloudSave(false);
             mContentDirty = false;
         }

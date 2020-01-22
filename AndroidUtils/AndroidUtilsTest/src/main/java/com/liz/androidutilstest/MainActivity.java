@@ -1,6 +1,5 @@
 package com.liz.androidutilstest;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -11,13 +10,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.liz.androidutils.ComUtils;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
-import com.liz.androidutils.MailSender;
-import com.liz.androidutils.SysTools;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeChecker;
@@ -31,7 +29,6 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+
+    private TextView tvTestInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +58,13 @@ public class MainActivity extends AppCompatActivity {
             );
         }
 
-        findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 test();
             }
         });
+        tvTestInfo = findViewById(R.id.text_test);
 
         //String dir = Environment.getExternalStorageDirectory().getAbsolutePath();
         //Toast.makeText(this, dir, Toast.LENGTH_LONG).show();
@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_logfile();
+        test_storage();
+        //test_logfile();
         //test_ImageCompress();
         //test_ziputils();
         //test_screencapture();
@@ -91,6 +92,32 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_storage() {
+        String testInfo = "";
+        testInfo += "getExternalStorageDirectory=" + Environment.getExternalStorageDirectory() + "\n";
+
+        if (SysUtils.isExternalStorageReadable()) {
+            testInfo += "isExternalStorageReadable ok\n";
+        }
+        else {
+            testInfo += "isExternalStorageReadable failed\n";
+        }
+        if (SysUtils.isExternalStorageWritable()) {
+            testInfo += "isExternalStorageWritable ok\n";
+        }
+        else {
+            testInfo += "isExternalStorageWritable failed\n";
+        }
+
+        if (FileUtils.writeTxtFile("/storage/0CCD-50F4/0.sd/aaa.txt", "mmmsssstetst")) {
+            testInfo += "writeTxtFile ok\n";
+        }
+        else {
+            testInfo += "writeTxtFile failed\n";
+        }
+        tvTestInfo.setText(testInfo);
     }
 
     public void test_logfile() {
@@ -143,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test_SysTools() {
-        if (SysTools.checkRootExecutable()) {
+        if (SysUtils.checkRootExecutable()) {
             Toast.makeText(this, "ROOTED!", Toast.LENGTH_LONG).show();
         }
         else {

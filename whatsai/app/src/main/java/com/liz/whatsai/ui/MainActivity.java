@@ -18,8 +18,6 @@ import com.liz.whatsai.logic.DataLogic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.security.Permissions;
-
 public class MainActivity extends AppCompatActivity {
 
     // Permissions Required
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 switch (DataLogic.getInitStatus()) {
-                    case ComDef.INIT_STATUS_INITING:
+                    case ComDef.INIT_STATUS_LOADING:
                         tryOpenAppActivity();
                         break;
                     case ComDef.INIT_STATUS_OK:

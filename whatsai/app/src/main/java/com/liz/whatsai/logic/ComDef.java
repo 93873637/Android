@@ -12,48 +12,57 @@ public class ComDef {
 
     public static final String APP_NAME = "whatsai";
 
-    public static final int INIT_STATUS_INITING = 0;
+    public static final int INIT_STATUS_LOADING = 0;
     public static final int INIT_STATUS_OK = 1;
     public static final int INIT_STATUS_FAILED = 2;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // WhatsaiStorage Definitions
 
-    //unfortunately, external storage can't be written by app for security!
-    //public static final String WHATSAI_HOME = "/storage/0CCD-50F4/0.sd/whatsai";
+    //
+    // Whatsai Home Directory
+    //
+    // it should be better to use external sdcard storage, but
+    // unfortunately, external storage can't be written by app for security!
+    // so we can't set home dir to external storage like following:
+    //
+    // public static final String WHATSAI_HOME = "/storage/0CCD-50F4/0.sd/whatsai";
+    //
+    // instead, we use internal sdcard storage:
+    //
     public static final String WHATSAI_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/0.sd/whatsai";
 
-    private static final String WHATSAI_DATA_FILE_NAME = "whatsai.dat";
-    private static final String WHATSAI_DATA_DIR_NAME = "whatsai.files";
+    public static final String WHATSAI_DATA_FILE_NAME = "whatsai.dat";
     public static final String WHATSAI_DATA_FILE = WHATSAI_HOME + "/" + WHATSAI_DATA_FILE_NAME;
+
+    public static final String WHATSAI_DATA_DIR_NAME = "whatsai.files";
     public static final String WHATSAI_DATA_DIR = WHATSAI_HOME + "/" + WHATSAI_DATA_DIR_NAME;
-    public static final String WHATSAI_DATA_FILE_TEMP = WHATSAI_DATA_FILE + ".tmp";
-    public static final String WHATSAI_DATA_FILE_SYNC = WHATSAI_DATA_FILE + ".syn";
 
-    public static final String WHATSAI_AUDIO_DATA_PATH = WHATSAI_HOME + "/audio";
+    public static final String WHATSAI_AUDIO_DIR_NAME = "audio";
+    public static final String WHATSAI_AUDIO_DIR = WHATSAI_HOME + "/" + WHATSAI_AUDIO_DIR_NAME;
 
-    public static final int WHATSAI_SAVING_DELAY = 3 * 1000;  //unit by milliseconds
-    public static final int WHATSAI_SAVING_TIMER = 10 * 1000;  //unit by milliseconds
-    public static final long CLOUD_SAVE_PERIOD = 24 * 3600 * 1000;  //one day, unit by millisecond
+    /**
+     * cache dir for temporary files
+     */
+    public static final String WHATSAI_CACHE_DIR_NAME = "cache";
+    public static final String WHATSAI_CACHE_DIR = WHATSAI_HOME + "/" + WHATSAI_CACHE_DIR_NAME;
 
-    public static final String CLOUD_FILE_NAME = "whatsai.zip";
-    public static final String CLOUD_FILE_PATH = WHATSAI_HOME + "/" + CLOUD_FILE_NAME;
+    public static final String CLOUD_FILE_NAME_PREFIX = APP_NAME;
+    public static final String CLOUD_FILE_NAME_SUFFIX = ".zip";
 
-    //tags for json
+    public static final long LOCAL_SAVE_DELAY = 10 * 1000L;  //unit by milliseconds
+    public static final long LOCAL_SAVE_TIMER = 10 * 1000L;  //unit by milliseconds
+
+    public static final long CLOUD_SAVE_DELAY = 10000; //###@: 60 * 1000L;  //unit by milliseconds
+    public static final long CLOUD_SAVE_TIMER = 10000; //###@: 24 * 60 * 60 * 1000L;  //unit by millisecond
+
+    // tags name for save
     public static final String TAG_TYPE = "TYPE";
     public static final String TAG_NAME = "NAME";
     public static final String TAG_LIST = "LIST";
     public static final String TAG_SUMMARY = "SUMMARY";
     public static final String TAG_CONTENT = "CONTENT";
     public static final String TAG_PASSWORD = "PASSWORD";
-    public static final String TAG_SYNC_TIME = "SYNC_TIME";
-
-    //tags for xml
-    public static final String XML_TAG_DIR = "dir";
-    public static final String XML_TAG_FILE = "file";
-    public static final String XML_ATTR_DONE = "DONE";
-    public static final String XML_ATTR_REMIND = "remind";
-    public static final String XML_BOOL_TRUE = "true";
 
     // WhatsaiStorage Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////

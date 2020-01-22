@@ -1,14 +1,17 @@
 package com.liz.androidutils;
 
 import android.content.Context;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -374,6 +377,67 @@ public class FileUtils {
         return true;
     }
 
+    public static boolean writeTxtFile(@NonNull final String fileAbsolute,@NonNull final String content) {
+        return writeTxtFile(fileAbsolute, content, false, false);
+    }
+        /*
+     * @param buffer   写入文件的内容
+     * @param fileAbsolute   保存文件名, 全路径
+     * @param append   是否追加写入，true为追加写入，false为重写文件
+     * @param autoLine 针对追加模式，true为增加时换行，false为增加时不换行
+     */
+    public static boolean writeTxtFile(@NonNull final String fileAbsolute,@NonNull final String content,
+                                       final boolean append, final boolean autoLine) {
+
+        RandomAccessFile raf = null;
+        FileOutputStream out = null;
+        try {
+            File file = new File(fileAbsolute);
+            if (!file.exists()) {
+                if (!file.createNewFile()) {
+                    System.out.println("ERROR: writeTxtFile: FileNotFoundException of file \"" + fileAbsolute + "\".");
+                    return false;
+                }
+            }
+
+            if (!file.isFile()) {
+                System.out.println("ERROR: writeTxtFile: file \"" + fileAbsolute + "\" is NOT a file!");
+                return false;
+            }
+
+            if (append) {
+                raf = new RandomAccessFile(file, "rw");
+                raf.seek(file.length());
+                raf.write(content.getBytes());
+                if (autoLine) {
+                    raf.write("\n".getBytes());
+                }
+            } else {
+                out = new FileOutputStream(file);
+                out.write(content.getBytes());
+                out.flush();
+            }
+
+            return true;
+        } catch (Exception e) {
+            System.out.println("ERROR: writeTxtFile: exception = " + e.toString());
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (raf != null) {
+                    raf.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                System.out.println("ERROR: writeTxtFile: close exception = " + e.toString());
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static boolean delete(String fileAbsolute) {
         File file = new File(fileAbsolute);
         if (!file.exists()) {
@@ -468,8 +532,11 @@ public class FileUtils {
 
     public static void main(String[] args) {
 
-        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "aaa\n"));
-        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "bbb\n"));
+        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "aaa\n"));
+        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "bbb\n"));
+        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "ccc\n", true, false));
+        //AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "aaa\n"));
+        //AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "bbb\n"));
 
         /*
         //assert true
