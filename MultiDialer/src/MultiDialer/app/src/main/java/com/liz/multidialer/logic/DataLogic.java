@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.androidutils.ZipUtils;
@@ -36,6 +37,7 @@ public class DataLogic extends MultiDialClient {
     private static int mTotalCalledNum = 0;
     private static boolean mWorking = false;
     private static boolean mDialing = false;
+    private static int mServerConnect = ComDef.SERVER_CONNECT_UNKNOWN;
 
     public static void init() {
         LogUtils.d("DataLogic: init");
@@ -72,6 +74,12 @@ public class DataLogic extends MultiDialClient {
     public static void release() {
         stopHeartbeatTimer();
         stopDaemonTaskTimer();
+    }
+
+    public static String getClientStatus() {
+        String info = ComDef.serverConnectString(mServerConnect);
+        info += "  " + SysUtils.getAppMemInfo();
+        return info;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -235,12 +243,10 @@ public class DataLogic extends MultiDialClient {
     public static String getTelListFileName() { return mTelListFileName; }
     public static void setTelListFileName(String value) { mTelListFileName = value; Settings.saveFileListFile(value); }
 
-    private static long getEndCallDelay() {
-        return mEndCallDelay;
-    }
-    public static void setEndCallDelay(long endCallDelay) {
-        mEndCallDelay = endCallDelay;
-    }
+    private static long getEndCallDelay() { return mEndCallDelay; }
+    public static void setEndCallDelay(long endCallDelay) { mEndCallDelay = endCallDelay; }
+
+    public static void setServerConnect(int connect) { mServerConnect = connect; }
 
     /*
     //since we got tellist from network, this is unnecessary

@@ -53,8 +53,8 @@ public class ComDef {
     public static final long LOCAL_SAVE_DELAY = 10 * 1000L;  //unit by milliseconds
     public static final long LOCAL_SAVE_TIMER = 10 * 1000L;  //unit by milliseconds
 
-    public static final long CLOUD_SAVE_DELAY = 10000; //###@: 60 * 1000L;  //unit by milliseconds
-    public static final long CLOUD_SAVE_TIMER = 10000; //###@: 24 * 60 * 60 * 1000L;  //unit by millisecond
+    public static final long CLOUD_SAVE_DELAY = 60 * 1000L;  //unit by milliseconds
+    public static final long CLOUD_SAVE_TIMER = 24 * 60 * 60 * 1000L;  //unit by millisecond
 
     // tags name for save
     public static final String TAG_TYPE = "TYPE";

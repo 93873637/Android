@@ -16,7 +16,22 @@ public class ComDef {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public static final String APP_NAME = "MultiDialer";
 
-    public static final boolean DEBUG = false;
+    //##@: todo: set true to run in debug mode
+    public static final boolean DEBUG = true;
+
+    public static final int SERVER_CONNECT_UNKNOWN = -1;
+    public static final int SERVER_CONNECT_OK = 0;
+    public static final int SERVER_CONNECT_FAILED = 1;
+    public static String serverConnectString(int connectStatus) {
+        switch (connectStatus) {
+            case SERVER_CONNECT_OK:
+                return "CONNECT";
+            case SERVER_CONNECT_FAILED:
+                return "DISCONNECT";
+            default:
+                return "UNKNOWN";
+        }
+    }
 
     public static final long DEFAULT_END_CALL_DELAY = 3000L;  //挂断电话延迟时间(ms)
     public static final long CAPTURE_SCREEN_OFFSET = 500L;  //截屏延迟时间(ms) = 挂断电话延迟时间 - OFFSET
@@ -28,8 +43,8 @@ public class ComDef {
     public static final long UI_TIMER_DELAY = 500L;  //unit by ms
     public static final long UI_TIMER_PERIOD = 1000L;  //unit by ms
 
-    public static final long HEARTBEAT_TIMER_DELAY = 60*1000L;  //unit by ms
-    public static final long HEARTBEAT_TIMER_MIN = 5*1000L;  //unit by ms
+    public static final long HEARTBEAT_TIMER_DELAY = 30*1000L;  //unit by ms
+    public static final long HEARTBEAT_TIMER_MIN = 10*1000L;  //unit by ms
 
     public static final long DAEMON_TASK_TIMER_DELAY = 60*1000L;  //unit by ms
     public static final long DAEMON_TASK_TIMER_PERIOD = 10*60*1000L;  //unit by ms

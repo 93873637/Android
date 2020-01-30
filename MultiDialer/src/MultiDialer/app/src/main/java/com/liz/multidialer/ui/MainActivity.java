@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.NetUtils;
 import com.liz.androidutils.StringBufferQueue;
 import com.liz.androidutils.TimeUtils;
 import com.liz.multidialer.R;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mBtnCall;
 
     private ScrollView mScrollProgressInfo;
+    private TextView mTextStaticInfo;
     private TextView mTextProgressInfo;
     private StringBufferQueue mProgressBuffer;
 
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (ComDef.DEBUG) {
             mScrollProgressInfo = findViewById(R.id.scroll_progress_info);
+            mTextStaticInfo = findViewById(R.id.text_static_info);
             mTextProgressInfo = findViewById(R.id.text_progress_info);
             mProgressBuffer = new StringBufferQueue(32);
             DataLogic.setProgressCallback(new DataLogic.ShowProgressCallback() {
@@ -156,6 +160,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onCallButtonClicked() {
+        if (!checkStart()) {
+            return;
+        }
+
         mEditDialInterval.clearFocus();
         DataLogic.setEndCallDelay(Integer.parseInt(mEditDialInterval.getText().toString()));
 
@@ -166,6 +174,18 @@ public class MainActivity extends AppCompatActivity {
             showProgressInfo("Call Button Clicked to Start Call...");
             onStartCall();
         }
+    }
+
+    private boolean checkStart() {
+        if (TextUtils.isEmpty(DataLogic.getDeviceId())) {
+            Toast.makeText(this, "无设备编号, 请设置", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(DataLogic.getServerAddress())) {
+            Toast.makeText(this, "无服务器地址, 请设置", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     private void onStartCall() {
@@ -199,6 +219,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void updateUI() {
+        MainActivity.this.setTitle(ComDef.APP_NAME + " - " + NetUtils.getLocalIpAddress(this));
+
         mTextDeviceId.setText(DataLogic.getDeviceId());
 
         mTextTelListFile.setText(DataLogic.getTelListFileInfo());
@@ -217,6 +239,14 @@ public class MainActivity extends AppCompatActivity {
                 DataLogic.getFloatingButtonText(),
                 DataLogic.getFloatingButtonColor()
         );
+
+        // anyway, write client status to log
+        LogUtils.d(DataLogic.getClientStatus());
+
+        // show status on debug version
+        if (ComDef.DEBUG) {
+            mTextStaticInfo.setText(DataLogic.getClientStatus());
+        }
     }
 
     @Override

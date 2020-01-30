@@ -303,7 +303,7 @@
                 android:fadeScrollbars="false"
                 android:focusable="true"
                 android:gravity="start|top"
-                android:text="心跳间隔(s, >=5s):"
+                android:text="心跳间隔(s, >=10s):"
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <EditText

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.io.DataOutputStream;
 import java.lang.reflect.Method;
+import java.text.DecimalFormat;
 
 /**
  * Created by liz on 2018/3/2.
@@ -165,5 +166,16 @@ public class SysUtils {
             return true ;
         }
         return false ;
+    }
+
+    public static String getAppMemInfo() {
+        final int M = 1024*1024;
+        Runtime r = Runtime.getRuntime();
+        DecimalFormat df = new DecimalFormat("#.0");
+        String maxMemory = df.format((double) r.maxMemory() / M);
+        String totalMemory = df.format((double) r.totalMemory() / M);
+        String freeMemory = df.format((double) r.freeMemory() / M);
+        String usedMemory = df.format((double) (r.totalMemory() - r.freeMemory()) / M);
+        return maxMemory + " / " + totalMemory + " / " + freeMemory + " / " + usedMemory;
     }
 }

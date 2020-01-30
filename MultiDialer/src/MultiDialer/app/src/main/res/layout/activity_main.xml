@@ -247,7 +247,26 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!--拨号信息-->
+        <TextView
+            android:id="@+id/text_static_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fadeScrollbars="false"
+            android:focusable="true"
+            android:gravity="start|top"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:scrollbarFadeDuration="2000"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:textIsSelectable="true"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            />
+
+        <!--调试信息-->
         <ScrollView
             android:id="@+id/scroll_progress_info"
             android:layout_width="match_parent"
@@ -261,7 +280,6 @@
                 android:id="@+id/text_progress_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:fadeScrollbars="false"
                 android:focusable="true"
                 android:gravity="start|top"
@@ -271,9 +289,10 @@
                 android:scrollbarStyle="insideOverlay"
                 android:scrollbars="vertical"
                 android:textIsSelectable="true"
+                android:text=""
                 android:textSize="12sp" />
         </ScrollView>
-        <!--拨号信息-->
+        <!--调试信息-->
 
         <Button
             android:id="@+id/btn_exit_app"

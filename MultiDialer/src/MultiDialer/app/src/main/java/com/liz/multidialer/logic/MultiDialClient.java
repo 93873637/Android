@@ -138,9 +138,11 @@ public class MultiDialClient {
             DataLogic.showProgress("_uploadHeartBeatFile: SFTP: upload file " + fileName + " to " + remotePath + "...");
             if (!sftpMgr.uploadFile(remotePath, remoteFileName, localPath, localFileName)) {
                 LogUtils.e("ERROR: _uploadHeartBeatFile: upload failed.");
+                DataLogic.setServerConnect(ComDef.SERVER_CONNECT_FAILED);
             }
             else {
                 LogUtils.d("_uploadHeartBeatFile: upload success");
+                DataLogic.setServerConnect(ComDef.SERVER_CONNECT_OK);
             }
 
             sftpMgr.disconnect();

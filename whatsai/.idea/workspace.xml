@@ -71,33 +71,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7942eab7-9a4b-4a24-91a2-a857d006b65a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/.idea/dictionaries/cloud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/.idea/dictionaries/cloud.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/LJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/LJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/StrUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/StringUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/SysTools.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/SysUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/SysUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/test/TestArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/test/TestArrayList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/ComDef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../VoiceRecognition/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/ThisApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/ThisApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiMail.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiMail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/StorageJSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/StorageJSON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/StorageXML.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/TextActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/TextActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,11 +90,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="388">
+              <caret line="42" selection-start-line="41" selection-end-line="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="63" column="55" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
+            <state relative-caret-position="363">
+              <caret line="184" column="1" selection-start-line="184" selection-start-column="1" selection-end-line="184" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -168,11 +153,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+            <state relative-caret-position="-1242">
+              <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1316#1805#0" expanded="true" />
@@ -241,8 +226,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>WHATSAI_AUDIO_DIR</find>
-      <find>WHATSAI_DATA_FILE_TEMP</find>
       <find>local_save_period</find>
       <find>saveToXML</find>
       <find>TAG_SYNC_TIME</find>
@@ -271,6 +254,8 @@
       <find>CLOUD_FILE_PATH</find>
       <find>onSendMailSuccess</find>
       <find>mMailSender</find>
+      <find>###@:</find>
+      <find>TextView</find>
     </findStrings>
     <replaceStrings>
       <replace>WHATSAI_</replace>
@@ -340,9 +325,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/DataLogic.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/app/ThisApp.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/ui/TextActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/WhatsaiMail.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java" />
       </list>
     </option>
   </component>
@@ -370,7 +355,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="10.11.97.82:2727" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DialerForInfo/Dialer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../VoiceRecognition" />
     <property name="project.structure.last.edited" value="Suggestions" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.4620462" />
@@ -689,7 +674,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Structure" order="1" sideWeight="0.5011136" side_tool="true" weight="0.15405117" />
@@ -709,7 +693,7 @@
       <window_info anchor="bottom" id="Build" order="6" sideWeight="0.49946696" weight="0.22828507" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.32962137" />
-      <window_info active="true" anchor="bottom" x="74" y="319" width="1455" height="498" id="Logcat" order="9" visible="true" weight="0.41091314" />
+      <window_info anchor="bottom" x="74" y="319" width="1455" height="498" id="Logcat" order="9" weight="0.3608018" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
@@ -724,7 +708,7 @@
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
       <window_info id="Designer" order="5" />
-      <window_info content_ui="combo" id="Project" order="6" sideWeight="0.4988864" weight="0.15298508" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" sideWeight="0.4988864" visible="true" weight="0.15298508" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.36859688" />
@@ -736,7 +720,7 @@
       <window_info anchor="bottom" id="Build" order="6" sideWeight="0.49946696" weight="0.22828507" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.32962137" />
-      <window_info active="true" anchor="bottom" x="74" y="319" width="1455" height="498" id="Logcat" order="9" visible="true" weight="0.41091314" />
+      <window_info anchor="bottom" x="74" y="319" width="1455" height="498" id="Logcat" order="9" visible="true" weight="0.3608018" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Gradle" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
@@ -1101,13 +1085,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="757">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/java/util/Timer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -1213,13 +1190,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="63" column="55" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/StorageJSON.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -1243,8 +1213,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/storage/WhatsaiStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="53" column="17" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+        <state relative-caret-position="-1242">
+          <caret line="66" column="29" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1316#1805#0" expanded="true" />
@@ -1255,6 +1225,20 @@
             <element signature="e#4820#4821#0" expanded="true" />
             <element signature="e#7797#7798#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/whatsai/logic/ComDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="184" column="1" selection-start-line="184" selection-start-column="1" selection-end-line="184" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="42" selection-start-line="41" selection-end-line="42" />
         </state>
       </provider>
     </entry>
