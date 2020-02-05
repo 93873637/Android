@@ -64,10 +64,24 @@ public class NumUtils {
         return num;
     }
 
-    public static void printBytes(@NonNull byte[] bytes) {
-        for (int i=0; i<bytes.length; i++) {
-            System.out.println("bytes["+i+"]=" + (int)bytes[i]);
+    public static String byte2Hex(byte b){
+        String s = Integer.toHexString(b & 0xFF);
+        return (s.length() == 1) ? ("0" + s) : s;
+    }
+
+    public static String bytes2Hex(byte[] bytes){
+        String s;
+        StringBuilder sb = new StringBuilder();
+        for(byte b : bytes) {
+            s = Integer.toHexString(b & 0xFF);
+            sb.append((s.length() == 1) ? "0" + s : s);
+            sb.append(" ");
         }
+        return sb.toString().trim();
+    }
+
+    public static void printBytes(@NonNull byte[] bytes) {
+        System.out.println(bytes2Hex(bytes));
     }
 
     public static byte int2OneByte(int num) {
@@ -79,34 +93,60 @@ public class NumUtils {
     }
 
     public static byte[] long2Bytes(long num) {
-        byte[] byteNum = new byte[8];
-        for (int ix = 0; ix < 8; ++ix) {
-            int offset = 64 - (ix + 1) * 8;
-            byteNum[ix] = (byte) ((num >> offset) & 0xff);
+        byte[] bytes = new byte[8];
+        for (int i = 0; i < 8; ++i) {
+            int offset = 64 - (i + 1) * 8;
+            bytes[i] = (byte) ((num >> offset) & 0xff);
         }
-        return byteNum;
+        return bytes;
     }
 
-    public static long bytes2Long(byte[] byteNum) {
+    public static long bytes2Long(byte[] bytes) {
         long num = 0;
-        for (int ix = 0; ix < 8; ++ix) {
+        for (byte b : bytes) {
             num <<= 8;
-            num |= (byteNum[ix] & 0xff);
+            num |= (b & 0xff);
         }
         return num;
+    }
+
+    /**
+     * java only has signed data type, here we can get unsigned int value by bit operations
+     */
+    public static int unsigned(byte data){
+        return data&0x0ff;
+    }
+
+    public static int unsigned(short data){
+        return data&0x0ffff;
+    }
+
+    public static long unsigned(int data){
+        return bytes2Long(int2Bytes(data));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Test Functions
 
     public static void main(String[] args) {
-        System.out.println("a = 0x" + Integer.toHexString(0x10000001));
-        System.out.println("a = 0x" + Integer.toHexString(0x8001));
+        AssertUtils.Assert(byte2Hex((byte)128).equals("80"));
+        AssertUtils.Assert(byte2Hex((byte)160).equals("a0"));
+        AssertUtils.Assert(unsigned((byte)-128) == 128);
+        AssertUtils.Assert(unsigned((short)-10) == 65526);
+        AssertUtils.Assert(unsigned(-1) == 4294967295L);
+
+//        byte[] bi = int2Bytes(-1);
+//        printBytes(bi);
+
+        //System.out.println("a = 0x" + Integer.toHexString(0x10000001));
+        //System.out.println("a = 0x" + Integer.toHexString(0x8001));
         //printBytes(int2Bytes(65536));
 //        test_formatShow(456);
 //        test_formatShow(1456);
 //        test_formatShow(13456);
 //        test_formatShow(123456);
+
+        System.out.println("\n***Test Successfully.");
     }
 
     public static void test_formatShow(int n) {

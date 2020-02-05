@@ -240,12 +240,10 @@ public class MainActivity extends AppCompatActivity {
                 DataLogic.getFloatingButtonColor()
         );
 
-        // anyway, write client status to log
-        LogUtils.d(DataLogic.getClientStatus());
-
-        // show status on debug version
+        // show and log status on debug version
         if (ComDef.DEBUG) {
             mTextStaticInfo.setText(DataLogic.getClientStatus());
+            LogUtils.d(DataLogic.getClientStatus());
         }
     }
 

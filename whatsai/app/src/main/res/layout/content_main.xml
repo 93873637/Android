@@ -27,13 +27,24 @@
             android:gravity="end|center_vertical">
 
             <ImageButton
-                android:id="@+id/toolbar_listen"
+                android:id="@+id/toolbar_listener"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="6dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:contentDescription="@string/action_listening"
+                android:gravity="end|center_vertical"
+                android:background="@drawable/listen" />
+
+            <ImageButton
+                android:id="@+id/toolbar_recorder"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="6dp"
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp"
-                android:contentDescription="@string/app_name"
+                android:contentDescription="@string/action_audio_recorder"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/micphone" />
 

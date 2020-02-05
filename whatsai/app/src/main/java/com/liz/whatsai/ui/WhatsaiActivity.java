@@ -25,7 +25,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.app.NodeListAdapter;
@@ -55,16 +54,19 @@ public class WhatsaiActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whatsai);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                startActivity(new Intent(WhatsaiActivity.this, AudioRecordActivity.class));
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,7 +91,8 @@ public class WhatsaiActivity extends AppCompatActivity
         });
 
         findViewById(R.id.ll_whatsai).setOnClickListener(this);
-        findViewById(R.id.toolbar_listen).setOnClickListener(this);
+        findViewById(R.id.toolbar_recorder).setOnClickListener(this);
+        findViewById(R.id.toolbar_listener).setOnClickListener(this);
 
         mWhatsaiLastClickTime = 0;
         mListItemLastClickTime = 0;
@@ -103,8 +106,11 @@ public class WhatsaiActivity extends AppCompatActivity
             case R.id.ll_whatsai:
                 onClickWhatsaiLayout();
                 break;
-            case R.id.toolbar_listen:
-                openAudioActivity();
+            case R.id.toolbar_recorder:
+                openAudioRecorderActivity();
+                break;
+            case R.id.toolbar_listener:
+                openListenerActivity();
                 break;
         }
 
@@ -384,7 +390,7 @@ public class WhatsaiActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            openAudioActivity();
+            openAudioRecorderActivity();
             return true;
         }
         else if (id == R.id.action_cloud_backup) {
@@ -395,8 +401,12 @@ public class WhatsaiActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void openAudioActivity() {
+    private void openAudioRecorderActivity() {
         startActivity(new Intent(WhatsaiActivity.this, AudioActivity.class));
+    }
+
+    private void openListenerActivity() {
+        startActivity(new Intent(WhatsaiActivity.this, ListenerActivity.class));
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

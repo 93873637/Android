@@ -5,7 +5,8 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_listening">whatsai listening</string>
+    <string name="action_audio_recorder">Whatsai Recorder</string>
+    <string name="action_listening">Whatsai Listener</string>
     <string name="action_cloud_save">Cloud Save</string>
 
     <string name="menu_home">Home</string>

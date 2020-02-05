@@ -56,6 +56,21 @@ public class TimeUtils {
     }
 
     /**
+     * @return String of time format as 19:11:03
+     */
+    public static String elapsed(long startTime) {
+        long timeDiff = System.currentTimeMillis() - startTime;
+        int seconds = (int)timeDiff / 1000;
+        int hour = seconds / 3600;
+        int minute = (seconds % 3600) / 60;
+        int second = seconds % 60;
+        String hs = (hour > 10?"":"0") + hour;
+        String ms = (minute > 10?"":"0") + minute;
+        String ss = (second > 10?"":"0") + second;
+        return hs + ":" + ms + ":" + ss;
+    }
+
+    /**
      * @return String of file name format as 191103.173655.626
      */
     public static String genTimeID() {
@@ -66,8 +81,17 @@ public class TimeUtils {
     // Test Functions
 
     public static void main(String[] args) {
-        for (int i=0; i<12; i++) {
-            System.out.println(genTimeID());
+        long start = System.currentTimeMillis();
+        for (int i=0; i<20; i++) {
+            try {
+                Thread.sleep(1234);
+            } catch (Exception e) {
+
+            }
+            System.out.println(elapsed(start));
         }
+//        for (int i=0; i<12; i++) {
+//            System.out.println(genTimeID());
+//        }
     }
 }

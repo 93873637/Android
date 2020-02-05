@@ -408,6 +408,11 @@ public class DataLogic extends MultiDialClient {
     //（4）上传频次（可配置）：手机在运行时，每隔5分钟上传一次心跳文件。
     //
     public static void onHeartbeatTimer() {
+
+        // write client status to log
+        LogUtils.d(DataLogic.getClientStatus());
+
+        //upload heartbeat file to server
         if (TextUtils.isEmpty(MultiDialClient.getDeviceId())) {
             LogUtils.e("ERROR: onHeartbeatTimer: no device id.");
             return;

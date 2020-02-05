@@ -1,5 +1,13 @@
 package com.liz.androidutils;
 
+import android.media.AudioAttributes;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
+import android.media.MediaRecorder;
+import android.util.Log;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,15 +19,66 @@ public class AudioUtils {
     public static final int AUDIO_TRACK_SINGLE = 1;
     public static final int AUDIO_TRACK_DOUBLE = 2;
 
+    public static String audioSourceName(int audioSource) {
+        switch (audioSource) {
+            case MediaRecorder.AudioSource.MIC: return "MIC";
+            case MediaRecorder.AudioSource.VOICE_CALL: return "VOICE_CALL";
+            case MediaRecorder.AudioSource.VOICE_COMMUNICATION: return "VOICE_COMMUNICATION";
+            case MediaRecorder.AudioSource.VOICE_DOWNLINK: return "VOICE_DOWNLINK";
+            case MediaRecorder.AudioSource.VOICE_RECOGNITION: return "VOICE_RECOGNITION";
+            case MediaRecorder.AudioSource.VOICE_UPLINK: return "VOICE_UPLINK";
+            case MediaRecorder.AudioSource.CAMCORDER: return "CAMCORDER";
+            case MediaRecorder.AudioSource.REMOTE_SUBMIX: return "REMOTE_SUBMIX";
+            case MediaRecorder.AudioSource.UNPROCESSED: return "UNPROCESSED";
+            default: return "UNKNOWN";
+        }
+    }
+
+    public static String audioFormatName(int audioFormat) {
+        switch (audioFormat) {
+            case AudioFormat.ENCODING_DEFAULT: return "DEFAULT";
+            case AudioFormat.ENCODING_PCM_16BIT: return "ENCODING_PCM_16BIT";
+            case AudioFormat.ENCODING_PCM_8BIT: return "ENCODING_PCM_8BIT";
+            case AudioFormat.ENCODING_PCM_FLOAT: return "ENCODING_PCM_FLOAT";
+            case AudioFormat.ENCODING_AC3: return "ENCODING_AC3";
+            case AudioFormat.ENCODING_E_AC3: return "ENCODING_E_AC3";
+            case AudioFormat.ENCODING_DTS: return "ENCODING_DTS";
+            case AudioFormat.ENCODING_DTS_HD: return "ENCODING_DTS_HD";
+            case AudioFormat.ENCODING_AAC_LC: return "ENCODING_AAC_LC";
+            case AudioFormat.ENCODING_AAC_HE_V1: return "ENCODING_AAC_HE_V1";
+            case AudioFormat.ENCODING_AAC_HE_V2: return "ENCODING_AAC_HE_V2";
+            case AudioFormat.ENCODING_IEC61937: return "ENCODING_IEC61937";
+            case AudioFormat.ENCODING_DOLBY_TRUEHD: return "ENCODING_DOLBY_TRUEHD";
+            case AudioFormat.ENCODING_AAC_ELD: return "ENCODING_AAC_ELD";
+            case AudioFormat.ENCODING_AAC_XHE: return "ENCODING_AAC_XHE";
+            case AudioFormat.ENCODING_AC4: return "ENCODING_AC4";
+            case AudioFormat.ENCODING_E_AC3_JOC: return "ENCODING_E_AC3_JOC";
+            case AudioFormat.ENCODING_DOLBY_MAT: return "ENCODING_DOLBY_MAT";
+            default: return "UNKNOWN";
+        }
+    }
+
+    public static String channelConfigName(int channelConfig) {
+        switch (channelConfig) {
+            case AudioFormat.CHANNEL_CONFIGURATION_MONO: return "CHANNEL_CONFIGURATION_MONO";
+            case AudioFormat.CHANNEL_CONFIGURATION_STEREO: return "CHANNEL_CONFIGURATION_STEREO";
+            case AudioFormat.CHANNEL_IN_MONO: return "CHANNEL_IN_MONO";
+            case AudioFormat.CHANNEL_IN_STEREO: return "CHANNEL_IN_STEREO";  //same as CHANNEL_OUT_STEREO
+            case AudioFormat.CHANNEL_OUT_MONO: return "CHANNEL_OUT_MONO";
+            case AudioFormat.CHANNEL_OUT_QUAD: return "CHANNEL_OUT_QUAD";
+            default: return "UNKNOWN";
+        }
+    }
+
     //
     //channels: 1-single track, 2-double track (sound will be fast if wrong)
     //
-    public static void pcmToWave(String pcmFileAbsolute, String wavFileAbsolute, long sampleRate, int recorderBufferSize, int channels) {
+    public static void pcmToWave(String pcmFileAbsolute, String wavFileAbsolute, long sampleRate, int recorderBufferSize, int audioFormat, int channels) {
         FileInputStream in;
         FileOutputStream out;
         long totalAudioLen = 0;
         long totalDataLen = 36;
-        long byteRate = 16 * sampleRate * channels / 8;
+        long byteRate = (audioFormat == AudioFormat.ENCODING_PCM_8BIT?8:16)* sampleRate * channels / 8;
         byte[] data = new byte[recorderBufferSize];
         try {
             in = new FileInputStream(pcmFileAbsolute);
@@ -102,5 +161,68 @@ public class AudioUtils {
         header[42] = (byte) ((totalAudioLen >> 16) & 0xff);
         header[43] = (byte) ((totalAudioLen >> 24) & 0xff);
         out.write(header, 0, 44);
+    }
+
+    public static void playPCM(String pcmFilePath, int bufferSize, int sampleRate, int encodingBits, int channelMask) {
+        playPCM(new File(pcmFilePath), bufferSize, sampleRate, encodingBits, channelMask);
+    }
+
+    public static void playPCM(File pcmFile, int bufferSize, int sampleRate, int encodingBits, int channelMask) {
+        if (pcmFile == null || !pcmFile.exists()) {
+            LogUtils.e("playPCM: pcm file not exists");
+            return;
+        }
+
+        final FileInputStream fileInputStream;
+        try {
+            fileInputStream = new FileInputStream(pcmFile);
+        } catch (Exception e) {
+            LogUtils.e("playPCM: file input stream exception " + e.toString());
+            return;
+        }
+
+        final int bufferSizeInBytes = bufferSize;
+        final AudioTrack audioTrack = new AudioTrack(
+                new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build(),
+                new AudioFormat.Builder()
+                        .setSampleRate(sampleRate)
+                        .setEncoding(encodingBits)
+                        .setChannelMask(channelMask)
+                        .build(),
+                bufferSizeInBytes,
+                AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
+        );
+
+        // AudioTrack need play first
+        audioTrack.play();
+
+        // run read and play task
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    byte[] buffer = new byte[bufferSizeInBytes];
+                    while (fileInputStream.available() > 0) {
+                        int readCount = fileInputStream.read(buffer);
+                        if (readCount < 0) {
+                            LogUtils.e("playPCM: read error " + readCount);
+                        } else {
+                            //play by audio track
+                            audioTrack.write(buffer, 0, readCount);
+                        }
+                    }
+                    fileInputStream.close();
+                } catch (Exception e) {
+                    LogUtils.e("playPCM: exception " + e.toString());
+                    e.printStackTrace();
+                } finally {
+                    audioTrack.stop();
+                    audioTrack.release();
+                }
+            }
+        }.start();
     }
 }

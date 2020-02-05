@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
@@ -26,7 +25,7 @@ import java.io.File;
 public class AudioActivity extends Activity implements View.OnClickListener,
         View.OnCreateContextMenuListener {
 
-    private ImageButton mBtnSwitchAudio;
+    private ImageButton mBtnSwitchRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,8 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         findViewById(R.id.titlebar_menu).setOnClickListener(this);
         findViewById(R.id.titlebar_close).setOnClickListener(this);
 
-        mBtnSwitchAudio = findViewById(R.id.btn_switch_audio);
-        mBtnSwitchAudio.setOnClickListener(this);
+        mBtnSwitchRecord = findViewById(R.id.btn_switch_record);
+        mBtnSwitchRecord.setOnClickListener(this);
 
         ListView listView = findViewById(R.id.lv_audio_files);
         listView.addFooterView(new ViewStub(this));
@@ -55,7 +54,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         setAudioFilesInfo();
         WhatsaiAudio.setAudioCallback(new WhatsaiAudio.WhatsaiAudioCallback() {
             @Override
-            public void onAudioFileGenerated() {
+            public void onAudioRecordStopped() {
                 AudioActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -80,8 +79,8 @@ public class AudioActivity extends Activity implements View.OnClickListener,
             case R.id.titlebar_close:
                 onBackPressed();
                 break;
-            case R.id.btn_switch_audio:
-                onSwitchAudio();
+            case R.id.btn_switch_record:
+                onSwitchRecord();
                 break;
             default:
                 break;
@@ -146,10 +145,11 @@ public class AudioActivity extends Activity implements View.OnClickListener,
 
     protected void setAudioButton() {
         //LogUtils.d("AudioActivity:setAudioButton: isRecording = " + WhatsaiAudio.isRecording());
-        mBtnSwitchAudio.setBackgroundResource(WhatsaiAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
+        mBtnSwitchRecord.setBackgroundResource(WhatsaiAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
     }
 
-    protected void onSwitchAudio() {
-        WhatsaiAudio.switchAudio();
-        setAudioButton();    }
+    protected void onSwitchRecord() {
+        WhatsaiAudio.switchRecord();
+        setAudioButton();
+    }
 }

@@ -46,6 +46,7 @@ dependencies {
     implementation files('libs/gson-2.8.0.jar')
     implementation files('libs/fastjson-1.2.9.jar')
     implementation files('libs/commons-io-1.4.jar')
+    implementation project(path: ':wavelibrary')
 }
 
 //Major_Version_Number.Minor_Version_Number.Revision_Number.Build_Date.Build_Time

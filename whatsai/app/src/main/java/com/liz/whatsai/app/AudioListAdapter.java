@@ -29,6 +29,10 @@ public class AudioListAdapter extends BaseAdapter {
         return (File)adapter.getItem((int)pos);
     }
 
+    public static String getAudioFilePath(long pos) {
+        return ((File)adapter.getItem((int)pos)).getAbsolutePath();
+    }
+
     public static String getAudioFilesInfo() {
         return adapter.getListInfo();
     }

@@ -12,6 +12,9 @@ public class ComDef {
 
     public static final String APP_NAME = "whatsai";
 
+    // ##@: set false for release version
+    public static boolean DEBUG = true;
+
     public static final int INIT_STATUS_LOADING = 0;
     public static final int INIT_STATUS_OK = 1;
     public static final int INIT_STATUS_FAILED = 2;

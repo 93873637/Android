@@ -39,6 +39,8 @@
 
         <activity android:name=".ui.NodeActivity" />
         <activity android:name=".ui.AudioActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.AudioRecordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ListenerActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.TextActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.AlarmActivity"/>
 

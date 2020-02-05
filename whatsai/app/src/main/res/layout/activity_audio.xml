@@ -27,7 +27,7 @@
                 android:layout_height="30dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:contentDescription="@string/action_listening"
+                android:contentDescription="@string/action_audio_recorder"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/ic_return" />
 
@@ -40,7 +40,7 @@
                 android:layout_marginStart="6dp"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="@string/action_listening"
+                android:text="@string/action_audio_recorder"
                 android:textColor="@color/colorToolbarText"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -68,7 +68,7 @@
             android:orientation="horizontal"
             android:gravity="center">
             <ImageButton
-                android:id="@+id/btn_switch_audio"
+                android:id="@+id/btn_switch_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

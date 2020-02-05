@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorDeepBlue"
+    android:gravity="start|center_vertical"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/titlebar_menu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_return"
+        android:contentDescription="@string/action_listening"
+        android:gravity="end|center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:id="@+id/titlebar_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="6dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorToolbarText"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/titlebar_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/icon_close"
+        android:contentDescription="@string/app_name"
+        android:gravity="end|center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+</LinearLayout>

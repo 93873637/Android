@@ -24,6 +24,9 @@ public class ThisApp extends Application {
     @Override
     public void onCreate() {
         LogUtils.setTag(ComDef.APP_NAME);
+        if (ComDef.DEBUG) {
+            LogUtils.setLevel(LogUtils.LOG_LEVEL_V);
+        }
         LogUtils.d("ThisApp:onCreate: pid = " + android.os.Process.myPid());
 
         super.onCreate();
