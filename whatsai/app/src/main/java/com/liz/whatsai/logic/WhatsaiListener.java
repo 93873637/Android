@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,11 +45,33 @@ public class WhatsaiListener {
     }
 
     public interface ListenerCallback {
-        void onGetFramePower(final int power);
+        void onPowerUpdated();
     }
 
     public static void setCallback(ListenerCallback callback) {
         mCallback = callback;
+    }
+
+    public static int getPowerListSize() {
+        if (mListener.mPowerList == null) {
+            return -1;
+        }
+        else {
+            return mListener.mPowerList.size();
+        }
+    }
+
+    public static int getLastPower() {
+        if (mListener.mPowerList == null || mListener.mPowerList.isEmpty()){
+            return -1;
+        }
+        else {
+            return mListener.mPowerList.get(mListener.mPowerList.size() - 1);
+        }
+    }
+
+    public static List<Integer> getPowerList() {
+        return mListener.mPowerList;
     }
 
     // Interface Functions
@@ -79,6 +103,7 @@ public class WhatsaiListener {
     private int mFrameRate = 0;
     private int mDataRate = 0;  // unit by b/s(bit/s)
     private String mTimeElapsed = "";  // format as hh:mm:ss
+    private ArrayList<Integer> mPowerList = new ArrayList<>();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Working Timer
@@ -164,6 +189,7 @@ public class WhatsaiListener {
         mFrameRate = 0;
         mDataRate = 0;
         mTimeElapsed = "00:00:00";
+        mPowerList.clear();
     }
 
     private void _switchListening() {
@@ -227,13 +253,14 @@ public class WhatsaiListener {
             sum += NumUtils.unsigned(audioData[i]);
         }
         mFramePower = sum / readSize;
+        mPowerList.add(mFramePower);
 
         mTotalSize += readSize;
         mFrameCount++;
         LogUtils.v("WhatsaiListener: read #" + mFrameCount + ": " + readSize + " / " + mTotalSize + " / " + mFramePower);
 
         if (mCallback != null) {
-            mCallback.onGetFramePower(mFramePower);
+            mCallback.onPowerUpdated();
         }
     }
 

@@ -17,15 +17,31 @@ import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.WhatsaiListener;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ListenerActivity extends Activity implements View.OnClickListener {
 
+    private final int POWER_MAX = 256;
+    private final int POWER_ITEM_WIDTH = 1;  // unit by pixel
+    private final int POWER_ITEM_SPACE = 0;  // unit by pixel
+    private final int POWER_UNIT_WIDTH = POWER_ITEM_WIDTH + POWER_ITEM_SPACE;
+    private final int POWER_ITEM_COLOR = Color.rgb(79, 208, 89);
+    private final int CANVAS_BG_A = 255;
+    private final int CANVAS_BG_R = 43;
+    private final int CANVAS_BG_G = 43;
+    private final int CANVAS_BG_B = 43;
+    private final int CANVAS_GRID_COLOR = Color.rgb(212, 212, 212);
+    private final int[] CANVAS_GRID_Y = {64, 128, 192};
+
     Button mBtnSwitchListening;
     TextView mTextAudioConfig;
     TextView mTextProgressInfo;
     SurfaceView mWaveSurfaceView;
+
+    Paint mPowerPaint;
+    Paint mGridPaint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,41 +65,97 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
 
         startUITimer();
         WhatsaiListener.setCallback(mListenerCallback);
+
+        initCanvas();
+    }
+
+    private void initCanvas() {
+        mPowerPaint = new Paint();
+        mPowerPaint.setColor(POWER_ITEM_COLOR);
+        mGridPaint = new Paint();
+        mGridPaint.setColor(CANVAS_GRID_COLOR);
     }
 
     private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
         @Override
-        public void onGetFramePower(final int power) {
+        public void onPowerUpdated() {
             ListenerActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    updateWaveSurface(power);
+                    updateWaveSurface();
                 }
             });
         }
     };
 
-    private void updateWaveSurface(int power) {
-        LogUtils.d("ListenerActivity:updateWaveSurface: power = " + power);
+    private void updateWaveSurface() {
         Canvas canvas = mWaveSurfaceView.getHolder().lockCanvas(
                 new Rect(0, 0, mWaveSurfaceView.getWidth(), mWaveSurfaceView.getHeight()));
         if (canvas == null) {
             LogUtils.e("ERROR: updateWaveSurface: canvas null");
             return;
         }
-        canvas.drawARGB(255, 239, 239, 239);
 
-        //public void drawLine(float startX, float startY, float stopX, float stopY, @NonNull Paint paint) {
-        Paint paintLine = new Paint();
-        paintLine.setColor(Color.rgb(221, 0, 0));
+        int canvasWidth = mWaveSurfaceView.getWidth();
+        int canvasHeight = mWaveSurfaceView.getHeight();
 
-        canvas.drawLine(100, 0, 100, mWaveSurfaceView.getHeight()*power/255, paintLine);
+        // draw background
+        canvas.drawARGB(CANVAS_BG_A, CANVAS_BG_R, CANVAS_BG_G, CANVAS_BG_B);
 
+        // draw grid
+        {
+            int h;
+            for (int y : CANVAS_GRID_Y) {
+                h = canvasHeight * y / POWER_MAX;
+                canvas.drawLine(0, h, canvasWidth, h, mGridPaint);
+            }
+        }
 
+        int listSize = WhatsaiListener.getPowerListSize();
+        if (listSize <= 0) {
+            LogUtils.i("No power list");
+        }
+        else {
+            int lastPower = WhatsaiListener.getLastPower();
+            LogUtils.d("updateWaveSurface: listSize = " + listSize + ", lastPower = " + lastPower);
+            List<Integer> powerList = WhatsaiListener.getPowerList();
 
+            int maxVisibleSize = canvasWidth / POWER_UNIT_WIDTH;
+            int startIndex = 0;
+            int showSize = listSize;
+            if (listSize > maxVisibleSize) {
+                //canvas not enough to show all powers, only show last items
+                startIndex = listSize - maxVisibleSize;
+                showSize = maxVisibleSize;
+            }
+            LogUtils.d("updateWaveSurface: startIndex = " + startIndex + ", showSize = " + showSize);
 
+            int powerHeight;
+            if (POWER_ITEM_WIDTH == 1) {
+                // just draw a line for one power value
+                int posX, posY;
+                for (int i = 0; i < showSize; i++) {
+                    powerHeight = canvasHeight * powerList.get(i+startIndex) / POWER_MAX;
+                    posX = i * POWER_UNIT_WIDTH;
+                    posY = canvasHeight - powerHeight;
+                    canvas.drawLine(posX, posY, posX, canvasHeight, mPowerPaint);
+                }
+            }
+            else {
+                //draw a rect for one power value
+                //left, top, right, bottom of rect
+                int l, t, r, b;
+                for (int i = 0; i < showSize; i++) {
+                    powerHeight = canvasHeight * powerList.get(i+startIndex) / POWER_MAX;
+                    l = i * POWER_UNIT_WIDTH;
+                    r = l + POWER_ITEM_WIDTH;
+                    t = canvasHeight - powerHeight;
+                    b = canvasHeight;
+                    canvas.drawRect(new Rect(l, t, r, b), mPowerPaint);
+                }
+            }
+        }
 
-        mWaveSurfaceView.getHolder().unlockCanvasAndPost(canvas);// 解锁画布，提交画好的图像
-
+        mWaveSurfaceView.getHolder().unlockCanvasAndPost(canvas);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

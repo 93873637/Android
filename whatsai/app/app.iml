@@ -177,5 +177,6 @@
     <orderEntry type="library" name="Gradle: __local_aars__:D.\WorkSpace\Android\_bin\AndroidUtils.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.collection:collection:1.0.0@jar" level="project" />
     <orderEntry type="module" module-name="wavelibrary" />
+    <orderEntry type="module" module-name="wavelibrary" />
   </component>
 </module>
