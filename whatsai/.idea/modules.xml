@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wavelibrary/wavelibrary.iml" filepath="$PROJECT_DIR$/wavelibrary/wavelibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/whatsai.iml" filepath="$PROJECT_DIR$/whatsai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/whatsai.iml" filepath="$PROJECT_DIR$/.idea/whatsai.iml" />
     </modules>
   </component>
 </project>
