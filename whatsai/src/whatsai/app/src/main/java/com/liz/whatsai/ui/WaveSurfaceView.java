@@ -12,28 +12,38 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import com.liz.androidutils.LogUtils;
+import com.liz.whatsai.logic.WhatsaiListener;
 
 import java.util.List;
 
 
 public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
 
-	private static final int WAVE_ITEM_WIDTH = 1;  // unit by pixel
-	private static final int WAVE_ITEM_SPACE = 0;  // unit by pixel
-	private static final int WAVE_UNIT_WIDTH = WAVE_ITEM_WIDTH + WAVE_ITEM_SPACE;
+	private static final double DEFAULT_WAVE_ITEM_WIDTH = 0.2;  // unit by pixel
+	private static final double DEFAULT_WAVE_ITEM_SPACE = 0;  // unit by pixel
+	private static final int MIN_RECT_WIDTH = 2;  // item width not enough to one pixel, just draw a line
+
+	// 16bits pcm
+	private static final double DEFAULT_WAVE_MAX_VALUE = 32768;
+
 	private static final int WAVE_ITEM_COLOR = Color.rgb(79, 208, 89);
 	private static final int CANVAS_BG_A = 255;
-	private static final int CANVAS_BG_R = 43;
-	private static final int CANVAS_BG_G = 43;
-	private static final int CANVAS_BG_B = 43;
-	private static final int CANVAS_GRID_COLOR = Color.rgb(212, 212, 212);
+	private static final int CANVAS_BG_R = 0;
+	private static final int CANVAS_BG_G = 0;
+	private static final int CANVAS_BG_B = 0;
+	private static final int CANVAS_GRID_COLOR = Color.rgb(160, 160, 160);
 	private static final int CANVAS_GRID_COLOR_MIDDLE = Color.rgb(255, 255, 255);
 
 	private Paint mWavePaint;
 	private Paint mGridPaint;
 	private Paint mGridMiddlePaint;
 
-	private int mAmplitude;
+	private double mMaxValue = DEFAULT_WAVE_MAX_VALUE;
+	private int mAmplitudeHeight;
+
+	private double mWaveItemWidth = DEFAULT_WAVE_ITEM_WIDTH;
+	private double mWaveItemSpace = DEFAULT_WAVE_ITEM_SPACE;
+	private int mItemShowNum;
 
 	public WaveSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -57,7 +67,15 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 		// TODO Auto-generated method stub
 	}
 
-	public void initSurfaceView(final SurfaceView sfv) {
+	public void setMaxValue(double maxValue) {
+		mMaxValue = maxValue;
+	}
+
+	private double getWaveUnitWidth() {
+		return mWaveItemWidth + mWaveItemSpace;
+	}
+
+	private void initSurfaceView(final SurfaceView sfv) {
 		mWavePaint = new Paint();
 		mWavePaint.setColor(WAVE_ITEM_COLOR);
 		mGridPaint = new Paint();
@@ -72,7 +90,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 					LogUtils.e("ERROR: initSurfaceView: canvas null");
 				}
 				else {
-					mAmplitude = canvas.getHeight() / 2;
+					mAmplitudeHeight = canvas.getHeight() / 2;
 					drawBackground(canvas);
 					sfv.getHolder().unlockCanvasAndPost(canvas);
 				}
@@ -87,17 +105,33 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 		// draw background
 		canvas.drawARGB(CANVAS_BG_A, CANVAS_BG_R, CANVAS_BG_G, CANVAS_BG_B);
 
-		// draw Y grid
-		int maxHeight = canvasHeight / 2;
+		// draw center line
 		int midHeight = canvasHeight / 2;
+		canvas.drawLine(0, midHeight, canvasWidth, midHeight, mGridMiddlePaint);
+
+		///*
+		// draw y grids(log10)
 		int[] yGrid = {10, 100, 1000, 10000};
-		int maxValue = 32768;
-		for (int i = 0; i < yGrid.length; i++) {
-			int h = (int)(Math.log10(yGrid[i]) / Math.log10(maxValue) * maxHeight);
+		for (int y : yGrid) {
+			int h = (int)(Math.log10(y) / Math.log10(mMaxValue) * mAmplitudeHeight);
 			canvas.drawLine(0, midHeight + h, canvasWidth, midHeight + h, mGridPaint);
 			canvas.drawLine(0, midHeight - h, canvasWidth, midHeight - h, mGridPaint);
 		}
-		canvas.drawLine(0, midHeight, canvasWidth, midHeight, mGridMiddlePaint);
+		//*/
+
+		mItemShowNum = (int)(canvasWidth / getWaveUnitWidth());
+		WhatsaiListener.setItemShowNum(mItemShowNum);
+
+		/*
+		// draw y grids(log)
+		//int[] yGrid = {(int)Math.pow(2, 2), (int)Math.pow(2, 6), (int)Math.pow(2, 10), (int)Math.pow(2, 14)};
+		int[] yGrid = {4, 64, 1024, 16384};
+		for (int y : yGrid) {
+			int h = (int)(Math.log(y) / Math.log(mMaxValue) * mAmplitudeHeight);
+			canvas.drawLine(0, midHeight + h, canvasWidth, midHeight + h, mGridPaint);
+			canvas.drawLine(0, midHeight - h, canvasWidth, midHeight - h, mGridPaint);
+		}
+		//*/
 	}
 
 	private static int calcItemHeight(int value, int maxValue, int maxHeight) {
@@ -127,24 +161,21 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
 		drawBackground(canvas);
 
-		int canvasWidth = this.getWidth();
-		int canvasHeight = this.getHeight();
+		int canvasWidth = canvas.getWidth();
+		int canvasHeight = canvas.getHeight();
+		double unitWidth = this.getWaveUnitWidth();
 
 		int listSize = dataList.size();
 		if (listSize <= 0) {
 			LogUtils.i("list empty");
 		}
 		else {
-			double lastPower = dataList.get(listSize - 1);
-			LogUtils.d("updateWaveSurface: listSize = " + listSize + ", lastPower = " + lastPower);
-
-			int maxVisibleSize = canvasWidth / WAVE_UNIT_WIDTH;
 			int startIndex = 0;
 			int showSize = listSize;
-			if (listSize > maxVisibleSize) {
+			if (listSize > mItemShowNum) {
 				//canvas not enough to show all items, only show last items
-				startIndex = listSize - maxVisibleSize;
-				showSize = maxVisibleSize;
+				startIndex = listSize - mItemShowNum;
+				showSize = mItemShowNum;
 			}
 			LogUtils.d("updateWaveSurface: startIndex = " + startIndex + ", showSize = " + showSize);
 
@@ -157,16 +188,16 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 			int l, t, r, b;
 			for (int i = 0; i < showSize; i++) {
 				itemValue = dataList.get(i + startIndex);
-				itemHeight = calcItemHeight(itemValue, maxValue, mAmplitude);
+				itemHeight = calcItemHeight(itemValue, maxValue, mAmplitudeHeight);
 				if (itemValue != 0) {
-					if (WAVE_ITEM_WIDTH == 1) {
-						posX = i * WAVE_UNIT_WIDTH;
+					if (mWaveItemWidth < MIN_RECT_WIDTH) {
+					    posX = (int)(i * unitWidth);
 						stopY = startY - itemHeight;
 						canvas.drawLine(posX, startY, posX, stopY, mWavePaint);
 					}
 					else {
-						l = i * WAVE_UNIT_WIDTH;
-						r = l + WAVE_ITEM_WIDTH;
+					    l = (int)(i * unitWidth);
+						r = (int)(l + mWaveItemWidth);
 						t = startY;
 						b = t - itemHeight;
 						canvas.drawRect(new Rect(l, t, r, b), mWavePaint);
@@ -177,12 +208,12 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             /*
             //draw line/rect based on bottom
             int itemHeight;
-            if (WAVE_ITEM_WIDTH == 1) {
+            if (DEFAULT_WAVE_ITEM_WIDTH == 1) {
                 // just draw a line for one power value
                 int posX, posY;
                 for (int i = 0; i < showSize; i++) {
                     itemHeight = canvasHeight * powerList.get(i+startIndex) / POWER_MAX;
-                    posX = i * WAVE_UNIT_WIDTH;
+                    posX = i * DEFAULT_WAVE_UNIT_WIDTH;
                     posY = canvasHeight - itemHeight;
                     canvas.drawLine(posX, posY, posX, canvasHeight, mWavePaint);
                 }
@@ -193,8 +224,8 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 int l, t, r, b;
                 for (int i = 0; i < showSize; i++) {
                     itemHeight = canvasHeight * powerList.get(i+startIndex) / POWER_MAX;
-                    l = i * WAVE_UNIT_WIDTH;
-                    r = l + WAVE_ITEM_WIDTH;
+                    l = i * DEFAULT_WAVE_UNIT_WIDTH;
+                    r = l + DEFAULT_WAVE_ITEM_WIDTH;
                     t = canvasHeight - itemHeight;
                     b = canvasHeight;
                     canvas.drawRect(new Rect(l, t, r, b), mWavePaint);

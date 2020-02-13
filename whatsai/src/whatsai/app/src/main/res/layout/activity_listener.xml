@@ -6,18 +6,11 @@
     android:orientation="vertical"
     tools:context="com.liz.whatsai.ui.NodeActivity">
 
-    <!--titlebar-->
-    <include
-        layout="@layout/whatsai_titlebar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-    <!--titlebar-->
-
     <!--wave show-->
     <com.liz.whatsai.ui.WaveSurfaceView
         android:id="@+id/wave_surface_view"
         android:layout_width="fill_parent"
-        android:layout_height="200dp" />
+        android:layout_height="160dp" />
     <!--wave show-->
 
     <TextView

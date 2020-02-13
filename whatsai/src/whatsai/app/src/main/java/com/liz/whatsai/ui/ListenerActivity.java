@@ -28,9 +28,6 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_listener);
         LogUtils.d("ListenerActivity:onCreate");
 
-        findViewById(R.id.titlebar_menu).setOnClickListener(this);
-        findViewById(R.id.titlebar_close).setOnClickListener(this);
-
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
         mBtnSwitchListening.setText(WhatsaiListener.isListening()?"STOP":"START");
@@ -41,6 +38,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         mTextAudioConfig = findViewById(R.id.text_audio_config);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
+        mWaveSurfaceView.setMaxValue(WhatsaiListener.getMaxPower());
 
         startUITimer();
         WhatsaiListener.setCallback(mListenerCallback);
@@ -60,7 +58,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // UI Timer
     private static final long UI_TIMER_DELAY = 0L;
-    private static final long UI_TIMER_PERIOD = 2000L;
+    private static final long UI_TIMER_PERIOD = 1000L;
     private Timer mUITimer;
     private void startUITimer() {
         mUITimer = new Timer();
@@ -99,10 +97,6 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.btn_play_audio:
                 onPlayAudio();
-                break;
-            case R.id.titlebar_menu:
-            case R.id.titlebar_close:
-                onBackPressed();
                 break;
             default:
                 break;

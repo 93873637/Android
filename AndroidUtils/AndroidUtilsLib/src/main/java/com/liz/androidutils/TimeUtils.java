@@ -60,13 +60,13 @@ public class TimeUtils {
      */
     public static String elapsed(long startTime) {
         long timeDiff = System.currentTimeMillis() - startTime;
-        int seconds = (int)timeDiff / 1000;
+        int seconds = (int) timeDiff / 1000;
         int hour = seconds / 3600;
         int minute = (seconds % 3600) / 60;
         int second = seconds % 60;
-        String hs = (hour > 10?"":"0") + hour;
-        String ms = (minute > 10?"":"0") + minute;
-        String ss = (second > 10?"":"0") + second;
+        String hs = (hour >= 10 ? "" : "0") + hour;
+        String ms = (minute >= 10 ? "" : "0") + minute;
+        String ss = (second >= 10 ? "" : "0") + second;
         return hs + ":" + ms + ":" + ss;
     }
 
