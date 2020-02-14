@@ -12,7 +12,6 @@ import com.liz.androidutils.TimeUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class WhatsaiListener {
     public static final int DEFAULT_AUDIO_SAMPLE_RATE = AUDIO_SAMPLE_RATE_44K;
 
     // sample rate for showing wave data
-    public static final int DEFAULT_WAVE_SAMPLING_RATE = 1;
+    public static final int DEFAULT_WAVE_SAMPLING_RATE = 100;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Interface Functions
@@ -57,12 +56,12 @@ public class WhatsaiListener {
         return mListener._getConfigInfo();
     }
 
-    public static String getProgressInfo() {
-        return mListener._getProgressInfo();
+    public static String getAudioConfigInfo() {
+        return mListener._getAudioConfigInfo();
     }
 
-    public static void setItemShowNum(int showNum) {
-        mListener.mItemShowNum = showNum;
+    public static String getProgressInfo() {
+        return mListener._getProgressInfo();
     }
 
     public interface ListenerCallback {
@@ -129,7 +128,6 @@ public class WhatsaiListener {
     private int mDataRate = 0;  // unit by b/s(bit/s)
     private String mTimeElapsed = "";  // format as hh:mm:ss
     private ArrayList<Integer> mPowerList = new ArrayList<>();
-    private int mItemShowNum = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Working Timer
@@ -177,17 +175,16 @@ public class WhatsaiListener {
         configInfo += "<br>Channel Config: <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
         configInfo += "<br>Audio Buffer Size(B): <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
         configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + ComDef.WHATSAI_AUDIO_DIR + "</font>";
-        configInfo += "<br>Wave Show Sampling Rate: <font color=\"#ff0000\">" + mWaveSampling + "</font>";
         return configInfo;
     }
 
-    private String getDisplayRate() {
-        double rate = 1;
-        if (mItemShowNum < mPowerList.size()) {
-            rate = 1.0 * mItemShowNum / mPowerList.size();
-        }
-        DecimalFormat df = new DecimalFormat("#.000");
-        return df.format(rate);
+    private String _getAudioConfigInfo() {
+        String configInfo = "<font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + mSampleRate + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
+        return configInfo;
     }
 
     private String _getProgressInfo() {
@@ -217,7 +214,7 @@ public class WhatsaiListener {
         info += " | FC: <font color=\"#ff0000\">" + mFrameCount + "</font>";
         info += " | FR: <font color=\"#ff0000\">" + mFrameRate + "</font>";
         info += " | DR: <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
-        info += " | <font color=\"#ff0000\">" + mItemShowNum + "</font>";
+        info += " | <font color=\"#ff0000\">" + mWaveSampling + "</font>";
         info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mPowerList.size()) + "</font>";
         return info;
     }

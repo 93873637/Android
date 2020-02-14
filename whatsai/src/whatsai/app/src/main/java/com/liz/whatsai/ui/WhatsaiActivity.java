@@ -93,6 +93,7 @@ public class WhatsaiActivity extends AppCompatActivity
         findViewById(R.id.ll_whatsai).setOnClickListener(this);
         findViewById(R.id.toolbar_recorder).setOnClickListener(this);
         findViewById(R.id.toolbar_listener).setOnClickListener(this);
+        findViewById(R.id.toolbar_voice_template).setOnClickListener(this);
 
         mWhatsaiLastClickTime = 0;
         mListItemLastClickTime = 0;
@@ -111,6 +112,9 @@ public class WhatsaiActivity extends AppCompatActivity
                 break;
             case R.id.toolbar_listener:
                 openListenerActivity();
+                break;
+            case R.id.toolbar_voice_template:
+                openVoiceTemplateActivity();
                 break;
         }
 
@@ -407,6 +411,10 @@ public class WhatsaiActivity extends AppCompatActivity
 
     private void openListenerActivity() {
         startActivity(new Intent(WhatsaiActivity.this, ListenerActivity.class));
+    }
+
+    private void openVoiceTemplateActivity() {
+        startActivity(new Intent(WhatsaiActivity.this, VoiceTemplateActivity.class));
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

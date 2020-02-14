@@ -12,7 +12,6 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import com.liz.androidutils.LogUtils;
-import com.liz.whatsai.logic.WhatsaiListener;
 
 import java.util.List;
 
@@ -43,7 +42,8 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
 	private double mWaveItemWidth = DEFAULT_WAVE_ITEM_WIDTH;
 	private double mWaveItemSpace = DEFAULT_WAVE_ITEM_SPACE;
-	private int mItemShowNum;
+	private int mItemListNum = 0;
+	private int mItemShowNum = 0;
 
 	public WaveSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -98,6 +98,17 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 		}.start();
 	}
 
+	public String getSurfaceInfo() {
+		String info = "";
+		info += " <font color=\"#ff0000\">" + mMaxValue + "</font>";
+		info += " | <font color=\"#ff0000\">" + mItemListNum + "</font>";
+		info += " | <font color=\"#ff0000\">" + mItemShowNum + "</font>";
+		info += " | <font color=\"#ff0000\">" + mAmplitudeHeight + "</font>";
+		info += " | <font color=\"#ff0000\">" + mWaveItemWidth + "</font>";
+		info += " | <font color=\"#ff0000\">" + mWaveItemSpace + "</font>";
+		return info;
+	}
+
 	private void drawBackground(Canvas canvas) {
 		int canvasWidth = canvas.getWidth();
 		int canvasHeight = canvas.getHeight();
@@ -120,7 +131,6 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 		//*/
 
 		mItemShowNum = (int)(canvasWidth / getWaveUnitWidth());
-		WhatsaiListener.setItemShowNum(mItemShowNum);
 
 		/*
 		// draw y grids(log)
@@ -161,7 +171,6 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
 		drawBackground(canvas);
 
-		int canvasWidth = canvas.getWidth();
 		int canvasHeight = canvas.getHeight();
 		double unitWidth = this.getWaveUnitWidth();
 
@@ -170,6 +179,8 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 			LogUtils.i("list empty");
 		}
 		else {
+			mItemListNum = listSize;
+
 			int startIndex = 0;
 			int showSize = listSize;
 			if (listSize > mItemShowNum) {

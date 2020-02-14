@@ -15,27 +15,25 @@ import com.liz.whatsai.logic.WhatsaiListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ListenerActivity extends Activity implements View.OnClickListener {
+public class VoiceTemplateActivity extends Activity implements View.OnClickListener {
 
-    Button mBtnSwitchListening;
-    TextView mTextAudioConfig;
-    TextView mTextProgressInfo;
     WaveSurfaceView mWaveSurfaceView;
+    TextView mTextProgressInfo;
+    Button mBtnSwitchListening;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listener);
-        LogUtils.d("ListenerActivity:onCreate");
+        setContentView(R.layout.activity_voice_template);
+        LogUtils.d("VoiceTemplateActivity:onCreate");
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
         mBtnSwitchListening.setText(WhatsaiListener.isListening()?"STOP":"START");
 
+        findViewById(R.id.btn_switch_listening).setOnClickListener(this);
         findViewById(R.id.btn_play_audio).setOnClickListener(this);
-        findViewById(R.id.btn_audio_config).setOnClickListener(this);
 
-        mTextAudioConfig = findViewById(R.id.text_audio_config);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
         mWaveSurfaceView.setMaxValue(WhatsaiListener.getMaxPower());
@@ -47,7 +45,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
     private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
         @Override
         public void onPowerUpdated() {
-            ListenerActivity.this.runOnUiThread(new Runnable() {
+            VoiceTemplateActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
                     mWaveSurfaceView.onUpdateSurfaceData(WhatsaiListener.getPowerList(), WhatsaiListener.getMaxPower());
                 }
@@ -64,7 +62,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         mUITimer = new Timer();
         mUITimer.schedule(new TimerTask() {
             public void run () {
-                ListenerActivity.this.runOnUiThread(new Runnable() {
+                VoiceTemplateActivity.this.runOnUiThread(new Runnable() {
                     public void run() {
                         updateUI();
                     }
@@ -82,20 +80,17 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private String getProgressInfo() {
-        return mWaveSurfaceView.getSurfaceInfo() + " <br> " + WhatsaiListener.getProgressInfo();
+        return WhatsaiListener.getProgressInfo() +
+                "<br>" + mWaveSurfaceView.getSurfaceInfo() + " || " + WhatsaiListener.getAudioConfigInfo();
     }
 
     private void updateUI() {
-        mTextAudioConfig.setText(Html.fromHtml(WhatsaiListener.getConfigInfo()));
         mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_audio_config:
-                onAudioConfig();
-                break;
             case R.id.btn_switch_listening:
                 onSwitchListening();
                 break;
@@ -105,10 +100,6 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
             default:
                 break;
         }
-    }
-
-    private void onAudioConfig() {
-        //###@:
     }
 
     private void onSwitchListening() {
@@ -127,7 +118,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
-        LogUtils.d("ListenerActivity:onBackPressed");
+        LogUtils.d("VoiceTemplateActivity:onBackPressed");
         stopUITimer();
         super.onBackPressed();
     }
