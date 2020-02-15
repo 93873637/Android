@@ -40,71 +40,139 @@ public class WhatsaiListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Interface Functions
 
-    public static boolean isListening() {
-        return mListener.mIsListening;
+    public WhatsaiListener() {
+        LogUtils.d("WhatsaiListener:WhatsaiListener");
+        mAudioBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mAudioFormat);
+        LogUtils.d("WhatsaiListener:WhatsaiListener: mAudioBufferSize = " + mAudioBufferSize);
+        mAudioRecord = new AudioRecord(mAudioSource, mSampleRate, mChannelConfig, mAudioFormat, mAudioBufferSize);
     }
 
-    public static void switchListening() {
-        mListener._switchListening();
+    public boolean isListening() {
+        return this.mIsListening;
     }
 
-    public static void playAudio() {
-        mListener._playAudio();
+    public void switchListening() {
+        LogUtils.d("WhatsaiListener:switchListening: mIsListening = " + mIsListening);
+        if (mIsListening) {
+            stopListening();
+            stopWorkingTimer();
+        }
+        else {
+            startListening();
+            startWorkingTimer();
+        }
     }
 
-    public static String getConfigInfo() {
-        return mListener._getConfigInfo();
+    public void playAudio() {
+        playAudio(getPCMFileAbsolute());
     }
 
-    public static String getAudioConfigInfo() {
-        return mListener._getAudioConfigInfo();
+    public void playAudio(String fileAbsolute) {
+        AudioUtils.playPCM(fileAbsolute, mAudioBufferSize, mSampleRate, mAudioFormat, mChannelConfig);
+        //##@: AudioUtils.playPCM16(mPowerList, mAudioBufferSize, mSampleRate, mChannelConfig);
+
+        /*
+        //save to wav file
+        LogUtils.d("Convert pcm file to wave...");
+        AudioUtils.pcmToWave(mPCMFileName, mPCMFileName + ".wav",
+                mSampleRate, mAudioBufferSize, mAudioFormat, AudioUtils.AUDIO_TRACK_SINGLE);
+        //*/
     }
 
-    public static String getProgressInfo() {
-        return mListener._getProgressInfo();
+    public String getAudioConfigInfoEx() {
+        String configInfo = "Audio Source: <font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
+        configInfo += "<br>Sample Rate(Hz): <font color=\"#ff0000\">" + mSampleRate + "</font>";
+        configInfo += "<br>Audio Format: <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
+        configInfo += "<br>Channel Config: <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
+        configInfo += "<br>Audio Buffer Size(B): <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
+        configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + ComDef.WHATSAI_AUDIO_DIR + "</font>";
+        return configInfo;
+    }
+
+    public String getAudioConfigInfo() {
+        String configInfo = "<font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + mSampleRate + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
+        return configInfo;
+    }
+
+    public String getProgressInfo() {
+        String info = "";
+        info += " <font color=\"#ff0000\">" + mPCMFileName + "</font>";
+        info += " | <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
+        info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mTotalSize) + "</font>";
+        info += " | FP: <font color=\"#ff0000\">" + mFramePower + "</font>";
+        info += " | FS: <font color=\"#ff0000\">" + mFrameSize + "</font>";
+        info += " | FC: <font color=\"#ff0000\">" + mFrameCount + "</font>";
+        info += " | FR: <font color=\"#ff0000\">" + mFrameRate + "</font>";
+        info += " | DR: <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
+        info += " | <font color=\"#ff0000\">" + mWaveSamplingRate + "</font>";
+        info += " | <font color=\"#ff0000\">" + mPowerList.size() + "</font>";
+        return info;
+    }
+
+    public String getSpeechText() {
+        return mSpeechText;
+    }
+
+    public String getPCMFileAbsolute() {
+        return ComDef.WHATSAI_AUDIO_DIR + "/" + mPCMFileName;
+    }
+
+    public String getPCMFileName() {
+        return mPCMFileName;
     }
 
     public interface ListenerCallback {
         void onPowerUpdated();
     }
 
-    public static void setCallback(ListenerCallback callback) {
+    public void setCallback(ListenerCallback callback) {
         mCallback = callback;
     }
 
-    @SuppressWarnings("unused")
-    public static int getPowerListSize() {
-        if (mListener.mPowerList == null) {
-            return -1;
-        }
-        else {
-            return mListener.mPowerList.size();
-        }
+    public void setWaveSamplingRate(int samplingRate) {
+        mWaveSamplingRate = samplingRate;
     }
 
     @SuppressWarnings("unused")
-    public static double getLastPower() {
-        if (mListener.mPowerList == null || mListener.mPowerList.isEmpty()){
+    public int getPowerListSize() {
+        if (this.mPowerList == null) {
             return -1;
         }
         else {
-            return mListener.mPowerList.get(mListener.mPowerList.size() - 1);
+            return this.mPowerList.size();
         }
     }
 
-    public static List<Integer> getPowerList() {
-        return mListener.mPowerList;
+    @SuppressWarnings("unused")
+    public double getLastPower() {
+        if (this.mPowerList == null || this.mPowerList.isEmpty()){
+            return -1;
+        }
+        else {
+            return this.mPowerList.get(this.mPowerList.size() - 1);
+        }
     }
 
-    public static int getMaxPower() {
+    public List<Integer> getPowerList() {
+        return this.mPowerList;
+    }
+
+    public int getMaxPower() {
         return MAX_POWER;
+    }
+
+    public void setVoiceRecognition(boolean recognition) {
+        mVoiceRecognition = recognition;
     }
 
     // Interface Functions
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private static WhatsaiListener mListener = new WhatsaiListener();
-    private static ListenerCallback mCallback = null;
+    private ListenerCallback mCallback = null;
 
     private AudioRecord mAudioRecord;
     private int mAudioSource = MediaRecorder.AudioSource.MIC;
@@ -112,7 +180,7 @@ public class WhatsaiListener {
     private int mAudioFormat = AudioFormat.ENCODING_PCM_16BIT;
     private int mChannelConfig = AudioFormat.CHANNEL_CONFIGURATION_MONO;
     private int mAudioBufferSize;  // unit by byte
-    private int mWaveSampling = DEFAULT_WAVE_SAMPLING_RATE;
+    private int mWaveSamplingRate = DEFAULT_WAVE_SAMPLING_RATE;
 
     private boolean mIsListening = false;
 
@@ -129,35 +197,34 @@ public class WhatsaiListener {
     private String mTimeElapsed = "";  // format as hh:mm:ss
     private ArrayList<Integer> mPowerList = new ArrayList<>();
 
+    private boolean mVoiceRecognition = false;
+    private String mSpeechText = "";
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Working Timer
     private static final long WORKING_TIMER_DELAY = 0L;
     private static final long WORKING_TIMER_PERIOD = 1000L;
+
     private Timer mWorkingTimer;
+
     private void startWorkingTimer() {
         mWorkingTimer = new Timer();
         mWorkingTimer.schedule(new TimerTask() {
             public void run () {
-                mListener.onWorkingTimer();
+                onWorkingTimer();
             }
         }, WORKING_TIMER_DELAY, WORKING_TIMER_PERIOD);
     }
+
     private void stopWorkingTimer() {
         if (mWorkingTimer != null) {
             mWorkingTimer.cancel();
             mWorkingTimer = null;
         }
     }
+
     // Working Timer
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // Singleton Constructor
-    private WhatsaiListener() {
-        LogUtils.d("WhatsaiListener:WhatsaiListener");
-        mAudioBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mAudioFormat);
-        LogUtils.d("WhatsaiListener:WhatsaiListener: mAudioBufferSize = " + mAudioBufferSize);
-        mAudioRecord = new AudioRecord(mAudioSource, mSampleRate, mChannelConfig, mAudioFormat, mAudioBufferSize);
-    }
 
     private void onWorkingTimer() {
         LogUtils.d("WhatsaiListener:onWorkingTimer");
@@ -166,57 +233,6 @@ public class WhatsaiListener {
         mDataRate = mTotalSize - mLastDataSize;
         mLastDataSize = mTotalSize;
         mTimeElapsed = TimeUtils.elapsed(mStartTime);
-    }
-
-    private String _getConfigInfo() {
-        String configInfo = "Audio Source: <font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
-        configInfo += "<br>Sample Rate(Hz): <font color=\"#ff0000\">" + mSampleRate + "</font>";
-        configInfo += "<br>Audio Format: <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
-        configInfo += "<br>Channel Config: <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
-        configInfo += "<br>Audio Buffer Size(B): <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
-        configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + ComDef.WHATSAI_AUDIO_DIR + "</font>";
-        return configInfo;
-    }
-
-    private String _getAudioConfigInfo() {
-        String configInfo = "<font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
-        configInfo += " | <font color=\"#ff0000\">" + mSampleRate + "</font>";
-        configInfo += " | <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
-        configInfo += " | <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
-        configInfo += " | <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
-        return configInfo;
-    }
-
-    private String _getProgressInfo() {
-        /*
-        String info = "";
-        if (mIsListening) {
-            info += "Status: <font color=\"#ff0000\"><b>LISTENING...</b></font>";
-        }
-        else {
-            info += "Status: <font color=\"#0000ff\"><b>IDLE</b></font>";
-        }
-        info += "<br>Frame Power: <font color=\"#ff0000\">" + mFramePower + "</font>";
-        info += "<br>Frame Size(B): <font color=\"#ff0000\">" + mFrameSize + "</font>";
-        info += "<br>Frame Count: <font color=\"#ff0000\">" + mFrameCount + "</font>";
-        info += "<br>Frame Rate: <font color=\"#ff0000\">" + mFrameRate + "</font>";
-        info += "<br>Data Rate(b/s): <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
-        info += "<br>Duration: <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
-        info += "<br>Total Size(B): <font color=\"#ff0000\">" + NumUtils.formatSize(mTotalSize) + "</font>";
-        info += "<br>PCM File: <font color=\"#ff0000\">" + mPCMFileName + "</font>";
-        //*/
-        String info = "";
-        info += " <font color=\"#ff0000\">" + mPCMFileName + "</font>";
-        info += " | <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
-        info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mTotalSize) + "</font>";
-        info += " | FP: <font color=\"#ff0000\">" + mFramePower + "</font>";
-        info += " | FS: <font color=\"#ff0000\">" + mFrameSize + "</font>";
-        info += " | FC: <font color=\"#ff0000\">" + mFrameCount + "</font>";
-        info += " | FR: <font color=\"#ff0000\">" + mFrameRate + "</font>";
-        info += " | DR: <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
-        info += " | <font color=\"#ff0000\">" + mWaveSampling + "</font>";
-        info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mPowerList.size()) + "</font>";
-        return info;
     }
 
     private void resetParams() {
@@ -233,18 +249,6 @@ public class WhatsaiListener {
         mDataRate = 0;
         mTimeElapsed = "00:00:00";
         mPowerList.clear();
-    }
-
-    private void _switchListening() {
-        LogUtils.d("WhatsaiListener:_switchListening: mIsListening = " + mIsListening);
-        if (mIsListening) {
-            stopListening();
-            stopWorkingTimer();
-        }
-        else {
-            startListening();
-            startWorkingTimer();
-        }
     }
 
     private void startListening() {
@@ -280,18 +284,35 @@ public class WhatsaiListener {
                     }
                     outputStream.close();
                 } catch (Exception e) {
-                    LogUtils.e("WhatsaiListener: startListening: exception: " + e.toString());
+                    LogUtils.e("WhatsaiListener: startListening: listen thread exception " + e.toString());
                     e.printStackTrace();
                 }
             }
         }).start();
+
+        if (mVoiceRecognition) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        LogUtils.d("WhatsaiListener: Start parse audio data get speech text...");
+                        while (mIsListening) {
+                            //###@: todo:
+                        }
+                    } catch (Exception e) {
+                        LogUtils.e("WhatsaiListener: startListening: recognition thread exception: " + e.toString());
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
     }
 
     private void onReadBuffer(final int readSize, byte[] audioData) {
         mFrameSize = readSize / 2;
 
         // sample for showing
-        for (int i = 0; i < mFrameSize; i += mWaveSampling) {
+        for (int i = 0; i < mFrameSize; i += mWaveSamplingRate) {
             mPowerList.add(audioData[i * 2 + 1] << 8 | audioData[i * 2]);
             /*
             // audio zoom
@@ -338,22 +359,6 @@ public class WhatsaiListener {
         }
         mIsListening = false;
         mAudioRecord.stop();
-    }
-
-    private String getPCMFileAbsolute() {
-        return ComDef.WHATSAI_AUDIO_DIR + "/" + mPCMFileName;
-    }
-
-    private void _playAudio() {
-        AudioUtils.playPCM(getPCMFileAbsolute(), mAudioBufferSize, mSampleRate, mAudioFormat, mChannelConfig);
-        //##@: AudioUtils.playPCM16(mPowerList, mAudioBufferSize, mSampleRate, mChannelConfig);
-
-        /*
-        //save to wav file
-        LogUtils.d("Convert pcm file to wave...");
-        AudioUtils.pcmToWave(mPCMFileName, mPCMFileName + ".wav",
-                mSampleRate, mAudioBufferSize, mAudioFormat, AudioUtils.AUDIO_TRACK_SINGLE);
-        //*/
     }
 
     private FileOutputStream getPCMOutputStream() {

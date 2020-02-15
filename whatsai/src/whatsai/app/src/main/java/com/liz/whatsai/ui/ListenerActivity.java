@@ -18,9 +18,10 @@ import java.util.TimerTask;
 public class ListenerActivity extends Activity implements View.OnClickListener {
 
     Button mBtnSwitchListening;
-    TextView mTextAudioConfig;
+    TextView mTextSpeech;
     TextView mTextProgressInfo;
     WaveSurfaceView mWaveSurfaceView;
+    WhatsaiListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,20 +29,23 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_listener);
         LogUtils.d("ListenerActivity:onCreate");
 
+        mListener = new WhatsaiListener();
+        mListener.setCallback(mListenerCallback);
+        mListener.setVoiceRecognition(true);
+
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
-        mBtnSwitchListening.setText(WhatsaiListener.isListening()?"STOP":"START");
+        mBtnSwitchListening.setText(mListener.isListening()?"STOP":"START");
 
         findViewById(R.id.btn_play_audio).setOnClickListener(this);
         findViewById(R.id.btn_audio_config).setOnClickListener(this);
 
-        mTextAudioConfig = findViewById(R.id.text_audio_config);
+        mTextSpeech = findViewById(R.id.text_speech);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
-        mWaveSurfaceView.setMaxValue(WhatsaiListener.getMaxPower());
+        mWaveSurfaceView.setMaxValue(mListener.getMaxPower());
 
         startUITimer();
-        WhatsaiListener.setCallback(mListenerCallback);
     }
 
     private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
@@ -49,7 +53,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         public void onPowerUpdated() {
             ListenerActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    mWaveSurfaceView.onUpdateSurfaceData(WhatsaiListener.getPowerList(), WhatsaiListener.getMaxPower());
+                    mWaveSurfaceView.onUpdateSurfaceData(mListener.getPowerList(), mListener.getMaxPower());
                 }
             });
         }
@@ -82,11 +86,12 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private String getProgressInfo() {
-        return mWaveSurfaceView.getSurfaceInfo() + " <br> " + WhatsaiListener.getProgressInfo();
+        return mListener.getProgressInfo() +
+                "<br>" +  mListener.getAudioConfigInfo() + " || " + mWaveSurfaceView.getSurfaceInfo();
     }
 
     private void updateUI() {
-        mTextAudioConfig.setText(Html.fromHtml(WhatsaiListener.getConfigInfo()));
+        mTextSpeech.setText(Html.fromHtml(mListener.getSpeechText()));
         mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
     }
 
@@ -112,16 +117,16 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
     }
 
     private void onSwitchListening() {
-        WhatsaiListener.switchListening();
-        mBtnSwitchListening.setText(WhatsaiListener.isListening()?"STOP":"START");
+        mListener.switchListening();
+        mBtnSwitchListening.setText(mListener.isListening()?"STOP":"START");
     }
 
     private void onPlayAudio() {
-        if (WhatsaiListener.isListening()) {
+        if (mListener.isListening()) {
             Toast.makeText(this, "Can't play when listening, stop first", Toast.LENGTH_SHORT).show();
         }
         else {
-            WhatsaiListener.playAudio();
+            mListener.playAudio();
         }
     }
 

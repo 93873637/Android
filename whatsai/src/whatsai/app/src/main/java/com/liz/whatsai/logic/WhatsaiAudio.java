@@ -4,7 +4,6 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 
 import com.liz.androidutils.LogUtils;
-import com.liz.whatsai.app.AudioListAdapter;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -44,8 +43,8 @@ public class WhatsaiAudio {
         return mPlayItemPos;
     }
 
-    public static void startPlay(int pos) {
-        mWhatsaiAudio._startPlay(AudioListAdapter.getAudioFilePath(pos));
+    public static void startPlay(String filePath) {
+        mWhatsaiAudio._startPlay(filePath);
     }
 
     public static void stopPlay(int pos) {

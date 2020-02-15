@@ -42,7 +42,6 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
 	private double mWaveItemWidth = DEFAULT_WAVE_ITEM_WIDTH;
 	private double mWaveItemSpace = DEFAULT_WAVE_ITEM_SPACE;
-	private int mItemListNum = 0;
 	private int mItemShowNum = 0;
 
 	public WaveSurfaceView(Context context, AttributeSet attrs) {
@@ -69,6 +68,14 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
 	public void setMaxValue(double maxValue) {
 		mMaxValue = maxValue;
+	}
+
+	public void setWaveItemWidth(double itemWidth) {
+		mWaveItemWidth = itemWidth;
+	}
+
+	public void setWaveItemSpace(double itemSpace) {
+		mWaveItemSpace = itemSpace;
 	}
 
 	private double getWaveUnitWidth() {
@@ -101,7 +108,6 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	public String getSurfaceInfo() {
 		String info = "";
 		info += " <font color=\"#ff0000\">" + mMaxValue + "</font>";
-		info += " | <font color=\"#ff0000\">" + mItemListNum + "</font>";
 		info += " | <font color=\"#ff0000\">" + mItemShowNum + "</font>";
 		info += " | <font color=\"#ff0000\">" + mAmplitudeHeight + "</font>";
 		info += " | <font color=\"#ff0000\">" + mWaveItemWidth + "</font>";
@@ -179,8 +185,6 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 			LogUtils.i("list empty");
 		}
 		else {
-			mItemListNum = listSize;
-
 			int startIndex = 0;
 			int showSize = listSize;
 			if (listSize > mItemShowNum) {

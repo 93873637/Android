@@ -66,7 +66,7 @@
     <!--action buttons-->
 
     <TextView
-        android:id="@+id/text_audio_config"
+        android:id="@+id/text_speech"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start|top"
@@ -74,7 +74,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="6dp"
-        android:text="Audio Config Info"
+        android:text="listening..."
         android:textColor="#000"
         android:textStyle="bold"
         android:textSize="12sp" />

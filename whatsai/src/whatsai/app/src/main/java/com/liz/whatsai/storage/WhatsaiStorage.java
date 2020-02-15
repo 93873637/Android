@@ -121,6 +121,10 @@ public class WhatsaiStorage {
             LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_AUDIO_DIR + " failed.");
             return false;
         }
+        if (!FileUtils.touchDir(ComDef.WHATSAI_AUDIO_TEMPLATE_DIR)) {
+            LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_AUDIO_TEMPLATE_DIR + " failed.");
+            return false;
+        }
         if (!FileUtils.touchDir(ComDef.WHATSAI_CACHE_DIR)) {
             LogUtils.e("WhatsaiStorage: Touch dir of " + ComDef.WHATSAI_CACHE_DIR + " failed.");
             return false;

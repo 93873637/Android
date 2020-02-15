@@ -44,6 +44,9 @@ public class ComDef {
     public static final String WHATSAI_AUDIO_DIR_NAME = "audio";
     public static final String WHATSAI_AUDIO_DIR = WHATSAI_HOME + "/" + WHATSAI_AUDIO_DIR_NAME;
 
+    public static final String WHATSAI_AUDIO_TEMPLATE_DIR_NAME = "templates";
+    public static final String WHATSAI_AUDIO_TEMPLATE_DIR = WHATSAI_AUDIO_DIR + "/" + WHATSAI_AUDIO_TEMPLATE_DIR_NAME;
+
     /**
      * cache dir for temporary files
      */

@@ -79,7 +79,7 @@
         </LinearLayout>
         <!--audio switch button-->
 
-        <!--audio record files list-->
+        <!--audio files list-->
         <LinearLayout
             android:id="@+id/ll_audio_files"
             android:layout_width="match_parent"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:drawSelectorOnTop="true" />
         </LinearLayout>
-        <!--audio data list-->
+        <!--audio files list-->
 
     </LinearLayout>
 </LinearLayout>

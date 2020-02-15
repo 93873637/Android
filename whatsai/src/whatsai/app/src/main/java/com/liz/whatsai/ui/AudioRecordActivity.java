@@ -59,12 +59,11 @@ public class AudioRecordActivity extends AppCompatActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_record);
 
-        initDatas();
+        initData();
         initUI();
     }
 
-    //初始化数据
-    private void initDatas() {
+    private void initData() {
         mBufferSizeInBytes = AudioRecord.getMinBufferSize(mSampleRateInHz, mChannelConfig, mAudioFormat);//计算最小缓冲区
         mAudioRecord = new AudioRecord(mAudioSource, mSampleRateInHz, mChannelConfig,
                 mAudioFormat, mBufferSizeInBytes);//创建AudioRecorder对象
@@ -74,7 +73,6 @@ public class AudioRecordActivity extends AppCompatActivity implements Runnable {
         }
     }
 
-    //初始化UI
     private void initUI() {
         mBtnStartRecord = findViewById(R.id.btn_start_record);
         mBtnStartRecord.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +99,6 @@ public class AudioRecordActivity extends AppCompatActivity implements Runnable {
         });
     }
 
-    //开始录音
     public void startRecord() {
 
         //AudioRecord.getMinBufferSize的参数是否支持当前的硬件设备
@@ -177,7 +174,7 @@ public class AudioRecordActivity extends AppCompatActivity implements Runnable {
 
             //判断AudioRecord未初始化，停止录音的时候释放了，状态就为STATE_UNINITIALIZED
             if (mAudioRecord.getState() == mAudioRecord.STATE_UNINITIALIZED) {
-                initDatas();
+                initData();
             }
 
             mAudioRecord.startRecording();//开始录音

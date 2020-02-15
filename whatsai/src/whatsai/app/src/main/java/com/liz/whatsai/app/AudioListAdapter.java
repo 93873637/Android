@@ -1,6 +1,5 @@
 package com.liz.whatsai.app;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.liz.androidutils.FileUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
@@ -17,40 +17,40 @@ import java.io.File;
 
 public class AudioListAdapter extends BaseAdapter {
 
-    private static AudioListAdapter adapter;
-    public static AudioListAdapter getAdapter() {
-        if (adapter == null) {
-            adapter = new AudioListAdapter(ThisApp.getAppContext());
-        }
-        return adapter;
+    private File[] mFileList;
+    private LayoutInflater mLayoutInflater;
+    private String mAudioDir;
+
+    public File getAudioFile(long pos) {
+        return (File)this.getItem((int)pos);
     }
 
-    public static File getAudioFile(long pos) {
-        return (File)adapter.getItem((int)pos);
+    public String getAudioFilePath(long pos) {
+        return ((File)this.getItem((int)pos)).getAbsolutePath();
     }
 
-    public static String getAudioFilePath(long pos) {
-        return ((File)adapter.getItem((int)pos)).getAbsolutePath();
+    public String getAudioFilesInfo() {
+        return this.getListInfo();
     }
 
-    public static String getAudioFilesInfo() {
-        return adapter.getListInfo();
+    public void onDataChanged() {
+        this.notifyDataSetChanged();
     }
 
-    public static void onDataChanged() {
-        getAdapter().notifyDataSetChanged();
+    public void onUpdateList() {
+        this.updateList();
     }
 
-    public static void onUpdateList() {
-        getAdapter().updateList();
-    }
-
-    private File[] list;
-    private LayoutInflater inflater;
-
-    private AudioListAdapter(Context context) {
+    public AudioListAdapter() {
+        mAudioDir = ComDef.WHATSAI_AUDIO_DIR;
         loadListData();
-        inflater = LayoutInflater.from(context);
+        mLayoutInflater = LayoutInflater.from(ThisApp.getAppContext());
+    }
+
+    public AudioListAdapter(String filePath) {
+        mAudioDir = filePath;
+        loadListData();
+        mLayoutInflater = LayoutInflater.from(ThisApp.getAppContext());
     }
 
     private void updateList() {
@@ -59,13 +59,13 @@ public class AudioListAdapter extends BaseAdapter {
     }
 
     private void loadListData() {
-        this.list = FileUtils.getFileList(ComDef.WHATSAI_AUDIO_DIR, FileUtils.ORDER_BY_DATE_DESC);
+        this.mFileList = FileUtils.getFileList(mAudioDir, FileUtils.ORDER_BY_DATE_DESC);
     }
 
     private String getListInfo() {
-        String info = "Total " + list.length + " Files";
+        String info = "Total " + mFileList.length + " Files";
         long sizeTotal = 0;
-        for (File f:list) {
+        for (File f: mFileList) {
             sizeTotal += FileUtils.getFileSize(f);
         }
         info += ", Size " + FileUtils.formatFileSize(sizeTotal);
@@ -74,8 +74,8 @@ public class AudioListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (list != null) {
-            return list.length;
+        if (mFileList != null) {
+            return mFileList.length;
         }
         else {
             return 0;
@@ -84,7 +84,7 @@ public class AudioListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return list[position];
+        return mFileList[position];
     }
 
     @Override
@@ -96,7 +96,7 @@ public class AudioListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.audio_list_item, parent, false);
+            convertView = mLayoutInflater.inflate(R.layout.audio_list_item, parent, false);
             holder = new ViewHolder();
             holder.ivType = convertView.findViewById(R.id.iv_image);
             holder.tvName = convertView.findViewById(R.id.tv_name);
@@ -106,7 +106,7 @@ public class AudioListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();  //the Object stored in this view as a tag
         }
 
-        File f = list[position];
+        File f = mFileList[position];
         holder.tvName.setText(f.getName());
         holder.tvSize.setText(FileUtils.formatFileSize(FileUtils.getFileSize(f)));
 //        holder.ivPlay.setOnClickListener(new View.OnClickListener() {

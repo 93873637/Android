@@ -26,6 +26,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         View.OnCreateContextMenuListener {
 
     private ImageButton mBtnSwitchRecord;
+    AudioListAdapter mAudioListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,11 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         mBtnSwitchRecord = findViewById(R.id.btn_switch_record);
         mBtnSwitchRecord.setOnClickListener(this);
 
+        mAudioListAdapter = new AudioListAdapter();
+
         ListView listView = findViewById(R.id.lv_audio_files);
         listView.addFooterView(new ViewStub(this));
-        listView.setAdapter(AudioListAdapter.getAdapter());
+        listView.setAdapter(mAudioListAdapter);
         //listView.setOnItemClickListener(this);
         listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -98,7 +101,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
         if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            WhatsaiAudio.startPlay((int)info.id);
+            WhatsaiAudio.startPlay(mAudioListAdapter.getAudioFilePath((int)info.id));
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
@@ -116,7 +119,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
 
     private void onDeleteAudioFile(long id) {
         final int pos = (int)id;
-        final File f = AudioListAdapter.getAudioFile(pos);
+        final File f = mAudioListAdapter.getAudioFile(pos);
         final TextView tv = new TextView(this);
         tv.setText(f.getAbsolutePath());
         new AlertDialog
@@ -134,13 +137,13 @@ public class AudioActivity extends Activity implements View.OnClickListener,
     }
 
     private void updateAudioList() {
-        AudioListAdapter.onUpdateList();
+        mAudioListAdapter.onUpdateList();
         setAudioFilesInfo();
     }
 
     private void setAudioFilesInfo() {
         TextView textAudioFiles = findViewById(R.id.tv_audio_files);
-        textAudioFiles.setText(AudioListAdapter.getAudioFilesInfo());
+        textAudioFiles.setText(mAudioListAdapter.getAudioFilesInfo());
     }
 
     protected void setAudioButton() {

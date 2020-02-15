@@ -10,7 +10,7 @@
     <com.liz.whatsai.ui.WaveSurfaceView
         android:id="@+id/wave_surface_view"
         android:layout_width="fill_parent"
-        android:layout_height="160dp" />
+        android:layout_height="120dp" />
     <!--wave show-->
 
     <TextView
@@ -53,7 +53,24 @@
             android:text="Play"
             android:textColor="#5d7883"
             android:textSize="18sp" />
+        <Button
+            android:id="@+id/btn_save_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="#5d7883"
+            android:textSize="18sp" />
     </LinearLayout>
     <!--action buttons-->
+
+    <!--audio files list-->
+    <ListView
+        android:id="@+id/lv_audio_files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true" />
+    <!--audio files list-->
 
 </LinearLayout>
