@@ -6,21 +6,17 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
-import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
-import com.liz.whatsai.app.AudioListAdapter;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.WhatsaiAudio;
 import com.liz.whatsai.logic.WhatsaiListener;
@@ -34,7 +30,7 @@ public class VoiceTemplateActivity extends Activity implements View.OnClickListe
     TextView mTextProgressInfo;
     Button mBtnSwitchListening;
     WhatsaiListener mListener;
-    AudioListAdapter mAudioListAdapter;
+    AudioListView mAudioListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,20 +57,10 @@ public class VoiceTemplateActivity extends Activity implements View.OnClickListe
         mWaveSurfaceView.setWaveItemWidth(1);
         mWaveSurfaceView.setWaveItemSpace(0);
 
+        mAudioListView = findViewById(R.id.lv_audio_files);
+        mAudioListView.onCreate(this, ComDef.WHATSAI_AUDIO_TEMPLATE_DIR);
+
         startUITimer();
-
-        mAudioListAdapter = new AudioListAdapter(ComDef.WHATSAI_AUDIO_TEMPLATE_DIR);
-
-        ListView listView = findViewById(R.id.lv_audio_files);
-        listView.addFooterView(new ViewStub(this));
-        listView.setAdapter(mAudioListAdapter);
-        listView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                for (ComDef.AudioListMenu c : ComDef.AudioListMenu.values()) {
-                    menu.add(0, c.id, 0, c.name);
-                }
-            }
-        });
     }
 
     private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
@@ -90,14 +76,21 @@ public class VoiceTemplateActivity extends Activity implements View.OnClickListe
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        //###@:todo: improve it by save audio file as wave file and play it
+//        if (mAudioListView.onContextItemSelected(item)) {
+//            return true;
+//        }
+//
+//        return super.onContextItemSelected(item);
+
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
         if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            mListener.playAudio(mAudioListAdapter.getAudioFilePath((int)info.id));
+            mListener.playAudio(mAudioListView.getAudioFilePath((int)info.id));
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WhatsaiAudio.stopPlay((int)info.id);
+            WhatsaiAudio.stopPlay();
             return true;
         }
         else {
@@ -189,7 +182,7 @@ public class VoiceTemplateActivity extends Activity implements View.OnClickListe
                             String srcFilePath = mListener.getPCMFileAbsolute();
                             String tarPilePath = ComDef.WHATSAI_AUDIO_TEMPLATE_DIR + "/" + et.getText().toString();
                             FileUtils.mv(srcFilePath, tarPilePath);
-                            mAudioListAdapter.onUpdateList();
+                            mAudioListView.updateList();
                         }
                     }
                 }).setNegativeButton("Cancel", null).show();

@@ -32,6 +32,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         mListener = new WhatsaiListener();
         mListener.setCallback(mListenerCallback);
         mListener.setVoiceRecognition(true);
+        mListener.setWaveSamplingRate(1);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
@@ -61,9 +62,12 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // UI Timer
+
     private static final long UI_TIMER_DELAY = 0L;
     private static final long UI_TIMER_PERIOD = 1000L;
+
     private Timer mUITimer;
+
     private void startUITimer() {
         mUITimer = new Timer();
         mUITimer.schedule(new TimerTask() {
@@ -76,12 +80,14 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
             }
         }, UI_TIMER_DELAY, UI_TIMER_PERIOD);
     }
+
     private void stopUITimer() {
         if (mUITimer != null) {
             mUITimer.cancel();
             mUITimer = null;
         }
     }
+
     // UI Timer
     ////////////////////////////////////////////////////////////////////////////////////////////////
 

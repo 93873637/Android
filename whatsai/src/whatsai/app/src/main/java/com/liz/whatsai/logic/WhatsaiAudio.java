@@ -47,7 +47,7 @@ public class WhatsaiAudio {
         mWhatsaiAudio._startPlay(filePath);
     }
 
-    public static void stopPlay(int pos) {
+    public static void stopPlay() {
         mWhatsaiAudio._stopPlay();
     }
 

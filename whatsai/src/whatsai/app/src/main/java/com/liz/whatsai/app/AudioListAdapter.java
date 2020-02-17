@@ -37,10 +37,6 @@ public class AudioListAdapter extends BaseAdapter {
         this.notifyDataSetChanged();
     }
 
-    public void onUpdateList() {
-        this.updateList();
-    }
-
     public AudioListAdapter() {
         mAudioDir = ComDef.WHATSAI_AUDIO_DIR;
         loadListData();
@@ -53,7 +49,7 @@ public class AudioListAdapter extends BaseAdapter {
         mLayoutInflater = LayoutInflater.from(ThisApp.getAppContext());
     }
 
-    private void updateList() {
+    public void updateList() {
         loadListData();
         notifyDataSetChanged();
     }

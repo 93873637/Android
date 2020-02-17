@@ -105,7 +105,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WhatsaiAudio.stopPlay((int)info.id);
+            WhatsaiAudio.stopPlay();
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.DEL.id) {
@@ -137,7 +137,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
     }
 
     private void updateAudioList() {
-        mAudioListAdapter.onUpdateList();
+        mAudioListAdapter.updateList();
         setAudioFilesInfo();
     }
 
