@@ -11,7 +11,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/ic_return"
-        android:contentDescription="@string/action_listening"
+        android:contentDescription="@string/app_name"
         android:gravity="end|center_vertical"
         android:paddingTop="8dp"
         android:paddingBottom="8dp" />

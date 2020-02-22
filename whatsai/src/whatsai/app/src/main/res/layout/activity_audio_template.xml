@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.liz.whatsai.ui.NodeActivity">
+
+    <!--wave show-->
+    <com.liz.whatsai.ui.WaveSurfaceView
+        android:id="@+id/wave_surface_view"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp" />
+    <!--wave show-->
+
+    <TextView
+        android:id="@+id/text_progress_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="0dp"
+        android:text="Audio Recording Info"
+        android:textColor="#000"
+        android:textSize="12sp" />
+
+    <!--action buttons-->
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_switch_listening"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Start"
+            android:textColor="#5d7883"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/btn_play_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Play"
+            android:textColor="#5d7883"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/btn_save_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Save"
+            android:textColor="#5d7883"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/btn_to_listener"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="LSN..."
+            android:textColor="#5d7883"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <!--action buttons-->
+
+    <!--audio files list-->
+    <com.liz.whatsai.ui.AudioListView
+        android:id="@+id/lv_audio_files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true" />
+    <!--audio files list-->
+
+</LinearLayout>

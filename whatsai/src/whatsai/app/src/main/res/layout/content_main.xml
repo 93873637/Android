@@ -22,28 +22,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="2dp"
+            android:paddingEnd="6dp"
             android:orientation="horizontal"
             android:background="@color/colorAccent"
             android:gravity="end|center_vertical">
 
             <ImageButton
                 android:id="@+id/toolbar_listener"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="6dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="6dp"
                 android:contentDescription="@string/action_listening"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/listen" />
 
             <ImageButton
                 android:id="@+id/toolbar_voice_template"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="6dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="6dp"
                 android:contentDescription="@string/action_listening"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/voice_template" />
@@ -52,9 +49,7 @@
                 android:id="@+id/toolbar_recorder"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="6dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:layout_margin="6dp"
                 android:contentDescription="@string/action_audio_recorder"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/micphone" />

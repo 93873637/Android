@@ -393,11 +393,15 @@ public class WhatsaiActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_listener) {
+            openListenerActivity();
+            return true;
+        }
+        else if (id == R.id.action_recorder) {
             openAudioRecorderActivity();
             return true;
         }
-        else if (id == R.id.action_cloud_backup) {
+        else if (id == R.id.action_cloud_save) {
             WhatsaiStorage.cloud_save(this);
             return true;
         }
@@ -414,7 +418,7 @@ public class WhatsaiActivity extends AppCompatActivity
     }
 
     private void openVoiceTemplateActivity() {
-        startActivity(new Intent(WhatsaiActivity.this, VoiceTemplateActivity.class));
+        startActivity(new Intent(WhatsaiActivity.this, AudioTemplateActivity.class));
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

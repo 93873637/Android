@@ -227,6 +227,7 @@ public class WhatsaiListener {
     private String mTimeElapsed = "";  // format as hh:mm:ss
     private ArrayList<Integer> mPowerList = new ArrayList<>();
     private ArrayList<AudioFrame> mFrameList = new ArrayList<>();
+    private ArrayList<AudioTemplate> mTemplateList = new ArrayList<>();
 
     private ListenerCallback mCallback = null;
 
@@ -284,6 +285,7 @@ public class WhatsaiListener {
         mTimeElapsed = "00:00:00";
         mPowerList.clear();
         mFrameList.clear();
+        mTemplateList.clear();
     }
 
     private void startListening() {
@@ -332,6 +334,14 @@ public class WhatsaiListener {
         }).start();
 
         if (mVoiceRecognition) {
+            if (mTemplateList.isEmpty()) {
+                if (!loadAudioTemplates()) {
+                    LogUtils.e("WhatsaiListener: load audio templates failed.");
+                    return;
+                }
+            }
+            LogUtils.d("WhatsaiListener: load audio templates ok, size = " + mTemplateList.size());
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -421,6 +431,11 @@ public class WhatsaiListener {
         mAudioRecord.stop();
     }
 
+    private boolean loadAudioTemplates() {
+        //####@:
+        return true;
+    }
+
     private FileOutputStream getPCMOutputStream() {
         File pcmFile = createPCMFile();
         if (pcmFile == null) {
@@ -460,7 +475,6 @@ public class WhatsaiListener {
                 e.printStackTrace();
             }
         }
-
         return null;
     }
 }

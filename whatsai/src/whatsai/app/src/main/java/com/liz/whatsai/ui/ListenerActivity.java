@@ -1,6 +1,7 @@
 package com.liz.whatsai.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -40,6 +41,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
 
         findViewById(R.id.btn_play_audio).setOnClickListener(this);
         findViewById(R.id.btn_audio_config).setOnClickListener(this);
+        findViewById(R.id.btn_to_template).setOnClickListener(this);
 
         mTextSpeech = findViewById(R.id.text_speech);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
@@ -112,6 +114,10 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.btn_play_audio:
                 onPlayAudio();
+                break;
+            case R.id.btn_to_template:
+                startActivity(new Intent(ListenerActivity.this, AudioTemplateActivity.class));
+                this.finish();
                 break;
             default:
                 break;

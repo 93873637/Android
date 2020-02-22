@@ -71,9 +71,14 @@ public class AudioUtils {
         }
     }
 
-    //
-    //channels: 1-single track, 2-double track (sound will be fast if wrong)
-    //
+    /**
+     * @param pcmFileAbsolute
+     * @param wavFileAbsolute
+     * @param sampleRate
+     * @param recorderBufferSize
+     * @param audioFormat
+     * @param channels: 1-single track, 2-double track (sound will be fast if wrong)
+     */
     public static void pcmToWave(String pcmFileAbsolute, String wavFileAbsolute, long sampleRate, int recorderBufferSize, int audioFormat, int channels) {
         FileInputStream in;
         FileOutputStream out;
@@ -101,9 +106,9 @@ public class AudioUtils {
         }
     }
 
-    /*
-    任何一种文件在头部添加相应的头文件才能够确定的表示这种文件的格式，wave是RIFF文件结构，每一部分为一个chunk，其中有RIFF WAVE chunk，
-    FMT Chunk，Fact chunk,Data chunk,其中Fact chunk是可以选择的，
+    /**
+     * 任何一种文件在头部添加相应的头文件才能够确定的表示这种文件的格式，wave是RIFF文件结构，每一部分为一个chunk，其中有RIFF WAVE chunk，
+     * FMT Chunk，Fact chunk,Data chunk,其中Fact chunk是可以选择的，
      */
     public static void writeWaveFileHeader(FileOutputStream out, long totalAudioLen, long totalDataLen, long longSampleRate,
                                            int channels, long byteRate) throws IOException {
@@ -176,60 +181,6 @@ public class AudioUtils {
         playPCM(new File(pcmFilePath), bufferSize, sampleRate, encodingBits, channelMask);
     }
 
-    public static void playPCM16(final ArrayList<Integer> dataList, final int bufferSize, int sampleRate, int channelMask) {
-        if (dataList == null || dataList.isEmpty()) {
-            LogUtils.e("playPCM: data list empty");
-            return;
-        }
-
-        int encodingBits = AudioFormat.ENCODING_PCM_16BIT;
-        final int byteNum = getByteNum(encodingBits);
-        final int bufferSizeInShorts = bufferSize / byteNum;
-
-        final AudioTrack audioTrack = new AudioTrack(
-                new AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .build(),
-                new AudioFormat.Builder()
-                        .setSampleRate(sampleRate)
-                        .setEncoding(encodingBits)
-                        .setChannelMask(channelMask)
-                        .build(),
-                bufferSize,
-                AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
-        );
-
-        // AudioTrack need play first
-        audioTrack.play();
-
-        // run read and play task
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    short[] buffer = new short[bufferSizeInShorts];
-                    int dataLeft = dataList.size();
-                    int readCount;
-                    while (dataLeft > 0) {
-                        readCount = (dataLeft > bufferSizeInShorts) ? bufferSizeInShorts : dataLeft;
-                        for (int i=0; i<readCount; i++) {
-                            buffer[i] = (short)(dataList.get(i) & 0xffff);
-                        }
-                        audioTrack.write(buffer, 0, readCount);
-                        dataLeft -= bufferSizeInShorts;
-                    }
-                } catch (Exception e) {
-                    LogUtils.e("playPCM: exception " + e.toString());
-                    e.printStackTrace();
-                } finally {
-                    audioTrack.stop();
-                    audioTrack.release();
-                }
-            }
-        }.start();
-    }
-
     public static void playPCM(File pcmFile, int bufferSize, int sampleRate, int encodingBits, int channelMask) {
         if (pcmFile == null || !pcmFile.exists()) {
             LogUtils.e("playPCM: pcm file not exists");
@@ -278,6 +229,60 @@ public class AudioUtils {
                         }
                     }
                     fileInputStream.close();
+                } catch (Exception e) {
+                    LogUtils.e("playPCM: exception " + e.toString());
+                    e.printStackTrace();
+                } finally {
+                    audioTrack.stop();
+                    audioTrack.release();
+                }
+            }
+        }.start();
+    }
+
+    public static void playPCM16(final ArrayList<Integer> dataList, final int bufferSize, int sampleRate, int channelMask) {
+        if (dataList == null || dataList.isEmpty()) {
+            LogUtils.e("playPCM: data list empty");
+            return;
+        }
+
+        int encodingBits = AudioFormat.ENCODING_PCM_16BIT;
+        final int byteNum = getByteNum(encodingBits);
+        final int bufferSizeInShorts = bufferSize / byteNum;
+
+        final AudioTrack audioTrack = new AudioTrack(
+                new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build(),
+                new AudioFormat.Builder()
+                        .setSampleRate(sampleRate)
+                        .setEncoding(encodingBits)
+                        .setChannelMask(channelMask)
+                        .build(),
+                bufferSize,
+                AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
+        );
+
+        // AudioTrack need play first
+        audioTrack.play();
+
+        // run read and play task
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    short[] buffer = new short[bufferSizeInShorts];
+                    int dataLeft = dataList.size();
+                    int readCount;
+                    while (dataLeft > 0) {
+                        readCount = (dataLeft > bufferSizeInShorts) ? bufferSizeInShorts : dataLeft;
+                        for (int i=0; i<readCount; i++) {
+                            buffer[i] = (short)(dataList.get(i) & 0xffff);
+                        }
+                        audioTrack.write(buffer, 0, readCount);
+                        dataLeft -= bufferSizeInShorts;
+                    }
                 } catch (Exception e) {
                     LogUtils.e("playPCM: exception " + e.toString());
                     e.printStackTrace();

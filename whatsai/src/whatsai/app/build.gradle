@@ -32,9 +32,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -46,7 +46,6 @@ dependencies {
     implementation files('libs/gson-2.8.0.jar')
     implementation files('libs/fastjson-1.2.9.jar')
     implementation files('libs/commons-io-1.4.jar')
-    implementation project(path: ':wavelibrary')
 }
 
 //Major_Version_Number.Minor_Version_Number.Revision_Number.Build_Date.Build_Time
