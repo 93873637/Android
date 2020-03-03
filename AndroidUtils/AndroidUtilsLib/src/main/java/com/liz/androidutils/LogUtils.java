@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 @SuppressWarnings("unused, WeakerAccess")
 public class LogUtils {
@@ -49,24 +47,6 @@ public class LogUtils {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	// Callback Log By Listener
-
-	//####@:
-	//use this callback to show log on ui?
-//
-//	public void testUsingLogCallback(final Activity activity) {
-//		LogUtils.setLogListener(new LogUtils.LogListener() {
-//			public void onCBLog(String msg, int level) {
-//				activity.runOnUiThread(new Runnable() {
-//					public void run() {
-//						String logMsg = TimeUtils.getLogTime() + " - " + msg;
-//						mProgressBuffer.append(logMsg);
-//						String progressInfo = mProgressBuffer.getBuffer() + "\n";
-//						mTextProgressInfo.setText(progressInfo);
-//					}
-//				});
-//			}
-//		});
-//	}
 
 	public interface LogListener {
 		void onCBLog(String msg, int level);

@@ -1,4 +1,0 @@
-#Thu Jun 13 20:39:39 CST 2019
-base.0=D\:\\WorkSpace\\android\\MultiCamera\\src\\MultiCamera\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
-path.0=classes.dex
-renamed.0=classes.dex
