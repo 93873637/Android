@@ -50,7 +50,8 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         findViewById(R.id.btn_switch_listening).setOnClickListener(this);
         findViewById(R.id.btn_play_audio).setOnClickListener(this);
         findViewById(R.id.btn_save_audio).setOnClickListener(this);
-        findViewById(R.id.btn_to_listener).setOnClickListener(this);
+        findViewById(R.id.btn_audio_listener).setOnClickListener(this);
+        findViewById(R.id.btn_audio_recorder).setOnClickListener(this);
 
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
@@ -147,8 +148,12 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
             case R.id.btn_save_audio:
                 onSaveAudio();
                 break;
-            case R.id.btn_to_listener:
+            case R.id.btn_audio_listener:
                 startActivity(new Intent(AudioTemplateActivity.this, ListenerActivity.class));
+                this.finish();
+                break;
+            case R.id.btn_audio_recorder:
+                startActivity(new Intent(AudioTemplateActivity.this, AudioRecordActivity.class));
                 this.finish();
                 break;
             default:

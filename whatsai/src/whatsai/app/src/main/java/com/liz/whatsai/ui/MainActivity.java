@@ -8,15 +8,14 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
-import com.liz.whatsai.app.ThisApp;
+import com.liz.whatsai.app.MyApp;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             LogUtils.e("Request Permissions Failed");
             MainActivity.this.finish();
-            ThisApp.exitApp();
+            MyApp.exitApp();
         }
     }
 
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         // delay some time for toast show
                         new Handler().postDelayed(new Runnable() {
                             public void run() {
-                                ThisApp.exitApp();
+                                MyApp.exitApp();
                             }
                         }, 3000L);
                         break;

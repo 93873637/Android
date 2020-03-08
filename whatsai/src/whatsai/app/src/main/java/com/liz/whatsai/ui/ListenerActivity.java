@@ -41,7 +41,8 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
 
         findViewById(R.id.btn_play_audio).setOnClickListener(this);
         findViewById(R.id.btn_audio_config).setOnClickListener(this);
-        findViewById(R.id.btn_to_template).setOnClickListener(this);
+        findViewById(R.id.btn_audio_template).setOnClickListener(this);
+        findViewById(R.id.btn_audio_recorder).setOnClickListener(this);
 
         mTextSpeech = findViewById(R.id.text_speech);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
@@ -115,8 +116,12 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
             case R.id.btn_play_audio:
                 onPlayAudio();
                 break;
-            case R.id.btn_to_template:
+            case R.id.btn_audio_template:
                 startActivity(new Intent(ListenerActivity.this, AudioTemplateActivity.class));
+                this.finish();
+                break;
+            case R.id.btn_audio_recorder:
+                startActivity(new Intent(ListenerActivity.this, AudioRecordActivity.class));
                 this.finish();
                 break;
             default:

@@ -1,205 +1,200 @@
 package com.liz.whatsai.ui;
 
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Html;
+import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.liz.androidutils.AudioUtils;
+import com.liz.androidutils.FileUtils;
+import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
+import com.liz.whatsai.logic.WhatsaiAudio;
+import com.liz.whatsai.logic.WhatsaiListener;
 
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class AudioRecordActivity extends AppCompatActivity implements Runnable {
+public class AudioRecordActivity extends Activity implements View.OnClickListener {
 
-    private Button mBtnStartRecord;
-    private Button mBtnStopRecord;
-    private Button mBtnPlayPCM;
-
-    //指定音频源 这个和MediaRecorder是相同的 MediaRecorder.AudioSource.MIC指的是麦克风
-    private static final int mAudioSource = MediaRecorder.AudioSource.MIC;
-
-    //指定采样率 （MediaRecoder 的采样率通常是8000Hz AAC的通常是44100Hz。 设置采样率为44100，目前为常用的采样率，官方文档表示这个值可以兼容所有的设置）
-    private static final int mSampleRateInHz = 44100;
-
-    //指定捕获音频的声道数目。在AudioFormat类中指定用于此的常量
-    private static final int mChannelConfig = AudioFormat.CHANNEL_CONFIGURATION_MONO; //单声道
-
-    //指定音频量化位数 ,在AudioFormaat类中指定了以下各种可能的常量。通常我们选择ENCODING_PCM_16BIT和ENCODING_PCM_8BIT PCM代表的是脉冲编码调制，它实际上是原始音频样本。
-    //因此可以设置每个样本的分辨率为16位或者8位，16位将占用更多的空间和处理能力,表示的音频也更加接近真实。
-    private static final int mAudioFormat = AudioFormat.ENCODING_PCM_16BIT;
-
-    //指定缓冲区大小。调用AudioRecord类的getMinBufferSize方法可以获得。
-    private int mBufferSizeInBytes;
-
-    private File mRecordingFile;//储存AudioRecord录下来的文件
-    private boolean isRecording = false; //true表示正在录音
-    private AudioRecord mAudioRecord = null;
-    private File mFileRoot = null;//文件目录
-    //存放的目录路径名称
-    private static final String mPathName = ComDef.WHATSAI_AUDIO_DIR;
-    //保存的音频文件名
-    private static final String mFileName = "audio_record_test.pcm";
-    //缓冲区中数据写入到数据，因为需要使用IO操作，因此读取数据的过程应该在子线程中执行。
-    private Thread mThread;
-    private DataOutputStream mDataOutputStream;
+    WaveSurfaceView mWaveSurfaceView;
+    TextView mTextProgressInfo;
+    Button mBtnSwitchListening;
+    WhatsaiListener mListener;
+    AudioListView mAudioListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_record);
+        LogUtils.d("AudioTemplateActivity:onCreate");
 
-        initData();
-        initUI();
+        mListener = new WhatsaiListener();
+        mListener.setWaveSamplingRate(32);
+
+        mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
+        mBtnSwitchListening.setOnClickListener(this);
+        mBtnSwitchListening.setText(mListener.isListening()?"STOP":"START");
+        mListener.setCallback(mListenerCallback);
+
+        findViewById(R.id.btn_switch_listening).setOnClickListener(this);
+        findViewById(R.id.btn_audio_listener).setOnClickListener(this);
+        findViewById(R.id.btn_audio_template).setOnClickListener(this);
+
+        mTextProgressInfo = findViewById(R.id.text_progress_info);
+        mWaveSurfaceView = findViewById(R.id.wave_surface_view);
+
+        mWaveSurfaceView.setMaxValue(mListener.getMaxPower());
+        mWaveSurfaceView.setWaveItemWidth(1);
+        mWaveSurfaceView.setWaveItemSpace(0);
+
+        mAudioListView = findViewById(R.id.lv_audio_files);
+        mAudioListView.onCreate(this, ComDef.WHATSAI_AUDIO_DIR);
+
+        startUITimer();
     }
 
-    private void initData() {
-        mBufferSizeInBytes = AudioRecord.getMinBufferSize(mSampleRateInHz, mChannelConfig, mAudioFormat);//计算最小缓冲区
-        mAudioRecord = new AudioRecord(mAudioSource, mSampleRateInHz, mChannelConfig,
-                mAudioFormat, mBufferSizeInBytes);//创建AudioRecorder对象
-        mFileRoot = new File(mPathName);
-        if (!mFileRoot.exists()) {
-            mFileRoot.mkdirs();
-        }
-    }
-
-    private void initUI() {
-        mBtnStartRecord = findViewById(R.id.btn_start_record);
-        mBtnStartRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startRecord();
-            }
-        });
-
-        mBtnStopRecord = findViewById(R.id.btn_stop_record);
-        mBtnStopRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopRecord();
-            }
-        });
-
-        mBtnPlayPCM = findViewById(R.id.btn_play_audio);
-        mBtnPlayPCM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playPCM();
-            }
-        });
-    }
-
-    public void startRecord() {
-
-        //AudioRecord.getMinBufferSize的参数是否支持当前的硬件设备
-        if (AudioRecord.ERROR_BAD_VALUE == mBufferSizeInBytes || AudioRecord.ERROR == mBufferSizeInBytes) {
-            throw new RuntimeException("Unable to getMinBufferSize");
-        } else {
-            destroyThread();
-            isRecording = true;
-            if (mThread == null) {
-                mThread = new Thread(this);
-                mThread.start();//开启线程
-            }
-        }
-    }
-
-    /**
-     * 销毁线程方法
-     */
-    private void destroyThread() {
-        try {
-            isRecording = false;
-            if (null != mThread && Thread.State.RUNNABLE == mThread.getState()) {
-                try {
-                    Thread.sleep(500);
-                    mThread.interrupt();
-                } catch (Exception e) {
-                    mThread = null;
+    private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
+        @Override
+        public void onPowerUpdated() {
+            AudioRecordActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    mWaveSurfaceView.onUpdateSurfaceData(mListener.getPowerList(), mListener.getMaxPower());
                 }
-            }
-            mThread = null;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            mThread = null;
+            });
+        }
+    };
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        //###@:todo: improve it by save audio file as wave file and play it
+//        if (mAudioListView.onContextItemSelected(item)) {
+//            return true;
+//        }
+//
+//        return super.onContextItemSelected(item);
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int itemId = item.getItemId();
+        if (itemId == ComDef.AudioListMenu.PLAY.id) {
+            mListener.playAudio(mAudioListView.getAudioFilePath((int)info.id));
+            return true;
+        }
+        else if (itemId == ComDef.AudioListMenu.STOP.id) {
+            WhatsaiAudio.stopPlay();
+            return true;
+        }
+        else {
+            return super.onContextItemSelected(item);
         }
     }
 
-    //停止录音
-    public void stopRecord() {
-        isRecording = false;
-        //停止录音，回收AudioRecord对象，释放内存
-        if (mAudioRecord != null) {
-            if (mAudioRecord.getState() == AudioRecord.STATE_INITIALIZED) {//初始化成功
-                mAudioRecord.stop();
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // UI Timer
+    private static final long UI_TIMER_DELAY = 0L;
+    private static final long UI_TIMER_PERIOD = 1000L;
+    private Timer mUITimer;
+    private void startUITimer() {
+        mUITimer = new Timer();
+        mUITimer.schedule(new TimerTask() {
+            public void run () {
+                AudioRecordActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        updateUI();
+                    }
+                });
             }
-            if (mAudioRecord != null) {
-                mAudioRecord.release();
-            }
+        }, UI_TIMER_DELAY, UI_TIMER_PERIOD);
+    }
+    private void stopUITimer() {
+        if (mUITimer != null) {
+            mUITimer.cancel();
+            mUITimer = null;
         }
+    }
+    // UI Timer
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private String getProgressInfo() {
+        return mListener.getProgressInfo() +
+                "<br>" + mWaveSurfaceView.getSurfaceInfo() + " || " + mListener.getAudioConfigInfo();
+    }
+
+    private void updateUI() {
+        mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
     }
 
     @Override
-    public void run() {
-
-        //标记为开始采集状态
-        isRecording = true;
-        //创建一个流，存放从AudioRecord读取的数据
-        mRecordingFile = new File(mFileRoot, mFileName);
-        if (mRecordingFile.exists()) {//音频文件保存过了删除
-            mRecordingFile.delete();
-        }
-        try {
-            mRecordingFile.createNewFile();//创建新文件
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("lu", "创建储存音频文件出错");
-        }
-
-        try {
-            //获取到文件的数据流
-            mDataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(mRecordingFile)));
-            byte[] buffer = new byte[mBufferSizeInBytes];
-
-            //判断AudioRecord未初始化，停止录音的时候释放了，状态就为STATE_UNINITIALIZED
-            if (mAudioRecord.getState() == mAudioRecord.STATE_UNINITIALIZED) {
-                initData();
-            }
-
-            mAudioRecord.startRecording();//开始录音
-            //getRecordingState获取当前AudioReroding是否正在采集数据的状态
-            while (isRecording && mAudioRecord.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING) {
-                int bufferReadResult = mAudioRecord.read(buffer, 0, mBufferSizeInBytes);
-                for (int i = 0; i < bufferReadResult; i++) {
-                    mDataOutputStream.write(buffer[i]);
-                }
-            }
-            mDataOutputStream.close();
-        } catch (Throwable t) {
-            Log.e("lu", "Recording Failed");
-            stopRecord();
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_switch_listening:
+                onSwitchListening();
+                break;
+            case R.id.btn_audio_listener:
+                startActivity(new Intent(AudioRecordActivity.this, ListenerActivity.class));
+                this.finish();
+                break;
+            case R.id.btn_audio_template:
+                startActivity(new Intent(AudioRecordActivity.this, AudioTemplateActivity.class));
+                this.finish();
+                break;
+            default:
+                break;
         }
     }
 
-    private void playPCM() {
-        AudioUtils.playPCM(mRecordingFile, mBufferSizeInBytes, mSampleRateInHz, mAudioFormat, mChannelConfig);
+    private void onSwitchListening() {
+        mListener.switchListening();
+        mBtnSwitchListening.setText(mListener.isListening()?"STOP":"START");
+    }
+
+    private void onPlayAudio() {
+        if (mListener.isListening()) {
+            Toast.makeText(this, "Can't play when listening, stop first", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mListener.playAudio();
+        }
+    }
+
+    private void onSaveAudio() {
+        final EditText et = new EditText(this);
+        et.setText(mListener.getPCMFileName());
+        new AlertDialog
+                .Builder(this)
+                .setTitle("Save Voice Template File As: ")
+                .setIcon(android.R.drawable.sym_def_app_icon)
+                .setView(et)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (TextUtils.isEmpty(et.getText().toString())) {
+                            Toast.makeText(AudioRecordActivity.this, "Please input template name", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            String srcFilePath = mListener.getPCMFileAbsolute();
+                            String tarPilePath = ComDef.WHATSAI_AUDIO_DIR + "/" + et.getText().toString();
+                            FileUtils.mv(srcFilePath, tarPilePath);
+                            mAudioListView.updateList();
+                        }
+                    }
+                }).setNegativeButton("Cancel", null).show();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        destroyThread();
-        stopRecord();
+    public void onBackPressed() {
+        LogUtils.d("AudioTemplateActivity:onBackPressed");
+        stopUITimer();
+        super.onBackPressed();
     }
 }

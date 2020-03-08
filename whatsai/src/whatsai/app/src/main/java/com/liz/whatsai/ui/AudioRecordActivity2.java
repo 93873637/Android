@@ -22,7 +22,7 @@ import com.liz.whatsai.logic.WhatsaiAudio;
 
 import java.io.File;
 
-public class AudioActivity extends Activity implements View.OnClickListener,
+public class AudioRecordActivity2 extends Activity implements View.OnClickListener,
         View.OnCreateContextMenuListener {
 
     private ImageButton mBtnSwitchRecord;
@@ -30,7 +30,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LogUtils.d("AudioActivity:onCreate");
+        LogUtils.d("testAudioRecordActivity:onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio);
 
@@ -58,7 +58,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
         WhatsaiAudio.setAudioCallback(new WhatsaiAudio.WhatsaiAudioCallback() {
             @Override
             public void onAudioRecordStopped() {
-                AudioActivity.this.runOnUiThread(new Runnable() {
+                AudioRecordActivity2.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         updateAudioList();
@@ -70,7 +70,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onResume() {
-        LogUtils.d("AudioActivity:onResume");
+        LogUtils.d("testAudioRecordActivity:onResume");
         super.onResume();
         setAudioButton();
     }
@@ -92,7 +92,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onBackPressed() {
-        LogUtils.d("AudioActivity:onBackPressed");
+        LogUtils.d("testAudioRecordActivity:onBackPressed");
         super.onBackPressed();
     }
 
@@ -147,7 +147,7 @@ public class AudioActivity extends Activity implements View.OnClickListener,
     }
 
     protected void setAudioButton() {
-        //LogUtils.d("AudioActivity:setAudioButton: isRecording = " + WhatsaiAudio.isRecording());
+        //LogUtils.d("testAudioRecordActivity:setAudioButton: isRecording = " + WhatsaiAudio.isRecording());
         mBtnSwitchRecord.setBackgroundResource(WhatsaiAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
     }
 

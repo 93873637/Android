@@ -43,7 +43,7 @@
                 android:layout_margin="6dp"
                 android:contentDescription="@string/action_listening"
                 android:gravity="end|center_vertical"
-                android:background="@drawable/voice_template" />
+                android:background="@drawable/audio_template" />
 
             <ImageButton
                 android:id="@+id/toolbar_recorder"

@@ -40,13 +40,17 @@ public class AudioListAdapter extends BaseAdapter {
     public AudioListAdapter() {
         mAudioDir = ComDef.WHATSAI_AUDIO_DIR;
         loadListData();
-        mLayoutInflater = LayoutInflater.from(ThisApp.getAppContext());
+        mLayoutInflater = LayoutInflater.from(MyApp.getAppContext());
     }
 
     public AudioListAdapter(String filePath) {
         mAudioDir = filePath;
         loadListData();
-        mLayoutInflater = LayoutInflater.from(ThisApp.getAppContext());
+        mLayoutInflater = LayoutInflater.from(MyApp.getAppContext());
+    }
+
+    public String getAudioDir() {
+        return mAudioDir;
     }
 
     public void updateList() {

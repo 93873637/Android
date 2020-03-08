@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 
     <application
-        android:name=".app.ThisApp"
+        android:name=".app.MyApp"
         android:allowBackup="false"
         android:icon="@drawable/icon_bitcomet"
         android:label="@string/app_name"
@@ -38,8 +38,9 @@
         </activity>
 
         <activity android:name=".ui.NodeActivity" />
-        <activity android:name=".ui.AudioActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.AudioRecordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.AudioRecordActivity2" android:screenOrientation="portrait"/>
+        <activity android:name=".test.testAudioRecordActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.ListenerActivity" android:screenOrientation="landscape"/>
         <activity android:name=".ui.AudioTemplateActivity" android:screenOrientation="landscape"/>
         <activity android:name=".ui.TextActivity" android:windowSoftInputMode="adjustResize" />

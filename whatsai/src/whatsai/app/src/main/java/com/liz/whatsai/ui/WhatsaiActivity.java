@@ -28,11 +28,12 @@ import com.google.android.material.navigation.NavigationView;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.app.NodeListAdapter;
-import com.liz.whatsai.app.ThisApp;
+import com.liz.whatsai.app.MyApp;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
 import com.liz.whatsai.storage.WhatsaiStorage;
+import com.liz.whatsai.test.testAudioRecordActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -63,7 +64,7 @@ public class WhatsaiActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                startActivity(new Intent(WhatsaiActivity.this, AudioRecordActivity.class));
+                startActivity(new Intent(WhatsaiActivity.this, testAudioRecordActivity.class));
             }
         });
 
@@ -76,7 +77,7 @@ public class WhatsaiActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         TextView tvAppInfo = navigationView.getHeaderView(0).findViewById(R.id.textAppInfo);
-        tvAppInfo.setText(ThisApp.mAppVersion);
+        tvAppInfo.setText(MyApp.mAppVersion);
 
         ListView listView = findViewById(R.id.lv_items);
         listView.addFooterView(new ViewStub(this));
@@ -410,7 +411,7 @@ public class WhatsaiActivity extends AppCompatActivity
     }
 
     private void openAudioRecorderActivity() {
-        startActivity(new Intent(WhatsaiActivity.this, AudioActivity.class));
+        startActivity(new Intent(WhatsaiActivity.this, AudioRecordActivity.class));
     }
 
     private void openListenerActivity() {

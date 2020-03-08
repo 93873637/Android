@@ -10,13 +10,13 @@ import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 
 /**
- * ThisApp.java
+ * MyApp.java
  * Created by liz on 18-1-8.
  */
 
 @SuppressWarnings("unused")
-public class ThisApp extends Application {
-    private static ThisApp mAppInst;
+public class MyApp extends Application {
+    private static MyApp mAppInst;
 
     public static String mAppVersion = "";
     public static String mAppVersionShow = "";  //text show in log
@@ -27,7 +27,7 @@ public class ThisApp extends Application {
         if (ComDef.DEBUG) {
             LogUtils.setLevel(LogUtils.LOG_LEVEL_V);
         }
-        LogUtils.d("ThisApp:onCreate: pid = " + android.os.Process.myPid());
+        LogUtils.d("MyApp:onCreate: pid = " + android.os.Process.myPid());
 
         super.onCreate();
         mAppInst = this;

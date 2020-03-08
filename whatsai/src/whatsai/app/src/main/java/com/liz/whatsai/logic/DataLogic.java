@@ -3,7 +3,7 @@ package com.liz.whatsai.logic;
 import android.content.Context;
 
 import com.liz.androidutils.LogUtils;
-import com.liz.whatsai.app.ThisApp;
+import com.liz.whatsai.app.MyApp;
 import com.liz.whatsai.storage.WhatsaiStorage;
 
 import java.text.SimpleDateFormat;
@@ -66,7 +66,7 @@ public class DataLogic extends WhatsaiStorage {
     private static void startAlarmTimer() {
         new Timer().schedule(new TimerTask() {
             public void run () {
-                DataLogic.checkAlarm(ThisApp.getAppContext());
+                DataLogic.checkAlarm(MyApp.getAppContext());
             }
         }, ComDef.TASK_LIST_ALARM_DELAY, ComDef.TASK_LIST_ALARM_TIMER);
     }

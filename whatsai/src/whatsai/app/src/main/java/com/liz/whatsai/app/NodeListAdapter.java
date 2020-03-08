@@ -20,7 +20,7 @@ public class NodeListAdapter extends BaseAdapter {
     private static NodeListAdapter adapter;
     public static NodeListAdapter getAdapter() {
         if (adapter == null) {
-            adapter = new NodeListAdapter(ThisApp.getAppContext(), DataLogic.getDataList());
+            adapter = new NodeListAdapter(MyApp.getAppContext(), DataLogic.getDataList());
         }
         return adapter;
     }
