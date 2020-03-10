@@ -4,10 +4,9 @@
     android:shape="oval"
     android:useLevel="false">
 
-    <solid android:color="#ff0000" />
+    <solid android:color="#a0ff0000" />
 
-    <!--
-    <stroke
+    <!--<stroke
         android:width="5dp"
         android:color="#e0e0e0" />-->
 

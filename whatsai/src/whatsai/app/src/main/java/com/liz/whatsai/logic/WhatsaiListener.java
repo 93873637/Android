@@ -5,6 +5,7 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
 import com.liz.androidutils.AudioUtils;
+import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.NumUtils;
 import com.liz.androidutils.TimeUtils;
@@ -18,13 +19,20 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("unused, WeakerAccess")
 public class WhatsaiListener {
 
     /**
      * default max audio power value(from pcm 16bits)
      */
     private static final int DEFAULT_MAX_POWER = 32768;
+
+
+    /**
+     * default max power list size used for surface view
+     * for A2H, its resolution is 1440*2560
+     */
+    private static final int DEFAULT_MAX_POWER_LIST_SIZE = 4096;
 
     /**
      * buffer size for audio power data, unit by byte
@@ -35,29 +43,61 @@ public class WhatsaiListener {
      */
     public static final int DEFAULT_MAX_BUFFER_SIZE = 1024*1024;
 
-    @SuppressWarnings("unused")
     public static final int AUDIO_SAMPLE_RATE_8K  =  8000;
-    @SuppressWarnings("unused")
     public static final int AUDIO_SAMPLE_RATE_16K = 16000;
-    @SuppressWarnings("unused")
     public static final int AUDIO_SAMPLE_RATE_32K = 32000;
-    @SuppressWarnings("unused")
     public static final int AUDIO_SAMPLE_RATE_44K = 44100;
-    @SuppressWarnings("unused")
     public static final int AUDIO_SAMPLE_RATE_48K = 48000;
     public static final int DEFAULT_AUDIO_SAMPLE_RATE = AUDIO_SAMPLE_RATE_44K;
 
     // sample rate from all wave sample data for wave data showing
-    public static final int DEFAULT_WAVE_SAMPLING_RATE = 100;
+    public static final int DEFAULT_WAVE_SAMPLING_RATE = 128;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Interface Functions
+    private AudioRecord mAudioRecord;
+    private boolean mIsListening = false;
+
+    private int mMaxPower = DEFAULT_MAX_POWER;
+    private int mMaxPowerSize = DEFAULT_MAX_POWER_LIST_SIZE;
+    private int mMaxBufferSize = DEFAULT_MAX_BUFFER_SIZE;
+
+    private int mAudioSource = MediaRecorder.AudioSource.MIC;
+    private int mSampleRate = DEFAULT_AUDIO_SAMPLE_RATE;
+    private int mAudioFormat = AudioFormat.ENCODING_PCM_16BIT;
+    private int mChannelConfig = AudioFormat.CHANNEL_CONFIGURATION_MONO;
+    private int mRecordBufferSize;  // unit by byte
+
+    /**
+     * sampling rate for wave showing, i.e. 100 means pick up one from 100 power data
+     */
+    private int mWaveSamplingRate = DEFAULT_WAVE_SAMPLING_RATE;
+
+    private String mNeatFileName = "";
+    private boolean mAutoSave = false;
+    private int mFrameSize = 0;
+    private int mFrameCount = 0;
+    private int mTotalSize = 0;
+    private int mLastFrameCount = 0;
+    private int mLastDataSize = 0;
+    private long mStartTime = 0;
+    private int mFrameRate = 0;
+    private int mFramePower = 0;
+    private int mDataRate = 0;  // unit by b/s(bit/s)
+    private String mTimeElapsed = "";  // format as hh:mm:ss
+    private ArrayList<Integer> mPowerList = new ArrayList<>();
+    private ArrayList<AudioFrame> mFrameList = new ArrayList<>();
+    private ArrayList<AudioTemplate> mTemplateList = new ArrayList<>();
+
+    private ListenerCallback mCallback = null;
+
+    private boolean mVoiceRecognition = false;
+    private final Object mRecognitionObject = new Object();
+    private String mSpeechText = "";
 
     public WhatsaiListener() {
         LogUtils.d("WhatsaiListener:WhatsaiListener");
-        mAudioBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mAudioFormat);
-        LogUtils.d("WhatsaiListener:WhatsaiListener: mAudioBufferSize = " + mAudioBufferSize);
-        mAudioRecord = new AudioRecord(mAudioSource, mSampleRate, mChannelConfig, mAudioFormat, mAudioBufferSize);
+        mRecordBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mAudioFormat);
+        LogUtils.d("WhatsaiListener:WhatsaiListener: mRecordBufferSize = " + mRecordBufferSize);
+        mAudioRecord = new AudioRecord(mAudioSource, mSampleRate, mChannelConfig, mAudioFormat, mRecordBufferSize);
     }
 
     public boolean isListening() {
@@ -69,6 +109,9 @@ public class WhatsaiListener {
         if (mIsListening) {
             stopListening();
             stopWorkingTimer();
+            if (mAutoSave) {
+                AudioUtils.pcm2Wave(getPCMFileAbsolute(), getWAVFileAbsolute(), mSampleRate, mRecordBufferSize, mAudioFormat, mChannelConfig);
+            }
         }
         else {
             startListening();
@@ -81,22 +124,16 @@ public class WhatsaiListener {
     }
 
     public void playAudio(String fileAbsolute) {
-        AudioUtils.playPCM(fileAbsolute, mAudioBufferSize, mSampleRate, mAudioFormat, mChannelConfig);
-        //##@: AudioUtils.playPCM16(mPowerList, mAudioBufferSize, mSampleRate, mChannelConfig);
-        /*
-        //save to wav file
-        LogUtils.d("Convert pcm file to wave...");
-        AudioUtils.pcmToWave(mPCMFileName, mPCMFileName + ".wav",
-                mSampleRate, mAudioBufferSize, mAudioFormat, AudioUtils.AUDIO_TRACK_SINGLE);
-        //*/
+        AudioUtils.playPCM(fileAbsolute, mRecordBufferSize, mSampleRate, mAudioFormat, mChannelConfig);
     }
+
     @SuppressWarnings("unused")
     public String getAudioConfigInfoFull() {
         String configInfo = "Audio Source: <font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
         configInfo += "<br>Sample Rate(Hz): <font color=\"#ff0000\">" + mSampleRate + "</font>";
         configInfo += "<br>Audio Format: <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
         configInfo += "<br>Channel Config: <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
-        configInfo += "<br>Audio Buffer Size(B): <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
+        configInfo += "<br>Audio Buffer Size(B): <font color=\"#ff0000\">" + mRecordBufferSize + "</font>";
         configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + ComDef.WHATSAI_AUDIO_DIR + "</font>";
         return configInfo;
     }
@@ -106,13 +143,13 @@ public class WhatsaiListener {
         configInfo += " | <font color=\"#ff0000\">" + mSampleRate + "</font>";
         configInfo += " | <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
         configInfo += " | <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
-        configInfo += " | <font color=\"#ff0000\">" + mAudioBufferSize + "</font>";
+        configInfo += " | <font color=\"#ff0000\">" + mRecordBufferSize + "</font>";
         return configInfo;
     }
 
     public String getProgressInfo() {
         String info = "";
-        info += " <font color=\"#ff0000\">" + mPCMFileName + "</font>";
+        info += " <font color=\"#ff0000\">" + getPCMFileName() + "</font>";
         info += " | <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
         info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mTotalSize) + "</font>";
         info += " | FP: <font color=\"#ff0000\">" + mFramePower + "</font>";
@@ -125,16 +162,29 @@ public class WhatsaiListener {
         return info;
     }
 
+    public String getProgressInfoSimple() {
+        String info = "";
+        info += " <font color=\"#ff0000\">" + getPCMFileName() + "</font>";
+        info += " | <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
+        info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mTotalSize) + "</font>";
+        info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
+        return info;
+    }
+
     public String getSpeechText() {
         return mSpeechText;
     }
 
     public String getPCMFileAbsolute() {
-        return ComDef.WHATSAI_AUDIO_DIR + "/" + mPCMFileName;
+        return ComDef.WHATSAI_CACHE_DIR + "/" + mNeatFileName + ".pcm";
+    }
+
+    public String getWAVFileAbsolute() {
+        return ComDef.WHATSAI_AUDIO_DIR + "/" + mNeatFileName + ".wav";
     }
 
     public String getPCMFileName() {
-        return mPCMFileName;
+        return mNeatFileName + ".pcm";
     }
 
     public interface ListenerCallback {
@@ -176,11 +226,18 @@ public class WhatsaiListener {
         mMaxPower = maxPower;
     }
 
+    public int getMaxPowerSize() {
+        return mMaxPowerSize;
+    }
+    public void setMaxPowerSize(int maxPowerSize) {
+        mMaxPowerSize = maxPowerSize;
+    }
+
     public int getMaxBufferSize() {
         return mMaxBufferSize;
     }
     public void setMaxBufferSize(int maxSize) {
-        mAudioBufferSize = maxSize;
+        mRecordBufferSize = maxSize;
     }
 
     public int getWaveSamplingRate() {
@@ -194,46 +251,9 @@ public class WhatsaiListener {
         mVoiceRecognition = recognition;
     }
 
-    // Interface Functions
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private AudioRecord mAudioRecord;
-    private boolean mIsListening = false;
-
-    private int mMaxPower = DEFAULT_MAX_POWER;
-    private int mMaxBufferSize = DEFAULT_MAX_BUFFER_SIZE;
-
-    private int mAudioSource = MediaRecorder.AudioSource.MIC;
-    private int mSampleRate = DEFAULT_AUDIO_SAMPLE_RATE;
-    private int mAudioFormat = AudioFormat.ENCODING_PCM_16BIT;
-    private int mChannelConfig = AudioFormat.CHANNEL_CONFIGURATION_MONO;
-    private int mAudioBufferSize;  // unit by byte
-
-    /**
-     * sampling rate for wave showing, i.e. 100 means pick up one from 100 power data
-     */
-    private int mWaveSamplingRate = DEFAULT_WAVE_SAMPLING_RATE;
-
-    private String mPCMFileName = "";
-    private int mFrameSize = 0;
-    private int mFrameCount = 0;
-    private int mTotalSize = 0;
-    private int mLastFrameCount = 0;
-    private int mLastDataSize = 0;
-    private long mStartTime = 0;
-    private int mFrameRate = 0;
-    private int mFramePower = 0;
-    private int mDataRate = 0;  // unit by b/s(bit/s)
-    private String mTimeElapsed = "";  // format as hh:mm:ss
-    private ArrayList<Integer> mPowerList = new ArrayList<>();
-    private ArrayList<AudioFrame> mFrameList = new ArrayList<>();
-    private ArrayList<AudioTemplate> mTemplateList = new ArrayList<>();
-
-    private ListenerCallback mCallback = null;
-
-    private boolean mVoiceRecognition = false;
-    private final Object mRecognitionObject = new Object();
-    private String mSpeechText = "";
+    public void setAutoSave(boolean autoSave) {
+        mAutoSave = autoSave;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Working Timer
@@ -272,7 +292,7 @@ public class WhatsaiListener {
 
     private void resetParams() {
         LogUtils.d("WhatsaiListener:onStartWorkingTimer");
-        mPCMFileName = "";
+        clearPCMFile();
         mFrameSize = 0;
         mFrameCount = 0;
         mTotalSize = 0;
@@ -295,23 +315,27 @@ public class WhatsaiListener {
             return;
         }
         mIsListening = true;
-
         resetParams();
-
-        final FileOutputStream outputStream = getPCMOutputStream();
+        final FileOutputStream outputStream = createPCMOutputStream();
         if (outputStream == null) {
             LogUtils.e("WhatsaiListener:startListening: get output stream for audio buffer failed.");
             return;
         }
-
         mAudioRecord.startRecording();
         mStartTime = System.currentTimeMillis();
+        startThread_RecordingAudioData(outputStream);
+        if (mVoiceRecognition) {
+            startThread_VoiceRecognition();
+        }
+    }
+
+    private void startThread_RecordingAudioData(final FileOutputStream outputStream) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     LogUtils.d("WhatsaiListener: Start loop write audio data to pcm file...");
-                    byte[] audioData = new byte[mAudioBufferSize];
+                    byte[] audioData = new byte[mRecordBufferSize];
                     int readSize;
                     while (mIsListening) {
                         readSize = mAudioRecord.read(audioData, 0, audioData.length);
@@ -332,40 +356,39 @@ public class WhatsaiListener {
                 LogUtils.d("WhatsaiListener: listener stop.");
             }
         }).start();
-
-        if (mVoiceRecognition) {
-            if (mTemplateList.isEmpty()) {
-                if (!loadAudioTemplates()) {
-                    LogUtils.e("WhatsaiListener: load audio templates failed.");
-                    return;
-                }
-            }
-            LogUtils.d("WhatsaiListener: load audio templates ok, size = " + mTemplateList.size());
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        LogUtils.d("WhatsaiListener: Start voice recognition...");
-                        while (mIsListening) {
-                            LogUtils.d("WhatsaiListener: wait recognition...");
-                            synchronized (mRecognitionObject) {
-                                mRecognitionObject.wait();
-                            }
-                            LogUtils.d("WhatsaiListener: recognition on frame #" + mFrameCount);
-                            onVoiceRecognition();
-                        }
-                    } catch (Exception e) {
-                        LogUtils.e("WhatsaiListener: startListening: recognition exception: " + e.toString());
-                        e.printStackTrace();
-                    }
-                    LogUtils.d("WhatsaiListener: voice recognition stop.");
-                }
-            }).start();
-        }
     }
 
-    private void onReadBuffer(final int readSize, byte[] audioData) {
+    private void startThread_VoiceRecognition() {
+        if (mTemplateList.isEmpty()) {
+            if (!loadAudioTemplates()) {
+                LogUtils.e("WhatsaiListener: startThread_VoiceRecognition: load audio templates failed.");
+                return;
+            }
+        }
+        LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: load audio templates ok, size = " + mTemplateList.size());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: Start voice recognition...");
+                    while (mIsListening) {
+                        LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: wait recognition...");
+                        synchronized (mRecognitionObject) {
+                            mRecognitionObject.wait();
+                        }
+                        LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: recognition on frame #" + mFrameCount);
+                        onVoiceRecognition();
+                    }
+                } catch (Exception e) {
+                    LogUtils.e("WhatsaiListener: startThread_VoiceRecognition: recognition exception: " + e.toString());
+                    e.printStackTrace();
+                }
+                LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: voice recognition stop.");
+            }
+        }).start();
+    }
+
+    private synchronized void onReadBuffer(final int readSize, byte[] audioData) {
         mFrameSize = readSize / 2;
 
         // sample for showing
@@ -381,6 +404,13 @@ public class WhatsaiListener {
             audioData[i * 2] = (byte)(pcmPower & 0x000000ff);
             audioData[i * 2 + 1] = (byte)((pcmPower & 0x0000ff00) >> 8);
             //*/
+        }
+
+        if (mPowerList.size() > mMaxPowerSize) {
+            int orgSize = mPowerList.size();
+            int toIndex = orgSize - mMaxPowerSize;
+            mPowerList.subList(0, toIndex).clear();
+            LogUtils.d("onReadBuffer: power list size " + orgSize + " exceed max " + mMaxPowerSize + ", removed to " + mPowerList.size());
         }
 
         // calculate frame power, for pcm16, combined two bytes into one short
@@ -436,17 +466,17 @@ public class WhatsaiListener {
         return true;
     }
 
-    private FileOutputStream getPCMOutputStream() {
+    private FileOutputStream createPCMOutputStream() {
         File pcmFile = createPCMFile();
         if (pcmFile == null) {
-            LogUtils.e("WhatsaiListener:getPCMOutputStream: create pcm file failed");
+            LogUtils.e("WhatsaiListener:createPCMOutputStream: create pcm file failed");
             return null;
         }
         try {
             return new FileOutputStream(pcmFile.getAbsoluteFile());
         }
         catch (Exception e) {
-            LogUtils.e("WhatsaiListener:getPCMOutputStream: create output stream exception " + e.toString());
+            LogUtils.e("WhatsaiListener:createPCMOutputStream: create output stream exception " + e.toString());
             return null;
         }
     }
@@ -456,9 +486,9 @@ public class WhatsaiListener {
      * @return file which name format as yy.MMdd.HHmmss(19.1103.173655)
      */
     private File createPCMFile() {
-        String strFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
-        String fileName = strFileTime + ".pcm";
-        String filePath = ComDef.WHATSAI_AUDIO_DIR + "/" + fileName;
+        String neatFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
+        String fileName = neatFileTime + ".pcm";
+        String filePath = ComDef.WHATSAI_CACHE_DIR + "/" + fileName;
         LogUtils.i("WhatsaiListener:createPCMFile: filePath = " + filePath);
 
         File objFile = new File(filePath);
@@ -468,7 +498,7 @@ public class WhatsaiListener {
                     LogUtils.e("WhatsaiListener: createPCMFile failed.");
                     return null;
                 }
-                mPCMFileName = fileName;
+                mNeatFileName = neatFileTime;
                 return objFile;
             } catch (IOException e) {
                 LogUtils.e("WhatsaiListener: createPCMFile exception: " + e.toString());
@@ -476,5 +506,10 @@ public class WhatsaiListener {
             }
         }
         return null;
+    }
+
+    private void clearPCMFile() {
+        FileUtils.removeFile(getPCMFileAbsolute());
+        mNeatFileName = "";
     }
 }

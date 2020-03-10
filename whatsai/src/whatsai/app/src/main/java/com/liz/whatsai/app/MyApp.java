@@ -27,7 +27,7 @@ public class MyApp extends Application {
         if (ComDef.DEBUG) {
             LogUtils.setLevel(LogUtils.LOG_LEVEL_V);
         }
-        LogUtils.d("MyApp:onCreate: pid = " + android.os.Process.myPid());
+        LogUtils.t();
 
         super.onCreate();
         mAppInst = this;
@@ -41,6 +41,7 @@ public class MyApp extends Application {
 
         //move to MainActivity
         //DataLogic.init();
+
     }
 
     public static Context getAppContext() {

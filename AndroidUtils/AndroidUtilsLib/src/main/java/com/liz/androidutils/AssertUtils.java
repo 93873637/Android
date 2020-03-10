@@ -1,7 +1,5 @@
 package com.liz.androidutils;
 
-import android.text.TextUtils;
-
 public class AssertUtils {
 
     public static void Assert(boolean expression) {

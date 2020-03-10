@@ -1,21 +1,24 @@
 package com.liz.androidutils;
 
 import android.content.Context;
-import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,9 +26,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.IOUtils;
 
 /**
  * FileUtils:
@@ -37,6 +37,7 @@ import org.apache.commons.io.IOUtils;
 
 @SuppressWarnings("unused, WeakerAccess")
 public class FileUtils {
+
     /**
      * @return get file extension name from file absolute path
      * such as: /home/liz/aaa.txt -> txt
@@ -48,6 +49,16 @@ public class FileUtils {
             return "";
         }
         return fileAbsolute.substring(index + 1);
+    }
+
+    /**
+     * @return replace current file extension name with new one
+     * such as:
+     * replaceFileExtension("/home/liz/aaa.pcm", "wav") = /home/liz/aaa.wav
+     */
+    public static String replaceFileExtension(String fileAbsolute, String extName) {
+        final String FILE_EXT_SEPARATOR = ".";
+        return getFilePathNeat(fileAbsolute) + FILE_EXT_SEPARATOR + extName;
     }
 
     /**
@@ -77,7 +88,7 @@ public class FileUtils {
     }
 
     /**
-     * @return get file neat name from file path
+     * @return get file neat name from file path without path and extension name
      * such as:
      * /home/liz/aaa.txt -> aaa
      * aaa.txt -> aaa
@@ -90,6 +101,23 @@ public class FileUtils {
             return "";
         }
         return fileName.substring(0, index);
+    }
+
+    /**
+     * @return get file neat name from file path without extension name, but have path
+     * such as:
+     * /home/liz/aaa.txt -> /home/liz/aaa
+     * aaa.txt -> aaa
+     */
+    public static String getFilePathNeat(String filePath) {
+        final String FILE_EXT_SEPARATOR = ".";
+        int index = filePath.lastIndexOf(FILE_EXT_SEPARATOR);
+        if (index == -1) {
+            return filePath;  //no ext, take all path as neat
+        }
+        else {
+            return filePath.substring(0, index);
+        }
     }
 
     public static void removeFile(String fileName) {
@@ -317,6 +345,64 @@ public class FileUtils {
         return (size1 == size2) && md51.equals(md52);
     }
 
+    /**
+     * @param header:  header bytes buffer
+     * @param srcPath: source file path
+     */
+    private static boolean appendFileHeader(String srcPath, byte[] header) {
+        try {
+            RandomAccessFile src = new RandomAccessFile(srcPath, "rw");
+            int srcLength = (int) src.length();
+            byte[] buff = new byte[srcLength];
+            src.read(buff, 0, srcLength);
+            src.seek(0);
+            src.write(header);
+            src.seek(header.length);
+            src.write(buff);
+            src.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println("appendFileHeader to " + srcPath + " failed, ex = " + e.toString());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static void BigFileAddHead() {
+        // 将282兆的文件内容头部添加一行字符  "This is a head!"
+        String strHead = "This is a head!"; // 添加的头部内容
+        String srcFilePath = "big_file"; // 原文件路径
+        String destFilePath = "big_file_has_head"; // 添加头部后文件路径 （最终添加头部生成的文件路径）
+        long startTime = System.currentTimeMillis();
+        try {
+            // 映射原文件到内存
+            RandomAccessFile srcRandomAccessFile = new RandomAccessFile(srcFilePath, "r");
+            FileChannel srcAccessFileChannel = srcRandomAccessFile.getChannel();
+            long srcLength = srcAccessFileChannel.size();
+            System.out.println("src file size:" + srcLength);  // src file size:296354010
+            MappedByteBuffer srcMap = srcAccessFileChannel.map(FileChannel.MapMode.READ_ONLY, 0, srcLength);
+
+            // 映射目标文件到内存
+            RandomAccessFile destRandomAccessFile = new RandomAccessFile(destFilePath, "rw");
+            FileChannel destAccessFileChannel = destRandomAccessFile.getChannel();
+            long destLength = srcLength + strHead.getBytes().length;
+            System.out.println("dest file size:" + destLength);  // dest file size:296354025
+            MappedByteBuffer destMap = destAccessFileChannel.map(FileChannel.MapMode.READ_WRITE, 0, destLength);
+
+            // 开始文件追加 : 先添加头部内容，再添加原来文件内容
+            destMap.position(0);
+            destMap.put(strHead.getBytes());
+            destMap.put(srcMap);
+            destAccessFileChannel.close();
+            System.out.println("dest real file size:" + new RandomAccessFile(destFilePath, "r").getChannel().size());
+            System.out.println("total time :" + (System.currentTimeMillis() - startTime));// 貌似时间不准确，异步操作？
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ArrayList<String> readTxtFileLines(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -532,13 +618,28 @@ public class FileUtils {
 
     public static void main(String[] args) {
 
+        System.out.println("\n***Test Begin...");
+
+        AssertUtils.Assert(replaceFileExtension("/home/liz/aaa.pcm", "wav").equals("/home/liz/aaa.wav"));
+        AssertUtils.Assert(replaceFileExtension("/home/liz/aaa.", "wav").equals("/home/liz/aaa.wav"));
+        AssertUtils.Assert(replaceFileExtension("/home/liz/aaa", "wav").equals("/home/liz/aaa.wav"));
+        AssertUtils.Assert(replaceFileExtension("aaa.ccc", "wav").equals("aaa.wav"));
+        AssertUtils.Assert(replaceFileExtension("aaa.c", "wav").equals("aaa.wav"));
+
+        AssertUtils.Assert(getFilePathNeat("/home/liz/aaa.txt").equals("/home/liz/aaa"));
+        AssertUtils.Assert(getFilePathNeat("/home/liz/aaa.t").equals("/home/liz/aaa"));
+        AssertUtils.Assert(getFilePathNeat("/home/liz/aaa.").equals("/home/liz/aaa"));
+        AssertUtils.Assert(getFilePathNeat("/home/liz/aaa").equals("/home/liz/aaa"));
+        AssertUtils.Assert(getFilePathNeat("aaa.txt").equals("aaa"));
+
         AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "aaa\n"));
         AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "bbb\n"));
         AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "ccc\n", true, false));
         //AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "aaa\n"));
         //AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "bbb\n"));
 
-        /*
+        AssertUtils.Assert(appendFileHeader("D:\\Temp\\test.txt", "1234567890".getBytes()));
+
         //assert true
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.txt").equals("txt"));
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.t").equals("t"));
@@ -547,6 +648,7 @@ public class FileUtils {
         AssertUtils.Assert(formatDirSeparator("/home/liz/aaa").equals("/home/liz/aaa" + File.separator));
         AssertUtils.Assert(formatDirSeparator("/home/liz/aaa" + File.separator).equals("/home/liz/aaa" + File.separator));
 
+        /*
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
             String fileAbs = "D:\\home\\liz\\aaa.txt";  //for windows
@@ -611,5 +713,7 @@ public class FileUtils {
 //        String path2="D:\\Temp\\test3.jpg";
         //mv(path2, path1);
         //*/
+
+        System.out.println("***Test Successfully.");
     }
 }

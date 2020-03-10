@@ -1,8 +1,5 @@
 package com.liz.androidutilstest;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,11 +10,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.liz.androidutils.ComUtils;
+import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
+import com.liz.androidutils.LogEx;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.SysUtils;
-import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.TimeChecker;
 import com.liz.androidutils.ZipUtils;
 
@@ -78,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_storage();
+        test_LogUtils();
+        //test_storage();
         //test_logfile();
         //test_ImageCompress();
         //test_ziputils();
@@ -92,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_LogUtils() {
+        LogUtils.t();
     }
 
     public void test_storage() {
@@ -121,11 +127,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test_logfile() {
-        LogUtils.setLogDir("/sdcard/test/");
-        LogUtils.setTag("###@:");
-        LogUtils.setSaveToFile(true);
-        LogUtils.setMaxLogFileSize(20*1024);
-
+        LogEx.setLogDir("/sdcard/test/");
+        LogEx.setTag("###@:");
+        LogEx.setSaveToFile(true);
+        LogEx.setMaxLogFileSize(20*1024);
         for (int i=0; i<1000; i++) {
             LogUtils.d("#" + i + " - this is test log message");
         }

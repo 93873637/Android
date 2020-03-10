@@ -5,7 +5,8 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,9 +17,6 @@ import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class AudioUtils {
-
-    public static final int AUDIO_TRACK_SINGLE = 1;
-    public static final int AUDIO_TRACK_DOUBLE = 2;
 
     public static String audioSourceName(int audioSource) {
         switch (audioSource) {
@@ -71,27 +69,58 @@ public class AudioUtils {
         }
     }
 
+    public static int getChannelNum(int channelConfig) {
+        switch (channelConfig) {
+            case AudioFormat.CHANNEL_CONFIGURATION_MONO: return 1;
+            case AudioFormat.CHANNEL_CONFIGURATION_STEREO: return 2;
+            case AudioFormat.CHANNEL_IN_MONO: return 1;
+            case AudioFormat.CHANNEL_IN_STEREO: return 2;  //same as CHANNEL_OUT_STEREO
+            case AudioFormat.CHANNEL_OUT_MONO: return 1;
+            case AudioFormat.CHANNEL_OUT_QUAD: return 1;
+            default: return 1;
+        }
+    }
+
     /**
-     * @param pcmFileAbsolute
-     * @param wavFileAbsolute
-     * @param sampleRate
-     * @param recorderBufferSize
-     * @param audioFormat
-     * @param channels: 1-single track, 2-double track (sound will be fast if wrong)
+     * read pcm file and save data to wave file, rename *.pcm to *.wav
+     *
+     * @param pcmFileAbsolute: pcm file name with full path to read from(*.pcm)
+     * @param sampleRate:
+     * @param recorderBufferSize:
+     * @param audioFormat:
+     * @param channelConfig:
      */
-    public static void pcmToWave(String pcmFileAbsolute, String wavFileAbsolute, long sampleRate, int recorderBufferSize, int audioFormat, int channels) {
+    public static void pcm2Wave(@NonNull String pcmFileAbsolute,
+                                long sampleRate,
+                                int recorderBufferSize,
+                                int audioFormat,
+                                int channelConfig) {
+        String wavFileAbsolute = FileUtils.replaceFileExtension(pcmFileAbsolute, "wav");
+        pcm2Wave(pcmFileAbsolute, wavFileAbsolute, sampleRate, recorderBufferSize, audioFormat, channelConfig);
+    }
+
+    /**
+     * @param pcmFileAbsolute: pcm file name with full path to read from(*.pcm)
+     * @param wavFileAbsolute: wave file name with full path to save to(*.wav)
+     * @param sampleRate:
+     * @param recorderBufferSize:
+     * @param audioFormat:
+     * @param channelConfig: AudioFormat.CHANNEL_CONFIGURATION_MONO
+     */
+    public static void pcm2Wave(String pcmFileAbsolute, String wavFileAbsolute, long sampleRate, int recorderBufferSize, int audioFormat, int channelConfig) {
         FileInputStream in;
         FileOutputStream out;
         long totalAudioLen = 0;
         long totalDataLen = 36;
-        long byteRate = (audioFormat == AudioFormat.ENCODING_PCM_8BIT?8:16)* sampleRate * channels / 8;
+        int channelNum = getChannelNum(channelConfig);
+        long byteRate = (audioFormat == AudioFormat.ENCODING_PCM_8BIT?8:16)* sampleRate * channelNum / 8;
         byte[] data = new byte[recorderBufferSize];
         try {
             in = new FileInputStream(pcmFileAbsolute);
             out = new FileOutputStream(wavFileAbsolute);
             totalAudioLen = in.getChannel().size();
             totalDataLen = totalAudioLen + 36;
-            writeWaveFileHeader(out, totalAudioLen, totalDataLen, sampleRate, channels, byteRate);
+            writeWaveFileHeader(out, totalAudioLen, totalDataLen, sampleRate, channelConfig, byteRate);
             while (in.read(data) != -1) {
                 out.write(data);
             }

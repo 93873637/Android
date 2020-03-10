@@ -71,4 +71,8 @@ public class AudioListView extends ListView {
     public void updateList() {
         mAdapter.updateList();
     }
+
+    public String getAudioFilesInfo() {
+        return mAdapter.getAudioFilesInfo();
+    }
 }

@@ -63,12 +63,12 @@ public class AudioListAdapter extends BaseAdapter {
     }
 
     private String getListInfo() {
-        String info = "Total " + mFileList.length + " Files";
+        String info = "Total <font color=\"#ff0000\">" + mFileList.length + "</font> Files";
         long sizeTotal = 0;
         for (File f: mFileList) {
             sizeTotal += FileUtils.getFileSize(f);
         }
-        info += ", Size " + FileUtils.formatFileSize(sizeTotal);
+        info += ", Size <font color=\"#ff0000\">" + FileUtils.formatFileSize(sizeTotal) + "</font>";
         return info;
     }
 

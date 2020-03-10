@@ -158,7 +158,13 @@ public class DataLogic extends WhatsaiStorage {
     }
 
     public static List<Node> getDataList() {
-        return mActiveNode.getList();
+        if (mActiveNode == null) {
+            LogUtils.e("ERROR: active node null");
+            return null;
+        }
+        else {
+            return mActiveNode.getList();
+        }
     }
 
     public static String getPath() {

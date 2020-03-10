@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LogUtils.d("MainActivity:onCreate: ThreadID = " + Thread.currentThread().getId());
+        LogUtils.t();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkPermissions();

@@ -18,7 +18,7 @@ import java.util.List;
 
 public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
 
-	private static final double DEFAULT_WAVE_ITEM_WIDTH = 0.2;  // unit by pixel
+	private static final double DEFAULT_WAVE_ITEM_WIDTH = 1;  // unit by pixel
 	private static final double DEFAULT_WAVE_ITEM_SPACE = 0;  // unit by pixel
 	private static final int MIN_RECT_WIDTH = 2;  // item width not enough to one pixel, just draw a line
 
@@ -168,6 +168,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	}
 
 	public void onUpdateSurfaceData(@NonNull List<Integer> dataList, int maxValue) {
+		LogUtils.d("onUpdateSurfaceData: thread id = " + Thread.currentThread().getId());
 		Canvas canvas = this.getHolder().lockCanvas(
 				new Rect(0, 0, this.getWidth(), this.getHeight()));
 		if (canvas == null) {
