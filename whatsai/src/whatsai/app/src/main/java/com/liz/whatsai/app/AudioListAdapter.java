@@ -109,12 +109,6 @@ public class AudioListAdapter extends BaseAdapter {
         File f = mFileList[position];
         holder.tvName.setText(f.getName());
         holder.tvSize.setText(FileUtils.formatFileSize(FileUtils.getFileSize(f)));
-//        holder.ivPlay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
         if (position == WhatsaiAudio.getPlayItemPos()) {
             convertView.setBackgroundColor(Color.GREEN);
@@ -128,7 +122,6 @@ public class AudioListAdapter extends BaseAdapter {
     public static class ViewHolder {
         ImageView ivType;
         TextView tvName;
-        //ImageView ivPlay;
         TextView tvSize;
     }
 }

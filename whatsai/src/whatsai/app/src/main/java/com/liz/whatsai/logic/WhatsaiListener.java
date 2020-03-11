@@ -86,11 +86,12 @@ public class WhatsaiListener {
     private ArrayList<Integer> mPowerList = new ArrayList<>();
     private ArrayList<AudioFrame> mFrameList = new ArrayList<>();
     private ArrayList<AudioTemplate> mTemplateList = new ArrayList<>();
+    final public Object mDataLock = new Object();
 
     private ListenerCallback mCallback = null;
 
     private boolean mVoiceRecognition = false;
-    private final Object mRecognitionObject = new Object();
+    final private Object mRecognitionObject = new Object();
     private String mSpeechText = "";
 
     public WhatsaiListener() {
@@ -361,39 +362,40 @@ public class WhatsaiListener {
     private void startThread_VoiceRecognition() {
         if (mTemplateList.isEmpty()) {
             if (!loadAudioTemplates()) {
-                LogUtils.e("WhatsaiListener: startThread_VoiceRecognition: load audio templates failed.");
+                LogUtils.te("load audio templates failed.");
                 return;
             }
         }
-        LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: load audio templates ok, size = " + mTemplateList.size());
+        LogUtils.td("load audio templates ok, size = " + mTemplateList.size());
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: Start voice recognition...");
+                    LogUtils.td("Start voice recognition...");
                     while (mIsListening) {
-                        LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: wait recognition...");
+                        LogUtils.td("wait recognition...");
                         synchronized (mRecognitionObject) {
                             mRecognitionObject.wait();
                         }
-                        LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: recognition on frame #" + mFrameCount);
+                        LogUtils.td("recognition on frame #" + mFrameCount);
                         onVoiceRecognition();
                     }
                 } catch (Exception e) {
-                    LogUtils.e("WhatsaiListener: startThread_VoiceRecognition: recognition exception: " + e.toString());
+                    LogUtils.te("recognition exception: " + e.toString());
                     e.printStackTrace();
                 }
-                LogUtils.d("WhatsaiListener: startThread_VoiceRecognition: voice recognition stop.");
+                LogUtils.td("voice recognition stop.");
             }
         }).start();
     }
 
-    private synchronized void onReadBuffer(final int readSize, byte[] audioData) {
+    private void onReadBuffer(final int readSize, byte[] audioData) {
         mFrameSize = readSize / 2;
 
-        // sample for showing
-        for (int i = 0; i < mFrameSize; i += mWaveSamplingRate) {
-            mPowerList.add(audioData[i * 2 + 1] << 8 | audioData[i * 2]);
+        synchronized(mDataLock) {
+            // sample for showing
+            for (int i = 0; i < mFrameSize; i += mWaveSamplingRate) {
+                mPowerList.add(audioData[i * 2 + 1] << 8 | audioData[i * 2]);
             /*
             // audio zoom
             int pcmPower = (audioData[i * 2 + 1] << 8 | audioData[i * 2]);
@@ -404,13 +406,14 @@ public class WhatsaiListener {
             audioData[i * 2] = (byte)(pcmPower & 0x000000ff);
             audioData[i * 2 + 1] = (byte)((pcmPower & 0x0000ff00) >> 8);
             //*/
-        }
+            }
 
-        if (mPowerList.size() > mMaxPowerSize) {
-            int orgSize = mPowerList.size();
-            int toIndex = orgSize - mMaxPowerSize;
-            mPowerList.subList(0, toIndex).clear();
-            LogUtils.d("onReadBuffer: power list size " + orgSize + " exceed max " + mMaxPowerSize + ", removed to " + mPowerList.size());
+            if (mPowerList.size() > mMaxPowerSize) {
+                int orgSize = mPowerList.size();
+                int toIndex = orgSize - mMaxPowerSize;
+                mPowerList.subList(0, toIndex).clear();
+                LogUtils.d("onReadBuffer: power list size " + orgSize + " exceed max " + mMaxPowerSize + ", removed to " + mPowerList.size());
+            }
         }
 
         // calculate frame power, for pcm16, combined two bytes into one short

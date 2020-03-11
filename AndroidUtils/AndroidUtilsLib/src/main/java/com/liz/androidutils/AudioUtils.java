@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("unused, WeakerAccess")
 public class AudioUtils {
 
     public static String audioSourceName(int audioSource) {
@@ -29,7 +29,8 @@ public class AudioUtils {
             case MediaRecorder.AudioSource.CAMCORDER: return "CAMCORDER";
             case MediaRecorder.AudioSource.REMOTE_SUBMIX: return "REMOTE_SUBMIX";
             case MediaRecorder.AudioSource.UNPROCESSED: return "UNPROCESSED";
-            default: return "UNKNOWN";
+            default:
+                return "UNKNOWN AUDIO SOURCE";
         }
     }
 
@@ -53,7 +54,8 @@ public class AudioUtils {
             case AudioFormat.ENCODING_AC4: return "ENCODING_AC4";
             case AudioFormat.ENCODING_E_AC3_JOC: return "ENCODING_E_AC3_JOC";
             case AudioFormat.ENCODING_DOLBY_MAT: return "ENCODING_DOLBY_MAT";
-            default: return "UNKNOWN";
+            default:
+                return "UNKNOWN AUDIO FORMAT";
         }
     }
 
@@ -65,7 +67,8 @@ public class AudioUtils {
             case AudioFormat.CHANNEL_IN_STEREO: return "CHANNEL_IN_STEREO";  //same as CHANNEL_OUT_STEREO
             case AudioFormat.CHANNEL_OUT_MONO: return "CHANNEL_OUT_MONO";
             case AudioFormat.CHANNEL_OUT_QUAD: return "CHANNEL_OUT_QUAD";
-            default: return "UNKNOWN";
+            default:
+                return "UNKNOWN CHANNEL CONFIG";
         }
     }
 
@@ -74,10 +77,20 @@ public class AudioUtils {
             case AudioFormat.CHANNEL_CONFIGURATION_MONO: return 1;
             case AudioFormat.CHANNEL_CONFIGURATION_STEREO: return 2;
             case AudioFormat.CHANNEL_IN_MONO: return 1;
-            case AudioFormat.CHANNEL_IN_STEREO: return 2;  //same as CHANNEL_OUT_STEREO
+            case AudioFormat.CHANNEL_IN_STEREO: return 2;   // i.e. CHANNEL_OUT_STEREO
             case AudioFormat.CHANNEL_OUT_MONO: return 1;
             case AudioFormat.CHANNEL_OUT_QUAD: return 1;
-            default: return 1;
+            default:
+                return -1;  // unknown channel config
+        }
+    }
+
+    public static int getByteNum(int audioFormat) {
+        switch (audioFormat) {
+            case AudioFormat.ENCODING_PCM_8BIT: return 1;
+            case AudioFormat.ENCODING_PCM_16BIT: return 2;
+            default:
+                return -1;  // unknown audio format
         }
     }
 
@@ -107,7 +120,12 @@ public class AudioUtils {
      * @param audioFormat:
      * @param channelConfig: AudioFormat.CHANNEL_CONFIGURATION_MONO
      */
-    public static void pcm2Wave(String pcmFileAbsolute, String wavFileAbsolute, long sampleRate, int recorderBufferSize, int audioFormat, int channelConfig) {
+    public static void pcm2Wave(String pcmFileAbsolute,
+                                String wavFileAbsolute,
+                                long sampleRate,
+                                int recorderBufferSize,
+                                int audioFormat,
+                                int channelConfig) {
         FileInputStream in;
         FileOutputStream out;
         long totalAudioLen = 0;
@@ -136,8 +154,8 @@ public class AudioUtils {
     }
 
     /**
-     * 任何一种文件在头部添加相应的头文件才能够确定的表示这种文件的格式，wave是RIFF文件结构，每一部分为一个chunk，其中有RIFF WAVE chunk，
-     * FMT Chunk，Fact chunk,Data chunk,其中Fact chunk是可以选择的，
+     * wave是RIFF文件结构，每一部分为一个chunk，其中有RIFF WAVE chunk，
+     * FMT Chunk，Fact chunk,Data chunk,其中Fact chunk是可以选择的
      */
     public static void writeWaveFileHeader(FileOutputStream out, long totalAudioLen, long totalDataLen, long longSampleRate,
                                            int channels, long byteRate) throws IOException {
@@ -196,14 +214,6 @@ public class AudioUtils {
         header[42] = (byte) ((totalAudioLen >> 16) & 0xff);
         header[43] = (byte) ((totalAudioLen >> 24) & 0xff);
         out.write(header, 0, 44);
-    }
-
-    public static int getByteNum(int audioFormat) {
-        switch (audioFormat) {
-            case AudioFormat.ENCODING_PCM_8BIT: return 1;
-            case AudioFormat.ENCODING_PCM_16BIT: return 2;
-            default: return 1;
-        }
     }
 
     public static void playPCM(String pcmFilePath, int bufferSize, int sampleRate, int encodingBits, int channelMask) {

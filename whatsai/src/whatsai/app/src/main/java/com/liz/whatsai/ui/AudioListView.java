@@ -29,12 +29,6 @@ public class AudioListView extends ListView {
         super(context, attrs, defStyle);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
-    }
-
     public void onCreate(Context context, String audioDir) {
         mAdapter = new AudioListAdapter(audioDir);
         this.setAdapter(mAdapter);
@@ -48,7 +42,12 @@ public class AudioListView extends ListView {
         });
     }
 
-    //###@: todo: save pcm as wave file and play it
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expandSpec);
+    }
+
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();

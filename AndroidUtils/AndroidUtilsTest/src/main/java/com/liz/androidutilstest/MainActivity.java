@@ -97,7 +97,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test_LogUtils() {
-        LogUtils.t();
+        LogUtils.setLevel(LogUtils.LOG_LEVEL_V);
+        LogUtils.trace();
+        LogUtils.tv("this is trace test");
+        LogUtils.td("this is trace test");
+        LogUtils.ti("this is trace test");
+        LogUtils.tw("this is trace test");
+        LogUtils.te("this is trace test");
     }
 
     public void test_storage() {

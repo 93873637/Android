@@ -11,14 +11,11 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +28,7 @@ import java.util.List;
  * FileUtils:
  * Created by liz on 2019/1/14.
  *
- * NOTE: don't using LogUtils, since LogUtils has function which called this file
+ * NOTE: don'trace using LogUtils, since LogUtils has function which called this file
  * or you will get recursive error, lead to stack overflow
  */
 
@@ -138,21 +135,21 @@ public class FileUtils {
         }
     }
 
-    public static void mv(String filePathFrom, String filePathTo) {
-        //delete old file
-        File fileTo = new File(filePathTo);
-        if (fileTo.exists()) {
-            if (!fileTo.delete()) {
-                System.out.println("Delete to file " + filePathTo + " failed.");
+    public static void mv(String fromFilePath, String toFilePath) {
+        // first delete toFile if exists
+        File toFile = new File(toFilePath);
+        if (toFile.exists()) {
+            if (!toFile.delete()) {
+                System.out.println("Delete toFile " + toFilePath + " failed.");
                 return;
             }
         }
 
-        //rename file
-        File fileFrom = new File(filePathFrom);
-        if (fileFrom.exists()) {
-            if (!fileFrom.renameTo(fileTo)) {
-                System.out.println("Rename file to " + filePathTo + " failed.");
+        // rename fromFile as toFile
+        File fromFile = new File(fromFilePath);
+        if (fromFile.exists()) {
+            if (!fromFile.renameTo(toFile)) {
+                System.out.println("Rename file to " + toFilePath + " failed.");
             }
         }
     }
@@ -253,51 +250,120 @@ public class FileUtils {
     }
 
     public static String getFormattedFileSize(File f) {
-        return formatFileSize(FileUtils.getFileSize(f));
+        return formatFileSize(FileUtils.getSingleFileSize(f));
     }
 
-    public static long getFileSize(File file) {
-        long size = 0;
+    /**
+     * @param filePath: file name with full path
+     * return: long, file size, unit by bytes
+     */
+    public static long getSingleFileSize(String filePath) {
+        return getSingleFileSize(new File(filePath));
+    }
+
+    /**
+     * @param file:
+     * return: long, file size, unit by bytes
+     */
+    public static long getSingleFileSize(File file) {
+        if (file == null) {
+            System.out.println("ERROR: getSingleFileSize: file null");
+            return -1;
+        }
+        if (!file.exists()) {
+            System.out.println("ERROR: getSingleFileSize: file \"" + file.getAbsolutePath() + "\" not exist");
+            return -2;
+        }
+        if (!file.isFile()) {
+            System.out.println("ERROR: getSingleFileSize: \"" + file.getAbsolutePath() + "\" not a file");
+            return -3;
+        }
+        RandomAccessFile raf = null;
         try {
-            if (file != null && file.exists()) {
-                FileInputStream fis;
-                fis = new FileInputStream(file);
-                size = fis.available();
-            }
+            raf = new RandomAccessFile(file, "rw");
+            return raf.length();
         }
         catch(Exception e) {
-            System.out.println("ERROR: getFileSize exception " + e.toString());
+            System.out.println("ERROR: getSingleFileSize: \"" + file.getAbsolutePath() + "\" failed with ex: " + e.toString());
+            return -4;
+        }
+        finally {
+            if (raf != null) {
+                try {
+                    raf.close();
+                } catch (Exception e) {
+                    System.out.println("ERROR: getSingleFileSize: close \"" + file.getAbsolutePath() + "\" exception: " + e.toString());
+                }
+            }
+        }
+    }
+
+    /**
+     * @param filePath: file name with full path
+     * return: long, file size, unit by bytes
+     */
+    public static long getFolderSize(String filePath) {
+        return getFolderSize(new File(filePath));
+    }
+
+    public static long getFolderSize(File dir) {
+        if (dir == null) {
+            System.out.println("ERROR: getFolderSize: dir null");
+            return -1;
+        }
+        if (!dir.exists()) {
+            System.out.println("ERROR: getFolderSize: dir \"" + dir.getAbsolutePath() + "\" not exist");
+            return -2;
+        }
+        if (!dir.isDirectory()) {
+            System.out.println("ERROR: getFolderSize: \"" + dir.getAbsolutePath() + "\" not a dir");
+            return -3;
+        }
+        long size = 0;
+        File[] fileList = dir.listFiles();
+        if (fileList != null) {
+            for (File f : fileList) {
+                long s = 0;
+                if (f.isDirectory()) {
+                    s += getFolderSize(f);
+                } else {
+                    s += getSingleFileSize(f);
+                }
+                if (s < 0) {
+                    System.out.println("ERROR: getFolderSize: get size failed on file \"" + f.getAbsolutePath() + "\"");
+                    return -4;
+                }
+                size += s;
+            }
         }
         return size;
     }
 
     public static long getFileSize(String filePath) {
-        long size = 0;
+        return getFileSize(new File(filePath));
+    }
+
+    public static long getFileSize(File f) {
+        if (f == null) {
+            System.out.println("ERROR: getFileSize: file null");
+            return -1;
+        }
+        if (!f.exists()) {
+            System.out.println("ERROR: getFileSize: file \"" + f.getAbsolutePath() + "\" not exist");
+            return -2;
+        }
         try {
-            File f = new File(filePath);
+            long size;
             if (f.isDirectory()) {
                 size = getFolderSize(f);
             } else {
-                size = getFileSize(f);
+                size = getSingleFileSize(f);
             }
+            return size;
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("getFileSize exception: " + e.toString());
+            System.out.println("ERROR: getFileSize: \"" + f.getAbsolutePath() + "\" exception: " + e.toString());
+            return -3;
         }
-        return size;
-    }
-
-    private static long getFolderSize(File f) throws Exception {
-        long size = 0;
-        File fileList[] = f.listFiles();
-        for (int i = 0; i < fileList.length; i++) {
-            if (fileList[i].isDirectory()) {
-                size = size + getFolderSize(fileList[i]);
-            } else {
-                size = size + getFileSize(fileList[i]);
-            }
-        }
-        return size;
     }
 
     public static String formatFileSize(long fileSize) {
@@ -346,28 +412,91 @@ public class FileUtils {
     }
 
     /**
-     * @param header:  header bytes buffer
-     * @param srcPath: source file path
+     * An simple method to add headerBytes to source file by just copy to buffer
+     *
+     * @param srcFilePath: source file with full path
+     * @param headerBytes:  buffer for headerBytes bytes
+     *
+     * NOTE:
+     * Max File Size: 256M
      */
-    private static boolean appendFileHeader(String srcPath, byte[] header) {
+    private static boolean addHeaderSimple(String srcFilePath, byte[] headerBytes) {
+        final long MAX_FILE_SIZE = 256 * 1024 * 1024L;
+        RandomAccessFile srcFile = null;
         try {
-            RandomAccessFile src = new RandomAccessFile(srcPath, "rw");
-            int srcLength = (int) src.length();
-            byte[] buff = new byte[srcLength];
-            src.read(buff, 0, srcLength);
-            src.seek(0);
-            src.write(header);
-            src.seek(header.length);
-            src.write(buff);
-            src.close();
+            srcFile = new RandomAccessFile(srcFilePath, "rw");
+            long srcSize = srcFile.length();
+            if (srcSize > MAX_FILE_SIZE) {
+                System.out.println("ERROR: add header to " + srcFilePath + " failed, file size " + srcSize + " exceed max " + MAX_FILE_SIZE);
+                return false;
+            }
+            byte[] buf = new byte[(int) srcSize];
+            srcFile.read(buf, 0, (int) srcSize);
+            srcFile.seek(0);
+            srcFile.write(headerBytes);
+            srcFile.seek(headerBytes.length);
+            srcFile.write(buf);
             return true;
         } catch (Exception e) {
-            System.out.println("appendFileHeader to " + srcPath + " failed, ex = " + e.toString());
-            e.printStackTrace();
+            System.out.println("ERROR: addHeaderSimple: add header to " + srcFilePath + " failed, ex = " + e.toString());
             return false;
+        } finally {
+            try {
+                if (srcFile != null) {
+                    srcFile.close();
+                }
+            }
+            catch(Exception e) {
+                System.out.println("ERROR: addHeaderSimple: close exception, ex = " + e.toString());
+            }
         }
     }
 
+    /**
+     * Add headerBytes to source file
+     *
+     * @param srcFilePath: source file with full path
+     * @param headerBytes:  buffer for headerBytes bytes
+     *
+     */
+    private static boolean addHeader(String srcFilePath, byte[] headerBytes) {
+        final int DATA_BUF_SIZE = 2 * 1024 * 1024;
+        FileInputStream in = null;
+        FileOutputStream out = null;
+        byte[] data = new byte[DATA_BUF_SIZE];
+        try {
+            String dstFilePath = srcFilePath + ".dst";
+            in = new FileInputStream(srcFilePath);
+            out = new FileOutputStream(dstFilePath);
+            out.write(headerBytes);
+            int readLen;
+            while ((readLen = in.read(data)) != -1) {
+                out.write(data, 0, readLen);
+            }
+            in.close();
+            in = null;
+            out.close();
+            out = null;
+            mv(dstFilePath, srcFilePath);
+            return true;
+        } catch (Exception e) {
+            System.out.println("ERROR: addHeader: add header to " + srcFilePath + " failed, ex = " + e.toString());
+            return false;
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            } catch (Exception e) {
+                System.out.println("ERROR: addHeader: close exception, ex = " + e.toString());
+            }
+        }
+    }
+
+    /* ERROR: it not work for can't close file!
     public static void BigFileAddHead() {
         // 将282兆的文件内容头部添加一行字符  "This is a head!"
         String strHead = "This is a head!"; // 添加的头部内容
@@ -402,6 +531,7 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+    //*/
 
     public static ArrayList<String> readTxtFileLines(String filePath) {
         File file = new File(filePath);
@@ -435,8 +565,7 @@ public class FileUtils {
         }
     }
 
-    public static boolean appendTxtFile(@NonNull String fileAbsolute, @NonNull String content)
-    {
+    public static boolean appendTxtFile(@NonNull String fileAbsolute, @NonNull String content) {
         try {
             File file = new File(fileAbsolute);
             if (!file.exists()) {
@@ -445,22 +574,19 @@ public class FileUtils {
                     return false;
                 }
             }
-
             if (!file.isFile()) {
                 System.out.println("ERROR: appendTxtFile: file \"" + fileAbsolute + "\" is NOT a file!");
                 return false;
             }
-
             RandomAccessFile raf = new RandomAccessFile(file, "rw");
             raf.seek(file.length());
             raf.write(content.getBytes());
             raf.close();
+            return true;
         } catch (Exception e) {
             System.out.println("ERROR: appendTxtFile: exception = " + e.toString());
             return false;
         }
-
-        return true;
     }
 
     public static boolean writeTxtFile(@NonNull final String fileAbsolute,@NonNull final String content) {
@@ -581,24 +707,25 @@ public class FileUtils {
 
         // delete all sub files and dirs
         File[] files = dirFile.listFiles();
-        for (int i = 0; i < files.length; i++) {
-            String absolutePath = files[i].getAbsolutePath();
-            if (files[i].isFile()) {
-                flag = deleteFile(absolutePath);
-            }
-            else if (files[i].isDirectory()) {
-                flag = deleteDirectory(files[i].getAbsolutePath());
-            }
-            else {
-                System.out.println("ERROR: FileUtils.deleteDirectory: " + absolutePath + " not file/dir");
-                flag = false;
-                break;
-            }
-            if (!flag) {
-                System.out.println("ERROR: FileUtils.deleteDirectory: delete " + absolutePath + " failed");
-                break;
+        if (files != null) {
+            for (File f : files) {
+                String absolutePath = f.getAbsolutePath();
+                if (f.isFile()) {
+                    flag = deleteFile(absolutePath);
+                } else if (f.isDirectory()) {
+                    flag = deleteDirectory(f.getAbsolutePath());
+                } else {
+                    System.out.println("ERROR: FileUtils.deleteDirectory: " + absolutePath + " not file/dir");
+                    flag = false;
+                    break;
+                }
+                if (!flag) {
+                    System.out.println("ERROR: FileUtils.deleteDirectory: delete " + absolutePath + " failed");
+                    break;
+                }
             }
         }
+
         if (!flag) {
             System.out.println("ERROR: FileUtils.deleteDirectory: delete dir " + dir + " failed");
             return false;
@@ -616,9 +743,28 @@ public class FileUtils {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Test Functions
 
+    public static int test_try_catch_finally() {
+        try {
+            System.out.println("try E...");
+            File file = new File("d:\\temp\\aaa\\bbb");
+            FileOutputStream out = new FileOutputStream(file);
+            out.write("content".getBytes());
+            out.flush();
+            out.close();
+            System.out.println("try X.");
+            return 0;
+        } catch (Exception e) {
+            System.out.println("catch ex = " + e.toString());
+            return -1;
+        } finally {
+            System.out.println("finally...");
+        }
+    }
+
     public static void main(String[] args) {
 
         System.out.println("\n***Test Begin...");
+        //System.out.println("test_try_catch_finally=" + test_try_catch_finally());
 
         AssertUtils.Assert(replaceFileExtension("/home/liz/aaa.pcm", "wav").equals("/home/liz/aaa.wav"));
         AssertUtils.Assert(replaceFileExtension("/home/liz/aaa.", "wav").equals("/home/liz/aaa.wav"));
@@ -627,7 +773,7 @@ public class FileUtils {
         AssertUtils.Assert(replaceFileExtension("aaa.c", "wav").equals("aaa.wav"));
 
         AssertUtils.Assert(getFilePathNeat("/home/liz/aaa.txt").equals("/home/liz/aaa"));
-        AssertUtils.Assert(getFilePathNeat("/home/liz/aaa.t").equals("/home/liz/aaa"));
+        AssertUtils.Assert(getFilePathNeat("/home/liz/aaa.trace").equals("/home/liz/aaa"));
         AssertUtils.Assert(getFilePathNeat("/home/liz/aaa.").equals("/home/liz/aaa"));
         AssertUtils.Assert(getFilePathNeat("/home/liz/aaa").equals("/home/liz/aaa"));
         AssertUtils.Assert(getFilePathNeat("aaa.txt").equals("aaa"));
@@ -635,18 +781,36 @@ public class FileUtils {
         AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "aaa\n"));
         AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "bbb\n"));
         AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "ccc\n", true, false));
-        //AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "aaa\n"));
-        //AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "bbb\n"));
+        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "ddd\n"));
+        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "eee\n"));
 
-        AssertUtils.Assert(appendFileHeader("D:\\Temp\\test.txt", "1234567890".getBytes()));
+        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test.txt", "addHeaderSimple1\n".getBytes()));
+        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test.txt", "addHeaderSimple2\n".getBytes()));
+        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test.mp4", "addHeaderSimple\n".getBytes()));
+
+        AssertUtils.Assert(addHeader("D:\\Temp\\test.txt", "addHeader1111\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\test.txt", "addHeader2222\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\test.mp4", "addHeader1111\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\aaa.apk", "addHeader1111\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\test.wav", "addHeader1111\n".getBytes()));
 
         //assert true
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.txt").equals("txt"));
-        AssertUtils.Assert(getFileExtension("/home/liz/aaa.t").equals("t"));
+        AssertUtils.Assert(getFileExtension("/home/liz/aaa.trace").equals("trace"));
         AssertUtils.Assert(getFileExtension("/home/liz/aaa").equals(""));
 
         AssertUtils.Assert(formatDirSeparator("/home/liz/aaa").equals("/home/liz/aaa" + File.separator));
         AssertUtils.Assert(formatDirSeparator("/home/liz/aaa" + File.separator).equals("/home/liz/aaa" + File.separator));
+
+        AssertUtils.Assert(getFileSize("D:\\Temp\\20.0310.184415.wav") == 385459244);
+        AssertUtils.Assert(getFileSize("D:\\Media\\_cd\\midway2019.mkv") == 2923737914L);
+        AssertUtils.Assert(getFileSize("D:\\Software\\android\\android-sdk\\platforms\\android-24\\data\\res\\values-ja\\_incljju\\a\\_jp\\1\\tjkadxn\\tjkadxn\\1.mp4") == 5199565620L);
+        AssertUtils.Assert(getSingleFileSize("D:\\Temp\\20.0310.184415.wav") == 385459244);
+        AssertUtils.Assert(getSingleFileSize("D:\\Media\\_cd\\midway2019.mkv") == 2923737914L);
+        AssertUtils.Assert(getSingleFileSize("D:\\Software\\android\\android-sdk\\platforms\\android-24\\data\\res\\values-ja\\_incljju\\a\\_jp\\1\\tjkadxn\\tjkadxn\\1.mp4") == 5199565620L);
+
+        //AssertUtils.Assert(getFileSize("D:\\Media") == 12274233649L);
+        //AssertUtils.Assert(getFileSize("D:\\Temp") == 560574893L);
 
         /*
         {
@@ -661,7 +825,7 @@ public class FileUtils {
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
-            String fileAbs = "D:\\home\\liz\\aaa.t";  //for windows
+            String fileAbs = "D:\\home\\liz\\aaa.trace";  //for windows
             System.out.println("getFileName(\"" + fileAbs + "\")=\"" + getFileName(fileAbs) + "\"");
         }
         {
@@ -680,7 +844,7 @@ public class FileUtils {
         }
         {
             //String fileAbs = "/home/liz/aaa.txt";  //for unix
-            String fileAbs = "D:\\home\\liz\\aaa.t";  //for windows
+            String fileAbs = "D:\\home\\liz\\aaa.trace";  //for windows
             System.out.println("getFileNeatName(\"" + fileAbs + "\")=\"" + getFileNeatName(fileAbs) + "\"");
         }
         {

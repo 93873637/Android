@@ -23,15 +23,15 @@ import java.util.TimerTask;
 
 public class AudioRecordActivity extends Activity implements View.OnClickListener {
 
-    public static final int RECORD_WAVE_SAMPLING_RATE = 256;
+    public static final int RECORD_WAVE_SAMPLING_RATE = 1;
 
-    WaveSurfaceView mWaveSurfaceView;
-    TextView mTextProgressInfo;
-    TextView mTextAudioFilesInfo;
-    LinearLayout mAudioRecordBar;
-    Button mBtnSwitchListening;
-    WhatsaiListener mListener;
-    AudioListView mAudioListView;
+    private WaveSurfaceView mWaveSurfaceView;
+    private TextView mTextProgressInfo;
+    private TextView mTextAudioFilesInfo;
+    private LinearLayout mAudioRecordBar;
+    private Button mBtnSwitchListening;
+    private WhatsaiListener mListener;
+    private AudioListView mAudioListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,16 +67,24 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         startUITimer();
     }
 
-    private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
-        @Override
-        public void onPowerUpdated() {
-            AudioRecordActivity.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    mWaveSurfaceView.onUpdateSurfaceData(mListener.getPowerList(), mListener.getMaxPower());
-                }
-            });
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_switch_listening:
+                onSwitchListening();
+                break;
+            case R.id.btn_audio_listener:
+                startActivity(new Intent(AudioRecordActivity.this, ListenerActivity.class));
+                this.finish();
+                break;
+            case R.id.btn_audio_template:
+                startActivity(new Intent(AudioRecordActivity.this, AudioTemplateActivity.class));
+                this.finish();
+                break;
+            default:
+                break;
         }
-    };
+    }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -90,7 +98,9 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
         if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            mListener.playAudio(mAudioListView.getAudioFilePath((int)info.id));
+            String filePath = mAudioListView.getAudioFilePath((int)info.id);
+            mListener.playAudio(filePath);
+            //WhatsaiAudio.startPlay(filePath);
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
@@ -128,6 +138,19 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     // UI Timer
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
+        @Override
+        public void onPowerUpdated() {
+            AudioRecordActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    synchronized (mListener.mDataLock) {
+                        mWaveSurfaceView.onUpdateSurfaceData(mListener.getPowerList(), mListener.getMaxPower());
+                    }
+                }
+            });
+        }
+    };
+
     private String getProgressInfo() {
         if (mListener.isListening()) {
             return mListener.getProgressInfoSimple();
@@ -157,25 +180,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
 
     private void setAudioFilesInfo() {
         mTextAudioFilesInfo.setText(Html.fromHtml(mAudioListView.getAudioFilesInfo()));
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_switch_listening:
-                onSwitchListening();
-                break;
-            case R.id.btn_audio_listener:
-                startActivity(new Intent(AudioRecordActivity.this, ListenerActivity.class));
-                this.finish();
-                break;
-            case R.id.btn_audio_template:
-                startActivity(new Intent(AudioRecordActivity.this, AudioTemplateActivity.class));
-                this.finish();
-                break;
-            default:
-                break;
-        }
     }
 
     private void onSwitchListening() {

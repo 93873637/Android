@@ -38,7 +38,7 @@ public class LogUtils {
 
 	public static void setLevel(int level) {
 		if (level < LOG_LEVEL_MIN || level > LOG_LEVEL_MAX) {
-			e("ERROR: Can't set log level with invalid value " + level + ", should be [" + LOG_LEVEL_MIN + ", " + LOG_LEVEL_MAX + "]");
+			e("ERROR: Can'trace set log level with invalid value " + level + ", should be [" + LOG_LEVEL_MIN + ", " + LOG_LEVEL_MAX + "]");
 		}
 		else {
 			mLevel = level;
@@ -137,8 +137,7 @@ public class LogUtils {
 		d(className + "." + methodName + ":" + msg);
 	}
 
-	// t: print trace
-	public static void t() {
+	public static void trace() {
 		StringBuilder sb = new StringBuilder("TRACE");
 		sb.append(" ");
 		sb.append(android.os.Process.myPid());
@@ -147,18 +146,51 @@ public class LogUtils {
 		sb.append(" ");
 		sb.append(Thread.currentThread().getName());
 		StackTraceElement[] s = Thread.currentThread().getStackTrace();
-		if (s.length > 3) {
-			// s[0/1/2] is taken by LogUtils, skip
+		final int INDEX = 3;  //skip elements to real trace point
+		if (s.length > INDEX) {
 			sb.append(" ");
-			sb.append(s[3].getFileName());
+			sb.append(s[INDEX].getFileName());
 			sb.append("/");
-			sb.append(s[3].getLineNumber());
+			sb.append(s[INDEX].getLineNumber());
 			sb.append(" ");
-			sb.append(s[3].getClassName());
+			sb.append(s[INDEX].getClassName());
 			sb.append(".");
-			sb.append(s[3].getMethodName());
+			sb.append(s[INDEX].getMethodName());
 		}
 		d(sb.toString());
+	}
+
+	private static String t() {
+		StringBuilder sb = new StringBuilder();
+		StackTraceElement[] s = Thread.currentThread().getStackTrace();
+		final int INDEX = 4;  //skip elements to real trace point
+		if (s.length > INDEX) {
+			sb.append(s[INDEX].getFileName());
+			sb.append("/");
+			sb.append(s[INDEX].getLineNumber());
+			sb.append(" ");
+		}
+		return sb.toString();
+	}
+
+	public static void tv(String msg) {
+		v(t() + msg);
+	}
+
+	public static void td(String msg) {
+		d(t() + msg);
+	}
+
+	public static void ti(String msg) {
+		i(t() + msg);
+	}
+
+	public static void tw(String msg) {
+		w(t() + msg);
+	}
+
+	public static void te(String msg) {
+		e(t() + msg);
 	}
 
 	public static void tipD(String msg) {
@@ -259,7 +291,7 @@ public class LogUtils {
 //
 //		//get and check log file
 //		String logFilePath = getLogFilePath();
-//		if (FileUtils.getFileSize(logFilePath) >= mMaxLogFileSize) {
+//		if (FileUtils.getSingleFileSize(logFilePath) >= mMaxLogFileSize) {
 //			removeLogFile();
 //			createLogFile();
 //			logFilePath = getLogFilePath();

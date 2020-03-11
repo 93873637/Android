@@ -87,15 +87,15 @@ public class StringUtils {
 
 //
 //        {
-//            String aa = "{\"TYPE\": 1, \"NAME\": \"w'ha   t'sai\", \"LIST\": [{TYPE: 0, NAME: \"Task  Na\nme   0\"},{TYPE: 0, NAME: \"Tas \n\t  kName1\"}]}";
-//            String bb = deleteCharsOutsideQuotes(aa, " \n\t");
+//            String aa = "{\"TYPE\": 1, \"NAME\": \"w'ha   trace'sai\", \"LIST\": [{TYPE: 0, NAME: \"Task  Na\nme   0\"},{TYPE: 0, NAME: \"Tas \n\trace  kName1\"}]}";
+//            String bb = deleteCharsOutsideQuotes(aa, " \n\trace");
 //            System.out.println("\"" + aa + "\" -> \"" + bb + "\"");
 //        }
 
-//        String aa = "  a a   a \n d d \t";
-//        String bb = removeChars(aa, " \n\t");
+//        String aa = "  a a   a \n d d \trace";
+//        String bb = removeChars(aa, " \n\trace");
 //        System.out.println("\"" + aa + "\" -> \"" + bb + "\"") ;
-//        String cc = removeChars(aa, " \n\t");
+//        String cc = removeChars(aa, " \n\trace");
 //        System.out.println("\"" + aa + "\" -> \"" + cc + "\"") ;
     }
 }

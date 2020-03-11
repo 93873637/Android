@@ -7,13 +7,13 @@ import android.content.res.Configuration;
 import com.liz.androidutils.LogUtils;
 
 /**
- * ThisApp.java
+ * MyApp.java
  * Created by liz on 18-1-8.
  */
 
 @SuppressWarnings("unused")
-public class ThisApp extends Application {
-    private static ThisApp mAppInst;
+public class MyApp extends Application {
+    private static MyApp mAppInst;
     public static String mAppVersion = "";
     public static String mAppVersionShow = "";  //text show in log
 
