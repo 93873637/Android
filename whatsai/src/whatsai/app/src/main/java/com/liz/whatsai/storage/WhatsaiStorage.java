@@ -11,8 +11,8 @@ import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
 import com.liz.whatsai.logic.Task;
-import com.liz.whatsai.logic.WhatsaiDir;
-import com.liz.whatsai.logic.WhatsaiMail;
+import com.liz.whatsai.logic.WSDir;
+import com.liz.whatsai.logic.WSMail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,17 +34,17 @@ public class WhatsaiStorage {
     private static String mLastSyncFile = "";
 
     public static boolean initStorage() {
-        mRootNode = new WhatsaiDir();
+        mRootNode = new WSDir();
         mRootNode.setName(ComDef.APP_NAME);
         if (!buildDirs()) {
             LogUtils.e("WhatsaiStorage: buildDirs failed.");
             return false;
         }
 
-        StorageJSON.loadData((WhatsaiDir)mRootNode);
+        StorageJSON.loadData((WSDir)mRootNode);
         DataLogic.clearDirty();  //not dirty for load data
 
-        WhatsaiMail.setWhatsaiMailCallback(new WhatsaiMail.WhatsaiMailCallback() {
+        WSMail.setWhatsaiMailCallback(new WSMail.WhatsaiMailCallback() {
             @Override
             public void onSendMailSuccess(String fileAbsolute) {
                 // remove old file
@@ -225,14 +225,14 @@ public class WhatsaiStorage {
 
         // finally, cloud save required
         LogUtils.d("WhatsaiStorage: onCloudSaveTimer: upload new cloud file \"" + zipFileAbsolute + "\"...");
-        WhatsaiMail.start(null, zipFileAbsolute);
+        WSMail.start(null, zipFileAbsolute);
     }
 
     //
     // no check, direct save to cloud
     //
     public static void local_save() {
-        saveToFile((WhatsaiDir)mRootNode, ComDef.WHATSAI_DATA_FILE);
+        saveToFile((WSDir)mRootNode, ComDef.WHATSAI_DATA_FILE);
     }
 
     //
@@ -252,7 +252,7 @@ public class WhatsaiStorage {
         }
 
         //finally, save file to cloud
-        WhatsaiMail.start(activity, zipFileAbsolute);
+        WSMail.start(activity, zipFileAbsolute);
     }
 
     private static String genCloudSaveFileAbsolute() {
@@ -262,7 +262,7 @@ public class WhatsaiStorage {
                 + ComDef.CLOUD_FILE_NAME_SUFFIX;
     }
 
-    private static void saveToFile(WhatsaiDir dir, String fileAbsolute) {
+    private static void saveToFile(WSDir dir, String fileAbsolute) {
         LogUtils.d("WhatsaiStorage: saveToFile: \"" + fileAbsolute + "\"...");
         try {
             File f = new File(fileAbsolute);
@@ -285,14 +285,14 @@ public class WhatsaiStorage {
 
     ///* for test
     protected static Node loadTestData() {
-        WhatsaiDir rootNode = new WhatsaiDir();
+        WSDir rootNode = new WSDir();
         rootNode.setName("whatsai");
 
         {Task task = new Task(); task.setName("TaskName0"); task.setDone(true); rootNode.add(task);}
         {Task task = new Task(); task.setName("TaskName1"); task.setDone(false); rootNode.add(task);}
 
         {
-            WhatsaiDir tg = new WhatsaiDir();
+            WSDir tg = new WSDir();
             tg.setName("TaskGroup1");
             rootNode.add(tg);
             for (int i = 0; i < 2; i++) {
@@ -302,7 +302,7 @@ public class WhatsaiStorage {
                 tg.add(task);
             }
             {
-                WhatsaiDir tg11 = new WhatsaiDir();
+                WSDir tg11 = new WSDir();
                 tg11.setName("taskgroup11");
                 tg.add(tg11);
                 for (int i = 0; i < 3; i++) {
@@ -319,7 +319,7 @@ public class WhatsaiStorage {
         {Task task = new Task(); task.setName("TaskName4"); task.setDone(true); rootNode.add(task);}
 
         {
-            WhatsaiDir tg = new WhatsaiDir();
+            WSDir tg = new WSDir();
             tg.setName("TaskGroup2");
             rootNode.add(tg);
             for (int i = 0; i < 29; i++) {

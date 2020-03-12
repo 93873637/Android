@@ -53,7 +53,7 @@ public class DataLogic extends WhatsaiStorage {
         }
         else {
             mActiveNode = getRootNode();
-            WhatsaiAudio.init();
+            WSAudio.init();
             startAlarmTimer();
             mInitState = ComDef.INIT_STATUS_OK;
         }
@@ -115,19 +115,19 @@ public class DataLogic extends WhatsaiStorage {
     }
 
     private static void createFile(String name) {
-        Node node = new WhatsaiFile(name);
+        Node node = new WSFile(name);
         mActiveNode.add(node);
         setDirty();
     }
 
     private static void createDir(String name) {
-        Node node = new WhatsaiDir(name);
+        Node node = new WSDir(name);
         mActiveNode.add(node);
         setDirty();
     }
 
     private static void createText(String name) {
-        Node node = new WhatsaiText(name);
+        Node node = new WSText(name);
         mActiveNode.add(node);
         setDirty();
     }

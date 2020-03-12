@@ -40,11 +40,12 @@
         <activity android:name=".ui.NodeActivity" />
         <activity android:name=".ui.AudioRecordActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.AudioRecordActivity2" android:screenOrientation="portrait"/>
-        <activity android:name=".test.testAudioRecordActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.ListenerActivity" android:screenOrientation="landscape"/>
         <activity android:name=".ui.AudioTemplateActivity" android:screenOrientation="landscape"/>
+        <activity android:name=".ui.AudioConfigActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.TextActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.AlarmActivity"/>
+        <activity android:name=".test.testAudioRecordActivity" android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".app.WhatsaiReceiver"

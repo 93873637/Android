@@ -2,9 +2,9 @@ package com.liz;
 
 import com.liz.whatsai.logic.Task;
 import com.liz.whatsai.logic.TaskGroup;
-import com.liz.whatsai.logic.WhatsaiDir;
-import com.liz.whatsai.logic.WhatsaiFile;
-import com.liz.whatsai.logic.WhatsaiText;
+import com.liz.whatsai.logic.WSDir;
+import com.liz.whatsai.logic.WSFile;
+import com.liz.whatsai.logic.WSText;
 
 import org.junit.Test;
 
@@ -20,10 +20,10 @@ import static org.junit.Assert.assertTrue;
 public class WhatsaiUnitTest {
     @Test
     public void test_isDir() {
-        assertFalse(new WhatsaiFile().isDir());
+        assertFalse(new WSFile().isDir());
         assertFalse(new Task().isDir());
-        assertFalse(new WhatsaiText().isDir());
-        assertTrue(new WhatsaiDir().isDir());
+        assertFalse(new WSText().isDir());
+        assertTrue(new WSDir().isDir());
         assertTrue(new TaskGroup().isDir());
     }
 }

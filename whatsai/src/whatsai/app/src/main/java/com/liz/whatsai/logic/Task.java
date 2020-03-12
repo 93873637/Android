@@ -1,7 +1,5 @@
 package com.liz.whatsai.logic;
 
-import android.util.Log;
-
 import com.liz.androidutils.LogUtils;
 
 /**
@@ -9,7 +7,7 @@ import com.liz.androidutils.LogUtils;
  * Created by liz on 2018/9/17.
  */
 
-public class Task extends WhatsaiFile {
+public class Task extends WSFile {
     private boolean done;
 
     public Task() {

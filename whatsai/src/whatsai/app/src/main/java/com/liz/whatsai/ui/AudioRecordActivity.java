@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,8 +14,8 @@ import android.widget.TextView;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WhatsaiAudio;
-import com.liz.whatsai.logic.WhatsaiListener;
+import com.liz.whatsai.logic.WSListener;
+import com.liz.whatsai.logic.WSRecorder;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,7 +29,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     private TextView mTextAudioFilesInfo;
     private LinearLayout mAudioRecordBar;
     private Button mBtnSwitchListening;
-    private WhatsaiListener mListener;
     private AudioListView mAudioListView;
 
     @Override
@@ -39,31 +37,34 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         setContentView(R.layout.activity_audio_record);
         LogUtils.d("AudioTemplateActivity:onCreate");
 
-        mListener = new WhatsaiListener();
-        mListener.setWaveSamplingRate(RECORD_WAVE_SAMPLING_RATE);
-        mListener.setAutoSave(true);
+        ((TextView)findViewById(R.id.titlebar_name)).setText("Audio Recorder");
+
+        WSRecorder.inst().setWaveSamplingRate(RECORD_WAVE_SAMPLING_RATE);
+        WSRecorder.inst().setAutoSave(true);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
-        mBtnSwitchListening.setText(mListener.isListening()?"STOP":"START");
-        mListener.setCallback(mListenerCallback);
+        mBtnSwitchListening.setText(WSRecorder.inst().isListening()?"STOP":"START");
+        WSRecorder.inst().setCallback(mListenerCallback);
 
         findViewById(R.id.btn_switch_listening).setOnClickListener(this);
         findViewById(R.id.btn_audio_listener).setOnClickListener(this);
         findViewById(R.id.btn_audio_template).setOnClickListener(this);
+        findViewById(R.id.btn_audio_config).setOnClickListener(this);
 
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mAudioRecordBar = findViewById(R.id.ll_audio_record);
         mTextAudioFilesInfo = findViewById(R.id.tv_audio_files_info);
 
-        mWaveSurfaceView.setMaxValue(mListener.getMaxPower());
+        mWaveSurfaceView.setMaxValue(WSRecorder.inst().getMaxPower());
         mWaveSurfaceView.setWaveItemWidth(1);
         mWaveSurfaceView.setWaveItemSpace(0);
 
         mAudioListView = findViewById(R.id.lv_audio_files);
         mAudioListView.onCreate(this, ComDef.WHATSAI_AUDIO_DIR);
 
+        loadAudioListInfo();
         startUITimer();
     }
 
@@ -81,6 +82,9 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
                 startActivity(new Intent(AudioRecordActivity.this, AudioTemplateActivity.class));
                 this.finish();
                 break;
+            case R.id.btn_audio_config:
+                startActivity(new Intent(AudioRecordActivity.this, AudioConfigActivity.class));
+                break;
             default:
                 break;
         }
@@ -88,28 +92,11 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //###@:todo: improve it by save audio file as wave file and play it
-//        if (mAudioListView.onContextItemSelected(item)) {
-//            return true;
-//        }
-//
-//        return super.onContextItemSelected(item);
+        if (mAudioListView.onContextItemSelected(item)) {
+            return true;
+        }
 
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int itemId = item.getItemId();
-        if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            String filePath = mAudioListView.getAudioFilePath((int)info.id);
-            mListener.playAudio(filePath);
-            //WhatsaiAudio.startPlay(filePath);
-            return true;
-        }
-        else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WhatsaiAudio.stopPlay();
-            return true;
-        }
-        else {
-            return super.onContextItemSelected(item);
-        }
+        return super.onContextItemSelected(item);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,13 +125,13 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     // UI Timer
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
+    private WSListener.ListenerCallback mListenerCallback = new WSListener.ListenerCallback() {
         @Override
         public void onPowerUpdated() {
             AudioRecordActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    synchronized (mListener.mDataLock) {
-                        mWaveSurfaceView.onUpdateSurfaceData(mListener.getPowerList(), mListener.getMaxPower());
+                    synchronized (WSRecorder.inst().mDataLock) {
+                        mWaveSurfaceView.onUpdateSurfaceData(WSRecorder.inst().getPowerList(), WSRecorder.inst().getMaxPower());
                     }
                 }
             });
@@ -152,8 +139,8 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     };
 
     private String getProgressInfo() {
-        if (mListener.isListening()) {
-            return mListener.getProgressInfoSimple();
+        if (WSRecorder.inst().isListening()) {
+            return WSRecorder.inst().getProgressInfoSimple();
         }
         else {
             return "";
@@ -161,7 +148,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     }
 
     private void updateUI() {
-        if (mListener.isListening()) {
+        if (WSRecorder.inst().isListening()) {
             mBtnSwitchListening.setText("STOP");
             mAudioRecordBar.setBackgroundColor(Color.GREEN);
         }
@@ -170,12 +157,15 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
             mAudioRecordBar.setBackgroundColor(Color.RED);
         }
         mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
-        updateAudioList();
+    }
+
+    private void loadAudioListInfo() {
+        mAudioListView.updateList();
+        setAudioFilesInfo();
     }
 
     private void updateAudioList() {
-        mAudioListView.updateList();
-        setAudioFilesInfo();
+        loadAudioListInfo();
     }
 
     private void setAudioFilesInfo() {
@@ -183,8 +173,9 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     }
 
     private void onSwitchListening() {
-        mListener.switchListening();
+        WSRecorder.inst().switchListening();
         updateUI();
+        updateAudioList();
     }
 
     @Override

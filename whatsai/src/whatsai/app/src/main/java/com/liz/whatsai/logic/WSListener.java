@@ -20,7 +20,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @SuppressWarnings("unused, WeakerAccess")
-public class WhatsaiListener {
+public class WSListener {
 
     /**
      * default max audio power value(from pcm 16bits)
@@ -94,10 +94,10 @@ public class WhatsaiListener {
     final private Object mRecognitionObject = new Object();
     private String mSpeechText = "";
 
-    public WhatsaiListener() {
-        LogUtils.d("WhatsaiListener:WhatsaiListener");
+    public WSListener() {
+        LogUtils.d("WSListener:WSListener");
         mRecordBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mAudioFormat);
-        LogUtils.d("WhatsaiListener:WhatsaiListener: mRecordBufferSize = " + mRecordBufferSize);
+        LogUtils.d("WSListener:WSListener: mRecordBufferSize = " + mRecordBufferSize);
         mAudioRecord = new AudioRecord(mAudioSource, mSampleRate, mChannelConfig, mAudioFormat, mRecordBufferSize);
     }
 
@@ -106,12 +106,12 @@ public class WhatsaiListener {
     }
 
     public void switchListening() {
-        LogUtils.d("WhatsaiListener:switchListening: mIsListening = " + mIsListening);
+        LogUtils.d("WSListener:switchListening: mIsListening = " + mIsListening);
         if (mIsListening) {
             stopListening();
             stopWorkingTimer();
             if (mAutoSave) {
-                AudioUtils.pcm2Wave(getPCMFileAbsolute(), getWAVFileAbsolute(), mSampleRate, mRecordBufferSize, mAudioFormat, mChannelConfig);
+                AudioUtils.pcm2wav(getPCMFileAbsolute(), getWAVFileAbsolute(), mSampleRate, mRecordBufferSize, mAudioFormat, mChannelConfig);
             }
         }
         else {
@@ -258,6 +258,7 @@ public class WhatsaiListener {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Working Timer
+
     private static final long WORKING_TIMER_DELAY = 0L;
     private static final long WORKING_TIMER_PERIOD = 1000L;
 
@@ -283,7 +284,7 @@ public class WhatsaiListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void onWorkingTimer() {
-        LogUtils.d("WhatsaiListener:onWorkingTimer");
+        LogUtils.d("WSListener:onWorkingTimer");
         mFrameRate = mFrameCount - mLastFrameCount;
         mLastFrameCount = mFrameCount;
         mDataRate = mTotalSize - mLastDataSize;
@@ -292,7 +293,7 @@ public class WhatsaiListener {
     }
 
     private void resetParams() {
-        LogUtils.d("WhatsaiListener:onStartWorkingTimer");
+        LogUtils.d("WSListener:onStartWorkingTimer");
         clearPCMFile();
         mFrameSize = 0;
         mFrameCount = 0;
@@ -310,16 +311,16 @@ public class WhatsaiListener {
     }
 
     private void startListening() {
-        LogUtils.d("WhatsaiListener:startListening: mIsListening = " + mIsListening);
+        LogUtils.d("WSListener:startListening: mIsListening = " + mIsListening);
         if (mIsListening) {
-            LogUtils.d("WhatsaiListener:startListening: already started");
+            LogUtils.d("WSListener:startListening: already started");
             return;
         }
         mIsListening = true;
         resetParams();
         final FileOutputStream outputStream = createPCMOutputStream();
         if (outputStream == null) {
-            LogUtils.e("WhatsaiListener:startListening: get output stream for audio buffer failed.");
+            LogUtils.e("WSListener:startListening: get output stream for audio buffer failed.");
             return;
         }
         mAudioRecord.startRecording();
@@ -335,12 +336,12 @@ public class WhatsaiListener {
             @Override
             public void run() {
                 try {
-                    LogUtils.d("WhatsaiListener: Start loop write audio data to pcm file...");
+                    LogUtils.d("WSListener: Start loop write audio data to pcm file...");
                     byte[] audioData = new byte[mRecordBufferSize];
                     int readSize;
                     while (mIsListening) {
                         readSize = mAudioRecord.read(audioData, 0, audioData.length);
-                        onReadBuffer(readSize, audioData);
+                        onReadAudioData(readSize, audioData);
                         outputStream.write(audioData, 0, readSize);
                         outputStream.flush();
                         if (mVoiceRecognition) {
@@ -351,10 +352,10 @@ public class WhatsaiListener {
                     }
                     outputStream.close();
                 } catch (Exception e) {
-                    LogUtils.e("WhatsaiListener: startListening: listen thread exception " + e.toString());
+                    LogUtils.e("WSListener: startListening: listen thread exception " + e.toString());
                     e.printStackTrace();
                 }
-                LogUtils.d("WhatsaiListener: listener stop.");
+                LogUtils.d("WSListener: listener stop.");
             }
         }).start();
     }
@@ -389,60 +390,25 @@ public class WhatsaiListener {
         }).start();
     }
 
-    private void onReadBuffer(final int readSize, byte[] audioData) {
-        mFrameSize = readSize / 2;
+    private void onReadAudioData(final int readSize, byte[] audioData) {
+        synchronized (mDataLock) {
+            processAudioData(readSize, audioData);
 
-        synchronized(mDataLock) {
-            // sample for showing
-            for (int i = 0; i < mFrameSize; i += mWaveSamplingRate) {
-                mPowerList.add(audioData[i * 2 + 1] << 8 | audioData[i * 2]);
-            /*
-            // audio zoom
-            int pcmPower = (audioData[i * 2 + 1] << 8 | audioData[i * 2]);
-            pcmPower *= 2;
-            if (pcmPower > DEFAULT_MAX_POWER) {
-                pcmPower = DEFAULT_MAX_POWER;
-            }
-            audioData[i * 2] = (byte)(pcmPower & 0x000000ff);
-            audioData[i * 2 + 1] = (byte)((pcmPower & 0x0000ff00) >> 8);
-            //*/
-            }
+            mFrameSize = readSize / 2;
+            updateSurfaceSampleList(mFrameSize, audioData);
+            mFramePower = calcFramePower(mFrameSize, audioData);
+            mTotalSize += readSize;
+            mFrameCount++;
+            LogUtils.v("WSListener: read #" + mFrameCount + ": " + readSize + "/" + mTotalSize + "/" + mFramePower);
 
-            if (mPowerList.size() > mMaxPowerSize) {
-                int orgSize = mPowerList.size();
-                int toIndex = orgSize - mMaxPowerSize;
-                mPowerList.subList(0, toIndex).clear();
-                LogUtils.d("onReadBuffer: power list size " + orgSize + " exceed max " + mMaxPowerSize + ", removed to " + mPowerList.size());
-            }
-        }
-
-        // calculate frame power, for pcm16, combined two bytes into one short
-        {
-            int pcmVal;
-            int valid = 0;
-            double pcmSum = 0;
-            for (int i = 0; i < mFrameSize; i++) {
-                pcmVal = (audioData[i*2 + 1] << 8 | audioData[i*2]);
-                if (pcmVal != 0) {
-                    pcmSum += pcmVal * pcmVal;
-                    valid ++;
+            // save a period of audio buffer for recognition
+            if (mVoiceRecognition) {
+                AudioFrame frame = new AudioFrame(audioData);
+                if (mTotalSize > mMaxBufferSize) {
+                    mFrameList.remove(0);
                 }
+                mFrameList.add(frame);
             }
-            pcmSum /= valid;
-            mFramePower = (int)Math.sqrt(pcmSum);
-        }
-
-        mTotalSize += readSize;
-        mFrameCount ++;
-        LogUtils.v("WhatsaiListener: read #" + mFrameCount + ": " + readSize + "/" + mTotalSize + "/" + mFramePower);
-
-        // save a period of audio buffer for recognition
-        if (mVoiceRecognition) {
-            AudioFrame frame = new AudioFrame(audioData);
-            if (mTotalSize > mMaxBufferSize) {
-                mFrameList.remove(0);
-            }
-            mFrameList.add(frame);
         }
 
         if (mCallback != null) {
@@ -450,14 +416,61 @@ public class WhatsaiListener {
         }
     }
 
+    private void updateSurfaceSampleList(int frameNum, byte[] audioData) {
+        for (int i = 0; i < mFrameSize; i += mWaveSamplingRate) {
+            mPowerList.add(audioData[i * 2 + 1] << 8 | audioData[i * 2]);
+        }
+        if (mPowerList.size() > mMaxPowerSize) {
+            int orgSize = mPowerList.size();
+            int toIndex = orgSize - mMaxPowerSize;
+            mPowerList.subList(0, toIndex).clear();
+            LogUtils.d("onReadAudioData: power list size " + orgSize + " exceed max " + mMaxPowerSize + ", removed to " + mPowerList.size());
+        }
+    }
+
+    /**
+     * calculate frame power, for pcm16, combined two bytes into one short
+     */
+    private int calcFramePower(int frameNum, byte[] audioData) {
+        int pcmVal;
+        int valid = 0;
+        double pcmSum = 0;
+        for (int i = 0; i < frameNum; i++) {
+            pcmVal = (audioData[i * 2 + 1] << 8 | audioData[i * 2]);
+            if (pcmVal != 0) {
+                pcmSum += pcmVal * pcmVal;
+                valid++;
+            }
+        }
+        pcmSum /= valid;
+        return (int) Math.sqrt(pcmSum);
+    }
+
+    private void processAudioData(final int readSize, byte[] audioData) {
+        zoomVolume(readSize, audioData);
+    }
+
+    private void zoomVolume(final int readSize, byte[] audioData) {
+        /*
+        // audio zoom
+        int pcmPower = (audioData[i * 2 + 1] << 8 | audioData[i * 2]);
+        pcmPower *= 2;
+        if (pcmPower > DEFAULT_MAX_POWER) {
+            pcmPower = DEFAULT_MAX_POWER;
+        }
+        audioData[i * 2] = (byte) (pcmPower & 0x000000ff);
+        audioData[i * 2 + 1] = (byte) ((pcmPower & 0x0000ff00) >> 8);
+        //*/
+    }
+
     public void onVoiceRecognition() {
         //###@: todo: search templates words from frame list...
     }
 
     private void stopListening() {
-        LogUtils.d("WhatsaiListener:stopRecord: mIsListening = " + mIsListening);
+        LogUtils.d("WSListener:stopRecord: mIsListening = " + mIsListening);
         if (!mIsListening) {
-            LogUtils.d("WhatsaiListener: stopRecord: already stopped");
+            LogUtils.d("WSListener: stopRecord: already stopped");
             return;
         }
         mIsListening = false;
@@ -472,14 +485,14 @@ public class WhatsaiListener {
     private FileOutputStream createPCMOutputStream() {
         File pcmFile = createPCMFile();
         if (pcmFile == null) {
-            LogUtils.e("WhatsaiListener:createPCMOutputStream: create pcm file failed");
+            LogUtils.e("WSListener:createPCMOutputStream: create pcm file failed");
             return null;
         }
         try {
             return new FileOutputStream(pcmFile.getAbsoluteFile());
         }
         catch (Exception e) {
-            LogUtils.e("WhatsaiListener:createPCMOutputStream: create output stream exception " + e.toString());
+            LogUtils.e("WSListener:createPCMOutputStream: create output stream exception " + e.toString());
             return null;
         }
     }
@@ -492,19 +505,19 @@ public class WhatsaiListener {
         String neatFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
         String fileName = neatFileTime + ".pcm";
         String filePath = ComDef.WHATSAI_CACHE_DIR + "/" + fileName;
-        LogUtils.i("WhatsaiListener:createPCMFile: filePath = " + filePath);
+        LogUtils.i("WSListener:createPCMFile: filePath = " + filePath);
 
         File objFile = new File(filePath);
         if (!objFile.exists()) {
             try {
                 if (!objFile.createNewFile()) {
-                    LogUtils.e("WhatsaiListener: createPCMFile failed.");
+                    LogUtils.e("WSListener: createPCMFile failed.");
                     return null;
                 }
                 mNeatFileName = neatFileTime;
                 return objFile;
             } catch (IOException e) {
-                LogUtils.e("WhatsaiListener: createPCMFile exception: " + e.toString());
+                LogUtils.e("WSListener: createPCMFile exception: " + e.toString());
                 e.printStackTrace();
             }
         }

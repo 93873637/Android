@@ -9,26 +9,26 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 @SuppressWarnings("WeakerAccess")
-public class WhatsaiAudio {
+public class WSAudio {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Interfaces
 
     public static void init() {
-        LogUtils.d("WhatsaiAudio:init");
-        mWhatsaiAudio = new WhatsaiAudio();
+        LogUtils.d("WSAudio:init");
+        mWSAudio = new WSAudio();
     }
 
     public static void switchRecord() {
         if (isRecording()) {
-            mWhatsaiAudio.stopRecord();
+            mWSAudio.stopRecord();
         } else {
-            mWhatsaiAudio.startRecord();
+            mWSAudio.startRecord();
         }
     }
 
     public static boolean isRecording() {
-        return mWhatsaiAudio.mMediaRecorder != null;
+        return mWSAudio.mMediaRecorder != null;
     }
 
     public interface WhatsaiAudioCallback {
@@ -36,7 +36,7 @@ public class WhatsaiAudio {
     }
 
     public static void setAudioCallback(WhatsaiAudioCallback cb) {
-        mWhatsaiAudio.mAudioCallback = cb;
+        mWSAudio.mAudioCallback = cb;
     }
 
     public static int getPlayItemPos() {
@@ -44,25 +44,25 @@ public class WhatsaiAudio {
     }
 
     public static void startPlay(String filePath) {
-        mWhatsaiAudio._startPlay(filePath);
+        mWSAudio._startPlay(filePath);
     }
 
     public static void stopPlay() {
-        mWhatsaiAudio._stopPlay();
+        mWSAudio._stopPlay();
     }
 
     // Interfaces
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private static WhatsaiAudio mWhatsaiAudio;
+    private static WSAudio mWSAudio;
     private MediaRecorder mMediaRecorder = null;
     private MediaPlayer mMediaPlayer = null;
     private WhatsaiAudioCallback mAudioCallback = null;
     private static int mPlayItemPos = ComDef.INVALID_LIST_POS;
 
     //Singleton Constructor
-    private WhatsaiAudio() {
-        LogUtils.d("WhatsaiAudio:WhatsaiAudio");
+    private WSAudio() {
+        LogUtils.d("WSAudio:WSAudio");
     }
 
     /**
@@ -77,7 +77,7 @@ public class WhatsaiAudio {
 
     private void startRecord() {
         if (mMediaRecorder != null) {
-            LogUtils.d("WhatsaiAudio: startRecord: already start");
+            LogUtils.d("WSAudio: startRecord: already start");
             return;
         }
         mMediaRecorder = new MediaRecorder();
@@ -96,7 +96,7 @@ public class WhatsaiAudio {
 
     private void stopRecord() {
         if (mMediaRecorder == null) {
-            LogUtils.d("WhatsaiAudio: stopRecord: already stopped");
+            LogUtils.d("WSAudio: stopRecord: already stopped");
             return;
         }
         try {
@@ -104,7 +104,7 @@ public class WhatsaiAudio {
             mMediaRecorder.release();
             mMediaRecorder = null;
         } catch (RuntimeException e) {
-            LogUtils.e("WhatsaiAudio: stop record exception: " + e.toString());
+            LogUtils.e("WSAudio: stop record exception: " + e.toString());
             mMediaRecorder.reset();
             mMediaRecorder.release();
             mMediaRecorder = null;
@@ -115,9 +115,9 @@ public class WhatsaiAudio {
     }
 
     public void _startPlay(String filePath) {
-        LogUtils.d("WhatsaiAudio: _startPlay: filePath = " + filePath);
+        LogUtils.d("WSAudio: _startPlay: filePath = " + filePath);
         if (mMediaPlayer != null) {
-            LogUtils.d("WhatsaiAudio: _startPlay: already started, stop first");
+            LogUtils.d("WSAudio: _startPlay: already started, stop first");
             _stopPlay();
         }
         try {
@@ -133,7 +133,7 @@ public class WhatsaiAudio {
 
     public void _stopPlay() {
         if (mMediaPlayer == null) {
-            LogUtils.d("WhatsaiAudio: _stopPlay: already stopped");
+            LogUtils.d("WSAudio: _stopPlay: already stopped");
         }
         else {
             mMediaPlayer.stop();

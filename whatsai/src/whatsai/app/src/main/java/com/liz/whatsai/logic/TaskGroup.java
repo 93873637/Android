@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 @SuppressWarnings("WeakerAccess")
-public class TaskGroup extends WhatsaiDir {
+public class TaskGroup extends WSDir {
     private ArrayList<Node> list = null;
     private int task_number = 0;
 

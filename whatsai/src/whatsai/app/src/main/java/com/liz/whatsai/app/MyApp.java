@@ -27,16 +27,16 @@ public class MyApp extends Application {
         if (ComDef.DEBUG) {
             LogUtils.setLevel(LogUtils.LOG_LEVEL_V);
         }
-        LogUtils.t();
+        LogUtils.trace();
 
         super.onCreate();
         mAppInst = this;
         mAppVersion = SysUtils.getAppVersion(this);
 
         /* for test only
-        //WhatsaiMail.sendMail("tom.li@cloudminds.com", "ddaasfess111", "fease111");
-        //WhatsaiMail.sendMail("tom.li@cloudminds.com", "ddaasfess222", "fease222", "/sdcard/whatsai/whatsai.xml");
-        WhatsaiMail.sendMail("93873637@qq.com", "ddaasfess111", "fease111", "/sdcard/whatsai/whatsai.xml");
+        //WSMail.sendMail("tom.li@cloudminds.com", "ddaasfess111", "fease111");
+        //WSMail.sendMail("tom.li@cloudminds.com", "ddaasfess222", "fease222", "/sdcard/whatsai/whatsai.xml");
+        WSMail.sendMail("93873637@qq.com", "ddaasfess111", "fease111", "/sdcard/whatsai/whatsai.xml");
         //*/
 
         //move to MainActivity

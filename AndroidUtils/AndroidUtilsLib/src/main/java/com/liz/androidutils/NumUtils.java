@@ -12,6 +12,25 @@ public class NumUtils {
         return df.format(n);
     }
 
+    /**
+     * a function as printf("%05d", value)
+     * @param v: value
+     * @param n: zero number
+     * @return zero padding string, such as
+     *   zeroPadding(6, 3) = "006"
+     *   zeroPadding(56, 3) = "056"
+     *   zeroPadding(156, 3) = "156"
+     *   zeroPadding(2156, 3) = "2156"
+     */
+    public static String zeroPadding(int v, int n) {
+        String vs = "" + v;
+        int zeroNum = n - vs.length();
+        if (zeroNum > 0) {
+            for (int i=0; i<zeroNum; i++) vs = "0" + vs;
+        }
+        return vs;
+    }
+
     public static String formatSize(long size) {
         final long K_V = 1024;   //real value
         final long K_C = 1000;  //compare value, less than 4 degits
@@ -126,9 +145,21 @@ public class NumUtils {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Test Functions
+    // TEST MAIN
 
     public static void main(String[] args) {
+
+        StackTraceElement[] s = Thread.currentThread().getStackTrace();
+        String tag = s[1].getClassName() + " " + s[1].getFileName() + "/" + s[1].getLineNumber();
+        System.out.println("\n" + tag + ": Test Start...");
+
+        AssertUtils.Assert(zeroPadding(0, 3).equals("000"));
+        AssertUtils.Assert(zeroPadding(1, 3).equals("001"));
+        AssertUtils.Assert(zeroPadding(10, 3).equals("010"));
+        AssertUtils.Assert(zeroPadding(100, 3).equals("100"));
+        AssertUtils.Assert(zeroPadding(123, 3).equals("123"));
+        AssertUtils.Assert(zeroPadding(1234, 3).equals("1234"));
+
         AssertUtils.Assert(byte2Hex((byte)128).equals("80"));
         AssertUtils.Assert(byte2Hex((byte)160).equals("a0"));
         AssertUtils.Assert(unsigned((byte)-128) == 128);
@@ -146,7 +177,7 @@ public class NumUtils {
 //        test_formatShow(13456);
 //        test_formatShow(123456);
 
-        System.out.println("\n***Test Successfully.");
+        System.out.println("\n" + tag + ": Test Successfully.");
     }
 
     public static void test_formatShow(int n) {

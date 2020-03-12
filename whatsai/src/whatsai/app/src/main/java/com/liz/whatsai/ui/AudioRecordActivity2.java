@@ -18,7 +18,7 @@ import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.app.AudioListAdapter;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WhatsaiAudio;
+import com.liz.whatsai.logic.WSAudio;
 
 import java.io.File;
 
@@ -55,7 +55,7 @@ public class AudioRecordActivity2 extends Activity implements View.OnClickListen
         });
 
         setAudioFilesInfo();
-        WhatsaiAudio.setAudioCallback(new WhatsaiAudio.WhatsaiAudioCallback() {
+        WSAudio.setAudioCallback(new WSAudio.WhatsaiAudioCallback() {
             @Override
             public void onAudioRecordStopped() {
                 AudioRecordActivity2.this.runOnUiThread(new Runnable() {
@@ -101,14 +101,14 @@ public class AudioRecordActivity2 extends Activity implements View.OnClickListen
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
         if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            WhatsaiAudio.startPlay(mAudioListAdapter.getAudioFilePath((int)info.id));
+            WSAudio.startPlay(mAudioListAdapter.getAudioFilePath((int)info.id));
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WhatsaiAudio.stopPlay();
+            WSAudio.stopPlay();
             return true;
         }
-        else if (itemId == ComDef.AudioListMenu.DEL.id) {
+        else if (itemId == ComDef.AudioListMenu.DELETE.id) {
             onDeleteAudioFile(info.id);
             return true;
         }
@@ -147,12 +147,12 @@ public class AudioRecordActivity2 extends Activity implements View.OnClickListen
     }
 
     protected void setAudioButton() {
-        //LogUtils.d("testAudioRecordActivity:setAudioButton: isRecording = " + WhatsaiAudio.isRecording());
-        mBtnSwitchRecord.setBackgroundResource(WhatsaiAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
+        //LogUtils.d("testAudioRecordActivity:setAudioButton: isRecording = " + WSAudio.isRecording());
+        mBtnSwitchRecord.setBackgroundResource(WSAudio.isRecording() ? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
     }
 
     protected void onSwitchRecord() {
-        WhatsaiAudio.switchRecord();
+        WSAudio.switchRecord();
         setAudioButton();
     }
 }

@@ -5,17 +5,17 @@ package com.liz.whatsai.logic;
  * Created by liz on 2018/9/17.
  */
 
-public class WhatsaiText extends WhatsaiFile {
+public class WSText extends WSFile {
     private int scroll_x;
     private int scroll_y;
 
-    public WhatsaiText() {
+    public WSText() {
         super();
         scroll_x = 0;
         scroll_y = 0;
     }
 
-    public WhatsaiText(String name) {
+    public WSText(String name) {
         super(name);
         scroll_x = 0;
         scroll_y = 0;

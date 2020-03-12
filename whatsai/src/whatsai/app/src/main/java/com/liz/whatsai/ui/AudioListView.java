@@ -1,6 +1,9 @@
 package com.liz.whatsai.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -8,10 +11,15 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.liz.androidutils.FileUtils;
+import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.app.AudioListAdapter;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WhatsaiAudio;
+import com.liz.whatsai.logic.WSAudio;
+
+import java.io.File;
 
 public class AudioListView extends ListView {
 
@@ -29,6 +37,7 @@ public class AudioListView extends ListView {
         super(context, attrs, defStyle);
     }
 
+    //NOTE: you should call it on holder's onCreate
     public void onCreate(Context context, String audioDir) {
         mAdapter = new AudioListAdapter(audioDir);
         this.setAdapter(mAdapter);
@@ -40,6 +49,13 @@ public class AudioListView extends ListView {
                 }
             }
         });
+        this.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                LogUtils.td("position=" + position + ", arg1=" + arg1 + ", arg3=" + arg3);
+                WSAudio.startPlay(AudioListView.this.getAudioFilePath(position));
+            }
+        });
     }
 
     @Override
@@ -48,19 +64,43 @@ public class AudioListView extends ListView {
         super.onMeasure(widthMeasureSpec, expandSpec);
     }
 
+    //NOTE: you should call it on holder's onContextItemSelected
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int itemId = item.getItemId();
-        if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            //####@: mListener.playAudio(mAudioListAdapter.getAudioFilePath((int)info.id));
+        int menuItemId = item.getItemId();
+        LogUtils.td("menuItemId = " + menuItemId);
+        if (menuItemId == ComDef.AudioListMenu.PLAY.id) {
+            WSAudio.startPlay(this.getAudioFilePath((int) info.id));
             return true;
-        }
-        else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WhatsaiAudio.stopPlay();
+        } else if (menuItemId == ComDef.AudioListMenu.STOP.id) {
+            WSAudio.stopPlay();
             return true;
+        } else if (menuItemId == ComDef.AudioListMenu.DELETE.id) {
+            onDeleteAudioFile((int) info.id);
+            return true;
+        } else {
+            return false;
         }
+    }
 
-        return false;
+    private void onDeleteAudioFile(final int id) {
+        final File f = mAdapter.getAudioFile(id);
+        final TextView tv = new TextView(this.getContext());
+        tv.setText(f.getAbsolutePath());
+        tv.setTextColor(Color.RED);
+        tv.setTextSize(16);
+        new AlertDialog
+                .Builder(this.getContext())
+                .setTitle("Confirm Delete?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setView(tv)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FileUtils.removeFile(f);
+                        mAdapter.removeItem(id);
+                    }
+                }).setNegativeButton("Cancel", null).show();
     }
 
     public String getAudioFilePath(int id) {

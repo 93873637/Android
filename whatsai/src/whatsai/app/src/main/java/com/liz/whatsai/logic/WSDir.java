@@ -1,20 +1,18 @@
 package com.liz.whatsai.logic;
 
-import android.graphics.Bitmap;
-
 /**
- * WhatsaiDir:
+ * WSDir:
  * Created by liz on 2019/2/15.
  */
 
 @SuppressWarnings("unused")
-public class WhatsaiDir extends Node {
+public class WSDir extends Node {
 
-    public WhatsaiDir() {
+    public WSDir() {
         super();
     }
 
-    public WhatsaiDir(String name) {
+    public WSDir(String name) {
         super(name);
     }
 

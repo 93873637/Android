@@ -74,7 +74,7 @@ public class ComDef {
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    // WhatsaiMail Definitions
+    // WSMail Definitions
 
     public static final String MAIL_FROM_ADDRESS = "nehzil@sina.com";
     public static final String MAIL_FROM_ACCOUNT = "nehzil@sina.com";
@@ -83,7 +83,7 @@ public class ComDef {
     public static final String MAIL_CC_ADDRESS = "wx.tom.li@qq.com,13910115737@139.com,tom.li@cloudminds.com";
     public static final String MAIL_SMTP_HOST = "smtp.sina.com.cn";
 
-    // WhatsaiMail Definitions
+    // WSMail Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ public class ComDef {
     public enum AudioListMenu {
         PLAY("PLAY"),
         STOP("STOP"),
-        DEL("DELETE");
+        DELETE("DELETE");
 
         public int id;
         public String name;

@@ -71,9 +71,6 @@ public class LogUtils {
 			if (mLogListener != null) {
 				mLogListener.onCBLog(msg, LOG_LEVEL_V);
 			}
-//			if (mSaveToFile) {
-//				saveToFile('V', mTag, msg);
-//			}
 		}
 	}
 
@@ -83,9 +80,6 @@ public class LogUtils {
 			if (mLogListener != null) {
 				mLogListener.onCBLog(msg, LOG_LEVEL_D);
 			}
-//			if (mSaveToFile) {
-//				saveToFile('D', mTag, msg);
-//			}
 		}
 	}
 
@@ -95,9 +89,6 @@ public class LogUtils {
 			if (mLogListener != null) {
 				mLogListener.onCBLog(msg, LOG_LEVEL_I);
 			}
-//			if (mSaveToFile) {
-//				saveToFile('I', mTag, msg);
-//			}
 		}
 	}
 
@@ -107,9 +98,6 @@ public class LogUtils {
 			if (mLogListener != null) {
 				mLogListener.onCBLog(msg, LOG_LEVEL_W);
 			}
-//			if (mSaveToFile) {
-//				saveToFile('W', mTag, msg);
-//			}
 		}
 	}
 
@@ -119,9 +107,10 @@ public class LogUtils {
 		if (mLogListener != null) {
 			mLogListener.onCBLog(msg, LOG_LEVEL_E);
 		}
-//		if (mSaveToFile) {
-//			saveToFile('E', mTag, msg);
-//		}
+	}
+
+	public static void e2(String msg) {
+		e("ERROR: " + msg);
 	}
 
 	public static void v(Object obj, String msg) { Log.v(mTag, obj.getClass().getName() + ":" + msg); }
@@ -129,13 +118,6 @@ public class LogUtils {
 	public static void i(Object obj, String msg) { Log.i(mTag, obj.getClass().getName() + ":" + msg); 	}
 	public static void w(Object obj, String msg) { Log.w(mTag, obj.getClass().getName() + ":" + msg);	}
 	public static void e(Object obj, String msg) { Log.e(mTag, obj.getClass().getName() + ":" + msg);	}
-
-	// this can only put codes in place to take effect
-	public static void d2(String msg) {
-		String className = Thread.currentThread().getStackTrace()[1].getClassName();
-		String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();
-		d(className + "." + methodName + ":" + msg);
-	}
 
 	public static void trace() {
 		StringBuilder sb = new StringBuilder("TRACE");
@@ -191,6 +173,10 @@ public class LogUtils {
 
 	public static void te(String msg) {
 		e(t() + msg);
+	}
+
+	public static void te2(String msg) {
+		e2(t() + msg);
 	}
 
 	public static void tipD(String msg) {

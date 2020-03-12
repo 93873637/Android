@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
-import com.liz.whatsai.logic.WhatsaiListener;
+import com.liz.whatsai.logic.WSListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +22,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
     TextView mTextSpeech;
     TextView mTextProgressInfo;
     WaveSurfaceView mWaveSurfaceView;
-    WhatsaiListener mListener;
+    WSListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_listener);
         LogUtils.d("ListenerActivity:onCreate");
 
-        mListener = new WhatsaiListener();
+        mListener = new WSListener();
         mListener.setCallback(mListenerCallback);
         mListener.setVoiceRecognition(true);
         mListener.setWaveSamplingRate(1);
@@ -52,7 +52,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         startUITimer();
     }
 
-    private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
+    private WSListener.ListenerCallback mListenerCallback = new WSListener.ListenerCallback() {
         @Override
         public void onPowerUpdated() {
             ListenerActivity.this.runOnUiThread(new Runnable() {

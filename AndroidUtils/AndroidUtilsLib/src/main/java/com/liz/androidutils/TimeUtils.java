@@ -71,6 +71,75 @@ public class TimeUtils {
     }
 
     /**
+     * formatDuration: return formatted string by given milliseconds
+     *
+     * @param duration: time duration, unit by millisecond
+     * @return formatted time string:
+     * 189:23:56 -- 189 hours 23 minutes 56 seconds
+     *  16:23:56 -- 16 hours 23 minutes 56 seconds
+     *   1:23:56 -- 1 hour 23 minutes 56 seconds
+     *     23:56 -- 23 minutes 56 seconds
+     *     9.678 -- 9.678 seconds
+     *       678 -- 678 milliseconds
+     *  So there are total four formats, separated by HOUR, 10s, 1s
+     */
+    public static String formatDuration(int duration) {
+
+        final int SECOND = 1000;  // unit by ms
+        final int MINUTE = SECOND * 60;
+        final int HOUR = MINUTE * 60;
+        final int TEN_SECONDS = SECOND * 10;
+
+        int hh = duration / HOUR;
+        int mm = duration % HOUR / MINUTE;
+        int ss = duration % MINUTE / SECOND;
+        int ms = duration % SECOND;
+
+        String hhs = "" + hh;
+        String mms = NumUtils.zeroPadding(mm, 2);
+        String sss = NumUtils.zeroPadding(ss, 2);
+        String mss = NumUtils.zeroPadding(ms, 3);
+
+        if (duration >= HOUR) {
+            return hhs + ":" + mms + ":" + sss;
+        } else if (duration >= TEN_SECONDS) {
+            return mms + ":" + sss;
+        } else if (duration >= SECOND) {
+            return ss + "." + mss;
+        } else if (duration > 0) {
+            return "" + ms;
+        } else {
+            return "0";
+        }
+    }
+
+    /**
+     * formatDuration: return formatted string (hh:MM:ss.mmm) by given milliseconds
+     *
+     * @param duration: time duration, unit by millisecond
+     * @return time string format as hh:MM:ss.mmm
+     */
+    public static String formatDurationFull(int duration) {
+
+        final int SECOND = 1000;  // unit by ms
+        final int MINUTE = SECOND * 60;
+        final int HOUR = MINUTE * 60;
+        final int TEN_SECONDS = SECOND * 10;
+
+        int hh = duration / HOUR;
+        int mm = duration % HOUR / MINUTE;
+        int ss = duration % MINUTE / SECOND;
+        int ms = duration % SECOND;
+
+        String hhs = NumUtils.zeroPadding(hh, 2);
+        String mms = NumUtils.zeroPadding(mm, 2);
+        String sss = NumUtils.zeroPadding(ss, 2);
+        String mss = NumUtils.zeroPadding(ms, 3);
+
+        return hhs + ":" + mms + ":" + sss + "." + mss;
+    }
+
+    /**
      * @return String of file name format as 191103.173655.626
      */
     public static String genTimeID() {
@@ -81,17 +150,45 @@ public class TimeUtils {
     // Test Functions
 
     public static void main(String[] args) {
-        long start = System.currentTimeMillis();
-        for (int i=0; i<20; i++) {
-            try {
-                Thread.sleep(1234);
-            } catch (Exception e) {
 
-            }
-            System.out.println(elapsed(start));
-        }
-//        for (int i=0; i<12; i++) {
-//            System.out.println(genTimeID());
+        StackTraceElement[] s = Thread.currentThread().getStackTrace();
+        String tag = s[1].getClassName() + " " + s[1].getFileName() + "/" + s[1].getLineNumber();
+        System.out.println("\n" + tag + ": Test Start...");
+
+        AssertUtils.Assert(formatDuration(-1).equals("0"));
+        AssertUtils.Assert(formatDuration(0).equals("0"));
+        AssertUtils.Assert(formatDuration(1).equals("1"));
+        AssertUtils.Assert(formatDuration(9).equals("9"));
+        AssertUtils.Assert(formatDuration(10).equals("10"));
+        AssertUtils.Assert(formatDuration(100).equals("100"));
+        AssertUtils.Assert(formatDuration(999).equals("999"));
+        AssertUtils.Assert(formatDuration(1000).equals("1.000"));
+        AssertUtils.Assert(formatDuration(1001).equals("1.001"));
+        AssertUtils.Assert(formatDuration(1010).equals("1.010"));
+        AssertUtils.Assert(formatDuration(1100).equals("1.100"));
+        AssertUtils.Assert(formatDuration(1056).equals("1.056"));
+        AssertUtils.Assert(formatDuration(1234).equals("1.234"));
+        AssertUtils.Assert(formatDuration(9000).equals("9.000"));
+        AssertUtils.Assert(formatDuration(10*1000).equals("00:10"));
+        AssertUtils.Assert(formatDuration(59*1000).equals("00:59"));
+        AssertUtils.Assert(formatDuration(60*1000).equals("01:00"));
+        AssertUtils.Assert(formatDuration((59*60+59)*1000).equals("59:59"));
+        AssertUtils.Assert(formatDuration(3600*1000).equals("1:00:00"));
+        AssertUtils.Assert(formatDuration((23*3600+59*60+59)*1000).equals("23:59:59"));
+        AssertUtils.Assert(formatDuration((123*3600+59*60+59)*1000).equals("123:59:59"));
+
+//        long start = System.currentTimeMillis();
+//        for (int i=0; i<20; i++) {
+//            try {
+//                Thread.sleep(1234);
+//            } catch (Exception e) {
+//
+//            }
+//            System.out.println(elapsed(start));
 //        }
+////        for (int i=0; i<12; i++) {
+////            System.out.println(genTimeID());
+////        }
+        System.out.println("\n" + tag + ": Test Successfully.");
     }
 }

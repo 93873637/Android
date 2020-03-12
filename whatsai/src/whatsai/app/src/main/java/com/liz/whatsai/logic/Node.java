@@ -312,13 +312,13 @@ public abstract class Node implements Comparable<Node> {
             case ComDef.NODE_TYPE_TASK:
                 return new Task();
             case ComDef.NODE_TYPE_TEXT:
-                return new WhatsaiText();
+                return new WSText();
             case ComDef.NODE_TYPE_DIR:
-                return new WhatsaiDir();
+                return new WSDir();
             case ComDef.NODE_TYPE_TASKGROUP:
                 return new TaskGroup();
             default:
-                return new WhatsaiFile();
+                return new WSFile();
         }
     }
 

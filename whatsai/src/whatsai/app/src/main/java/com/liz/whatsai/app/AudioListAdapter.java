@@ -9,15 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.liz.androidutils.FileUtils;
+import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WhatsaiAudio;
+import com.liz.whatsai.logic.WSAudio;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class AudioListAdapter extends BaseAdapter {
 
-    private File[] mFileList;
+    private ArrayList<File> mFileList = new ArrayList<>();
     private LayoutInflater mLayoutInflater;
     private String mAudioDir;
 
@@ -53,17 +55,23 @@ public class AudioListAdapter extends BaseAdapter {
         return mAudioDir;
     }
 
+    public void removeItem(long id) {
+        mFileList.remove((int)id);
+        notifyDataSetChanged();
+    }
+
     public void updateList() {
         loadListData();
         notifyDataSetChanged();
     }
 
     private void loadListData() {
-        this.mFileList = FileUtils.getFileList(mAudioDir, FileUtils.ORDER_BY_DATE_DESC);
+        mFileList.clear();
+        mFileList = FileUtils.getFileArrayList(mAudioDir, FileUtils.ORDER_BY_DATE_DESC);
     }
 
     private String getListInfo() {
-        String info = "Total <font color=\"#ff0000\">" + mFileList.length + "</font> Files";
+        String info = "Total <font color=\"#ff0000\">" + mFileList.size() + "</font> Files";
         long sizeTotal = 0;
         for (File f: mFileList) {
             sizeTotal += FileUtils.getFileSize(f);
@@ -75,7 +83,7 @@ public class AudioListAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         if (mFileList != null) {
-            return mFileList.length;
+            return mFileList.size();
         }
         else {
             return 0;
@@ -84,7 +92,7 @@ public class AudioListAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mFileList[position];
+        return mFileList.get(position);
     }
 
     @Override
@@ -106,11 +114,17 @@ public class AudioListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();  //the Object stored in this view as a tag
         }
 
-        File f = mFileList[position];
-        holder.tvName.setText(f.getName());
-        holder.tvSize.setText(FileUtils.formatFileSize(FileUtils.getFileSize(f)));
+        File f = mFileList.get(position);
+        if (f == null) {
+            LogUtils.te2("file null on pos " + position);
+        }
+        else {
+            String nameInfo = f.getName();  // + "(" + MediaUtils.getMediaDurationFormat(f) + ")";  //####@: ###@: don't add here, it time cost!
+            holder.tvName.setText(nameInfo);
+            holder.tvSize.setText(FileUtils.getFileSizeFormat(f));
+        }
 
-        if (position == WhatsaiAudio.getPlayItemPos()) {
+        if (position == WSAudio.getPlayItemPos()) {
             convertView.setBackgroundColor(Color.GREEN);
         }
         else {

@@ -6,10 +6,15 @@
     android:orientation="vertical"
     tools:context="com.liz.whatsai.ui.NodeActivity">
 
+    <include
+        layout="@layout/whatsai_titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
     <com.liz.whatsai.ui.WaveSurfaceView
         android:id="@+id/wave_surface_view"
         android:layout_width="fill_parent"
-        android:layout_height="155dp" />
+        android:layout_height="160dp" />
 
     <!--action bar-->
     <LinearLayout
@@ -20,7 +25,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
-        android:padding="2dp"
+        android:padding="6dp"
         android:background="#ff0000"
         android:orientation="horizontal">
 

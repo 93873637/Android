@@ -18,13 +18,13 @@ import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
-import com.liz.whatsai.logic.WhatsaiText;
+import com.liz.whatsai.logic.WSText;
 
 import java.text.SimpleDateFormat;
 
 public class TextActivity extends Activity implements View.OnClickListener {
 
-    private WhatsaiText mTextNode = null;
+    private WSText mTextNode = null;
 
     private EditText mEditContent;
     private ScrollView mEditScroll;
@@ -54,7 +54,7 @@ public class TextActivity extends Activity implements View.OnClickListener {
             finish();
             return;
         }
-        mTextNode = (WhatsaiText) node;
+        mTextNode = (WSText) node;
         String titleName = DataLogic.getPath() + "/" + mTextNode.getName();
         ((TextView)findViewById(R.id.titlebar_title)).setText(titleName);
 

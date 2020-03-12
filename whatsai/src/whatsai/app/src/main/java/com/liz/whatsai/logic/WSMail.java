@@ -7,7 +7,7 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.MailSender;
 
 @SuppressWarnings("unused, WeakerAccess")
-public class WhatsaiMail {
+public class WSMail {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     private static WhatsaiMailCallback mWhatsaiMailCallback = null;
@@ -29,7 +29,7 @@ public class WhatsaiMail {
     }
 
     private static void send(final Activity activity, final String fileAbsolute) {
-        LogUtils.d("WhatsaiMail: send: activity = " + activity + ", fileAbsolute = " + fileAbsolute);
+        LogUtils.d("WSMail: send: activity = " + activity + ", fileAbsolute = " + fileAbsolute);
 
         MailSender mMailSender = new MailSender();
         mMailSender.fromAddress = ComDef.MAIL_FROM_ADDRESS;
@@ -42,12 +42,12 @@ public class WhatsaiMail {
 
         String msg;
         if (mMailSender.send()) {
-            msg = "WhatsaiMail: mail sent successfully, attach = " + fileAbsolute;
+            msg = "WSMail: mail sent successfully, attach = " + fileAbsolute;
             LogUtils.d(msg);
             mWhatsaiMailCallback.onSendMailSuccess(fileAbsolute);
         }
         else {
-            msg = "WhatsaiMail: send mail with attach \"" + fileAbsolute + "\" failed, error = " + mMailSender.errMsg;
+            msg = "WSMail: send mail with attach \"" + fileAbsolute + "\" failed, error = " + mMailSender.errMsg;
             LogUtils.e(msg);
         }
 
@@ -62,7 +62,7 @@ public class WhatsaiMail {
             });
         }
         else {
-            LogUtils.d("WhatsaiMail: no context to toast");
+            LogUtils.d("WSMail: no context to toast");
         }
     }
 }

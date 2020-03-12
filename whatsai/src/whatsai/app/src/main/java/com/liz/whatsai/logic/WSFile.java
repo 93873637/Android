@@ -1,18 +1,18 @@
 package com.liz.whatsai.logic;
 
 /**
- * WhatsaiFile:
+ * WSFile:
  * Created by liz on 2019/2/15.
  */
 
 @SuppressWarnings("WeakerAccess")
-public class WhatsaiFile extends Node {
+public class WSFile extends Node {
 
-    public WhatsaiFile() {
+    public WSFile() {
         super();
     }
 
-    public WhatsaiFile(String name) {
+    public WSFile(String name) {
         super(name);
     }
 

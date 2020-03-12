@@ -199,6 +199,10 @@ public class FileUtils {
         return files;
     }
 
+    public static ArrayList<File> getFileArrayList(String filePath, int order) {
+        return new ArrayList<>(Arrays.asList(getFileList(filePath, order)));
+    }
+
     public static void orderByDate(@NonNull File[] files, boolean desc) {
         final int compare_result = desc ? -1 : 1;
         Arrays.sort(files, new Comparator<File>() {
@@ -245,11 +249,11 @@ public class FileUtils {
         return "log_" + SysUtils.getIMEI(context) + "_" + strDateTime + ".zip";
     }
 
-    public static String getFormattedFileSize(String fileAbsolutePath) {
+    public static String getFileSizeFormat(String fileAbsolutePath) {
         return formatFileSize(FileUtils.getFileSize(fileAbsolutePath));
     }
 
-    public static String getFormattedFileSize(File f) {
+    public static String getFileSizeFormat(File f) {
         return formatFileSize(FileUtils.getSingleFileSize(f));
     }
 
@@ -420,7 +424,7 @@ public class FileUtils {
      * NOTE:
      * Max File Size: 256M
      */
-    private static boolean addHeaderSimple(String srcFilePath, byte[] headerBytes) {
+    public static boolean addHeaderSimple(String srcFilePath, byte[] headerBytes) {
         final long MAX_FILE_SIZE = 256 * 1024 * 1024L;
         RandomAccessFile srcFile = null;
         try {
@@ -459,13 +463,31 @@ public class FileUtils {
      * @param headerBytes:  buffer for headerBytes bytes
      *
      */
-    private static boolean addHeader(String srcFilePath, byte[] headerBytes) {
+    public static boolean addHeader(String srcFilePath, byte[] headerBytes) {
+        String dstFilePath = srcFilePath + ".dst";
+        if (addHeader(srcFilePath, dstFilePath, headerBytes)) {
+            mv(dstFilePath, srcFilePath);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Add headerBytes to source file, save to dstFilePath
+     *
+     * @param srcFilePath: source file with full path
+     * @param dstFilePath: destination file with full path
+     * @param headerBytes:  buffer for headerBytes bytes
+     *
+     */
+    public static boolean addHeader(String srcFilePath, String dstFilePath, byte[] headerBytes) {
         final int DATA_BUF_SIZE = 2 * 1024 * 1024;
         FileInputStream in = null;
         FileOutputStream out = null;
         byte[] data = new byte[DATA_BUF_SIZE];
         try {
-            String dstFilePath = srcFilePath + ".dst";
             in = new FileInputStream(srcFilePath);
             out = new FileOutputStream(dstFilePath);
             out.write(headerBytes);
@@ -477,7 +499,6 @@ public class FileUtils {
             in = null;
             out.close();
             out = null;
-            mv(dstFilePath, srcFilePath);
             return true;
         } catch (Exception e) {
             System.out.println("ERROR: addHeader: add header to " + srcFilePath + " failed, ex = " + e.toString());
@@ -760,6 +781,9 @@ public class FileUtils {
             System.out.println("finally...");
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // TEST MAIN
 
     public static void main(String[] args) {
 

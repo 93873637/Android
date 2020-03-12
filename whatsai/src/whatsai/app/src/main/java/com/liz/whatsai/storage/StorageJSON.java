@@ -11,7 +11,7 @@ import com.liz.androidutils.LJson;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.Node;
-import com.liz.whatsai.logic.WhatsaiDir;
+import com.liz.whatsai.logic.WSDir;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.liz.whatsai.logic.WhatsaiText;
 
 import org.json.JSONObject;
 
@@ -35,7 +34,7 @@ public class StorageJSON {
 
     private static String ENTER = System.getProperty("line.separator");
 
-    public static void saveToJSON(OutputStream out, WhatsaiDir rootNode) {
+    public static void saveToJSON(OutputStream out, WSDir rootNode) {
         String jsonString = node2JsonStr(rootNode);
         jsonString = LJson.formatJson(jsonString);
         try {
@@ -47,7 +46,7 @@ public class StorageJSON {
         }
     }
 
-    public static void loadData(WhatsaiDir rootNode) {
+    public static void loadData(WSDir rootNode) {
         String jsonStr = LJson.readJsonFile(ComDef.WHATSAI_DATA_FILE);
         if (TextUtils.isEmpty(jsonStr)) {
             LogUtils.e("loadFromJSON failed with empty string");
@@ -247,15 +246,15 @@ public class StorageJSON {
     }
 
     public static void test_fastJson() {
-//        WhatsaiDir rootNode = new WhatsaiDir("aaa");
-//        WhatsaiDir subNode = new WhatsaiDir("bbb");
+//        WSDir rootNode = new WSDir("aaa");
+//        WSDir subNode = new WSDir("bbb");
 //        rootNode.add(subNode);
 //
 //        //String jsonString = JSON.toJSONString(node.getRemindString());
 //        String jsonString = JSON.toJSONString(rootNode);
 //        System.out.println("fastJson=" + jsonString);
 //
-//        WhatsaiDir rootNode2 = JSONObject.parseObject(jsonString, WhatsaiDir.class);
+//        WSDir rootNode2 = JSONObject.parseObject(jsonString, WSDir.class);
 //        System.out.println("JSONString->JavaObject: " + rootNode2);
     }
 

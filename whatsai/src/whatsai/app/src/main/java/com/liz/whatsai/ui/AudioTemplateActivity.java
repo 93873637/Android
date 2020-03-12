@@ -19,8 +19,8 @@ import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WhatsaiAudio;
-import com.liz.whatsai.logic.WhatsaiListener;
+import com.liz.whatsai.logic.WSAudio;
+import com.liz.whatsai.logic.WSListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,7 +30,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
     WaveSurfaceView mWaveSurfaceView;
     TextView mTextProgressInfo;
     Button mBtnSwitchListening;
-    WhatsaiListener mListener;
+    WSListener mListener;
     AudioListView mAudioListView;
 
     @Override
@@ -39,7 +39,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.activity_audio_template);
         LogUtils.d("AudioTemplateActivity:onCreate");
 
-        mListener = new WhatsaiListener();
+        mListener = new WSListener();
         mListener.setWaveSamplingRate(32);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
@@ -66,7 +66,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         startUITimer();
     }
 
-    private WhatsaiListener.ListenerCallback mListenerCallback = new WhatsaiListener.ListenerCallback() {
+    private WSListener.ListenerCallback mListenerCallback = new WSListener.ListenerCallback() {
         @Override
         public void onPowerUpdated() {
             AudioTemplateActivity.this.runOnUiThread(new Runnable() {
@@ -93,7 +93,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WhatsaiAudio.stopPlay();
+            WSAudio.stopPlay();
             return true;
         }
         else {
