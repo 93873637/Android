@@ -51,9 +51,16 @@ public class AudioListView extends ListView {
         });
         this.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                LogUtils.td("position=" + position + ", arg1=" + arg1 + ", arg3=" + arg3);
-                WSAudio.startPlay(AudioListView.this.getAudioFilePath(position));
+            public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+                LogUtils.td("pos=" + pos + ", arg1=" + arg1 + ", arg3=" + arg3);
+                if (mAdapter.isSelected(pos)) {
+                    WSAudio.stopPlay();
+                    mAdapter.clearSelected();
+                }
+                else {
+                    mAdapter.updateSelected(pos);
+                    WSAudio.startPlay(mAdapter.getAudioFilePath(pos));
+                }
             }
         });
     }
@@ -68,12 +75,19 @@ public class AudioListView extends ListView {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int menuItemId = item.getItemId();
+        int pos = (int)info.id;
         LogUtils.td("menuItemId = " + menuItemId);
         if (menuItemId == ComDef.AudioListMenu.PLAY.id) {
-            WSAudio.startPlay(this.getAudioFilePath((int) info.id));
+            if (!mAdapter.isSelected(pos)) {
+                mAdapter.updateSelected(pos);
+            }
+            WSAudio.startPlay(this.getAudioFilePath(pos));
             return true;
         } else if (menuItemId == ComDef.AudioListMenu.STOP.id) {
-            WSAudio.stopPlay();
+            if (mAdapter.isSelected(pos)) {
+                mAdapter.clearSelected();
+                WSAudio.stopPlay();
+            }
             return true;
         } else if (menuItemId == ComDef.AudioListMenu.DELETE.id) {
             onDeleteAudioFile((int) info.id);

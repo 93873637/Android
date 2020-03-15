@@ -27,9 +27,9 @@ public class DataLogic extends WhatsaiStorage {
     private static int mInitState = ComDef.INIT_STATUS_LOADING;
 
     public static void init() {
-        LogUtils.d("DataLogic:init: mInitState = " + mInitState + ", ThreadID = " + Thread.currentThread().getId());
+        LogUtils.trace();
         if (mInitState == ComDef.INIT_STATUS_OK) {
-            LogUtils.i("DataLogic:init: Already initialized OK");
+            LogUtils.ti("DataLogic already initialized");
         }
         else {
             new Thread(new Runnable() {
@@ -46,6 +46,7 @@ public class DataLogic extends WhatsaiStorage {
     }
 
     private static void initThread() {
+        LogUtils.trace();
         mInitState = ComDef.INIT_STATUS_LOADING;
         if (!WhatsaiStorage.initStorage()) {
             LogUtils.e("DataLogic: WhatsaiStorage init failed.");

@@ -86,7 +86,7 @@ public class WSListener {
     private ArrayList<Integer> mPowerList = new ArrayList<>();
     private ArrayList<AudioFrame> mFrameList = new ArrayList<>();
     private ArrayList<AudioTemplate> mTemplateList = new ArrayList<>();
-    final public Object mDataLock = new Object();
+    final private Object mDataLock = new Object();
 
     private ListenerCallback mCallback = null;
 
@@ -105,13 +105,24 @@ public class WSListener {
         return this.mIsListening;
     }
 
+    public Object getDataLock() {
+        return mDataLock;
+    }
+
     public void switchListening() {
         LogUtils.d("WSListener:switchListening: mIsListening = " + mIsListening);
         if (mIsListening) {
             stopListening();
             stopWorkingTimer();
             if (mAutoSave) {
-                AudioUtils.pcm2wav(getPCMFileAbsolute(), getWAVFileAbsolute(), mSampleRate, mRecordBufferSize, mAudioFormat, mChannelConfig);
+                AudioUtils.pcm2wav(
+                        getPCMFileAbsolute(),
+                        getWAVFileAbsolute(),
+                        mSampleRate,
+                        mRecordBufferSize,
+                        mAudioFormat,
+                        mChannelConfig,
+                        true);
             }
         }
         else {
@@ -120,11 +131,11 @@ public class WSListener {
         }
     }
 
-    public void playAudio() {
-        playAudio(getPCMFileAbsolute());
+    public void playPCMFile() {
+        playPCMFile(getPCMFileAbsolute());
     }
 
-    public void playAudio(String fileAbsolute) {
+    public void playPCMFile(String fileAbsolute) {
         AudioUtils.playPCM(fileAbsolute, mRecordBufferSize, mSampleRate, mAudioFormat, mChannelConfig);
     }
 
@@ -177,7 +188,7 @@ public class WSListener {
     }
 
     public String getPCMFileAbsolute() {
-        return ComDef.WHATSAI_CACHE_DIR + "/" + mNeatFileName + ".pcm";
+        return ComDef.WHATSAI_AUDIO_DIR + "/" + mNeatFileName + ".pcm";
     }
 
     public String getWAVFileAbsolute() {
@@ -318,14 +329,14 @@ public class WSListener {
         }
         mIsListening = true;
         resetParams();
-        final FileOutputStream outputStream = createPCMOutputStream();
-        if (outputStream == null) {
+        final FileOutputStream pcmOutputStream = createPCMOutputStream();
+        if (pcmOutputStream == null) {
             LogUtils.e("WSListener:startListening: get output stream for audio buffer failed.");
             return;
         }
         mAudioRecord.startRecording();
         mStartTime = System.currentTimeMillis();
-        startThread_RecordingAudioData(outputStream);
+        startThread_RecordingAudioData(pcmOutputStream);
         if (mVoiceRecognition) {
             startThread_VoiceRecognition();
         }
@@ -504,7 +515,7 @@ public class WSListener {
     private File createPCMFile() {
         String neatFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
         String fileName = neatFileTime + ".pcm";
-        String filePath = ComDef.WHATSAI_CACHE_DIR + "/" + fileName;
+        String filePath = ComDef.WHATSAI_AUDIO_DIR + "/" + fileName;
         LogUtils.i("WSListener:createPCMFile: filePath = " + filePath);
 
         File objFile = new File(filePath);

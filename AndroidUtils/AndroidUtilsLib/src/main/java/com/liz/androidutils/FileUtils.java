@@ -177,30 +177,58 @@ public class FileUtils {
     public static final int ORDER_BY_DATE = 0;
     public static final int ORDER_BY_DATE_DESC = 1;
 
-    public static File[] getFileList(String filePath) {
+    public static File[] getFileList(String filePath, boolean fileOnly) {
         File path = new File(filePath);
         if (!path.exists()) {
             System.out.println("getFileList: file path \"" + filePath + "\" not exists.");
             return new File[0];
         }
-        File[] files = path.listFiles();
+
+        File[] files;
+        if (fileOnly) {
+            files = path.listFiles(new java.io.FileFilter() {
+                @Override
+                public boolean accept(File f) {
+                    return f.isFile();
+                }
+            });
+        }
+        else {
+            files = path.listFiles();
+        }
+
         if (files == null) {
             System.out.println("getFileList: file path \"" + filePath + "\" list files null.");
             return new File[0];
-        }
-        else {
+        } else {
             return files;
         }
     }
 
     public static File[] getFileList(String filePath, int order) {
-        File[] files = getFileList(filePath);
+        File[] files = getFileList(filePath, true);
         orderByDate(files, order == ORDER_BY_DATE_DESC);
         return files;
     }
 
     public static ArrayList<File> getFileArrayList(String filePath, int order) {
         return new ArrayList<>(Arrays.asList(getFileList(filePath, order)));
+    }
+
+    public static ArrayList<File> getFileListRecursive(String strPath) {
+        ArrayList<File> fileList = new ArrayList<>();
+        File dir = new File(strPath);
+        File[] files = dir.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    fileList.addAll(getFileListRecursive(f.getAbsolutePath()));
+                } else {
+                    fileList.add(f);
+                }
+            }
+        }
+        return fileList;
     }
 
     public static void orderByDate(@NonNull File[] files, boolean desc) {
@@ -454,6 +482,10 @@ public class FileUtils {
                 System.out.println("ERROR: addHeaderSimple: close exception, ex = " + e.toString());
             }
         }
+    }
+
+    public static boolean isPCMFile(String fileAbsolute) {
+        return getFileExtension(fileAbsolute).toUpperCase().equals("PCM");
     }
 
     /**

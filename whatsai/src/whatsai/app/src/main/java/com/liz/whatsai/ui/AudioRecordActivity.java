@@ -22,8 +22,6 @@ import java.util.TimerTask;
 
 public class AudioRecordActivity extends Activity implements View.OnClickListener {
 
-    public static final int RECORD_WAVE_SAMPLING_RATE = 1;
-
     private WaveSurfaceView mWaveSurfaceView;
     private TextView mTextProgressInfo;
     private TextView mTextAudioFilesInfo;
@@ -35,17 +33,13 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_record);
-        LogUtils.d("AudioTemplateActivity:onCreate");
+        LogUtils.trace();
 
-        ((TextView)findViewById(R.id.titlebar_name)).setText("Audio Recorder");
-
-        WSRecorder.inst().setWaveSamplingRate(RECORD_WAVE_SAMPLING_RATE);
-        WSRecorder.inst().setAutoSave(true);
+        ((TextView)findViewById(R.id.titlebar_name)).setText("whatsai Audio Recorder");
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
         mBtnSwitchListening.setText(WSRecorder.inst().isListening()?"STOP":"START");
-        WSRecorder.inst().setCallback(mListenerCallback);
 
         findViewById(R.id.btn_switch_listening).setOnClickListener(this);
         findViewById(R.id.btn_audio_listener).setOnClickListener(this);
@@ -66,6 +60,49 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
 
         loadAudioListInfo();
         startUITimer();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtils.trace();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.trace();
+        WSRecorder.inst().setCallback(mListenerCallback);
+    }
+
+    @Override
+    public void onPause() {
+        LogUtils.trace();
+        WSRecorder.inst().setCallback(null);
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        LogUtils.trace();
+        WSRecorder.inst().setCallback(null);
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        LogUtils.trace();
+        WSRecorder.inst().setCallback(null);
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        LogUtils.d("AudioTemplateActivity:onBackPressed");
+        stopUITimer();
+        WSRecorder.inst().setCallback(null);
+
+        super.onBackPressed();
     }
 
     @Override
@@ -130,7 +167,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         public void onPowerUpdated() {
             AudioRecordActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    synchronized (WSRecorder.inst().mDataLock) {
+                    synchronized (WSRecorder.inst().getDataLock()) {
                         mWaveSurfaceView.onUpdateSurfaceData(WSRecorder.inst().getPowerList(), WSRecorder.inst().getMaxPower());
                     }
                 }
@@ -157,6 +194,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
             mAudioRecordBar.setBackgroundColor(Color.RED);
         }
         mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
+        setAudioFilesInfo();
     }
 
     private void loadAudioListInfo() {
@@ -176,12 +214,5 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         WSRecorder.inst().switchListening();
         updateUI();
         updateAudioList();
-    }
-
-    @Override
-    public void onBackPressed() {
-        LogUtils.d("AudioTemplateActivity:onBackPressed");
-        stopUITimer();
-        super.onBackPressed();
     }
 }

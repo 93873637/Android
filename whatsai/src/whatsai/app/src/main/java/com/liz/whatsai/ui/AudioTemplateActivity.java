@@ -89,7 +89,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
         if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            mListener.playAudio(mAudioListView.getAudioFilePath((int)info.id));
+            mListener.playPCMFile(mAudioListView.getAudioFilePath((int)info.id));
             return true;
         }
         else if (itemId == ComDef.AudioListMenu.STOP.id) {
@@ -171,7 +171,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
             Toast.makeText(this, "Can't play when listening, stop first", Toast.LENGTH_SHORT).show();
         }
         else {
-            mListener.playAudio();
+            mListener.playPCMFile();
         }
     }
 

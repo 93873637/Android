@@ -19,6 +19,13 @@ public class ComDef {
     public static final int INIT_STATUS_OK = 1;
     public static final int INIT_STATUS_FAILED = 2;
 
+    public static final String WHATSAI_SHARED_PREFERENCES = APP_NAME + "SharedPreferences";
+    public static String KEY_EXIT_STATUS = "ExitStatus";
+    public static String KEY_AUDIO_RECORD_FILENAME = "AudioRecordFilename";
+
+    public static int DEFAULT_EXIT_STATUS = 0;
+    public static String DEFAULT_AUDIO_RECORD_FILENAME = "";
+
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // WhatsaiStorage Definitions
 
@@ -188,4 +195,6 @@ public class ComDef {
     public static final int TIME_SAME = 0;
 
     public static final int INVALID_LIST_POS = -1;
+
+    public static final int AUDIO_RECORD_WAVE_SAMPLING_RATE = 1;
 }

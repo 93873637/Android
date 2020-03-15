@@ -3,6 +3,7 @@ package com.liz.whatsai.logic;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 
+import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 
 import java.io.IOException;
@@ -17,6 +18,9 @@ public class WSAudio {
     public static void init() {
         LogUtils.d("WSAudio:init");
         mWSAudio = new WSAudio();
+
+        WSRecorder.inst().setWaveSamplingRate(ComDef.AUDIO_RECORD_WAVE_SAMPLING_RATE);
+        WSRecorder.inst().setAutoSave(true);
     }
 
     public static void switchRecord() {
@@ -44,7 +48,12 @@ public class WSAudio {
     }
 
     public static void startPlay(String filePath) {
-        mWSAudio._startPlay(filePath);
+        if (FileUtils.isPCMFile(filePath)) {
+            WSRecorder.inst().playPCMFile(filePath);
+        }
+        else {
+            mWSAudio._startPlay(filePath);
+        }
     }
 
     public static void stopPlay() {

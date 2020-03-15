@@ -98,7 +98,7 @@
             android:layout_gravity="start"
             android:layout_marginStart="6dp"
             android:layout_marginBottom="0dp"
-            android:text="Total 999 Files, Size 999M"
+            android:text="999 Files, Total 999MB"
             android:textSize="16sp"
             android:textStyle="bold"
             />

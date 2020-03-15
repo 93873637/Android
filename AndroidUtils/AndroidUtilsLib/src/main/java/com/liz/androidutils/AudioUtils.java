@@ -108,10 +108,10 @@ public class AudioUtils {
                                 int sampleRate,
                                 int recorderBufferSize,
                                 int audioFormat,
-                                int channelConfig) {
+                                int channelConfig,
+                                boolean deletePCM) {
         String wavFileAbsolute = FileUtils.replaceFileExtension(pcmFileAbsolute, "wav");
-        pcm2wav(pcmFileAbsolute, wavFileAbsolute, sampleRate, recorderBufferSize, audioFormat, channelConfig);
-        FileUtils.mv(wavFileAbsolute, pcmFileAbsolute);
+        pcm2wav(pcmFileAbsolute, wavFileAbsolute, sampleRate, recorderBufferSize, audioFormat, channelConfig, deletePCM);
     }
 
     /**
@@ -127,7 +127,8 @@ public class AudioUtils {
                                int sampleRate,
                                int recorderBufferSize,
                                int audioFormat,
-                               int channelConfig) {
+                               int channelConfig,
+                               boolean deletePCM) {
 
         int numChannels = channelNumByConfig(channelConfig);
         int bitsPerSample = bitNumByAudioFormat(audioFormat);
@@ -148,6 +149,10 @@ public class AudioUtils {
 
         FileUtils.addHeader(pcmFileAbsolute, wavFileAbsolute,
                 buildWaveFileHeader(chunkSize, numChannels, sampleRate, byteRate, blockAlign, bitsPerSample, subchunk2Size));
+
+        if (deletePCM) {
+            FileUtils.delete(pcmFileAbsolute);
+        }
     }
 
     /**

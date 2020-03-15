@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String[] permissions = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.RECORD_AUDIO
+            Manifest.permission.RECORD_AUDIO,
     };
 
     @Override
@@ -81,19 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
     protected void openAppActivity() {
         LogUtils.d("MainActivity:openAppActivity");
-        DataLogic.init();
-        tryOpenAppActivity();
-    }
-
-    protected  void tryOpenAppActivity() {
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 switch (DataLogic.getInitStatus()) {
                     case ComDef.INIT_STATUS_LOADING:
-                        tryOpenAppActivity();
+                        openAppActivity();
                         break;
                     case ComDef.INIT_STATUS_OK:
-                        startActivity(new Intent(MainActivity.this, WhatsaiActivity.class));
+                        startActivity(new Intent(MainActivity.this, WSActivity.class));
                         MainActivity.this.finish();
                         break;
                     case ComDef.INIT_STATUS_FAILED:

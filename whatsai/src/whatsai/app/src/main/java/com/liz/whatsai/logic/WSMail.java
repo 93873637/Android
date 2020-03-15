@@ -28,6 +28,14 @@ public class WSMail {
         }).start();
     }
 
+    public void test(){
+        /* for test only
+        //WSMail.sendMail("tom.li@cloudminds.com", "ddaasfess111", "fease111");
+        //WSMail.sendMail("tom.li@cloudminds.com", "ddaasfess222", "fease222", "/sdcard/whatsai/whatsai.xml");
+        WSMail.sendMail("93873637@qq.com", "ddaasfess111", "fease111", "/sdcard/whatsai/whatsai.xml");
+        //*/
+    }
+
     private static void send(final Activity activity, final String fileAbsolute) {
         LogUtils.d("WSMail: send: activity = " + activity + ", fileAbsolute = " + fileAbsolute);
 

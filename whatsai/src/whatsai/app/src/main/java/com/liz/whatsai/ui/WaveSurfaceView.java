@@ -46,24 +46,24 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
 	public WaveSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
+		LogUtils.trace();
 		getHolder().addCallback(this);
 	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
+		LogUtils.trace();
 		initSurfaceView(this);
 	}
 
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		// TODO Auto-generated method stub
+		LogUtils.trace();
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
+		LogUtils.trace();
 	}
 
 	public void setMaxValue(double maxValue) {
@@ -83,6 +83,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	}
 
 	private void initSurfaceView(final SurfaceView sfv) {
+		LogUtils.trace();
 		mWavePaint = new Paint();
 		mWavePaint.setColor(WAVE_ITEM_COLOR);
 		mGridPaint = new Paint();
@@ -168,6 +169,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	}
 
 	public void onUpdateSurfaceData(@NonNull List<Integer> dataList, int maxValue) {
+		LogUtils.trace();
 		Canvas canvas = this.getHolder().lockCanvas(
 				new Rect(0, 0, this.getWidth(), this.getHeight()));
 		if (canvas == null) {

@@ -143,7 +143,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
             Toast.makeText(this, "Can't play when listening, stop first", Toast.LENGTH_SHORT).show();
         }
         else {
-            mListener.playAudio();
+            mListener.playPCMFile();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.liz.whatsai.ui;
+package com.liz.whatsai.test;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,7 +22,7 @@ import com.liz.whatsai.logic.WSAudio;
 
 import java.io.File;
 
-public class AudioRecordActivity2 extends Activity implements View.OnClickListener,
+public class testAudioRecordActivity2 extends Activity implements View.OnClickListener,
         View.OnCreateContextMenuListener {
 
     private ImageButton mBtnSwitchRecord;
@@ -58,7 +58,7 @@ public class AudioRecordActivity2 extends Activity implements View.OnClickListen
         WSAudio.setAudioCallback(new WSAudio.WhatsaiAudioCallback() {
             @Override
             public void onAudioRecordStopped() {
-                AudioRecordActivity2.this.runOnUiThread(new Runnable() {
+                testAudioRecordActivity2.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         updateAudioList();

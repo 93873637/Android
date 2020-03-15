@@ -23,25 +23,18 @@ public class MyApp extends Application {
 
     @Override
     public void onCreate() {
+        super.onCreate();
+
         LogUtils.setTag(ComDef.APP_NAME);
         if (ComDef.DEBUG) {
             LogUtils.setLevel(LogUtils.LOG_LEVEL_V);
         }
         LogUtils.trace();
 
-        super.onCreate();
         mAppInst = this;
         mAppVersion = SysUtils.getAppVersion(this);
 
-        /* for test only
-        //WSMail.sendMail("tom.li@cloudminds.com", "ddaasfess111", "fease111");
-        //WSMail.sendMail("tom.li@cloudminds.com", "ddaasfess222", "fease222", "/sdcard/whatsai/whatsai.xml");
-        WSMail.sendMail("93873637@qq.com", "ddaasfess111", "fease111", "/sdcard/whatsai/whatsai.xml");
-        //*/
-
-        //move to MainActivity
-        //DataLogic.init();
-
+        DataLogic.init();
     }
 
     public static Context getAppContext() {

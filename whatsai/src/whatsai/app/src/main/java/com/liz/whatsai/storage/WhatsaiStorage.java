@@ -41,8 +41,15 @@ public class WhatsaiStorage {
             return false;
         }
 
-        StorageJSON.loadData((WSDir)mRootNode);
-        DataLogic.clearDirty();  //not dirty for load data
+        if (FileUtils.isExists(ComDef.WHATSAI_DATA_FILE)) {
+            StorageJSON.loadData((WSDir) mRootNode);
+        }
+        else {
+            LogUtils.i("DataLogic: data file \"" + ComDef.WHATSAI_DATA_FILE + "\" not exist.");
+        }
+
+        // data not dirty after loading
+        DataLogic.clearDirty();
 
         WSMail.setWhatsaiMailCallback(new WSMail.WhatsaiMailCallback() {
             @Override

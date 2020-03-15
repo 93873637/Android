@@ -38,7 +38,7 @@ import com.liz.whatsai.test.testAudioRecordActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class WhatsaiActivity extends AppCompatActivity
+public class WSActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
         AdapterView.OnItemClickListener, View.OnCreateContextMenuListener {
 
@@ -64,7 +64,7 @@ public class WhatsaiActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                startActivity(new Intent(WhatsaiActivity.this, testAudioRecordActivity.class));
+                startActivity(new Intent(WSActivity.this, testAudioRecordActivity.class));
             }
         });
 
@@ -214,39 +214,39 @@ public class WhatsaiActivity extends AppCompatActivity
 //                                    openNode(id);
 //                                }
 //                                else {
-//                                    Toast.makeText(WhatsaiActivity.this, "Password Incorrect", Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(WSActivity.this, "Password Incorrect", Toast.LENGTH_LONG).show();
 //                                }
 //                            }
 //                        }).setNegativeButton("Cancel", null).show();
 
                 //check either password or fingerprint
-                new MultiAuthDialog().openDlg(WhatsaiActivity.this,
+                new MultiAuthDialog().openDlg(WSActivity.this,
                         new MultiAuthDialog.MultiAuthCallback() {
                     @Override
                     public boolean onCheckPassword(String passwordInput) {
-                        //Toast.makeText(WhatsaiActivity.this, "onCheckPassword", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(WSActivity.this, "onCheckPassword", Toast.LENGTH_SHORT).show();
                         return node.samePassword(passwordInput);
                     }
 
                     @Override
                     public void onAuthenticationSucceeded() {
-                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationSucceeded", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WSActivity.this, "onAuthenticationSucceeded", Toast.LENGTH_SHORT).show();
                         openNode(id);
                     }
 
                     @Override
                     public void onAuthenticationFailed() {
-                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationFailed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WSActivity.this, "onAuthenticationFailed", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAuthenticationCancel() {
-                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationCancel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WSActivity.this, "onAuthenticationCancel", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAuthenticationError() {
-                        Toast.makeText(WhatsaiActivity.this, "onAuthenticationError", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WSActivity.this, "onAuthenticationError", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -267,13 +267,13 @@ public class WhatsaiActivity extends AppCompatActivity
     }
 
     protected void openNodeProperties(long id) {
-        Intent intent = new Intent(WhatsaiActivity.this, NodeActivity.class);
+        Intent intent = new Intent(WSActivity.this, NodeActivity.class);
         intent.putExtra("NodeId", id);
         startActivityForResult(intent, REQUEST_NODE_PROPERTIES);
     }
 
     protected void openTextNode(long id) {
-        Intent intent = new Intent(WhatsaiActivity.this, TextActivity.class);
+        Intent intent = new Intent(WSActivity.this, TextActivity.class);
         intent.putExtra("NodeId", id);
         startActivityForResult(intent, REQUEST_NODE_TEXT_EDIT);
     }
@@ -307,7 +307,7 @@ public class WhatsaiActivity extends AppCompatActivity
             final long arg3_ = arg3;
             mListItemLastClickTimer.schedule(new TimerTask() {
                 public void run () {
-                    WhatsaiActivity.this.runOnUiThread(new Runnable() {
+                    WSActivity.this.runOnUiThread(new Runnable() {
                         public void run() {
                             mListItemLastClickTime = 0;
                             mListItemLastClickPos = -1;
@@ -356,8 +356,10 @@ public class WhatsaiActivity extends AppCompatActivity
         if (requestCode == REQUEST_NODE_PROPERTIES) {
             if (resultCode == RESULT_OK) {
                 NodeListAdapter.onDataChanged();
+                return;
             }
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -411,15 +413,15 @@ public class WhatsaiActivity extends AppCompatActivity
     }
 
     private void openAudioRecorderActivity() {
-        startActivity(new Intent(WhatsaiActivity.this, AudioRecordActivity.class));
+        startActivity(new Intent(WSActivity.this, AudioRecordActivity.class));
     }
 
     private void openListenerActivity() {
-        startActivity(new Intent(WhatsaiActivity.this, ListenerActivity.class));
+        startActivity(new Intent(WSActivity.this, ListenerActivity.class));
     }
 
     private void openVoiceTemplateActivity() {
-        startActivity(new Intent(WhatsaiActivity.this, AudioTemplateActivity.class));
+        startActivity(new Intent(WSActivity.this, AudioTemplateActivity.class));
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -465,7 +467,7 @@ public class WhatsaiActivity extends AppCompatActivity
     }
 
     protected void updateView() {
-        WhatsaiActivity.this.setTitle(DataLogic.getPath());
+        WSActivity.this.setTitle(DataLogic.getPath());
         NodeListAdapter.onUpdateList();
     }
 }

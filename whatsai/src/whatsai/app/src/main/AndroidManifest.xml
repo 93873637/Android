@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".ui.WhatsaiActivity"
+            android:name=".ui.WSActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -39,7 +39,7 @@
 
         <activity android:name=".ui.NodeActivity" />
         <activity android:name=".ui.AudioRecordActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.AudioRecordActivity2" android:screenOrientation="portrait"/>
+        <activity android:name=".test.testAudioRecordActivity2" android:screenOrientation="portrait"/>
         <activity android:name=".ui.ListenerActivity" android:screenOrientation="landscape"/>
         <activity android:name=".ui.AudioTemplateActivity" android:screenOrientation="landscape"/>
         <activity android:name=".ui.AudioConfigActivity" android:screenOrientation="portrait"/>
