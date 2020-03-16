@@ -31,12 +31,31 @@ public class WSAudio {
         }
     }
 
+    public static int getCurrentPlayPosition() {
+        if (mWSAudio.mMediaPlayer != null) {
+            return mWSAudio.mMediaPlayer.getCurrentPosition();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public static int getCurrentPlayDuration() {
+        if (mWSAudio.mMediaPlayer != null) {
+            return mWSAudio.mMediaPlayer.getDuration();
+        }
+        else {
+            return 0;
+        }
+    }
+
     public static boolean isRecording() {
         return mWSAudio.mMediaRecorder != null;
     }
 
     public interface WhatsaiAudioCallback {
         void onAudioRecordStopped();
+        void onAudioPlayStopped(String filePath);
     }
 
     public static void setAudioCallback(WhatsaiAudioCallback cb) {
@@ -45,6 +64,15 @@ public class WSAudio {
 
     public static int getPlayItemPos() {
         return mPlayItemPos;
+    }
+
+    public static void startPlay(String filePath, MediaPlayer.OnCompletionListener listener) {
+        if (FileUtils.isPCMFile(filePath)) {
+            WSRecorder.inst().playPCMFile(filePath);
+        }
+        else {
+            mWSAudio._startPlay(filePath, listener);
+        }
     }
 
     public static void startPlay(String filePath) {
@@ -120,6 +148,24 @@ public class WSAudio {
         }
         if (mAudioCallback != null) {
             mAudioCallback.onAudioRecordStopped();
+        }
+    }
+
+    public void _startPlay(String filePath, MediaPlayer.OnCompletionListener listener) {
+        LogUtils.d("WSAudio: _startPlay: filePath = " + filePath);
+        if (mMediaPlayer != null) {
+            LogUtils.d("WSAudio: _startPlay: already started, stop first");
+            _stopPlay();
+        }
+        try {
+            mMediaPlayer = new MediaPlayer();
+            mMediaPlayer.setDataSource(filePath);
+            mMediaPlayer.setOnCompletionListener(listener);
+            mMediaPlayer.prepare();
+            mMediaPlayer.start();
+        } catch (IOException e) {
+            LogUtils.e("_startPlay exception: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

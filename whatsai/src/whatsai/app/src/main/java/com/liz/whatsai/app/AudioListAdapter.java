@@ -12,6 +12,8 @@ import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
+import com.liz.whatsai.logic.WSAudio;
+import com.liz.whatsai.logic.WSListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,13 +26,15 @@ public class AudioListAdapter extends BaseAdapter {
     private int mSelected = ComDef.INVALID_LIST_POS;
 
     public AudioListAdapter() {
-        mAudioDir = ComDef.WHATSAI_AUDIO_DIR;
-        loadListData();
-        mLayoutInflater = LayoutInflater.from(MyApp.getAppContext());
+        initAdapter(ComDef.WHATSAI_AUDIO_DIR);
     }
 
-    public AudioListAdapter(String filePath) {
-        mAudioDir = filePath;
+    public AudioListAdapter(String audioDir) {
+        initAdapter(audioDir);
+    }
+
+    private void initAdapter(String audioDir) {
+        mAudioDir = audioDir;
         loadListData();
         mLayoutInflater = LayoutInflater.from(MyApp.getAppContext());
     }
@@ -62,8 +66,13 @@ public class AudioListAdapter extends BaseAdapter {
     }
 
     public boolean isSelected(int pos) {
-        return pos == mSelected;
+        return hasSelected() && pos == mSelected;
     }
+
+    public boolean hasSelected() {
+        return mSelected != ComDef.INVALID_LIST_POS;
+    }
+
     public String getAudioFilesInfo() {
         return this.getListInfo();
     }
@@ -140,6 +149,12 @@ public class AudioListAdapter extends BaseAdapter {
         }
         else {
             String nameInfo = f.getName();
+            if (position == mSelected) {
+                nameInfo += "(" + WSAudio.getCurrentPlayPosition() + "/" + WSAudio.getCurrentPlayDuration() + ")";
+            }
+            else {
+                nameInfo += "(" + WSListener.getWaveDuration(f) + ")";
+            }
             holder.tvName.setText(nameInfo);
             holder.tvSize.setText(FileUtils.getFileSizeFormat(f));
         }

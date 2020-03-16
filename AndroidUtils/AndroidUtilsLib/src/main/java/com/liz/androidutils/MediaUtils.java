@@ -6,6 +6,10 @@ import android.text.TextUtils;
 import java.io.File;
 import java.util.HashMap;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+
 /**
  * MediaUtils:
  * Created by liz on 2019/1/31.
@@ -13,6 +17,14 @@ import java.util.HashMap;
 
 @SuppressWarnings("unused, WeakerAccess")
 public class MediaUtils {
+
+    public static int getWaveDuration() {
+        File source = new File("C:\\Users\\5eece771f85d4c0a8ecbf510e078f697.wav");
+        Clip clip = AudioSystem.getClip();
+        AudioInputStream ais = AudioSystem.getAudioInputStream(source);
+        clip.open(ais);
+        System.out.println(clip.getMicrosecondLength() / 1000000D + " s");
+    }
 
     public static int getMediaDuration(File file) {
         if (file == null) {

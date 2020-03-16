@@ -195,6 +195,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         }
         mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
         setAudioFilesInfo();
+        mAudioListView.updateUI();
     }
 
     private void loadAudioListInfo() {

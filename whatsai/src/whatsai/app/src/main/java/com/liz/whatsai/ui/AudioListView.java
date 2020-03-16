@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -25,6 +26,14 @@ public class AudioListView extends ListView {
 
     private AudioListAdapter mAdapter;
 
+    MediaPlayer.OnCompletionListener mMediaPLayerCompletionlistener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            LogUtils.td("onCompletion");
+            mAdapter.clearSelected();
+        }
+    };
+
     public AudioListView(Context context) {
         super(context);
     }
@@ -38,7 +47,7 @@ public class AudioListView extends ListView {
     }
 
     //NOTE: you should call it on holder's onCreate
-    public void onCreate(Context context, String audioDir) {
+    public void onCreate(final Context context, String audioDir) {
         mAdapter = new AudioListAdapter(audioDir);
         this.setAdapter(mAdapter);
         this.addFooterView(new ViewStub(context));
@@ -59,7 +68,7 @@ public class AudioListView extends ListView {
                 }
                 else {
                     mAdapter.updateSelected(pos);
-                    WSAudio.startPlay(mAdapter.getAudioFilePath(pos));
+                    WSAudio.startPlay(mAdapter.getAudioFilePath(pos), mMediaPLayerCompletionlistener);
                 }
             }
         });
@@ -81,7 +90,7 @@ public class AudioListView extends ListView {
             if (!mAdapter.isSelected(pos)) {
                 mAdapter.updateSelected(pos);
             }
-            WSAudio.startPlay(this.getAudioFilePath(pos));
+            WSAudio.startPlay(this.getAudioFilePath(pos), mMediaPLayerCompletionlistener);
             return true;
         } else if (menuItemId == ComDef.AudioListMenu.STOP.id) {
             if (mAdapter.isSelected(pos)) {
@@ -119,6 +128,12 @@ public class AudioListView extends ListView {
 
     public String getAudioFilePath(int id) {
         return mAdapter.getAudioFilePath(id);
+    }
+
+    public void updateUI() {
+        if (mAdapter.hasSelected()) {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     public void updateList() {

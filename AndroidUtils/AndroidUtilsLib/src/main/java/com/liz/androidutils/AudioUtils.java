@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
 
 @SuppressWarnings("unused, WeakerAccess")
 public class AudioUtils {
@@ -345,60 +344,6 @@ public class AudioUtils {
                         }
                     }
                     fileInputStream.close();
-                } catch (Exception e) {
-                    LogUtils.e("playPCM: exception " + e.toString());
-                    e.printStackTrace();
-                } finally {
-                    audioTrack.stop();
-                    audioTrack.release();
-                }
-            }
-        }.start();
-    }
-
-    public static void playPCM16(final ArrayList<Integer> dataList, final int bufferSize, int sampleRate, int channelMask) {
-        if (dataList == null || dataList.isEmpty()) {
-            LogUtils.e("playPCM: data list empty");
-            return;
-        }
-
-        int encodingBits = AudioFormat.ENCODING_PCM_16BIT;
-        final int byteNum = byteNumByAudioFormat(encodingBits);
-        final int bufferSizeInShorts = bufferSize / byteNum;
-
-        final AudioTrack audioTrack = new AudioTrack(
-                new AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .build(),
-                new AudioFormat.Builder()
-                        .setSampleRate(sampleRate)
-                        .setEncoding(encodingBits)
-                        .setChannelMask(channelMask)
-                        .build(),
-                bufferSize,
-                AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
-        );
-
-        // AudioTrack need play first
-        audioTrack.play();
-
-        // run read and play task
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    short[] buffer = new short[bufferSizeInShorts];
-                    int dataLeft = dataList.size();
-                    int readCount;
-                    while (dataLeft > 0) {
-                        readCount = (dataLeft > bufferSizeInShorts) ? bufferSizeInShorts : dataLeft;
-                        for (int i=0; i<readCount; i++) {
-                            buffer[i] = (short)(dataList.get(i) & 0xffff);
-                        }
-                        audioTrack.write(buffer, 0, readCount);
-                        dataLeft -= bufferSizeInShorts;
-                    }
                 } catch (Exception e) {
                     LogUtils.e("playPCM: exception " + e.toString());
                     e.printStackTrace();

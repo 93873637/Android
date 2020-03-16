@@ -29,9 +29,9 @@
 
             <ImageButton
                 android:id="@+id/toolbar_listener"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="6dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="4dp"
                 android:contentDescription="@string/action_listening"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/listen" />
@@ -40,8 +40,8 @@
                 android:id="@+id/toolbar_voice_template"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="6dp"
-                android:contentDescription="@string/action_listening"
+                android:layout_margin="4dp"
+                android:contentDescription="@string/action_template"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/audio_template" />
 
@@ -49,7 +49,7 @@
                 android:id="@+id/toolbar_recorder"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="6dp"
+                android:layout_margin="4dp"
                 android:contentDescription="@string/action_audio_recorder"
                 android:gravity="end|center_vertical"
                 android:background="@drawable/micphone" />

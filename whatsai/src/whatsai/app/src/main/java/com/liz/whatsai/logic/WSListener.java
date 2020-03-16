@@ -131,6 +131,10 @@ public class WSListener {
         }
     }
 
+    public static int getWaveDuration(File f) {
+        return (int)(FileUtils.getFileSize(f) - 44) / (44100*2); //###@: mSampleRate * AudioUtils.byteNumByAudioFormat(mAudioFormat));
+    }
+
     public void playPCMFile() {
         playPCMFile(getPCMFileAbsolute());
     }

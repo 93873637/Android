@@ -65,6 +65,11 @@ public class testAudioRecordActivity2 extends Activity implements View.OnClickLi
                     }
                 });
             }
+
+            @Override
+            public void onAudioPlayStopped(String filePath) {
+
+            }
         });
     }
 
