@@ -4,22 +4,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WSAudio;
 import com.liz.whatsai.logic.WSListener;
 
 import java.util.Timer;
@@ -27,11 +26,14 @@ import java.util.TimerTask;
 
 public class AudioTemplateActivity extends Activity implements View.OnClickListener {
 
-    WaveSurfaceView mWaveSurfaceView;
-    TextView mTextProgressInfo;
-    Button mBtnSwitchListening;
-    WSListener mListener;
-    AudioListView mAudioListView;
+    private WaveSurfaceView mWaveSurfaceView;
+    private LinearLayout mAudioControlBar;
+    private TextView mTextProgressInfo;
+    private Button mBtnSwitchListening;
+    private WSListener mListener;
+    private AudioListView mAudioListView;
+
+    private String mAudioTemplatePath = ComDef.WHATSAI_AUDIO_TEMPLATE_DIR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,8 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         LogUtils.d("AudioTemplateActivity:onCreate");
 
         mListener = new WSListener();
-        mListener.setWaveSamplingRate(32);
+        mListener.setWaveSamplingRate(1);
+        mListener.setAudioPath(ComDef.WHATSAI_CACHE_DIR);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
@@ -55,13 +58,14 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
 
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
+        mAudioControlBar = findViewById(R.id.ll_audio_control_bar);
 
         mWaveSurfaceView.setMaxValue(mListener.getMaxPower());
         mWaveSurfaceView.setWaveItemWidth(1);
         mWaveSurfaceView.setWaveItemSpace(0);
 
         mAudioListView = findViewById(R.id.lv_audio_files);
-        mAudioListView.onCreate(this, ComDef.WHATSAI_AUDIO_TEMPLATE_DIR);
+        mAudioListView.onCreate(this, mAudioTemplatePath);
 
         startUITimer();
     }
@@ -79,26 +83,11 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //###@:todo: improve it by save audio file as wave file and play it
-//        if (mAudioListView.onContextItemSelected(item)) {
-//            return true;
-//        }
-//
-//        return super.onContextItemSelected(item);
+        if (mAudioListView.onContextItemSelected(item)) {
+            return true;
+        }
 
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        int itemId = item.getItemId();
-        if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            mListener.playPCMFile(mAudioListView.getAudioFilePath((int)info.id));
-            return true;
-        }
-        else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WSAudio.stopPlay();
-            return true;
-        }
-        else {
-            return super.onContextItemSelected(item);
-        }
+        return super.onContextItemSelected(item);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,6 +123,14 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
 
     private void updateUI() {
         mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
+        if (mListener.isListening()) {
+            mBtnSwitchListening.setText("STOP");
+            mAudioControlBar.setBackgroundColor(Color.GREEN);
+        }
+        else {
+            mBtnSwitchListening.setText("START");
+            mAudioControlBar.setBackgroundColor(Color.RED);
+        }
     }
 
     @Override
@@ -164,6 +161,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
     private void onSwitchListening() {
         mListener.switchListening();
         mBtnSwitchListening.setText(mListener.isListening()?"STOP":"START");
+        updateUI();
     }
 
     private void onPlayAudio() {
@@ -177,10 +175,10 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
 
     private void onSaveAudio() {
         final EditText et = new EditText(this);
-        et.setText(mListener.getPCMFileName());
+        et.setText(mListener.getNeatFileName());
         new AlertDialog
                 .Builder(this)
-                .setTitle("Save Voice Template File As: ")
+                .setTitle("Save current voice as template file(*.wav): ")
                 .setIcon(android.R.drawable.sym_def_app_icon)
                 .setView(et)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -190,9 +188,8 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
                             Toast.makeText(AudioTemplateActivity.this, "Please input template name", Toast.LENGTH_LONG).show();
                         }
                         else {
-                            String srcFilePath = mListener.getPCMFileAbsolute();
-                            String tarPilePath = ComDef.WHATSAI_AUDIO_TEMPLATE_DIR + "/" + et.getText().toString();
-                            FileUtils.mv(srcFilePath, tarPilePath);
+                            String wavFilePath = mAudioTemplatePath + "/" + et.getText().toString() + ".wav";
+                            mListener.saveWavFile(wavFilePath, true);
                             mAudioListView.updateList();
                         }
                     }

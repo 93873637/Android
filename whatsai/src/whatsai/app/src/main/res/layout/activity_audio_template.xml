@@ -27,7 +27,9 @@
         android:textSize="12sp" />
 
     <!--action bar-->
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/ll_audio_control_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
@@ -39,31 +41,28 @@
             android:id="@+id/btn_switch_listening"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
+            android:layout_gravity="center"
             android:text="Start"
-            android:textColor="#5d7883"
-            android:textSize="18sp" />
-        <Button
-            android:id="@+id/btn_play_audio"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:text="Play"
-            android:textColor="#5d7883"
-            android:textSize="18sp" />
-        <Button
-            android:id="@+id/btn_save_audio"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:text="Save"
-            android:textColor="#5d7883"
-            android:textSize="18sp" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="start|top" />
+            android:background="#00ff0000"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+        <ImageButton
+            android:id="@+id/btn_play_audio"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="6dp"
+            android:contentDescription="@string/action_save_wave"
+            android:layout_gravity="end|center_vertical"
+            android:background="@drawable/icon_play_audio" />
+        <ImageButton
+            android:id="@+id/btn_save_audio"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="6dp"
+            android:contentDescription="@string/action_save_wave"
+            android:layout_gravity="end|center_vertical"
+            android:background="@drawable/icon_save2" />
         <ImageButton
             android:id="@+id/btn_audio_listener"
             android:layout_width="30dp"

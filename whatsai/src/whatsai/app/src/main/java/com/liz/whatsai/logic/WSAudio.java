@@ -55,7 +55,6 @@ public class WSAudio {
 
     public interface WhatsaiAudioCallback {
         void onAudioRecordStopped();
-        void onAudioPlayStopped(String filePath);
     }
 
     public static void setAudioCallback(WhatsaiAudioCallback cb) {

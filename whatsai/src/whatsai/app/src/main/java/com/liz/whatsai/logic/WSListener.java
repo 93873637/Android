@@ -55,16 +55,18 @@ public class WSListener {
 
     private AudioRecord mAudioRecord;
     private boolean mIsListening = false;
+    private String mAudioPath = ComDef.WHATSAI_AUDIO_DIR;
 
-    private int mMaxPower = DEFAULT_MAX_POWER;
-    private int mMaxPowerSize = DEFAULT_MAX_POWER_LIST_SIZE;
-    private int mMaxBufferSize = DEFAULT_MAX_BUFFER_SIZE;
-
+    // audio config
     private int mAudioSource = MediaRecorder.AudioSource.MIC;
     private int mSampleRate = DEFAULT_AUDIO_SAMPLE_RATE;
     private int mAudioFormat = AudioFormat.ENCODING_PCM_16BIT;
     private int mChannelConfig = AudioFormat.CHANNEL_CONFIGURATION_MONO;
     private int mRecordBufferSize;  // unit by byte
+
+    private int mMaxPower = DEFAULT_MAX_POWER;
+    private int mMaxPowerSize = DEFAULT_MAX_POWER_LIST_SIZE;
+    private int mMaxBufferSize = DEFAULT_MAX_BUFFER_SIZE;
 
     /**
      * sampling rate for wave showing, i.e. 100 means pick up one from 100 power data
@@ -131,8 +133,11 @@ public class WSListener {
         }
     }
 
+    //return ms
     public static int getWaveDuration(File f) {
-        return (int)(FileUtils.getFileSize(f) - 44) / (44100*2); //###@: mSampleRate * AudioUtils.byteNumByAudioFormat(mAudioFormat));
+        long pcmLen = FileUtils.getFileSize(f) - 44;
+        long byteRate = 44100 * 2L; // bytes/second, ###@: mSampleRate * AudioUtils.byteNumByAudioFormat(mAudioFormat));
+        return (int)(pcmLen * 1000 / byteRate);
     }
 
     public void playPCMFile() {
@@ -150,7 +155,7 @@ public class WSListener {
         configInfo += "<br>Audio Format: <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
         configInfo += "<br>Channel Config: <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
         configInfo += "<br>Audio Buffer Size(B): <font color=\"#ff0000\">" + mRecordBufferSize + "</font>";
-        configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + ComDef.WHATSAI_AUDIO_DIR + "</font>";
+        configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + getAudioPath() + "</font>";
         return configInfo;
     }
 
@@ -192,15 +197,19 @@ public class WSListener {
     }
 
     public String getPCMFileAbsolute() {
-        return ComDef.WHATSAI_AUDIO_DIR + "/" + mNeatFileName + ".pcm";
+        return getAudioPath() + "/" + mNeatFileName + ".pcm";
     }
 
     public String getWAVFileAbsolute() {
-        return ComDef.WHATSAI_AUDIO_DIR + "/" + mNeatFileName + ".wav";
+        return getAudioPath() + "/" + mNeatFileName + ".wav";
     }
 
     public String getPCMFileName() {
         return mNeatFileName + ".pcm";
+    }
+
+    public String getNeatFileName() {
+        return mNeatFileName;
     }
 
     public interface ListenerCallback {
@@ -233,6 +242,14 @@ public class WSListener {
 
     public List<Integer> getPowerList() {
         return this.mPowerList;
+    }
+
+    public String getAudioPath() {
+        return mAudioPath;
+    }
+
+    public void setAudioPath(String audioPath) {
+        mAudioPath = audioPath;
     }
 
     public int getMaxPower() {
@@ -269,6 +286,12 @@ public class WSListener {
 
     public void setAutoSave(boolean autoSave) {
         mAutoSave = autoSave;
+    }
+
+    public void saveWavFile(String wavFilePath, boolean deletePCM) {
+        AudioUtils.pcm2wav(getPCMFileAbsolute(), wavFilePath,
+                mSampleRate, mRecordBufferSize, mAudioFormat, mChannelConfig,
+                deletePCM);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -519,7 +542,7 @@ public class WSListener {
     private File createPCMFile() {
         String neatFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
         String fileName = neatFileTime + ".pcm";
-        String filePath = ComDef.WHATSAI_AUDIO_DIR + "/" + fileName;
+        String filePath = getAudioPath() + "/" + fileName;
         LogUtils.i("WSListener:createPCMFile: filePath = " + filePath);
 
         File objFile = new File(filePath);

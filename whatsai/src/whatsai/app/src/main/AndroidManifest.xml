@@ -19,6 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <receiver
+            android:name=".app.WSReceiver"
+            android:enabled="true"/>
+
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
@@ -47,8 +51,9 @@
         <activity android:name=".ui.AlarmActivity"/>
         <activity android:name=".test.testAudioRecordActivity" android:screenOrientation="portrait"/>
 
-        <receiver
-            android:name=".app.WhatsaiReceiver"
-            android:enabled="true"/>
+        <service
+            android:name="com.liz.whatsai.logic.WSListenService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 </manifest>

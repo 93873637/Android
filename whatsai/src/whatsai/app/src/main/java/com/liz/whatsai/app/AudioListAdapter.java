@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.TimeUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.WSAudio;
@@ -150,10 +151,11 @@ public class AudioListAdapter extends BaseAdapter {
         else {
             String nameInfo = f.getName();
             if (position == mSelected) {
-                nameInfo += "(" + WSAudio.getCurrentPlayPosition() + "/" + WSAudio.getCurrentPlayDuration() + ")";
+                nameInfo += "(" + TimeUtils.formatDuration(WSAudio.getCurrentPlayPosition()) + "/"
+                        + TimeUtils.formatDuration(WSAudio.getCurrentPlayDuration()) + ")";
             }
             else {
-                nameInfo += "(" + WSListener.getWaveDuration(f) + ")";
+                nameInfo += "(" + TimeUtils.formatDuration(WSListener.getWaveDuration(f)) + ")";
             }
             holder.tvName.setText(nameInfo);
             holder.tvSize.setText(FileUtils.getFileSizeFormat(f));

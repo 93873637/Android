@@ -99,15 +99,15 @@ public class AudioListView extends ListView {
             }
             return true;
         } else if (menuItemId == ComDef.AudioListMenu.DELETE.id) {
-            onDeleteAudioFile((int) info.id);
+            onDeleteAudioFile(pos);
             return true;
         } else {
             return false;
         }
     }
 
-    private void onDeleteAudioFile(final int id) {
-        final File f = mAdapter.getAudioFile(id);
+    private void onDeleteAudioFile(final int pos) {
+        final File f = mAdapter.getAudioFile(pos);
         final TextView tv = new TextView(this.getContext());
         tv.setText(f.getAbsolutePath());
         tv.setTextColor(Color.RED);
@@ -120,8 +120,12 @@ public class AudioListView extends ListView {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        if (mAdapter.isSelected(pos)) {
+                            mAdapter.clearSelected();
+                            WSAudio.stopPlay();
+                        }
+                        mAdapter.removeItem(pos);
                         FileUtils.removeFile(f);
-                        mAdapter.removeItem(id);
                     }
                 }).setNegativeButton("Cancel", null).show();
     }

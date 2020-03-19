@@ -6,11 +6,6 @@
     android:orientation="vertical"
     tools:context="com.liz.whatsai.ui.NodeActivity">
 
-    <include
-        layout="@layout/whatsai_titlebar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
     <!--wave show-->
     <com.liz.whatsai.ui.WaveSurfaceView
         android:id="@+id/wave_surface_view"
@@ -32,7 +27,9 @@
         android:textSize="12sp" />
 
     <!--action bar-->
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/ll_audio_control_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
@@ -41,34 +38,31 @@
         android:background="#efefef"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btn_audio_config"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Config"
-            android:textColor="#5d7883"
-            android:textSize="18sp" />
-        <Button
             android:id="@+id/btn_switch_listening"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="Start"
-            android:textColor="#5d7883"
-            android:textSize="18sp" />
-        <Button
-            android:id="@+id/btn_play_audio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Play"
-            android:textColor="#5d7883"
-            android:textSize="18sp" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_gravity="start|top" />
+            android:background="#00ff0000"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+        <ImageButton
+            android:id="@+id/btn_play_audio"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="6dp"
+            android:contentDescription="@string/action_save_wave"
+            android:layout_gravity="end|center_vertical"
+            android:background="@drawable/icon_play_audio" />
+        <ImageButton
+            android:id="@+id/btn_audio_config"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="6dp"
+            android:contentDescription="@string/action_audio_recorder"
+            android:layout_gravity="end|center_vertical"
+            android:background="@drawable/gear24" />
         <ImageButton
             android:id="@+id/btn_audio_template"
             android:layout_width="30dp"

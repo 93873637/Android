@@ -9,6 +9,7 @@
     <string name="action_listening">Whatsai Listener</string>
     <string name="action_recording">Whatsai Audio Recorder</string>
     <string name="action_template">Whatsai Audio Template</string>
+    <string name="action_save_wave">Save Wave File</string>
     <string name="action_cloud_save">Cloud Save</string>
 
     <string name="menu_home">Home</string>
