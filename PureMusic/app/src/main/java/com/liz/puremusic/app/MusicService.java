@@ -10,9 +10,9 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.text.TextUtils;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.logic.ComDef;
 import com.liz.puremusic.logic.DataLogic;
-import com.liz.puremusic.utils.LogUtils;
 
 import java.text.SimpleDateFormat;
 

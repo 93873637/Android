@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.logic.DataLogic;
-import com.liz.puremusic.utils.LogUtils;
 
 import static android.provider.Settings.System.ALARM_ALERT;
 

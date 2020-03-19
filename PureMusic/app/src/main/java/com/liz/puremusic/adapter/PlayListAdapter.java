@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.liz.puremusic.R;
-import com.liz.puremusic.app.ThisApp;
+import com.liz.puremusic.app.MyApp;
 import com.liz.puremusic.logic.ComDef;
 import com.liz.puremusic.logic.DataLogic;
 import com.liz.puremusic.logic.PlayItem;
@@ -20,24 +20,28 @@ import java.util.List;
 
 public class PlayListAdapter extends BaseAdapter {
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Singleton
     private static PlayListAdapter adapter;
-    public static PlayListAdapter getAdapter() {
+    public static PlayListAdapter inst() {
         if (adapter == null) {
-            adapter = new PlayListAdapter(ThisApp.getAppContext(), DataLogic.getPlayList());
+            adapter = new PlayListAdapter(MyApp.getAppContext(), DataLogic.getPlayList());
         }
         return adapter;
     }
+    // Singleton
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static void setOnListOperListener(OnListOperListener operListener) {
-        getAdapter().mOperListener = operListener;
+        inst().mOperListener = operListener;
     }
 
     public static void onDataChanged() {
-        getAdapter().notifyDataSetChanged();
+        inst().notifyDataSetChanged();
     }
 
     public static void onUpdateList() {
-        getAdapter().updateList();
+        inst().updateList();
     }
 
     private List<PlayItem> list;
@@ -112,7 +116,7 @@ public class PlayListAdapter extends BaseAdapter {
                     convertView.setBackgroundColor(Color.RED);
                     break;
                 case ComDef.PLAY_STATUS_PAUSED:
-                    convertView.setBackgroundColor(ThisApp.getAppContext().getColor(R.color.light_blue));
+                    convertView.setBackgroundColor(MyApp.getAppContext().getColor(R.color.light_blue));
                     break;
                 default:
                     convertView.setBackgroundColor(Color.GREEN);

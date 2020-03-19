@@ -2,6 +2,10 @@ package com.liz.puremusic.logic;
 
 import android.text.TextUtils;
 
+import com.liz.puremusic.utils.MediaUtils;
+
+import java.io.File;
+
 /**
  * Node.java
  * Created by admin on 2018/8/30.
@@ -16,8 +20,17 @@ public class PlayItem {
         this.mFilePath = "";
     }
 
+    PlayItem(File f) {
+        init(f.getAbsolutePath());
+    }
+
     PlayItem(String filePath) {
+        init(filePath);
+    }
+
+    private void init(String filePath) {
         this.mFilePath = filePath;
+        setDuration(MediaUtils.getMediaDuration(filePath));
     }
 
     String getFilePath() {

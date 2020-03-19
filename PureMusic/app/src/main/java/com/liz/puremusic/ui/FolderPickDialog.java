@@ -7,19 +7,29 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.R;
-import com.liz.puremusic.utils.LogUtils;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess, unused")
 public class FolderPickDialog extends FilePickDialog implements OnItemClickListener {
 
     public FolderPickDialog(Context context, File filePath) {
         super(context, filePath);
+        initDialog(filePath, "");
+    }
 
+    public FolderPickDialog(Context context, File filePath, String btnText) {
+        super(context, filePath);
+        initDialog(filePath, btnText);
+    }
+
+    public void initDialog(File filePath, String btnText) {
         Button btnSelect = findViewById(R.id.btn_select);
+        btnSelect.setText(btnText);
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +49,12 @@ public class FolderPickDialog extends FilePickDialog implements OnItemClickListe
                 }
             }
         });
+        findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FolderPickDialog.this.dismiss();
+            }
+        });
     }
 
     @Override
@@ -50,8 +66,8 @@ public class FolderPickDialog extends FilePickDialog implements OnItemClickListe
     protected void addToFileList(File file) {
         //only add file path
         if (file != null && file.isDirectory()) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put(ICON, R.drawable.folder);
+            Map<String, Object> map = new HashMap<>();
+            map.put(ICON, R.drawable.icon_folder2);
             map.put(NAME, file.getName());
             map.put(FILE, file);
             map.put(ROOT, false);

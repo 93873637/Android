@@ -12,5 +12,5 @@
     <dimen name="play_list_ctrl_width">40dp</dimen>
     <dimen name="play_list_ctrl_height">40dp</dimen>
     <dimen name="play_list_ctrl_margin">4dp</dimen>
-    <dimen name="play_list_ctrl_padding">4dp</dimen>
+    <dimen name="play_list_ctrl_padding">8dp</dimen>
 </resources>

@@ -52,12 +52,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="2dp"
+                android:gravity="bottom"
                 android:text="SORT"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/colorToolbarText"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
 
             <TextView
@@ -66,12 +68,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="2dp"
                 android:text="CLEAR"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/colorToolbarText"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
 
             <TextView
@@ -80,12 +83,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="2dp"
                 android:text="HOME"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/colorToolbarText"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
         </LinearLayout>
 
@@ -104,15 +108,15 @@
             android:paddingTop="@dimen/play_list_ctrl_padding"
             android:paddingBottom="@dimen/play_list_ctrl_padding"
             android:gravity="center_vertical"
-            android:background="@color/colorForToolbar"
+            android:background="#80d0d0d0"
             android:orientation="horizontal">
             <ImageButton
                 android:id="@+id/music_lists"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="@dimen/play_list_ctrl_width"
+                android:layout_height="@dimen/play_list_ctrl_width"
                 android:layout_marginStart="@dimen/play_list_ctrl_margin"
                 android:layout_marginEnd="@dimen/play_list_ctrl_margin"
-                android:background="@drawable/playlists"
+                android:background="@drawable/icon_config_yellow"
                 android:contentDescription="@string/app_name"
                 />
             <TextView

@@ -4,19 +4,19 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.logic.ComDef;
 import com.liz.puremusic.logic.DataLogic;
 import com.liz.puremusic.ui.PlayNotifier;
-import com.liz.puremusic.utils.LogUtils;
 
 /**
- * ThisApp.java
+ * MyApp.java
  * Created by liz on 18-1-8.
  */
 
 @SuppressWarnings("unused")
-public class ThisApp extends Application {
-    private static ThisApp mAppInst;
+public class MyApp extends Application {
+    private static MyApp mAppInst;
     public static String mAppVersion = "";
     public static String mAppVersionShow = "";  //text show in log
 

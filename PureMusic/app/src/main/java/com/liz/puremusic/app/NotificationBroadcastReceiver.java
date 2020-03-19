@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.logic.DataLogic;
 import com.liz.puremusic.ui.PlayNotifier;
-import com.liz.puremusic.utils.LogUtils;
 
 /**
  * NotificationBroadcastReceiver:
@@ -40,7 +40,7 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
                     DataLogic.switchPlayMode();
                     break;
                 case PlayNotifier.NOTIFY_KEY_CLOSE_APP:
-                    ThisApp.onExitApp();
+                    MyApp.onExitApp();
                     break;
                 default:
                     LogUtils.w("WARNING: NotificationBroadcastReceiver.onReceive: unsupported notify key " + notifyId);

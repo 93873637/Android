@@ -12,11 +12,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.R;
 import com.liz.puremusic.adapter.FilePickListAdapter;
 import com.liz.puremusic.logic.ComDef;
 import com.liz.puremusic.logic.DataLogic;
-import com.liz.puremusic.utils.LogUtils;
 
 import java.io.File;
 import java.text.Collator;
@@ -111,7 +111,7 @@ public class FilePickDialog extends Dialog implements OnItemClickListener {
         if (!DataLogic.isRoot(dir)) {
             LogUtils.d("FilePickDialog.getChildrenList: not root, add to parent dir...");
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put(ICON, R.drawable.folder);
+            map.put(ICON, R.drawable.icon_folder2);
             map.put(NAME, ComDef.PARENT_DIR);
             map.put(FILE, dir.getParentFile());
             map.put(ROOT, true);
@@ -163,7 +163,7 @@ public class FilePickDialog extends Dialog implements OnItemClickListener {
     protected void addToFileList(File file) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put(ICON, file.isDirectory()
-                ? R.drawable.folder
+                ? R.drawable.icon_folder2
                 : R.drawable.file);
         map.put(NAME, file.getName());
         map.put(FILE, file);

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.KeyEvent;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.logic.DataLogic;
-import com.liz.puremusic.utils.LogUtils;
 
 /**
  * MediaButtonReceiver:

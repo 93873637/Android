@@ -15,10 +15,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.R;
 import com.liz.puremusic.logic.ComDef;
 import com.liz.puremusic.logic.DataLogic;
-import com.liz.puremusic.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnCreateContextMenuListener {
     private TextView playInfo;
@@ -53,10 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnCreateCont
         public void run() {
             updateUiOnTimer();
             if (mTimerHandler != null) {
-                mTimerHandler.postDelayed(runnable, ComDef.PLAYUI_REFRESH_TIMER);
+                mTimerHandler.postDelayed(runnable, ComDef.PLAY_UI_REFRESH_TIMER);
             }
         }
     };
+
     public void startUiTimer() {
         LogUtils.d("MainActivity.startUiTimer: handler=" + mTimerHandler);
         if (mTimerHandler == null) {

@@ -2,10 +2,10 @@ package com.liz.puremusic.logic;
 
 import android.text.TextUtils;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.puremusic.app.MusicService;
-import com.liz.puremusic.app.ThisApp;
+import com.liz.puremusic.app.MyApp;
 import com.liz.puremusic.utils.FileUtils;
-import com.liz.puremusic.utils.LogUtils;
 import com.liz.puremusic.utils.MediaUtils;
 import com.liz.puremusic.utils.StrUtils;
 
@@ -16,9 +16,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import static com.liz.puremusic.logic.ComDef.PLAY_STATUS_COMPLETION;
-import static com.liz.puremusic.logic.ComDef.PLAY_STATUS_STARTED;
-
 /**
  * DataLogic:
  * Created by liz on 2018/3/8.
@@ -26,24 +23,20 @@ import static com.liz.puremusic.logic.ComDef.PLAY_STATUS_STARTED;
 
 @SuppressWarnings("unused")
 public class DataLogic extends MusicService {
-    private static ArrayList<PlayItem> mPlayList = new ArrayList<>();
 
-    public static List<PlayItem> getPlayList() {
-        return mPlayList;
-    }
-
-    public static boolean isPlayListEmpty() {
-        return (mPlayList != null) && mPlayList.size() > 0;
-    }
     private static final int LIST_INDEX_BEGIN = 0;
+
+    private static ArrayList<PlayItem> mPlayList = new ArrayList<>();
     private static int mCurrentListPos = LIST_INDEX_BEGIN;  //zero based
     private static int mPlayMode = ComDef.PLAY_MODE_DEFAULT;
+    private static String mMusicHome = ComDef.MUSIC_DEFAULT_HOME;
 
     public static void init() {
         LogUtils.d("DataLogic.init");
 
         //loadTestData();
-        loadDefaultMusic();
+        mMusicHome = Settings.readMusicHome();
+        loadHomeList();
 
         mCurrentListPos = LIST_INDEX_BEGIN;
         mPlayMode = ComDef.PLAY_MODE_DEFAULT;
@@ -60,13 +53,15 @@ public class DataLogic extends MusicService {
             }
         });
 
-        startService(ThisApp.getAppContext());
+        startService(MyApp.getAppContext());
     }
 
-    public static void loadDefaultMusic() {
-        LogUtils.d("DataLogic.loadDefaultMusic");
-        File fileDir = new File(ComDef.PURE_MUSIC_DEFAULT_PATH);
-        DataLogic.onAddMusic(fileDir);
+    public static List<PlayItem> getPlayList() {
+        return mPlayList;
+    }
+
+    public static boolean isPlayListEmpty() {
+        return (mPlayList != null) && mPlayList.size() > 0;
     }
 
     public static void setPlayMode(int mode) {
@@ -114,16 +109,25 @@ public class DataLogic extends MusicService {
     }
 
     public static void stopMusicService() {
-        MusicService.stopService(ThisApp.getAppContext());
+        MusicService.stopService(MyApp.getAppContext());
     }
 
     /* for test only
     protected static void loadTestData() {
-        addToList( ComDef.PURE_MUSIC_DEFAULT_PATH + "/music.mp3");
-        addToList( ComDef.PURE_MUSIC_DEFAULT_PATH + "/music2.mp3");
-        addToList( ComDef.PURE_MUSIC_DEFAULT_PATH + "/music3.mp3");
+        addToList( mMusicHome + "/music.mp3");
+        addToList( mMusicHome + "/music2.mp3");
+        addToList( mMusicHome + "/music3.mp3");
     }
     //*/
+
+    public static String getMusicHome() {
+        return mMusicHome;
+    }
+
+    public static void setMusicHome(String homeDir) {
+        mMusicHome = homeDir;
+        Settings.saveMusicHome(mMusicHome);
+    }
 
     public static String getPlayInfo() {
         return getPlayListInfo() + " [" + DataLogic.getCurrentMusicName() +  "] [" + getPlayStatusName() + "]";
@@ -133,32 +137,33 @@ public class DataLogic extends MusicService {
         return mCurrentListPos;
     }
 
-    public static void onAddMusic(String filePath) {
-        addToList(filePath);
-        checkAutoLoad();
+    public static void addMusic(String filePath) {
+        addMusic(new File(filePath));
     }
 
-    public static void onAddMusic(File file) {
-        addToList(file);
-        checkAutoLoad();
+    public static void addMusic(File file) {
+        if (file != null) {
+            addToList(file);
+            checkAutoLoad();
+        }
     }
 
-    protected static void addToList(String filePath) {
-        LogUtils.d("DataLogic.addToList: filePath=" + filePath);
-        PlayItem item = new PlayItem(filePath);
-        item.setDuration(MediaUtils.getMediaDuration(filePath));
-        mPlayList.add(item);
-    }
-
-    protected static void addToList(File file) {
-        if (file.isDirectory()) {
-            // add all sub files of the folder
+    private static void addToList(File file) {
+        if (file == null) {
+            LogUtils.te("file null");
+            return;
+        }
+        if (file.isFile()) {
+            // add one play item
+            mPlayList.add(new PlayItem(file));
+        }
+        else if (file.isDirectory()) {
+            // add all sub file/dir of the folder
             File[] children = file.listFiles();
             if (children != null) {
                 for (File f : children) {
-                    //only add file, not dir
                     if (!f.isDirectory() && validFileExt(f)) {
-                        addToList(f.getPath());
+                        addToList(f);
                     }
                     else {
                         LogUtils.i("DataLogic.addToList: skip file=" + f.getAbsolutePath());
@@ -167,8 +172,7 @@ public class DataLogic extends MusicService {
             }
         }
         else {
-            // add one file
-            addToList(file.getPath());
+            LogUtils.te("unrecognized file");
         }
     }
 
@@ -201,9 +205,9 @@ public class DataLogic extends MusicService {
         checkCurrentPos();
     }
 
-    public static void loadPlayListHome() {
+    public static void loadHomeList() {
         clearPlayList();
-        loadDefaultMusic();
+        DataLogic.addMusic(mMusicHome);
     }
 
     public static void clearPlayList() {
@@ -217,16 +221,14 @@ public class DataLogic extends MusicService {
         Collections.sort(mPlayList, new Comparator<PlayItem>() {
             @Override
             public int compare(PlayItem o1, PlayItem o2) {
-                int ret = 0;
-
                 //66 Revelation (10).mp3
                 //66 Revelation (2).mp3
                 String name1 = o1.getFileName();
                 String name2 = o2.getFileName();
-                ret = StrUtils.compareByBracketedInteger(name1, name2);
-
-                LogUtils.d("sortPlayList: name1=" + name1 + ", name2=" + name2 + ", ret =" + ret);
-                return ret;
+                return StrUtils.compareByBracketedInteger(name1, name2);
+                //int ret = StrUtils.compareByBracketedInteger(name1, name2);
+                //LogUtils.d("sortPlayList: name1=" + name1 + ", name2=" + name2 + ", ret =" + ret);
+                //return ret;
             }
         });
     }
@@ -335,7 +337,7 @@ public class DataLogic extends MusicService {
     }
 
     public static boolean isRoot(File dir) {
-        return TextUtils.equals(dir.getPath(), ComDef.ROOT_PATH.getPath());
+        return TextUtils.equals(dir.getPath(), ComDef.ROOT_PATH);
     }
 
     public static String getCurrentMusicFile() {
@@ -360,8 +362,8 @@ public class DataLogic extends MusicService {
             return ComDef.TEXT_PLAY_LIST_EMPTY;
         }
 
-        if (mCurrentListPos < 0 && mCurrentListPos >= playListSize) {
-            LogUtils.e("ERROR: DataLogic.getCurrentMusicName: invalid mCurrentListPos=" + mCurrentListPos + ", playListSize=" + playListSize);
+        if (mCurrentListPos < 0 || mCurrentListPos >= playListSize) {
+            LogUtils.te2("invalid list pos " + mCurrentListPos + ", required [" + LIST_INDEX_BEGIN + "/" + playListSize + "]");
             return ComDef.TEXT_INVALID_POS;
         }
 
@@ -380,7 +382,7 @@ public class DataLogic extends MusicService {
         //check if music file changed
         if (TextUtils.equals(getCurrentMusicFile(), mDataSource)) {
             //not change, just start playing
-            if (getPlayStatus() != PLAY_STATUS_STARTED) {
+            if (getPlayStatus() != ComDef.PLAY_STATUS_STARTED) {
                 startPlay();
             }
         }
@@ -433,7 +435,7 @@ public class DataLogic extends MusicService {
 
     public static void onPlayCompletion() {
         LogUtils.d("DataLogic.onPlayCompletion: mCurrentListPos=" + mCurrentListPos + ", mPlayMode=" + mPlayMode);
-        setPlayStatus(PLAY_STATUS_COMPLETION);
+        setPlayStatus(ComDef.PLAY_STATUS_COMPLETION);
 
         boolean needPlay = false;
         boolean needLoad = false;
