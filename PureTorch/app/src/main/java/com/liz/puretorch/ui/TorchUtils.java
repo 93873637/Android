@@ -2,10 +2,13 @@ package com.liz.puretorch.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.hardware.Camera;
 import android.hardware.camera2.CameraManager;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.liz.puretorch.utils.LogUtils;
 
@@ -20,17 +23,42 @@ public class TorchUtils {
 
     public static void enableTorch(Context context, boolean enable) {
         mTorchEnabled = enable;
+        //Openshoudian(context);
+//        try {
+//            CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+//            if (manager == null) {
+//                LogUtils.e("TorchUtils: get camera service failed");
+//            }
+//            else {
+//                manager.setTorchMode("0", mTorchEnabled);
+//            }
+//        }
+//        catch (Exception ex) {
+//            LogUtils.e("TorchUtils: open torch exception: " + ex.toString());
+//        }
+    }
+
+    public static void Openshoudian(Context context) {
+        Camera camera=null;
+        //异常处理一定要加，否则Camera打开失败的话程序会崩溃
         try {
-            CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-            if (manager == null) {
-                LogUtils.e("TorchUtils: get camera service failed");
-            }
-            else {
-                manager.setTorchMode("0", mTorchEnabled);
-            }
+            Log.d("smile","camera打开");
+            camera = Camera.open();
+        } catch (Exception e) {
+            Log.d("smile","Camera打开有问题");
+            Toast.makeText(context, "Camera被占用，请先关闭", Toast.LENGTH_SHORT).show();
         }
-        catch (Exception ex) {
-            LogUtils.e("TorchUtils: open torch exception: " + ex.toString());
+
+        if(camera != null)
+        {
+            //打开闪光灯
+            camera.startPreview();
+            Camera.Parameters parameter = camera.getParameters();
+            parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            camera.setParameters(parameter);
+            Log.d("smile","闪光灯打开");
+
+
         }
     }
 

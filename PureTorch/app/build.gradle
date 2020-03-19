@@ -8,7 +8,7 @@ android {
     defaultConfig {
 
         applicationId "com.liz.puretorch"
-        minSdkVersion 23
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName generateVersionName()

@@ -4,9 +4,10 @@
     <dimen name="play_ctrl_button_margin">8dp</dimen>
     <dimen name="play_ctrl_panel_padding">8dp</dimen>
 
+    <dimen name="notify_height">111dp</dimen>
     <dimen name="notify_play_ctrl_button_width">30dp</dimen>
     <dimen name="notify_play_ctrl_button_height">30dp</dimen>
-    <dimen name="notify_play_ctrl_button_margin">10dp</dimen>
+    <dimen name="notify_play_ctrl_button_margin">7dp</dimen>
     <dimen name="notify_play_ctrl_panel_padding">5dp</dimen>
 
     <dimen name="play_list_ctrl_width">40dp</dimen>

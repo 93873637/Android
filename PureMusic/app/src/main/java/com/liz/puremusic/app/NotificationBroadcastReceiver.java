@@ -24,6 +24,9 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
         }
         else {
             switch (notifyId) {
+                case PlayNotifier.NOTIFY_KEY_MAIN_UI:
+                    DataLogic.switchPlayOrPause();
+                    break;
                 case PlayNotifier.NOTIFY_KEY_PLAY_OR_PAUSE:
                     DataLogic.switchPlayOrPause();
                     break;

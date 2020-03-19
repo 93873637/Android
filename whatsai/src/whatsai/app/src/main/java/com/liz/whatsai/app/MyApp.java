@@ -9,6 +9,7 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
+import com.liz.whatsai.logic.WSListenService;
 
 /**
  * MyApp.java
@@ -36,6 +37,7 @@ public class MyApp extends Application {
         mAppVersion = SysUtils.getAppVersion(this);
 
         DataLogic.init();
+        WSListenService.startService(MyApp.getAppContext());
         //###@: acquireWakeLock();
     }
 

@@ -13,24 +13,6 @@ import com.liz.androidutils.LogUtils;
 
 public class WSListenService extends Service {
 
-    //////////////////////////////////////////////////////////////////////////////////
-    // APIs
-
-    public static void startService(Context context) {
-        Intent intent = new Intent(context, WSListenService.class);
-        context.startService(intent);
-        context.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    public static void stopService(Context context) {
-        context.unbindService(mServiceConnection);
-        Intent intent = new Intent(context, WSListenService.class);
-        context.stopService(intent);
-    }
-
-    // APIs
-    //////////////////////////////////////////////////////////////////////////////////
-
     ///////////////////////////////////////////////////////////////////////////////////////////////
     // Singleton
 
@@ -51,6 +33,24 @@ public class WSListenService extends Service {
 
     // Singleton
     ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////////
+    // APIs
+
+    public static void startService(Context context) {
+        Intent intent = new Intent(context, WSListenService.class);
+        context.startService(intent);
+        context.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    public static void stopService(Context context) {
+        context.unbindService(mServiceConnection);
+        Intent intent = new Intent(context, WSListenService.class);
+        context.stopService(intent);
+    }
+
+    // APIs
+    //////////////////////////////////////////////////////////////////////////////////
 
     private ServiceBinder mBinder = new ServiceBinder();
     private class ServiceBinder extends Binder {

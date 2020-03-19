@@ -6,100 +6,31 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="闪光灯打开" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcbeb664-2383-4ba5-b93d-4ea0947c53e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../AudioWaveShow-master/AudioWaveShow-master/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiListener2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/AudioConfigActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/AudioRecordActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/ListenerActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_audio_config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_audio_record.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_listener.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/whatsai_titlebar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/.idea/dictionaries/cloud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/.idea/dictionaries/cloud.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/AudioUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/AudioUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/NumUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/NumUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/TimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/TimeUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/res/layout/layout_notification.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/androidTest/debug/com/liz/puremusic/test/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/androidTest/debug/com/liz/puremusic/test/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/build/generated/source/buildConfig/debug/com/liz/puremusic/BuildConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PureMusic/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureMusic/app/src/main/java/com/liz/puremusic/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/src/main/java/com/liz/puremusic/logic/DataLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureMusic/app/src/main/res/layout/layout_notification.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/app/src/main/res/layout/layout_notification.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/androidTest/java/dongzhong/testforfloatingwindow/ExampleInstrumentedTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/java/dongzhong/testforfloatingwindow/FloatingButtonService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/java/dongzhong/testforfloatingwindow/FloatingImageDisplayService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/java/dongzhong/testforfloatingwindow/FloatingVideoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/java/dongzhong/testforfloatingwindow/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/drawable/image_01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/drawable/image_02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/drawable/image_03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/drawable/image_04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/drawable/image_05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/layout/image_display.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/layout/video_display.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/app/src/test/java/dongzhong/testforfloatingwindow/ExampleUnitTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TestForFloatingWindow-master/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/dictionaries/cloud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/dictionaries/cloud.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/app/ThisApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/app/ThisApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/ComDef.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/ComDef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/logic/WhatsaiAudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/AudioActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/java/com/liz/whatsai/ui/WhatsaiActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_audio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/activity_audio.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/content_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/layout/content_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/MyApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/MyApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/logic/WSListenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/logic/WSListenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/WSNotifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/WSNotifier.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +50,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="3634">
               <caret line="176" selection-start-line="176" selection-end-line="176" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -130,22 +61,61 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="506">
               <caret line="22" selection-start-line="22" selection-end-line="24" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_v5_top.xml">
+          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2070">
+            <state relative-caret-position="270">
               <caret line="90" column="55" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="55" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/hardware/Camera.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="367" column="25" selection-start-line="367" selection-start-column="25" selection-end-line="367" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/content/Context.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="3778" column="31" selection-start-line="3778" selection-start-column="31" selection-end-line="3778" selection-end-column="31" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -195,17 +165,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchSwitchButton.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_v5_top.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/VerticalSeekBar2.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/VerticalSeekBar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="660" />
@@ -219,36 +190,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="PureTorch" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="5a222bac" />
+    <property name="device.picker.selection" value="04aa67620025f5cd" />
     <property name="last_opened_file_path" value="D:/Download/VerticalSeekbar-master/VerticalSeekbar-master" />
   </component>
   <component name="RecentsManager">
@@ -347,11 +297,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.23880596" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.07622601" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -363,10 +313,10 @@
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="4" visible="true" weight="0.22939867" />
-      <window_info anchor="bottom" id="Run" order="5" />
-      <window_info anchor="bottom" id="Logcat" order="6" weight="0.32925472" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Build" order="4" weight="0.4298441" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.32962137" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="6" visible="true" weight="0.32850778" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32962137" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
@@ -378,7 +328,7 @@
     </layout>
     <layout-to-restore>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.23880596" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.07622601" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -390,9 +340,9 @@
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="4" weight="0.22939867" />
-      <window_info anchor="bottom" id="Run" order="5" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="6" visible="true" weight="0.32962137" />
+      <window_info active="true" anchor="bottom" id="Build" order="4" visible="true" weight="0.4298441" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.32962137" />
+      <window_info anchor="bottom" id="Logcat" order="6" weight="0.32850778" />
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32962137" />
@@ -403,6 +353,18 @@
       <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
       <window_info anchor="right" id="Preview" order="5" />
     </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/gradle.properties">
@@ -436,20 +398,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_v4_top.xml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_v4_bottom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/app/ThisApp.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -487,9 +449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -515,12 +474,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_v2h2_middle.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2093">
           <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchSwitchButton.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -550,24 +509,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="30" column="9" lean-forward="true" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_custom_button.xml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/busy_toast.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/VerticalSeekBar.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -585,7 +537,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
+        <state relative-caret-position="3634">
           <caret line="176" selection-start-line="176" selection-end-line="176" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -594,20 +546,51 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="22" selection-start-line="22" selection-end-line="24" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_v5_top.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2070">
+        <state relative-caret-position="270">
           <caret line="90" column="55" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="55" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/content/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="3778" column="31" selection-start-line="3778" selection-start-column="31" selection-end-line="3778" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/hardware/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="367" column="25" selection-start-line="367" selection-start-column="25" selection-end-line="367" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/puretorch/ui/TorchUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

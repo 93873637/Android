@@ -32,7 +32,7 @@ public class DataLogic extends MusicService {
     private static String mMusicHome = ComDef.MUSIC_DEFAULT_HOME;
 
     public static void init() {
-        LogUtils.d("DataLogic.init");
+        LogUtils.trace();
 
         //loadTestData();
         mMusicHome = Settings.readMusicHome();

@@ -54,6 +54,6 @@
         <service
             android:name="com.liz.whatsai.logic.WSListenService"
             android:enabled="true"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 </manifest>

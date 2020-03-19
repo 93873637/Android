@@ -28,6 +28,7 @@ public class PlayNotifier {
     private static final String ACTION_PURE_MUSIC_NOTIFY = "com.liz.puremusic.notify";
     private static final int NOTICE_ID_TYPE_0 = R.string.app_name;
 
+    public static final int NOTIFY_KEY_MAIN_UI = 0;
     public static final int NOTIFY_KEY_PLAY_OR_PAUSE = 1;
     public static final int NOTIFY_KEY_PLAY_PREV = 2;
     public static final int NOTIFY_KEY_PLAY_NEXT = 3;
@@ -73,6 +74,7 @@ public class PlayNotifier {
         remoteViews.setInt(R.id.BtnPlayOrPause, "setBackgroundResource", DataLogic.isPlaying()?R.drawable.pause:R.drawable.play);
         remoteViews.setInt(R.id.BtnPlayMode, "setBackgroundResource", MainActivity.getPlayModeResId());
 
+        remoteViews.setOnClickPendingIntent(R.id.main_image, getPendingIntentForActivity(context, NOTIFY_KEY_MAIN_UI));
         remoteViews.setOnClickPendingIntent(R.id.BtnPlayOrPause, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_OR_PAUSE));
         remoteViews.setOnClickPendingIntent(R.id.notify_play_prev, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_PREV));
         remoteViews.setOnClickPendingIntent(R.id.notify_play_next, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_NEXT));
@@ -103,7 +105,11 @@ public class PlayNotifier {
     }
 
     private static PendingIntent getPendingIntentForActivity(Context context, int keyId) {
-            Intent intent = new Intent(context, PlayListActivity.class);
+            Class<?> cls =  MainActivity.class;
+            if (keyId == NOTIFY_KEY_PLAY_LIST) {
+                cls = PlayListActivity.class;
+            }
+            Intent intent = new Intent(context, cls);
             intent.putExtra(PURE_MUSIC_NOTIFY_KEY, keyId);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             int requestCode = (int) SystemClock.uptimeMillis();

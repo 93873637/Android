@@ -11,8 +11,8 @@ import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
 
+import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
-import com.liz.whatsai.logic.DataLogic;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,8 +52,13 @@ public class WSNotifier {
         manager.cancel(NOTICE_ID_TYPE_0);
     }
 
-    private static void addNotification(Context context) {
+    private static void addNotification(final Context context) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager == null) {
+            LogUtils.te("get notification service null");
+            return;
+        }
+
         if (android.os.Build.VERSION.SDK_INT >= 26) {
             int importance = NotificationManager.IMPORTANCE_LOW;
             NotificationChannel channel = new NotificationChannel(WHATSAI_CHANNEL_ID, WHATSAI_CHANNEL_NAME, importance);
@@ -63,30 +68,23 @@ public class WSNotifier {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, WHATSAI_CHANNEL_ID);
         builder.setOngoing(true);
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
-
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
-        remoteViews.setTextViewText(R.id.PlayInfo, DataLogic.getCurrentMusicName());
-        remoteViews.setInt(R.id.BtnPlayOrPause, "setBackgroundResource", DataLogic.isPlaying()?R.drawable.pause:R.drawable.play);
-        remoteViews.setInt(R.id.BtnPlayMode, "setBackgroundResource", MainActivity.getPlayModeResId());
-
-        remoteViews.setOnClickPendingIntent(R.id.BtnPlayOrPause, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_OR_PAUSE));
-        remoteViews.setOnClickPendingIntent(R.id.notify_play_prev, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_PREV));
-        remoteViews.setOnClickPendingIntent(R.id.notify_play_next, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_NEXT));
-        remoteViews.setOnClickPendingIntent(R.id.BtnStop, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_STOP));
-        remoteViews.setOnClickPendingIntent(R.id.BtnPlayMode, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_MODE));
-        remoteViews.setOnClickPendingIntent(R.id.notify_play_list, getPendingIntentForActivity(context, NOTIFY_KEY_PLAY_LIST));
-        remoteViews.setOnClickPendingIntent(R.id.notify_close_app, getPendingIntentForBroadcast(context, NOTIFY_KEY_CLOSE_APP));
-
         builder.setSmallIcon(R.drawable.abc_ic_menu_share_mtrl_alpha);
+
+        RemoteViews remoteViews = initNotifierView(context);
         Notification notification = builder.build();
-
-        if (android.os.Build.VERSION.SDK_INT >= 16) {
-            notification = builder.build();
-            notification.bigContentView = remoteViews;
-        }
-
+        notification.bigContentView = remoteViews;
         notification.contentView = remoteViews;
+
         manager.notify(NOTICE_ID_TYPE_0, notification);
+    }
+
+    private static RemoteViews initNotifierView(final Context context) {
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
+//        remoteViews.setTextViewText(R.id.PlayInfo, DataLogic.getCurrentMusicName());
+//        remoteViews.setInt(R.id.BtnPlayOrPause, "setBackgroundResource", DataLogic.isPlaying()?R.drawable.pause:R.drawable.play);
+//        remoteViews.setInt(R.id.BtnPlayMode, "setBackgroundResource", MainActivity.getPlayModeResId());
+//        //remoteViews.setOnClickPendingIntent(R.id.BtnPlayOrPause, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_OR_PAUSE));
+        return remoteViews;
     }
 
     private static PendingIntent getPendingIntentForBroadcast(Context context, int keyId) {
@@ -99,7 +97,7 @@ public class WSNotifier {
     }
 
     private static PendingIntent getPendingIntentForActivity(Context context, int keyId) {
-            Intent intent = new Intent(context, PlayListActivity.class);
+            Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra(WHATSAI_NOTIFY_KEY, keyId);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             int requestCode = (int) SystemClock.uptimeMillis();
