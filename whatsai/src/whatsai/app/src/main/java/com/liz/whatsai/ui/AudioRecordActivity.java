@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
+import com.liz.whatsai.logic.WSListenService;
 import com.liz.whatsai.logic.WSListener;
 import com.liz.whatsai.logic.WSRecorder;
 
@@ -212,7 +213,8 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     }
 
     private void onSwitchListening() {
-        WSRecorder.inst().switchListening();
+        WSListenService.switchListening();
+        //###@: WSRecorder.inst().switchListening();
         updateUI();
         updateAudioList();
     }

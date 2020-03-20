@@ -26,8 +26,8 @@ public class WSListenService extends Service {
     // the one and only object instance
     private static WSListenService mWSListenService;
 
-    // private constructor for singleton
-    private WSListenService() {
+    // for singleton, the constructor should be private, but for service, it must public.
+    public WSListenService() {
         LogUtils.trace();
     }
 
@@ -47,6 +47,10 @@ public class WSListenService extends Service {
         context.unbindService(mServiceConnection);
         Intent intent = new Intent(context, WSListenService.class);
         context.stopService(intent);
+    }
+
+    public static void switchListening() {
+        inst()._switchListening();
     }
 
     // APIs
@@ -80,6 +84,10 @@ public class WSListenService extends Service {
     public IBinder onBind(Intent intent) {
         LogUtils.trace();
         return mBinder;
+    }
+
+    private  void _switchListening() {
+        WSRecorder.inst().switchListening();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
