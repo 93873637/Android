@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.DataOutputStream;
 import java.lang.reflect.Method;
@@ -149,23 +148,19 @@ public class SysUtils {
         }
     }
 
-    /* Checks if external storage is available for read and write */
-    public static boolean isExternalStorageWritable () {
-        String state = Environment. getExternalStorageState ();
-        if ( Environment . MEDIA_MOUNTED . equals ( state )) {
-            return true ;
-        }
-        return false ;
+    /**
+     *  Checks if external storage is available for read and write
+     * */
+    public static boolean isExternalStorageWritable() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
-    /* Checks if external storage is available to at least read */
-    public static boolean isExternalStorageReadable () {
-        String state = Environment . getExternalStorageState ();
-        if ( Environment . MEDIA_MOUNTED . equals ( state ) ||
-                Environment . MEDIA_MOUNTED_READ_ONLY . equals ( state )) {
-            return true ;
-        }
-        return false ;
+    /**
+     *  Checks if external storage is available to at least read
+     * */
+    public static boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 
     public static String getAppMemInfo() {
@@ -178,4 +173,40 @@ public class SysUtils {
         String usedMemory = df.format((double) (r.totalMemory() - r.freeMemory()) / M);
         return maxMemory + " / " + totalMemory + " / " + freeMemory + " / " + usedMemory;
     }
+
+//    ////////////////////////////////////////////////////////////////////////////////////////////////
+//    // Wake Lock
+//
+//    private PowerManager.WakeLock mWakeLock = null;
+//    private static final String mWakeLockName = ComDef.APP_NAME + ":wakelocktag";
+//
+//    /**
+//     * acquire wakelock to keep running after screen off
+//     */
+//    private synchronized void acquireWakeLock() {
+//        if (mWakeLock == null) {
+//            PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+//            if (pm == null) {
+//                LogUtils.te2("get power service failed");
+//            }
+//            else {
+//                mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, mWakeLockName);
+//                if (null != mWakeLock) {
+//                    LogUtils.trace();
+//                    mWakeLock.acquire();
+//                }
+//            }
+//        }
+//    }
+//
+//    private synchronized void releaseWakeLock() {
+//        if (null != mWakeLock) {
+//            LogUtils.trace();
+//            mWakeLock.release();
+//            mWakeLock = null;
+//        }
+//    }
+//
+//    // Wake Lock
+//    ////////////////////////////////////////////////////////////////////////////////////////////////
 }

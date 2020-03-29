@@ -112,24 +112,55 @@ public class WSListener {
     }
 
     public void switchListening() {
-        LogUtils.d("WSListener:switchListening: mIsListening = " + mIsListening);
+        LogUtils.td("mIsListening = " + mIsListening);
         if (mIsListening) {
             stopListening();
-            stopWorkingTimer();
-            if (mAutoSave) {
-                AudioUtils.pcm2wav(
-                        getPCMFileAbsolute(),
-                        getWAVFileAbsolute(),
-                        mSampleRate,
-                        mRecordBufferSize,
-                        mAudioFormat,
-                        mChannelConfig,
-                        true);
-            }
         }
         else {
             startListening();
-            startWorkingTimer();
+        }
+    }
+
+    public void startListening() {
+        LogUtils.d("WSListener:startListening: mIsListening = " + mIsListening);
+        if (mIsListening) {
+            LogUtils.d("WSListener:startListening: already started");
+            return;
+        }
+        mIsListening = true;
+        resetParams();
+        final FileOutputStream pcmOutputStream = createPCMOutputStream();
+        if (pcmOutputStream == null) {
+            LogUtils.e("WSListener:startListening: get output stream for audio buffer failed.");
+            return;
+        }
+        mAudioRecord.startRecording();
+        mStartTime = System.currentTimeMillis();
+        startThread_RecordingAudioData(pcmOutputStream);
+        if (mVoiceRecognition) {
+            startThread_VoiceRecognition();
+        }
+        startWorkingTimer();
+    }
+
+    public void stopListening() {
+        LogUtils.d("WSListener:stopRecord: mIsListening = " + mIsListening);
+        if (!mIsListening) {
+            LogUtils.d("WSListener: stopRecord: already stopped");
+            return;
+        }
+        mIsListening = false;
+        mAudioRecord.stop();
+        stopWorkingTimer();
+        if (mAutoSave) {
+            AudioUtils.pcm2wav(
+                    getPCMFileAbsolute(),
+                    getWAVFileAbsolute(),
+                    mSampleRate,
+                    mRecordBufferSize,
+                    mAudioFormat,
+                    mChannelConfig,
+                    true);
         }
     }
 
@@ -348,27 +379,6 @@ public class WSListener {
         mTemplateList.clear();
     }
 
-    private void startListening() {
-        LogUtils.d("WSListener:startListening: mIsListening = " + mIsListening);
-        if (mIsListening) {
-            LogUtils.d("WSListener:startListening: already started");
-            return;
-        }
-        mIsListening = true;
-        resetParams();
-        final FileOutputStream pcmOutputStream = createPCMOutputStream();
-        if (pcmOutputStream == null) {
-            LogUtils.e("WSListener:startListening: get output stream for audio buffer failed.");
-            return;
-        }
-        mAudioRecord.startRecording();
-        mStartTime = System.currentTimeMillis();
-        startThread_RecordingAudioData(pcmOutputStream);
-        if (mVoiceRecognition) {
-            startThread_VoiceRecognition();
-        }
-    }
-
     private void startThread_RecordingAudioData(final FileOutputStream outputStream) {
         new Thread(new Runnable() {
             @Override
@@ -503,16 +513,6 @@ public class WSListener {
 
     public void onVoiceRecognition() {
         //###@: todo: search templates words from frame list...
-    }
-
-    private void stopListening() {
-        LogUtils.d("WSListener:stopRecord: mIsListening = " + mIsListening);
-        if (!mIsListening) {
-            LogUtils.d("WSListener: stopRecord: already stopped");
-            return;
-        }
-        mIsListening = false;
-        mAudioRecord.stop();
     }
 
     private boolean loadAudioTemplates() {

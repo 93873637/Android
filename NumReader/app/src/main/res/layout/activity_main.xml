@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reader_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.liz.MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <!--switch button-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageButton
+            android:id="@+id/btn_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="@drawable/bg_circle_green"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textNumCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/numeric_zero"
+        android:textSize="88sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textTimeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/default_date_time"
+        android:textSize="39sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_padding"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/tv_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="RESET"
+        android:textSize="22sp"
+        android:textColor="#0000ff"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="TEST NUM: "
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/edit_num"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:maxLength="10"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:text="1234567890"
+            />
+        <Button
+            android:id="@+id/btn_play_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PLAY"
+            />
+    </LinearLayout>
+
+</LinearLayout>

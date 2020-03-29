@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
@@ -46,6 +47,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         findViewById(R.id.btn_audio_listener).setOnClickListener(this);
         findViewById(R.id.btn_audio_template).setOnClickListener(this);
         findViewById(R.id.btn_audio_config).setOnClickListener(this);
+        findViewById(R.id.text_reload_file_list).setOnClickListener(this);
 
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
@@ -102,7 +104,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         LogUtils.d("AudioTemplateActivity:onBackPressed");
         stopUITimer();
         WSRecorder.inst().setCallback(null);
-
         super.onBackPressed();
     }
 
@@ -123,6 +124,10 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
             case R.id.btn_audio_config:
                 startActivity(new Intent(AudioRecordActivity.this, AudioConfigActivity.class));
                 break;
+            case R.id.text_reload_file_list:
+                Toast.makeText(AudioRecordActivity.this, "Reloading...", Toast.LENGTH_LONG).show();
+                mAudioListView.updateList();
+                break;
             default:
                 break;
         }
@@ -133,7 +138,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         if (mAudioListView.onContextItemSelected(item)) {
             return true;
         }
-
         return super.onContextItemSelected(item);
     }
 
@@ -213,8 +217,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     }
 
     private void onSwitchListening() {
-        WSListenService.switchListening();
-        //###@: WSRecorder.inst().switchListening();
+        WSListenService.switchOnOff();
         updateUI();
         updateAudioList();
     }

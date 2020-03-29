@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
+import com.liz.whatsai.app.MyApp;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,45 +24,61 @@ import java.util.TimerTask;
  */
 
 public class WSNotifier {
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static final int NOTICE_ID_TYPE_0 = R.string.app_name;
+
     private static final String WHATSAI_CHANNEL_ID = "WhatsaiChannelId";
     private static final String WHATSAI_CHANNEL_NAME = "WhatsaiChannelName";
     public static final String WHATSAI_NOTIFY_KEY = "WhatsaiNotifyKey";
     private static final String ACTION_WHATSAI_NOTIFY = "com.liz.whatsai.notify";
-    private static final int NOTICE_ID_TYPE_0 = R.string.app_name;
 
     public static final int NOTIFY_KEY_APP_STATUS = 1;
     public static final int NOTIFY_KEY_CLOSE_APP = 2;
 
-    private static final int NOTIFY_UPDATE_TIMER_DELAY = 200;
-    private static final int NOTIFY_UPDATE_TIMER_PERIOD = 1000;
+    private static final int NOTIFY_UPDATE_TIMER_DELAY = 500;
+    private static final int NOTIFY_UPDATE_TIMER_PERIOD = 2000;
 
-    private static Timer mNotifyUpdateTimer;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static void onCreate(final Context context) {
-        mNotifyUpdateTimer = new Timer();
-        mNotifyUpdateTimer.schedule(new TimerTask() {
+    private static Notification mNotification;
+
+    public static void create() {
+        LogUtils.trace();
+        final Context context = MyApp.getAppContext();
+        new Timer().schedule(new TimerTask() {
             public void run() {
-                addNotification(context);
+                createNotification(context);
             }
         }, NOTIFY_UPDATE_TIMER_DELAY, NOTIFY_UPDATE_TIMER_PERIOD);
     }
 
-    public static void onDestory(final Context context) {
-        mNotifyUpdateTimer.cancel();
+    public static void destroy() {
+        final Context context = MyApp.getAppContext();
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager == null) {
+            LogUtils.te2("get notification service null");
+            return;
+        }
         manager.cancel(NOTICE_ID_TYPE_0);
     }
 
-    private static void addNotification(final Context context) {
+    public static Notification getNotification() {
+        return mNotification;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private static void createNotification(final Context context) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager == null) {
-            LogUtils.te("get notification service null");
+            LogUtils.te2("get notification service null");
             return;
         }
 
         if (android.os.Build.VERSION.SDK_INT >= 26) {
-            int importance = NotificationManager.IMPORTANCE_LOW;
-            NotificationChannel channel = new NotificationChannel(WHATSAI_CHANNEL_ID, WHATSAI_CHANNEL_NAME, importance);
+            NotificationChannel channel = new NotificationChannel(WHATSAI_CHANNEL_ID, WHATSAI_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
             manager.createNotificationChannel(channel);
         }
 
@@ -71,11 +88,12 @@ public class WSNotifier {
         builder.setSmallIcon(R.drawable.abc_ic_menu_share_mtrl_alpha);
 
         RemoteViews remoteViews = initNotifierView(context);
-        Notification notification = builder.build();
-        notification.bigContentView = remoteViews;
-        notification.contentView = remoteViews;
 
-        manager.notify(NOTICE_ID_TYPE_0, notification);
+        mNotification = builder.build();
+        mNotification.bigContentView = remoteViews;
+        mNotification.contentView = remoteViews;
+
+        manager.notify(NOTICE_ID_TYPE_0, mNotification);
     }
 
     private static RemoteViews initNotifierView(final Context context) {

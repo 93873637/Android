@@ -97,14 +97,23 @@ public class AudioListAdapter extends BaseAdapter {
     private void loadListData() {
         mFileList.clear();
         mFileList = FileUtils.getFileArrayList(mAudioDir, FileUtils.ORDER_BY_DATE_DESC);
-        //###@: todo: append file duration here: + "(" + MediaUtils.getMediaDurationFormat(f) + ")";
     }
 
     private String getListInfo() {
         String info = "TOTAL <font color=\"#ff0000\">" + mFileList.size() + "</font> FILES";
         long sizeTotal = 0;
+        long size = 0;
         for (File f: mFileList) {
-            sizeTotal += FileUtils.getFileSize(f);
+            size = FileUtils.getFileSize(f);
+            if (size < 0) {
+                // something wrong with the file list, maybe file deleted from sdcard manually
+                // so need refresh list, but to avoid refresh frequently
+                // we give a tip let user click to refresh manually
+                return "<font color=\"#ff0000\">List Error, Try RELOAD</font>";
+            }
+            else {
+                sizeTotal += size;
+            }
         }
         info += ", <font color=\"#ff0000\">" + FileUtils.formatFileSize(sizeTotal) + "</font>";
         return info;

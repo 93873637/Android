@@ -1,0 +1,103 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:1-35:12
+	package
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:3:5-22
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:7:5-47
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:7:5-47
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:7:5-47
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:7:5-47
+INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:7:5-47
+	android:targetSdkVersion
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:7:15-44
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:7:5-47
+		INJECTED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:9:22-78
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:10:5-75
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:10:22-72
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:11:22-78
+uses-permission#com.android.launcher.permission.READ_SETTINGS
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:12:5-84
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:12:22-82
+uses-permission#com.android.launcher.permission.WRITE_SETTINGS
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:13:5-85
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:13:22-83
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:14:5-73
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:14:22-70
+uses-permission#android.permission.READ_SYNC_SETTINGS
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:15:5-77
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:15:22-74
+uses-permission#android.permission.WRITE_SYNC_SETTINGS
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:16:5-78
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:16:22-75
+application
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:18:5-33:19
+	android:label
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:21:9-41
+	android:icon
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:20:9-44
+	android:allowBackup
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:19:9-35
+	android:theme
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:22:9-40
+activity#com.liz.MainActivity
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:23:9-32:20
+	android:label
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:25:13-45
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:24:13-48
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.DEFAULT+category:name:android.intent.category.HOME+category:name:android.intent.category.LAUNCHER
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:26:13-31:29
+action#android.intent.action.MAIN
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:27:17-69
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:27:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:28:17-77
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:28:27-74
+category#android.intent.category.HOME
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:29:17-73
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:29:27-70
+category#android.intent.category.DEFAULT
+ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:30:17-76
+	android:name
+		ADDED from D:\WorkSpace\Android\NumReader\app\src\main\AndroidManifest.xml:30:27-73

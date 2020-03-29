@@ -169,7 +169,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	}
 
 	public void onUpdateSurfaceData(@NonNull List<Integer> dataList, int maxValue) {
-		LogUtils.trace();
+		//LogUtils.trace();
 		Canvas canvas = this.getHolder().lockCanvas(
 				new Rect(0, 0, this.getWidth(), this.getHeight()));
 		if (canvas == null) {

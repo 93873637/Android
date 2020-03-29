@@ -9,48 +9,30 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import com.liz.androidutils.LogUtils;
+import com.liz.whatsai.app.MyApp;
+import com.liz.whatsai.ui.WSNotifier;
 
 
 public class WSListenService extends Service {
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    // Singleton
-
-    public static WSListenService inst() {
-        if (mWSListenService == null) {
-            mWSListenService = new WSListenService();
-        }
-        return mWSListenService;
-    }
-
     // the one and only object instance
-    private static WSListenService mWSListenService;
-
-    // for singleton, the constructor should be private, but for service, it must public.
-    public WSListenService() {
-        LogUtils.trace();
-    }
-
-    // Singleton
-    ///////////////////////////////////////////////////////////////////////////////////////////////
+    private static WSListenService mWSListenService = new WSListenService();
 
     //////////////////////////////////////////////////////////////////////////////////
     // APIs
 
-    public static void startService(Context context) {
-        Intent intent = new Intent(context, WSListenService.class);
-        context.startService(intent);
-        context.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+    public static void start() {
+        Context context = MyApp.getAppContext();
+        context.startService(new Intent(context, WSListenService.class));
     }
 
-    public static void stopService(Context context) {
-        context.unbindService(mServiceConnection);
-        Intent intent = new Intent(context, WSListenService.class);
-        context.stopService(intent);
+    public static void stop() {
+        Context context = MyApp.getAppContext();
+        context.stopService(new Intent(context, WSListenService.class));
     }
 
-    public static void switchListening() {
-        inst()._switchListening();
+    public static void switchOnOff() {
+        mWSListenService._switchOnOff();
     }
 
     // APIs
@@ -75,9 +57,16 @@ public class WSListenService extends Service {
     };
 
     @Override
-    public boolean onUnbind(Intent intent) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtils.trace();
-        return super.onUnbind(intent);
+        if (WSNotifier.getNotification() != null) {
+            WSListenService.this.startForeground(WSNotifier.NOTICE_ID_TYPE_0, WSNotifier.getNotification());
+        }
+        else {
+            LogUtils.tw2("no notification to startForeground service");
+        }
+        WSRecorder.inst().startListening();
+        return START_STICKY;
     }
 
     @Override
@@ -86,12 +75,13 @@ public class WSListenService extends Service {
         return mBinder;
     }
 
-    private  void _switchListening() {
-        WSRecorder.inst().switchListening();
+    @Override
+    public boolean onUnbind(Intent intent) {
+        LogUtils.trace();
+        return super.onUnbind(intent);
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Class WSListenService
-
-    //todo:
+    private  void _switchOnOff() {
+        WSRecorder.inst().switchListening();
+    }
 }

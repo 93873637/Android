@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/surface_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#323232"
+        android:gravity="center"
+        >
+        <com.liz.testcamera.ui.ResizableSurfaceView
+            android:id="@+id/surface_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </RelativeLayout>
+
+    <!--bottom bar-->
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:padding="0dp"
+        android:background="@color/camera_control_bg_opaque">
+
+        <TextView
+            android:id="@+id/tv_progress_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:text="0/0"/>
+
+        <TextView
+            android:id="@+id/tv_camera_info"
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:layout_margin="3dp"
+            android:layout_alignParentBottom="true"
+            android:ellipsize="end"
+            android:text="0/0"/>
+
+        <com.liz.testcamera.ui.CircleImageView
+            android:id="@+id/picture_view"
+            android:layout_centerVertical="true"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@mipmap/def_pic"
+            />
+
+        <com.liz.testcamera.ui.ShutterButton
+            android:id="@+id/shutter_button"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/shutter_button_0" />
+
+        <com.liz.testcamera.ui.CircleImageView
+            android:id="@+id/scene_mode_night"
+            android:layout_centerVertical="true"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_scene_mode_night_off"
+            />
+
+    </RelativeLayout>
+
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/camera_control_bg_transparent"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_camera_info"
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:layout_margin="3dp"
+            android:ellipsize="end"
+            android:text="0/0"/>
+    </LinearLayout>
+     -->
+</LinearLayout>

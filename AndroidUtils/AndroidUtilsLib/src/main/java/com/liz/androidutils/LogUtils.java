@@ -101,6 +101,10 @@ public class LogUtils {
 		}
 	}
 
+	public static void w2(String msg) {
+		w("WARNING: " + msg);
+	}
+
 	public static void e(String msg) {
 		//since e is top level, not need to judge, direct show
 		Log.e(mTag, msg);
@@ -169,6 +173,10 @@ public class LogUtils {
 
 	public static void tw(String msg) {
 		w(t() + msg);
+	}
+
+	public static void tw2(String msg) {
+		w2(t() + msg);
 	}
 
 	public static void te(String msg) {

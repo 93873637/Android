@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f79dfa04-fc38-457a-9d79-cc9887230c5c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/LogUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/LogUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/SysUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/SysUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/caches/build_file_checksums.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/caches/gradle_models.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/androidTest/java/com/example/ice/coursetable/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/java/com/example/ice/coursetable/CameraActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/java/com/example/ice/coursetable/flashstrategy/AutoStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/java/com/example/ice/coursetable/flashstrategy/CloseStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/java/com/example/ice/coursetable/flashstrategy/FlashStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/java/com/example/ice/coursetable/flashstrategy/KeepOpenStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/java/com/example/ice/coursetable/flashstrategy/OpenStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/anim/flash_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/anim/flash_out.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/drawable/change.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/drawable/circle_shape.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/drawable/flash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/drawable/flash_text_shape.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/drawable/takephoto.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/layout/activity_camera.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/layout/flash_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/values-v21/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/values/dimens.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/app/src/test/java/com/example/ice/coursetable/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/.idea/dictionaries/cloud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/.idea/dictionaries/cloud.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/AudioListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/MyApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/MyApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/logic/WSListenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/logic/WSListenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/logic/WSListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/logic/WSListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/AudioRecordActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/AudioRecordActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/WSNotifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/WSNotifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/WaveSurfaceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/ui/WaveSurfaceView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/res/layout/activity_audio_record.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/res/layout/activity_audio_record.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/res/layout/layout_notification.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/res/layout/layout_notification.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/src/whatsai/app/src/main/res/values/dimens.xml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/build/classes/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="397">
+              <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>com.android.tools.build:gradle</find>
+      <find>MAX_SOUNDS</find>
+      <find>NumReader</find>
+      <find>playNumberString</find>
+      <find>mContext</find>
+      <find>play</find>
+      <find>etCountReadSpan</find>
+      <find>callback</find>
+      <find>SP_READ_SPAN</find>
+      <find>SP_TIME_SPAN</find>
+      <find>left</find>
+      <find>release</find>
+      <find>switchOnOff</find>
+      <find>tvTimeCount</find>
+      <find>mTotalCount</find>
+      <find>mUIHandler</find>
+      <find>mBtnSwitch</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Start</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/SoundPoolPlayer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="1932" />
+    <option name="height" value="1045" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.project.structure.last.selected" value="SDK Location" />
+    <property name="android.project.structure.proportion" value="0.15" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="device.picker.selection" value="192.168.1.2:2727" />
+    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\WorkSpace\Android\NumReader\app\src\main\res\drawable" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <module name="" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f79dfa04-fc38-457a-9d79-cc9887230c5c" name="Default" comment="" />
+      <created>1522670691574</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1522670691574</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="2" width="1932" height="1045" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Captures" order="2" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="3" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Resources Explorer" order="8" weight="0.32959402" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32921347" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Gradle Console" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Logcat" order="10" weight="0.32919955" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3295063" />
+      <window_info anchor="bottom" id="Build" order="14" weight="0.26719278" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
+      <window_info anchor="right" id="Gradle" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Preview" order="8" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Captures" order="2" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="3" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Resources Explorer" order="8" weight="0.32959402" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32921347" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Gradle Console" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Logcat" order="10" weight="0.32919955" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3295063" />
+      <window_info anchor="bottom" id="Build" order="14" visible="true" weight="0.26719278" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
+      <window_info anchor="right" id="Gradle" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info anchor="right" id="Preview" order="8" />
+    </layout-to-restore>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/import-summary.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradlew.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="79" selection-start-line="5" selection-start-column="79" selection-end-line="5" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/media/SoundPool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="624">
+          <caret line="476" column="29" selection-start-line="476" selection-start-column="29" selection-end-line="476" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/SoundPoolPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="57" column="53" selection-start-line="57" selection-start-column="53" selection-end-line="57" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="789">
+          <caret line="79" column="31" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+          <folding>
+            <element signature="e#484#511#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+          <folding>
+            <element signature="e#477#504#0" expanded="true" />
+            <element signature="e#528#555#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="135" column="39" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="39" />
+          <folding>
+            <element signature="e#2531#2532#0" expanded="true" />
+            <element signature="e#3026#3027#0" expanded="true" />
+            <element signature="e#3099#3100#0" expanded="true" />
+            <element signature="e#3174#3175#0" expanded="true" />
+            <element signature="e#3247#3248#0" expanded="true" />
+            <element signature="e#3835#3836#0" expanded="true" />
+            <element signature="e#3865#3866#0" expanded="true" />
+            <element signature="e#3885#3886#0" expanded="true" />
+            <element signature="e#3910#3911#0" expanded="true" />
+            <element signature="e#3853#4027#0" expanded="true" />
+            <element signature="e#4026#4027#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="70" column="117" selection-start-line="70" selection-start-column="117" selection-end-line="70" selection-end-column="117" />
+          <folding>
+            <element signature="e#2280#2392#0" expanded="true" />
+            <element signature="e#2391#2392#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+  </component>
+</project>
