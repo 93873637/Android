@@ -22,6 +22,9 @@ SoundRecorder-master/.gradle
 TestForFloatingWindow-master/app/build
 TestForFloatingWindow-master/.gradle
 
+MyCameras/src/AutoCamera/app/build
+NumReader/app/build
+
 audioWaveCanvas-master/
 AudioWaveShow-master
 MediaProjectionDemo-master
