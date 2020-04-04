@@ -124,12 +124,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        // Instantiate the gesture detector with the
-        // application context and an implementation of
+        // Instantiate the gesture detector with the application context and an implementation of
         // GestureDetector.OnGestureListener
         mDetector = new GestureDetectorCompat(this, mBtnSwitch);
-        // Set the gesture detector as the double tap
-        // listener.
+        // Set the gesture detector as the double tap listener.
         mDetector.setOnDoubleTapListener(mBtnSwitch);
 
         //BottomNavigationView navigation = findViewById(R.id.navigation);

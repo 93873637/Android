@@ -7,7 +7,7 @@ import android.os.Environment;
  * Created by liz on 2018/3/8.
  */
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("unused, WeakerAccess")
 public class ComDef {
 
     public static final String APP_NAME = "whatsai";
@@ -32,14 +32,13 @@ public class ComDef {
     //
     // Whatsai Home Directory
     //
-    // it should be better to use external sdcard storage, but
-    // unfortunately, external storage can't be written by app for security!
-    // so we can't set home dir to external storage like following:
-    //
+    // it should be better to use external sdcard storage, but unfortunately,
+    // external storage can't be written by app for security!
+    // so we can't set home dir to external storage as:
     // public static final String WHATSAI_HOME = "/storage/0CCD-50F4/0.sd/whatsai";
-    //
     // instead, we use internal sdcard storage:
     //
+    @SuppressWarnings("deprecation")
     public static final String WHATSAI_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/0.sd/whatsai";
 
     public static final String WHATSAI_DATA_FILE_NAME = "whatsai.dat";
@@ -147,10 +146,9 @@ public class ComDef {
 
     private static int AudioListMenuEnumID = 0;
     public enum AudioListMenu {
-        PLAY("PLAY"),
-        STOP("STOP"),
-        DELETE("DELETE");
-
+        RELOAD("RELOAD"),
+        DELETE("DELETE"),
+        DELETE_ALL("DELETE ALL");
         public int id;
         public String name;
         AudioListMenu(String name) {
@@ -158,22 +156,6 @@ public class ComDef {
             this.id = (AudioListMenuEnumID++);
         }
     }
-
-//    public static enum LIST_MENU {
-//        LIST_MENU_ID_OPEN,
-//        LIST_MENU_ID_ADD,
-//
-//    }
-//    public static final int LIST_MENU_ID_OPEN = 0;
-//    public static final int LIST_MENU_ID_ADD = 1;
-//    public static final int LIST_MENU_ID_MODIFY = 2;
-//    public static final int LIST_MENU_ID_DELETE = 3;
-//    public static final int LIST_MENU_ID_PROPERTIES = 4;
-//
-//    public static final String LIST_MENU_NAME_ADD = "ADD";
-//    public static final String LIST_MENU_NAME_MODIFY = "MODIFY";
-//    public static final String LIST_MENU_NAME_DELETE = "DELETE";
-//    public static final String LIST_MENU_NAME_PROPERTIES = "PROPERTIES";
 
     // List Menu Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////

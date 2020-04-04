@@ -1,0 +1,1594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="AvailableLibraryUpdateStorage">
+    <library-updates>
+      <library-update>
+        <group-id>junit</group-id>
+        <name>junit</name>
+        <version>4.13-beta-3</version>
+        <repository>JCenter</repository>
+      </library-update>
+    </library-updates>
+    <last-search-timestamp>1560429985704</last-search-timestamp>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="75e7deaf-e7bb-43c2-a27e-9e8c532202bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/ApiHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/BitmapUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars___D__WorkSpace_Android__bin_AndroidUtils_jar_unspecified_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/StringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/StringUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/UP8ib60VYTy3UO4lNenS4W0wKYw=" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/UP8ib60VYTy3UO4lNenS4W0wKYw=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AutoCamera/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../AutoCamera/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/blame/res/debug/multi-v2/debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/blame/res/debug/multi-v2/values.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/e5wn9vyTC+0axD4J0YJVmJ3xrP8=" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/e5wn9vyTC+0axD4J0YJVmJ3xrP8=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/processDebugResources/resources-list-for-resources-debug.ap_.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/incremental/processDebugResources/resources-list-for-resources-debug.ap_.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/instant_app_manifest/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/instant_app_manifest/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/instant_run_merged_manifests/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/instant_run_merged_manifests/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader$MyTimerTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader$MyTimerTask.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/liz/NumReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/merged_manifests/debug/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/merged_manifests/debug/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/merged_manifests/debugAndroidTest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/merged_manifests/debugAndroidTest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/processed_res/debug/processDebugResources/out/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/processed_res/debug/processDebugResources/out/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/res/merged/debug/values_values.arsc.flat" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader$MyTimerTask.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader$MyTimerTask.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader.dex" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/intermediates/transforms/dexBuilder/debug/0/com/liz/NumReader.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/src/main/java/com/liz/NumReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/src/main/java/com/liz/NumReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../NumReader/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../NumReader/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2 .rar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/CERT.RSA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/CERT.SF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/android.arch.core_runtime.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/android.arch.lifecycle_livedata-core.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/android.arch.lifecycle_livedata.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/android.arch.lifecycle_runtime.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/android.arch.lifecycle_viewmodel.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/android.support.design_material.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.appcompat_appcompat.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.asynclayoutinflater_asynclayoutinflater.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.cardview_cardview.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.coordinatorlayout_coordinatorlayout.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.core_core.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.cursoradapter_cursoradapter.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.customview_customview.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.documentfile_documentfile.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.drawerlayout_drawerlayout.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.fragment_fragment.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.interpolator_interpolator.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.legacy_legacy-support-core-ui.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.legacy_legacy-support-core-utils.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.loader_loader.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.print_print.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.recyclerview_recyclerview.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.slidingpanelayout_slidingpanelayout.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.swiperefreshlayout_swiperefreshlayout.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.transition_transition.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.vectordrawable_vectordrawable-animated.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.vectordrawable_vectordrawable.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.versionedparcelable_versionedparcelable.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/androidx.viewpager_viewpager.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/com.google.android.material_material.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/kotlin-stdlib-common-coroutines.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/kotlin-stdlib-common.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/kotlin-stdlib-jdk7.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/kotlin-stdlib.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/META-INF/kotlin-stdlib_coroutinesExperimental.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/androidsupportmultidexversion.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/assets/crashlytics-build.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/classes.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/fabric/com.crashlytics.sdk.android.answers.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/fabric/com.crashlytics.sdk.android.beta.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/fabric/com.crashlytics.sdk.android.crashlytics-core.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/fabric/com.crashlytics.sdk.android.crashlytics.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/fabric/io.fabric.sdk.android.fabric.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-ads.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-analytics-impl.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-analytics.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-common.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-core.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-database-collection.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-database.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-iid-interop.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-iid.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-measurement-connector-impl.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/firebase-measurement-connector.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ArithmeticException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/AssertionError.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/BuilderInference.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ClassCastException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Comparator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ConcurrentModificationException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Error.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Exception.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Experimental.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ExperimentalMultiplatform.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ExperimentalUnsignedTypes.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/HashCodeKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/IllegalArgumentException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/IllegalStateException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/IndexOutOfBoundsException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/InitializedLazyImpl.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/KotlinHKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/KotlinVersion.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/LateinitKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Lazy.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/LazyKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/LazyThreadSafetyMode.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/NoSuchElementException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/NoWhenBranchMatchedException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/NotImplementedError.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/NullPointerException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/NumberFormatException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/OptionalExpectation.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Pair.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/PreconditionsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Result.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ResultKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/RuntimeException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/StandardKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/SuccessOrFailureKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/SuspendKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/Triple.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/TuplesKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UByte.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UByteArray.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UByteArrayKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UByteKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UInt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UIntArray.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UIntArrayKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UIntKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ULong.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ULongArray.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ULongArrayKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ULongKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UNINITIALIZED_VALUE.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UShort.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UShortArray.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UShortArrayKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UShortKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UninitializedPropertyAccessException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UnsafeLazyImpl.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UnsignedUtilsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UnsupportedOperationException.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/UseExperimental.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/WasExperimental.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/annotation/annotation.kotlin_builtins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractCollection.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractList.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractMap.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractMutableCollection.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractMutableList.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractMutableMap.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractMutableSet.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/AbstractSet.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/ArrayAsCollection.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/ArrayList.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/ArraysKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/CollectionsHKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/CollectionsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/EmptyIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/EmptyList.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/EmptyMap.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/EmptySet.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/Grouping.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/GroupingKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/HashMap.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/HashSet.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/IndexedValue.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/IndexingIterable.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/IndexingIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/IterablesKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/IteratorsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/LinkedHashMap.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/LinkedHashSet.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MapAccessorsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MapWithDefault.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MapWithDefaultImpl.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MapWithDefaultKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MapsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MovingSubList.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MutableCollectionsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MutableMapWithDefault.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/MutableMapWithDefaultImpl.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/RandomAccess.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/ReversedList.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/ReversedListReadOnly.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/ReversedViewsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/RingBuffer.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/SetsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/SlidingWindowKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/State.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/UByteIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/UIntIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/ULongIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/UShortIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/collections/collections.kotlin_builtins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/comparisons/ComparisonsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/comparisons/NaturalOrderComparator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/comparisons/ReverseOrderComparator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/comparisons/ReversedComparator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/CallsInPlace.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/ConditionalEffect.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/ContractBuilder.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/ContractBuilderKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/Effect.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/ExperimentalContracts.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/InvocationKind.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/Returns.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/ReturnsNotNull.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/contracts/SimpleEffect.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/AbstractCoroutineContextElement.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/CombinedContext.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/Continuation.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/ContinuationInterceptor.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/ContinuationKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/CoroutineContext.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/EmptyCoroutineContext.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/RestrictsSuspension.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/SafeContinuation.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/coroutines.kotlin_builtins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/AbstractCoroutineContextElement.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/CombinedContext.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/Continuation.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/ContinuationInterceptor.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/CoroutineContext.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/CoroutinesLibraryKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/EmptyCoroutineContext.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/RestrictsSuspension.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/SafeContinuation.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/SequenceBuilder.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/SequenceBuilderIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/SequenceBuilderKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/intrinsics/CoroutinesIntrinsicsExperimentalHKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/experimental/intrinsics/IntrinsicsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/intrinsics/CoroutineSingletons.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/intrinsics/CoroutinesIntrinsicsHKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/coroutines/intrinsics/IntrinsicsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/experimental/BitwiseOperationsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/experimental/ExperimentalTypeInference.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/AccessibleLateinitPropertyLiteral.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/ContractsDsl.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/DynamicExtension.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/Exact.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/HidesMembers.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/InlineOnly.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/LowPriorityInOverloadResolution.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/NoInfer.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/OnlyInputTypes.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/RequireKotlin.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/RequireKotlinVersionKind.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/UProgressionUtilKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/internal/internal.kotlin_builtins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/io/IoHKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/io/Serializable.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/js/JsName.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmField.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmMultifileClass.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmName.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmOverloads.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmStatic.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmSuppressWildcards.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmSynthetic.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/JvmWildcard.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/Strictfp.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/Synchronized.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/Transient.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/jvm/Volatile.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/kotlin.kotlin_builtins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/math/MathHKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/native/concurrent/SharedImmutable.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/native/concurrent/ThreadLocal.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/properties/Delegates.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/properties/NotNullVar.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/properties/ObservableProperty.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/properties/ReadOnlyProperty.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/properties/ReadWriteProperty.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/random/Random.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/random/RandomKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/random/URandomKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/random/XorWowRandom.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/ClosedDoubleRange.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/ClosedFloatingPointRange.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/ComparableRange.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/RangesKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/UIntProgression.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/UIntProgressionIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/UIntRange.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/ULongProgression.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/ULongProgressionIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/ULongRange.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/ranges/ranges.kotlin_builtins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KCallable.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KClass.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KMutableProperty.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KMutableProperty0.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KMutableProperty1.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KMutableProperty2.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KProperty.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KProperty0.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KProperty1.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/KProperty2.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/reflect/reflect.kotlin_builtins" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/ConstrainedOnceSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/DistinctIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/DistinctSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/DropSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/DropTakeSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/DropWhileSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/EmptySequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/FilteringSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/FlatteningSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/GeneratorSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/IndexingSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/MergingSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/Sequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/SequenceBuilderIterator.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/SequenceBuilderKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/SequenceScope.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/SequencesKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/SubSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/TakeSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/TakeWhileSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/TransformingIndexedSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/sequences/TransformingSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/Appendable.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/CharKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/DelimitedRangesSequence.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/IndentKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/MatchGroup.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/MatchGroupCollection.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/MatchNamedGroupCollection.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/MatchResult.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/Regex.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/RegexExtensionsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/RegexOption.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/StringBuilder.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/StringBuilderKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/StringNumberConversionsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/StringsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/TextHKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/Typography.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/kotlin/text/UStringsKt.kotlin_metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/lib/arm64-v8a/liblame-mp3-utils.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-ads-base.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-ads-identifier.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-ads-lite.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-ads.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-auth-api-phone.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-auth-base.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-auth.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-base.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-basement.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-drive.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-gass.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-measurement-api.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-measurement-base.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-measurement-sdk-api.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-stats.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/play-services-tasks.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim-v21/design_bottom_sheet_slide_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim-v21/design_bottom_sheet_slide_out.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_fade_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_fade_out.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_grow_fade_in_from_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_popup_enter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_popup_exit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_shrink_fade_out_from_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_slide_in_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_slide_in_top.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_slide_out_bottom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_slide_out_top.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_tooltip_enter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/abc_tooltip_exit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/cycle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/cycle_7_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/design_bottom_sheet_slide_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/design_bottom_sheet_slide_out.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/design_snackbar_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/design_snackbar_out.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/shake.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/anim/shake_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator-v19/mtrl_btn_state_list_anim.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator-v21/design_appbar_state_list_animator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/design_fab_hide_motion_spec.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/design_fab_show_motion_spec.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/mtrl_btn_state_list_anim.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/mtrl_btn_unelevated_state_list_anim.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/mtrl_chip_state_list_anim.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/mtrl_fab_hide_motion_spec.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/mtrl_fab_show_motion_spec.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/mtrl_fab_transformation_sheet_collapse_spec.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/animator/mtrl_fab_transformation_sheet_expand_spec.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v21/abc_btn_colored_borderless_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_btn_colored_borderless_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_btn_colored_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_color_highlight_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_tint_btn_checkable.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_tint_default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_tint_edittext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_tint_seek_thumb.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_tint_spinner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/abc_tint_switch_track.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color-v23/design_tint_password_toggle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_background_cache_hint_selector_material_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_background_cache_hint_selector_material_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_btn_colored_borderless_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_btn_colored_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_hint_foreground_material_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_hint_foreground_material_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_primary_text_disable_only_material_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_primary_text_disable_only_material_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_primary_text_material_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_primary_text_material_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_search_url_text.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_secondary_text_material_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_secondary_text_material_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_tint_btn_checkable.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_tint_default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_tint_edittext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_tint_seek_thumb.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_tint_spinner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/abc_tint_switch_track.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/common_google_signin_btn_text_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/common_google_signin_btn_text_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/common_google_signin_btn_tint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/design_error.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/design_tint_password_toggle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_bottom_nav_colored_item_tint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_bottom_nav_item_tint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_btn_bg_color_selector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_btn_ripple_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_btn_stroke_color_selector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_btn_text_btn_ripple_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_btn_text_color_selector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_chip_background_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_chip_close_icon_tint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_chip_ripple_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_chip_text_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_fab_ripple_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_tabs_colored_ripple_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_tabs_icon_color_selector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_tabs_icon_color_selector_colored.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_tabs_legacy_text_color_selector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_tabs_ripple_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/mtrl_text_btn_text_color_selector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/switch_thumb_material_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/color/switch_thumb_material_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-anydpi-v21/design_ic_visibility.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-anydpi-v21/design_ic_visibility_off.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-anydpi-v21/ic_fingerprint_error_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-anydpi-v21/ic_fingerprint_success_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-anydpi-v21/ic_mic_none_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-anydpi-v21/ic_more_vert_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_airplanemode_active_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_alarm_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_battery_50_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_bluetooth_connected_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_book_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_bookmark_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_call_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_card_giftcard_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_cast_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_center_focus_weak_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_child_friendly_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_create_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_directions_bike_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_directions_walk_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_favorite_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_filter_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_hearing_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_local_grocery_store_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_location_on_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_lock_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_merge_type_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_ondemand_video_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_pool_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_radio_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_sentiment_satisfied_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_settings_input_antenna_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_show_chart_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_speaker_phone_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_videocam_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_volume_down_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_volume_up_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v21/ic_wb_sunny_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_action_microphone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_action_search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_airplanemode_active_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_alarm_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_battery_50_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_bluetooth_connected_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_book_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_bookmark_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_call_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_card_giftcard_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_cast_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_center_focus_weak_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_child_friendly_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_create_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_directions_bike_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_directions_walk_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_favorite_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_filter_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_hearing_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_local_grocery_store_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_location_on_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_lock_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_merge_type_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_ondemand_video_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_pool_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_radio_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_sentiment_satisfied_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_settings_input_antenna_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_show_chart_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_speaker_phone_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_videocam_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_volume_down_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_volume_up_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/ic_wb_sunny_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-hdpi-v4/navigation_expand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-ldrtl-xxhdpi-v17/abc_spinner_mtrl_am_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/$avd_hide_password__0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/$avd_hide_password__1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/$avd_hide_password__2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/$avd_show_password__0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/$avd_show_password__1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/$avd_show_password__2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_action_bar_item_background_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_btn_colored_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_dialog_material_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_edit_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_list_divider_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_ratingbar_indicator_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_ratingbar_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/abc_ratingbar_small_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/avd_hide_password.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/avd_show_password.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/design_bottom_navigation_item_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/design_password_eye.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/notification_action_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v21/ripple_selector_side_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-v23/abc_control_background_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-watch-v20/abc_dialog_material_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-watch-v20/common_google_signin_btn_text_disabled.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xhdpi-v4/common_full_open_on_phone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xhdpi-v4/notification_bg_low_normal.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xhdpi-v4/notification_bg_low_pressed.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xhdpi-v4/notification_bg_normal.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_btn_check_to_on_mtrl_015.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_btn_radio_to_on_mtrl_015.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_menu_share_mtrl_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_star_black_16dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_star_black_36dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_star_black_48dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_star_half_black_16dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_star_half_black_36dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_ic_star_half_black_48dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_list_divider_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_list_focused_holo.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_list_longpressed_holo.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_dark.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_light.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_popup_background_mtrl_mult.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_scrubber_primary_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_text_select_handle_left_mtrl_dark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_text_select_handle_left_mtrl_light.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_text_select_handle_middle_mtrl_dark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_text_select_handle_middle_mtrl_light.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl_dark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_text_select_handle_right_mtrl_light.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/abc_textfield_search_default_mtrl_alpha.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/baseline_save_white_36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/baseline_volume_mute_black_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/baseline_volume_up_black_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/design_ic_visibility.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/design_ic_visibility_off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/googleg_disabled_color_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/googleg_standard_color_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_fingerprint_error_pf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_fingerprint_success_pf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_fp_40px_pf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_media_pause.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_media_play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_media_stop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_mic_none_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_mic_white_36dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxhdpi-v4/ic_more_vert_black_24dp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxxhdpi-v4/delete_lockscreen_pf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable-xxxhdpi-v4/fingerprint_lockscreen_pf.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_btn_borderless_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_btn_check_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_btn_colored_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_btn_default_mtrl_shape.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_btn_radio_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_cab_background_internal_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_cab_background_top_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_dialog_material_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_edit_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ic_ab_back_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ic_clear_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ic_go_search_api_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ic_menu_overflow_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ic_search_api_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ic_voice_search_api_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_item_background_holo_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_item_background_holo_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_list_divider_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_list_selector_background_transition_holo_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_list_selector_background_transition_holo_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_list_selector_holo_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_list_selector_holo_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ratingbar_indicator_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ratingbar_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_ratingbar_small_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_seekbar_thumb_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_seekbar_tick_mark_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_seekbar_track_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_spinner_textfield_background_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_switch_thumb_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_tab_indicator_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_text_cursor_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_textfield_search_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/abc_vector_test.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/about_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/background_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/background_pin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/banner_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/bkgnd_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/bkgnd_pressed.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/button_options.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/button_options_bkgnd.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/circle_background_pf_lock_screen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/circle_code_empty_pf_lockscreen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/circle_code_fill_pf_lockscreen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/circle_key_selector_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/close.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/code_selector_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_icon_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_icon_dark_focused.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_icon_dark_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_icon_disabled.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_icon_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_icon_light_focused.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_icon_light_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_text_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_text_dark_focused.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_text_dark_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_text_disabled.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_text_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_text_light_focused.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/common_google_signin_btn_text_light_normal.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/design_bottom_navigation_item_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/design_fab_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/design_password_eye.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/design_snackbar_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/edittext_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/facebook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/google_drive_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/ic_app.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/ic_mtrl_chip_checked_black.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/ic_mtrl_chip_checked_circle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/ic_mtrl_chip_close_circle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_left.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_left_focused.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_left_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_left_pressed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_right.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_right_focused.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_right_normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/marker_right_pressed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/mtrl_snackbar_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/mtrl_tabs_default_indicator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/navigation_empty_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/nnf_ic_create_new_folder_white_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/nnf_ic_folder_black_48dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/nnf_ic_save_black_24dp.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/notification_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/notification_bg_low.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/notification_icon_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/notification_tile_bg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/record_progress_bar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/record_progress_bar_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/recorder_file.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/ripple_selector_key_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/ripple_selector_side_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/rounded_rectangle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/small_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/ssr_small.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/tooltip_frame_dark.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/tooltip_frame_light.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/touch_selector_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/twitter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/type_alarm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/type_music.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/type_notification.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/drawable/type_ringtone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/interpolator-v21/mtrl_fast_out_linear_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/interpolator-v21/mtrl_fast_out_slow_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/interpolator-v21/mtrl_linear_out_slow_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/interpolator/mtrl_fast_out_linear_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/interpolator/mtrl_fast_out_slow_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/interpolator/mtrl_linear.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/interpolator/mtrl_linear_out_slow_in.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-land/after_save_action.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-land/editor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-land/media_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-land/media_select_row.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-sw600dp-v13/design_layout_snackbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-sw600dp-v13/mtrl_layout_snackbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v16/notification_template_custom_big.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/abc_screen_toolbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/card_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/fragment_media_playback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/notification_action.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/notification_action_tombstone.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/notification_template_custom_big.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/notification_template_icon_group.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/show_popup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v21/toolbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v22/abc_alert_dialog_button_bar_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-v26/abc_screen_toolbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-watch-v20/abc_alert_dialog_button_bar_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout-watch-v20/abc_alert_dialog_title_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_action_bar_title_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_action_bar_up_container.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_action_menu_item_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_action_menu_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_action_mode_bar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_action_mode_close_item_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_activity_chooser_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_activity_chooser_view_list_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_alert_dialog_button_bar_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_alert_dialog_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_alert_dialog_title_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_cascading_menu_item_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_dialog_title_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_expanded_menu_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_list_menu_item_checkbox.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_list_menu_item_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_list_menu_item_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_list_menu_item_radio.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_popup_menu_header_item_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_popup_menu_item_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_screen_content_include.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_screen_simple.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_screen_simple_overlay_action_mode.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_screen_toolbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_search_dropdown_item_icons_2line.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_search_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_select_dialog_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/abc_tooltip.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/activity_about.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/activity_fragment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/activity_pin_code.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/after_save_action.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/app_icon_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/app_icon_popup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/card_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/choose_contact.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/contact_row.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_bottom_navigation_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_bottom_sheet_dialog.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_layout_snackbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_layout_snackbar_include.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_layout_tab_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_layout_tab_text.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_menu_item_action_area.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_navigation_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_navigation_item_header.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_navigation_item_separator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_navigation_item_subheader.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_navigation_menu.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_navigation_menu_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/design_text_input_password_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/dialog_rating.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/dialog_rename_file.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/editor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/file_save.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/fragment_file_viewer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/fragment_licenses.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/fragment_lock_screen_pf.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/fragment_media_playback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/fragment_record.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/media_select.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/media_select_row.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/mtrl_layout_snackbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/mtrl_layout_snackbar_include.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/nnf_activity_filepicker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/nnf_dialog_folder_name.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/nnf_filepicker_listitem_checkable.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/nnf_filepicker_listitem_dir.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/nnf_fragment_filepicker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/not_bar_title_popup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_action.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_action_tombstone.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_icon_popup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_icon_view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_media_action.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_media_cancel_action.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_big_media.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_big_media_custom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_big_media_narrow.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_big_media_narrow_custom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_icon_group.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_lines_media.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_media.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_media_custom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_part_chronometer.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/notification_template_part_time.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/select_dialog_item_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/select_dialog_multichoice_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/select_dialog_singlechoice_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/show_popup.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/support_simple_spinner_dropdown_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/toolbar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/view_code_pf_lockscreen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/view_pf_code_checkbox.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/view_pf_fingerprint_dialog_container.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/layout/view_pf_fingerprint_dialog_content.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/menu/edit_options.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/menu/menu_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/menu/picker_actions.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/menu/select_options.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-anydpi-v26/ic_ssr.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-hdpi-v4/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-hdpi-v4/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-hdpi-v4/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-hdpi-v4/ic_ssr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-hdpi-v4/ic_ssr_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-mdpi-v4/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-mdpi-v4/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-mdpi-v4/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-mdpi-v4/ic_ssr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-mdpi-v4/ic_ssr_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xhdpi-v4/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xhdpi-v4/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xhdpi-v4/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xhdpi-v4/ic_ssr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xhdpi-v4/ic_ssr_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxhdpi-v4/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxhdpi-v4/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxhdpi-v4/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxhdpi-v4/ic_ssr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxhdpi-v4/ic_ssr_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxxhdpi-v4/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxxhdpi-v4/ic_launcher_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxxhdpi-v4/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxxhdpi-v4/ic_ssr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/mipmap-xxxhdpi-v4/ic_ssr_foreground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/raw/temptrack.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/xml/nnf_provider_paths.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/xml/provider_paths.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/xml/settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/res/xml/splits0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_apk/Background voice recorder BVR_v3.0.2/resources.arsc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../../../_bin/AndroidUtils.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../whatsai/src/whatsai/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../whatsai/src/whatsai/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/MyApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../whatsai/src/whatsai/app/src/main/java/com/liz/whatsai/app/MyApp.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="MultiCamera" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/ComDef.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/app/ThisApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="826">
+              <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/DataLogic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="64" column="48" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>onImageAvailable</find>
+      <find>ImageReader</find>
+      <find>CameraManager</find>
+      <find>EnumCa</find>
+      <find>open</find>
+      <find>OPEN_CAMERA</find>
+      <find>cameraOpen</find>
+      <find>CAMERA_ID_FRONT_MAIN</find>
+      <find>preview</find>
+      <find>PREVIEW_SIZE_WIDTH</find>
+      <find>adjustSizeForPreview</find>
+      <find>onPi</find>
+      <find>savefil</find>
+      <find>onPictureTaken</find>
+      <find>height</find>
+      <find>width</find>
+      <find>PICTURE_SIZE_WIDTH</find>
+      <find>SURFACE_SIZE_WIDTH</find>
+      <find>mSurfaceHolder</find>
+      <find>setPreview</find>
+      <find>CAMERA_ID_BACK_SUB</find>
+      <find>CAMERA_ID_DEFAULT</find>
+      <find>openCamera</find>
+      <find>Timer</find>
+      <find>startUiTimer</find>
+      <find>ParametersWrapper</find>
+      <find>resize</find>
+      <find>mSurfaceWidth</find>
+      <find>CAMERA_ID_BACK_MAIN</find>
+      <find>mCameraLensId</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/testcamera/logic/DataLogic.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_camera.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/testcamera/logic/ComDef.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/testcamera/activity/CameraActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/utils/StrUtils.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/Storage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/app/ThisApp.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/AndroidCameraManagerImpl.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/MediaSaveService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/SensorControler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/NightMode.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/CameraActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/DataLogic.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/ComDef.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="260" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MultiCamera" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="MultiCamera" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="MultiCamera" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="MultiCamera" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="multicamera" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MultiCamera" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="multicamera" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MultiCamera" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="multicamera" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="device.picker.selection" value="2UOLNIDLKM" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Camera2_Demo/CameraDemo-master" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="75e7deaf-e7bb-43c2-a27e-9e8c532202bc" name="Default Changelist" comment="" />
+      <created>1560427561433</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1560427561433</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4991708" visible="true" weight="0.23560767" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" sideWeight="0.50082916" side_tool="true" weight="0.23560767" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Resources Explorer" order="7" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.32850778" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.4766147" />
+      <window_info anchor="bottom" id="TODO" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32850778" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50053304" side_tool="true" weight="0.22939867" />
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49946696" weight="0.22939867" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32962137" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Assistant" order="5" weight="0.32985073" />
+      <window_info anchor="right" id="Preview" order="6" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4991708" weight="0.23560767" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" sideWeight="0.50082916" side_tool="true" weight="0.23560767" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Resources Explorer" order="7" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.32850778" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="1" visible="true" weight="0.4766147" />
+      <window_info anchor="bottom" id="TODO" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32850778" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50053304" side_tool="true" weight="0.22939867" />
+      <window_info anchor="bottom" id="Version Control" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49946696" weight="0.22939867" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32962137" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Assistant" order="5" weight="0.32985073" />
+      <window_info anchor="right" id="Preview" order="6" />
+    </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/ResizableSurfaceView.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/CameraActivity.java</url>
+          <line>178</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/ResizableSurfaceView.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/DataLogic.java</url>
+          <line>328</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-26/android.jar!/android/hardware/camera2/CameraMetadata.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="126" column="28" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/CameraManagerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="30" column="45" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/CameraSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5543">
+          <caret line="255" selection-start-line="255" selection-end-line="255" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/CameraManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2185">
+          <caret line="110" column="23" selection-start-line="110" selection-start-column="23" selection-end-line="110" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/media/ImageReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="941">
+          <caret line="774" selection-start-line="774" selection-end-line="774" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/widget/ImageView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14421">
+          <caret line="694" column="16" selection-start-line="694" selection-start-column="16" selection-end-line="694" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/exif/ExifInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="75" column="28" selection-start-line="75" selection-start-column="28" selection-end-line="75" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/view/SurfaceHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="112" column="38" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_camera.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/TwoStateImageView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/ShutterButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/utils/StrUtils.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/utils/SysUtils.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/utils/LogUtils.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/utils/BitmapUtils.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/utils/ApiHelper.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/codeaurora/snapcam/wrapper/CamcorderProfileWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/codeaurora/snapcam/wrapper/CameraInfoWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/codeaurora/snapcam/wrapper/ExtendedFaceWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/codeaurora/snapcam/wrapper/Wrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/Storage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/AndroidCameraManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4945">
+          <caret line="235" column="24" selection-start-line="235" selection-start-column="24" selection-end-line="235" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/MediaSaveService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/camera/SensorControler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/codeaurora/snapcam/wrapper/ParametersWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="150" column="22" selection-start-line="150" selection-start-column="22" selection-end-line="150" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="195" selection-start-line="195" selection-end-line="195" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/hardware/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="2442" column="52" selection-start-line="2442" selection-start-column="52" selection-end-line="2442" selection-end-column="52" />
+          <folding>
+            <element signature="e#111276#111277#0" expanded="true" />
+            <element signature="e#111338#111339#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/ResizableSurfaceView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="52" column="19" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/ui/CameraActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="187" lean-forward="true" selection-start-line="187" selection-end-line="187" />
+          <folding>
+            <element signature="e#6676#6808#0" expanded="true" />
+            <element signature="e#6807#6808#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/NightMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="31" column="16" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/ExpoParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/DataLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="64" column="48" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/logic/ComDef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/multicamera/app/ThisApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="54" column="19" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

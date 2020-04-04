@@ -745,7 +745,19 @@ public class FileUtils {
         return (new File(fileAbsolute)).exists();
     }
 
+    public static boolean clearDir(String dir) {
+        return removeDir(dir, false);
+    }
+
+    public static boolean deleteDir(String dir) {
+        return removeDir(dir, true);
+    }
+
     public static boolean deleteDirectory(String dir) {
+        return removeDir(dir, true);
+    }
+
+    public static boolean removeDir(String dir, boolean removeSelf) {
         //add separator on end of dir
         if (!dir.endsWith(File.separator))
             dir = dir + File.separator;
@@ -766,7 +778,7 @@ public class FileUtils {
                 if (f.isFile()) {
                     flag = deleteFile(absolutePath);
                 } else if (f.isDirectory()) {
-                    flag = deleteDirectory(f.getAbsolutePath());
+                    flag = removeDir(f.getAbsolutePath(), true);
                 } else {
                     System.out.println("ERROR: FileUtils.deleteDirectory: " + absolutePath + " not file/dir");
                     flag = false;
@@ -785,9 +797,11 @@ public class FileUtils {
         }
 
         // finally, delete the empty dir
-        if (!dirFile.delete()) {
-            System.out.println("ERROR: FileUtils.deleteDirectory: dirFile delete of " + dir + " failed");
-            return false;
+        if (removeSelf) {
+            if (!dirFile.delete()) {
+                System.out.println("ERROR: FileUtils.deleteDirectory: dirFile delete of " + dir + " failed");
+                return false;
+            }
         }
 
         return true;

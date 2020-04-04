@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_audio_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:text="audio file Info"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+
+    <com.liz.whatsai.ui.WaveSurfaceViewEx
+        android:id="@+id/wave_surface_view"
+        android:layout_width="fill_parent"
+        android:layout_height="160dp" />
+
+    <!--wave thumbnail-->
+    <RelativeLayout
+        android:id="@+id/layout_wave_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="0dp"
+        android:background="#ffff00"
+        android:orientation="horizontal"
+        android:padding="0dp">
+
+        <com.liz.whatsai.ui.WaveSurfaceViewEx
+            android:id="@+id/wave_surface_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_margin="0dp"
+            android:padding="0dp" />
+
+        <Button
+            android:id="@+id/btn_canvas_thumbnail"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="0dp"
+            android:background="#70606060"
+            android:padding="0dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_switch_listening"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_gravity="center"
+        android:text="Play"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+</LinearLayout>

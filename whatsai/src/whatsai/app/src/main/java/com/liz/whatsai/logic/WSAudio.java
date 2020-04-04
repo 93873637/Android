@@ -18,9 +18,6 @@ public class WSAudio {
     public static void init() {
         LogUtils.d("WSAudio:init");
         mWSAudio = new WSAudio();
-
-        WSRecorder.inst().setWaveSamplingRate(ComDef.AUDIO_RECORD_WAVE_SAMPLING_RATE);
-        WSRecorder.inst().setAutoSave(true);
     }
 
     public static void switchRecord() {

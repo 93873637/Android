@@ -57,6 +57,22 @@ public class StringUtils {
         return tarStr;
     }
 
+    public static int[] str2IntArr(String str, String delimit) {
+        if (str == null || str.isEmpty() || str.trim().equals("")) {
+            return null;
+        }
+        if (delimit == null || delimit.isEmpty() || delimit.trim().equals("")) {
+            return null;
+        }
+        int[] intArr;
+        String[] strArr = str.split(delimit);
+        intArr = new int[strArr.length];
+        for (int i=0; i<strArr.length; i++) {
+            intArr[i] = Integer.parseInt(strArr[i]);
+        }
+        return intArr;
+    }
+
 //    public static final int INT_STR_LEN = 12;
 //
 //    public static String formatNum(int n) {

@@ -1,0 +1,7 @@
+#Wed Apr 01 14:38:50 CST 2020
+base.0=D\:\\WorkSpace\\Android\\MyCameras\\src\\MultiCamera\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out
+path.1=classes.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=D\:\\WorkSpace\\Android\\MyCameras\\src\\MultiCamera\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out

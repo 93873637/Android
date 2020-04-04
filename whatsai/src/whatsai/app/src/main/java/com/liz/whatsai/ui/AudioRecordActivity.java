@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +25,13 @@ import java.util.TimerTask;
 
 public class AudioRecordActivity extends Activity implements View.OnClickListener {
 
-    private WaveSurfaceView mWaveSurfaceView;
+    private static final double RECORDER_WAVE_ITEM_WIDTH = 1;
+    private static final double RECORDER_WAVE_ITEM_SPACE = 0;
+    private final static int THUMBNAIL_MIN_WIDTH = 20;
+
+    private WaveSurfaceViewEx mWaveSurfaceViewEx;
+    private WaveSurfaceViewEx mWaveSurfaceThumbnial;
+    private Button mBtnCanvasThumbnail;
     private TextView mTextProgressInfo;
     private TextView mTextAudioFilesInfo;
     private LinearLayout mAudioRecordBar;
@@ -37,8 +44,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         setContentView(R.layout.activity_audio_record);
         LogUtils.trace();
 
-        ((TextView)findViewById(R.id.titlebar_name)).setText("whatsai Audio Recorder");
-
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
         mBtnSwitchListening.setText(WSRecorder.inst().isListening()?"STOP":"START");
@@ -49,20 +54,54 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         findViewById(R.id.btn_audio_config).setOnClickListener(this);
         findViewById(R.id.text_reload_file_list).setOnClickListener(this);
 
-        mWaveSurfaceView = findViewById(R.id.wave_surface_view);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mAudioRecordBar = findViewById(R.id.ll_audio_record);
         mTextAudioFilesInfo = findViewById(R.id.tv_audio_files_info);
 
-        mWaveSurfaceView.setMaxValue(WSRecorder.inst().getMaxPower());
-        mWaveSurfaceView.setWaveItemWidth(1);
-        mWaveSurfaceView.setWaveItemSpace(0);
+        mWaveSurfaceViewEx = findViewById(R.id.wave_surface_view);
+        mWaveSurfaceViewEx.setMaxWaveValue(WSRecorder.inst().getMaxPower());
+        mWaveSurfaceViewEx.setWaveSamplingRate(ComDef.AUDIO_RECORD_WAVE_SAMPLING_RATE);
+        mWaveSurfaceViewEx.setWaveItemWidth(RECORDER_WAVE_ITEM_WIDTH);
+        mWaveSurfaceViewEx.setWaveItemSpace(RECORDER_WAVE_ITEM_SPACE);
+
+        mWaveSurfaceThumbnial = findViewById(R.id.wave_surface_thumbnail);
+        mWaveSurfaceThumbnial.setBackground(0xff, 0x60, 0x60, 0x60);
+        mWaveSurfaceThumbnial.setMaxWaveValue(WSRecorder.inst().getMaxPower());
+        mWaveSurfaceThumbnial.setWaveSamplingRate(ComDef.AUDIO_RECORD_WAVE_SAMPLING_RATE * 1024);
+        mWaveSurfaceThumbnial.setWaveItemWidth(RECORDER_WAVE_ITEM_WIDTH);
+        mWaveSurfaceThumbnial.setWaveItemSpace(RECORDER_WAVE_ITEM_SPACE);
+        mWaveSurfaceThumbnial.setMaxListSize(65536);
+        mWaveSurfaceThumbnial.setFullMode(true);
+        mWaveSurfaceThumbnial.setDrawGrid(false);
 
         mAudioListView = findViewById(R.id.lv_audio_files);
         mAudioListView.onCreate(this, ComDef.WHATSAI_AUDIO_DIR);
 
+        initThumbnail();
+
         loadAudioListInfo();
         startUITimer();
+    }
+
+    private void initThumbnail() {
+        mWaveSurfaceThumbnial = findViewById(R.id.wave_surface_thumbnail);
+        mBtnCanvasThumbnail = findViewById(R.id.btn_canvas_thumbnail);
+    }
+
+    private static void setViewWidth(View v, int width) {
+        ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
+        layoutParams.width = width;
+        v.setLayoutParams(layoutParams);
+    }
+
+    private void updateThumbnail(int waveLen, int canvasLen) {
+        LogUtils.td("waveLen = " + waveLen + ", canvasLen = " + canvasLen);
+        if (waveLen > canvasLen) {
+            int canvasWidth = mWaveSurfaceThumbnial.getWidth() * canvasLen / waveLen;
+            if (canvasWidth < THUMBNAIL_MIN_WIDTH) canvasWidth = THUMBNAIL_MIN_WIDTH;
+            LogUtils.td("canvasWidth = " + canvasWidth);
+            setViewWidth(mBtnCanvasThumbnail, canvasWidth);
+        }
     }
 
     @Override
@@ -125,7 +164,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
                 startActivity(new Intent(AudioRecordActivity.this, AudioConfigActivity.class));
                 break;
             case R.id.text_reload_file_list:
-                Toast.makeText(AudioRecordActivity.this, "Reloading...", Toast.LENGTH_LONG).show();
+                Toast.makeText(AudioRecordActivity.this, "Reloading...", Toast.LENGTH_SHORT).show();
                 mAudioListView.updateList();
                 break;
             default:
@@ -173,7 +212,21 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
             AudioRecordActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
                     synchronized (WSRecorder.inst().getDataLock()) {
-                        mWaveSurfaceView.onUpdateSurfaceData(WSRecorder.inst().getPowerList(), WSRecorder.inst().getMaxPower());
+                        mWaveSurfaceViewEx.updateSurface(WSRecorder.inst().getPowerList(), WSRecorder.inst().getMaxPower());
+                    }
+                }
+            });
+        }
+
+        @Override
+        public void onReadAudioData(final int size, final byte[] data) {
+            AudioRecordActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    synchronized (WSRecorder.inst().getDataLock()) {
+                        mWaveSurfaceViewEx.addAudioData(data, size);
+                        mWaveSurfaceViewEx.redrawSurface();
+                        mWaveSurfaceThumbnial.addAudioData(data, size);
+                        //mWaveSurfaceThumbnial.redrawSurface();  //not update thumbnail surface on time
                     }
                 }
             });
@@ -193,6 +246,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         if (WSRecorder.inst().isListening()) {
             mBtnSwitchListening.setText("STOP");
             mAudioRecordBar.setBackgroundColor(Color.GREEN);
+            mWaveSurfaceThumbnial.redrawSurface();
         }
         else {
             mBtnSwitchListening.setText("START");
@@ -217,6 +271,10 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     }
 
     private void onSwitchListening() {
+        if (WSRecorder.inst().isListening()) {
+            mWaveSurfaceViewEx.clearCanvas();
+            mWaveSurfaceThumbnial.clearCanvas();
+        }
         WSListenService.switchOnOff();
         updateUI();
         updateAudioList();

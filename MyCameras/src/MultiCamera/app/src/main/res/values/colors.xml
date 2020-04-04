@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="action_button_color">#4688F1</color>
+    <color name="action_button_touch_hint">#FFFFFF</color>
+
+    <color name="pass_button_color">#3BA757</color>
+    <color name="fail_button_color">#E9453C</color>
+
+    <color name="key_label_color">#FABC2D</color>
+
+    <color name="pointers_text_black">#FF000000</color>
+    <color name="pointers_text_white80">#80FFFFFF</color>
+    <color name="pointers_level_color">#C0FF0000</color>
+    <color name="pointers_text_white">#FFFFFFFF</color>
+    <color name="pointers_target_color">#0000C0</color>
+    <color name="pointers_path_color">#0060FF</color>
+    <color name="pointers_point_color1">#FF80FFFF</color>
+    <color name="pointers_point_color2">#FFFF4080</color>
+
+    <color name="camera_control_bg_opaque">#ff191919</color>
+    <color name="camera_control_bg_transparent">#4d191919</color>
+
+</resources>

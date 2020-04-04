@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.WSListener;
+import com.liz.whatsai.logic.WSRecorder;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,7 +34,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         mListener = new WSListener();
         mListener.setCallback(mListenerCallback);
         mListener.setVoiceRecognition(true);
-        mListener.setWaveSamplingRate(1);
+        //###@: mListener.setWaveSamplingRate(1);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
@@ -47,7 +48,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         mTextSpeech = findViewById(R.id.text_speech);
         mTextProgressInfo = findViewById(R.id.text_progress_info);
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
-        mWaveSurfaceView.setMaxValue(mListener.getMaxPower());
+        mWaveSurfaceView.setMaxWaveValue(mListener.getMaxPower());
 
         startUITimer();
     }
@@ -57,7 +58,18 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         public void onPowerUpdated() {
             ListenerActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    mWaveSurfaceView.onUpdateSurfaceData(mListener.getPowerList(), mListener.getMaxPower());
+                    mWaveSurfaceView.updateSurface(mListener.getPowerList(), mListener.getMaxPower());
+                }
+            });
+        }
+
+        @Override
+        public void onReadAudioData(final int size, final byte[] data) {
+            ListenerActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    synchronized (WSRecorder.inst().getDataLock()) {
+                        mWaveSurfaceView.addAudioData(data, size);
+                    }
                 }
             });
         }

@@ -19,14 +19,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-@SuppressWarnings("unused, WeakerAccess")
+@SuppressWarnings("WeakerAccess")
 public class WSListener {
 
     /**
      * default max audio power value(from pcm 16bits)
      */
     private static final int DEFAULT_MAX_POWER = 32768;
-
 
     /**
      * default max power list size used for surface view
@@ -65,7 +64,7 @@ public class WSListener {
     private int mRecordBufferSize;  // unit by byte
 
     private int mMaxPower = DEFAULT_MAX_POWER;
-    private int mMaxPowerSize = DEFAULT_MAX_POWER_LIST_SIZE;
+    private int mMaxPowerListSize = DEFAULT_MAX_POWER_LIST_SIZE;
     private int mMaxBufferSize = DEFAULT_MAX_BUFFER_SIZE;
 
     /**
@@ -245,6 +244,7 @@ public class WSListener {
 
     public interface ListenerCallback {
         void onPowerUpdated();
+        void onReadAudioData(final int size, final byte[] data);
     }
 
     public void setCallback(ListenerCallback callback) {
@@ -290,11 +290,11 @@ public class WSListener {
         mMaxPower = maxPower;
     }
 
-    public int getMaxPowerSize() {
-        return mMaxPowerSize;
+    public int getMaxPowerListSize() {
+        return mMaxPowerListSize;
     }
-    public void setMaxPowerSize(int maxPowerSize) {
-        mMaxPowerSize = maxPowerSize;
+    public void setMaxPowerListSize(int maxPowerListSize) {
+        mMaxPowerListSize = maxPowerListSize;
     }
 
     public int getMaxBufferSize() {
@@ -438,12 +438,13 @@ public class WSListener {
         }).start();
     }
 
-    private void onReadAudioData(final int readSize, byte[] audioData) {
+    private void onReadAudioData(final int readSize, final byte[] audioData) {
         synchronized (mDataLock) {
             processAudioData(readSize, audioData);
 
             mFrameSize = readSize / 2;
-            updateSurfaceSampleList(mFrameSize, audioData);
+            //###@: updateSurfaceSampleList(mFrameSize, audioData);
+
             mFramePower = calcFramePower(mFrameSize, audioData);
             mTotalSize += readSize;
             mFrameCount++;
@@ -457,22 +458,23 @@ public class WSListener {
                 }
                 mFrameList.add(frame);
             }
-        }
 
-        if (mCallback != null) {
-            mCallback.onPowerUpdated();
+            if (mCallback != null) {
+                //mCallback.onPowerUpdated();
+                mCallback.onReadAudioData(readSize, audioData);
+            }
         }
     }
 
-    private void updateSurfaceSampleList(int frameNum, byte[] audioData) {
+    private void updateSurfaceSampleList(int frameNum, final byte[] audioData) {
         for (int i = 0; i < mFrameSize; i += mWaveSamplingRate) {
             mPowerList.add(audioData[i * 2 + 1] << 8 | audioData[i * 2]);
         }
-        if (mPowerList.size() > mMaxPowerSize) {
+        if (mPowerList.size() > mMaxPowerListSize) {
             int orgSize = mPowerList.size();
-            int toIndex = orgSize - mMaxPowerSize;
+            int toIndex = orgSize - mMaxPowerListSize;
             mPowerList.subList(0, toIndex).clear();
-            LogUtils.d("onReadAudioData: power list size " + orgSize + " exceed max " + mMaxPowerSize + ", removed to " + mPowerList.size());
+            LogUtils.d("onReadAudioData: power list size " + orgSize + " exceed max " + mMaxPowerListSize + ", removed to " + mPowerList.size());
         }
     }
 

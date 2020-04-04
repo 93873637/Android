@@ -20,6 +20,7 @@ import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.WSListener;
+import com.liz.whatsai.logic.WSRecorder;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,7 +43,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         LogUtils.d("AudioTemplateActivity:onCreate");
 
         mListener = new WSListener();
-        mListener.setWaveSamplingRate(1);
+        //####@: mListener.setWaveSamplingRate(1);
         mListener.setAudioPath(ComDef.WHATSAI_CACHE_DIR);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
@@ -60,7 +61,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         mWaveSurfaceView = findViewById(R.id.wave_surface_view);
         mAudioControlBar = findViewById(R.id.ll_audio_control_bar);
 
-        mWaveSurfaceView.setMaxValue(mListener.getMaxPower());
+        mWaveSurfaceView.setMaxWaveValue(mListener.getMaxPower());
         mWaveSurfaceView.setWaveItemWidth(1);
         mWaveSurfaceView.setWaveItemSpace(0);
 
@@ -75,7 +76,18 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         public void onPowerUpdated() {
             AudioTemplateActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
-                    mWaveSurfaceView.onUpdateSurfaceData(mListener.getPowerList(), mListener.getMaxPower());
+                    mWaveSurfaceView.updateSurface(mListener.getPowerList(), mListener.getMaxPower());
+                }
+            });
+        }
+
+        @Override
+        public void onReadAudioData(final int size, final byte[] data) {
+            AudioTemplateActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    synchronized (WSRecorder.inst().getDataLock()) {
+                        mWaveSurfaceView.addAudioData(data, size);
+                    }
                 }
             });
         }
@@ -86,7 +98,6 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         if (mAudioListView.onContextItemSelected(item)) {
             return true;
         }
-
         return super.onContextItemSelected(item);
     }
 

@@ -1,6 +1,7 @@
 package com.liz.whatsai.app;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,8 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WSAudio;
 import com.liz.whatsai.logic.WSListener;
+import com.liz.whatsai.logic.WSPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class AudioListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private String mAudioDir;
     private int mSelected = ComDef.INVALID_LIST_POS;
+    private WSPlayer mPlayer = null;
 
     public AudioListAdapter() {
         initAdapter(ComDef.WHATSAI_AUDIO_DIR);
@@ -36,9 +38,17 @@ public class AudioListAdapter extends BaseAdapter {
 
     private void initAdapter(String audioDir) {
         mAudioDir = audioDir;
+        mPlayer = new WSPlayer();
         loadListData();
         mLayoutInflater = LayoutInflater.from(MyApp.getAppContext());
     }
+
+    private MediaPlayer.OnCompletionListener mPlayCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            LogUtils.td("onCompletion");
+        }
+    };
 
     public File getAudioFile(long pos) {
         return (File)this.getItem((int)pos);
@@ -54,6 +64,15 @@ public class AudioListAdapter extends BaseAdapter {
 
     public int getSelected() {
         return mSelected;
+    }
+
+    public void onItemClick(int pos) {
+        if (isSelected(pos)) {
+            mPlayer.stopPlay();
+        } else {
+            updateSelected(pos);
+            mPlayer.startPlay(getAudioFilePath(pos), mPlayCompletionListener);
+        }
     }
 
     public void clearSelected() {
@@ -82,13 +101,29 @@ public class AudioListAdapter extends BaseAdapter {
         return mAudioDir;
     }
 
-    public void removeItem(long id) {
-        mFileList.remove((int)id);
+    public void removeItem(int id) {
+        if (isSelected(id)) {
+            clearSelected();
+            mPlayer.stopPlay();
+        }
+        mFileList.remove(id);
         mSelected = ComDef.INVALID_LIST_POS;
         notifyDataSetChanged();
     }
 
+    public void playItem(final int pos) {
+        if (!isSelected(pos)) {
+            updateSelected(pos);
+        }
+        mPlayer.startPlay(this.getAudioFilePath(pos), mPlayCompletionListener);
+    }
+
+    public void stopPlay() {
+        mPlayer.stopPlay();
+    }
+
     public void updateList() {
+        mPlayer.stopPlay();
         loadListData();
         mSelected = ComDef.INVALID_LIST_POS;
         notifyDataSetChanged();
@@ -160,8 +195,8 @@ public class AudioListAdapter extends BaseAdapter {
         else {
             String nameInfo = f.getName();
             if (position == mSelected) {
-                nameInfo += "(" + TimeUtils.formatDuration(WSAudio.getCurrentPlayPosition()) + "/"
-                        + TimeUtils.formatDuration(WSAudio.getCurrentPlayDuration()) + ")";
+                nameInfo += "(" + TimeUtils.formatDuration(mPlayer.getCurrentPlayPosition()) + "/"
+                        + TimeUtils.formatDuration(mPlayer.getCurrentPlayDuration()) + ")";
             }
             else {
                 nameInfo += "(" + TimeUtils.formatDuration(WSListener.getWaveDuration(f)) + ")";

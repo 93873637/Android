@@ -100,15 +100,7 @@ public class testAudioRecordActivity2 extends Activity implements View.OnClickLi
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int itemId = item.getItemId();
-        if (itemId == ComDef.AudioListMenu.PLAY.id) {
-            WSAudio.startPlay(mAudioListAdapter.getAudioFilePath((int)info.id));
-            return true;
-        }
-        else if (itemId == ComDef.AudioListMenu.STOP.id) {
-            WSAudio.stopPlay();
-            return true;
-        }
-        else if (itemId == ComDef.AudioListMenu.DELETE.id) {
+        if (itemId == ComDef.AudioListMenu.DELETE.id) {
             onDeleteAudioFile(info.id);
             return true;
         }

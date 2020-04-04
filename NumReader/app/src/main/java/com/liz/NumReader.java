@@ -85,7 +85,6 @@ public class NumReader {
 	}
 
 	public static void stop() {
-		mTotalCount = 0;
 		if (mCountTimer == null) {
 			Log.w(TAG, "no timer to stop");
 		} else {

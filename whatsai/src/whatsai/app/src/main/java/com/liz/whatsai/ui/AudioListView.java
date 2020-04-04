@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -18,21 +17,12 @@ import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.app.AudioListAdapter;
 import com.liz.whatsai.logic.ComDef;
-import com.liz.whatsai.logic.WSAudio;
 
 import java.io.File;
 
 public class AudioListView extends ListView {
 
     private AudioListAdapter mAdapter;
-
-    MediaPlayer.OnCompletionListener mMediaPLayerCompletionlistener = new MediaPlayer.OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer mp) {
-            LogUtils.td("onCompletion");
-            mAdapter.clearSelected();
-        }
-    };
 
     public AudioListView(Context context) {
         super(context);
@@ -62,14 +52,8 @@ public class AudioListView extends ListView {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
                 LogUtils.td("pos=" + pos + ", arg1=" + arg1 + ", arg3=" + arg3);
-                if (mAdapter.isSelected(pos)) {
-                    WSAudio.stopPlay();
-                    mAdapter.clearSelected();
-                }
-                else {
-                    mAdapter.updateSelected(pos);
-                    WSAudio.startPlay(mAdapter.getAudioFilePath(pos), mMediaPLayerCompletionlistener);
-                }
+                //###@: mAdapter.onItemClick(pos);
+                AudioPlayDlg.onPlayAudio(AudioListView.this.getContext(), mAdapter.getAudioFile(pos));
             }
         });
     }
@@ -80,33 +64,29 @@ public class AudioListView extends ListView {
         super.onMeasure(widthMeasureSpec, expandSpec);
     }
 
+    //
     //NOTE: you should call it on holder's onContextItemSelected
+    //
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int menuItemId = item.getItemId();
         int pos = (int)info.id;
         LogUtils.td("menuItemId = " + menuItemId);
-        if (menuItemId == ComDef.AudioListMenu.PLAY.id) {
-            if (!mAdapter.isSelected(pos)) {
-                mAdapter.updateSelected(pos);
-            }
-            WSAudio.startPlay(this.getAudioFilePath(pos), mMediaPLayerCompletionlistener);
+        if (menuItemId == ComDef.AudioListMenu.DELETE.id) {
+            onDelete(pos);
             return true;
-        } else if (menuItemId == ComDef.AudioListMenu.STOP.id) {
-            if (mAdapter.isSelected(pos)) {
-                mAdapter.clearSelected();
-                WSAudio.stopPlay();
-            }
+        } else if (menuItemId == ComDef.AudioListMenu.RELOAD.id) {
+            onReload();
             return true;
-        } else if (menuItemId == ComDef.AudioListMenu.DELETE.id) {
-            onDeleteAudioFile(pos);
+        } else if (menuItemId == ComDef.AudioListMenu.DELETE_ALL.id) {
+            onDeleteAll();
             return true;
         } else {
             return false;
         }
     }
 
-    private void onDeleteAudioFile(final int pos) {
+    private void onDelete(final int pos) {
         final File f = mAdapter.getAudioFile(pos);
         final TextView tv = new TextView(this.getContext());
         tv.setText(f.getAbsolutePath());
@@ -120,18 +100,37 @@ public class AudioListView extends ListView {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (mAdapter.isSelected(pos)) {
-                            mAdapter.clearSelected();
-                            WSAudio.stopPlay();
-                        }
                         mAdapter.removeItem(pos);
                         FileUtils.removeFile(f);
                     }
                 }).setNegativeButton("Cancel", null).show();
     }
 
-    public String getAudioFilePath(int id) {
-        return mAdapter.getAudioFilePath(id);
+    private void onReload() {
+        mAdapter.updateList();
+    }
+
+    private void onDeleteAll() {
+        String title = "CONFIRM DELETE";
+        String text = "ALL AUDIO FILES WILL BE DELETED! ARE YOU SURE?";
+
+        final TextView tv = new TextView(this.getContext());
+        tv.setText(text);
+        tv.setTextColor(Color.RED);
+        tv.setTextSize(20);
+        tv.setPadding(50, 10, 50, 10);
+        new AlertDialog
+                .Builder(this.getContext())
+                .setTitle(title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setView(tv)
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FileUtils.clearDir(mAdapter.getAudioDir());
+                        mAdapter.updateList();
+                    }
+                }).setNegativeButton("NO", null).show();
     }
 
     public void updateUI() {
@@ -140,11 +139,11 @@ public class AudioListView extends ListView {
         }
     }
 
-    public void updateList() {
-        mAdapter.updateList();
-    }
-
     public String getAudioFilesInfo() {
         return mAdapter.getAudioFilesInfo();
+    }
+
+    public void updateList() {
+        mAdapter.updateList();
     }
 }
