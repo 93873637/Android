@@ -27,8 +27,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
-import com.liz.whatsai.app.NodeListAdapter;
 import com.liz.whatsai.app.MyApp;
+import com.liz.whatsai.app.NodeListAdapter;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
@@ -406,6 +406,15 @@ public class WSActivity extends AppCompatActivity
         }
         else if (id == R.id.action_cloud_save) {
             WhatsaiStorage.cloud_save(this);
+            return true;
+        }
+        else if (id == R.id.action_app_minimize) {
+            WSActivity.this.onBackPressed();
+            return true;
+        }
+        else if (id == R.id.action_app_exit) {
+            WSActivity.this.finish();
+            MyApp.exitApp();
             return true;
         }
 

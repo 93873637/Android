@@ -15,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,7 +52,7 @@ public class WSListener {
     public static final int DEFAULT_WAVE_SAMPLING_RATE = 128;
 
     private AudioRecord mAudioRecord;
-    private boolean mIsListening = false;
+    private boolean mListening = false;
     private String mAudioPath = ComDef.WHATSAI_AUDIO_DIR;
 
     // audio config
@@ -64,13 +63,7 @@ public class WSListener {
     private int mRecordBufferSize;  // unit by byte
 
     private int mMaxPower = DEFAULT_MAX_POWER;
-    private int mMaxPowerListSize = DEFAULT_MAX_POWER_LIST_SIZE;
     private int mMaxBufferSize = DEFAULT_MAX_BUFFER_SIZE;
-
-    /**
-     * sampling rate for wave showing, i.e. 100 means pick up one from 100 power data
-     */
-    private int mWaveSamplingRate = DEFAULT_WAVE_SAMPLING_RATE;
 
     private String mNeatFileName = "";
     private boolean mAutoSave = false;
@@ -84,7 +77,6 @@ public class WSListener {
     private int mFramePower = 0;
     private int mDataRate = 0;  // unit by b/s(bit/s)
     private String mTimeElapsed = "";  // format as hh:mm:ss
-    private ArrayList<Integer> mPowerList = new ArrayList<>();
     private ArrayList<AudioFrame> mFrameList = new ArrayList<>();
     private ArrayList<AudioTemplate> mTemplateList = new ArrayList<>();
     final private Object mDataLock = new Object();
@@ -103,7 +95,7 @@ public class WSListener {
     }
 
     public boolean isListening() {
-        return this.mIsListening;
+        return mListening;
     }
 
     public Object getDataLock() {
@@ -111,8 +103,8 @@ public class WSListener {
     }
 
     public void switchListening() {
-        LogUtils.td("mIsListening = " + mIsListening);
-        if (mIsListening) {
+        LogUtils.td("switchListening: mListening = " + mListening);
+        if (mListening) {
             stopListening();
         }
         else {
@@ -121,16 +113,17 @@ public class WSListener {
     }
 
     public void startListening() {
-        LogUtils.d("WSListener:startListening: mIsListening = " + mIsListening);
-        if (mIsListening) {
-            LogUtils.d("WSListener:startListening: already started");
+        LogUtils.td("startListening: mListening = " + mListening);
+        if (mListening) {
+            LogUtils.td("startListening: already started");
             return;
         }
-        mIsListening = true;
+        mListening = true;
+        LogUtils.td("startListening: mListening = " + mListening);
         resetParams();
         final FileOutputStream pcmOutputStream = createPCMOutputStream();
         if (pcmOutputStream == null) {
-            LogUtils.e("WSListener:startListening: get output stream for audio buffer failed.");
+            LogUtils.te("startListening: get output stream for audio buffer failed.");
             return;
         }
         mAudioRecord.startRecording();
@@ -140,15 +133,16 @@ public class WSListener {
             startThread_VoiceRecognition();
         }
         startWorkingTimer();
+        mCallback.onListenStarted();
     }
 
     public void stopListening() {
-        LogUtils.d("WSListener:stopRecord: mIsListening = " + mIsListening);
-        if (!mIsListening) {
+        LogUtils.d("WSListener:stopRecord: mListening = " + mListening);
+        if (!mListening) {
             LogUtils.d("WSListener: stopRecord: already stopped");
             return;
         }
-        mIsListening = false;
+        mListening = false;
         mAudioRecord.stop();
         stopWorkingTimer();
         if (mAutoSave) {
@@ -161,6 +155,7 @@ public class WSListener {
                     mChannelConfig,
                     true);
         }
+        mCallback.onListenStopped(mAutoSave);
     }
 
     //return ms
@@ -199,6 +194,10 @@ public class WSListener {
     }
 
     public String getProgressInfo() {
+        if (!isListening()) {
+            return "IDLE";
+        }
+
         String info = "";
         info += " <font color=\"#ff0000\">" + getPCMFileName() + "</font>";
         info += " | <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
@@ -208,8 +207,6 @@ public class WSListener {
         info += " | FC: <font color=\"#ff0000\">" + mFrameCount + "</font>";
         info += " | FR: <font color=\"#ff0000\">" + mFrameRate + "</font>";
         info += " | DR: <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
-        info += " | <font color=\"#ff0000\">" + mWaveSamplingRate + "</font>";
-        info += " | <font color=\"#ff0000\">" + mPowerList.size() + "</font>";
         return info;
     }
 
@@ -219,6 +216,19 @@ public class WSListener {
         info += " | <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
         info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mTotalSize) + "</font>";
         info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
+        return info;
+    }
+
+    public String getProgressInfoForNotify() {
+        String info = "LISTEN: ";
+        if (!isListening()) {
+            info += "NO";
+        }
+        else {
+            info += " <font color=\"#ff0000\">" + mTimeElapsed + "</font>";
+            info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mTotalSize) + "</font>";
+            info += " | <font color=\"#ff0000\">" + NumUtils.formatSize(mDataRate) + "</font>";
+        }
         return info;
     }
 
@@ -243,36 +253,13 @@ public class WSListener {
     }
 
     public interface ListenerCallback {
-        void onPowerUpdated();
+        void onListenStarted();
+        void onListenStopped(boolean save);
         void onReadAudioData(final int size, final byte[] data);
     }
 
     public void setCallback(ListenerCallback callback) {
         mCallback = callback;
-    }
-
-    @SuppressWarnings("unused")
-    public int getPowerListSize() {
-        if (this.mPowerList == null) {
-            return -1;
-        }
-        else {
-            return this.mPowerList.size();
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public double getLastPower() {
-        if (this.mPowerList == null || this.mPowerList.isEmpty()){
-            return -1;
-        }
-        else {
-            return this.mPowerList.get(this.mPowerList.size() - 1);
-        }
-    }
-
-    public List<Integer> getPowerList() {
-        return this.mPowerList;
     }
 
     public String getAudioPath() {
@@ -290,25 +277,11 @@ public class WSListener {
         mMaxPower = maxPower;
     }
 
-    public int getMaxPowerListSize() {
-        return mMaxPowerListSize;
-    }
-    public void setMaxPowerListSize(int maxPowerListSize) {
-        mMaxPowerListSize = maxPowerListSize;
-    }
-
     public int getMaxBufferSize() {
         return mMaxBufferSize;
     }
     public void setMaxBufferSize(int maxSize) {
         mRecordBufferSize = maxSize;
-    }
-
-    public int getWaveSamplingRate() {
-        return mWaveSamplingRate;
-    }
-    public void setWaveSamplingRate(int samplingRate) {
-        mWaveSamplingRate = samplingRate;
     }
 
     public void setVoiceRecognition(boolean recognition) {
@@ -374,7 +347,6 @@ public class WSListener {
         mFramePower = 0;
         mDataRate = 0;
         mTimeElapsed = "00:00:00";
-        mPowerList.clear();
         mFrameList.clear();
         mTemplateList.clear();
     }
@@ -387,7 +359,7 @@ public class WSListener {
                     LogUtils.d("WSListener: Start loop write audio data to pcm file...");
                     byte[] audioData = new byte[mRecordBufferSize];
                     int readSize;
-                    while (mIsListening) {
+                    while (mListening) {
                         readSize = mAudioRecord.read(audioData, 0, audioData.length);
                         onReadAudioData(readSize, audioData);
                         outputStream.write(audioData, 0, readSize);
@@ -421,7 +393,7 @@ public class WSListener {
             public void run() {
                 try {
                     LogUtils.td("Start voice recognition...");
-                    while (mIsListening) {
+                    while (mListening) {
                         LogUtils.td("wait recognition...");
                         synchronized (mRecognitionObject) {
                             mRecognitionObject.wait();
@@ -443,12 +415,10 @@ public class WSListener {
             processAudioData(readSize, audioData);
 
             mFrameSize = readSize / 2;
-            //###@: updateSurfaceSampleList(mFrameSize, audioData);
-
             mFramePower = calcFramePower(mFrameSize, audioData);
             mTotalSize += readSize;
             mFrameCount++;
-            LogUtils.v("WSListener: read #" + mFrameCount + ": " + readSize + "/" + mTotalSize + "/" + mFramePower);
+            //LogUtils.v("WSListener: read #" + mFrameCount + ": " + readSize + "/" + mTotalSize + "/" + mFramePower);
 
             // save a period of audio buffer for recognition
             if (mVoiceRecognition) {
@@ -460,21 +430,8 @@ public class WSListener {
             }
 
             if (mCallback != null) {
-                //mCallback.onPowerUpdated();
                 mCallback.onReadAudioData(readSize, audioData);
             }
-        }
-    }
-
-    private void updateSurfaceSampleList(int frameNum, final byte[] audioData) {
-        for (int i = 0; i < mFrameSize; i += mWaveSamplingRate) {
-            mPowerList.add(audioData[i * 2 + 1] << 8 | audioData[i * 2]);
-        }
-        if (mPowerList.size() > mMaxPowerListSize) {
-            int orgSize = mPowerList.size();
-            int toIndex = orgSize - mMaxPowerListSize;
-            mPowerList.subList(0, toIndex).clear();
-            LogUtils.d("onReadAudioData: power list size " + orgSize + " exceed max " + mMaxPowerListSize + ", removed to " + mPowerList.size());
         }
     }
 

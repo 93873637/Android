@@ -69,4 +69,12 @@
         android:text="SAVE"
         />
 
+    <Button
+        android:id="@+id/btn_cancel_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:text="Cancel"
+        />
+
 </LinearLayout>

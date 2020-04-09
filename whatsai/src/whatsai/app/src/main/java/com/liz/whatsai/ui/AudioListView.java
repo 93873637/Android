@@ -1,9 +1,11 @@
 package com.liz.whatsai.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -37,10 +39,10 @@ public class AudioListView extends ListView {
     }
 
     //NOTE: you should call it on holder's onCreate
-    public void onCreate(final Context context, String audioDir) {
+    public void onCreate(final Activity activity, String audioDir) {
         mAdapter = new AudioListAdapter(audioDir);
         this.setAdapter(mAdapter);
-        this.addFooterView(new ViewStub(context));
+        this.addFooterView(new ViewStub(activity));
         this.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                 for (ComDef.AudioListMenu c : ComDef.AudioListMenu.values()) {
@@ -52,8 +54,7 @@ public class AudioListView extends ListView {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
                 LogUtils.td("pos=" + pos + ", arg1=" + arg1 + ", arg3=" + arg3);
-                //###@: mAdapter.onItemClick(pos);
-                AudioPlayDlg.onPlayAudio(AudioListView.this.getContext(), mAdapter.getAudioFile(pos));
+                AudioPlayDlg.openPlayDlg(activity, mAdapter.getAudioFile(pos));
             }
         });
     }
@@ -111,18 +112,16 @@ public class AudioListView extends ListView {
     }
 
     private void onDeleteAll() {
-        String title = "CONFIRM DELETE";
-        String text = "ALL AUDIO FILES WILL BE DELETED! ARE YOU SURE?";
+        String text = "\nWARNING: \nALL AUDIO FILES WILL BE DELETED! \nARE YOU SURE?";
 
         final TextView tv = new TextView(this.getContext());
         tv.setText(text);
         tv.setTextColor(Color.RED);
-        tv.setTextSize(20);
-        tv.setPadding(50, 10, 50, 10);
+        tv.setTextSize(16);
+        tv.setTypeface(null, Typeface.BOLD);
+        tv.setPadding(50, 10, 10, 10);
         new AlertDialog
                 .Builder(this.getContext())
-                .setTitle(title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setView(tv)
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
@@ -130,13 +129,9 @@ public class AudioListView extends ListView {
                         FileUtils.clearDir(mAdapter.getAudioDir());
                         mAdapter.updateList();
                     }
-                }).setNegativeButton("NO", null).show();
-    }
-
-    public void updateUI() {
-        if (mAdapter.hasSelected()) {
-            mAdapter.notifyDataSetChanged();
-        }
+                })
+                .setNegativeButton("NO", null)
+                .show();
     }
 
     public String getAudioFilesInfo() {

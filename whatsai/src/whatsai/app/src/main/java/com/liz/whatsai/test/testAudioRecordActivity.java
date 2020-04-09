@@ -90,7 +90,7 @@ public class testAudioRecordActivity extends AppCompatActivity implements Runnab
             }
         });
 
-        mBtnPlayPCM = findViewById(R.id.btn_play_audio);
+        mBtnPlayPCM = findViewById(R.id.btn_play_or_pause);
         mBtnPlayPCM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -146,6 +146,31 @@ public class LogUtils {
 		d(sb.toString());
 	}
 
+	public static void trace(String msg) {
+		StringBuilder sb = new StringBuilder("TRACE");
+		sb.append(" ");
+		sb.append(android.os.Process.myPid());
+		sb.append("/");
+		sb.append(Thread.currentThread().getId());
+		sb.append(" ");
+		sb.append(Thread.currentThread().getName());
+		StackTraceElement[] s = Thread.currentThread().getStackTrace();
+		final int INDEX = 3;  //skip elements to real trace point
+		if (s.length > INDEX) {
+			sb.append(" ");
+			sb.append(s[INDEX].getFileName());
+			sb.append("/");
+			sb.append(s[INDEX].getLineNumber());
+			sb.append(" ");
+			sb.append(s[INDEX].getClassName());
+			sb.append(".");
+			sb.append(s[INDEX].getMethodName());
+		}
+		sb.append( " - ");
+		sb.append(msg);
+		d(sb.toString());
+	}
+
 	private static String t() {
 		StringBuilder sb = new StringBuilder();
 		StackTraceElement[] s = Thread.currentThread().getStackTrace();

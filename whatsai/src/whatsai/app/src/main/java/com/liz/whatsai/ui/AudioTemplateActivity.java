@@ -43,7 +43,6 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         LogUtils.d("AudioTemplateActivity:onCreate");
 
         mListener = new WSListener();
-        //####@: mListener.setWaveSamplingRate(1);
         mListener.setAudioPath(ComDef.WHATSAI_CACHE_DIR);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
@@ -52,7 +51,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         mListener.setCallback(mListenerCallback);
 
         findViewById(R.id.btn_switch_listening).setOnClickListener(this);
-        findViewById(R.id.btn_play_audio).setOnClickListener(this);
+        findViewById(R.id.btn_play_or_pause).setOnClickListener(this);
         findViewById(R.id.btn_save_audio).setOnClickListener(this);
         findViewById(R.id.btn_audio_listener).setOnClickListener(this);
         findViewById(R.id.btn_audio_recorder).setOnClickListener(this);
@@ -72,13 +71,13 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
     }
 
     private WSListener.ListenerCallback mListenerCallback = new WSListener.ListenerCallback() {
+
         @Override
-        public void onPowerUpdated() {
-            AudioTemplateActivity.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    mWaveSurfaceView.updateSurface(mListener.getPowerList(), mListener.getMaxPower());
-                }
-            });
+        public void onListenStarted(){
+        }
+
+        @Override
+        public void onListenStopped(boolean save) {
         }
 
         @Override
@@ -150,7 +149,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
             case R.id.btn_switch_listening:
                 onSwitchListening();
                 break;
-            case R.id.btn_play_audio:
+            case R.id.btn_play_or_pause:
                 onPlayAudio();
                 break;
             case R.id.btn_save_audio:

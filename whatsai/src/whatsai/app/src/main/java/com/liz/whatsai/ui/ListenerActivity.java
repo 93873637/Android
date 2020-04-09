@@ -34,13 +34,12 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
         mListener = new WSListener();
         mListener.setCallback(mListenerCallback);
         mListener.setVoiceRecognition(true);
-        //###@: mListener.setWaveSamplingRate(1);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
         mBtnSwitchListening.setText(mListener.isListening()?"STOP":"START");
 
-        findViewById(R.id.btn_play_audio).setOnClickListener(this);
+        findViewById(R.id.btn_play_or_pause).setOnClickListener(this);
         findViewById(R.id.btn_audio_config).setOnClickListener(this);
         findViewById(R.id.btn_audio_template).setOnClickListener(this);
         findViewById(R.id.btn_audio_recorder).setOnClickListener(this);
@@ -54,13 +53,13 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
     }
 
     private WSListener.ListenerCallback mListenerCallback = new WSListener.ListenerCallback() {
+
         @Override
-        public void onPowerUpdated() {
-            ListenerActivity.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    mWaveSurfaceView.updateSurface(mListener.getPowerList(), mListener.getMaxPower());
-                }
-            });
+        public void onListenStarted(){
+        }
+
+        @Override
+        public void onListenStopped(boolean save) {
         }
 
         @Override
@@ -125,7 +124,7 @@ public class ListenerActivity extends Activity implements View.OnClickListener {
             case R.id.btn_switch_listening:
                 onSwitchListening();
                 break;
-            case R.id.btn_play_audio:
+            case R.id.btn_play_or_pause:
                 onPlayAudio();
                 break;
             case R.id.btn_audio_template:

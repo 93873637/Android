@@ -102,8 +102,9 @@ public class MyApp extends Application {
 
     public static void onExitApp() {
         LogUtils.d("onExitApp");
+        DataLogic.stopMusicService();
         PureMusicReceiver.release(getAppContext());
-        PlayNotifier.onDestory(getAppContext());
+        PlayNotifier.onDestroy(getAppContext());
         int pid = android.os.Process.myPid();
         LogUtils.d("onExitApp: pid=" + pid);
         android.os.Process.killProcess(pid);
@@ -113,7 +114,7 @@ public class MyApp extends Application {
     public void onTerminate() {
         LogUtils.d("onTerminate");
         PureMusicReceiver.release(this);
-        PlayNotifier.onDestory(this);
+        PlayNotifier.onDestroy(this);
         super.onTerminate();
     }
 

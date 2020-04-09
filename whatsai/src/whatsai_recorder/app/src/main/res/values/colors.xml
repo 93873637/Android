@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorMainBackground">#F2F2F2</color>
+    <color name="colorMainText">#6a6a6a</color>
+    <color name="colorDescBackground">#FEFEFE</color>
+    <color name="colorTelBackground">#FEFEFE</color>
+    <color name="colorToolbarBackground">#2A56C6</color>
+    <color name="colorToolbarText">@android:color/white</color>
+    <color name="colorToolbarAction">#80FFFFFF</color>
+    <color name="colorGrayLineForAddPic">#CDCDCD</color>
+    <color name="colorLineForMenu">#C2C2C2</color>
+    <color name="colorForMenuItem">#DCDCDC</color>
+    <color name="colorHeaderBackground">#F6F6F6</color>
+    <color name="colorHeaderTilte">#7C7C7C</color>
+    <color name="colorLightBlue">#DDEEFF</color>
+    <color name="theme_color">#5283d0</color>
+    <color name="material_blue_700">#3367D6</color>
+    <color name="buttonStroke">#B5B5B5</color>
+    <color name="buttonColorIn">#CAE1FF</color>
+    <color name="buttonColor">#6495ED</color>
+    <color name="green">#458B74</color>
+    <color name="gray">#919191</color>
+    <color name="colorDeepBlue">#2266FF</color>
+    <color name="colorWhite">#FFFFFF</color>
+</resources>

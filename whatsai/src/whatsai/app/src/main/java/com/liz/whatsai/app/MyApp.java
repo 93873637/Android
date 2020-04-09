@@ -10,6 +10,8 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
+import com.liz.whatsai.logic.WSListenService;
+import com.liz.whatsai.ui.WSNotifier;
 
 /**
  * MyApp.java
@@ -46,6 +48,8 @@ public class MyApp extends Application {
     public static void exitApp() {
         LogUtils.trace();
         DataLogic.release();
+        WSListenService.stop();
+        WSNotifier.close();
         int pid = android.os.Process.myPid();
         LogUtils.i("exitApp, pid = " + pid);
         android.os.Process.killProcess(pid);

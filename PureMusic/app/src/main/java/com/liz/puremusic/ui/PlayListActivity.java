@@ -108,7 +108,7 @@ public class PlayListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 File fileDir = new File(DataLogic.getMusicHome());
-                FolderPickDialog pickDialog = new FolderPickDialog(PlayListActivity.this, fileDir);
+                FolderPickDialog pickDialog = new FolderPickDialog(PlayListActivity.this, fileDir, "SELECT DIR");
                 pickDialog.setOnFileSelectListener(new FilePickDialog.OnFileSelectListener() {
                     @Override
                     public void onFileSelect(File file) {

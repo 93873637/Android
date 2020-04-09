@@ -183,7 +183,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // UI Timer
     private static final long UI_TIMER_DELAY = 0L;
-    private static final long UI_TIMER_PERIOD = 2000L;
+    private static final long UI_TIMER_PERIOD = 1000L;
     private Timer mUITimer;
     private void startUITimer() {
         mUITimer = new Timer();
@@ -208,14 +208,16 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
 
     private WSListener.ListenerCallback mListenerCallback = new WSListener.ListenerCallback() {
         @Override
-        public void onPowerUpdated() {
-            AudioRecordActivity.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    synchronized (WSRecorder.inst().getDataLock()) {
-                        mWaveSurfaceViewEx.updateSurface(WSRecorder.inst().getPowerList(), WSRecorder.inst().getMaxPower());
-                    }
-                }
-            });
+        public void onListenStarted(){
+            AudioRecordActivity.this.updateUI();
+        }
+
+        @Override
+        public void onListenStopped(boolean save) {
+            AudioRecordActivity.this.updateUI();
+            if (save) {
+                AudioRecordActivity.this.updateAudioList();
+            }
         }
 
         @Override
@@ -223,10 +225,8 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
             AudioRecordActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
                     synchronized (WSRecorder.inst().getDataLock()) {
-                        mWaveSurfaceViewEx.addAudioData(data, size);
-                        mWaveSurfaceViewEx.redrawSurface();
-                        mWaveSurfaceThumbnial.addAudioData(data, size);
-                        //mWaveSurfaceThumbnial.redrawSurface();  //not update thumbnail surface on time
+                        mWaveSurfaceViewEx.updateAudioData(data, size);
+                        mWaveSurfaceThumbnial.addAudioData(data, size);  //thumbnail not update on time in case display problem
                     }
                 }
             });
@@ -234,7 +234,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     };
 
     private String getProgressInfo() {
-        if (WSRecorder.inst().isListening()) {
+        if (WSListenService.isListening()) {
             return WSRecorder.inst().getProgressInfoSimple();
         }
         else {
@@ -243,7 +243,8 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     }
 
     private void updateUI() {
-        if (WSRecorder.inst().isListening()) {
+        LogUtils.td("updateUI: isListening " + WSListenService.isListening());
+        if (WSListenService.isListening()) {
             mBtnSwitchListening.setText("STOP");
             mAudioRecordBar.setBackgroundColor(Color.GREEN);
             mWaveSurfaceThumbnial.redrawSurface();
@@ -254,7 +255,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         }
         mTextProgressInfo.setText(Html.fromHtml(this.getProgressInfo()));
         setAudioFilesInfo();
-        mAudioListView.updateUI();
     }
 
     private void loadAudioListInfo() {
@@ -271,12 +271,15 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     }
 
     private void onSwitchListening() {
-        if (WSRecorder.inst().isListening()) {
+        LogUtils.td("onSwitchListening: isListening " + WSListenService.isListening());
+        if (WSListenService.isListening()) {
+            WSListenService.stopListening();
+        }
+        else {
+            //clear surface for next listening
             mWaveSurfaceViewEx.clearCanvas();
             mWaveSurfaceThumbnial.clearCanvas();
+            WSListenService.startListening();
         }
-        WSListenService.switchOnOff();
-        updateUI();
-        updateAudioList();
     }
 }

@@ -3,65 +3,46 @@ package com.liz.whatsai.logic;
 import android.media.MediaPlayer;
 
 import com.liz.androidutils.LogUtils;
-
-import java.io.IOException;
+import com.liz.androidutils.TimeUtils;
 
 @SuppressWarnings("WeakerAccess")
-public class WSPlayer {
+public class WSPlayer extends MediaPlayer {
 
-    private MediaPlayer mMediaPlayer = null;
-
-    public void startPlay(String filePath) {
-        startPlay(filePath, null);
+    public WSPlayer() {
+        this.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                LogUtils.trace();
+            }
+        });
     }
-
-    public void startPlay(String filePath, MediaPlayer.OnCompletionListener listener) {
-        LogUtils.td("filePath = " + filePath);
-        if (mMediaPlayer != null) {
-            LogUtils.td("play already started, stop first");
-            stopPlay();
-        }
+    public boolean load(String filePath) {
+        LogUtils.td("load filePath = " + filePath);
         try {
-            mMediaPlayer = new MediaPlayer();
-            mMediaPlayer.setDataSource(filePath);
-            mMediaPlayer.setOnCompletionListener(listener);
-            mMediaPlayer.prepare();
-            mMediaPlayer.start();
-        } catch (IOException e) {
-            LogUtils.e("play ex = " + e.getMessage());
+            this.seekTo(0);
+            this.reset();
+            this.setDataSource(filePath);
+            this.prepare();
+            return true;
+        } catch (Exception e) {
+            LogUtils.te2("load " + filePath + " failed, ex = " + e.getMessage());
             e.printStackTrace();
+            return false;
         }
     }
 
-    public void stopPlay() {
-        if (mMediaPlayer == null) {
-            LogUtils.td("play already stopped");
-        }
-        else {
-            mMediaPlayer.stop();
-            mMediaPlayer.release();
-            mMediaPlayer = null;
-        }
+    public String getCurrentPlayPositionFormat() {
+        return TimeUtils.formatDurationFull(this.getCurrentPosition());
     }
 
-    public boolean isPlaying() {
-        if (mMediaPlayer != null) {
-            return mMediaPlayer.isPlaying();
-        }
-        return false;
+    public String getMediaDurationFormat() {
+        return TimeUtils.formatDurationFull(this.getDuration());
     }
 
-    public int getCurrentPlayPosition() {
-        if (mMediaPlayer != null) {
-            return mMediaPlayer.getCurrentPosition();
-        }
-        return 0;
-    }
-
-    public int getCurrentPlayDuration() {
-        if (mMediaPlayer != null) {
-            return mMediaPlayer.getDuration();
-        }
-        return 0;
+    /**
+     * @return percent of play progress
+     */
+    public String getProgressInfo() {
+        return getCurrentPlayPositionFormat() + " / " + getMediaDurationFormat();
     }
 }

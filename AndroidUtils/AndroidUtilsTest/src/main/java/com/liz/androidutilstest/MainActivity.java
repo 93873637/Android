@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.liz.androidutils.AudioUtils;
 import com.liz.androidutils.ComUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
@@ -81,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_LogUtils();
+        test_AudioUtils();
+        //test_LogUtils();
         //test_storage();
         //test_logfile();
         //test_ImageCompress();
@@ -96,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_AudioUtils() {
+        ArrayList<Integer> dataList = new ArrayList<>();
+        AudioUtils.loadWaveProfile("/sdcard/0.sd/whatsai/audio/20.0404.090143.wav", dataList, 1328);
+        LogUtils.td("test loadWaveProfile, data size = " + dataList.size());
     }
 
     public void test_LogUtils() {

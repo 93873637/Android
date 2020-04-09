@@ -156,19 +156,19 @@ public class WhatsaiStorage {
     }
 
     public static void onLocalSaveTimer() {
-        LogUtils.d("WhatsaiStorage: onLocalSaveTimer: E...");
+        LogUtils.tv("onLocalSaveTimer: E...");
 
         if (!isDirty()) {
-            LogUtils.d("WhatsaiStorage: onLocalSaveTimer: data not change.");
+            LogUtils.td("onLocalSaveTimer: data not change.");
             return;
         }
 
         if (mRootNode.isEmpty()) {
-            LogUtils.d("WhatsaiStorage: onLocalSaveTimer: root node empty");
+            LogUtils.td("onLocalSaveTimer: root node empty");
             return;
         }
 
-        LogUtils.d("WhatsaiStorage: onLocalSaveTimer: local_save...");
+        LogUtils.tv("onLocalSaveTimer: local_save...");
         local_save();
     }
 

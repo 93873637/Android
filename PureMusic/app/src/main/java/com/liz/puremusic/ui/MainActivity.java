@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnCreateCont
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser == true) {
+                if (fromUser) {
                     DataLogic.seekTo(progress);
                 }
             }
@@ -135,9 +135,9 @@ public class MainActivity extends AppCompatActivity implements View.OnCreateCont
     }
 
     private void findViewById() {
-        musicTime = findViewById(R.id.MusicTimePlayed);
-        musicTotal =  findViewById(R.id.MusicTimeTotal);
-        seekBar = findViewById(R.id.MusicSeekBar);
+        musicTime = findViewById(R.id.tv_time_played);
+        musicTotal =  findViewById(R.id.tv_music_duration);
+        seekBar = findViewById(R.id.sb_play_progress);
 
         playInfo = findViewById(R.id.PlayInfo);
 
@@ -245,14 +245,6 @@ public class MainActivity extends AppCompatActivity implements View.OnCreateCont
             }
         });
 
-//        btnQuit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopUiTimer();
-//                DataLogic.stopMusicService();
-//                MainActivity.this.finish();
-//            }
-//        });
     }
 
     public static int getPlayModeResId() {

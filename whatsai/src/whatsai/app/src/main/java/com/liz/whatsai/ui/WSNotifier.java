@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
+import android.text.Html;
 import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
@@ -14,6 +15,7 @@ import androidx.core.app.NotificationCompat;
 import com.liz.androidutils.LogUtils;
 import com.liz.whatsai.R;
 import com.liz.whatsai.app.MyApp;
+import com.liz.whatsai.logic.WSRecorder;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,24 +46,26 @@ public class WSNotifier {
 
     private static Notification mNotification;
 
-    public static void create() {
+    public static void open() {
         LogUtils.trace();
         final Context context = MyApp.getAppContext();
+        createNotification(context);
         new Timer().schedule(new TimerTask() {
             public void run() {
-                createNotification(context);
+                updateNotifyView(context);
             }
         }, NOTIFY_UPDATE_TIMER_DELAY, NOTIFY_UPDATE_TIMER_PERIOD);
     }
 
-    public static void destroy() {
+    public static void close() {
+        LogUtils.trace();
         final Context context = MyApp.getAppContext();
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager == null) {
             LogUtils.te2("get notification service null");
-            return;
+        } else {
+            manager.cancel(NOTICE_ID_TYPE_0);
         }
-        manager.cancel(NOTICE_ID_TYPE_0);
     }
 
     public static Notification getNotification() {
@@ -85,24 +89,27 @@ public class WSNotifier {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, WHATSAI_CHANNEL_ID);
         builder.setOngoing(true);
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
-        builder.setSmallIcon(R.drawable.abc_ic_menu_share_mtrl_alpha);
+        builder.setSmallIcon(R.drawable.icon_bitcomet);
 
-        RemoteViews remoteViews = initNotifierView(context);
-
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
         mNotification = builder.build();
         mNotification.bigContentView = remoteViews;
         mNotification.contentView = remoteViews;
-
         manager.notify(NOTICE_ID_TYPE_0, mNotification);
     }
 
-    private static RemoteViews initNotifierView(final Context context) {
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
-//        remoteViews.setTextViewText(R.id.PlayInfo, DataLogic.getCurrentMusicName());
-//        remoteViews.setInt(R.id.BtnPlayOrPause, "setBackgroundResource", DataLogic.isPlaying()?R.drawable.pause:R.drawable.play);
-//        remoteViews.setInt(R.id.BtnPlayMode, "setBackgroundResource", MainActivity.getPlayModeResId());
-//        //remoteViews.setOnClickPendingIntent(R.id.BtnPlayOrPause, getPendingIntentForBroadcast(context, NOTIFY_KEY_PLAY_OR_PAUSE));
-        return remoteViews;
+    private static void updateNotifyView(Context context) {
+        //LogUtils.trace();
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager == null) {
+            LogUtils.te2("get notification service null");
+        } else {
+            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
+            remoteViews.setTextViewText(R.id.tv_whatsai_info, Html.fromHtml(WSRecorder.inst().getProgressInfoForNotify()));
+            mNotification.bigContentView = remoteViews;
+            mNotification.contentView = remoteViews;
+            manager.notify(NOTICE_ID_TYPE_0, mNotification);
+        }
     }
 
     private static PendingIntent getPendingIntentForBroadcast(Context context, int keyId) {
@@ -115,10 +122,10 @@ public class WSNotifier {
     }
 
     private static PendingIntent getPendingIntentForActivity(Context context, int keyId) {
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra(WHATSAI_NOTIFY_KEY, keyId);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            int requestCode = (int) SystemClock.uptimeMillis();
-            return PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(WHATSAI_NOTIFY_KEY, keyId);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        int requestCode = (int) SystemClock.uptimeMillis();
+        return PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }

@@ -7,6 +7,11 @@ import java.text.DecimalFormat;
 @SuppressWarnings("unused, WeakerAccess")
 public class NumUtils {
 
+    public static final long K = 1024L;
+    public static final long M = K * K;
+    public static final long G = K * M;
+    public static final long T = M * M;
+
     public static String formatShow(int n) {
         DecimalFormat df =  new DecimalFormat("###,##0");
         return df.format(n);
@@ -32,8 +37,8 @@ public class NumUtils {
     }
 
     public static String formatSize(long size) {
-        final long K_V = 1024;   //real value
-        final long K_C = 1000;  //compare value, less than 4 degits
+        final long K_V = 1024;  //real value
+        final long K_C = 1000;  //compare value, less than 4 digits
         final long M_V = K_V * K_V;
         final long M_C = K_C * K_C;
         final long G_V = M_V * K_V;

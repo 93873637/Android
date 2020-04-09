@@ -16,9 +16,9 @@ import com.liz.puremusic.ui.PlayNotifier;
 public class NotificationBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        LogUtils.d("NotificationBroadcastReceiver.onReceive");
-        //collapseStatusBar(context);　　//clear status bar
+        LogUtils.trace();
         int notifyId = intent.getIntExtra(PlayNotifier.PURE_MUSIC_NOTIFY_KEY, -1);
+        LogUtils.td("receive notification, notifyId = " + notifyId);
         if (notifyId == -1){
             LogUtils.e("ERROR: NotificationBroadcastReceiver.onReceive: unknown notify key");
         }

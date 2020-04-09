@@ -152,7 +152,7 @@ public class LogEx extends LogUtils {
 		//01-04 11:37:58.499 E/AndroidRuntime(23013): FATAL EXCEPTION: Thread-12
 		String logInfo = TimeUtils.getLogTime() + " " + type + "/" + tag + ": " + msg + "\n";
 
-		FileOutputStream fos;
+		FileOutputStream fos = null;
 		BufferedWriter bw = null;
 		try {
 			fos = new FileOutputStream(logFilePath, true);
@@ -165,6 +165,9 @@ public class LogEx extends LogUtils {
 			try {
 				if (bw != null) {
 					bw.close();
+				}
+				if (fos != null) {
+					fos.close();
 				}
 			} catch (IOException e) {
 				Log.e(getTag(), "ERROR: saveToFile: close exception " + e.toString());

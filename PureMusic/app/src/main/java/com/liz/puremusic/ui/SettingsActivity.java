@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.liz.puremusic.R;
 import com.liz.puremusic.logic.DataLogic;
@@ -36,6 +37,14 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DataLogic.setMusicHome(mEditMusicHome.getText().toString());
+                Toast.makeText(SettingsActivity.this, "Configurations Saved", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        findViewById(R.id.btn_cancel_settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingsActivity.this.finish();
             }
         });
     }

@@ -38,7 +38,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             }
             else {
                 alarmTime = node.getRemindString();
-                alarmInfo =  node.getName();
+                alarmInfo = node.getName();
             }
         }
 
