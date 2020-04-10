@@ -4,8 +4,11 @@ NoAnnoy/src/NoAnnoy/.gradle
 PureMusic/app/build
 PureMusic/.gradle
 
-whatsai/app/build
-whatsai/.gradle
+whatsai/src/whatsai/app/build
+whatsai/src/whatsai/.gradle
+
+whatsai/src/whatsai_recorder/app/build
+whatsai/src/whatsai_recorder/.gradle
 
 PureTorch/app/build
 PureTorch/.gradle

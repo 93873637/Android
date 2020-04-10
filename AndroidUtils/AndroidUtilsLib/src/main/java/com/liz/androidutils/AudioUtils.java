@@ -1,9 +1,12 @@
 package com.liz.androidutils;
 
+import android.annotation.SuppressLint;
+import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 
@@ -455,6 +458,7 @@ public class AudioUtils {
         }
     }
 
+    @SuppressLint("NewApi")
     public static void playPCM(final FileInputStream fis,
                                int bufferSize,
                                int sampleRate,
@@ -462,22 +466,26 @@ public class AudioUtils {
                                int channelMask) {
 
         final int bufferSizeInBytes = bufferSize;
-//        final AudioTrack audioTrack = new AudioTrack(
-//                new AudioAttributes.Builder()
-//                        .setUsage(AudioAttributes.USAGE_MEDIA)
-//                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-//                        .build(),
-//                new AudioFormat.Builder()
-//                        .setSampleRate(sampleRate)
-//                        .setEncoding(audioFormat)
-//                        .setChannelMask(channelMask)
-//                        .build(),
-//                bufferSizeInBytes,
-//                AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
-//        );
-
-        final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, channelMask,
-            audioFormat, bufferSize, AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE);
+        final AudioTrack audioTrack;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            audioTrack = new AudioTrack(
+                    new AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .build(),
+                    new AudioFormat.Builder()
+                            .setSampleRate(sampleRate)
+                            .setEncoding(audioFormat)
+                            .setChannelMask(channelMask)
+                            .build(),
+                    bufferSizeInBytes,
+                    AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
+            );
+        }
+        else {
+            audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, channelMask,
+                    audioFormat, bufferSize, AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE);
+        }
 
         // AudioTrack need play first
         audioTrack.play();
