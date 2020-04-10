@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.liz.whatsai.ui.NodeActivity">
+    tools:context="com.liz.wsrecorder.ui.NodeActivity">
 
     <!--<include-->
         <!--layout="@layout/whatsai_titlebar"-->
         <!--android:layout_width="fill_parent"-->
         <!--android:layout_height="wrap_content" />-->
 
-    <com.liz.whatsai.ui.WaveSurfaceViewEx
+    <com.liz.wsrecorder.ui.WaveSurfaceViewEx
         android:id="@+id/wave_surface_view"
         android:layout_width="fill_parent"
         android:layout_height="192dp" />
@@ -26,7 +26,7 @@
         android:background="#ffff00"
         android:orientation="horizontal"
         >
-        <com.liz.whatsai.ui.WaveSurfaceViewEx
+        <com.liz.wsrecorder.ui.WaveSurfaceViewEx
             android:id="@+id/wave_surface_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -151,7 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.liz.whatsai.ui.AudioListView
+            <com.liz.wsrecorder.ui.AudioListView
                 android:id="@+id/lv_audio_files"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

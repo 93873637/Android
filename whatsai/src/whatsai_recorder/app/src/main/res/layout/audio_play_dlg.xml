@@ -19,7 +19,7 @@
         android:textStyle="bold"
         />
 
-    <com.liz.whatsai.ui.WaveSurfaceViewEx
+    <com.liz.wsrecorder.ui.WaveSurfaceViewEx
         android:id="@+id/wave_surface_view"
         android:layout_width="fill_parent"
         android:layout_height="132dp" />
@@ -34,7 +34,7 @@
         android:orientation="horizontal"
         android:padding="0dp">
 
-        <com.liz.whatsai.ui.WaveSurfaceViewEx
+        <com.liz.wsrecorder.ui.WaveSurfaceViewEx
             android:id="@+id/wave_surface_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

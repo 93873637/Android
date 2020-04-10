@@ -1,6 +1,7 @@
 package com.liz.androidutils;
 
-import android.text.TextUtils;
+import java.io.File;
+import java.io.FileInputStream;
 
 /**
  *
@@ -88,7 +89,11 @@ import android.text.TextUtils;
  *
  */
 
+@SuppressWarnings("unused, WeakerAccess")
 public class WaveFileHeader {
+
+    public static final int WAVE_FILE_HEADER_LEN = 44;
+    public static final int WAVE_FILE_HEADER_POS_SUBCHUNK2SIZE = 40;
 
     public static final int CHUNK_ID_LEN = 4;
     public static final int CHUNK_SIZE_LEN = 4;
@@ -124,12 +129,54 @@ public class WaveFileHeader {
     public WaveFileHeader() {
     }
 
+    public static WaveFileHeader parseFile(String wavFilePath) {
+        File wavFile = new File(wavFilePath);
+        if (!wavFile.exists()) {
+            JLog.te("wav file " + wavFilePath + " not exists");
+            return null;
+        }
+
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(wavFile);
+            byte[] headerBytes = new byte[WAVE_FILE_HEADER_LEN];
+            int readSize = fis.read(headerBytes);
+            if (readSize != WAVE_FILE_HEADER_LEN) {
+                JLog.te("read wave header failed.");
+                fis.close();
+                return null;
+            }
+            WaveFileHeader header = new WaveFileHeader();
+            if (!header.parse(headerBytes)) {
+                JLog.te("read wave header failed.");
+                fis.close();
+                return null;
+            }
+            else {
+                return header;
+            }
+        }
+        catch (Exception e) {
+            JLog.te("playPCM: exception " + e.toString());
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (Exception e) {
+                JLog.te("close file input stream failed, ex = " + e.toString());
+            }
+        }
+    }
+
     public boolean parse(byte[] headerBytes) {
         int offset = 0;
 
         chunk_id = readString(headerBytes, offset, CHUNK_ID_LEN);
         if (!chunk_id.equals("RIFF")) {
-            loge("parse: invalid chunk id " + chunk_id);
+            JLog.te("invalid chunk id " + chunk_id);
             return false;
         }
         offset += CHUNK_ID_LEN;
@@ -139,14 +186,14 @@ public class WaveFileHeader {
 
         format = readString(headerBytes, offset, FORMAT_LEN);
         if (!format.equals("WAVE")) {
-            loge("parse: invalid format " + format);
+            JLog.te("invalid format " + format);
             return false;
         }
         offset += FORMAT_LEN;
 
         subchunk1_id = readString(headerBytes, offset, SUBCHUNK1_ID_LEN);
         if (!subchunk1_id.equals("fmt ")) {
-            loge("parse: invalid subchunk1 id " + subchunk1_id);
+            JLog.te("invalid subchunk1 id " + subchunk1_id);
             return false;
         }
         offset += SUBCHUNK1_ID_LEN;
@@ -158,16 +205,13 @@ public class WaveFileHeader {
         offset += AUDIO_FORMAT_LEN;
 
         num_channels = readShort(headerBytes, offset);
-        offset += NUM_CHANNELS_LEN;
+        offset += NUM_CHANNELS_LEN;  // 24
 
         sample_rate = readInt(headerBytes, offset);
         offset += SAMPLE_RATE_LEN;
 
         byte_rate = readInt(headerBytes, offset);
         offset += BYTE_RATE_LEN;
-
-        sample_rate = readInt(headerBytes, offset);
-        offset += SAMPLE_RATE_LEN;
 
         block_align = readShort(headerBytes, offset);
         offset += BLOCK_ALIGN_LEN;
@@ -176,8 +220,8 @@ public class WaveFileHeader {
         offset += BITS_PER_SAMPLE_LEN;
 
         subchunk2_id = readString(headerBytes, offset, SUBCHUNK2_ID_LEN);
-        if (!TextUtils.equals(subchunk2_id, "RIFF")) {
-            loge("parse: invalid subchunk2 id " + subchunk2_id);
+        if (!subchunk2_id.equals("data")) {
+            JLog.te("invalid subchunk2 id " + subchunk2_id);
             return false;
         }
         offset += SUBCHUNK2_ID_LEN;
@@ -185,12 +229,26 @@ public class WaveFileHeader {
         subchunk2_size = readInt(headerBytes, offset);
         offset += SUBCHUNK2_SIZE_LEN;
 
-        System.out.println("parse over, size = " + offset);
+        JLog.td("parse over, size = " + offset);
         return true;
     }
 
-    private void loge(String msg) {
-        System.out.println("ERROR: WaveFileHeader: " + msg);
+    public void log() {
+        System.out.println("-----------------------------------------");
+        System.out.println("chunk_id = " + chunk_id + "");
+        System.out.println("chunk_size = " + chunk_size + "");
+        System.out.println("format = " + format + "");
+        System.out.println("subchunk1_id = " + subchunk1_id + "");
+        System.out.println("subchunk1_size = " + subchunk1_size + "");
+        System.out.println("audio_format = " + audio_format + "");
+        System.out.println("num_channels = " + num_channels + "");
+        System.out.println("sample_rate = " + sample_rate + "");
+        System.out.println("byte_rate = " + byte_rate + "");
+        System.out.println("block_align = " + block_align + "");
+        System.out.println("bits_per_sample = " + bits_per_sample + "");
+        System.out.println("subchunk2_id = " + subchunk2_id + "");
+        System.out.println("subchunk2_size = " + subchunk2_size + "");
+        System.out.println("-----------------------------------------");
     }
 
     private String readString(byte[] headBuf, int offset, int len) {
@@ -200,15 +258,29 @@ public class WaveFileHeader {
     }
 
     private int readInt(byte[] headBuf, int offset) {
-        return headBuf[offset]
-                + (headBuf[offset + 1] << 8)
-                + (headBuf[offset + 2] << 16)
-                + (headBuf[offset + 3] << 24);
+        return NumUtils.bytes2IntB(headBuf, offset);
     }
 
     private short readShort(byte[] headBuf, int offset) {
-        short s = (short)(headBuf[offset + 1] << 8);
-        s += headBuf[offset];
-        return s;
+        return NumUtils.bytes2ShortB(headBuf, offset);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // TEST MAIN
+
+    public static void main(String[] args) {
+        JLog.newLine();
+        JLog.i("***Test Begin...");
+
+        WaveFileHeader wfh = WaveFileHeader.parseFile("D:\\Temp\\test.wav");
+        if (wfh == null) {
+            JLog.e("pare file failed");
+        }
+        else {
+            wfh.log();
+        }
+
+        JLog.i("***Test Successfully.");
+        JLog.newLine();
     }
 }

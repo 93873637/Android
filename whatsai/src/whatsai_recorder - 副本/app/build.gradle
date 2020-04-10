@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+ext.majorNumber = 1
+ext.minorNumber = 0
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
+    defaultConfig {
+        applicationId "com.liz.whatsai.recorder"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName generateVersionName()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "wsrecorder_${variant.versionName}.apk"
+        }
+    }
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation files('D:/WorkSpace/Android/_bin/AndroidUtils.jar')
+    implementation 'com.sun.mail:android-mail:1.5.5'
+    implementation 'com.sun.mail:android-activation:1.5.5'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.6'
+    implementation files('libs/gson-2.8.0.jar')
+    implementation files('libs/fastjson-1.2.9.jar')
+    implementation files('libs/commons-io-1.4.jar')
+}
+
+//Major_Version_Number.Minor_Version_Number.Revision_Number.Build_Date.Build_Time
+def generateVersionName() {
+    String strDate = new Date().format("yy.MMdd")
+    String strTime = new Date().format("HHmm")
+    majorNumber + "." + minorNumber + ".$strDate.$strTime"
+}

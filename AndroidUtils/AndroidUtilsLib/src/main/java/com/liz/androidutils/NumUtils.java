@@ -79,11 +79,59 @@ public class NumUtils {
         return byteNum;
     }
 
+    /**
+     * little endian
+     */
     public static int bytes2Int(byte[] byteNum) {
+        return bytes2Int(byteNum, 0);
+    }
+
+    /**
+     * little endian
+     */
+    public static int bytes2Int(byte[] byteNum, int offset) {
         int num = 0;
         for (int ix = 0; ix < 4; ++ix) {
             num <<= 8;
-            num |= (byteNum[ix] & 0xff);
+            num |= (byteNum[offset + ix] & 0xff);
+        }
+        return num;
+    }
+
+    /**
+     * big endian
+     */
+    public static short bytes2ShortB(byte[] byteNum) {
+        return bytes2ShortB(byteNum, 0);
+    }
+
+    /**
+     * big endian
+     */
+    public static short bytes2ShortB(byte[] byteNum, int offset) {
+        short num = 0;
+        for (int ix = 1; ix >=0; --ix) {
+            num <<= 8;
+            num |= (byteNum[offset + ix] & 0xff);
+        }
+        return num;
+    }
+
+    /**
+     * big endian
+     */
+    public static int bytes2IntB(byte[] byteNum) {
+        return bytes2IntB(byteNum, 0);
+    }
+
+    /**
+     * big endian
+     */
+    public static int bytes2IntB(byte[] byteNum, int offset) {
+        int num = 0;
+        for (int ix = 3; ix >=0; --ix) {
+            num <<= 8;
+            num |= (byteNum[offset + ix] & 0xff);
         }
         return num;
     }
@@ -170,6 +218,15 @@ public class NumUtils {
         AssertUtils.Assert(unsigned((byte)-128) == 128);
         AssertUtils.Assert(unsigned((short)-10) == 65526);
         AssertUtils.Assert(unsigned(-1) == 4294967295L);
+
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x00, (byte)0x00}) == 0);
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x01, (byte)0x00}) == 1);
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x02, (byte)0x00}) == 2);
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x10, (byte)0x00}) == 16);
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x00, (byte)0x01}) == 256);
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x00, (byte)0x10}) == 4096);
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x00, (byte)0x80}) == -32768);
+        AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0xff, (byte)0xff}) == -1);
 
 //        byte[] bi = int2Bytes(-1);
 //        printBytes(bi);

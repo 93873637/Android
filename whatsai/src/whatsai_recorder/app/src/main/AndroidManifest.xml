@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.liz.whatsai">
+    package="com.liz.wsrecorder">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
-        android:name=".app.MyApp"
+        android:name=".recorder.app.MyApp"
         android:allowBackup="false"
         android:icon="@drawable/soundrecorder4"
         android:label="@string/app_name"
@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".recorder.ui.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -31,12 +31,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.AudioRecordActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.AudioConfigActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".recorder.ui.AudioRecordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".recorder.ui.AudioConfigActivity" android:screenOrientation="portrait"/>
         <activity android:name=".test.testAudioRecordActivity" android:screenOrientation="portrait"/>
 
         <service
-            android:name="com.liz.whatsai.logic.WSListenService"
+            android:name=".recorder.logic.WSListenService"
             android:enabled="true"
             android:exported="false"/>
     </application>
