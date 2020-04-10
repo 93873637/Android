@@ -7,7 +7,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
     defaultConfig {
-        applicationId "com.liz.whatsai.recorder.recorder"
+        applicationId "com.liz.wsrecorder"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1

@@ -21,6 +21,7 @@ import com.liz.androidutils.LogEx;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.TimeChecker;
+import com.liz.androidutils.WaveFileHeader;
 import com.liz.androidutils.ZipUtils;
 
 import java.io.File;
@@ -101,9 +102,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test_AudioUtils() {
+        String wavFilePath = "/sdcard/0.sd/whatsai/audio/20.0410.172713.wav";
+
         ArrayList<Integer> dataList = new ArrayList<>();
-        AudioUtils.loadWaveProfile("/sdcard/0.sd/whatsai/audio/20.0404.090143.wav", dataList, 1328);
+        AudioUtils.loadWaveProfile(wavFilePath, dataList, 1328);
         LogUtils.td("test loadWaveProfile, data size = " + dataList.size());
+
+        WaveFileHeader wfh = WaveFileHeader.parseFile(wavFilePath);
+        if (wfh != null) {
+            wfh.log();
+        }
+
+        AudioUtils.playWAV(wavFilePath);
     }
 
     public void test_LogUtils() {

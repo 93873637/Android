@@ -1,6 +1,7 @@
 package com.liz.androidutils;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +19,7 @@ import static android.content.Context.TELEPHONY_SERVICE;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class TelUtils {
 
+    @TargetApi(23)
     public static String startCall(Context context, String telNum) {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telNum));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

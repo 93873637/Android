@@ -1,5 +1,6 @@
 package com.liz.androidutils;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -92,6 +93,7 @@ public class SysUtils {
 
     public static final String ERR_MSG_OK = "OK";
 
+    @TargetApi(23)
     public static String supportFingerprint(Context context) {
         String errMsg = ERR_MSG_OK;
 

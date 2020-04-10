@@ -5,9 +5,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.IOUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -430,17 +427,19 @@ public class FileUtils {
         return sizeString;
     }
 
-    public static boolean sameFile(String filePath1, String filePath2) throws IOException {
-        FileInputStream fis1 = new FileInputStream(filePath1);
-        long size1 = fis1.available();
-        String md51 = DigestUtils.md5Hex(IOUtils.toByteArray(fis1));
-        IOUtils.closeQuietly(fis1);
-
-        FileInputStream fis2 = new FileInputStream(filePath2);
-        long size2 = fis2.available();
-        String md52 = DigestUtils.md5Hex(IOUtils.toByteArray(fis2));
-        IOUtils.closeQuietly(fis2);
-        return (size1 == size2) && md51.equals(md52);
+    public static boolean sameFile(String filePath1, String filePath2) {
+//        FileInputStream fis1 = new FileInputStream(filePath1);
+//        long size1 = fis1.available();
+//        String md51 = DigestUtils.md5Hex(IOUtils.toByteArray(fis1));
+//        IOUtils.closeQuietly(fis1);
+//
+//        FileInputStream fis2 = new FileInputStream(filePath2);
+//        long size2 = fis2.available();
+//        String md52 = DigestUtils.md5Hex(IOUtils.toByteArray(fis2));
+//        IOUtils.closeQuietly(fis2);
+//        return (size1 == size2) && md51.equals(md52);
+        //###@:
+        return false;
     }
 
     /**

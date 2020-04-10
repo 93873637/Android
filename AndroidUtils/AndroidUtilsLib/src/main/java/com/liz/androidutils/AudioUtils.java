@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioManager;
+import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.os.Build;
@@ -105,6 +106,17 @@ public class AudioUtils {
                 return "CHANNEL_OUT_QUAD";
             default:
                 return "UNKNOWN CHANNEL CONFIG";
+        }
+    }
+
+    public static int channelConfigByNum(int num_channels) {
+        switch (num_channels) {
+            case 1:
+                return AudioFormat.CHANNEL_CONFIGURATION_MONO;
+            case 2:
+                return AudioFormat.CHANNEL_CONFIGURATION_STEREO;
+            default:
+                return AudioFormat.CHANNEL_CONFIGURATION_MONO;
         }
     }
 
@@ -389,23 +401,20 @@ public class AudioUtils {
     }
 
     public static int getPlayBufferSizeByWavHeader(WaveFileHeader header) {
-
-//        int bufferSize = AudioRecord.getMinBufferSize(
-//                header.sample_rate,
-//                header.calcPlayBufferSize(),
-//                header.audio_format
-//        );
-        return 0;  //###@:
+        return AudioRecord.getMinBufferSize(
+                header.sample_rate,
+                channelConfigByNum(header.num_channels),
+                getAudioFormatByWavHeader(header)
+        );
     }
 
     public static int getAudioFormatByWavHeader(WaveFileHeader header) {
-        return 0;  //###@:
-
-    }
-
-    public static int getChannelMaskByWavHeader(WaveFileHeader header) {
-        return 0;  //###@:
-
+        if (header.bits_per_sample == 16) {
+            return AudioFormat.ENCODING_PCM_16BIT;
+        }
+        else {
+            return AudioFormat.ENCODING_PCM_8BIT;
+        }
     }
 
     public static void playWAV(String wavFilePath) {
@@ -435,7 +444,7 @@ public class AudioUtils {
                     getPlayBufferSizeByWavHeader(header),
                     header.sample_rate,
                     getAudioFormatByWavHeader(header),
-                    getChannelMaskByWavHeader(header)
+                    channelConfigByNum(header.num_channels)
             );
         } catch (Exception e) {
             LogUtils.te2("play wav file " + wavFilePath + " failed, ex = " + e.toString());
@@ -576,6 +585,13 @@ public class AudioUtils {
         System.out.println("\n");
         System.out.println("***Test Begin...");
 
+        test_modifyWaveFileHeader();
+
+        System.out.println("***Test Successfully.");
+        System.out.println("\n");
+    }
+
+    public static void test_modifyWaveFileHeader() {
         RandomAccessFile raf = null;
         String waveAbsolutePath = "D:/Temp/test.wav";
         try {
@@ -592,8 +608,5 @@ public class AudioUtils {
                 System.out.println("ERROR: addHeaderSimple: close exception, ex = " + e.toString());
             }
         }
-
-        System.out.println("***Test Successfully.");
-        System.out.println("\n");
     }
 }

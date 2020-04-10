@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.liz.androidutils.AudioUtils;
 import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TimeUtils;
@@ -17,7 +18,6 @@ import com.liz.wsrecorder.R;
 import com.liz.wsrecorder.logic.ComDef;
 import com.liz.wsrecorder.logic.WSListener;
 import com.liz.wsrecorder.logic.WSPlayer;
-import com.liz.wsrecorder.logic.WSRecorder;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -72,7 +72,8 @@ public class AudioListAdapter extends BaseAdapter {
             setSelected(pos);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 // since media player can't play wav file on old api, we play pcm by audio tracker
-                WSRecorder.inst().playWAVFile(this.getAudioFilePath(pos));
+                //WSRecorder.inst().playWAVFile(this.getAudioFilePath(pos));
+                AudioUtils.playWAV(this.getAudioFilePath(pos));
             }
             else {
                 WSPlayer.play(this.getAudioFilePath(pos), mPlayCompletionListener);

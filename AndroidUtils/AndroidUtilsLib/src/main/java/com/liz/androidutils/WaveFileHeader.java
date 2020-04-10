@@ -95,6 +95,9 @@ public class WaveFileHeader {
     public static final int WAVE_FILE_HEADER_LEN = 44;
     public static final int WAVE_FILE_HEADER_POS_SUBCHUNK2SIZE = 40;
 
+    public static final int WAVE_CHANNEL_MONO = 1;
+    public static final int WAVE_CHANNEL_STEREO = 2;
+
     public static final int CHUNK_ID_LEN = 4;
     public static final int CHUNK_SIZE_LEN = 4;
     public static final int FORMAT_LEN = 4;
