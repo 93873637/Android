@@ -11,8 +11,10 @@ import com.liz.androidutils.NumUtils;
 import com.liz.androidutils.TimeUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -27,10 +29,10 @@ public class WSListener {
     private static final int DEFAULT_MAX_POWER = 32768;
 
     /**
-     * default max power list size used for surface view
-     * for A2H, its resolution is 1440*2560
+     * limit audio file size in case disk full
      */
-    private static final int DEFAULT_MAX_POWER_LIST_SIZE = 4096;
+    private static final long DEFAULT_MAX_AUDIO_FILE_SIZE = NumUtils.G;
+    private static final long DEFAULT_MAX_STORAGE_SIZE = 10 * DEFAULT_MAX_AUDIO_FILE_SIZE;
 
     /**
      * buffer size for audio power data, unit by byte
@@ -53,7 +55,7 @@ public class WSListener {
 
     private AudioRecord mAudioRecord;
     private boolean mListening = false;
-    private String mAudioPath = ComDef.WHATSAI_AUDIO_DIR;
+    private String mAudioDir = ComDef.WHATSAI_AUDIO_DIR;
 
     // audio config
     private int mAudioSource = MediaRecorder.AudioSource.MIC;
@@ -87,6 +89,9 @@ public class WSListener {
     final private Object mRecognitionObject = new Object();
     private String mSpeechText = "";
 
+    private long mMaxAudioFileSize = DEFAULT_MAX_AUDIO_FILE_SIZE;
+    private long mMaxAudioStorageSize = DEFAULT_MAX_STORAGE_SIZE;  //###@: not take effect
+
     public WSListener() {
         LogUtils.d("WSListener:WSListener");
         mRecordBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mAudioFormat);
@@ -119,16 +124,10 @@ public class WSListener {
             return;
         }
         mListening = true;
-        LogUtils.td("startListening: mListening = " + mListening);
         resetParams();
-        final FileOutputStream pcmOutputStream = createPCMOutputStream();
-        if (pcmOutputStream == null) {
-            LogUtils.te("startListening: get output stream for audio buffer failed.");
-            return;
-        }
         mAudioRecord.startRecording();
         mStartTime = System.currentTimeMillis();
-        startThread_RecordingAudioData(pcmOutputStream);
+        startThread_RecordingAudioData();
         if (mVoiceRecognition) {
             startThread_VoiceRecognition();
         }
@@ -158,6 +157,16 @@ public class WSListener {
         mCallback.onListenStopped(mAutoSave);
     }
 
+    private byte[] getWaveHeader() {
+        return AudioUtils.getWaveHeader(
+                0,
+                mSampleRate,
+                mRecordBufferSize,
+                mAudioFormat,
+                mChannelConfig
+        );
+    }
+
     //return ms
     public static int getWaveDuration(File f) {
         long pcmLen = FileUtils.getFileSize(f) - 44;
@@ -173,6 +182,27 @@ public class WSListener {
         AudioUtils.playPCM(fileAbsolute, mRecordBufferSize, mSampleRate, mAudioFormat, mChannelConfig);
     }
 
+    public void playWAVFile(String fileAbsolute) {
+        File wavFile = new File(fileAbsolute);
+        if (!wavFile.exists()) {
+            LogUtils.te2("wav file " + fileAbsolute + " not exists");
+            return;
+        }
+        try {
+            FileInputStream fis = new FileInputStream(wavFile);
+            byte[] headerBytes = new byte[AudioUtils.WAVE_FILE_HEADER_LEN];
+            int readSize = fis.read(headerBytes);
+            if (readSize != AudioUtils.WAVE_FILE_HEADER_LEN) {
+                LogUtils.te2("read wave header failed.");
+                fis.close();
+                return;
+            }
+            AudioUtils.playPCM(fis, mRecordBufferSize, mSampleRate, mAudioFormat, mChannelConfig);
+        } catch (Exception e) {
+            LogUtils.te2("play wav file " + fileAbsolute + " failed, ex = " + e.toString());
+        }
+    }
+
     @SuppressWarnings("unused")
     public String getAudioConfigInfoFull() {
         String configInfo = "Audio Source: <font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
@@ -180,7 +210,7 @@ public class WSListener {
         configInfo += "<br>Audio Format: <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
         configInfo += "<br>Channel Config: <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";
         configInfo += "<br>Audio Buffer Size(B): <font color=\"#ff0000\">" + mRecordBufferSize + "</font>";
-        configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + getAudioPath() + "</font>";
+        configInfo += "<br>Audio Path: <font color=\"#ff0000\">" + getAudioDir() + "</font>";
         return configInfo;
     }
 
@@ -237,11 +267,11 @@ public class WSListener {
     }
 
     public String getPCMFileAbsolute() {
-        return getAudioPath() + "/" + mNeatFileName + ".pcm";
+        return getAudioDir() + "/" + mNeatFileName + ".pcm";
     }
 
     public String getWAVFileAbsolute() {
-        return getAudioPath() + "/" + mNeatFileName + ".wav";
+        return getAudioDir() + "/" + mNeatFileName + ".wav";
     }
 
     public String getPCMFileName() {
@@ -262,13 +292,8 @@ public class WSListener {
         mCallback = callback;
     }
 
-    public String getAudioPath() {
-        return mAudioPath;
-    }
-
-    public void setAudioPath(String audioPath) {
-        mAudioPath = audioPath;
-    }
+    public String getAudioDir() { return mAudioDir; }
+    public void setAudioDir(String audioDir) { mAudioDir = audioDir; }
 
     public int getMaxPower() {
         return mMaxPower;
@@ -296,6 +321,14 @@ public class WSListener {
         AudioUtils.pcm2wav(getPCMFileAbsolute(), wavFilePath,
                 mSampleRate, mRecordBufferSize, mAudioFormat, mChannelConfig,
                 deletePCM);
+    }
+
+    public void setMaxAudioFileSize(long size) {
+        mMaxAudioFileSize = size;
+    }
+
+    public void setMaxAudioStorageSize(long size) {
+        mMaxAudioStorageSize = size;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -351,7 +384,61 @@ public class WSListener {
         mTemplateList.clear();
     }
 
-    private void startThread_RecordingAudioData(final FileOutputStream outputStream) {
+    private void startThread_RecordingAudioData() {
+        final RandomAccessFile raf = createAudioOutputFile();
+        if (raf == null) {
+            LogUtils.tw2("file output file null");
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    LogUtils.d("WSListener: Start loop write audio data to file...");
+                    if (raf != null) {
+                        byte[] header = getWaveHeader();
+                        raf.seek(0);
+                        raf.write(header);
+                    }
+                    byte[] audioData = new byte[mRecordBufferSize];
+                    int readSize;
+                    while (mListening) {
+                        readSize = mAudioRecord.read(audioData, 0, audioData.length);
+                        onReadAudioData(readSize, audioData);
+                        if (mTotalSize < mMaxAudioFileSize) {
+                            if (raf != null) {
+                                raf.write(audioData, 0, readSize);
+                                AudioUtils.modifyWaveFileHeader(raf, mTotalSize);
+                            }
+                        }
+                        else {
+                            LogUtils.tw2("current file size " + mTotalSize + " exceed max " + mMaxAudioFileSize + ", data not save");
+                        }
+                        if (mVoiceRecognition) {
+                            synchronized (mRecognitionObject) {
+                                mRecognitionObject.notify();
+                            }
+                        }
+                    }
+                    if (raf != null) {
+                        raf.close();
+                    }
+                } catch (Exception e) {
+                    LogUtils.e("WSListener: startListening: listen thread exception " + e.toString());
+                    e.printStackTrace();
+                }
+                LogUtils.d("WSListener: listener stop.");
+            }
+        }).start();
+    }
+
+    /**
+     * recording audio data to file using FileOutputStream
+     */
+    private void startThread_RecordingAudioData2() {
+        final FileOutputStream fos = createAudioOutputStream();
+        if (fos == null) {
+            LogUtils.tw2("file output stream null");
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -362,15 +449,19 @@ public class WSListener {
                     while (mListening) {
                         readSize = mAudioRecord.read(audioData, 0, audioData.length);
                         onReadAudioData(readSize, audioData);
-                        outputStream.write(audioData, 0, readSize);
-                        outputStream.flush();
+                        if (fos != null) {
+                            fos.write(audioData, 0, readSize);
+                            fos.flush();
+                        }
                         if (mVoiceRecognition) {
                             synchronized (mRecognitionObject) {
                                 mRecognitionObject.notify();
                             }
                         }
                     }
-                    outputStream.close();
+                    if (fos != null) {
+                        fos.close();
+                    }
                 } catch (Exception e) {
                     LogUtils.e("WSListener: startListening: listen thread exception " + e.toString());
                     e.printStackTrace();
@@ -414,9 +505,9 @@ public class WSListener {
         synchronized (mDataLock) {
             processAudioData(readSize, audioData);
 
+            mTotalSize += readSize;
             mFrameSize = readSize / 2;
             mFramePower = calcFramePower(mFrameSize, audioData);
-            mTotalSize += readSize;
             mFrameCount++;
             //LogUtils.v("WSListener: read #" + mFrameCount + ": " + readSize + "/" + mTotalSize + "/" + mFramePower);
 
@@ -479,6 +570,62 @@ public class WSListener {
         return true;
     }
 
+    private RandomAccessFile createAudioOutputFile() {
+        File f = createWaveFile();
+        if (f == null) {
+            LogUtils.te2("create wave file failed");
+            return null;
+        }
+        try {
+            return new RandomAccessFile(f.getAbsoluteFile(), "rw");
+        }
+        catch (Exception e) {
+            LogUtils.te2("create audio output file exception " + e.toString());
+            return null;
+        }
+    }
+
+    private FileOutputStream createAudioOutputStream() {
+        File f = createWaveFile();
+        if (f == null) {
+            LogUtils.te2("create wave file failed");
+            return null;
+        }
+        try {
+            return new FileOutputStream(f.getAbsoluteFile());
+        }
+        catch (Exception e) {
+            LogUtils.te2("create output stream exception " + e.toString());
+            return null;
+        }
+    }
+
+    /**
+     * create a wave file to write pcm data
+     * @return file which name format as yy.MMdd.HHmmss(19.1103.173655)
+     */
+    private File createWaveFile() {
+        String neatFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
+        String fileName = neatFileTime + ".wav";
+        String filePath = getAudioDir() + "/" + fileName;
+        LogUtils.ti("createWaveFile: filePath = " + filePath);
+        File f = new File(filePath);
+        if (!f.exists()) {
+            try {
+                if (!f.createNewFile()) {
+                    LogUtils.te2("create wave file failed.");
+                    return null;
+                }
+                mNeatFileName = neatFileTime;
+                return f;
+            } catch (IOException e) {
+                LogUtils.te2("create wave file exception: " + e.toString());
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     private FileOutputStream createPCMOutputStream() {
         File pcmFile = createPCMFile();
         if (pcmFile == null) {
@@ -501,7 +648,7 @@ public class WSListener {
     private File createPCMFile() {
         String neatFileTime = new SimpleDateFormat("yy.MMdd.HHmmss").format(new java.util.Date());
         String fileName = neatFileTime + ".pcm";
-        String filePath = getAudioPath() + "/" + fileName;
+        String filePath = getAudioDir() + "/" + fileName;
         LogUtils.i("WSListener:createPCMFile: filePath = " + filePath);
 
         File objFile = new File(filePath);

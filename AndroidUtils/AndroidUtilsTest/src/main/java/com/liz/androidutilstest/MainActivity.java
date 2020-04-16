@@ -19,8 +19,10 @@ import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogEx;
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.StorageUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.TimeChecker;
+import com.liz.androidutils.UsbUtils;
 import com.liz.androidutils.WaveFileHeader;
 import com.liz.androidutils.ZipUtils;
 
@@ -32,6 +34,7 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
@@ -77,15 +80,18 @@ public class MainActivity extends AppCompatActivity {
         ZipUtils.zipFileAbsolutes("/sdcard/0.sd/whatsai/whatsai2.zip",
                 "/sdcard/0.sd/whatsai/whatsai.dat",
                 "/sdcard/0.sd/whatsai/whatsai.files");
+
+        test_UsbUtils();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //Test Functions
 
     public void test() {
-        test_AudioUtils();
+        test_UsbUtils();
+        //test_StorageUtils();
+        //test_AudioUtils();
         //test_LogUtils();
-        //test_storage();
         //test_logfile();
         //test_ImageCompress();
         //test_ziputils();
@@ -99,6 +105,41 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_UsbUtils() {
+        UsbUtils.showList(MainActivity.this);
+    }
+
+    public void test_StorageUtils() {
+        //test_storage();
+        {
+            List<String> list = StorageUtils.getVolumeList(MainActivity.this);
+            if (list == null) {
+                LogUtils.td("StorageUtils.getVolumeList return null");
+            } else {
+                LogUtils.d("--------------------------------------------");
+                for (String info : list) {
+                    LogUtils.td(info);
+                }
+                LogUtils.d("--------------------------------------------");
+            }
+        }
+
+        {
+            List<String> list = StorageUtils.getUsbDiskPathList(MainActivity.this);
+            if (list == null) {
+                LogUtils.td("StorageUtils.getUsbDiskPathList return null");
+            } else {
+                LogUtils.d("--------------------------------------------");
+                for (String info : list) {
+                    LogUtils.td(info);
+                }
+                LogUtils.d("--------------------------------------------");
+            }
+        }
+
+        LogUtils.td("StorageUtils.getSdCardPath() = \"" + StorageUtils.getSdCardPath(MainActivity.this) + "\"");
     }
 
     public void test_AudioUtils() {

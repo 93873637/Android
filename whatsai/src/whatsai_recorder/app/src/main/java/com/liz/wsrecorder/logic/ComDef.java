@@ -39,7 +39,7 @@ public class ComDef {
 
     public static final String WHATSAI_RECORDER_NAME = "recorder";
     public static final String WHATSAI_RECORDER_HOME = WHATSAI_HOME + "/" + WHATSAI_RECORDER_NAME;
-    
+
     // WSStorage Definitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
 

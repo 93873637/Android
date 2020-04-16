@@ -9,6 +9,9 @@ package com.liz.androidutils;
 @SuppressWarnings("unused, WeakerAccess")
 public class JLog {
 
+	public static void p(String msg) { System.out.print(msg); }
+	public static void pl(String msg) { System.out.println(msg); }
+
 	public static void v(String msg) { System.out.println("VERBOSE: " + msg); }
 	public static void d(String msg) { System.out.println("DEBUG: " + msg); }
 	public static void i(String msg) { System.out.println("INFO: " + msg); }

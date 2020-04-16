@@ -31,9 +31,7 @@ public class WaveSurfaceViewEx extends WaveSurfaceView implements GestureDetecto
     protected void initSurfaceView() {
         super.initSurfaceView();
         LogUtils.trace();
-
         this.setOnTouchListener(mOnTouchListener);
-
         // Instantiate the gesture detector with the application context and an implementation of
         // GestureDetector.OnGestureListener
         mDetector = new GestureDetectorCompat(this.getContext(), this);

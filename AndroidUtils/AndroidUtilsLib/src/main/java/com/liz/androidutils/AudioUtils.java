@@ -411,8 +411,7 @@ public class AudioUtils {
     public static int getAudioFormatByWavHeader(WaveFileHeader header) {
         if (header.bits_per_sample == 16) {
             return AudioFormat.ENCODING_PCM_16BIT;
-        }
-        else {
+        } else {
             return AudioFormat.ENCODING_PCM_8BIT;
         }
     }
@@ -490,8 +489,7 @@ public class AudioUtils {
                     bufferSizeInBytes,
                     AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE
             );
-        }
-        else {
+        } else {
             audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, channelMask,
                     audioFormat, bufferSize, AudioTrack.MODE_STREAM, AudioManager.AUDIO_SESSION_ID_GENERATE);
         }

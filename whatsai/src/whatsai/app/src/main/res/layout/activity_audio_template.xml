@@ -7,10 +7,10 @@
     tools:context="com.liz.whatsai.ui.NodeActivity">
 
     <!--wave show-->
-    <com.liz.whatsai.ui.WaveSurfaceView
+    <com.liz.whatsai.ui.WaveSurfaceViewEx
         android:id="@+id/wave_surface_view"
         android:layout_width="fill_parent"
-        android:layout_height="120dp" />
+        android:layout_height="200dp" />
     <!--wave show-->
 
     <TextView

@@ -27,7 +27,7 @@ import java.util.TimerTask;
 
 public class AudioTemplateActivity extends Activity implements View.OnClickListener {
 
-    private WaveSurfaceView mWaveSurfaceView;
+    private WaveSurfaceViewEx mWaveSurfaceView;
     private LinearLayout mAudioControlBar;
     private TextView mTextProgressInfo;
     private Button mBtnSwitchListening;
@@ -43,7 +43,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
         LogUtils.d("AudioTemplateActivity:onCreate");
 
         mListener = new WSListener();
-        mListener.setAudioPath(ComDef.WHATSAI_CACHE_DIR);
+        mListener.setAudioDir(ComDef.WHATSAI_CACHE_DIR);
 
         mBtnSwitchListening = findViewById(R.id.btn_switch_listening);
         mBtnSwitchListening.setOnClickListener(this);
@@ -85,7 +85,7 @@ public class AudioTemplateActivity extends Activity implements View.OnClickListe
             AudioTemplateActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
                     synchronized (WSRecorder.inst().getDataLock()) {
-                        mWaveSurfaceView.addAudioData(data, size);
+                        mWaveSurfaceView.updateAudioData(data, size);
                     }
                 }
             });

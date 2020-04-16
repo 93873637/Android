@@ -3,6 +3,7 @@ package com.liz.whatsai.app;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.PowerManager;
 
 import androidx.annotation.NonNull;
 
@@ -39,6 +40,9 @@ public class MyApp extends Application {
         mAppVersion = SysUtils.getAppVersion(this);
 
         DataLogic.init();
+        WSListenService.start();
+        WSNotifier.open();
+        acquireWakeLock();
     }
 
     public static Context getAppContext() {
@@ -50,6 +54,7 @@ public class MyApp extends Application {
         DataLogic.release();
         WSListenService.stop();
         WSNotifier.close();
+        mAppInst.releaseWakeLock();
         int pid = android.os.Process.myPid();
         LogUtils.i("exitApp, pid = " + pid);
         android.os.Process.killProcess(pid);
@@ -78,4 +83,40 @@ public class MyApp extends Application {
         LogUtils.trace();
         super.onConfigurationChanged(newConfig);
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Wake Lock
+
+    private PowerManager.WakeLock mWakeLock = null;
+    private static final String mWakeLockName = ComDef.APP_NAME + ":wakelocktag";
+
+    /**
+     * acquire wakelock to keep running after screen off
+     */
+    private synchronized void acquireWakeLock() {
+        if (mWakeLock == null) {
+            PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+            if (pm == null) {
+                LogUtils.te2("get power service failed");
+            }
+            else {
+                mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, mWakeLockName);
+                if (null != mWakeLock) {
+                    LogUtils.trace();
+                    mWakeLock.acquire();
+                }
+            }
+        }
+    }
+
+    private synchronized void releaseWakeLock() {
+        if (null != mWakeLock) {
+            LogUtils.trace();
+            mWakeLock.release();
+            mWakeLock = null;
+        }
+    }
+
+    // Wake Lock
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 }

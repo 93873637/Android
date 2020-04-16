@@ -722,18 +722,27 @@ public class FileUtils {
     }
 
     public static boolean deleteFile(String fileAbsolute) {
-        File file = new File(fileAbsolute);
-        if (file.exists() && file.isFile()) {
-            if (file.delete()) {
-                return true;
-            } else {
-                System.out.println("ERROR: FileUtils.deleteFile: delete " + fileAbsolute + " failed");
-                return false;
-            }
-        } else {
-            System.out.println("ERROR: FileUtils.deleteFile: " + fileAbsolute + " not exist");
+        return deleteFile(new File(fileAbsolute));
+    }
+
+    public static boolean deleteFile(File file) {
+        if (file == null) {
+            System.out.println("ERROR: FileUtils.deleteFile: file null");
             return false;
         }
+        if (!file.exists()) {
+            System.out.println("ERROR: FileUtils.deleteFile: file not exist");
+            return false;
+        }
+        if (!file.isFile()) {
+            System.out.println("ERROR: FileUtils.deleteFile: not file");
+            return false;
+        }
+        if (!file.delete()) {
+            System.out.println("ERROR: FileUtils.deleteFile: delete " + file.getAbsolutePath() + " failed");
+            return false;
+        }
+        return true;
     }
 
     public static boolean isExists(String fileAbsolute) {

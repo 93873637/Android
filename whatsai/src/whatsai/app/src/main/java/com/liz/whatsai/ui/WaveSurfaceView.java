@@ -46,6 +46,13 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	private static final int CANVAS_GRID_COLOR = Color.rgb(160, 160, 160);
 	private static final int CANVAS_MIDDLE_GRID_COLOR = Color.rgb(255, 255, 255);
 
+	private static final int VALUE_MODE_LOGE = 1;
+	private static final int VALUE_MODE_LOG10 = 2;
+	private static final int[] GRID_VALUES_LOGE = {(int)Math.exp(2), (int)Math.exp(4), (int)Math.exp(6), (int)Math.exp(8), (int)Math.exp(10)};
+	private static final int[] GRID_VALUES_LOG10 = {10, 100, 1000, 10000};
+	private static final int DEFAULT_VALUE_MODE = VALUE_MODE_LOGE;
+	private int mValueMode = DEFAULT_VALUE_MODE;
+
 	private int mWaveItemColor = WAVE_ITEM_COLOR;
 	private int mCanvasBgA = CANVAS_BG_A;
 	private int mCanvasBgR = CANVAS_BG_R;
@@ -113,6 +120,10 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	public void clearCanvas() {
 		mDataList.clear();
 		redrawSurface();
+	}
+
+	public void setValueMode(int mode) {
+		mValueMode = mode;
 	}
 
 	public void setDrawGrid(boolean draw) {
@@ -275,12 +286,18 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 		}
 	}
 
-	private static int calcItemHeight(int value, int maxValue, int maxHeight) {
+	private static int calcItemHeight(int value, int maxValue, int maxHeight, int valueMode) {
 		if (value == 0) {
 			return 0;
 		}
 		else {
-			double rate = Math.log10(Math.abs(value)) / Math.log10(Math.abs(maxValue));
+			double rate;
+			if (valueMode == WaveSurfaceView.VALUE_MODE_LOG10) {
+				rate = Math.log10(Math.abs(value)) / Math.log10(Math.abs(maxValue));
+			}
+			else {
+				rate = Math.log(Math.abs(value)) / Math.log(Math.abs(maxValue));
+			}
 			int height = (int) (rate * Math.abs(maxHeight));
 			if (value < 0) {
 				height = -1 * height;
@@ -346,25 +363,23 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 		int midHeight = canvasHeight / 2;
 		canvas.drawLine(0, midHeight, canvasWidth, midHeight, mGridMiddlePaint);
 
-		// draw y grids(log10)
+		// draw y grids
 		if (mDrawGrid) {
-			int[] yGrid = {10, 100, 1000, 10000};
-			for (int y : yGrid) {
-				int h = (int) (Math.log10(y) / Math.log10(mMaxWaveValue) * mAmplitudeHeight);
-				canvas.drawLine(0, midHeight + h, canvasWidth, midHeight + h, mGridPaint);
-				canvas.drawLine(0, midHeight - h, canvasWidth, midHeight - h, mGridPaint);
+			if (mValueMode == VALUE_MODE_LOG10) {
+				for (int y : GRID_VALUES_LOG10) {
+					int h = (int) (Math.log10(y) / Math.log10(mMaxWaveValue) * mAmplitudeHeight);
+					canvas.drawLine(0, midHeight + h, canvasWidth, midHeight + h, mGridPaint);
+					canvas.drawLine(0, midHeight - h, canvasWidth, midHeight - h, mGridPaint);
+				}
 			}
-    		/*
-    		// draw y grids(log)
-    		//int[] yGrid = {(int)Math.pow(2, 2), (int)Math.pow(2, 6), (int)Math.pow(2, 10), (int)Math.pow(2, 14)};
-    		int[] yGrid = {4, 64, 1024, 16384};
-    		for (int y : yGrid) {
-    			int h = (int)(Math.log(y) / Math.log(mMaxWaveValue) * mAmplitudeHeight);
-    			canvas.drawLine(0, midHeight + h, canvasWidth, midHeight + h, mGridPaint);
-    			canvas.drawLine(0, midHeight - h, canvasWidth, midHeight - h, mGridPaint);
-    		}
-    		//*/
-		}
+			else {
+				for (int y : GRID_VALUES_LOGE) {
+					int h = (int)(Math.log(y) / Math.log(mMaxWaveValue) * mAmplitudeHeight);
+					canvas.drawLine(0, midHeight + h, canvasWidth, midHeight + h, mGridPaint);
+					canvas.drawLine(0, midHeight - h, canvasWidth, midHeight - h, mGridPaint);
+				}
+			}
+    	}
 	}
 
 	/**
@@ -383,7 +398,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 		int l, t, r, b;
 		for (int i = 0; i < dataList.size(); i++) {
 			itemValue = dataList.get(i);
-			itemHeight = calcItemHeight(itemValue, mMaxWaveValue, mAmplitudeHeight);
+			itemHeight = calcItemHeight(itemValue, mMaxWaveValue, mAmplitudeHeight, mValueMode);
 			if (itemValue != 0) {
 				if (mWaveItemWidth < MIN_RECT_WIDTH) {
 					posX = (int) (i * unitWidth);
