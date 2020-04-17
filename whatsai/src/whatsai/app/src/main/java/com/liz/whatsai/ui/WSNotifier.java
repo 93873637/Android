@@ -31,7 +31,7 @@ public class WSNotifier {
 
     public static final int NOTICE_ID_TYPE_0 = R.string.app_name;
 
-    private static final String WHATSAI_CHANNEL_ID = "WhatsaiChannelId";
+    private static final String WHATSAI_CHANNEL_ID = "WhatsaiChannelId0";
     private static final String WHATSAI_CHANNEL_NAME = "WhatsaiChannelName";
     public static final String WHATSAI_NOTIFY_KEY = "WhatsaiNotifyKey";
     private static final String ACTION_WHATSAI_NOTIFY = "com.liz.whatsai.notify";
@@ -39,20 +39,28 @@ public class WSNotifier {
     public static final int NOTIFY_KEY_APP_STATUS = 1;
     public static final int NOTIFY_KEY_CLOSE_APP = 2;
 
-    private static final int NOTIFY_UPDATE_TIMER_DELAY = 500;
-    private static final int NOTIFY_UPDATE_TIMER_PERIOD = 2000;
+    private static final int NOTIFY_UPDATE_TIMER_DELAY = 1000;
+    private static final int NOTIFY_UPDATE_TIMER_PERIOD = 5000;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private static Notification mNotification;
 
+    /**
+     * update channel id each time when create to remove the disgusting alter sound
+     * @return new channel id
+     */
+    private static String genChannelID() {
+        return WHATSAI_CHANNEL_ID + System.currentTimeMillis();
+    }
+
     public static void open() {
         LogUtils.trace();
         final Context context = MyApp.getAppContext();
-        createNotification(context);
+        final String channelID = genChannelID();
         new Timer().schedule(new TimerTask() {
             public void run() {
-                updateNotifyView(context);
+                updateNotification(context, channelID);
             }
         }, NOTIFY_UPDATE_TIMER_DELAY, NOTIFY_UPDATE_TIMER_PERIOD);
     }
@@ -74,7 +82,7 @@ public class WSNotifier {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private static void createNotification(final Context context) {
+    private static void updateNotification(final Context context, final String channelID) {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager == null) {
             LogUtils.te2("get notification service null");
@@ -82,34 +90,52 @@ public class WSNotifier {
         }
 
         if (android.os.Build.VERSION.SDK_INT >= 26) {
-            NotificationChannel channel = new NotificationChannel(WHATSAI_CHANNEL_ID, WHATSAI_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(channelID, WHATSAI_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            //disable alert sound(NOTE: only take effect with new channel id)
+            channel.setSound(null, null);
             manager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, WHATSAI_CHANNEL_ID);
-        builder.setOngoing(true);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelID);
+        //设置小图标
+        builder.setSmallIcon(WSRecorder.inst().isListening()?R.drawable.micphone:R.drawable.icon_bitcomet);
+        //设置大图标
+        //builder.setLargeIcon(bitmap);
+        //设置标题
+        //builder.setContentTitle("这是标题");
+        //设置通知正文
+        //builder.setContentText("这是正文，当前ID是：" + id);
+        //设置摘要
+        //builder.setSubText("这是摘要");
+        //设置是否点击消息后自动clean
+        //builder.setAutoCancel(true);
+        //显示指定文本
+        //builder.setContentInfo("Info");
+        //与setContentInfo类似，但如果设置了setContentInfo则无效果
+        //用于当显示了多个相同ID的Notification时，显示消息总数
+        //builder.setNumber(2);
+        //通知在状态栏显示时的文本
+        //builder.setTicker("在状态栏上显示的文本");
+        //设置优先级
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
-        builder.setSmallIcon(R.drawable.icon_bitcomet);
+        //自定义消息时间，以毫秒为单位，当前设置为比系统时间少一小时
+        //builder.setWhen(System.currentTimeMillis() - 3600000);
+        //设置为一个正在进行的通知，此时用户无法清除通知
+        builder.setOngoing(true);
+        //设置消息的提醒方式，震动提醒：DEFAULT_VIBRATE     声音提醒：NotificationCompat.DEFAULT_SOUND
+        //三色灯提醒NotificationCompat.DEFAULT_LIGHTS     以上三种方式一起：DEFAULT_ALL
+        builder.setDefaults(NotificationCompat.DEFAULT_SOUND);
+        //设置震动方式，延迟零秒，震动一秒，延迟一秒、震动一秒
+        //builder.setVibrate(new long[]{0, 1000, 1000, 1000});
+        //set true to alert only once after app start
+        builder.setOnlyAlertOnce(true);
+        mNotification = builder.build();
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
-        mNotification = builder.build();
+        remoteViews.setTextViewText(R.id.tv_whatsai_info, Html.fromHtml(WSRecorder.inst().getProgressInfoForNotify()));
         mNotification.bigContentView = remoteViews;
         mNotification.contentView = remoteViews;
         manager.notify(NOTICE_ID_TYPE_0, mNotification);
-    }
-
-    private static void updateNotifyView(Context context) {
-        //LogUtils.trace();
-        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager == null) {
-            LogUtils.te2("get notification service null");
-        } else {
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
-            remoteViews.setTextViewText(R.id.tv_whatsai_info, Html.fromHtml(WSRecorder.inst().getProgressInfoForNotify()));
-            mNotification.bigContentView = remoteViews;
-            mNotification.contentView = remoteViews;
-            manager.notify(NOTICE_ID_TYPE_0, mNotification);
-        }
     }
 
     private static PendingIntent getPendingIntentForBroadcast(Context context, int keyId) {

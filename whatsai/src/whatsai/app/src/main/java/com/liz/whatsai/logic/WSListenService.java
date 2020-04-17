@@ -86,20 +86,18 @@ public class WSListenService extends Service {
 
     @Override
     public void onCreate() {
-        LogUtils.trace();
         super.onCreate();
+        LogUtils.trace();
+        if (WSNotifier.getNotification() != null) {
+            startForeground(WSNotifier.NOTICE_ID_TYPE_0, WSNotifier.getNotification());
+        } else {
+            LogUtils.tw2("no notification to startForeground");
+        }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtils.trace(this.toString());
-
-        if (WSNotifier.getNotification() != null) {
-            WSListenService.this.startForeground(WSNotifier.NOTICE_ID_TYPE_0, WSNotifier.getNotification());
-        } else {
-            LogUtils.tw2("no notification to startForeground");
-        }
-
         if (intent == null) {
             LogUtils.td("onStartCommand: intent null");
         }
@@ -114,7 +112,6 @@ public class WSListenService extends Service {
                 LogUtils.td("unhandled action " + action);
             }
         }
-
         return START_STICKY;
     }
 
