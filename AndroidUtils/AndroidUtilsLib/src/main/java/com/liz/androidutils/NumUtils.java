@@ -70,15 +70,6 @@ public class NumUtils {
         return sizeString;
     }
 
-    public static byte[] int2Bytes(int num) {
-        byte[] byteNum = new byte[4];
-        byteNum[0] = (byte)((num >> 24) & 0xff);
-        byteNum[1] = (byte)((num >> 16) & 0xff);
-        byteNum[2] = (byte)((num >> 8) & 0xff);
-        byteNum[3] = (byte)(num & 0xff);
-        return byteNum;
-    }
-
     /**
      * little endian
      */
@@ -142,12 +133,16 @@ public class NumUtils {
     }
 
     public static String bytes2Hex(byte[] bytes){
+        return bytes2Hex(bytes, " ");
+    }
+
+    public static String bytes2Hex(byte[] bytes, String sep){
         String s;
         StringBuilder sb = new StringBuilder();
         for(byte b : bytes) {
             s = Integer.toHexString(b & 0xFF);
             sb.append((s.length() == 1) ? "0" + s : s);
-            sb.append(" ");
+            sb.append(sep);
         }
         return sb.toString().trim();
     }
@@ -157,6 +152,10 @@ public class NumUtils {
     }
 
     public static byte int2OneByte(int num) {
+        return (byte) (num & 0x000000ff);
+    }
+
+    public static byte int2TwoBytes(int num) {
         return (byte) (num & 0x000000ff);
     }
 
@@ -171,6 +170,30 @@ public class NumUtils {
             bytes[i] = (byte) ((num >> offset) & 0xff);
         }
         return bytes;
+    }
+
+    public static byte[] int2Bytes(int num) {
+        byte[] byteNum = new byte[4];
+        byteNum[0] = (byte)((num >> 24) & 0xff);
+        byteNum[1] = (byte)((num >> 16) & 0xff);
+        byteNum[2] = (byte)((num >> 8) & 0xff);
+        byteNum[3] = (byte)(num & 0xff);
+        return byteNum;
+    }
+
+    public static byte[] short2Bytes(short num) {
+        byte[] byteNum = new byte[2];
+        byteNum[0] = (byte)((num >> 8) & 0xff);
+        byteNum[1] = (byte)(num & 0xff);
+        return byteNum;
+    }
+
+    public static String short2HexStr(short num) {
+        return bytes2Hex(short2Bytes(num), "");
+    }
+
+    public static String int2HexStr(int num) {
+        return bytes2Hex(int2Bytes(num));
     }
 
     public static long bytes2Long(byte[] bytes) {
@@ -227,6 +250,11 @@ public class NumUtils {
         AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x00, (byte)0x10}) == 4096);
         AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0x00, (byte)0x80}) == -32768);
         AssertUtils.Assert(bytes2ShortB(new byte[]{(byte)0xff, (byte)0xff}) == -1);
+
+        AssertUtils.Assert(short2HexStr((short)1133).equals("046d"));
+        AssertUtils.Assert(short2HexStr((short)2085).equals("0825"));
+
+
 
 //        byte[] bi = int2Bytes(-1);
 //        printBytes(bi);

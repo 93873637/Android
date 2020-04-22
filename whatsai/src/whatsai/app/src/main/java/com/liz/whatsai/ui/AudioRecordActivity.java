@@ -78,9 +78,6 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
         mAudioListView.onCreate(this, ComDef.WHATSAI_AUDIO_DIR);
 
         initThumbnail();
-
-        loadAudioListInfo();
-        startUITimer();
     }
 
     private void initThumbnail() {
@@ -114,6 +111,8 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     public void onResume() {
         super.onResume();
         LogUtils.trace();
+        loadAudioListInfo();
+        startUITimer();
         WSRecorder.inst().setCallback(mListenerCallback);
     }
 
@@ -121,6 +120,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     public void onPause() {
         LogUtils.trace();
         WSRecorder.inst().setCallback(null);
+        stopUITimer();
         super.onPause();
     }
 
@@ -128,6 +128,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     public void onStop() {
         LogUtils.trace();
         WSRecorder.inst().setCallback(null);
+        stopUITimer();
         super.onStop();
     }
 
@@ -135,14 +136,15 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     public void onDestroy() {
         LogUtils.trace();
         WSRecorder.inst().setCallback(null);
+        stopUITimer();
         super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
         LogUtils.d("AudioTemplateActivity:onBackPressed");
-        stopUITimer();
         WSRecorder.inst().setCallback(null);
+        stopUITimer();
         super.onBackPressed();
     }
 
@@ -209,11 +211,13 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
     private WSListener.ListenerCallback mListenerCallback = new WSListener.ListenerCallback() {
         @Override
         public void onListenStarted(){
+            WSNotifier.updateNotification();
             AudioRecordActivity.this.updateUI();
         }
 
         @Override
         public void onListenStopped(boolean save) {
+            WSNotifier.updateNotification();
             AudioRecordActivity.this.updateUI();
             if (save) {
                 AudioRecordActivity.this.updateAudioList();
@@ -222,6 +226,7 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
 
         @Override
         public void onReadAudioData(final int size, final byte[] data) {
+            //LogUtils.trace();
             AudioRecordActivity.this.runOnUiThread(new Runnable() {
                 public void run() {
                     synchronized (WSRecorder.inst().getDataLock()) {

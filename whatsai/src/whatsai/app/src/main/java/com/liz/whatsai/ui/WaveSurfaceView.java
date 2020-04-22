@@ -118,6 +118,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	}
 
 	public void clearCanvas() {
+		LogUtils.trace();
 		mDataList.clear();
 		redrawSurface();
 	}
@@ -171,6 +172,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	}
 
 	public void updateAudioData(final byte[] data, final int size) {
+		//LogUtils.trace();
 		addAudioData(data, size);
 		redrawSurface();
 	}
@@ -319,6 +321,7 @@ public class WaveSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 	}
 
 	public void redrawSurface() {
+		//LogUtils.trace();
 		drawSurface();
 	}
 

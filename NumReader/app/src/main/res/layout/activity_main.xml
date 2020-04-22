@@ -55,31 +55,34 @@
         android:id="@+id/tv_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:text="RESET"
-        android:textSize="22sp"
+        android:textSize="28sp"
         android:textColor="#0000ff"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center|center_vertical"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="0dp"
             android:text="TEST NUM: "
-            android:textSize="20sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
         <EditText
-            android:id="@+id/edit_num"
+            android:id="@+id/edit_test_num"
             android:layout_width="139dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
             android:maxLength="10"
             android:digits="1234567890"
             android:inputType="number"
@@ -89,7 +92,12 @@
             android:id="@+id/btn_play_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="PLAY"
+            android:textSize="16sp"
+            android:textStyle="bold"
             />
     </LinearLayout>
 

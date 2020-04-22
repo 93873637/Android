@@ -178,10 +178,14 @@ public class UsbUtils {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static String getUsbDeviceInfo(UsbDevice device) {
         return device.getDeviceName()
-                + "|" + device.getVendorId() + ":" + device.getProductId()
-                + "|" + device.getProductName()
-                + "|" + device.getManufacturerName()
-                + "|" + device.getDeviceClass() + "/" + device.getDeviceSubclass()
+                + " | " + usbId2HexStr(device.getVendorId()) + ":" + usbId2HexStr(device.getProductId())
+                + " | " + device.getProductName()
+                + " | " + device.getManufacturerName()
+                + " | " + device.getDeviceClass() + "/" + device.getDeviceSubclass()
                 ;
+    }
+
+    public static String usbId2HexStr(int id) {
+        return NumUtils.short2HexStr((short)id);
     }
 }

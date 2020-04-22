@@ -1,3 +1,9 @@
+MyDish/app/build
+MyDish/.gradle
+
+KeyTest/app/build
+KeyTest/.gradle
+
 NoAnnoy/src/NoAnnoy/app/build
 NoAnnoy/src/NoAnnoy/.gradle
 

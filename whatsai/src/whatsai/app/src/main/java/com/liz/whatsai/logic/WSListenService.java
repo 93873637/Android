@@ -88,11 +88,6 @@ public class WSListenService extends Service {
     public void onCreate() {
         super.onCreate();
         LogUtils.trace();
-        if (WSNotifier.getNotification() != null) {
-            startForeground(WSNotifier.NOTICE_ID_TYPE_0, WSNotifier.getNotification());
-        } else {
-            LogUtils.tw2("no notification to startForeground");
-        }
     }
 
     @Override
@@ -110,6 +105,11 @@ public class WSListenService extends Service {
                 WSRecorder.inst().stopListening();
             } else {
                 LogUtils.td("unhandled action " + action);
+            }
+            if (WSNotifier.getNotification() != null) {
+                startForeground(WSNotifier.NOTICE_ID_TYPE_0, WSNotifier.getNotification());
+            } else {
+                LogUtils.tw2("no notification to startForeground");
             }
         }
         return START_STICKY;

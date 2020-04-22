@@ -359,7 +359,7 @@ public class WSListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void onWorkingTimer() {
-        LogUtils.d("WSListener:onWorkingTimer");
+        //LogUtils.trace();
         mFrameRate = mFrameCount - mLastFrameCount;
         mLastFrameCount = mFrameCount;
         mDataRate = mTotalSize - mLastDataSize;
@@ -368,7 +368,7 @@ public class WSListener {
     }
 
     private void resetParams() {
-        LogUtils.d("WSListener:onStartWorkingTimer");
+        LogUtils.trace();
         clearPCMFile();
         mFrameSize = 0;
         mFrameCount = 0;
@@ -520,6 +520,7 @@ public class WSListener {
                 mFrameList.add(frame);
             }
 
+            //LogUtils.tv("mCallback = " + mCallback);
             if (mCallback != null) {
                 mCallback.onReadAudioData(readSize, audioData);
             }

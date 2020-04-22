@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.SystemClock;
 import android.text.Html;
 import android.widget.RemoteViews;
@@ -36,15 +37,17 @@ public class WSNotifier {
     public static final String WHATSAI_NOTIFY_KEY = "WhatsaiNotifyKey";
     private static final String ACTION_WHATSAI_NOTIFY = "com.liz.whatsai.notify";
 
+    public static final int NOTIFY_KEY_MAIN_UI = 0;
     public static final int NOTIFY_KEY_APP_STATUS = 1;
     public static final int NOTIFY_KEY_CLOSE_APP = 2;
 
     private static final int NOTIFY_UPDATE_TIMER_DELAY = 1000;
-    private static final int NOTIFY_UPDATE_TIMER_PERIOD = 5000;
+    private static final int NOTIFY_UPDATE_TIMER_PERIOD = 6000;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private static Notification mNotification;
+    private static String mChannelID = WHATSAI_CHANNEL_ID;
 
     /**
      * update channel id each time when create to remove the disgusting alter sound
@@ -56,11 +59,10 @@ public class WSNotifier {
 
     public static void open() {
         LogUtils.trace();
-        final Context context = MyApp.getAppContext();
-        final String channelID = genChannelID();
+        mChannelID = genChannelID();
         new Timer().schedule(new TimerTask() {
             public void run() {
-                updateNotification(context, channelID);
+                updateNotification();
             }
         }, NOTIFY_UPDATE_TIMER_DELAY, NOTIFY_UPDATE_TIMER_PERIOD);
     }
@@ -82,23 +84,24 @@ public class WSNotifier {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private static void updateNotification(final Context context, final String channelID) {
+    public static void updateNotification() {
+        Context context = MyApp.getAppContext();
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager == null) {
             LogUtils.te2("get notification service null");
             return;
         }
 
-        if (android.os.Build.VERSION.SDK_INT >= 26) {
-            NotificationChannel channel = new NotificationChannel(channelID, WHATSAI_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(mChannelID, WHATSAI_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
             //disable alert sound(NOTE: only take effect with new channel id)
             channel.setSound(null, null);
             manager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelID);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, mChannelID);
         //设置小图标
-        builder.setSmallIcon(WSRecorder.inst().isListening()?R.drawable.micphone:R.drawable.icon_bitcomet);
+        builder.setSmallIcon(WSRecorder.inst().isListening()?R.drawable.micphone_taskbar:R.drawable.icon_bitcomet);
         //设置大图标
         //builder.setLargeIcon(bitmap);
         //设置标题
@@ -133,9 +136,21 @@ public class WSNotifier {
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.layout_notification);
         remoteViews.setTextViewText(R.id.tv_whatsai_info, Html.fromHtml(WSRecorder.inst().getProgressInfoForNotify()));
+
+        remoteViews.setOnClickPendingIntent(R.id.main_image, getPendingIntentForActivity(context, NOTIFY_KEY_MAIN_UI));
+        remoteViews.setOnClickPendingIntent(R.id.notify_close_app, getPendingIntentForBroadcast(context, NOTIFY_KEY_CLOSE_APP));
+
         mNotification.bigContentView = remoteViews;
         mNotification.contentView = remoteViews;
         manager.notify(NOTICE_ID_TYPE_0, mNotification);
+    }
+
+    private static PendingIntent getPendingIntentForActivity(Context context, int keyId) {
+        Intent intent = new Intent(context, WSActivity.class);
+        intent.putExtra(WHATSAI_NOTIFY_KEY, keyId);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        int requestCode = (int) SystemClock.uptimeMillis();
+        return PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private static PendingIntent getPendingIntentForBroadcast(Context context, int keyId) {
@@ -145,13 +160,5 @@ public class WSNotifier {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         int requestCode = (int) SystemClock.uptimeMillis();
         return PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-    private static PendingIntent getPendingIntentForActivity(Context context, int keyId) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(WHATSAI_NOTIFY_KEY, keyId);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        int requestCode = (int) SystemClock.uptimeMillis();
-        return PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }

@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		final EditText editNum = findViewById(R.id.edit_num);
+		final EditText editNum = findViewById(R.id.edit_test_num);
 		findViewById(R.id.btn_play_num).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
