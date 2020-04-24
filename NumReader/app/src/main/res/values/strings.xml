@@ -8,10 +8,12 @@
     <string name="text_stop">Stop</string>
     
     <string name="time_span_prefix">Count once every </string>
-    <string name="time_span_surfix"> second(s)</string>
+    <string name="time_span_suffix"> second(s)</string>
     <string name="count_span_prefix">Read once every </string>
-    <string name="count_span_surfix"> count(s)</string>
-    
+    <string name="count_span_suffix"> count(s)</string>
+
+    <string name="desc_switch_button">Play/Pause</string>
+
     <string name="numeric_zero">0</string>
     
 </resources>

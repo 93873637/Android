@@ -1,4 +1,4 @@
-package com.liz.multidialer.ui;
+package com.liz.keytest;
 
 import android.app.Service;
 import android.content.ComponentName;
@@ -28,7 +28,17 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.liz.androidutils.LogUtils;
 
 /**
- * Created by dongzhong on 2018/5/30.
+ * //启动1x1大小服务窗口进行监听变化，音量按键下按
+ * //  不接受触摸屏事件。
+ * //public static final int FLAG_NOT_TOUCHABLE = 0x00000010;
+ * //
+ * //        当窗口可以获得焦点（没有设置FLAG_NOT_FOCUSALBE选项）时，仍然将窗口范围之外的点设备事件（鼠标、触摸屏）发送给后面的窗口处理。否则它将独占所有的点设备事件，而不管它们是不是发生在窗口范围之内。
+ * //public static final int FLAG_NOT_TOUCH_MODAL = 0x00000020;
+ * //NOTE: 注意不要设置FLAG_NOT_FOCUSABLE
+ * //任何按键均可触发
+ * //缺点:
+ * //锁屏，黑屏后无效
+ * //
  */
 
 @SuppressWarnings("unused")

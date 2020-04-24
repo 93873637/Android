@@ -8,7 +8,7 @@
         android:id="@+id/iv_dish"
         android:layout_width="@dimen/menu_item_height"
         android:layout_height="@dimen/menu_item_height"
-        android:background="#808080"
+        android:background="#909090"
         android:contentDescription="@string/app_name"
         android:scaleType="fitXY" />
 
@@ -16,6 +16,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/menu_item_height"
         android:layout_weight="1"
+        android:layout_gravity="center"
         android:background="#000000ff"
         android:orientation="vertical">
 
@@ -23,18 +24,21 @@
             android:id="@+id/tv_dish_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/menu_item_name_height"
+            android:gravity="center"
             android:layout_marginStart="6dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
             android:text="my dish name"
-            android:textSize="20sp"
+            android:textSize="28sp"
+            android:textColor="#0000ff"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/menu_item_button_height"
             android:layout_gravity="center"
+            android:padding="2dp"
             android:background="#0000ff00"
             android:orientation="horizontal">
 
@@ -43,27 +47,33 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_margin="2dp"
                 android:text="爸爸会"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/btn_text_size"
+                android:textStyle="bold"
+                android:background="@drawable/lightbulb_off2"/>
 
             <Button
                 android:id="@+id/btn_mum"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_margin="2dp"
                 android:text="妈妈会"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/btn_text_size"
+                android:textStyle="bold"
+                android:background="@drawable/lightbulb_off2"/>
 
             <Button
                 android:id="@+id/btn_grandma"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_margin="2dp"
                 android:text="姥姥会"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/btn_text_size"
+                android:textStyle="bold"
+                android:background="@drawable/lightbulb_off2"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -2,10 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a186f87-7a15-4948-bfb6-c7f7e72c447b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/logic/DataLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../whatsai/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/DiskTestUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/FloatingButtonService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/PowerSaveMonitorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MonitorView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../KeyTest/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../KeyTest/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/VolumeKeyObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/VolumeKeyObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/app/ThisApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/app/ThisApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/FloatingButtonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/FloatingButtonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyDish/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/data/MenuListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/data/MenuListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/logic/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/logic/Dish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/res/layout/menu_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/res/layout/menu_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,15 +37,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -45,15 +50,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="223" column="27" selection-start-line="223" selection-start-column="19" selection-end-line="223" selection-end-column="27" />
+            <state relative-caret-position="535">
+              <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
               <folding>
                 <element signature="e#7718#7719#0" expanded="true" />
                 <element signature="e#7818#7819#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/CmdTool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="897">
+              <caret line="40" column="23" lean-forward="true" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -96,16 +110,17 @@
       <find>textInfo</find>
       <find>mTextInfo</find>
       <find>progress</find>
+      <find>runCmd</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="1932" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -229,9 +244,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.34861407" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25746268" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -277,8 +293,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+        <state relative-caret-position="1955">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
         </state>
       </provider>
     </entry>
@@ -312,12 +328,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="223" column="27" selection-start-line="223" selection-start-column="19" selection-end-line="223" selection-end-column="27" />
+        <state relative-caret-position="535">
+          <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
           <folding>
             <element signature="e#7718#7719#0" expanded="true" />
             <element signature="e#7818#7819#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/cmdtool/CmdTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="897">
+          <caret line="40" column="23" lean-forward="true" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
         </state>
       </provider>
     </entry>

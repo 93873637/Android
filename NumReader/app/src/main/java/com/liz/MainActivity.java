@@ -16,16 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private ImageButton mBtnSwtich;
-	private TextView tvTimeCount = null;
-	private TextView tvNumCount = null;
+	private Button mBtnSwitch;
+	private TextView mTextTimeCount = null;
 	private View mLayoutSettings = null;
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -39,8 +38,8 @@ public class MainActivity extends Activity {
 	private static class UIHandler extends Handler {
 		private final WeakReference<MainActivity> mActivity;
 
-		public UIHandler(MainActivity activity) {
-			mActivity = new WeakReference<MainActivity>(activity);
+		UIHandler(MainActivity activity) {
+			mActivity = new WeakReference<>(activity);
 		}
 
 		@Override
@@ -55,10 +54,8 @@ public class MainActivity extends Activity {
 
 	public void handleMessage(Message msg) {
 		switch (msg.what) {
-		case 0:
-			// refresh ui
-			tvTimeCount.setText(NumReader.getFormatTimeStr());
-			tvNumCount.setText("" + NumReader.getCount());
+		case NumReader.MSG_NUMBER_UPDATED:
+			updateUI();
 			break;
 		default:
 			break;
@@ -66,9 +63,9 @@ public class MainActivity extends Activity {
 	}
 
 	public void updateUI() {
-		tvTimeCount.setText(NumReader.getFormatTimeStr());
-		tvNumCount.setText(NumReader.getCountString());
-		mBtnSwtich.setBackgroundResource(NumReader.isPlaying()? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
+		mTextTimeCount.setText(NumReader.getFormatTimeStr());
+		mBtnSwitch.setText(NumReader.getNumberString());
+		mBtnSwitch.setBackgroundResource(NumReader.isPlaying()? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
 	}
 
 	@Override
@@ -76,19 +73,26 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mBtnSwtich = findViewById(R.id.btn_switch);
-		mBtnSwtich.setOnClickListener(new OnClickListener() {
+		mBtnSwitch = findViewById(R.id.btn_switch);
+		mBtnSwitch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				NumReader.switchOnOff();
+				NumReader.switchPlayPause();
 				updateUI();
 			}
 		});
 
-		tvTimeCount = findViewById(R.id.textTimeCount);
-		tvNumCount = findViewById(R.id.textNumCount);
+		mTextTimeCount = findViewById(R.id.textTimeCount);
 
-		findViewById(R.id.tv_reset).setOnClickListener(new OnClickListener() {
+		findViewById(R.id.ib_replay).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				NumReader.replay();
+				updateUI();
+			}
+		});
+
+		findViewById(R.id.ib_reset).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				NumReader.reset();
@@ -119,9 +123,7 @@ public class MainActivity extends Activity {
 
 	protected void onResume() {
 		super.onResume();
-		
-		tvNumCount.setText("" + NumReader.getCount());
-		tvTimeCount.setText(NumReader.getFormatTimeStr());
+		updateUI();
 	}
 
 	@Override
@@ -208,7 +210,7 @@ public class MainActivity extends Activity {
 			editor.putFloat(NumReader.SP_PLAY_RATE, newPlayRate);
 			editor.commit();
 			
-			//update value and stop current reading
+			//update value and pause current reading
 			NumReader.mTimeSpan = newTimeSpan;
 			NumReader.mReadSpan = newReadSpan;
 			NumReader.mDigitSpan = newDigitSpan;

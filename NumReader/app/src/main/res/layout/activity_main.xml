@@ -6,68 +6,94 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context="com.liz.MainActivity"
-    tools:ignore="MergeRootFrame" >
+    tools:ignore="MergeRootFrame">
 
     <!--switch button-->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="0dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <ImageButton
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
             android:id="@+id/btn_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="000"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:background="@drawable/bg_circle_green"/>
-    </LinearLayout>
+            android:textSize="88sp"
+            android:background="@drawable/bg_circle_green"
+            android:contentDescription="@string/desc_switch_button"
+            />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textNumCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="@string/numeric_zero"
-        android:textSize="88sp"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:id="@+id/textNumCount"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="80dp"-->
+        <!--android:layout_marginTop="80dp"-->
+        <!--android:text="@string/numeric_zero"-->
+        <!--android:textSize="88sp"-->
+        <!--android:textStyle="bold" />-->
 
     <TextView
         android:id="@+id/textTimeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="6dp"
         android:text="@string/default_date_time"
         android:textSize="39sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_padding"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+    <!--padding-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_padding"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!--/>-->
 
-    <TextView
-        android:id="@+id/tv_reset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="RESET"
-        android:textSize="28sp"
-        android:textColor="#0000ff"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ib_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_circle_yellow"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/ib_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_circle_blue"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center|center_vertical"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,19 +101,19 @@
             android:layout_marginEnd="0dp"
             android:text="TEST NUM: "
             android:textSize="18sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/edit_test_num"
             android:layout_width="139dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="2dp"
-            android:maxLength="10"
             android:digits="1234567890"
             android:inputType="number"
-            android:text="1234567890"
-            />
+            android:maxLength="10"
+            android:text="1234567890" />
+
         <Button
             android:id="@+id/btn_play_num"
             android:layout_width="wrap_content"
@@ -97,8 +123,7 @@
             android:paddingEnd="10dp"
             android:text="PLAY"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

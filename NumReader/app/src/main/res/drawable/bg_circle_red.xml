@@ -17,7 +17,7 @@
         android:type="radial" />
 
     <size
-        android:width="@dimen/circle_button_size"
-        android:height="@dimen/circle_button_size" />
+        android:width="@dimen/switch_button_circle_size"
+        android:height="@dimen/switch_button_circle_size" />
 
 </shape>

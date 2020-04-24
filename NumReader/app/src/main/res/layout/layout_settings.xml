@@ -33,7 +33,7 @@
             android:id="@+id/tvCountTimeSpanSurfix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/time_span_surfix" />
+            android:text="@string/time_span_suffix" />
     </LinearLayout>
 
     <!--read span-->
@@ -62,7 +62,7 @@
             android:id="@+id/tvCountReadSpanSurfix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/count_span_surfix" />
+            android:text="@string/count_span_suffix" />
     </LinearLayout>
 
     <!--digits span-->

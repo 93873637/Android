@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.liz.androidutils.LogEx;
 import com.liz.androidutils.LogUtils;
 import com.liz.multidialer.logic.ComDef;
 import com.liz.multidialer.logic.DataLogic;
@@ -32,8 +33,8 @@ public class ThisApp extends Application {
         mAppVersionShow = "";
 
         LogUtils.setTag(ComDef.APP_NAME);
-        LogUtils.setLogDir(ComDef.DIALER_LOG_DIR);
-        LogUtils.setSaveToFile(true);
+        LogEx.setLogDir(ComDef.DIALER_LOG_DIR);
+        LogEx.setSaveToFile(true);
         LogUtils.d("ThisApp: onCreate, pid = " + android.os.Process.myPid());
 
         DataLogic.init();

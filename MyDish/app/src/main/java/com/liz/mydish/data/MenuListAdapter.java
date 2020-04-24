@@ -23,10 +23,11 @@ public class MenuListAdapter extends BaseAdapter {
         mLayoutInflater = LayoutInflater.from(context);
 
         //load test data
-        for (int i = 0; i < 10; i++) {
-            mDishList.add(new Dish("Dish" + i));
-        }
-
+        mDishList.add(new Dish("披萨", R.drawable.pizza));
+        mDishList.add(new Dish("蛋糕", R.drawable.cake));
+        mDishList.add(new Dish("牛排", R.drawable.beaf));
+        mDishList.add(new Dish("咖喱饭", R.drawable.gali));
+        mDishList.add(new Dish("火锅", R.drawable.firepot));
     }
 
     @Override
@@ -50,7 +51,7 @@ public class MenuListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.menu_list_item, parent, false);
             holder = new ViewHolder();
@@ -64,7 +65,31 @@ public class MenuListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();  //the Object stored in this view as a tag
         }
 
+        holder.ivDishPic.setBackgroundResource(mDishList.get(position).resId);
         holder.tvDishName.setText(mDishList.get(position).name);
+
+        holder.btnDad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDishList.get(position).dad_can = !mDishList.get(position).dad_can;
+                holder.btnDad.setBackgroundResource(mDishList.get(position).dad_can?R.drawable.lightbulb_on1:R.drawable.lightbulb_off2);
+            }
+        });
+        holder.btnMum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDishList.get(position).mum_can = !mDishList.get(position).mum_can;
+                holder.btnMum.setBackgroundResource(mDishList.get(position).mum_can?R.drawable.lightbulb_on1:R.drawable.lightbulb_off2);
+            }
+        });
+        holder.btnGrandma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDishList.get(position).grandma_can = !mDishList.get(position).grandma_can;
+                holder.btnGrandma.setBackgroundResource(mDishList.get(position).grandma_can?R.drawable.lightbulb_on1:R.drawable.lightbulb_off2);
+            }
+        });
+
         return convertView;
     }
 

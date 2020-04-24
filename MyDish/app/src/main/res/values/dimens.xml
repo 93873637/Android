@@ -2,7 +2,8 @@
 <resources>
 
     <dimen name="menu_item_height">180dp</dimen>
-    <dimen name="menu_item_name_height">40dp</dimen>
-    <dimen name="menu_item_button_height">140dp</dimen>
+    <dimen name="menu_item_name_height">103dp</dimen>
+    <dimen name="menu_item_button_height">77dp</dimen>
+    <dimen name="btn_text_size">18sp</dimen>
 
 </resources>
