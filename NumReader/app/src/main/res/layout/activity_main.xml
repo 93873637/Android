@@ -29,16 +29,6 @@
             />
     </RelativeLayout>
 
-    <!--<TextView-->
-        <!--android:id="@+id/textNumCount"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="80dp"-->
-        <!--android:layout_marginTop="80dp"-->
-        <!--android:text="@string/numeric_zero"-->
-        <!--android:textSize="88sp"-->
-        <!--android:textStyle="bold" />-->
-
     <TextView
         android:id="@+id/textTimeCount"
         android:layout_width="wrap_content"
@@ -47,14 +37,6 @@
         android:text="@string/default_date_time"
         android:textSize="39sp"
         android:textStyle="bold" />
-
-    <!--padding-->
-    <!--<TextView-->
-    <!--android:id="@+id/tv_padding"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_weight="1"-->
-    <!--/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,23 +47,23 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/ib_replay"
+        <Button
+            android:id="@+id/btn_replay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/bg_circle_yellow"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/replay_button_style"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:id="@+id/ib_reset"
+        <Button
+            android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/bg_circle_blue"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/reset_button_style"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
     </LinearLayout>

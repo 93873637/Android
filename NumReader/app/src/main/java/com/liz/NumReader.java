@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+@SuppressWarnings("WeakerAccess")
 public class NumReader {
 
     public static final String TAG = "NumReader";
@@ -19,16 +20,19 @@ public class NumReader {
     public static final String SP_READ_SPAN = "SharedPrefCountReadSpan";
     public static final String SP_DIGIT_SPAN = "SharedPrefDigitSpan";
     public static final String SP_PLAY_RATE = "SharedPrefPlaySpan";
+    public static final String SP_COUNT_START = "SharedPrefCountStart";
 
     public static final int DEFAULT_TIME_SPAN = 1;  //default time span(seconds) to count once
     public static final int DEFAULT_READ_SPAN = 5;  //default span to read once
     public static final int DEFAULT_DIGIT_SPAN = 300;  //default time span(seconds) to count once
     public static final float DEFAULT_PLAY_RATE = 1.1f;  //default span to read once
+    public static final int DEFAULT_COUNT_START = 0;  //default count start number
 
     public static int mTimeSpan = DEFAULT_TIME_SPAN;  //how many seconds to count once
     public static int mReadSpan = DEFAULT_READ_SPAN;  //how many count to read once
     public static int mDigitSpan = DEFAULT_DIGIT_SPAN;  // span between digit(s) in same number string, unit by ms
     public static float mPlayRate = DEFAULT_PLAY_RATE;  // sound pool play rate, 0.5f - 2.0f, slower - faster
+    public static int mCountStart = DEFAULT_COUNT_START;
 
     //constants
     public static final int TIMER_DELAY = 0;
@@ -36,7 +40,7 @@ public class NumReader {
 
     //variables
     private static Timer mCountTimer = null;
-    private static int mTotalNumber = 0;
+    private static int mCountNumber = mCountStart;
 
     public static final int MSG_NUMBER_UPDATED = 0;
 
@@ -52,6 +56,8 @@ public class NumReader {
         mReadSpan = spSettings.getInt(NumReader.SP_READ_SPAN, NumReader.DEFAULT_READ_SPAN);
         mDigitSpan = spSettings.getInt(NumReader.SP_DIGIT_SPAN, NumReader.DEFAULT_DIGIT_SPAN);
         mPlayRate = spSettings.getFloat(NumReader.SP_PLAY_RATE, NumReader.DEFAULT_PLAY_RATE);
+        mCountStart = spSettings.getInt(NumReader.SP_COUNT_START, NumReader.DEFAULT_COUNT_START);
+        mCountNumber = mCountStart;
         SoundPoolPlayer.init(context);
     }
 
@@ -65,7 +71,7 @@ public class NumReader {
 
     public static void reset() {
         pause();
-        mTotalNumber = 0;
+        mCountNumber = mCountStart;
     }
 
     public static void replay() {
@@ -113,12 +119,16 @@ public class NumReader {
         return "" + mDigitSpan;
     }
 
+    public static String getCountStartString() {
+        return "" + mCountStart;
+    }
+
     public static String getPlayRateString() {
         return "" + mPlayRate;
     }
 
     public static String getFormatTimeStr() {
-        int secondCount = mTotalNumber * mTimeSpan;
+        int secondCount = mCountNumber * mTimeSpan;
         int hour = secondCount / (60 * 60);
         int minute = (secondCount - hour * 60) / 60;
         int second = secondCount - hour * 60 * 60 - minute * 60;
@@ -140,11 +150,11 @@ public class NumReader {
     }
 
     public static String getNumberString() {
-        return "" + mTotalNumber;
+        return "" + mCountNumber;
     }
 
     public static int getNumber() {
-        return mTotalNumber;
+        return mCountNumber;
     }
 
     private static class MyTimerTask extends TimerTask {
@@ -169,15 +179,15 @@ public class NumReader {
     };
 
     public static void onTimerEvent() {
-        mTotalNumber++;
+        mCountNumber++;
         mUIHandler.sendEmptyMessage(MSG_NUMBER_UPDATED);
 
-        if (mTotalNumber % mReadSpan == 0 && mTotalNumber != 0) {
+        if (mCountNumber % mReadSpan == 0) {
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    SoundPoolPlayer.playNumber(mTotalNumber);
+                    SoundPoolPlayer.playNumber(mCountNumber);
                 }
             }).start();
         }

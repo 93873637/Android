@@ -11,40 +11,217 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f79dfa04-fc38-457a-9d79-cc9887230c5c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/DiskTestUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/FloatingButtonService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/PowerSaveMonitorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/MonitorView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CmdTool/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CmdTool/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KeyTest/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KeyTest/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/VolumeKeyObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../KeyTest/app/src/main/java/com/liz/keytest/VolumeKeyObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/app/ThisApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/app/ThisApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/FloatingButtonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MultiDialer/src/MultiDialer/app/src/main/java/com/liz/multidialer/ui/FloatingButtonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyDish/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/data/MenuListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/data/MenuListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/logic/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/java/com/liz/mydish/logic/Dish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/res/layout/menu_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/res/layout/menu_list_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MyDish/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/.idea/dictionaries/cloud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/.idea/dictionaries/cloud.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/TelUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsLib/src/main/java/com/liz/androidutils/TelUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AndroidUtils/AndroidUtilsTest/src/main/java/com/liz/androidutilstest/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.18.1214.1552.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.18.1214.1557.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.18.1220.1035.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.18.1220.1055.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.19.0103.1413.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.19.0103.1414.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.19.0103.1416.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.19.0107.1702.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.19.0107.2044.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CmdTool/app/build/outputs/apk/debug/CmdTool_1.0.19.0107.2342.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Feedback/app/debug/app-debug.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/MultiDialer1223_test_no_upload.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/autodialer.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/autodialer2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/autodialer3.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/calllogreader.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/dialer.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1022.1140.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1022.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1023.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1030.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1105.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1127/MultiDialer.2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1127/MultiDialer.3.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1127/MultiDialer.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1127/MultiDialerDaemon.2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1127/MultiDialerDaemon.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1224.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1224_2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1225.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1225_2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1230.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer1231.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/2019/multidialer2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0107_test_restart_screen_cap.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0109.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0109_2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0112.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0113.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0118.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0120.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0120_2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0120_3.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MultiDialer/res/apk/multidialer0121.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyCameras/src/AutoCamera/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyCameras/src/MultiCamera/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NoAnnoy/res/release/NoAnnoy0812.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NoAnnoy/res/release/NoAnnoy0813.15.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NoAnnoy/res/release/NoAnnoy0813.apk" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/LogUtils.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_blue.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_blue.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PureMusic/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/assets/iflytek/recognize.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/assets/iflytek/voice_bg.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/assets/iflytek/voice_empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/assets/iflytek/voice_full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/assets/iflytek/waiting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/assets/iflytek/warning.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/libs/Msc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/libs/arm64-v8a/libmsc.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/libs/armeabi-v7a/libmsc.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/release.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/res/iat/common.jet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/res/iat/sms_16k.jet" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/res/layout/ifly_layout_mnotice_image.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.gradle/5.1.1/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.gradle/5.1.1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/libs/Msc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/libs/arm64-v8a/libmsc.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/libs/armeabi-v7a/libmsc.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/lint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/local.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/msc.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/mscV5PlusDemo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/call.bnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/grammar_sample.abnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/iattest.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/iflytek/recognize.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/iflytek/voice_bg.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/iflytek/voice_empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/iflytek/voice_full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/iflytek/waiting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/iflytek/warning.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/userwords" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/wake.bnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/assets/wake_grammar_sample.abnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/AsrDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/IatDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/IvwActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/OneShotDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/SpeechApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/TtsDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/mscv5plusdemo/WakeDemo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/speech/setting/IatSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/speech/setting/TtsSettings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/speech/util/FucUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/speech/util/JsonParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/speech/util/SettingTextWatcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/java/com/iflytek/speech/util/XmlParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_left.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_left_f.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_left_n.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_left_p.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_right.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_right_f.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_right_n.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/btn_right_p.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/button_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/cancel.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/cancel_p.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/editbox.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/edittext_name.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/login.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/login_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/mic_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/mic_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/mic_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/mic_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/name_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/name_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/ok.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/ok_d.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/ok_p.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/pane_bg.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-hdpi/superman.9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-ldpi/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable-mdpi/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable/cancel_button.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable/list_bg_color.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable/main_setting_btn_np.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable/ok_button.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable/setting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/drawable/setting_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/iatdemo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/isrdemo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/ivw_activity.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/list_items.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/oneshot_activity.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/title.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/ttsdemo.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/layout/wake_activity.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/values/dimen.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/xml/iat_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/xml/tts_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/res/Android_esriat_exp1139_5e304fda/sample/mscV5PlusDemo/src/main/res/xml/understand_setting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VoiceRecognition/src/baidu_speech_ASR_V3_20191210_81acdf5_3.1.3/ASR_V3_20191210_81acdf5_3.1.3.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_apk/Background voice recorder BVR_v3.0.2.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_apk/PerfMon.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_apk/potplayer.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUSBCamera-master.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../_bin/AndroidUtils.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/BusList_1.0.18.1114.1007.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/Feedback_1.0.59.180701.0226_76d00fb.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/NumberReader.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/TroubleMaker.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/UVCCamera.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/install/ImageTools_1.0.19.0729.1836.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/install/PureMusic_1.0.19.0213.0014.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/install/PureTorch_1.0.19.0830.1150.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../_bin/install/ScreenHelper_1.0.19.0902.1009.apk" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,44 +246,27 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
-              <folding>
-                <element signature="e#1090#1118#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
           <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="72" column="13" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="13" />
-              <folding>
-                <element signature="e#2498#2499#0" expanded="true" />
-                <element signature="e#2531#2532#0" expanded="true" />
-                <element signature="e#3879#3880#0" expanded="true" />
-                <element signature="e#3904#3905#0" expanded="true" />
-                <element signature="e#4743#5004#0" expanded="true" />
-                <element signature="e#5003#5004#0" expanded="true" />
-                <element signature="e#5311#5483#0" expanded="true" />
-                <element signature="e#5482#5483#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="506">
+              <caret line="62" column="48" selection-start-line="62" selection-start-column="48" selection-end-line="62" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/android/os/Handler.class">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="113" column="25" selection-start-line="113" selection-start-column="25" selection-end-line="113" selection-end-column="25" />
+            <state relative-caret-position="374">
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
               <folding>
-                <element signature="e#3433#3434#0" expanded="true" />
-                <element signature="e#3484#3485#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1799#1800#0" expanded="true" />
+                <element signature="e#1813#1814#0" expanded="true" />
+                <element signature="e#2506#3205#0" expanded="true" />
+                <element signature="e#3204#3205#0" expanded="true" />
+                <element signature="e#3287#3986#0" expanded="true" />
+                <element signature="e#3985#3986#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,48 +275,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_yellow.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
-              <folding>
-                <element signature="e#484#519#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="368">
+              <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_blue.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_yellow_pressed.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+            <state relative-caret-position="391">
+              <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
               <folding>
-                <element signature="e#484#519#0" expanded="true" />
-                <element signature="e#543#578#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
-              <caret line="97" column="31" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-              <folding>
-                <element signature="e#484#518#0" expanded="true" />
-                <element signature="e#542#576#0" expanded="true" />
+                <element signature="e#484#527#0" expanded="true" />
+                <element signature="e#551#594#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,44 +297,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-              <folding>
-                <element signature="e#477#511#0" expanded="true" />
-                <element signature="e#535#569#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="184">
+              <caret line="8" column="39" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>com.android.tools.build:gradle</find>
-      <find>MAX_SOUNDS</find>
-      <find>NumReader</find>
-      <find>playNumberString</find>
-      <find>mContext</find>
-      <find>play</find>
       <find>etCountReadSpan</find>
       <find>callback</find>
       <find>SP_READ_SPAN</find>
@@ -212,12 +323,27 @@
       <find>switchOnOff</find>
       <find>tvTimeCount</find>
       <find>mUIHandler</find>
-      <find>mBtnSwitch</find>
       <find>mTotalCount</find>
       <find>textNumCount</find>
       <find>UIHandler</find>
       <find>tvNumCount</find>
       <find>77</find>
+      <find>setBackgroundColor</find>
+      <find>setBackgroundResource</find>
+      <find>control_button_pressed_circle_size</find>
+      <find>btn_switch</find>
+      <find>updateUI</find>
+      <find>bg_circle_blue_pressed</find>
+      <find>ib_reset</find>
+      <find>reset_button_style</find>
+      <find>edit_play_rate</find>
+      <find>mDigitSpan</find>
+      <find>mReadSpan</find>
+      <find>mCountStart</find>
+      <find>mTotalNumber</find>
+      <find>mBtnSwitch</find>
+      <find>mCountNumber</find>
+      <find>init</find>
     </findStrings>
     <replaceStrings>
       <replace>Start</replace>
@@ -231,19 +357,31 @@
       <list>
         <option value="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/SoundPoolPlayer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/MyButton.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/button_style.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/shape_button_style.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_yellow.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/play_button_style.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green_pressed.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_blue.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_blue_pressed.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/reset_button_style.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/replay_button_style.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/ShapeButton.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/SwitchButton.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red_pressed.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_yellow_pressed.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml" />
       </list>
     </option>
   </component>
@@ -262,41 +400,8 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="NumReader" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="NumReader" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="NumReader" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="drawable" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="NumReader" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="NumReader" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane" />
     </panes>
   </component>
@@ -308,6 +413,9 @@
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.liz" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\WorkSpace\Android\NumReader\app\src\main\res\drawable" />
     </key>
@@ -492,7 +600,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24946696" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24946696" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Captures" order="2" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="3" />
@@ -504,18 +612,18 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32850778" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997773" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Gradle Console" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Logcat" order="10" weight="0.32919955" />
+      <window_info anchor="bottom" id="Logcat" order="10" weight="0.33853006" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.3295063" />
-      <window_info anchor="bottom" id="Build" order="14" weight="0.26391983" />
+      <window_info anchor="bottom" id="Build" order="14" weight="0.26280624" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -537,20 +645,20 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Resources Explorer" order="8" weight="0.32959402" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32919955" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32850778" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997773" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Gradle Console" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Logcat" order="10" weight="0.32919955" />
+      <window_info anchor="bottom" id="Logcat" order="10" weight="0.33853006" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.3295063" />
-      <window_info anchor="bottom" id="Build" order="14" weight="0.26391983" />
+      <window_info anchor="bottom" id="Build" order="14" weight="0.26280624" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -562,20 +670,30 @@
       <window_info anchor="right" id="Preview" order="8" />
     </layout-to-restore>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/SwitchButton.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/liz/ShapeButton.java</url>
+          <line>38</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/import-summary.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/gradlew.bat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
@@ -615,22 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="789">
-          <caret line="79" column="31" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -638,108 +740,193 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/android/os/Handler.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
+        <state relative-caret-position="2185">
           <caret line="113" column="25" selection-start-line="113" selection-start-column="25" selection-end-line="113" selection-end-column="25" />
-          <folding>
-            <element signature="e#3433#3434#0" expanded="true" />
-            <element signature="e#3484#3485#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
-          <folding>
-            <element signature="e#1090#1118#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="97" column="31" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="72" column="13" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="13" />
-          <folding>
-            <element signature="e#2498#2499#0" expanded="true" />
-            <element signature="e#2531#2532#0" expanded="true" />
-            <element signature="e#3879#3880#0" expanded="true" />
-            <element signature="e#3904#3905#0" expanded="true" />
-            <element signature="e#4743#5004#0" expanded="true" />
-            <element signature="e#5003#5004#0" expanded="true" />
-            <element signature="e#5311#5483#0" expanded="true" />
-            <element signature="e#5482#5483#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_yellow.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/LogUtils.java" />
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
-          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+          <caret line="21" column="70" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_style.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="22" column="48" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/play_button_style.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-w820dp/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/android/view/View.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7130">
+          <caret line="398" column="19" selection-start-line="398" selection-start-column="19" selection-end-line="398" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green_pressed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="21" column="64" selection-start-line="21" selection-start-column="64" selection-end-line="21" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-v11/styles.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-v14/styles.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_settings.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="105" column="43" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="43" />
           <folding>
-            <element signature="e#484#519#0" expanded="true" />
+            <element signature="e#355#1313#0" />
+            <element signature="e#1340#2299#0" />
+            <element signature="e#2328#3056#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_blue.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
+        <state relative-caret-position="276">
+          <caret line="12" selection-start-line="2" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_blue_pressed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="36" selection-start-line="6" selection-end-line="21" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/reset_button_style.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="89" selection-start-line="3" selection-start-column="67" selection-end-line="3" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/replay_button_style.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" selection-start-line="2" selection-end-line="4" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/SwitchButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/NumReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/ShapeButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-49">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
           <folding>
-            <element signature="e#484#519#0" expanded="true" />
-            <element signature="e#543#578#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#588#1387#0" expanded="true" />
+            <element signature="e#1386#1387#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red_pressed.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+        <state relative-caret-position="138">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
           <folding>
-            <element signature="e#477#511#0" expanded="true" />
-            <element signature="e#535#569#0" expanded="true" />
+            <element signature="e#477#519#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_green.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        <state relative-caret-position="552">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_red.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_yellow.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_circle_yellow_pressed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
           <folding>
-            <element signature="e#484#518#0" expanded="true" />
-            <element signature="e#542#576#0" expanded="true" />
+            <element signature="e#484#527#0" expanded="true" />
+            <element signature="e#551#594#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="62" column="48" selection-start-line="62" selection-start-column="48" selection-end-line="62" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/liz/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1799#1800#0" expanded="true" />
+            <element signature="e#1813#1814#0" expanded="true" />
+            <element signature="e#2506#3205#0" expanded="true" />
+            <element signature="e#3204#3205#0" expanded="true" />
+            <element signature="e#3287#3986#0" expanded="true" />
+            <element signature="e#3985#3986#0" expanded="true" />
           </folding>
         </state>
       </provider>

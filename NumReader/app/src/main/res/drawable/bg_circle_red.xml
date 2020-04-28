@@ -4,7 +4,7 @@
     android:shape="oval"
     android:useLevel="false">
 
-    <solid android:color="#a0ff0000" />
+    <solid android:color="#ff0000" />
 
     <!--<stroke
         android:width="5dp"
@@ -13,7 +13,7 @@
     <gradient
         android:endColor="#770000"
         android:gradientRadius="100%p"
-        android:startColor="#FF0000"
+        android:startColor="#ff0000"
         android:type="radial" />
 
     <size

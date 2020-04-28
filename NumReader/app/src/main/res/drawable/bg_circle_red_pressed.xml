@@ -4,21 +4,20 @@
     android:shape="oval"
     android:useLevel="false">
 
-    <solid android:color="#0000ff" />
+    <solid android:color="#ff0000" />
 
     <!--<stroke
         android:width="5dp"
-        android:color="#e0e0e0" />
-        -->
+        android:color="#e0e0e0" />-->
 
     <gradient
-        android:endColor="#0000ff"
+        android:endColor="#770000"
         android:gradientRadius="100%p"
-        android:startColor="#efefef"
+        android:startColor="#ff0000"
         android:type="radial" />
 
     <size
-        android:width="@dimen/control_button_circle_size"
-        android:height="@dimen/control_button_circle_size" />
+        android:width="@dimen/switch_button_circle_size_pressed"
+        android:height="@dimen/switch_button_circle_size_pressed" />
 
 </shape>

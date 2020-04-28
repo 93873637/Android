@@ -13,6 +13,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,9 +22,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.liz.androidutils.LogUtils;
+
 public class MainActivity extends Activity {
 
 	private Button mBtnSwitch;
+	private Button mBtnReplay;
+	private Button mBtnReset;
+	//private SwitchButton mBtnSwitch;
 	private TextView mTextTimeCount = null;
 	private View mLayoutSettings = null;
 	
@@ -63,6 +69,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void updateUI() {
+		setUI();
+	}
+
+	public void setUI() {
 		mTextTimeCount.setText(NumReader.getFormatTimeStr());
 		mBtnSwitch.setText(NumReader.getNumberString());
 		mBtnSwitch.setBackgroundResource(NumReader.isPlaying()? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
@@ -74,31 +84,77 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		mBtnSwitch = findViewById(R.id.btn_switch);
-		mBtnSwitch.setOnClickListener(new OnClickListener() {
+//		mBtnSwitch.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				NumReader.switchPlayPause();
+//				updateUI();
+//			}
+//		});
+//
+		mBtnSwitch.setOnTouchListener(mOnTouchListener);
+
+		mBtnReplay = findViewById(R.id.btn_replay);
+		mBtnReplay.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View v) {
-				NumReader.switchPlayPause();
-				updateUI();
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				switch (motionEvent.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						//textView.animate().scaleX(0.8f).scaleY(0.8f).setDuration(500).start();
+						LogUtils.td("ACTION_DOWN");
+						mBtnReplay.setBackgroundResource(R.drawable.bg_circle_yellow_pressed);
+						break;
+					case MotionEvent.ACTION_UP:
+						//textView.animate().scaleX(1).scaleY(1).setDuration(500).start();
+						LogUtils.td("ACTION_UP");
+						mBtnReplay.setBackgroundResource(R.drawable.bg_circle_yellow);
+						NumReader.replay();
+						updateUI();
+						break;
+				}
+				return mBtnReplay.performClick();
+			}
+		});
+
+		mBtnReset = findViewById(R.id.btn_reset);
+		mBtnReset.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				switch (motionEvent.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						//textView.animate().scaleX(0.8f).scaleY(0.8f).setDuration(500).start();
+						LogUtils.td("ACTION_DOWN");
+						mBtnReset.setBackgroundResource(R.drawable.bg_circle_blue_pressed);
+						break;
+					case MotionEvent.ACTION_UP:
+						//textView.animate().scaleX(1).scaleY(1).setDuration(500).start();
+						LogUtils.td("ACTION_UP");
+						mBtnReset.setBackgroundResource(R.drawable.bg_circle_blue);
+						NumReader.reset();
+						updateUI();
+						break;
+				}
+				return mBtnReset.performClick();
 			}
 		});
 
 		mTextTimeCount = findViewById(R.id.textTimeCount);
 
-		findViewById(R.id.ib_replay).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				NumReader.replay();
-				updateUI();
-			}
-		});
+//		findViewById(R.id.ib_replay).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				NumReader.replay();
+//				updateUI();
+//			}
+//		});
 
-		findViewById(R.id.ib_reset).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				NumReader.reset();
-				updateUI();
-			}
-		});
+//		findViewById(R.id.btn_reset).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				NumReader.reset();
+//				updateUI();
+//			}
+//		});
 
 		final EditText editNum = findViewById(R.id.edit_test_num);
 		findViewById(R.id.btn_play_num).setOnClickListener(new OnClickListener() {
@@ -110,12 +166,36 @@ public class MainActivity extends Activity {
 
 		NumReader.init(this);
 		NumReader.setUIHandler(mUIHandler);
-		updateUI();
+		setUI();
 	}
+
+	private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
+		@Override
+		public boolean onTouch(View view, MotionEvent motionEvent) {
+			switch (motionEvent.getAction()) {
+				case MotionEvent.ACTION_DOWN://收缩到0.8(正常值是1)，速度500
+					//textView.animate().scaleX(0.8f).scaleY(0.8f).setDuration(500).start();
+					LogUtils.td("ACTION_DOWN");
+					if (NumReader.isPlaying()) {
+						mBtnSwitch.setBackgroundResource(R.drawable.bg_circle_green_pressed);
+					}
+					else {
+						mBtnSwitch.setBackgroundResource(R.drawable.bg_circle_red_pressed);
+					}
+					break;
+				case MotionEvent.ACTION_UP:
+					//textView.animate().scaleX(1).scaleY(1).setDuration(500).start();
+					LogUtils.td("ACTION_UP");
+					NumReader.switchPlayPause();
+					mBtnSwitch.setBackgroundResource(NumReader.isPlaying()? R.drawable.bg_circle_green : R.drawable.bg_circle_red);
+					break;
+			}
+			return mBtnSwitch.performClick();
+		}
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
@@ -164,12 +244,14 @@ public class MainActivity extends Activity {
         EditText etCountTimeSpan = mLayoutSettings.findViewById(R.id.etCountTimeSpan);
         EditText etCountReadSpan = mLayoutSettings.findViewById(R.id.etCountReadSpan);
         EditText editDigitSpan = mLayoutSettings.findViewById(R.id.edit_digits_span);
-        EditText editPlayRate = mLayoutSettings.findViewById(R.id.edit_play_rate);
+		EditText editPlayRate = mLayoutSettings.findViewById(R.id.edit_play_rate);
+		EditText editCountStart = mLayoutSettings.findViewById(R.id.edit_count_start);
 
 		etCountTimeSpan.setText(NumReader.getTimeSpanString());
         etCountReadSpan.setText(NumReader.getReadSpanString());
         editDigitSpan.setText(NumReader.getDigitSpanString());
-        editPlayRate.setText(NumReader.getPlayRateString());
+		editPlayRate.setText(NumReader.getPlayRateString());
+		editCountStart.setText(NumReader.getCountStartString());
 	}
 	
 	public void onSettingsOK() {
@@ -178,18 +260,21 @@ public class MainActivity extends Activity {
 		EditText etCountReadSpan = mLayoutSettings.findViewById(R.id.etCountReadSpan);
 		EditText editDigitSpan = mLayoutSettings.findViewById(R.id.edit_digits_span);
 		EditText editPlayRate = mLayoutSettings.findViewById(R.id.edit_play_rate);
+		EditText editCountStart = mLayoutSettings.findViewById(R.id.edit_count_start);
 
 		//set origin value
 		int newTimeSpan;
 		int newReadSpan;
 		int newDigitSpan;
 		float newPlayRate;
+		int newCountStart;
 
 		try {
 			newTimeSpan = Integer.parseInt(etCountTimeSpan.getText().toString());
 			newReadSpan = Integer.parseInt(etCountReadSpan.getText().toString());
 			newDigitSpan = Integer.parseInt(editDigitSpan.getText().toString());
 			newPlayRate = Float.parseFloat(editPlayRate.getText().toString());
+			newCountStart = Integer.parseInt(editCountStart.getText().toString());
 		}
 		catch (NumberFormatException ex) {
 			Toast.makeText(MainActivity.this, "NumberFormatException: " + ex.toString(), Toast.LENGTH_SHORT).show();
@@ -199,7 +284,9 @@ public class MainActivity extends Activity {
 		if (newTimeSpan != NumReader.mTimeSpan
 				|| newReadSpan != NumReader.mReadSpan
 				|| newDigitSpan != NumReader.mDigitSpan
-				|| newPlayRate != NumReader.mPlayRate) {
+				|| newPlayRate != NumReader.mPlayRate
+				|| newCountStart != NumReader.mCountStart
+		) {
 			
 			//setting change, save new settings
 			SharedPreferences.Editor editor = this.getSharedPreferences(NumReader.SP_SETTINGS, Context.MODE_PRIVATE).edit();
@@ -208,13 +295,15 @@ public class MainActivity extends Activity {
 			editor.putInt(NumReader.SP_READ_SPAN, newReadSpan);
 			editor.putInt(NumReader.SP_DIGIT_SPAN, newDigitSpan);
 			editor.putFloat(NumReader.SP_PLAY_RATE, newPlayRate);
-			editor.commit();
+			editor.putInt(NumReader.SP_COUNT_START, newCountStart);
+			editor.apply();
 			
 			//update value and pause current reading
 			NumReader.mTimeSpan = newTimeSpan;
 			NumReader.mReadSpan = newReadSpan;
 			NumReader.mDigitSpan = newDigitSpan;
 			NumReader.mPlayRate = newPlayRate;
+			NumReader.mCountStart = newCountStart;
  		}
 	}
 }

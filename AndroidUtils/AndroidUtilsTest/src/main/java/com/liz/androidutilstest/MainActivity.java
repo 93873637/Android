@@ -21,6 +21,7 @@ import com.liz.androidutils.LogEx;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.StorageUtils;
 import com.liz.androidutils.SysUtils;
+import com.liz.androidutils.TelUtils;
 import com.liz.androidutils.TimeChecker;
 import com.liz.androidutils.UsbUtils;
 import com.liz.androidutils.WaveFileHeader;
@@ -39,12 +40,39 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
 
-    // Storage Permissions
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Deal with Permissions
+
+    /**
+     * add checkPermissions to onCreate of activity
+     */
+
+    private static final int REQUEST_CODE_PERMISSIONS = 1;
+    private static String[] PERMISSIONS_REQUIRED = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CALL_PHONE
     };
+
+    private void checkPermissions() {
+        boolean allPermissionsGranted = true;
+        for (String permission : PERMISSIONS_REQUIRED) {
+            if (ActivityCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+                allPermissionsGranted = false;
+                break;
+            }
+        }
+        if (!allPermissionsGranted) {
+            ActivityCompat.requestPermissions(
+                    MainActivity.this,
+                    PERMISSIONS_REQUIRED,
+                    REQUEST_CODE_PERMISSIONS);
+        }
+    }
+
+    // Deal with Permissions
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     private TextView tvTestInfo;
 
@@ -55,16 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         LogUtils.trace();
 
-        // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    MainActivity.this,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
+        checkPermissions();
 
         findViewById(R.id.btn_test).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_UsbUtils();
+        test_TelUtils();
+        //test_UsbUtils();
         //test_StorageUtils();
         //test_AudioUtils();
         //test_LogUtils();
@@ -105,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
         //test_image_scale_by_buffer();
         //test_image_scale_by_bitmap();
         //LogUtils.d("###@: time=" + System.currentTimeMillis());
+    }
+
+    public void test_TelUtils() {
+        LogUtils.td("get sim state: " + TelUtils.getSimStateString(this, 0));
+        LogUtils.td("get sim state: " + TelUtils.getSimStateString(this, 1));
     }
 
     public void test_UsbUtils() {

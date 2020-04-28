@@ -4,6 +4,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="switch_button_circle_size">270dp</dimen>
+    <dimen name="switch_button_circle_size_pressed">250dp</dimen>
     <dimen name="control_button_circle_size">170dp</dimen>
+    <dimen name="control_button_circle_size_pressed">160dp</dimen>
 
 </resources>

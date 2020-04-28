@@ -119,5 +119,6 @@
     <orderEntry type="jdk" jdkName="Android API 29 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4:19.1.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\WorkSpace\Android\_bin\AndroidUtils.jar:unspecified@jar" level="project" />
   </component>
 </module>

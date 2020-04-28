@@ -4,7 +4,7 @@
     android:shape="oval"
     android:useLevel="false">
 
-    <solid android:color="#0000ff" />
+    <solid android:color="#dede00" />
 
     <!--<stroke
         android:width="5dp"
@@ -12,13 +12,13 @@
         -->
 
     <gradient
-        android:endColor="#0000ff"
+        android:endColor="#5f5f00"
         android:gradientRadius="100%p"
-        android:startColor="#efefef"
+        android:startColor="#dede00"
         android:type="radial" />
 
     <size
-        android:width="@dimen/control_button_circle_size"
-        android:height="@dimen/control_button_circle_size" />
+        android:width="@dimen/control_button_circle_size_pressed"
+        android:height="@dimen/control_button_circle_size_pressed" />
 
 </shape>

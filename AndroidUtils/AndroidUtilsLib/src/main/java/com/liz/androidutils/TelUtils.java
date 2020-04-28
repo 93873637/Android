@@ -19,6 +19,99 @@ import static android.content.Context.TELEPHONY_SERVICE;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class TelUtils {
 
+    public static String getSimStateString(int simState) {
+        switch (simState) {
+            case android.telephony.TelephonyManager.SIM_STATE_ABSENT:
+                return "ABSENT";
+            case android.telephony.TelephonyManager.SIM_STATE_PIN_REQUIRED:
+                return "PIN_REQUIRED";
+            case android.telephony.TelephonyManager.SIM_STATE_PUK_REQUIRED:
+                return "PUK_REQUIRED";
+            case android.telephony.TelephonyManager.SIM_STATE_NETWORK_LOCKED:
+                return "NETWORK_LOCKED";
+            case android.telephony.TelephonyManager.SIM_STATE_READY:
+                return "READY";
+            case android.telephony.TelephonyManager.SIM_STATE_NOT_READY:
+                return "NOT_READY";
+            case android.telephony.TelephonyManager.SIM_STATE_PERM_DISABLED:
+                return "PERM_DISABLED";
+            case android.telephony.TelephonyManager.SIM_STATE_CARD_IO_ERROR:
+                return "CARD_IO_ERROR";
+            case android.telephony.TelephonyManager.SIM_STATE_CARD_RESTRICTED:
+                return "CARD_RESTRICTED";
+            case android.telephony.TelephonyManager.SIM_STATE_UNKNOWN:
+                return "UNKNOWN";
+            default:
+                return "ERROR UNKNOWN";
+        }
+    }
+
+    public static String getSimStateString(Context context, int slotIndex) {
+        return getSimStateString(getSimState(context, slotIndex));
+    }
+
+    /**
+     * Returns a constant indicating the state of the device SIM card in a slot.
+     *
+     * @param slotIndex #SIM_STATE_UNKNOWN
+     *                  #SIM_STATE_ABSENT
+     *                  #SIM_STATE_PIN_REQUIRED
+     *                  #SIM_STATE_PUK_REQUIRED
+     *                  #SIM_STATE_NETWORK_LOCKED
+     *                  #SIM_STATE_READY
+     *                  #SIM_STATE_NOT_READY
+     *                  #SIM_STATE_PERM_DISABLED
+     *                  #SIM_STATE_CARD_IO_ERROR
+     *                  #SIM_STATE_CARD_RESTRICTED
+     */
+    @TargetApi(26)
+    public static int getSimState(Context context, int slotIndex) {
+        try {
+            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (telephonyManager == null) {
+                LogUtils.te2("get telephony manager null");
+                return -1;
+            }
+            if (context.checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                return telephonyManager.getSimState(slotIndex);
+            } else {
+                LogUtils.te2("no permission of Manifest.permission.READ_PHONE_STATE");
+                return -2;
+            }
+        } catch (Exception e) {
+            LogUtils.te2("get imsi failed, ex = " + e.toString());
+            e.printStackTrace();
+            return -3;
+        }
+    }
+
+//
+//    @TargetApi(23)
+//    public static String getIMSI(Context context) {
+//        try {
+//            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+//            if (telephonyManager == null) {
+//                LogUtils.te2("get telephony manager null");
+//                return "";
+//            }
+//            if (context.checkSelfPermission(android..READ_PRIVILEGED_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+//                String imsi = telephonyManager.getSubscriberId();
+//                if (null == imsi) {
+//                    imsi = "";
+//                }
+//                return imsi;
+//            }
+//            else {
+//                LogUtils.te2("no permission of Manifest.permission.READ_PHONE_STATE");
+//                return "";
+//            }
+//        } catch (Exception e) {
+//            LogUtils.te2("get imsi failed, ex = " + e.toString());
+//            e.printStackTrace();
+//            return "";
+//        }
+//    }
+
     @TargetApi(23)
     public static String startCall(Context context, String telNum) {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + telNum));
@@ -26,8 +119,7 @@ public class TelUtils {
         if (context.checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             context.startActivity(intent);
             return "OK";
-        }
-        else {
+        } else {
             return "ERROR: startCall: No permission of Manifest.permission.CALL_PHONE";
         }
     }
@@ -53,7 +145,7 @@ public class TelUtils {
         }
     }
 
-    public static boolean isCalling(Context context){
+    public static boolean isCalling(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return (telephonyManager.getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) ||
                 (telephonyManager.getCallState() == TelephonyManager.CALL_STATE_RINGING);
