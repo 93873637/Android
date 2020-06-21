@@ -174,7 +174,7 @@ public class MailSender {
     private void addPicBody() {
 //        // 5. 创建图片"节点"
 //        MimeBodyPart image = new MimeBodyPart();
-//        DataHandler dh = new DataHandler(new FileDataSource("/storage/0CCD-50F4/0.sd/whatsai/test.jpg"));
+//        DataHandler dh = new DataHandler(new FileDataSource("/storage/0CCD-50F4/0.sd/whatsai/test_item.jpg"));
 //        image.setDataHandler(dh);
 //        // 为"节点"设置一个唯一编号（在文本"节点"将引用该ID）
 //        image.setContentID("mailTestPic");
@@ -204,13 +204,13 @@ public class MailSender {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    // java main and test functions
+    // java main and test_item functions
 
     public static void main(String[] args) {
         //following functions can only run on Android, or you will get Stub error!
 //        test_send_mail_content();
 //        ms.sendMail("this is a mail 带附件！", "/storage/0CCD-50F4/0.sd/whatsai/whatsai.zip");
-//        ms.sendMail("this is 邮件 带附件和图片！", "/storage/0CCD-50F4/0.sd/whatsai/whatsai.zip", "/storage/0CCD-50F4/0.sd/whatsai/test.jpg");
+//        ms.sendMail("this is 邮件 带附件和图片！", "/storage/0CCD-50F4/0.sd/whatsai/whatsai.zip", "/storage/0CCD-50F4/0.sd/whatsai/test_item.jpg");
     }
 
     public static void test_send_mail_simple() {

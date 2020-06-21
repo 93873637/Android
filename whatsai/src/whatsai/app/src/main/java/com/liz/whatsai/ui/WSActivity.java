@@ -32,8 +32,8 @@ import com.liz.whatsai.app.NodeListAdapter;
 import com.liz.whatsai.logic.ComDef;
 import com.liz.whatsai.logic.DataLogic;
 import com.liz.whatsai.logic.Node;
+import com.liz.whatsai.logic.WSListenService;
 import com.liz.whatsai.storage.WhatsaiStorage;
-import com.liz.whatsai.test.testAudioRecordActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -63,8 +63,8 @@ public class WSActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                startActivity(new Intent(WSActivity.this, testAudioRecordActivity.class));
+                //startActivity(new Intent(WSActivity.this, testAudioRecordActivity.class));
+                WSListenService.switchListening();
             }
         });
 

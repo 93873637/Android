@@ -163,6 +163,14 @@ public class FileUtils {
     }
 
     public static String formatDirSeparator(String dir) {
+        return appendSeparator(dir);
+    }
+
+    public static String touchSeparator(String dir) {
+        return appendSeparator(dir);
+    }
+
+    public static String appendSeparator(String dir) {
         if (dir.endsWith(File.separator)) {
             return dir;
         }
@@ -856,21 +864,21 @@ public class FileUtils {
         AssertUtils.Assert(getFilePathNeat("/home/liz/aaa").equals("/home/liz/aaa"));
         AssertUtils.Assert(getFilePathNeat("aaa.txt").equals("aaa"));
 
-        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "aaa\n"));
-        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "bbb\n"));
-        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test.txt", "ccc\n", true, false));
-        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "ddd\n"));
-        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test.txt", "eee\n"));
+        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test_item.txt", "aaa\n"));
+        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test_item.txt", "bbb\n"));
+        AssertUtils.Assert(writeTxtFile("D:\\Temp\\test_item.txt", "ccc\n", true, false));
+        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test_item.txt", "ddd\n"));
+        AssertUtils.Assert(appendTxtFile("D:\\Temp\\test_item.txt", "eee\n"));
 
-        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test.txt", "addHeaderSimple1\n".getBytes()));
-        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test.txt", "addHeaderSimple2\n".getBytes()));
-        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test.mp4", "addHeaderSimple\n".getBytes()));
+        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test_item.txt", "addHeaderSimple1\n".getBytes()));
+        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test_item.txt", "addHeaderSimple2\n".getBytes()));
+        AssertUtils.Assert(addHeaderSimple("D:\\Temp\\test_item.mp4", "addHeaderSimple\n".getBytes()));
 
-        AssertUtils.Assert(addHeader("D:\\Temp\\test.txt", "addHeader1111\n".getBytes()));
-        AssertUtils.Assert(addHeader("D:\\Temp\\test.txt", "addHeader2222\n".getBytes()));
-        AssertUtils.Assert(addHeader("D:\\Temp\\test.mp4", "addHeader1111\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\test_item.txt", "addHeader1111\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\test_item.txt", "addHeader2222\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\test_item.mp4", "addHeader1111\n".getBytes()));
         AssertUtils.Assert(addHeader("D:\\Temp\\aaa.apk", "addHeader1111\n".getBytes()));
-        AssertUtils.Assert(addHeader("D:\\Temp\\test.wav", "addHeader1111\n".getBytes()));
+        AssertUtils.Assert(addHeader("D:\\Temp\\test_item.wav", "addHeader1111\n".getBytes()));
 
         //assert true
         AssertUtils.Assert(getFileExtension("/home/liz/aaa.txt").equals("txt"));

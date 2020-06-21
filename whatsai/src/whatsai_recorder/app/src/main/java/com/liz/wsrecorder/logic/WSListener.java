@@ -58,7 +58,7 @@ public class WSListener {
     private String mAudioDir = ComDef.WHATSAI_AUDIO_DIR;
 
     // audio config
-    private int mAudioSource = MediaRecorder.AudioSource.MIC;
+    private int mAudioSource = MediaRecorder.AudioSource.VOICE_CALL;
     private int mSampleRate = DEFAULT_AUDIO_SAMPLE_RATE;
     private int mAudioFormat = AudioFormat.ENCODING_PCM_16BIT;
     private int mChannelConfig = AudioFormat.CHANNEL_CONFIGURATION_MONO;
@@ -205,7 +205,7 @@ public class WSListener {
 
     @SuppressWarnings("unused")
     public String getAudioConfigInfoFull() {
-        String configInfo = "Audio Source: <font color=\"#ff0000\">" + AudioUtils.audioSourceName(MediaRecorder.AudioSource.MIC) + "</font>";
+        String configInfo = "Audio Source: <font color=\"#ff0000\">" + AudioUtils.audioSourceName(mAudioSource) + "</font>";
         configInfo += "<br>Sample Rate(Hz): <font color=\"#ff0000\">" + mSampleRate + "</font>";
         configInfo += "<br>Audio Format: <font color=\"#ff0000\">" + AudioUtils.audioFormatName(mAudioFormat) + "</font>";
         configInfo += "<br>Channel Config: <font color=\"#ff0000\">" + AudioUtils.channelConfigName(mChannelConfig) + "</font>";

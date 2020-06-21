@@ -58,6 +58,16 @@ public class WSListenService extends Service {
         return WSRecorder.inst().isListening();
     }
 
+    public static void switchListening() {
+        LogUtils.td("switchListening: isListening " + isListening());
+        if (isListening()) {
+            stopListening();
+        }
+        else {
+            startListening();
+        }
+    }
+
     // APIs
     //////////////////////////////////////////////////////////////////////////////////
 

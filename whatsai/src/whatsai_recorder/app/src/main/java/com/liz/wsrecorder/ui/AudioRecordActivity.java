@@ -262,14 +262,19 @@ public class AudioRecordActivity extends Activity implements View.OnClickListene
 
     private void onSwitchListening() {
         LogUtils.td("onSwitchListening: isListening " + WSListenService.isListening());
-        if (WSListenService.isListening()) {
-            WSListenService.stopListening();
-        }
-        else {
-            //clear surface for next listening
-            mWaveSurfaceViewEx.clearCanvas();
-            mWaveSurfaceThumbnial.clearCanvas();
-            WSListenService.startListening();
-        }
+        WSRecorder.inst().startListening();
+        //WSMediaRecorder.getInstance().start();
+//        if (WSRecorder.inst().isListening()) {
+//        //if (WSListenService.isListening()) {  //####@:
+//                //####@: WSListenService.stopListening();
+//            //WSRecorder.inst().stopListening();
+//        }
+//        else {
+//            //clear surface for next listening
+//            mWaveSurfaceViewEx.clearCanvas();
+//            mWaveSurfaceThumbnial.clearCanvas();
+//            //####@: WSListenService.startListening();
+//            WSRecorder.inst().startListening();
+//        }
     }
 }

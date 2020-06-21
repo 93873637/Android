@@ -132,7 +132,9 @@ public class WSListener {
             startThread_VoiceRecognition();
         }
         startWorkingTimer();
-        mCallback.onListenStarted();
+        if (mCallback != null) {
+            mCallback.onListenStarted();
+        }
     }
 
     public void stopListening() {
@@ -154,7 +156,9 @@ public class WSListener {
                     mChannelConfig,
                     true);
         }
-        mCallback.onListenStopped(mAutoSave);
+        if (mCallback != null) {
+            mCallback.onListenStopped(mAutoSave);
+        }
     }
 
     private byte[] getWaveHeader() {

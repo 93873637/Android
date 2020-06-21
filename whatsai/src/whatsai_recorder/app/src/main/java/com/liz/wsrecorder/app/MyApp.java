@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.wsrecorder.logic.ComDef;
-import com.liz.wsrecorder.logic.WSListenService;
 
 /**
  * MyApp.java
@@ -36,7 +35,7 @@ public class MyApp extends Application {
         mAppInst = this;
         mAppVersion = SysUtils.getAppVersion(this);
 
-        WSListenService.start();
+        //####@: WSListenService.start();
     }
 
     public static Context getAppContext() {
@@ -45,7 +44,7 @@ public class MyApp extends Application {
 
     public static void exitApp() {
         LogUtils.trace();
-        WSListenService.stop();
+        //####@: WSListenService.stop();
         int pid = android.os.Process.myPid();
         LogUtils.i("exitApp, pid = " + pid);
         android.os.Process.killProcess(pid);

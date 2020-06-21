@@ -1,5 +1,6 @@
 package com.liz.androidutils;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -66,25 +67,26 @@ public class LogEx extends LogUtils {
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	//log to file
-
-	private static final int DEFAULT_MAX_LOG_FILE_NUM = 5;
-	private static final long DEFAULT_MAX_LOG_FILE_SIZE = 2*1024*1024;  //unit by bytes
-
-	private static boolean mSaveToFile = false;
-	private static String mLogDir = "";
-	private static String mLogFileName = "";
-	private static int mMaxLogFileNum = DEFAULT_MAX_LOG_FILE_NUM;
-	private static long mMaxLogFileSize = DEFAULT_MAX_LOG_FILE_SIZE;
-	private static ArrayList<String> mLogFileList = new ArrayList<>();
-
 	public static void setSaveToFile(boolean save) {
 		mSaveToFile = save;
 	}
 
 	public static void setLogDir(String dir) {
-		mLogDir = FileUtils.formatDirSeparator(dir);
+		if (TextUtils.isEmpty(dir)) {
+			mLogDir = DEFAULT_LOG_DIR;
+		}
+		else {
+			mLogDir = FileUtils.touchSeparator(dir);
+		}
+	}
+
+	public static void setLogFilePrefix(String prefix) {
+		if (TextUtils.isEmpty(prefix)) {
+			mLogFilePrefix = DEFAULT_LOG_FILE_PREFIX;
+		}
+		else {
+			mLogFilePrefix = prefix;
+		}
 	}
 
 	public static void setMaxLogFileNum(int maxNum) {
@@ -95,26 +97,42 @@ public class LogEx extends LogUtils {
 		mMaxLogFileSize = maxSize;
 	}
 
-	private static String getLogFilePath() {
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	// log to file
+
+	private static final int DEFAULT_MAX_LOG_FILE_NUM = 5;
+	private static final long DEFAULT_MAX_LOG_FILE_SIZE = 2*1024*1024;  // unit by bytes
+	@SuppressLint("SdCardPath")
+	private static final String DEFAULT_LOG_DIR = "/sdcard/log/";  // using current working dir as default
+	private static final String DEFAULT_LOG_FILE_PREFIX = "log";
+
+	private static String mLogDir = DEFAULT_LOG_DIR;
+	private static String mLogFilePrefix = DEFAULT_LOG_FILE_PREFIX;
+	private static String mLogFileName = "";
+	private static boolean mSaveToFile = false;
+	private static int mMaxLogFileNum = DEFAULT_MAX_LOG_FILE_NUM;
+	private static long mMaxLogFileSize = DEFAULT_MAX_LOG_FILE_SIZE;
+	private static ArrayList<String> mLogFileList = new ArrayList<>();
+
+	private static String getLogFileAbsolute() {
 		return mLogDir + mLogFileName;
 	}
 
 	private static void genLogFileName() {
-		//SimpleDateFormat format = new SimpleDateFormat("yyMMdd_HHmmss");
-		//String strDateTime = format.format(new Date(System.currentTimeMillis()));
-		mLogFileName = "log_" + System.currentTimeMillis() + ".txt";
-		Log.d(getTag(), "genLogFileName: " + mLogFileName);
+		mLogFileName = mLogFilePrefix + "_" + TimeUtils.getFileTime(false) + ".txt";
+		Log.d(getTag(), "genLogFileName \"" + mLogFileName + "\"");
 	}
 
-	private static void createLogFile() {
+	private static boolean createLogFile() {
 		genLogFileName();
-		String filePath = getLogFilePath();
+		String filePath = getLogFileAbsolute();
 		mLogFileList.add(filePath);
-		Log.d(getTag(), "createLogFile: " + filePath + ", size = " + mLogFileList.size());
+		Log.d(getTag(), "createLogFile: " + filePath + ", list size = " + mLogFileList.size());
+		return true;
 	}
 
-	//remove earliest one when queue full
-	private static void removeLogFile() {
+	//remove oldest log file when file list queue full
+	private static void checkLogFileList() {
 		if (mLogFileList.size() >= mMaxLogFileNum) {
 			String filePath = mLogFileList.get(0);
 			FileUtils.delete(filePath);
@@ -123,39 +141,53 @@ public class LogEx extends LogUtils {
 		}
 	}
 
-	private static void saveToFile(char type, String tag, String msg) {
-		if (TextUtils.isEmpty(mLogDir)) {
-			Log.e(getTag(), "ERROR: log file path empty");
-			return;
-		}
+	private static long getCurrentLogFileSize() {
+		return FileUtils.getFileSize(getLogFileAbsolute());
+	}
 
-		File filePath = new File(mLogDir);
-		if (!filePath.exists()) {
-			if (!filePath.mkdirs()) {
-				Log.e(getTag(), "ERROR: failed to make log file path " + mLogDir);
-				return;
+	private static boolean checkLogFile() {
+		// need ensure log dir exists if dir not empty
+		if (!TextUtils.isEmpty(mLogDir)) {
+			File dir = new File(mLogDir);
+			if (!dir.exists()) {
+				Log.d(getTag(), "log dir \"" + dir + "\" not exist, create...");
+				if (!dir.mkdirs()) {
+					Log.e(getTag(), "ERROR: create log dir \"" + dir + "\" failed.");
+					return false;
+				}
 			}
 		}
 
+		// we need create log file at the beginning
 		if (TextUtils.isEmpty(mLogFileName)) {
-			createLogFile();
+			return createLogFile();
 		}
 
-		//get and check log file
-		String logFilePath = getLogFilePath();
-		if (FileUtils.getFileSize(logFilePath) >= mMaxLogFileSize) {
-			removeLogFile();
-			createLogFile();
-			logFilePath = getLogFilePath();
+		// check if current log file up to max file size
+		if (getCurrentLogFileSize() >= mMaxLogFileSize) {
+			checkLogFileList();
+			return createLogFile();
 		}
 
-		//01-04 11:37:58.499 E/AndroidRuntime(23013): FATAL EXCEPTION: Thread-12
+		return true;
+	}
+
+	private static void saveToFile(char type, String tag, String msg) {
+		if (!checkLogFile()) {
+			Log.e(getTag(), "ERROR: saveToFile: check log file failed.");
+			return;
+		}
+
+		//
+		// log format as:
+		// 01-04 11:37:58.499 E/AndroidRuntime(23013): FATAL EXCEPTION: Thread-12
+		//
 		String logInfo = TimeUtils.getLogTime() + " " + type + "/" + tag + ": " + msg + "\n";
 
 		FileOutputStream fos = null;
 		BufferedWriter bw = null;
 		try {
-			fos = new FileOutputStream(logFilePath, true);
+			fos = new FileOutputStream(getLogFileAbsolute(), true);
 			bw = new BufferedWriter(new OutputStreamWriter(fos));
 			bw.write(logInfo);
 		} catch (Exception e) {

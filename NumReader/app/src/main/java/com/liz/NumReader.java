@@ -21,18 +21,27 @@ public class NumReader {
     public static final String SP_DIGIT_SPAN = "SharedPrefDigitSpan";
     public static final String SP_PLAY_RATE = "SharedPrefPlaySpan";
     public static final String SP_COUNT_START = "SharedPrefCountStart";
+    public static final String SP_COUNT_MAX = "SharedPrefCountMax";
+    public static final String SP_COUNT_ON_MAX = "SharedPrefCountOnMax";
+
+    public static final int COUNT_ON_MAX_LOOP = 0;
+    public static final int COUNT_ON_MAX_STOP = 1;
 
     public static final int DEFAULT_TIME_SPAN = 1;  //default time span(seconds) to count once
     public static final int DEFAULT_READ_SPAN = 5;  //default span to read once
     public static final int DEFAULT_DIGIT_SPAN = 300;  //default time span(seconds) to count once
     public static final float DEFAULT_PLAY_RATE = 1.1f;  //default span to read once
     public static final int DEFAULT_COUNT_START = 0;  //default count start number
+    public static final int DEFAULT_COUNT_MAX = 100;
+    public static final int DEFAULT_COUNT_ON_MAX = COUNT_ON_MAX_LOOP;
 
     public static int mTimeSpan = DEFAULT_TIME_SPAN;  //how many seconds to count once
     public static int mReadSpan = DEFAULT_READ_SPAN;  //how many count to read once
     public static int mDigitSpan = DEFAULT_DIGIT_SPAN;  // span between digit(s) in same number string, unit by ms
     public static float mPlayRate = DEFAULT_PLAY_RATE;  // sound pool play rate, 0.5f - 2.0f, slower - faster
     public static int mCountStart = DEFAULT_COUNT_START;
+    public static int mCountMax = DEFAULT_COUNT_MAX;
+    public static int mCountOnMax = DEFAULT_COUNT_ON_MAX;
 
     //constants
     public static final int TIMER_DELAY = 0;
@@ -57,6 +66,8 @@ public class NumReader {
         mDigitSpan = spSettings.getInt(NumReader.SP_DIGIT_SPAN, NumReader.DEFAULT_DIGIT_SPAN);
         mPlayRate = spSettings.getFloat(NumReader.SP_PLAY_RATE, NumReader.DEFAULT_PLAY_RATE);
         mCountStart = spSettings.getInt(NumReader.SP_COUNT_START, NumReader.DEFAULT_COUNT_START);
+        mCountMax = spSettings.getInt(NumReader.SP_COUNT_MAX, NumReader.DEFAULT_COUNT_MAX);
+        mCountOnMax = spSettings.getInt(NumReader.SP_COUNT_ON_MAX, NumReader.DEFAULT_COUNT_ON_MAX);
         mCountNumber = mCountStart;
         SoundPoolPlayer.init(context);
     }
@@ -123,6 +134,14 @@ public class NumReader {
         return "" + mCountStart;
     }
 
+    public static String getCountMaxString() {
+        return "" + mCountMax;
+    }
+
+    public static boolean isOnMaxLoop() {
+        return mCountOnMax == COUNT_ON_MAX_LOOP;
+    }
+
     public static String getPlayRateString() {
         return "" + mPlayRate;
     }
@@ -165,8 +184,6 @@ public class NumReader {
         }
     }
 
-    ;
-
     final static Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -180,10 +197,18 @@ public class NumReader {
 
     public static void onTimerEvent() {
         mCountNumber++;
+        if (mCountNumber > mCountMax) {
+            if (isOnMaxLoop()) {
+                mCountNumber = mCountStart;
+            }
+            else {
+                NumReader.pause();
+                return;
+            }
+        }
         mUIHandler.sendEmptyMessage(MSG_NUMBER_UPDATED);
 
-        if (mCountNumber % mReadSpan == 0) {
-
+        if (mCountNumber != 0 && mCountNumber % mReadSpan == 0) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {

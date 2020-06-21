@@ -275,7 +275,7 @@ public class WaveFileHeader {
         JLog.newLine();
         JLog.i("***Test Begin...");
 
-        WaveFileHeader wfh = WaveFileHeader.parseFile("D:\\Temp\\test.wav");
+        WaveFileHeader wfh = WaveFileHeader.parseFile("D:\\Temp\\test_item.wav");
         if (wfh == null) {
             JLog.e("pare file failed");
         }

@@ -23,6 +23,6 @@
         android:text=""
         app:layout_constraintTop_toBottomOf="@id/btn_test"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:scrollbars="vertical"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

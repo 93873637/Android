@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,14 +24,6 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.RECORD_AUDIO,
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        LogUtils.trace();
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        checkPermissions();
-    }
-
     protected void checkPermissions() {
         boolean allPermissionsGranted = true;
         for (String permission : permissions) {
@@ -49,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
                     permissions,
                     REQUEST_CODE_PERMISSIONS);
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        LogUtils.trace();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        checkPermissions();
     }
 
     @Override
@@ -77,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
 
     protected void openAppActivity() {
         LogUtils.trace();
+
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAPTURE_AUDIO_OUTPUT) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "CAPTURE_AUDIO_OUTPUT granted OK!!!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this, "CAPTURE_AUDIO_OUTPUT NOT granted", Toast.LENGTH_LONG).show();
+        }
+
         startActivity(new Intent(MainActivity.this, AudioRecordActivity.class));
         MainActivity.this.finish();
     }

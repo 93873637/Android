@@ -4,8 +4,11 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.usb.UsbDevice;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import com.liz.androidutils.FileUtils;
 import com.liz.androidutils.ImageUtils;
 import com.liz.androidutils.LogEx;
 import com.liz.androidutils.LogUtils;
+import com.liz.androidutils.NumUtils;
 import com.liz.androidutils.StorageUtils;
 import com.liz.androidutils.SysUtils;
 import com.liz.androidutils.TelUtils;
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         tvTestInfo = findViewById(R.id.text_test);
+        tvTestInfo.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         //String dir = Environment.getExternalStorageDirectory().getAbsolutePath();
         //Toast.makeText(this, dir, Toast.LENGTH_LONG).show();
@@ -107,12 +112,12 @@ public class MainActivity extends AppCompatActivity {
     //Test Functions
 
     public void test() {
-        test_TelUtils();
+        //test_TelUtils();
         //test_UsbUtils();
         //test_StorageUtils();
         //test_AudioUtils();
         //test_LogUtils();
-        //test_logfile();
+        test_LogEx();
         //test_ImageCompress();
         //test_ziputils();
         //test_screencapture();
@@ -134,6 +139,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void test_UsbUtils() {
         UsbUtils.showList(MainActivity.this);
+
+        String info = "";
+        List<UsbDevice> list = UsbUtils.getUsbDeviceList(this);
+        if (list == null) {
+            info = "list null";
+        } else {
+            info += "<b>get list, size = <font color='red'>" + list.size() + "</font></b><br>";
+            info += "-----------------------------------------------<br>";
+
+            for(int i = 0; i < list.size(); ++i) {
+                int vid = list.get(i).getVendorId();
+                int pid = list.get(i).getProductId();
+
+                info += "<b>#" + (i + 1) + ": ";
+                info += list.get(i).getDeviceId() + ", ";
+                info += vid + ":" + pid + "(" + NumUtils.short2HexStr((short)vid) + ":" + NumUtils.short2HexStr((short)pid) + "), ";
+                info += list.get(i).getDeviceClass() + "/" + list.get(i).getDeviceSubclass();
+                info += "<br>";
+                info += "</b>";
+                info += "* DeviceName = " + list.get(i).getDeviceName() + "<br>";
+                info += "* ProductName = " + list.get(i).getProductName() + "<br>";
+                info += "* ManufacturerName = " + list.get(i).getManufacturerName() + "<br>";
+                info += list.get(i).toString();
+                info += "<br><br>";
+            }
+
+            info += "-----------------------------------------------<br>";
+        }
+        tvTestInfo.setText(Html.fromHtml(info));
     }
 
     public void test_StorageUtils() {
@@ -218,14 +252,19 @@ public class MainActivity extends AppCompatActivity {
         tvTestInfo.setText(testInfo);
     }
 
-    public void test_logfile() {
-        LogEx.setLogDir("/sdcard/test/");
-        LogEx.setTag("###@:");
+    public void test_LogEx() {
         LogEx.setSaveToFile(true);
-        LogEx.setMaxLogFileSize(20*1024);
-        for (int i=0; i<1000; i++) {
-            LogUtils.d("#" + i + " - this is test log message");
-        }
+        LogEx.setLogDir("/sdcard/logeeee");
+        LogEx.setLogFilePrefix("pppp");
+        LogEx.d("this is a test");
+        LogEx.d("files dir=" + getApplicationContext().getFilesDir().getAbsolutePath());
+        LogEx.d("package dir=" + getApplicationContext().getPackageResourcePath());
+//        LogEx.setTag("###@:");
+//        LogEx.setSaveToFile(true);
+//        LogEx.setMaxLogFileSize(20*1024);
+//        for (int i=0; i<1000; i++) {
+//            LogUtils.d("#" + i + " - this is test log message");
+//        }
     }
 
     public void test_ImageCompress() {
@@ -333,6 +372,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void test_SysUtils() {
         LogUtils.d("test_SysUtils: appVersion = " + SysUtils.getAppVersion(MainActivity.this));
+        LogUtils.d("test_SysUtils: appVersion = " + SysUtils.genVersionName("1", "0"));
     }
 
     public void test_image() {

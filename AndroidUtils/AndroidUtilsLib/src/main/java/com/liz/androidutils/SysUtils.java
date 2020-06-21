@@ -14,6 +14,7 @@ import android.util.Log;
 import java.io.DataOutputStream;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by liz on 2018/3/2.
@@ -21,6 +22,15 @@ import java.text.DecimalFormat;
 
 @SuppressWarnings("unused")
 public class SysUtils {
+
+    /**
+     * generate version name for android app
+     * @return String of version name format as *.*.20.0512.1600
+     */
+    public static String genVersionName(String major, String minor) {
+        String strTime = new SimpleDateFormat("yy.MMdd.HHmm").format(new java.util.Date());
+        return major + "." + minor + "." + strTime;
+    }
 
     public static String getAppVersion(Context context) {
         String ver = "";

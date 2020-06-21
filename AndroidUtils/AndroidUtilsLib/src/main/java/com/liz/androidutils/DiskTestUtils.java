@@ -25,13 +25,13 @@ public class DiskTestUtils {
     private static final byte[] DISK_TEST_DATA = new byte[1024*1024];
 
     public static boolean testReadAndWrite(String testDir) {
-        // check test dir
+        // check test_item dir
         boolean testDirCreated = false;
         File dir = new File(testDir);
         if (!dir.exists()) {
-            JLog.ti("test dir \"" + testDir + "\" not exists, create...");
+            JLog.ti("test_item dir \"" + testDir + "\" not exists, create...");
             if (!dir.mkdirs()) {
-                JLog.te("create test dir \"" + testDir + "\" failed.");
+                JLog.te("create test_item dir \"" + testDir + "\" failed.");
                 return false;
             }
             else {
@@ -41,14 +41,14 @@ public class DiskTestUtils {
         else {
             // already exist, check if directory
             if (!dir.isDirectory()) {
-                JLog.ti("test dir \"" + testDir + "\" exists but not direct, delete it first...");
+                JLog.ti("test_item dir \"" + testDir + "\" exists but not direct, delete it first...");
                 if (!dir.delete()) {
-                    JLog.te("delete old test dir \"" + testDir + "\" failed");
+                    JLog.te("delete old test_item dir \"" + testDir + "\" failed");
                     return false;
                 }
-                JLog.ti("create new test dir \"" + testDir + "\"...");
+                JLog.ti("create new test_item dir \"" + testDir + "\"...");
                 if (!dir.mkdirs()) {
-                    JLog.te("create new test dir \"" + testDir + "\" failed.");
+                    JLog.te("create new test_item dir \"" + testDir + "\" failed.");
                     return false;
                 }
                 else {
@@ -59,36 +59,36 @@ public class DiskTestUtils {
 
         File f = new File(testDir, DISK_TEST_FILENAME);
         try {
-            // prepare test file
+            // prepare test_item file
             if (f.exists()) {
-                JLog.ti("test file \"" + f.getAbsolutePath() + "\" already exists, delete it first...");
+                JLog.ti("test_item file \"" + f.getAbsolutePath() + "\" already exists, delete it first...");
                 if (f.delete()) {
-                    JLog.te("delete old test file \"" + f.getAbsolutePath() + "\" failed.");
+                    JLog.te("delete old test_item file \"" + f.getAbsolutePath() + "\" failed.");
                     return false;
                 }
             }
             if (!f.createNewFile()) {
-                JLog.te("create test file \"" + f.getAbsolutePath() + "\" failed.");
+                JLog.te("create test_item file \"" + f.getAbsolutePath() + "\" failed.");
                 return false;
             }
 
-            // test write data to file
+            // test_item write data to file
             testWriteFile(f.getAbsolutePath());
             //###@:testReadFile(f.getAbsolutePath());
             return true;
         } catch (Exception ex) {
-            JLog.te("test failed, ex = " + ex.toString());
+            JLog.te("test_item failed, ex = " + ex.toString());
             ex.printStackTrace();
             return false;
         } finally {
             if (f.exists()) {
                 if (f.delete()) {
-                    JLog.te("delete test file \"" + f.getAbsolutePath() + "\" failed.");
+                    JLog.te("delete test_item file \"" + f.getAbsolutePath() + "\" failed.");
                 }
             }
             if (testDirCreated && dir.exists()) {
                 if (!dir.delete()) {
-                    JLog.te("delete test dir \"" + testDir + "\" failed");
+                    JLog.te("delete test_item dir \"" + testDir + "\" failed");
                 }
             }
         }
@@ -101,7 +101,7 @@ public class DiskTestUtils {
             osw.flush();
             osw.close();
         } catch (Exception ex) {
-            JLog.te("test failed, ex = " + ex.toString());
+            JLog.te("test_item failed, ex = " + ex.toString());
             ex.printStackTrace();
         }
     }
