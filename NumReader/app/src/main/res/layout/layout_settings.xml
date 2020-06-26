@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialog"
+    android:id="@+id/settings_dialog"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="start"
@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/settings_margin_start"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -40,7 +40,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="@dimen/settings_margin_start"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -69,7 +69,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/settings_margin_start"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -92,7 +92,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/settings_margin_start"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -111,42 +111,35 @@
             android:minWidth="40dp" />
     </LinearLayout>
 
-    <!--count start-->
+    <!--count min/max-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/settings_margin_start"
         android:gravity="start"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_count_start"
+            android:id="@+id/tv_count_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Count Start From: " />
+            android:text="MIN: " />
 
         <EditText
-            android:id="@+id/edit_count_start"
+            android:id="@+id/edit_count_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:maxLength="6"
+            android:maxLength="5"
             android:minWidth="40dp" />
-    </LinearLayout>
-
-    <!--count max-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:gravity="start"
-        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_count_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Count Max: " />
+            android:layout_marginStart="6dp"
+            android:text="MAX: "
+            />
 
         <EditText
             android:id="@+id/edit_count_max"
@@ -157,11 +150,30 @@
             android:minWidth="50dp"
             android:autofillHints="" />
 
-        <TextView
-            android:id="@+id/tv_count_on_max"
+        <CheckBox
+            android:id="@+id/cb_count_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="On Max: " />
+            android:layout_marginTop="2dp"
+            android:text="Count Down"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!--count on end -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/settings_margin_start"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_count_on_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="On End: " />
 
         <RadioGroup
             android:id="@+id/rg_on_max"

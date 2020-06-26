@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
@@ -15,10 +16,17 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.liz.androidutils.LogEx;
+import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TimeUtils;
 import com.liz.androidutils.ui.AppCompatActivityEx;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivityEx {
+
+    private static final int UI_TIMER_DELAY = 200;
+    private static final int UI_TIMER_PERIOD = 1000;
 
     private TextView tvTimeCurrent;
     private TextView tvTimeStart;
@@ -99,7 +107,7 @@ public class MainActivity extends AppCompatActivityEx {
         tvLogInfo = findViewById(R.id.text_log_info);
         tvLogInfo.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        setUITimer(100, 1000);
+        setUITimer(UI_TIMER_DELAY, UI_TIMER_PERIOD);
 
         requestPermissions(
                 new String[]{
@@ -128,7 +136,104 @@ public class MainActivity extends AppCompatActivityEx {
                     }
                 }
         );
+
+        mCurrentBearing = LocationService.inst().getBearing();
+        ivOrientation.setRotation(mCurrentBearing);
+
+        //##@:
+        //mCurrentBearing = LocationService.inst().getBearing();
+        //ivOrientation.setRotation(mCurrentBearing);
+        //setBearingAnimation(170);
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    // Bearing Animation
+
+    private static final int BEARING_MIN = 0;
+    private static final int BEARING_MAX = 360;
+    private static final int BEARING_ROTATION_MAX = BEARING_MAX / 2;
+    private static final int BEARING_ANIMATION_TIMER_DELAY = 0;    // unit by milli-seconds
+    private static final int BEARING_ANIMATION_TIMER_PERIOD = 10;  // unit by milli-seconds
+    private static final int BEARING_ANIMATION_NUM = 40;
+    private static final float BEARING_INC_MIN = 0.5f;
+
+    private float mCurrentBearing = 0;
+    private Timer mBearingTimer = null;
+
+    private void stopBearingTimer() {
+        if (mBearingTimer != null) {
+            mBearingTimer.cancel();
+            mBearingTimer = null;
+        }
+    }
+
+    /**
+     * setBearingAnimation: moving to target bearing with animation effect
+     * NOTE: all bearing should be 0~359
+     * @param targetBearing: number of 0~359, clockwise
+     */
+    private void setBearingAnimation(final float targetBearing) {
+        LogUtils.td("current=" + mCurrentBearing + ", target=" + targetBearing);
+        // calc bearing diff, negative means anti-clockwise
+        float bearingDiff = targetBearing - mCurrentBearing;
+        if (Math.abs(bearingDiff) < BEARING_INC_MIN) {
+            LogUtils.td("diff too small, no animation, set directly");
+            ivOrientation.setRotation(targetBearing);
+            return;
+        }
+
+        if (bearingDiff > BEARING_ROTATION_MAX) {
+            // anti-clockwise rotation
+            bearingDiff = bearingDiff - BEARING_MAX;
+        }
+        if (bearingDiff < 0) {
+            if (bearingDiff <= -BEARING_ROTATION_MAX) {
+                bearingDiff += BEARING_MAX;
+            }
+        }
+
+        float bearingInc = 1.0f * bearingDiff / BEARING_ANIMATION_NUM;
+        if (bearingInc > 0 && bearingInc < BEARING_INC_MIN) {
+            bearingInc = BEARING_INC_MIN;
+        }
+        if (bearingInc < 0 && bearingInc > -BEARING_INC_MIN) {
+            bearingInc = -BEARING_INC_MIN;
+        }
+        final float timerInc = bearingInc;
+        LogUtils.td("diff=" + bearingDiff + ", inc=" + bearingInc + ", timerInc=" + timerInc);
+
+        stopBearingTimer();
+
+        mBearingTimer = new Timer();
+        mBearingTimer.schedule(new TimerTask() {
+            public void run() {
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        mCurrentBearing += timerInc;
+                        if (mCurrentBearing < BEARING_MIN) {
+                            mCurrentBearing += BEARING_MAX;
+                        }
+                        if (mCurrentBearing >= BEARING_MAX) {
+                            mCurrentBearing -= BEARING_MAX;
+                        }
+                        float diff = mCurrentBearing - targetBearing;
+                        LogUtils.td("target=" + targetBearing + ", current=" + mCurrentBearing + ", inc=" + timerInc + ", diff=" + diff);
+                        if (Math.abs(diff) < Math.abs(timerInc)) {
+                            stopBearingTimer();
+                            ivOrientation.setRotation(targetBearing);
+                            LogUtils.td("rotation in place!");
+                        }
+                        else {
+                            ivOrientation.setRotation(mCurrentBearing);
+                        }
+                    }
+                });
+            }
+        }, BEARING_ANIMATION_TIMER_DELAY, BEARING_ANIMATION_TIMER_PERIOD);
+    }
+
+    // Bearing Animation
+    //////////////////////////////////////////////////////////////////////////////////////////////
 
     private int getSpeedWidth(double ratio) {
         int totalWidth = tvCurrentSpeedInfo.getWidth();
@@ -146,26 +251,36 @@ public class MainActivity extends AppCompatActivityEx {
         tvTimeElapsed.setText(LocationService.inst().getDurationText());
         tvCurrentSpeedInfo.setText(LocationService.inst().getCurrentSpeedText());
         tvAverageSpeedInfo.setText(LocationService.inst().getAverageSpeedText());
+        tvStatisInfo.setText(Html.fromHtml(LocationService.inst().getStatisInfo()));
 
-        ivOrientation.setRotation(LocationService.inst().getBearing());
-        tvStatisInfo.setText(LocationService.inst().getStatisInfo());
+        if (LocationService.inst().isRunning() && LocationService.inst().hasSpeed()){
+            ivOrientation.setBackgroundResource(R.drawable.orientation);
+            if (comdef.BEARING_ANIMATION) {
+                setBearingAnimation(LocationService.inst().getBearing());
+            } else {
+                ivOrientation.setRotation(LocationService.inst().getBearing());
+            }
+        }
+        else {
+            ivOrientation.setRotation(0);
+            ivOrientation.setBackgroundResource(R.drawable.compass);
+        }
 
-        ///*
-        ////////////////////////////////////////////////////////////////////////////////////////
+        // set speed bar showing
         tvCurrentSpeed.setWidth(1);  // must call this first to make width take effect?
         tvCurrentSpeed.getLayoutParams().width = getSpeedWidth(LocationService.inst().getCurrentSpeedRatio());
         tvAverageSpeed.setWidth(1);
         tvAverageSpeed.getLayoutParams().width = getSpeedWidth(LocationService.inst().getAverageSpeedRatio());
-        ////////////////////////////////////////////////////////////////////////////////////////
-        //*/
 
         if (LocationService.inst().isRunning()) {
             btnSwitch.setText("STOP");
             btnSwitch.setBackgroundColor(Color.RED);
+            btnSwitch.setTextColor(Color.rgb(0x00, 0xff, 0xff));
         }
         else {
             btnSwitch.setText("START");
             btnSwitch.setBackgroundColor(Color.GREEN);
+            btnSwitch.setTextColor(Color.rgb(0xff, 0x00, 0xff));
         }
     }
 

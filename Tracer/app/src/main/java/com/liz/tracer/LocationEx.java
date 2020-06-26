@@ -28,10 +28,10 @@ public class LocationEx extends Location {
     public String toString() {
         return this.getLongitude()
                 + ", " + this.getLatitude()
-                + ", " + this.getAltitude()
-                + ", " + this.getAccuracy()
+                + ", " + String.format("%.1f", this.getAltitude())
                 + ", " + this.getSpeed()
                 + ", " + this.getBearing()
+                + ", " + String.format("%.1f", this.getAccuracy())
                 + ", " + this.getTime()
                 ;
     }

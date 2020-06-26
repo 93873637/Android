@@ -7,5 +7,6 @@
     <dimen name="switch_button_circle_size_pressed">200dp</dimen>
     <dimen name="control_button_circle_size">160dp</dimen>
     <dimen name="control_button_circle_size_pressed">100dp</dimen>
+    <dimen name="settings_margin_start">10dp</dimen>
 
 </resources>

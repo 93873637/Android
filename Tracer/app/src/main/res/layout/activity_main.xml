@@ -30,6 +30,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/time_text_size"
+            android:textColor="#5f005f"
             android:background="#a0ffa0"
             />
         <TextView
@@ -43,6 +44,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/time_text_size"
+            android:textColor="#5f5f00"
             android:background="#a0a0ff"
             />
         <TextView
@@ -56,6 +58,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/time_text_size"
+            android:textColor="#005f5f"
             android:background="#ffa0a0"
             />
     </LinearLayout>
@@ -140,8 +143,8 @@
         android:background="#ffffff"
         >
         <RelativeLayout
-            android:layout_width="220dp"
-            android:layout_height="220dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:gravity="center"
             >
             <ImageView
@@ -159,11 +162,6 @@
                 android:background="@drawable/orientation"
                 />
         </RelativeLayout>
-<!--        <com.liz.tracer.BearingSurfaceView-->
-<!--            android:id="@+id/surface_view_bearing"-->
-<!--            android:background="@drawable/division_panel"-->
-<!--            android:layout_width="220dp"-->
-<!--            android:layout_height="220dp" />-->
         <TextView
             android:id="@+id/text_statis_info"
             android:layout_width="match_parent"
@@ -191,11 +189,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingTop="@dimen/control_padding_top"
+            android:paddingBottom="@dimen/control_padding_bottom"
             android:text="START"
             android:gravity="center"
             android:background="#00ff00"
+            android:textColor="#ff00ff"
             android:textStyle="bold"
             android:textSize="@dimen/tracer_text_size" />
         <Button
@@ -203,11 +202,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingTop="@dimen/control_padding_top"
+            android:paddingBottom="@dimen/control_padding_bottom"
             android:text="RST"
             android:gravity="center"
             android:background="#0000ff"
+            android:textColor="#ffff00"
             android:textStyle="bold"
             android:textSize="@dimen/tracer_text_size" />
         <Button
@@ -215,11 +215,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+            android:paddingTop="@dimen/control_padding_top"
+            android:paddingBottom="@dimen/control_padding_bottom"
             android:text="EXT"
             android:gravity="center"
             android:background="#ff0000"
+            android:textColor="#00ffff"
             android:textStyle="bold"
             android:textSize="@dimen/tracer_text_size" />
     </LinearLayout>

@@ -173,6 +173,8 @@ public class LogUtils {
 
 	private static String t() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(Thread.currentThread().getId());
+		sb.append(" ");
 		StackTraceElement[] s = Thread.currentThread().getStackTrace();
 		final int INDEX = 4;  //skip elements to real trace point
 		if (s.length > INDEX) {

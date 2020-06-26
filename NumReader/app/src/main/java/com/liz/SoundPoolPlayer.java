@@ -8,6 +8,8 @@ import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
+import com.liz.androidutils.LogUtils;
+
 @SuppressWarnings("WeakerAccess")
 public class SoundPoolPlayer {
 	
@@ -42,7 +44,8 @@ public class SoundPoolPlayer {
 	}
 
     public static void playNumber(int num) {
-        playNumberString("" + num);
+		LogUtils.td("num = " + num);
+		playNumberString("" + num);
     }
 
 	public static void playNumberString(String strNum) {
@@ -54,7 +57,7 @@ public class SoundPoolPlayer {
 			if (i < (len - 1)) {
                 try {
                     //sleep a while for play speed control
-                    Thread.currentThread();
+                    //Thread.currentThread();
                     Thread.sleep(NumReader.mDigitSpan);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

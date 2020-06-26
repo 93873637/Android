@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,7 +18,6 @@ import com.liz.androidutils.LogUtils;
 import com.liz.androidutils.TimeUtils;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -69,24 +67,24 @@ public class LocationService {
             return;
         }
 
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setCostAllowed(true);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        mLocationProvider = mLocationManager.getBestProvider(criteria, true);
+//        Criteria criteria = new Criteria();
+//        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+//        criteria.setAltitudeRequired(false);
+//        criteria.setBearingRequired(false);
+//        criteria.setCostAllowed(true);
+//        criteria.setPowerRequirement(Criteria.POWER_LOW);
+//        mLocationProvider = mLocationManager.getBestProvider(criteria, true);
 
-//        List<String> providerList = mLocationManager.getProviders(true);
-//        if (providerList.contains(LocationManager.GPS_PROVIDER)) {
-//            mLocationProvider = LocationManager.GPS_PROVIDER;
-//        } else if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
-//            mLocationProvider = LocationManager.NETWORK_PROVIDER;
-//        } else {
-//            Toast.makeText(context, "No location mLocationProvider", Toast.LENGTH_SHORT).show();
-//            LogEx.e("No location mLocationProvider available");
-//            return;
-//        }
+        List<String> providerList = mLocationManager.getProviders(true);
+        if (providerList.contains(LocationManager.GPS_PROVIDER)) {
+            mLocationProvider = LocationManager.GPS_PROVIDER;
+        } else if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
+            mLocationProvider = LocationManager.NETWORK_PROVIDER;
+        } else {
+            Toast.makeText(context, "No location mLocationProvider", Toast.LENGTH_SHORT).show();
+            LogEx.e("No location mLocationProvider available");
+            return;
+        }
 
         mCallback = callback;
     }
@@ -125,7 +123,10 @@ public class LocationService {
         String text = "NA";
         LocationEx location = getLastLocation();
         if (location != null) {
-            text = "" + (int)location.getBearing();
+            if (Math.abs(location.getSpeed()) > comdef.ZERO_SPEED) {
+                text = "" + (int)location.getBearing();
+                text += " " + LocationUtils.getBearingName(location.getBearing());
+            }
         }
         return text;
     }
@@ -188,22 +189,26 @@ public class LocationService {
         }
     }
 
+    public boolean hasSpeed() {
+        return getCurrentSpeed() > comdef.ZERO_SPEED;
+    }
+
     public String getCurrentSpeedText() {
         return LocationUtils.getDualSpeedText(getCurrentSpeed());
     }
 
     public String getStatisInfo() {
-        return LocationService.inst().getDistanceText()
-                + "\n"
-                + (LocationService.inst().getDuration() / 1000)
-                + "\n"
-                + LocationService.inst().getAverageSpeedText()
-                + "\n"
-                + LocationService.inst().getMaxSpeedText()
-                + "\n"
-                + LocationService.inst().getCurrentSpeedText()
-                + "\n"
-                + LocationService.inst().getBearingText()
+        return "<b><font color='red'>" + LocationService.inst().getDistanceText() + "</font></b>"
+                + "<br>"
+                + "<b><font color='#3f003f'>" + (LocationService.inst().getDuration() / 1000) + " s</font></b>"
+                + "<br>"
+                + "<b><font color='#007f00'>" + LocationService.inst().getMaxSpeedText() + "</font></b>"
+                + "<br>"
+                + "<b><font color='blue'>" + LocationService.inst().getAverageSpeedText() + "</font></b>"
+                + "<br>"
+                + "<b><font color='red'>" + LocationService.inst().getCurrentSpeedText() + "</font></b>"
+                + "<br>"
+                + "<b><font color='#3f003f'>" + LocationService.inst().getBearingText() + "</font></b>"
                 ;
     }
 

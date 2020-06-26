@@ -9,7 +9,7 @@
     tools:ignore="MergeRootFrame">
 
     <!--switch button-->
-    <RelativeLayout
+    <com.liz.androidutils.ui.SquareRelativeLayout
         android:id="@+id/layout_switch"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -28,7 +28,7 @@
             android:background="@drawable/bg_circle_green"
             android:contentDescription="@string/desc_switch_button"
             />
-    </RelativeLayout>
+    </com.liz.androidutils.ui.SquareRelativeLayout>
 
     <TextView
         android:id="@+id/textTimeCount"
